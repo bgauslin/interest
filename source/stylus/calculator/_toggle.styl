@@ -41,7 +41,8 @@
 [no-touch] .toggle__button::before
   transition border TRANSITION_SPEED ease,
              color TRANSITION_SPEED ease,
-             opacity TRANSITION_SPEED ease
+             opacity TRANSITION_SPEED ease,
+             transform TRANSITION_SPEED_DRAWER
 
 .toggle__button:focus
 .toggle__button:active
@@ -54,7 +55,7 @@
   css_triangle(WHITE, TOGGLE_ARROW_SIZE, 'down')
   content ''
   display inline-block
-  margin px_to_rem(8)
+  margin-right px_to_rem(8)
   transition transform TRANSITION_SPEED_DRAWER
 
 .toggle__button[target=visible]::before

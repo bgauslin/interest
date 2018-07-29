@@ -13,7 +13,7 @@ elixir(mix => {
   .stylus('calculator.styl')
   .copy('source/html', 'public')
   .copy('source/webfonts', 'public/ui/webfonts')
-  .copy('source/icons', 'public')
+  .copy('source/icons', 'public/ui')
   .livereload()
   .browserSync({
     proxy: 'calculator.gauslin.test'

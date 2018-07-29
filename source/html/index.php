@@ -26,6 +26,7 @@ if ($_SERVER['SERVER_NAME'] == $prodServer) {
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?t=<?php echo date('U') ?>">
+    <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" href="<?php echo $css ?>">
   </head>
 

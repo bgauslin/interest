@@ -20,25 +20,6 @@ body_font(weight = 500)
     font-family 'Avenir Variable', sans-serif
     font-variation-settings 'wght' weight
 
-css_icon_cancel(color, size = 1.25em, thickness = 3px)
-  &
-    align-items center
-    display inline-flex
-
-  &::before
-  &::after
-    background color
-    height thickness
-    display inline-block
-    content ''
-    width size
-
-  &::before
-    transform rotate(-45deg)
-
-  &::after
-    transform translateX(-100%) rotate(45deg)
-
 css_icon_menu(color, thickness = 3px)
   width = (thickness * 6)
   border_top = (thickness * 3)
@@ -93,45 +74,3 @@ font_face()
     src url('/ui/webfonts/AvenirLTStd-Medium.woff2') format('woff2'),
         url('/ui/webfonts/AvenirLTStd-Medium.woff') format('woff')
     font-weight 500
-
-link(link, visited, hover, active)
-  &
-    &:link
-      color link
-
-    &:visited
-      color visited
-
-    &:active
-    &:focus
-      color active !important
-
-  [no-touch]&
-    &:hover
-      color hover
-
-link_background(link, visited, hover, active)
-  &
-    &:link
-      background link
-
-    &:visited
-      background visited
-
-    &:active
-    &:focus
-      background active
-
-  [no-touch]&
-    &:hover
-      background hover
-
-shadow(elevation)
-  if (elevation == 0)
-    box-shadow 0 0 10px 0 rgba(BLACK, .12)
-
-  if (elevation == 1)
-    box-shadow 0 1px 3px rgba(BLACK, .12), 0 1px 2px rgba(BLACK, .24)
-
-  if (elevation == 2)
-    box-shadow 0 3px 6px rgba(BLACK, .16), 0 3px 6px rgba(BLACK, .23)

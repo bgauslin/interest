@@ -1,4 +1,4 @@
-import { updateTotal } from './modules/calculations';
+import { STORAGE_ITEM_VALUES, updateTotal } from './modules/calculations';
 import { setCollapsibleState, setToggleLabel, toggleButtonState } from './modules/collapsible';
 // import { googleAdSense } from './modules/googleAdSense'
 import { googleAnalytics } from './modules/googleAnalytics'
@@ -12,9 +12,6 @@ const AnalyticsConfig = {
   domain: 'gauslin.com',
   id: 'UA-626192-11',
 }
-
-/** @const {string} localStorage item containing user-provided input values. */
-const STORAGE_ITEM_VALUES = 'values';
 
 /**
  * @description Initializes the app.
@@ -58,5 +55,4 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 document.addEventListener('keyup', () => {
   updateTotal(inputValues());
-  localStorage.setItem(STORAGE_ITEM_VALUES, inputValues());
 });

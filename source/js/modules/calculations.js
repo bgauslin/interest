@@ -10,6 +10,9 @@ const CURRENCY_ATTR = 'currency'
 /** @const {number} */
 const EURO_FORMAT_THRESHOLD = 50000;
 
+/** @const {string} localStorage item containing user-provided input values. */
+const STORAGE_ITEM_VALUES = 'values';
+
 /**
  * @param {!number} amount: Initial value.
  * @param {!number} rate: Interest rate.
@@ -108,10 +111,11 @@ const formatRupee = (rupees) => {
  */
 const updateTotal = (values) => {
   if (document.querySelectorAll(':invalid').length === 0) {
+    localStorage.setItem(STORAGE_ITEM_VALUES, values);
     TOTAL_EL.textContent = compound(...values);
   }
   return;
 }
 
 
-export { updateTotal };
+export { STORAGE_ITEM_VALUES, updateTotal };

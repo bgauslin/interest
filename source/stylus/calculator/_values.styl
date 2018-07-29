@@ -1,0 +1,112 @@
+.values
+  align-self center
+  display flex
+  flex-direction column
+  justify-content center
+  grid-column 2 / 3
+  grid-row 3 / 4
+  justify-self stretch
+  overflow hidden
+  padding CARD_PADDING
+
+  @media BREAKPOINT_SMALL
+    align-self start
+    border-radius CARD_CORNER_RADIUS
+
+  @media BREAKPOINT_MEDIUM
+    grid-row 2 / 3
+
+  @media BREAKPOINT_LARGE
+    grid-column 2 / 3
+    position sticky
+    top HEADER_HEIGHT_MEDIUM + ROW_GAP_MEDIUM
+
+.values__list
+  list-style none
+  margin 0 auto
+  padding 0
+
+  @media BREAKPOINT_SMALL
+    display flex
+    flex-wrap wrap
+
+  @media BREAKPOINT_LARGE
+    display block
+    margin 0
+
+.values__item
+  align-items center
+  display flex
+  justify-content space-between
+  margin 0 0 px_to_rem(16)
+
+  @media BREAKPOINT_SMALL
+    flex 0 0 50%
+
+#compounds
+  display none
+
+@media BREAKPOINT_SMALL
+  #principal
+    order 1
+  #rate
+    order 2
+  #contribution
+    order 3
+  #periods
+    order 4
+
+.values__label
+  flex 1
+  line-height 1
+  margin-left px_to_rem(12)
+  order 2
+  white-space nowrap
+
+#rate .values__label::before
+  content '% '
+
+.values__input
+  appearance none
+  background 0
+  body_font()
+  border 0
+  border-radius 0
+  font-size INPUT_TEXT_SIZE
+  height INPUT_HEIGHT
+  line-height 1
+  order 1
+  padding 0
+  text-align right
+  width INPUT_WIDTH
+
+.values__input:focus
+  border-color GREEN !important
+  color GREEN !important
+
+.values__input:focus:invalid
+  border-color WARNING !important
+  color WARNING !important
+
+.values__total
+  color GREEN
+  font-size VALUES_TOTAL_TEXT_SIZE
+  height VALUES_TOTAL_TEXT_SIZE
+  line-height VALUES_TOTAL_TEXT_SIZE
+  margin 0 auto
+  max-width 'calc(100vw - %s)' % (2 * (COLUMN_GAP + CARD_PADDING))
+  opacity 1
+  overflow hidden
+  text-align center
+  text-overflow ellipsis
+  transition opacity TRANSITION_SPEED,
+             visibility TRANSITION_SPEED
+  visibility visible
+
+  &:empty
+    opacity 0
+    visibility hidden
+
+  @media BREAKPOINT_LARGE
+    margin 0
+    text-align left

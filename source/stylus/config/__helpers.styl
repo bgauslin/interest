@@ -1,0 +1,137 @@
+// --------------------------------------------------
+// functions
+
+px_to_em(px)
+  em_units = px / 16
+  return em_units * 1em
+
+px_to_rem(px)
+  rem_units = px / 16
+  return rem_units * 1rem
+
+// --------------------------------------------------
+// mixins
+
+body_font(weight = 500)
+  font-family 'Avenir Medium' sans-serif // fallback
+  font-weight weight
+
+  @supports (font-variation-settings: normal) // variable
+    font-family 'Avenir Variable', sans-serif
+    font-variation-settings 'wght' weight
+
+css_icon_cancel(color, size = 1.25em, thickness = 3px)
+  &
+    align-items center
+    display inline-flex
+
+  &::before
+  &::after
+    background color
+    height thickness
+    display inline-block
+    content ''
+    width size
+
+  &::before
+    transform rotate(-45deg)
+
+  &::after
+    transform translateX(-100%) rotate(45deg)
+
+css_icon_menu(color, thickness = 3px)
+  width = (thickness * 6)
+  border_top = (thickness * 3)
+  border_bottom = thickness
+  height = thickness
+
+  &
+    align-items center
+    display inline-flex
+
+  &::before
+    border-bottom border_bottom solid color
+    border-top border_top double color
+    content ''
+    height height
+    width width
+
+css_triangle(color, size, direction)
+  if direction == 'up'
+    border-bottom size solid color
+    border-left size solid transparent
+    border-right size solid transparent
+  if direction == 'down'
+    border-left size solid transparent
+    border-right size solid transparent
+    border-top size solid color
+  if direction == 'right'
+    border-bottom size solid transparent
+    border-left size solid color
+    border-top size solid transparent
+  if direction == 'left'
+    border-bottom size solid transparent
+    border-right size solid color
+    border-top size solid transparent
+  height 0
+  width 0
+
+font_weight(weight)
+  font-weight weight
+
+  @supports (font-variation-settings: normal)
+    font-variation-settings 'wght' weight
+
+font_face()
+  @font-face
+    font-family 'Avenir Variable'
+    src url('/ui/webfonts/AvenirNext-Variable.woff2') format('woff2')
+    font-weight 1 999
+
+  @font-face
+    font-family 'Avenir Medium'
+    src url('/ui/webfonts/AvenirLTStd-Medium.woff2') format('woff2'),
+        url('/ui/webfonts/AvenirLTStd-Medium.woff') format('woff')
+    font-weight 500
+
+link(link, visited, hover, active)
+  &
+    &:link
+      color link
+
+    &:visited
+      color visited
+
+    &:active
+    &:focus
+      color active !important
+
+  [no-touch]&
+    &:hover
+      color hover
+
+link_background(link, visited, hover, active)
+  &
+    &:link
+      background link
+
+    &:visited
+      background visited
+
+    &:active
+    &:focus
+      background active
+
+  [no-touch]&
+    &:hover
+      background hover
+
+shadow(elevation)
+  if (elevation == 0)
+    box-shadow 0 0 10px 0 rgba(BLACK, .12)
+
+  if (elevation == 1)
+    box-shadow 0 1px 3px rgba(BLACK, .12), 0 1px 2px rgba(BLACK, .24)
+
+  if (elevation == 2)
+    box-shadow 0 3px 6px rgba(BLACK, .16), 0 3px 6px rgba(BLACK, .23)

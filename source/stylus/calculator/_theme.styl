@@ -1,0 +1,70 @@
+THEMES = {
+  light: {
+    BACKGROUND: white
+    BORDER: mix(black, white, 15%)
+    CANVAS: mix(black, white, 2%)
+    INPUT: black
+    INPUT_BORDER: mix(black, white, 15%)
+    SYMBOL: rgba(black, .5)
+    TEXT: rgba(black, .8)
+    ZEBRA_STRIPE: mix(black, white, 2%)
+  },
+  sepia: {
+    BACKGROUND: SEPIA
+    BORDER: mix(black, SEPIA, 15%)
+    CANVAS: mix(black, SEPIA, 5%)
+    INPUT: mix(black, SEPIA, 90%)
+    INPUT_BORDER: mix(black, SEPIA, 30%)
+    SYMBOL: mix(black, SEPIA, 50%)
+    TEXT: mix(black, SEPIA, 80%)
+    ZEBRA_STRIPE: mix(black, SEPIA, 4%)
+  },
+  dark: {
+    BACKGROUND: DARK
+    BORDER: mix(black, white, 75%)
+    CANVAS: mix(black, DARK, 25%)
+    INPUT: rgba(white, .85)
+    INPUT_BORDER: mix(black, white, 65%)
+    SYMBOL: rgba(white, .5)
+    TEXT: rgba(white, .7)
+    ZEBRA_STRIPE: mix(black, DARK, 10%)
+  }
+}
+
+// NOTE: Semicolons after each property to avoid Stylus compiler complaints.
+for name, theme in THEMES
+  [theme=\"{name}\"]
+    {body}&
+      background theme['BACKGROUND'];
+      color theme['TEXT'];
+
+    .values__input
+      border-bottom 2px solid theme['INPUT_BORDER'];
+
+    .values__input:not(:focus)
+      color theme['INPUT'];
+
+    .table__frame
+    tr:first-child
+      border-bottom 1px solid theme['BORDER'];
+
+    tr:nth-child(even)
+      background theme['ZEBRA_STRIPE'];
+
+    td.growth::after
+    td.deposits::before
+    td.interest::before
+    td.balance::before
+      color theme['SYMBOL'];
+
+    @media BREAKPOINT_SMALL
+      {body}&
+        background theme['CANVAS'];
+
+      .values
+      .table__data
+        background theme['BACKGROUND'];
+
+      .values
+      .table__frame
+        border 1px solid theme['BORDER'];

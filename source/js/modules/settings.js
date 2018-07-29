@@ -1,0 +1,182 @@
+import { updateTotal } from './calculations';
+import { CURRENCIES } from './currency';
+import { inputValues } from'./inputs';
+import { MODES, THEMES } from './theming';
+
+
+/** @enum {Object} TODO: ... */
+const Selectors = {
+  MASK: '.mask',
+  MENU: '.menu__content',
+  TOGGLE: '.settings__toggle',
+};
+
+/** @enum {Array<string>} TODO: ... */
+const SETTINGS = [
+  'theme',
+  'currency',
+];
+
+/** @const {string} */
+const INACTIVE_ATTR = 'inactive';
+
+/** @const {HTMLElement} */
+const MASK_EL = document.querySelector(Selectors.MASK);
+
+/** @const {HTMLElement} */
+const MENU_EL = document.querySelector(Selectors.MENU);
+
+/** @const {HTMLElement} */
+const TOGGLE_EL = document.querySelector(Selectors.TOGGLE);
+
+/** @class */
+export default class {
+  /**
+   * @description Sets an attribute on the body element and saves it to
+   * localStorage.
+   * @param {!string} name: The attribute to set on the body element.
+   * @param {!string} value: The value of the body attribute.
+   */
+  changeOption(name, value) {
+    document.body.setAttribute(name, value);
+    localStorage.setItem(name, value);
+    updateTotal(inputValues());
+    return;
+  }
+
+  /**
+   * @param {!Object} data: Object containing the options data.
+   * @param {!string} selector: Element that options are attached to.
+   */
+  makeOptions(data, selector) {
+    const target = document.querySelector(selector);
+    const { label, name, options } = data;
+    let html = '';
+
+    html += `
+      <h4 class="menu__heading">${label}</h4>
+      <ul class="menu__list">
+    `;
+
+    options.forEach((option) => {
+      const item = `
+        <li class="item" type="${name}">
+          <label class="item__label">
+            <input class="option" type="radio" name="${name}" value="${option.value}">
+            <span class="option__label" option="${option.value}">${option.label}</span>
+          </label>
+        </li>
+      `;
+
+      html += item;
+    });
+
+    html += `</ul>`;
+    target.innerHTML = html;
+    this.updateOptions(name);
+
+    return;
+  }
+
+  /**
+   * @description Adds an attribute with a value, and saves it to localStorage.
+   * @param {!string} name: Name of the localStorage item and attribute to set.
+   * @param {?string=} fallback: Default value if none is stored yet.
+   */
+  setOption(name, fallback='') {
+    let value;
+
+    const stored = localStorage.getItem(name);
+    if (stored) {
+      value = stored; // Use previously stored value.
+    } else {
+      value = fallback.toLowerCase(); // Set value to fallback.
+    }
+
+    document.body.setAttribute(name, value);
+    localStorage.setItem(name, value);
+
+    return;
+  }
+
+  /**
+   * @description Creates settings fields and populates them with user
+   * preferences and/or defaults.
+   */
+  scaffold () {
+    let html = '';
+
+    // Attach settings elements to DOM.
+    SETTINGS.forEach((setting) => {
+      html += `<div class="menu__group" setting="${setting}"></div>`;
+    });
+
+    MENU_EL.innerHTML = html;
+
+    // Initialize settings.
+    this.setOption('theme', 'light');
+    this.setOption('currency', 'USD');
+
+    // Populate settings elements.
+    this.makeOptions(THEMES, '[setting=theme]');
+    this.makeOptions(CURRENCIES, '[setting=currency]');
+
+    // Set up element listeners.
+    this.initToggle();
+
+    return;
+  };
+
+  /**
+   * @description Sets current option and adds listeners to each option.
+   * @param {!string} option: Attribute to set on the body element; also the
+   * name of the input.
+   */
+  updateOptions(option) {
+    const currentAttr = document.body.getAttribute(option);
+
+    [...document.querySelectorAll(`[name=${option}]`)].forEach((input) => {
+      if (currentAttr == input.value) {
+        input.setAttribute('checked', '');
+      }
+      input.addEventListener('click', () => {
+        this.changeOption(option, input.value);
+      });
+    });
+  }
+
+  /**
+   * @description Initializes menu toggle and overlay mask.
+   */
+  initToggle() {
+    TOGGLE_EL.addEventListener('click', () => {
+      if (MASK_EL.hasAttribute('inactive')) {
+        this.enableMask();
+      } else {
+        this.disableMask();
+      }
+      return;
+    });
+  }
+
+  /**
+   * @description Hides overlay mask.
+   */
+  disableMask() {
+    MASK_EL.setAttribute(INACTIVE_ATTR, '');
+    return;
+  }
+
+  /**
+   * @description Shows overlay mask and adds a click listener.
+   */
+  enableMask() {
+    MASK_EL.removeAttribute(INACTIVE_ATTR);
+    MASK_EL.addEventListener('click', () => {
+      TOGGLE_EL.checked = false;
+      this.disableMask();
+    }, { once: true });
+
+    return;
+  }
+}

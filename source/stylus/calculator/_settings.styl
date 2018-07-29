@@ -1,0 +1,32 @@
+.settings
+  position relative
+  z-index 1
+
+.settings__toggle
+  appearance none
+  background 0
+  border 0
+  css_icon_menu(WHITE)
+  cursor pointer
+  display none
+  height HEADER_HEIGHT
+  justify-content center
+  margin 0 px_to_rem(-12) 0 0
+  opacity 1
+  transition opacity TRANSITION_SPEED,
+             transform TRANSITION_SPEED
+  width HEADER_HEIGHT
+
+  &:active
+    transform scale(.85)
+
+  &:checked
+    opacity .75
+
+  @media BREAKPOINT_MEDIUM
+    height HEADER_HEIGHT_MEDIUM
+    margin-right px_to_rem(-20)
+    width HEADER_HEIGHT_MEDIUM
+
+[no-touch] .settings__toggle:hover
+  opacity .75

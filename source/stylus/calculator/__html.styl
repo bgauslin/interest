@@ -1,0 +1,37 @@
+html
+body
+  body_font()
+  margin 0
+  padding 0
+  -webkit-tap-highlight-color transparent
+  text-size-adjust none
+  width 100%
+
+*
+  box-sizing border-box
+
+input[type=number]
+  &::-webkit-inner-spin-button
+  &::-webkit-outer-spin-button
+    appearance none
+    margin 0
+
+input:focus
+button:focus
+  outline none
+
+table
+  border-collapse collapse
+  font-size TABLE_TEXT_SIZE
+  width 100%
+
+  @media BREAKPOINT_MEDIUM
+    font-size TABLE_TEXT_SIZE_MEDIUM
+
+th
+td
+  text-align right
+  white-space nowrap
+
+th
+  font_weight(600)

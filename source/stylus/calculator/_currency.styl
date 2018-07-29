@@ -1,0 +1,21 @@
+CURRENCIES = {
+  eur: '€'
+  gbp: '£'
+  inr: '₹'
+  usd: '$'
+  // won: '₩'
+  yen: '¥'
+}
+
+for name, value in CURRENCIES
+  [currency={name}]
+    .values__total:not(:empty)
+    td.deposits
+    td.interest
+    td.balance
+      &::before
+        content value
+        margin-right px_to_em(4)
+
+[currency] .values__total:not(:empty)::before
+  color inherit

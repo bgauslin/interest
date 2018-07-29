@@ -1,0 +1,90 @@
+@import 'config/__helpers'
+@import 'config/_colors'
+
+// Colors.
+DARK = #282c35
+GREEN = #00ad45
+SEPIA = #f8f2e3
+WARNING = #c00
+
+// Animations.
+TRANSITION_SPEED = .2s
+TRANSITION_SPEED_DRAWER = .5s
+
+// Text sizes.
+HEADER_TEXT_SIZE = px_to_rem(16)
+HEADER_TEXT_SIZE_MEDIUM = px_to_rem(20)
+
+INPUT_TEXT_SIZE = px_to_rem(20)
+
+TABLE_TEXT_SIZE = px_to_em(13)
+TABLE_TEXT_SIZE_MEDIUM = px_to_em(15)
+
+VALUES_TOTAL_TEXT_SIZE = px_to_em(32)
+
+// Layout - elements.
+BUTTON_HEIGHT = px_to_rem(40)
+BUTTON_MARGIN = px_to_rem(32)
+
+CARD_CORNER_RADIUS = 8px
+CARD_PADDING = px_to_rem(24)
+
+HEADER_HEIGHT = px_to_rem(44)
+HEADER_HEIGHT_MEDIUM = px_to_rem(60)
+
+INPUT_HEIGHT = px_to_rem(32)
+INPUT_WIDTH = 5.5rem
+
+MENU_ARROW_SIZE = 10px
+MENU_CORNER_RADIUS = 4px
+MENU_ICON_SIZE = px_to_rem(12)
+MENU_ITEM_SIZE = px_to_rem(40)
+MENU_ITEM_TEXT_SIZE = px_to_em(22)
+MENU_PADDING = px_to_rem(16)
+
+TABLE_MAX_WIDTH = px_to_rem(640)
+TABLE_PADDING_X = px_to_em(12)
+TABLE_PADDING_X_LARGE = px_to_em(16)
+TABLE_PADDING_Y = px_to_em(8)
+
+TOGGLE_ARROW_SIZE = 5px
+
+VALUES_MAX_WIDTH = px_to_rem(240)
+
+// Layout - grid.
+COLUMN_GAP = px_to_rem(16)
+ROW_GAP = px_to_rem(16)
+
+COLUMN_GAP_MEDIUM = px_to_rem(24)
+ROW_GAP_MEDIUM = px_to_rem(24)
+
+// Layout - content.
+CONTENT_WIDTH_MEDIUM = TABLE_MAX_WIDTH
+CONTENT_WIDTH_LARGE = (VALUES_MAX_WIDTH + (2 * CARD_PADDING)) + TABLE_MAX_WIDTH + COLUMN_GAP_MEDIUM
+
+VALUES_WIDTH_GRID = VALUES_MAX_WIDTH + (2 * CARD_PADDING)
+BUTTON_ROW_HEIGHT_GRID = px_to_rem(96)
+
+// Breakpoints - based on grid and content (overrides values in global config).
+BREAKPOINT_SMALL_UNITS = px_to_rem(420)
+BREAKPOINT_MEDIUM_UNITS = CONTENT_WIDTH_MEDIUM + (2 * COLUMN_GAP_MEDIUM)
+BREAKPOINT_LARGE_UNITS = CONTENT_WIDTH_LARGE + (2 * COLUMN_GAP_MEDIUM)
+
+BREAKPOINT_SMALL = 'screen and (min-width: %s)' % BREAKPOINT_SMALL_UNITS
+BREAKPOINT_MEDIUM = 'screen and (min-width: %s)' % BREAKPOINT_MEDIUM_UNITS
+BREAKPOINT_LARGE = 'screen and (min-width: %s)' % BREAKPOINT_LARGE_UNITS
+
+font_face()
+
+@import 'calculator/__html.styl'
+@import 'calculator/_app.styl'
+@import 'calculator/_currency.styl'
+@import 'calculator/_header.styl'
+@import 'calculator/_mask.styl'
+@import 'calculator/_menu.styl'
+@import 'calculator/_no-js.styl'
+@import 'calculator/_settings.styl'
+@import 'calculator/_table.styl'
+@import 'calculator/_theme.styl'
+@import 'calculator/_toggle.styl'
+@import 'calculator/_values.styl'

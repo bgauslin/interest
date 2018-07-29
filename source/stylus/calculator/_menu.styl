@@ -1,0 +1,121 @@
+.menu
+  background WHITE
+  border-radius MENU_CORNER_RADIUS
+  color DARK_GREY
+  margin-top (COLUMN_GAP / 2)
+  max-width 'calc(100vw - %s)' % COLUMN_GAP
+  opacity 0
+  position absolute
+  right px_to_rem(-8)
+  transition opacity TRANSITION_SPEED ease-out,
+             transform TRANSITION_SPEED ease-out,
+             visibility TRANSITION_SPEED ease-out
+  transform 'translateY(-%s)' % px_to_rem(12)
+  visibility hidden
+  z-index -1
+
+  @media BREAKPOINT_MEDIUM
+    margin-top -4px
+
+.settings__toggle:checked + .menu
+  opacity 1
+  transform translateY(0)
+  visibility visible
+
+// Menu arrow.
+.menu::before
+  content ''
+  css_triangle(WHITE, MENU_ARROW_SIZE, 'up')
+  position absolute
+  right 8px
+  top (- MENU_ARROW_SIZE)
+
+// Menu container.
+.menu__content
+  display flex
+  padding MENU_PADDING 0
+  -webkit-overflow-scrolling touch
+  overflow-x auto
+  max-width 100%
+  width 100%
+
+.menu__group
+  padding 0 MENU_PADDING
+
+.menu__group:not(:last-child)
+  border-right 1px solid LIGHTER_GREY
+
+.menu__heading
+  display none // TODO: for testing; remove HTML if we don't keep the headings
+  font-size px_to_rem(13)
+  font_weight(600)
+  margin 0 0 px_to_rem(12)
+  padding 0
+
+// Settings lists.
+.menu__list
+  display flex
+  list-style none
+  margin 0
+  padding 0
+
+.item:not(:last-child)
+  margin 0 px_to_rem(12) 0 0
+
+.item__label
+  display block
+  height MENU_ITEM_SIZE
+  overflow hidden
+  position relative
+  width MENU_ITEM_SIZE
+
+[no-touch] .item__label:hover
+  cursor pointer
+
+// Settings options.
+.option
+  position absolute
+  top -20px
+
+.option__label
+  align-items center
+  border-radius 50%
+  display inline-flex
+  height MENU_ITEM_SIZE
+  justify-content center
+  position relative
+  width MENU_ITEM_SIZE
+  z-index -1
+
+[no-touch] .option__label
+  transition border TRANSITION_SPEED
+
+// Styles for different option types.
+[type="currency"] .option__label
+  background OFF_WHITE
+  border 3px solid LIGHTER_GREY
+  color LIGHT_GREY
+  font-size MENU_ITEM_TEXT_SIZE
+
+[type="currency"] .option:checked + .option__label
+  background WHITE
+  color GREEN
+
+[type="theme"] .option__label
+  border 3px solid LIGHTER_GREY
+  color transparent
+
+.option__label[option="light"]
+  background WHITE
+
+.option__label[option="sepia"]
+  background SEPIA
+
+.option__label[option="dark"]
+  background DARK
+
+.option:checked + .option__label
+  border-color GREEN
+
+[no-touch] .item__label:hover .option:not(:checked) + .option__label
+  border-color LIGHT_GREY

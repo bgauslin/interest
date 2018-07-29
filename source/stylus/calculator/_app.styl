@@ -1,0 +1,18 @@
+.app
+  display grid
+  grid-template-columns COLUMN_GAP auto COLUMN_GAP
+  grid-template-rows HEADER_HEIGHT COLUMN_GAP 1fr auto BUTTON_ROW_HEIGHT_GRID
+  min-height 100vh
+
+  @media BREAKPOINT_SMALL
+    grid-template-rows HEADER_HEIGHT COLUMN_GAP auto auto BUTTON_ROW_HEIGHT_GRID
+
+  @media BREAKPOINT_MEDIUM
+    grid-row-gap ROW_GAP
+    grid-template-rows HEADER_HEIGHT_MEDIUM auto 1fr 0
+
+  @media BREAKPOINT_LARGE
+    grid-column-gap COLUMN_GAP_MEDIUM
+    grid-row-gap ROW_GAP_MEDIUM
+    grid-template-columns 1fr VALUES_WIDTH_GRID TABLE_MAX_WIDTH 1fr
+    grid-template-rows HEADER_HEIGHT_MEDIUM auto 0

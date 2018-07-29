@@ -1,0 +1,37 @@
+.header
+  background GREEN
+  color WHITE
+  height HEADER_HEIGHT
+  left 0
+  position fixed
+  right 0
+  top 0
+  z-index 1
+
+  @media BREAKPOINT_MEDIUM
+    height HEADER_HEIGHT_MEDIUM
+
+.header__frame
+  align-items center
+  display flex
+  height HEADER_HEIGHT
+  justify-content space-between
+  margin 0 auto
+  padding 0 COLUMN_GAP
+
+  @media BREAKPOINT_MEDIUM
+    height HEADER_HEIGHT_MEDIUM
+    padding 0 COLUMN_GAP_MEDIUM
+
+  @media BREAKPOINT_LARGE
+    max-width CONTENT_WIDTH_LARGE
+    padding 0
+
+.header__title
+  font-size HEADER_TEXT_SIZE
+  line-height 1
+  margin 0
+  white-space nowrap
+
+  @media BREAKPOINT_MEDIUM
+    font-size HEADER_TEXT_SIZE_MEDIUM

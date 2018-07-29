@@ -1,6 +1,6 @@
 .table
   grid-column 1 / 4
-  grid-row 4 / 5
+  grid-row 4 / span 1
   height auto
   justify-self stretch
   margin 0
@@ -12,16 +12,16 @@
              opacity TRANSITION_SPEED ease-out
 
   @media BREAKPOINT_SMALL
-    grid-column 2 / 3
+    grid-column 2 / span 1
 
   @media BREAKPOINT_MEDIUM
-    grid-row 3 / 4
+    grid-row 3 / span 1
     height auto !important
     opacity 1
 
   @media BREAKPOINT_LARGE
     grid-column 3 / 4
-    grid-row 2 / 3
+    grid-row 2 / span 1
     justify-self stretch
     padding 0
 

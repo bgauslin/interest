@@ -1,5 +1,5 @@
 import { CURRENCIES } from './currency';
-import { updateTotal } from'./inputs';
+import { updateTotal } from'./userValues';
 import { MODES, THEMES } from './theming';
 
 

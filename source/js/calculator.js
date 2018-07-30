@@ -1,7 +1,7 @@
 import { setCollapsibleState, setToggleLabel, toggleButtonState } from './modules/collapsible';
 import { googleAnalytics } from './modules/googleAnalytics'
-import { STORAGE_VALUES, createInputs, populateInputs, updateTotal } from'./modules/inputs';
 import Settings from './modules/settings';
+import { STORAGE_VALUES, createInputs, populateInputs, updateTotal } from'./modules/userValues';
 import { hasJs, noTouch } from './modules/utilities';
 
 

@@ -1,5 +1,4 @@
 import { updateTotal } from'./userValues';
-import { THEMES } from './themes';
 
 
 /** @enum {Object} TODO: ... */
@@ -60,6 +59,26 @@ const CURRENCIES = {
     //   label: '₩',
     //   value: 'won',
     // },
+  ],
+};
+
+/** @enum {Object} Color theme options. */
+const THEMES = {
+  label: 'Theme',
+  name: 'theme',
+  options: [
+    {
+      label: 'Light',
+      value: 'light',
+    },
+    {
+      label: 'Sepia',
+      value: 'sepia',
+    },
+    {
+      label: 'Dark',
+      value: 'dark',
+    },
   ],
 };
 

@@ -1,4 +1,4 @@
-/** @enum {Object} Color theming options. */
+/** @enum {Object} Color theme options. */
 const THEMES = {
   label: 'Theme',
   name: 'theme',

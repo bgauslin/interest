@@ -1,6 +1,6 @@
 /** @enum {string} Elements, classes, attributes for collapsing/expanding. */
 const Collapsible = {
-  ATTR: 'collapsed',
+  ATTR: 'data-collapsed',
   SELECTOR: '.table',
   TOGGLE: '.toggle__button',
 }
@@ -16,6 +16,12 @@ const COLLAPSIBLE_EL = document.querySelector(Collapsible.SELECTOR);
 
 /** @const {HTMLElement} Toggle for collapsible element. */
 const TOGGLE_EL = document.querySelector(Collapsible.TOGGLE);
+
+/** @const {string} Attribute that hides an element. */
+const HIDDEN_ATTR = 'data-hidden';
+
+/** @const {string} Attribute set on the target's source. */
+const TARGET_ATTR = 'data-target';
 
 /** @const {string} localStorage item name for collapsible display. */
 const STORAGE_ITEM = 'table';
@@ -78,7 +84,7 @@ const setToggleLabel = () => {
   const attr = target.hasAttribute(Collapsible.ATTR) ? 'hidden' : 'visible';
   const label = target.hasAttribute(Collapsible.ATTR) ? 'Show' : 'Hide';
 
-  toggle.setAttribute('target', attr);
+  toggle.setAttribute(TARGET_ATTR, attr);
   toggle.textContent = `${label} table`;
 
   return;
@@ -89,14 +95,13 @@ const setToggleLabel = () => {
  */
 const toggleButtonState = (n) => {
   const els = [COLLAPSIBLE_EL, TOGGLE_EL];
-  const hiddenAttr = 'hidden';
   const threshold = 0;
 
   els.forEach((el) => {
     if (n <= threshold) {
-      el.setAttribute(hiddenAttr, '');
+      el.setAttribute(HIDDEN_ATTR, '');
     } else {
-      el.removeAttribute(hiddenAttr);
+      el.removeAttribute(HIDDEN_ATTR);
     }
   });
   return;

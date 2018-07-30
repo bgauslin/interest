@@ -3,7 +3,7 @@ import { toggleButtonState } from './collapsible';
 
 
 /** @const {string} */
-const CURRENCY_ATTR = 'currency'
+const CURRENCY_ATTR = 'data-currency'
 
 /** @const {number} */
 const EURO_FORMAT_THRESHOLD = 50000;

@@ -30,12 +30,12 @@
   width 50vw
   white-space nowrap
 
-  &[hidden]
-    opacity 0
-    visibility hidden
-
   @media BREAKPOINT_SMALL
     width 33vw
+
+.toggle__button[data-hidden]
+  opacity 0
+  visibility hidden
 
 [no-touch] .toggle__button
 [no-touch] .toggle__button::before
@@ -58,7 +58,7 @@
   margin-right px_to_rem(8)
   transition transform TRANSITION_SPEED_DRAWER
 
-.toggle__button[target=visible]::before
+.toggle__button[data-target="visible"]::before
   transform rotate(180deg)
 
 .toggle__button:focus::before

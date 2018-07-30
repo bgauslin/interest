@@ -53,69 +53,73 @@ const TOTAL_EL = document.querySelector('.values__total');
 /** @const {string} localStorage item containing user-provided input values. */
 const STORAGE_VALUES = 'values';
 
-/** @description Creates and attaches input fields for user-provided values. */
-const createInputs = () => {
-  let html = '';
 
-  USER_INPUTS.forEach((el) => {
-    const min = (el.min) ? `min="${el.min}"` : '';
-    const max = (el.max) ? `max="${el.max}"` : '';
-    const pattern = (el.pattern) ? `pattern="${el.pattern}"` : '';
-    const required = (el.required) ? 'required' : '';
+/** @class */
+class UserValues {
+  /** @description Creates and attaches input fields for user-provided values. */
+  createInputs() {
+    let html = '';
 
-    const input = `
-      <li id="${el.name}" class="values__item">
-        <label for="${el.name}" class="values__label">${el.label}</label>
-        <input class="values__input"
-               type="${el.type}"
-               name="${el.name}"
-               ${min}
-               ${max}
-               ${pattern}
-               ${required}>
-      </li>
-    `;
-    html += input;
-  });
+    USER_INPUTS.forEach((el) => {
+      const min = (el.min) ? `min="${el.min}"` : '';
+      const max = (el.max) ? `max="${el.max}"` : '';
+      const pattern = (el.pattern) ? `pattern="${el.pattern}"` : '';
+      const required = (el.required) ? 'required' : '';
 
-  INPUTS_EL.innerHTML = html;
+      const input = `
+        <li id="${el.name}" class="values__item">
+          <label for="${el.name}" class="values__label">${el.label}</label>
+          <input class="values__input"
+                 type="${el.type}"
+                 name="${el.name}"
+                 ${min}
+                 ${max}
+                 ${pattern}
+                 ${required}>
+        </li>
+      `;
+      html += input;
+    });
 
-  return;
-}
+    INPUTS_EL.innerHTML = html;
 
-/**
- * Populates input fields with user-provided values.
- * @param {!string} data: User values from localStorage, converted from a
- * string to an array.
- */
-const populateInputs = (data) => {
-  const values = data.split(',');
-
-  for (let i = 0; i < values.length; i++) {
-    const input = INPUTS_EL.querySelectorAll('li')[i].querySelector('input');
-    input.value = values[i];
+    return;
   }
 
-  return;
-}
+  /**
+   * Populates input fields with user-provided values.
+   * @param {!string} data: User values from localStorage, converted from a
+   * string to an array.
+   */
+  populateInputs(data) {
+    const values = data.split(',');
 
-/** @description Updates DOM element with the total value after compounding. */
-const updateTotal = () => {
-  let values = [];
+    for (let i = 0; i < values.length; i++) {
+      const input = INPUTS_EL.querySelectorAll('li')[i].querySelector('input');
+      input.value = values[i];
+    }
 
-  USER_INPUTS.forEach((el) => {
-    const el_ = document.querySelector(`[name=${el.name}]`);
-    const value = Number(el_.value);
-    values.push(value);
-  });
-
-  if (document.querySelectorAll(':invalid').length === 0) {
-    localStorage.setItem(STORAGE_VALUES, values);
-    TOTAL_EL.textContent = compound(...values);
+    return;
   }
 
-  return;
+  /** @description Updates DOM element with the total value after compounding. */
+  updateTotal() {
+    let values = [];
+
+    USER_INPUTS.forEach((el) => {
+      const el_ = document.querySelector(`[name=${el.name}]`);
+      const value = Number(el_.value);
+      values.push(value);
+    });
+
+    if (document.querySelectorAll(':invalid').length === 0) {
+      localStorage.setItem(STORAGE_VALUES, values);
+      TOTAL_EL.textContent = compound(...values);
+    }
+
+    return;
+  }
 }
 
 
-export { STORAGE_VALUES, createInputs, populateInputs, updateTotal };
+export { STORAGE_VALUES, UserValues };

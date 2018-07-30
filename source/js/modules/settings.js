@@ -1,5 +1,7 @@
-import { updateTotal } from'./userValues';
+import { UserValues } from'./userValues';
 
+
+const userValues = new UserValues();
 
 /** @enum {Object} TODO: ... */
 const Selectors = {
@@ -98,7 +100,7 @@ const MENU_EL = document.querySelector(Selectors.MENU);
 const TOGGLE_EL = document.querySelector(Selectors.TOGGLE);
 
 /** @class */
-export default class {
+class Settings {
   /**
    * @description Sets an attribute on the body element and saves it to
    * localStorage.
@@ -108,7 +110,7 @@ export default class {
   changeOption(name, value) {
     document.body.setAttribute(`data-${name}`, value);
     localStorage.setItem(name, value);
-    updateTotal();
+    userValues.updateTotal();
     return;
   }
 
@@ -233,3 +235,6 @@ export default class {
     });
   }
 }
+
+
+export { Settings };

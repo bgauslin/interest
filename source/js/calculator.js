@@ -1,6 +1,6 @@
 import { setExpandableState, setToggleLabel, toggleButtonState } from './modules/expandable';
-import Settings from './modules/settings';
-import { STORAGE_VALUES, createInputs, populateInputs, updateTotal } from'./modules/userValues';
+import { Settings } from './modules/settings';
+import { STORAGE_VALUES, UserValues } from'./modules/userValues';
 import { googleAnalytics, hasJs, noTouch } from './modules/utilities';
 
 
@@ -10,8 +10,12 @@ const AnalyticsConfig = {
   id: 'UA-626192-11',
 }
 
-/** @const {Object} */
+/** @const {class} */
 const settings = new Settings();
+
+/** @const {class} */
+const userValues = new UserValues();
+
 
 /** @description Initializes the app. */
 const init = () => {
@@ -21,15 +25,15 @@ const init = () => {
   settings.scaffold();
 
   // Create primary UI.
-  createInputs();
+  userValues.createInputs();
   setExpandableState();
   setToggleLabel();
 
   // Update UI based on previous visit.
   const values = localStorage.getItem(STORAGE_VALUES);
   if (values) {
-    populateInputs(values);
-    updateTotal();
+    userValues.populateInputs(values);
+    userValues.updateTotal();
   } else {
     toggleButtonState(0);
   }
@@ -45,5 +49,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /** @description Updates DOM when user changes input values. */
 document.addEventListener('keyup', () => {
-  updateTotal();
+  userValues.updateTotal();
 });

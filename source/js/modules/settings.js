@@ -5,15 +5,23 @@ import { MODES, THEMES } from './theming';
 
 /** @enum {Object} TODO: ... */
 const Selectors = {
+  CURRENCY: '[setting=currency]',
   MASK: '.mask',
   MENU: '.menu__content',
+  THEME: '[setting=theme]',
   TOGGLE: '.settings__toggle',
 };
 
-/** @enum {Array<string>} TODO: ... */
+/** @enum {Array} TODO: ... */
 const SETTINGS = [
-  'theme',
-  'currency',
+  {
+    name: 'theme',
+    fallback: 'light',
+  },
+  {
+    name: 'currency',
+    fallback: 'usd',
+  },
 ];
 
 /** @const {string} */
@@ -111,6 +119,32 @@ export default class {
   }
 
   /**
+   * @description Creates settings fields and populates them with user
+   * preferences and/or defaults.
+   */
+  scaffold () {
+    let html = '';
+
+    // Attaches settings elements to DOM and creates defaults for first run.
+    SETTINGS.forEach((setting) => {
+      const { name, fallback } = setting;
+      html += `<div class="menu__group" setting="${name}"></div>`;
+      this.setOption(name, fallback);
+    });
+
+    MENU_EL.innerHTML = html;
+
+    // Populate settings elements.
+    this.makeOptions(THEMES, Selectors.THEME);
+    this.makeOptions(CURRENCIES, Selectors.CURRENCY);
+
+    // Set up element listeners.
+    this.initToggle();
+
+    return;
+  };
+
+  /**
    * @description Adds an attribute with a value, and saves it to localStorage.
    * @param {!string} name: Name of the localStorage item and attribute to set.
    * @param {?string=} fallback: Default value if none is stored yet.
@@ -130,34 +164,6 @@ export default class {
 
     return;
   }
-
-  /**
-   * @description Creates settings fields and populates them with user
-   * preferences and/or defaults.
-   */
-  scaffold () {
-    let html = '';
-
-    // Attach settings elements to DOM.
-    SETTINGS.forEach((setting) => {
-      html += `<div class="menu__group" setting="${setting}"></div>`;
-    });
-
-    MENU_EL.innerHTML = html;
-
-    // Initialize settings.
-    this.setOption('theme', 'light'); // TODO: use constants here.
-    this.setOption('currency', 'USD'); // TODO: use constants here.
-
-    // Populate settings elements.
-    this.makeOptions(THEMES, '[setting=theme]'); // TODO: use a constant here.
-    this.makeOptions(CURRENCIES, '[setting=currency]'); // TODO: use a constant here.
-
-    // Set up element listeners.
-    this.initToggle();
-
-    return;
-  };
 
   /**
    * @description Sets current option and adds listeners to each option.

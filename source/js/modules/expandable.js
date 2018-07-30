@@ -14,7 +14,7 @@ const State = {
 /** @const {HTMLElement} Expandable element. */
 const EXPANDABLE_EL = document.querySelector(Expandable.SELECTOR);
 
-/** @const {HTMLElement} Toggle for collapsible element. */
+/** @const {HTMLElement} Toggle for expandable element. */
 const TOGGLE_EL = document.querySelector(Expandable.TOGGLE);
 
 /** @const {string} Attribute that hides an element. */
@@ -27,8 +27,8 @@ const TARGET_ATTR = 'data-target';
 const STORAGE_ITEM = 'table';
 
 /**
- * @param {HTMLElement} el: Element that expands and collapses when a
- * toggle is clicked.
+ * @param {HTMLElement} el: Element that expands / collapses when its toggle
+ * is clicked.
  */
 const expandCollapse = (el) => {
   const direction = el.hasAttribute(Expandable.ATTR) ? State.EXPANDED : State.COLLAPSED;
@@ -61,9 +61,7 @@ const expandCollapse = (el) => {
   return;
 }
 
-/**
- * @description Sets expandable element's state via an attribute.
- */
+/** @description Sets expandable element's state via attribute. */
 const setExpandableState = () => {
   const el = EXPANDABLE_EL;
   if (localStorage.getItem(STORAGE_ITEM) !== State.EXPANDED) {
@@ -73,10 +71,7 @@ const setExpandableState = () => {
   return;
 }
 
-/**
- * @description Sets the expandable toggle label based on the state of its
- * target element.
- */
+/** @description Sets toggle label based on the target element's state. */
 const setToggleLabel = () => {
   const target = EXPANDABLE_EL;
   const toggle = TOGGLE_EL;
@@ -90,9 +85,7 @@ const setToggleLabel = () => {
   return;
 }
 
-/**
- * @param {!number} n: Number of calculated periods.
- */
+/** @param {!number} n: Number of calculated periods. */
 const toggleButtonState = (n) => {
   const els = [EXPANDABLE_EL, TOGGLE_EL];
   const threshold = 0;
@@ -107,10 +100,7 @@ const toggleButtonState = (n) => {
   return;
 }
 
-/**
- * @description Listens for button click and toggles expandable element's
- * state.
- */
+/** @description Listens for click and toggles expandable element's state. */
 TOGGLE_EL.addEventListener('click', () => {
   expandCollapse(EXPANDABLE_EL);
 });

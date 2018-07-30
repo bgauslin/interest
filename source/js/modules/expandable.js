@@ -1,5 +1,5 @@
 /** @enum {string} Elements, classes, attributes for collapsing/expanding. */
-const Collapsible = {
+const Expandable = {
   ATTR: 'data-collapsed',
   SELECTOR: '.table',
   TOGGLE: '.toggle__button',
@@ -11,11 +11,11 @@ const State = {
   EXPANDED: 'expand',
 }
 
-/** @const {HTMLElement} Collapsible element. */
-const COLLAPSIBLE_EL = document.querySelector(Collapsible.SELECTOR);
+/** @const {HTMLElement} Expandable element. */
+const EXPANDABLE_EL = document.querySelector(Expandable.SELECTOR);
 
 /** @const {HTMLElement} Toggle for collapsible element. */
-const TOGGLE_EL = document.querySelector(Collapsible.TOGGLE);
+const TOGGLE_EL = document.querySelector(Expandable.TOGGLE);
 
 /** @const {string} Attribute that hides an element. */
 const HIDDEN_ATTR = 'data-hidden';
@@ -23,7 +23,7 @@ const HIDDEN_ATTR = 'data-hidden';
 /** @const {string} Attribute set on the target's source. */
 const TARGET_ATTR = 'data-target';
 
-/** @const {string} localStorage item name for collapsible display. */
+/** @const {string} localStorage item name for expandable element's display. */
 const STORAGE_ITEM = 'table';
 
 /**
@@ -31,7 +31,7 @@ const STORAGE_ITEM = 'table';
  * toggle is clicked.
  */
 const expandCollapse = (el) => {
-  const direction = el.hasAttribute(Collapsible.ATTR) ? State.EXPANDED : State.COLLAPSED;
+  const direction = el.hasAttribute(Expandable.ATTR) ? State.EXPANDED : State.COLLAPSED;
   const elHeight = el.scrollHeight;
 
   if (direction === State.COLLAPSED) {
@@ -42,7 +42,7 @@ const expandCollapse = (el) => {
       });
     });
 
-    el.setAttribute(Collapsible.ATTR, '');
+    el.setAttribute(Expandable.ATTR, '');
   }
 
   if (direction === State.EXPANDED) {
@@ -53,7 +53,7 @@ const expandCollapse = (el) => {
       el.removeEventListener('transitionend', null, false);
     }, { once: true });
 
-    el.removeAttribute(Collapsible.ATTR);
+    el.removeAttribute(Expandable.ATTR);
   }
 
   localStorage.setItem(STORAGE_ITEM, direction);
@@ -62,27 +62,27 @@ const expandCollapse = (el) => {
 }
 
 /**
- * @description Sets collapsible element's state via an attribute.
+ * @description Sets expandable element's state via an attribute.
  */
-const setCollapsibleState = () => {
-  const el = COLLAPSIBLE_EL;
+const setExpandableState = () => {
+  const el = EXPANDABLE_EL;
   if (localStorage.getItem(STORAGE_ITEM) !== State.EXPANDED) {
     el.style.height = 0;
-    el.setAttribute(Collapsible.ATTR, '');
+    el.setAttribute(Expandable.ATTR, '');
   }
   return;
 }
 
 /**
- * @description Sets the collapsible toggle label based on the state of its
+ * @description Sets the expandable toggle label based on the state of its
  * target element.
  */
 const setToggleLabel = () => {
-  const target = COLLAPSIBLE_EL;
+  const target = EXPANDABLE_EL;
   const toggle = TOGGLE_EL;
 
-  const attr = target.hasAttribute(Collapsible.ATTR) ? 'hidden' : 'visible';
-  const label = target.hasAttribute(Collapsible.ATTR) ? 'Show' : 'Hide';
+  const attr = target.hasAttribute(Expandable.ATTR) ? 'hidden' : 'visible';
+  const label = target.hasAttribute(Expandable.ATTR) ? 'Show' : 'Hide';
 
   toggle.setAttribute(TARGET_ATTR, attr);
   toggle.textContent = `${label} table`;
@@ -94,7 +94,7 @@ const setToggleLabel = () => {
  * @param {!number} n: Number of calculated periods.
  */
 const toggleButtonState = (n) => {
-  const els = [COLLAPSIBLE_EL, TOGGLE_EL];
+  const els = [EXPANDABLE_EL, TOGGLE_EL];
   const threshold = 0;
 
   els.forEach((el) => {
@@ -108,12 +108,12 @@ const toggleButtonState = (n) => {
 }
 
 /**
- * @description Listens for button click and toggles collapsible element's
+ * @description Listens for button click and toggles expandable element's
  * state.
  */
 TOGGLE_EL.addEventListener('click', () => {
-  expandCollapse(COLLAPSIBLE_EL);
+  expandCollapse(EXPANDABLE_EL);
 });
 
 
-export { setCollapsibleState, setToggleLabel, toggleButtonState };
+export { setExpandableState, setToggleLabel, toggleButtonState };

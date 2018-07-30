@@ -1,4 +1,4 @@
-import { setCollapsibleState, setToggleLabel, toggleButtonState } from './modules/collapsible';
+import { setExpandableState, setToggleLabel, toggleButtonState } from './modules/expandable';
 import { googleAnalytics } from './modules/googleAnalytics'
 import Settings from './modules/settings';
 import { STORAGE_VALUES, createInputs, populateInputs, updateTotal } from'./modules/userValues';
@@ -23,7 +23,7 @@ const init = () => {
 
   // Create primary UI.
   createInputs();
-  setCollapsibleState();
+  setExpandableState();
   setToggleLabel();
 
   // Update UI based on previous visit.

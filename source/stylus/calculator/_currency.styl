@@ -8,7 +8,7 @@ CURRENCIES = {
 }
 
 for name, value in CURRENCIES
-  [currency={name}]
+  [data-currency=\"{name}\"]
     .values__total:not(:empty)
     td.deposits
     td.interest
@@ -17,5 +17,5 @@ for name, value in CURRENCIES
         content value
         margin-right px_to_em(4)
 
-[currency] .values__total:not(:empty)::before
+[data-currency] .values__total:not(:empty)::before
   color inherit

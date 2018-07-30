@@ -33,7 +33,7 @@ THEMES = {
 
 // NOTE: Semicolons after each property to avoid Stylus compiler complaints.
 for name, theme in THEMES
-  [theme=\"{name}\"]
+  [data-theme=\"{name}\"]
     {body}&
       background theme['BACKGROUND'];
       color theme['TEXT'];

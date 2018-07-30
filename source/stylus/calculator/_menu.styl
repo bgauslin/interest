@@ -84,27 +84,27 @@
   transition border TRANSITION_SPEED
 
 // Styles for different option types.
-[type="currency"] .option__label
+[data-type="currency"] .option__label
   background OFF_WHITE
   border 3px solid LIGHTER_GREY
   color LIGHT_GREY
   font-size MENU_ITEM_TEXT_SIZE
 
-[type="currency"] .option:checked + .option__label
+[data-type="currency"] .option:checked + .option__label
   background WHITE
   color GREEN
 
-[type="theme"] .option__label
+[data-type="theme"] .option__label
   border 3px solid LIGHTER_GREY
   color transparent
 
-.option__label[option="light"]
+.option__label[data-option="light"]
   background WHITE
 
-.option__label[option="sepia"]
+.option__label[data-option="sepia"]
   background SEPIA
 
-.option__label[option="dark"]
+.option__label[data-option="dark"]
   background DARK
 
 .option:checked + .option__label

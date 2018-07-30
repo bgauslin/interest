@@ -5,10 +5,10 @@ import { MODES, THEMES } from './theming';
 
 /** @enum {Object} TODO: ... */
 const Selectors = {
-  CURRENCY: '[setting=currency]',
+  CURRENCY: '[data-setting="currency"]',
   MASK: '.mask',
   MENU: '.menu__content',
-  THEME: '[setting=theme]',
+  THEME: '[data-setting="theme"]',
   TOGGLE: '.settings__toggle',
 };
 
@@ -48,7 +48,7 @@ export default class {
    * @param {!string} value: The value of the body attribute.
    */
   changeOption(name, value) {
-    document.body.setAttribute(name, value);
+    document.body.setAttribute(`data-${name}`, value);
     localStorage.setItem(name, value);
     updateTotal();
     return;
@@ -92,24 +92,21 @@ export default class {
     const target = document.querySelector(selector);
     const { label, name, options } = data;
     let html = '';
-
     html += `<ul class="menu__list">`;
-
     options.forEach((option) => {
       const item = `
-        <li class="item" type="${name}">
+        <li class="item" data-type="${name}">
           <label class="item__label">
             <input class="option" type="radio" name="${name}" value="${option.value}">
-            <span class="option__label" option="${option.value}">${option.label}</span>
+            <span class="option__label" data-option="${option.value}">${option.label}</span>
           </label>
         </li>
       `;
-
       html += item;
     });
-
     html += `</ul>`;
     target.innerHTML = html;
+
     this.updateOptions(name);
 
     return;
@@ -117,18 +114,16 @@ export default class {
 
   /**
    * @description Creates settings fields and populates them with user
-   * preferences and/or defaults.
+   * preferences or defaults.
    */
   scaffold () {
+    // Attach settings elements to DOM and set defaults for first run.
     let html = '';
-
-    // Attaches settings elements to DOM and creates defaults for first run.
     SETTINGS.forEach((setting) => {
       const { name, fallback } = setting;
-      html += `<div class="menu__group" setting="${name}"></div>`;
+      html += `<div class="menu__group" data-setting="${name}"></div>`;
       this.setOption(name, fallback);
     });
-
     MENU_EL.innerHTML = html;
 
     // Populate settings elements.
@@ -156,7 +151,7 @@ export default class {
       value = fallback.toLowerCase(); // Set value to fallback.
     }
 
-    document.body.setAttribute(name, value);
+    document.body.setAttribute(`data-${name}`, value);
     localStorage.setItem(name, value);
 
     return;
@@ -168,7 +163,7 @@ export default class {
    * name of the input.
    */
   updateOptions(option) {
-    const currentAttr = document.body.getAttribute(option);
+    const currentAttr = document.body.getAttribute(`data-${option}`);
 
     [...document.querySelectorAll(`[name=${option}]`)].forEach((input) => {
       if (currentAttr == input.value) {

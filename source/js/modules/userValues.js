@@ -118,4 +118,4 @@ const updateTotal = () => {
 }
 
 
-export { createInputs, populateInputs, updateTotal };
+export { STORAGE_VALUES, createInputs, populateInputs, updateTotal };

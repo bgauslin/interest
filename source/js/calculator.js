@@ -1,7 +1,6 @@
-import { STORAGE_ITEM_VALUES, updateTotal } from './modules/calculations';
 import { setCollapsibleState, setToggleLabel, toggleButtonState } from './modules/collapsible';
 import { googleAnalytics } from './modules/googleAnalytics'
-import { createInputs, inputValues, populateInputs } from'./modules/inputs';
+import { STORAGE_VALUES, createInputs, populateInputs, updateTotal } from'./modules/inputs';
 import Settings from './modules/settings';
 import { hasJs, noTouch } from './modules/utilities';
 
@@ -12,45 +11,40 @@ const AnalyticsConfig = {
   id: 'UA-626192-11',
 }
 
-/**
- * @description Initializes the app.
- */
+/** @const {Object} */
+const settings = new Settings();
+
+/** @description Initializes the app. */
 const init = () => {
   // Set body attributes and make settings menu.
   hasJs();
   noTouch();
-
-  const settings = new Settings();
   settings.scaffold();
 
-  // Create main UI.
+  // Create primary UI.
   createInputs();
   setCollapsibleState();
   setToggleLabel();
 
   // Update UI based on previous visit.
-  const values = localStorage.getItem(STORAGE_ITEM_VALUES);
+  const values = localStorage.getItem(STORAGE_VALUES);
   if (values) {
     populateInputs(values);
-    updateTotal(inputValues());
+    updateTotal();
   } else {
     toggleButtonState(0);
   }
 
-  // Third-party scripts.
+  // Load third-party scripts.
   googleAnalytics(AnalyticsConfig);
 }
 
-/**
- * @description Waits until the DOM is ready.
- */
+/** @description Waits until the DOM is ready to initialize app. */
 document.addEventListener('DOMContentLoaded', () => {
   init();
 });
 
-/**
- * @description Updates DOM when user changes input values.
- */
+/** @description Updates DOM when user changes input values. */
 document.addEventListener('keyup', () => {
-  updateTotal(inputValues());
+  updateTotal();
 });

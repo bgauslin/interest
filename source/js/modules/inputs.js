@@ -1,3 +1,6 @@
+import { compound } from './calculations';
+
+
 /**
  * @type {Array} HTML input elements.
  */
@@ -44,9 +47,13 @@ const USER_INPUTS = [
 /** @const {HTMLElement} Element for attaching input fields to */
 const INPUTS_EL = document.querySelector('.values__list');
 
-/**
- * @description Creates and attaches input fields for user-provided values.
- */
+/** @const {HTMLElement} */
+const TOTAL_EL = document.querySelector('.values__total');
+
+/** @const {string} localStorage item containing user-provided input values. */
+const STORAGE_VALUES = 'values';
+
+/** @description Creates and attaches input fields for user-provided values. */
 const createInputs = () => {
   let html = '';
 
@@ -77,22 +84,6 @@ const createInputs = () => {
 }
 
 /**
- * @description Collects user input values for passing to a separate function
- * that calculates compounded amount.
- * @returns Array of user-provided values.
- */
-const inputValues = () => {
-  let values = [];
-
-  USER_INPUTS.forEach((el) => {
-    const el_ = document.querySelector(`[name=${el.name}]`);
-    const value = Number(el_.value);
-    values.push(value);
-  });
-  return values;
-}
-
-/**
  * Populates input fields with user-provided values.
  * @param {!string} data: User values from localStorage, converted from a
  * string to an array.
@@ -104,8 +95,27 @@ const populateInputs = (data) => {
     const input = INPUTS_EL.querySelectorAll('li')[i].querySelector('input');
     input.value = values[i];
   }
+
+  return;
+}
+
+/** @description Updates DOM element with the total value after compounding. */
+const updateTotal = () => {
+  let values = [];
+
+  USER_INPUTS.forEach((el) => {
+    const el_ = document.querySelector(`[name=${el.name}]`);
+    const value = Number(el_.value);
+    values.push(value);
+  });
+
+  if (document.querySelectorAll(':invalid').length === 0) {
+    localStorage.setItem(STORAGE_VALUES, values);
+    TOTAL_EL.textContent = compound(...values);
+  }
+
   return;
 }
 
 
-export { createInputs, inputValues, populateInputs };
+export { createInputs, populateInputs, updateTotal };

@@ -1,6 +1,5 @@
-import { updateTotal } from './calculations';
 import { CURRENCIES } from './currency';
-import { inputValues } from'./inputs';
+import { updateTotal } from'./inputs';
 import { MODES, THEMES } from './theming';
 
 
@@ -16,6 +15,9 @@ const SETTINGS = [
   'theme',
   'currency',
 ];
+
+/** @const {string} */
+const CHECKED_ATTR = 'checked';
 
 /** @const {string} */
 const INACTIVE_ATTR = 'inactive';
@@ -40,11 +42,41 @@ export default class {
   changeOption(name, value) {
     document.body.setAttribute(name, value);
     localStorage.setItem(name, value);
-    updateTotal(inputValues());
+    updateTotal();
     return;
   }
 
+  /** @description Hides overlay mask. */
+  disableMask() {
+    MASK_EL.setAttribute(INACTIVE_ATTR, '');
+    return;
+  }
+
+  /** @description Shows overlay mask and adds a click listener. */
+  enableMask() {
+    MASK_EL.removeAttribute(INACTIVE_ATTR);
+    MASK_EL.addEventListener('click', () => {
+      TOGGLE_EL.checked = false;
+      this.disableMask();
+    }, { once: true });
+
+    return;
+  }
+
+  /** @description Initializes menu toggle and overlay mask. */
+  initToggle() {
+    TOGGLE_EL.addEventListener('click', () => {
+      if (MASK_EL.hasAttribute(INACTIVE_ATTR)) {
+        this.enableMask();
+      } else {
+        this.disableMask();
+      }
+      return;
+    });
+  }
+
   /**
+   * @description Creates settings options and attaches them to the DOM.
    * @param {!Object} data: Object containing the options data.
    * @param {!string} selector: Element that options are attached to.
    */
@@ -114,12 +146,12 @@ export default class {
     MENU_EL.innerHTML = html;
 
     // Initialize settings.
-    this.setOption('theme', 'light');
-    this.setOption('currency', 'USD');
+    this.setOption('theme', 'light'); // TODO: use constants here.
+    this.setOption('currency', 'USD'); // TODO: use constants here.
 
     // Populate settings elements.
-    this.makeOptions(THEMES, '[setting=theme]');
-    this.makeOptions(CURRENCIES, '[setting=currency]');
+    this.makeOptions(THEMES, '[setting=theme]'); // TODO: use a constant here.
+    this.makeOptions(CURRENCIES, '[setting=currency]'); // TODO: use a constant here.
 
     // Set up element listeners.
     this.initToggle();
@@ -137,46 +169,11 @@ export default class {
 
     [...document.querySelectorAll(`[name=${option}]`)].forEach((input) => {
       if (currentAttr == input.value) {
-        input.setAttribute('checked', '');
+        input.setAttribute(CHECKED_ATTR, '');
       }
       input.addEventListener('click', () => {
         this.changeOption(option, input.value);
       });
     });
-  }
-
-  /**
-   * @description Initializes menu toggle and overlay mask.
-   */
-  initToggle() {
-    TOGGLE_EL.addEventListener('click', () => {
-      if (MASK_EL.hasAttribute('inactive')) {
-        this.enableMask();
-      } else {
-        this.disableMask();
-      }
-      return;
-    });
-  }
-
-  /**
-   * @description Hides overlay mask.
-   */
-  disableMask() {
-    MASK_EL.setAttribute(INACTIVE_ATTR, '');
-    return;
-  }
-
-  /**
-   * @description Shows overlay mask and adds a click listener.
-   */
-  enableMask() {
-    MASK_EL.removeAttribute(INACTIVE_ATTR);
-    MASK_EL.addEventListener('click', () => {
-      TOGGLE_EL.checked = false;
-      this.disableMask();
-    }, { once: true });
-
-    return;
   }
 }

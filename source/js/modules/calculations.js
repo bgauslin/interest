@@ -1,17 +1,12 @@
 import { createTable } from './table';
 import { toggleButtonState } from './collapsible';
 
-/** @const {HTMLElement} */
-const TOTAL_EL = document.querySelector('.values__total');
 
 /** @const {string} */
 const CURRENCY_ATTR = 'currency'
 
 /** @const {number} */
 const EURO_FORMAT_THRESHOLD = 50000;
-
-/** @const {string} localStorage item containing user-provided input values. */
-const STORAGE_ITEM_VALUES = 'values';
 
 /**
  * @param {!number} amount: Initial value.
@@ -53,7 +48,9 @@ const compound = (principal, contribution, rate, compounds, periods) => {
 
     sums.push([i, formatCurrency(deposits), formatCurrency(interest), formatCurrency(balance), growth]);
   }
+
   createTable(sums);
+
   const [year, deposits, interest, balance, growth] = sums[sums.length - 1];
 
   return balance;
@@ -105,17 +102,5 @@ const formatRupee = (rupees) => {
   return `${thousandsFormatted}${hundreds}.${decimal}`;
 }
 
-/**
- * @description Updates DOM element with the total value after compounding.
- * @param {!Array} values: User-provided values.
- */
-const updateTotal = (values) => {
-  if (document.querySelectorAll(':invalid').length === 0) {
-    localStorage.setItem(STORAGE_ITEM_VALUES, values);
-    TOTAL_EL.textContent = compound(...values);
-  }
-  return;
-}
 
-
-export { STORAGE_ITEM_VALUES, updateTotal };
+export { compound };

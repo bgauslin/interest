@@ -93,10 +93,7 @@ export default class {
     const { label, name, options } = data;
     let html = '';
 
-    html += `
-      <h4 class="menu__heading">${label}</h4>
-      <ul class="menu__list">
-    `;
+    html += `<ul class="menu__list">`;
 
     options.forEach((option) => {
       const item = `

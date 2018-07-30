@@ -1,9 +1,9 @@
 import { UserValues } from'./userValues';
 
-
+/** @class */
 const userValues = new UserValues();
 
-/** @enum {Object} TODO: ... */
+/** @enum {Object} */
 const Selectors = {
   CURRENCY: '[data-setting="currency"]',
   MASK: '.mask',
@@ -12,7 +12,7 @@ const Selectors = {
   TOGGLE: '.settings__toggle',
 };
 
-/** @enum {Array} TODO: ... */
+/** @enum {Array} */
 const SETTINGS = [
   {
     name: 'theme',

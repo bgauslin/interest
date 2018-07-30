@@ -1,8 +1,7 @@
 import { setExpandableState, setToggleLabel, toggleButtonState } from './modules/expandable';
-import { googleAnalytics } from './modules/googleAnalytics'
 import Settings from './modules/settings';
 import { STORAGE_VALUES, createInputs, populateInputs, updateTotal } from'./modules/userValues';
-import { hasJs, noTouch } from './modules/utilities';
+import { googleAnalytics, hasJs, noTouch } from './modules/utilities';
 
 
 /** @enum {string} Google Analytics settings. */

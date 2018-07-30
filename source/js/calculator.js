@@ -1,6 +1,5 @@
 import { STORAGE_ITEM_VALUES, updateTotal } from './modules/calculations';
 import { setCollapsibleState, setToggleLabel, toggleButtonState } from './modules/collapsible';
-// import { googleAdSense } from './modules/googleAdSense'
 import { googleAnalytics } from './modules/googleAnalytics'
 import { createInputs, inputValues, populateInputs } from'./modules/inputs';
 import Settings from './modules/settings';
@@ -40,7 +39,6 @@ const init = () => {
 
   // Third-party scripts.
   googleAnalytics(AnalyticsConfig);
-  // googleAdSense();
 }
 
 /**

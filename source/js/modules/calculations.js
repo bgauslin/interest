@@ -1,5 +1,5 @@
 import { createTable } from './table';
-import { toggleButtonState } from './collapsible';
+import { toggleButtonState } from './expandable';
 
 
 /** @const {string} */

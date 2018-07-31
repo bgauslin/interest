@@ -38,11 +38,9 @@
   visibility hidden
 
 [no-touch] .toggle__button
-[no-touch] .toggle__button::before
   transition border TRANSITION_SPEED ease,
              color TRANSITION_SPEED ease,
-             opacity TRANSITION_SPEED ease,
-             transform TRANSITION_SPEED_DRAWER
+             opacity TRANSITION_SPEED ease
 
 .toggle__button:focus
 .toggle__button:active
@@ -59,7 +57,7 @@
   transition transform TRANSITION_SPEED_DRAWER
 
 .toggle__button[data-target="visible"]::before
-  transform rotate(180deg)
+  transform rotate(-180deg)
 
 .toggle__button:focus::before
 .toggle__button:active::before

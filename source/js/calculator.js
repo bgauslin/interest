@@ -4,27 +4,22 @@ import { STORAGE_VALUES, UserValues } from'./modules/userValues';
 import { Utilities } from './modules/utilities';
 
 
-/** @enum {string} Google Analytics settings. */
-const AnalyticsConfig = {
-  domain: 'gauslin.com',
-  id: 'UA-626192-11',
-}
-
-/** @const {class} */
+/** @instance  */
 const settings = new Settings();
 
-/** @const {class} */
+/** @instance */
 const userValues = new UserValues();
 
-/** @const {class} */
-const utilities = new Utilities();
+/** @instance */
+const utilities = new Utilities({
+  domain: 'gauslin.com',
+  id: 'UA-626192-11',
+});
 
 /** @description Initializes the app. */
 const init = () => {
-  // Set body attributes and make settings menu.
-  utilities.hasJs();
-  utilities.noTouch();
-  settings.scaffold();
+  utilities.init(); // Set body attributes and start GA.
+  settings.scaffold(); // Make settings menu.
 
   // Create primary UI.
   userValues.createInputs();
@@ -39,9 +34,6 @@ const init = () => {
   } else {
     toggleButtonState(0);
   }
-
-  // Load third-party scripts.
-  utilities.googleAnalytics(AnalyticsConfig);
 }
 
 /** @description Waits until the DOM is ready to initialize app. */

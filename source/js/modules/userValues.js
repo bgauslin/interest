@@ -117,17 +117,13 @@ class UserValues {
   }
 
   updateOnChange(selector) {
-    window.MutationObserver = window.MutationObserver
-      || window.WebKitMutationObserver
-      || window.MozMutationObserver;
-
-    const self = this;
     const target = document.querySelector(selector);
     const config = {
       attributes: true,
     };
+    const self = this;
 
-    const observer = new MutationObserver(function(mutation) {
+    const observer = new MutationObserver((mutation) => {
       self.updateTotal()
     });
 

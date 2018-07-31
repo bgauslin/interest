@@ -116,8 +116,10 @@ class UserValues {
     }
   }
 
-  updateOnCurrencyChange(selector) {
-    window.MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+  updateOnChange(selector) {
+    window.MutationObserver = window.MutationObserver
+      || window.WebKitMutationObserver
+      || window.MozMutationObserver;
 
     const self = this;
     const target = document.querySelector(selector);
@@ -145,7 +147,7 @@ class UserValues {
       toggleButtonState(0); // TODO: handle this differently
     }
 
-    this.updateOnCurrencyChange('[data-currency]');
+    this.updateOnChange('[data-currency]');
 
     // Update DOM when user changes input values.
     document.addEventListener('keyup', () => {

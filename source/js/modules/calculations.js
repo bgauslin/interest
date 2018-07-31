@@ -1,6 +1,4 @@
 import { createTable } from './table';
-import { toggleButtonState } from './expandable'; // TODO: move this out of here
-
 
 /** @const {string} */
 const CURRENCY_ATTR = 'data-currency'
@@ -31,7 +29,7 @@ const compound = (principal, contribution, rate, compounds, periods) => {
   let contributionCompounded;
   let sums = [];
 
-  toggleButtonState(periods); // TODO: move this out of here
+  // toggleButtonState(periods); // TODO: move this out of here
 
   for (let i = 1; i <= periods; i++) {
     principalCompounded = amountWithInterest(p, rate);

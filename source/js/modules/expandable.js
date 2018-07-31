@@ -1,23 +1,11 @@
-// TODO: refactor this as a class and update accordingly...
+/** @const {string} */
+const COLLAPSED = 'collapse';
 
-/** @enum {string} Elements, classes, attributes for collapsing/expanding. */
-const Expandable = {
-  ATTR: 'data-collapsed',
-  SELECTOR: '.table',
-  TOGGLE: '.toggle__button',
-}
+/** @const {string} */
+const EXPANDED = 'expand';
 
-/** @enum {string}  Names for collapsed/expanded states. */
-const State = {
-  COLLAPSED: 'collapse',
-  EXPANDED: 'expand',
-}
-
-/** @const {HTMLElement} Expandable element. */
-const EXPANDABLE_EL = document.querySelector(Expandable.SELECTOR);
-
-/** @const {HTMLElement} Toggle for expandable element. */
-const TOGGLE_EL = document.querySelector(Expandable.TOGGLE);
+/** @const {string} */
+const EXPANDED_ATTR = 'data-collapsed'; // TODO: rename to 'expanded'; update accordingly
 
 /** @const {string} Attribute that hides an element. */
 const HIDDEN_ATTR = 'data-hidden';
@@ -28,85 +16,89 @@ const TARGET_ATTR = 'data-target';
 /** @const {string} localStorage item name for expandable element's display. */
 const STORAGE_ITEM = 'table';
 
-/**
- * @param {HTMLElement} el: Element that expands / collapses when its toggle
- * is clicked.
- */
-const expandCollapse = (el) => {
-  const direction = el.hasAttribute(Expandable.ATTR) ? State.EXPANDED : State.COLLAPSED;
-  const elHeight = el.scrollHeight;
+/** @class */
+class Expandable {
 
-  if (direction === State.COLLAPSED) {
-    requestAnimationFrame(() => {
-      el.style.height = `${elHeight}px`;
+  constructor(target, toggle) {
+    this.target = document.querySelector(target);
+    this.toggle = document.querySelector(toggle);
+  }
+
+  expandCollapse() {
+    const direction = this.target.hasAttribute(EXPANDED_ATTR) ? EXPANDED : COLLAPSED;
+    const elHeight = this.target.scrollHeight;
+
+    if (direction === COLLAPSED) {
       requestAnimationFrame(() => {
-        el.style.height = 0;
+        this.target.style.height = `${elHeight}px`;
+        requestAnimationFrame(() => {
+          this.target.style.height = 0;
+        });
       });
-    });
 
-    el.setAttribute(Expandable.ATTR, '');
-  }
-
-  if (direction === State.EXPANDED) {
-    el.style.height = `${elHeight}px`;
-
-    el.addEventListener('transitionend', () => {
-      el.style.height = null;
-      el.removeEventListener('transitionend', null, false);
-    }, { once: true });
-
-    el.removeAttribute(Expandable.ATTR);
-  }
-
-  localStorage.setItem(STORAGE_ITEM, direction);
-  setToggleLabel();
-  return;
-}
-
-/** @description Sets expandable element's state via attribute. */
-const setExpandableState = () => {
-  const el = EXPANDABLE_EL;
-  if (localStorage.getItem(STORAGE_ITEM) !== State.EXPANDED) {
-    el.style.height = 0;
-    el.setAttribute(Expandable.ATTR, '');
-  }
-  return;
-}
-
-/** @description Sets toggle label based on the target element's state. */
-const setToggleLabel = () => {
-  const target = EXPANDABLE_EL;
-  const toggle = TOGGLE_EL;
-
-  const attr = target.hasAttribute(Expandable.ATTR) ? 'hidden' : 'visible';
-  const label = target.hasAttribute(Expandable.ATTR) ? 'Show' : 'Hide';
-
-  toggle.setAttribute(TARGET_ATTR, attr);
-  toggle.textContent = `${label} table`;
-
-  return;
-}
-
-/** @param {!number} n: Number of calculated periods. */
-const toggleButtonState = (n) => {
-  const els = [EXPANDABLE_EL, TOGGLE_EL];
-  const threshold = 0;
-
-  els.forEach((el) => {
-    if (n <= threshold) {
-      el.setAttribute(HIDDEN_ATTR, '');
-    } else {
-      el.removeAttribute(HIDDEN_ATTR);
+      this.target.setAttribute(EXPANDED_ATTR, '');
     }
-  });
-  return;
+
+    if (direction === EXPANDED) {
+      this.target.style.height = `${elHeight}px`;
+
+      this.target.addEventListener('transitionend', () => {
+        this.target.style.height = null;
+        this.target.removeEventListener('transitionend', null, false);
+      }, { once: true });
+
+      this.target.removeAttribute(EXPANDED_ATTR);
+    }
+
+    localStorage.setItem(STORAGE_ITEM, direction);
+    this.setToggleLabel();
+    return;
+  }
+
+  /** @description Sets expandable element's state via attribute. */
+  setExpandableState() {
+    const el = this.target;
+    if (localStorage.getItem(STORAGE_ITEM) !== EXPANDED) {
+      el.style.height = 0;
+      el.setAttribute(EXPANDED_ATTR, '');
+    }
+  }
+
+  /** @description Sets toggle label based on the target element's state. */
+  setToggleLabel() {
+    const attr = this.target.hasAttribute(EXPANDED_ATTR) ? 'hidden' : 'visible';
+    const label = this.target.hasAttribute(EXPANDED_ATTR) ? 'Show' : 'Hide';
+
+    this.toggle.setAttribute(TARGET_ATTR, attr);
+    this.toggle.textContent = `${label} table`;
+  }
+
+  /** @param {!number} n: Number of calculated periods. */
+  toggleButtonState(n) {
+    console.log('toggleButtonState called');
+
+    const els = [this.target, this.toggle];
+    const threshold = 0;
+
+    els.forEach((el) => {
+      if (n <= threshold) {
+        el.setAttribute(HIDDEN_ATTR, '');
+      } else {
+        el.removeAttribute(HIDDEN_ATTR);
+      }
+    });
+  }
+
+  init() {
+    this.setExpandableState();
+    this.setToggleLabel();
+
+    /** @description Listens for click and toggles expandable element's state. */
+    this.toggle.addEventListener('click', () => {
+      this.expandCollapse();
+    });
+  }
 }
 
-/** @description Listens for click and toggles expandable element's state. */
-TOGGLE_EL.addEventListener('click', () => {
-  expandCollapse(EXPANDABLE_EL);
-});
 
-
-
-export { setExpandableState, setToggleLabel, toggleButtonState };
+export { Expandable };

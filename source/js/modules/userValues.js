@@ -1,4 +1,4 @@
-import { setExpandableState, setToggleLabel, toggleButtonState } from './expandable';
+import { Expandable } from './expandable';
 import { compound } from './calculations';
 
 /**
@@ -47,6 +47,13 @@ const USER_INPUTS = [
 
 /** @const {string} localStorage item containing user-provided input values. */
 const STORAGE_ITEM_VALUES = 'values';
+
+/** @const {string} */
+const EXPANDABLE_TARGET = '.table';
+
+/** @const {string} */
+const EXPANDABLE_TOGGLE = '.toggle__button';
+
 
 /** @class */
 class UserValues {
@@ -132,15 +139,16 @@ class UserValues {
 
   init() {
     this.createInputs();
-    setExpandableState(); // TODO: handle this differently
-    setToggleLabel(); // TODO: handle this differently
+
+    const expandable = new Expandable(EXPANDABLE_TARGET, EXPANDABLE_TOGGLE);
+    expandable.init();
 
     const values = localStorage.getItem(STORAGE_ITEM_VALUES);
     if (values) {
       this.populateInputs(values);
       this.updateTotal();
     } else {
-      toggleButtonState(0); // TODO: handle this differently
+      expandable.toggleButtonState(0);
     }
 
     this.updateOnChange('[data-currency]');

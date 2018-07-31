@@ -38,7 +38,7 @@ const CURRENCIES = {
   ],
 };
 
-/** @enum {Array} ... */
+/** @enum {Array{Object{name: string, fallback: string}}} ... */
 const SETTINGS = [
   {
     name: 'theme',
@@ -49,7 +49,6 @@ const SETTINGS = [
     fallback: 'usd',
   },
 ];
-
 
 /** @enum {Object} Color theme options. */
 const THEMES = {
@@ -72,12 +71,6 @@ const THEMES = {
 };
 
 /** @const {string} */
-const CURRENCY_SELECTOR = '[data-setting="currency"]';
-
-/** @const {string} */
-const THEME_SELECTOR = '[data-setting="theme"]';
-
-/** @const {string} */
 const CHECKED_ATTR = 'checked';
 
 /** @const {string} */
@@ -86,14 +79,13 @@ const INACTIVE_ATTR = 'inactive';
 /** @class */
 class Settings {
   /**
-   * @param {string} mask: Element selector...
-   * @param {string} menu: Element selector...
-   * @param {string} toggle: Element selector...
+   * @param {!Object{mask: string, menu: string, toggle: string}} selectors:
+   * Element selectors.
    */
-  constructor(mask, menu, toggle) {
-    this.mask = document.querySelector(mask);
-    this.menu = document.querySelector(menu);
-    this.toggle = document.querySelector(toggle);
+  constructor(selectors) {
+    this.mask = document.querySelector(selectors.mask);
+    this.menu = document.querySelector(selectors.menu);
+    this.toggle = document.querySelector(selectors.toggle);
   }
 
   /**
@@ -134,11 +126,12 @@ class Settings {
 
   /**
    * @description Creates settings options and attaches them to the DOM.
-   * @param {!Object} data: Object containing the options data.
+   * @param {!Object{label: string, name: string, options: string }} data:
+   * Object containing the options data.
    * @param {!string} selector: Element that options are attached to.
    */
   makeOptions(data, selector) {
-    const target = document.querySelector(selector);
+    const target = document.querySelector(`[data-setting="${selector}"]`);
     const { label, name, options } = data;
     let html = '';
     html += `<ul class="menu__list">`;
@@ -204,8 +197,8 @@ class Settings {
     this.menu.innerHTML = html;
 
     // Populate settings elements.
-    this.makeOptions(THEMES, THEME_SELECTOR);
-    this.makeOptions(CURRENCIES, CURRENCY_SELECTOR);
+    this.makeOptions(THEMES, THEMES.name);
+    this.makeOptions(CURRENCIES, CURRENCIES.name);
 
     // Set up element listeners.
     this.initToggle();

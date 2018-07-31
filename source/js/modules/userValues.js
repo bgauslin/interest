@@ -3,7 +3,8 @@ import { compound } from './calculations';
 
 
 /**
- * @type {Array} HTML input elements.
+ * @type {Array{Object{label: string, name: string, max: number, pattern: string, type: string}}}
+ * HTML input elements.
  */
 const USER_INPUTS = [
   {
@@ -51,12 +52,11 @@ const STORAGE_ITEM_VALUES = 'values';
 /** @class */
 class UserValues {
   /**
-   * @param {string} list: Element selector...
-   * @param {string} total: Element selector...
+   * @param {Object{list: string, total: string}} selectors: Element selectors.
    */
-  constructor(list, total) {
-    this.listEl = document.querySelector(list);
-    this.totalEl = document.querySelector(total);
+  constructor(selectors) {
+    this.listEl = document.querySelector(selectors.list);
+    this.totalEl = document.querySelector(selectors.total);
   }
 
   /** @description Creates and attaches input fields for user-provided values. */
@@ -137,6 +137,11 @@ class UserValues {
     } else {
       toggleButtonState(0); // TODO: handle this differently
     }
+
+    // Update DOM when user changes input values.
+    document.addEventListener('keyup', () => {
+      this.updateTotal();
+    });
   }
 }
 

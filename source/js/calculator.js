@@ -3,10 +3,17 @@ import { UserValues } from'./modules/userValues';
 import { Utilities } from './modules/utilities';
 
 /** @instance  */
-const settings = new Settings('.mask', '.menu__content', '.settings__toggle');
+const settings = new Settings({
+  mask: '.mask',
+  menu: '.menu__content',
+  toggle: '.settings__toggle',
+});
 
 /** @instance */
-const userValues = new UserValues('.values__list', '.values__total');
+const userValues = new UserValues({
+  list: '.values__list',
+  total: '.values__total'
+});
 
 /** @instance */
 const utilities = new Utilities({
@@ -19,9 +26,4 @@ document.addEventListener('DOMContentLoaded', () => {
   settings.init();
   userValues.init();
   utilities.init();
-});
-
-/** @description Updates DOM when user changes input values. */
-document.addEventListener('keyup', () => {
-  userValues.updateTotal();
 });

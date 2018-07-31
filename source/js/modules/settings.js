@@ -1,8 +1,3 @@
-import { UserValues } from'./userValues';
-
-/** @class */
-const userValues = new UserValues();
-
 /** @enum {Object} */
 const Selectors = {
   CURRENCY: '[data-setting="currency"]',
@@ -110,7 +105,6 @@ class Settings {
   changeOption(name, value) {
     document.body.setAttribute(`data-${name}`, value);
     localStorage.setItem(name, value);
-    userValues.updateTotal();
     return;
   }
 

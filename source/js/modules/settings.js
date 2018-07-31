@@ -1,24 +1,3 @@
-/** @enum {Object} */
-const Selectors = {
-  CURRENCY: '[data-setting="currency"]',
-  MASK: '.mask',
-  MENU: '.menu__content',
-  THEME: '[data-setting="theme"]',
-  TOGGLE: '.settings__toggle',
-};
-
-/** @enum {Array} */
-const SETTINGS = [
-  {
-    name: 'theme',
-    fallback: 'light',
-  },
-  {
-    name: 'currency',
-    fallback: 'usd',
-  },
-];
-
 /**
  * @type {Object} Currency information for display and formatting.
  */
@@ -59,6 +38,19 @@ const CURRENCIES = {
   ],
 };
 
+/** @enum {Array} ... */
+const SETTINGS = [
+  {
+    name: 'theme',
+    fallback: 'light',
+  },
+  {
+    name: 'currency',
+    fallback: 'usd',
+  },
+];
+
+
 /** @enum {Object} Color theme options. */
 const THEMES = {
   label: 'Theme',
@@ -80,22 +72,30 @@ const THEMES = {
 };
 
 /** @const {string} */
+const CURRENCY_SELECTOR = '[data-setting="currency"]';
+
+/** @const {string} */
+const THEME_SELECTOR = '[data-setting="theme"]';
+
+/** @const {string} */
 const CHECKED_ATTR = 'checked';
 
 /** @const {string} */
 const INACTIVE_ATTR = 'inactive';
 
-/** @const {HTMLElement} */
-const MASK_EL = document.querySelector(Selectors.MASK);
-
-/** @const {HTMLElement} */
-const MENU_EL = document.querySelector(Selectors.MENU);
-
-/** @const {HTMLElement} */
-const TOGGLE_EL = document.querySelector(Selectors.TOGGLE);
-
 /** @class */
 class Settings {
+  /**
+   * @param {string} mask: Element selector...
+   * @param {string} menu: Element selector...
+   * @param {string} toggle: Element selector...
+   */
+  constructor(mask, menu, toggle) {
+    this.mask = document.querySelector(mask);
+    this.menu = document.querySelector(menu);
+    this.toggle = document.querySelector(toggle);
+  }
+
   /**
    * @description Sets an attribute on the body element and saves it to
    * localStorage.
@@ -109,22 +109,22 @@ class Settings {
 
   /** @description Hides overlay mask. */
   disableMask() {
-    MASK_EL.setAttribute(INACTIVE_ATTR, '');
+    this.mask.setAttribute(INACTIVE_ATTR, '');
   }
 
   /** @description Shows overlay mask and adds a click listener. */
   enableMask() {
-    MASK_EL.removeAttribute(INACTIVE_ATTR);
-    MASK_EL.addEventListener('click', () => {
-      TOGGLE_EL.checked = false;
+    this.mask.removeAttribute(INACTIVE_ATTR);
+    this.mask.addEventListener('click', () => {
+      this.toggle.checked = false;
       this.disableMask();
     }, { once: true });
   }
 
   /** @description Initializes menu toggle and overlay mask. */
   initToggle() {
-    TOGGLE_EL.addEventListener('click', () => {
-      if (MASK_EL.hasAttribute(INACTIVE_ATTR)) {
+    this.toggle.addEventListener('click', () => {
+      if (this.mask.hasAttribute(INACTIVE_ATTR)) {
         this.enableMask();
       } else {
         this.disableMask();
@@ -165,15 +165,8 @@ class Settings {
    * @param {?string=} fallback: Default value if none is stored yet.
    */
   setOption(name, fallback='') {
-    let value;
-
     const stored = localStorage.getItem(name);
-    if (stored) {
-      value = stored; // Use previously stored value.
-    } else {
-      value = fallback.toLowerCase(); // Set value to fallback.
-    }
-
+    const value = (stored) ? stored : fallback.toLowerCase();
     document.body.setAttribute(`data-${name}`, value);
     localStorage.setItem(name, value);
   }
@@ -208,11 +201,11 @@ class Settings {
       html += `<div class="menu__group" data-setting="${name}"></div>`;
       this.setOption(name, fallback);
     });
-    MENU_EL.innerHTML = html;
+    this.menu.innerHTML = html;
 
     // Populate settings elements.
-    this.makeOptions(THEMES, Selectors.THEME);
-    this.makeOptions(CURRENCIES, Selectors.CURRENCY);
+    this.makeOptions(THEMES, THEME_SELECTOR);
+    this.makeOptions(CURRENCIES, CURRENCY_SELECTOR);
 
     // Set up element listeners.
     this.initToggle();

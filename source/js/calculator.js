@@ -3,7 +3,7 @@ import { UserValues } from'./modules/userValues';
 import { Utilities } from './modules/utilities';
 
 /** @instance  */
-const settings = new Settings();
+const settings = new Settings('.mask', '.menu__content', '.settings__toggle');
 
 /** @instance */
 const userValues = new UserValues('.values__list', '.values__total');

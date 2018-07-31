@@ -1,7 +1,6 @@
 import { setExpandableState, setToggleLabel, toggleButtonState } from './expandable';
 import { compound } from './calculations';
 
-
 /**
  * @type {Array{Object{label: string, name: string, max: number, pattern: string, type: string}}}
  * HTML input elements.
@@ -117,12 +116,20 @@ class UserValues {
     }
   }
 
-  updateOnCurrencyChange() {
-    // TODO: add a mutation observer that calls updateTotal() when a body
-    // attribute has changed.
+  updateOnCurrencyChange(selector) {
+    window.MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
 
-    // https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
-    // https://stackoverflow.com/questions/4561845/firing-event-on-dom-attribute-change/4561975
+    const self = this;
+    const target = document.querySelector(selector);
+    const config = {
+      attributes: true,
+    };
+
+    const observer = new MutationObserver(function(mutation) {
+      self.updateTotal()
+    });
+
+    observer.observe(target, config);
   }
 
   init() {
@@ -137,6 +144,8 @@ class UserValues {
     } else {
       toggleButtonState(0); // TODO: handle this differently
     }
+
+    this.updateOnCurrencyChange('[data-currency]');
 
     // Update DOM when user changes input values.
     document.addEventListener('keyup', () => {

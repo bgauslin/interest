@@ -105,13 +105,11 @@ class Settings {
   changeOption(name, value) {
     document.body.setAttribute(`data-${name}`, value);
     localStorage.setItem(name, value);
-    return;
   }
 
   /** @description Hides overlay mask. */
   disableMask() {
     MASK_EL.setAttribute(INACTIVE_ATTR, '');
-    return;
   }
 
   /** @description Shows overlay mask and adds a click listener. */
@@ -121,8 +119,6 @@ class Settings {
       TOGGLE_EL.checked = false;
       this.disableMask();
     }, { once: true });
-
-    return;
   }
 
   /** @description Initializes menu toggle and overlay mask. */
@@ -133,7 +129,6 @@ class Settings {
       } else {
         this.disableMask();
       }
-      return;
     });
   }
 
@@ -162,33 +157,7 @@ class Settings {
     target.innerHTML = html;
 
     this.updateOptions(name);
-
-    return;
   }
-
-  /**
-   * @description Creates settings fields and populates them with user
-   * preferences or defaults.
-   */
-  scaffold () {
-    // Attach settings elements to DOM and set defaults for first run.
-    let html = '';
-    SETTINGS.forEach((setting) => {
-      const { name, fallback } = setting;
-      html += `<div class="menu__group" data-setting="${name}"></div>`;
-      this.setOption(name, fallback);
-    });
-    MENU_EL.innerHTML = html;
-
-    // Populate settings elements.
-    this.makeOptions(THEMES, Selectors.THEME);
-    this.makeOptions(CURRENCIES, Selectors.CURRENCY);
-
-    // Set up element listeners.
-    this.initToggle();
-
-    return;
-  };
 
   /**
    * @description Adds an attribute with a value, and saves it to localStorage.
@@ -207,8 +176,6 @@ class Settings {
 
     document.body.setAttribute(`data-${name}`, value);
     localStorage.setItem(name, value);
-
-    return;
   }
 
   /**
@@ -228,6 +195,28 @@ class Settings {
       });
     });
   }
+
+  /**
+   * @description Creates settings fields and populates them with user
+   * preferences or defaults.
+   */
+  init () {
+    // Attach settings elements to DOM and set defaults for first run.
+    let html = '';
+    SETTINGS.forEach((setting) => {
+      const { name, fallback } = setting;
+      html += `<div class="menu__group" data-setting="${name}"></div>`;
+      this.setOption(name, fallback);
+    });
+    MENU_EL.innerHTML = html;
+
+    // Populate settings elements.
+    this.makeOptions(THEMES, Selectors.THEME);
+    this.makeOptions(CURRENCIES, Selectors.CURRENCY);
+
+    // Set up element listeners.
+    this.initToggle();
+  };
 }
 
 

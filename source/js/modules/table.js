@@ -1,3 +1,5 @@
+// TODO: refactor this as a class and pass in element at instantiation...
+
 /** @const {HTMLElement} Table element. */
 const TABLE_EL = document.querySelector('.table__data');
 

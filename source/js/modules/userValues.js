@@ -1,7 +1,6 @@
+import { setExpandableState, setToggleLabel, toggleButtonState } from './expandable';
 import { compound } from './calculations';
 
-// TODO: add a mutation observer that calls updateTotal() when a body
-// attribute has changed.
 
 /**
  * @type {Array} HTML input elements.
@@ -49,10 +48,12 @@ const USER_INPUTS = [
 /** @const {string} localStorage item containing user-provided input values. */
 const STORAGE_ITEM_VALUES = 'values';
 
-
 /** @class */
 class UserValues {
-
+  /**
+   * @param {string} list: Element selector...
+   * @param {string} total: Element selector...
+   */
   constructor(list, total) {
     this.listEl = document.querySelector(list);
     this.totalEl = document.querySelector(total);
@@ -84,8 +85,6 @@ class UserValues {
     });
 
     this.listEl.innerHTML = html;
-
-    return;
   }
 
   /**
@@ -100,8 +99,6 @@ class UserValues {
       const input = this.listEl.querySelectorAll('li')[i].querySelector('input');
       input.value = values[i];
     }
-
-    return;
   }
 
   /** @description Updates DOM element with the total value after compounding. */
@@ -118,10 +115,30 @@ class UserValues {
       localStorage.setItem(STORAGE_ITEM_VALUES, values);
       this.totalEl.textContent = compound(...values);
     }
+  }
 
-    return;
+  updateOnCurrencyChange() {
+    // TODO: add a mutation observer that calls updateTotal() when a body
+    // attribute has changed.
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
+    // https://stackoverflow.com/questions/4561845/firing-event-on-dom-attribute-change/4561975
+  }
+
+  init() {
+    this.createInputs();
+    setExpandableState(); // TODO: handle this differently
+    setToggleLabel(); // TODO: handle this differently
+
+    const values = localStorage.getItem(STORAGE_ITEM_VALUES);
+    if (values) {
+      this.populateInputs(values);
+      this.updateTotal();
+    } else {
+      toggleButtonState(0); // TODO: handle this differently
+    }
   }
 }
 
 
-export { STORAGE_ITEM_VALUES, UserValues };
+export { UserValues };

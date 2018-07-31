@@ -1,3 +1,5 @@
+// TODO: refactor this as a class and update accordingly...
+
 /** @enum {string} Elements, classes, attributes for collapsing/expanding. */
 const Expandable = {
   ATTR: 'data-collapsed',
@@ -104,6 +106,7 @@ const toggleButtonState = (n) => {
 TOGGLE_EL.addEventListener('click', () => {
   expandCollapse(EXPANDABLE_EL);
 });
+
 
 
 export { setExpandableState, setToggleLabel, toggleButtonState };

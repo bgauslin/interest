@@ -1,5 +1,7 @@
 import { compound } from './calculations';
 
+// TODO: add a mutation observer that calls updateTotal() when a body
+// attribute has changed.
 
 /**
  * @type {Array} HTML input elements.
@@ -44,18 +46,18 @@ const USER_INPUTS = [
   }
 ];
 
-/** @const {HTMLElement} Element for attaching input fields to */
-const INPUTS_EL = document.querySelector('.values__list');
-
-/** @const {HTMLElement} */
-const TOTAL_EL = document.querySelector('.values__total');
-
 /** @const {string} localStorage item containing user-provided input values. */
-const STORAGE_VALUES = 'values';
+const STORAGE_ITEM_VALUES = 'values';
 
 
 /** @class */
 class UserValues {
+
+  constructor(list, total) {
+    this.listEl = document.querySelector(list);
+    this.totalEl = document.querySelector(total);
+  }
+
   /** @description Creates and attaches input fields for user-provided values. */
   createInputs() {
     let html = '';
@@ -81,7 +83,7 @@ class UserValues {
       html += input;
     });
 
-    INPUTS_EL.innerHTML = html;
+    this.listEl.innerHTML = html;
 
     return;
   }
@@ -95,7 +97,7 @@ class UserValues {
     const values = data.split(',');
 
     for (let i = 0; i < values.length; i++) {
-      const input = INPUTS_EL.querySelectorAll('li')[i].querySelector('input');
+      const input = this.listEl.querySelectorAll('li')[i].querySelector('input');
       input.value = values[i];
     }
 
@@ -113,8 +115,8 @@ class UserValues {
     });
 
     if (document.querySelectorAll(':invalid').length === 0) {
-      localStorage.setItem(STORAGE_VALUES, values);
-      TOTAL_EL.textContent = compound(...values);
+      localStorage.setItem(STORAGE_ITEM_VALUES, values);
+      this.totalEl.textContent = compound(...values);
     }
 
     return;
@@ -122,4 +124,4 @@ class UserValues {
 }
 
 
-export { STORAGE_VALUES, UserValues };
+export { STORAGE_ITEM_VALUES, UserValues };

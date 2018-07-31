@@ -1,6 +1,6 @@
 import { setExpandableState, setToggleLabel, toggleButtonState } from './modules/expandable';
 import { Settings } from './modules/settings';
-import { STORAGE_VALUES, UserValues } from'./modules/userValues';
+import { STORAGE_ITEM_VALUES, UserValues } from'./modules/userValues';
 import { Utilities } from './modules/utilities';
 
 
@@ -8,7 +8,7 @@ import { Utilities } from './modules/utilities';
 const settings = new Settings();
 
 /** @instance */
-const userValues = new UserValues();
+const userValues = new UserValues('.values__list', '.values__total');
 
 /** @instance */
 const utilities = new Utilities({
@@ -27,7 +27,7 @@ const init = () => {
   setToggleLabel();
 
   // Update UI based on previous visit.
-  const values = localStorage.getItem(STORAGE_VALUES);
+  const values = localStorage.getItem(STORAGE_ITEM_VALUES);
   if (values) {
     userValues.populateInputs(values);
     userValues.updateTotal();

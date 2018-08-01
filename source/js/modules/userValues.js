@@ -1,5 +1,11 @@
 import { Calculations } from './calculations';
 
+/** @instance */
+const calculations = new Calculations({
+  currencyAttr: 'data-currency',
+  table: '.table__data',
+});
+
 /**
  * @type {Array{Object{label: string, name: string, max: number, pattern: string, type: string}}}
  * HTML input elements.
@@ -44,11 +50,8 @@ const USER_INPUTS = [
   }
 ];
 
-/** @instance */
-const calculations = new Calculations({
-  currencyAttr: 'data-currency',
-  table: '.table__data',
-});
+/** @const {string} */
+const INVALID_ATTR = ':invalid';
 
 /** @class */
 class UserValues {
@@ -114,7 +117,7 @@ class UserValues {
       values.push(value);
     });
 
-    if (document.querySelectorAll(':invalid').length === 0) {
+    if (document.querySelectorAll(INVALID_ATTR).length === 0) {
       localStorage.setItem(this.storage, values);
       this.totalEl.textContent = calculations.compound(...values);
     }

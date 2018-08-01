@@ -124,7 +124,7 @@ class UserValues {
     const self = this;
 
     const observer = new MutationObserver((mutation) => {
-      self.updateTotal()
+      self.updateTotal();
     });
 
     observer.observe(target, config);

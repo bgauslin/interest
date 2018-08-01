@@ -29,8 +29,6 @@ const compound = (principal, contribution, rate, compounds, periods) => {
   let contributionCompounded;
   let sums = [];
 
-  // toggleButtonState(periods); // TODO: move this out of here
-
   for (let i = 1; i <= periods; i++) {
     principalCompounded = amountWithInterest(p, rate);
     contributionCompounded = amountWithInterest(c, rate);

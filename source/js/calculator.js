@@ -13,7 +13,7 @@ const settings = new Settings({
 /** @instance */
 const userValues = new UserValues({
   list: '.values__list',
-  total: '.values__total'
+  total: '.values__total',
 });
 
 /** @instance */
@@ -26,6 +26,7 @@ const utilities = new Utilities({
 const expandable = new Expandable({
   target: '.table',
   toggle: '.toggle__button',
+  total: '.values__total',
   trigger: '[name="periods"]',
 });
 

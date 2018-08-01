@@ -1,4 +1,9 @@
-import { compound } from './calculations';
+import { Calculations } from './calculations';
+
+const calculations = new Calculations({
+  table: '.table__data',
+  attr: 'data-currency',
+});
 
 /**
  * @type {Array{Object{label: string, name: string, max: number, pattern: string, type: string}}}
@@ -43,6 +48,9 @@ const USER_INPUTS = [
     required: true,
   }
 ];
+
+/** @const {string} ... */
+const CURRENCY_ATTR = '[data-currency]';
 
 /** @const {string} localStorage item containing user-provided input values. */
 const STORAGE_ITEM_VALUES = 'values';
@@ -111,11 +119,14 @@ class UserValues {
 
     if (document.querySelectorAll(':invalid').length === 0) {
       localStorage.setItem(STORAGE_ITEM_VALUES, values);
-      this.totalEl.textContent = compound(...values);
+      this.totalEl.textContent = calculations.compound(...values);
     }
   }
 
-  /** @description ... */
+  /**
+   * @description Watches an element's attributes for changes and updates
+   * the total's value and/or state.
+   */
   updateOnChange(selector) {
     const target = document.querySelector(selector);
     const config = {
@@ -130,7 +141,10 @@ class UserValues {
     observer.observe(target, config);
   }
 
-  /** @description ... */
+  /**
+   * @description Renders user-provided input fields, populates them if data
+   * exists, and adds an observer and listener for user-provided changes.
+   */
   init() {
     this.createInputs();
 
@@ -140,9 +154,8 @@ class UserValues {
       this.updateTotal();
     }
 
-    this.updateOnChange('[data-currency]');
+    this.updateOnChange(CURRENCY_ATTR);
 
-    // Update DOM when user changes input values.
     document.addEventListener('keyup', () => {
       this.updateTotal();
     });

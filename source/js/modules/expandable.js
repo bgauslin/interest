@@ -24,6 +24,7 @@ class Expandable {
   constructor(selectors) {
     this.targetEl = document.querySelector(selectors.target);
     this.toggleEl = document.querySelector(selectors.toggle);
+    this.totalEl = document.querySelector(selectors.total);
     this.trigger = selectors.trigger;
   }
 
@@ -39,7 +40,6 @@ class Expandable {
           this.targetEl.style.height = 0;
         });
       });
-
       this.targetEl.removeAttribute(EXPANDED_ATTR);
     }
 
@@ -52,7 +52,6 @@ class Expandable {
       }, { once: true });
 
       this.targetEl.setAttribute(EXPANDED_ATTR, '');
-
     }
 
     localStorage.setItem(STORAGE_ITEM, direction);
@@ -60,28 +59,18 @@ class Expandable {
   }
 
   /** @description Sets expandable element's state via attribute. */
-  setExpandableState() {
+  setStateOnLoad() {
     if (localStorage.getItem(STORAGE_ITEM) !== EXPANDED) {
       this.targetEl.style.height = 0;
       this.targetEl.removeAttribute(EXPANDED_ATTR);
     }
   }
 
-  /** @description Sets toggle label based on the target element's state. */
-  setToggleLabel() {
-    const attr = this.targetEl.hasAttribute(EXPANDED_ATTR) ? 'visible' : 'hidden';
-    const label = this.targetEl.hasAttribute(EXPANDED_ATTR) ? 'Hide' : 'Show';
-
-    this.toggleEl.setAttribute(TARGET_ATTR, attr);
-    this.toggleEl.textContent = `${label} table`;
-  }
-
-  // TODO: rename this method and also hide the total.
   /** @description ... */
-  toggleButtonState() {
+  setState() {
     const trigger = document.querySelector(this.trigger);
     const value = trigger.value;
-    const els = [this.targetEl, this.toggleEl];
+    const els = [this.targetEl, this.toggleEl, this.totalEl];
     const threshold = 0;
 
     els.forEach((el) => {
@@ -93,6 +82,15 @@ class Expandable {
     });
   }
 
+  /** @description Sets toggle label based on the target element's state. */
+  setToggleLabel() {
+    const attr = this.targetEl.hasAttribute(EXPANDED_ATTR) ? 'visible' : 'hidden';
+    const label = this.targetEl.hasAttribute(EXPANDED_ATTR) ? 'Hide' : 'Show';
+
+    this.toggleEl.setAttribute(TARGET_ATTR, attr);
+    this.toggleEl.textContent = `${label} table`;
+  }
+
   /** @description ... */
   updateOnChange(selector) {
     const target = document.querySelector(selector);
@@ -102,7 +100,7 @@ class Expandable {
     const self = this;
 
     const observer = new MutationObserver((mutation) => {
-      self.toggleButtonState();
+      self.setState();
     });
 
     observer.observe(target, config);
@@ -110,9 +108,9 @@ class Expandable {
 
   /** @description ... */
   init() {
-    this.setExpandableState();
+    this.setStateOnLoad();
     this.setToggleLabel();
-    this.toggleButtonState();
+    this.setState();
     this.updateOnChange(this.trigger);
 
     /** @description Listens for click and toggles expandable element's state. */

@@ -5,7 +5,7 @@ const COLLAPSED = 'collapse';
 const EXPANDED = 'expand';
 
 /** @const {string} */
-const EXPANDED_ATTR = 'data-collapsed'; // TODO: rename to 'expanded'; update accordingly
+const EXPANDED_ATTR = 'data-expanded';
 
 /** @const {string} Attribute that hides an element. */
 const HIDDEN_ATTR = 'data-hidden';
@@ -29,7 +29,7 @@ class Expandable {
 
   /** @description ... */
   expandCollapse() {
-    const direction = this.targetEl.hasAttribute(EXPANDED_ATTR) ? EXPANDED : COLLAPSED;
+    const direction = this.targetEl.hasAttribute(EXPANDED_ATTR) ? COLLAPSED : EXPANDED;
     const elHeight = this.targetEl.scrollHeight;
 
     if (direction === COLLAPSED) {
@@ -40,7 +40,7 @@ class Expandable {
         });
       });
 
-      this.targetEl.setAttribute(EXPANDED_ATTR, '');
+      this.targetEl.removeAttribute(EXPANDED_ATTR);
     }
 
     if (direction === EXPANDED) {
@@ -51,7 +51,8 @@ class Expandable {
         this.targetEl.removeEventListener('transitionend', null, false);
       }, { once: true });
 
-      this.targetEl.removeAttribute(EXPANDED_ATTR);
+      this.targetEl.setAttribute(EXPANDED_ATTR, '');
+
     }
 
     localStorage.setItem(STORAGE_ITEM, direction);
@@ -62,20 +63,21 @@ class Expandable {
   setExpandableState() {
     if (localStorage.getItem(STORAGE_ITEM) !== EXPANDED) {
       this.targetEl.style.height = 0;
-      this.targetEl.setAttribute(EXPANDED_ATTR, '');
+      this.targetEl.removeAttribute(EXPANDED_ATTR);
     }
   }
 
   /** @description Sets toggle label based on the target element's state. */
   setToggleLabel() {
-    const attr = this.targetEl.hasAttribute(EXPANDED_ATTR) ? 'hidden' : 'visible';
-    const label = this.targetEl.hasAttribute(EXPANDED_ATTR) ? 'Show' : 'Hide';
+    const attr = this.targetEl.hasAttribute(EXPANDED_ATTR) ? 'visible' : 'hidden';
+    const label = this.targetEl.hasAttribute(EXPANDED_ATTR) ? 'Hide' : 'Show';
 
     this.toggleEl.setAttribute(TARGET_ATTR, attr);
     this.toggleEl.textContent = `${label} table`;
   }
 
-  /** @param {!number} n: Number of calculated periods. */
+  // TODO: rename this method and also hide the total.
+  /** @description ... */
   toggleButtonState() {
     const trigger = document.querySelector(this.trigger);
     const value = trigger.value;

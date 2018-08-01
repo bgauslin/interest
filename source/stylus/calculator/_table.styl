@@ -17,7 +17,7 @@
 
   @media BREAKPOINT_MEDIUM
     grid-row 3 / span 1
-    height auto !important // display table regardless of 'collapsed' / inline height
+    height auto !important // always display table
     opacity 1
 
   @media BREAKPOINT_LARGE
@@ -29,7 +29,7 @@
 .table[data-hidden]
   display none
 
-.table:not([data-collapsed])
+.table[data-expanded]
   @media BREAKPOINT_SMALL
     margin-top px_to_rem(16)
 

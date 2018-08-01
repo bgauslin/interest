@@ -1,4 +1,5 @@
-import { createTable } from './table';
+/** @const {HTMLElement} Table element. */
+const TABLE_EL = document.querySelector('.table__data');
 
 /** @const {string} */
 const CURRENCY_ATTR = 'data-currency'
@@ -45,7 +46,7 @@ const compound = (principal, contribution, rate, compounds, periods) => {
     sums.push([i, formatCurrency(deposits), formatCurrency(interest), formatCurrency(balance), growth]);
   }
 
-  createTable(sums);
+  table(sums);
 
   const [year, deposits, interest, balance, growth] = sums[sums.length - 1];
 
@@ -96,6 +97,39 @@ const formatRupee = (rupees) => {
   if (thousands) hundreds = `,${hundreds}`;
 
   return `${thousandsFormatted}${hundreds}.${decimal}`;
+}
+
+/**
+ * @description Displays initial and compounded amounts for each time period.
+ * @param {!Array<string>} data - Formatted values.
+ */
+const table = (data) => {
+  let html = `
+    <tr>
+      <th class="year">Year</th>
+      <th class="deposits">Deposits</th>
+      <th class="interest">Interest</th>
+      <th class="balance">Balance</th>
+      <th class="growth">Growth</th>
+    </tr>
+  `;
+
+  data.forEach((item) => {
+    const [year, deposits, interest, balance, growth] = item;
+    html += `
+      <tr>
+        <td class="year">${year}</td>
+        <td class="deposits">${deposits}</td>
+        <td class="interest">${interest}</td>
+        <td class="balance">${balance}</td>
+        <td class="growth">${growth}</td>
+      </tr>
+    `;
+  });
+
+  TABLE_EL.innerHTML = html;
+
+  return;
 }
 
 

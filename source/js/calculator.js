@@ -26,6 +26,7 @@ const utilities = new Utilities({
 const expandable = new Expandable({
   target: '.table',
   toggle: '.toggle__button',
+  trigger: '[name="periods"]',
 });
 
 /** @description Waits until the DOM is ready to initialize app. */

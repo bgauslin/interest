@@ -19,38 +19,39 @@ const STORAGE_ITEM = 'table';
 /** @class */
 class Expandable {
   /**
-   * @param {Object{target: string, toggle: string}} selectors: Element selectors.
+   * @param {Object{target: string, toggle: string, trigger: string}} selectors: Element selectors.
    */
   constructor(selectors) {
-    this.target = document.querySelector(selectors.target);
-    this.toggle = document.querySelector(selectors.toggle);
+    this.targetEl = document.querySelector(selectors.target);
+    this.toggleEl = document.querySelector(selectors.toggle);
+    this.trigger = selectors.trigger;
   }
 
   /** @description ... */
   expandCollapse() {
-    const direction = this.target.hasAttribute(EXPANDED_ATTR) ? EXPANDED : COLLAPSED;
-    const elHeight = this.target.scrollHeight;
+    const direction = this.targetEl.hasAttribute(EXPANDED_ATTR) ? EXPANDED : COLLAPSED;
+    const elHeight = this.targetEl.scrollHeight;
 
     if (direction === COLLAPSED) {
       requestAnimationFrame(() => {
-        this.target.style.height = `${elHeight}px`;
+        this.targetEl.style.height = `${elHeight}px`;
         requestAnimationFrame(() => {
-          this.target.style.height = 0;
+          this.targetEl.style.height = 0;
         });
       });
 
-      this.target.setAttribute(EXPANDED_ATTR, '');
+      this.targetEl.setAttribute(EXPANDED_ATTR, '');
     }
 
     if (direction === EXPANDED) {
-      this.target.style.height = `${elHeight}px`;
+      this.targetEl.style.height = `${elHeight}px`;
 
-      this.target.addEventListener('transitionend', () => {
-        this.target.style.height = null;
-        this.target.removeEventListener('transitionend', null, false);
+      this.targetEl.addEventListener('transitionend', () => {
+        this.targetEl.style.height = null;
+        this.targetEl.removeEventListener('transitionend', null, false);
       }, { once: true });
 
-      this.target.removeAttribute(EXPANDED_ATTR);
+      this.targetEl.removeAttribute(EXPANDED_ATTR);
     }
 
     localStorage.setItem(STORAGE_ITEM, direction);
@@ -59,31 +60,30 @@ class Expandable {
 
   /** @description Sets expandable element's state via attribute. */
   setExpandableState() {
-    const el = this.target;
     if (localStorage.getItem(STORAGE_ITEM) !== EXPANDED) {
-      el.style.height = 0;
-      el.setAttribute(EXPANDED_ATTR, '');
+      this.targetEl.style.height = 0;
+      this.targetEl.setAttribute(EXPANDED_ATTR, '');
     }
   }
 
   /** @description Sets toggle label based on the target element's state. */
   setToggleLabel() {
-    const attr = this.target.hasAttribute(EXPANDED_ATTR) ? 'hidden' : 'visible';
-    const label = this.target.hasAttribute(EXPANDED_ATTR) ? 'Show' : 'Hide';
+    const attr = this.targetEl.hasAttribute(EXPANDED_ATTR) ? 'hidden' : 'visible';
+    const label = this.targetEl.hasAttribute(EXPANDED_ATTR) ? 'Show' : 'Hide';
 
-    this.toggle.setAttribute(TARGET_ATTR, attr);
-    this.toggle.textContent = `${label} table`;
+    this.toggleEl.setAttribute(TARGET_ATTR, attr);
+    this.toggleEl.textContent = `${label} table`;
   }
 
   /** @param {!number} n: Number of calculated periods. */
-  toggleButtonState(n) {
-    console.log('toggleButtonState called');
-
-    const els = [this.target, this.toggle];
+  toggleButtonState() {
+    const trigger = document.querySelector(this.trigger);
+    const value = trigger.value;
+    const els = [this.targetEl, this.toggleEl];
     const threshold = 0;
 
     els.forEach((el) => {
-      if (n <= threshold) {
+      if (value <= threshold) {
         el.setAttribute(HIDDEN_ATTR, '');
       } else {
         el.removeAttribute(HIDDEN_ATTR);
@@ -92,15 +92,29 @@ class Expandable {
   }
 
   /** @description ... */
+  updateOnChange(selector) {
+    const target = document.querySelector(selector);
+    const config = {
+      attributes: true,
+    };
+    const self = this;
+
+    const observer = new MutationObserver((mutation) => {
+      self.toggleButtonState();
+    });
+
+    observer.observe(target, config);
+  }
+
+  /** @description ... */
   init() {
     this.setExpandableState();
     this.setToggleLabel();
-
-    // TODO: initialize a method that calls toggleButtonState() and passes in
-    // the quantity of periods when that input field changes.
+    this.toggleButtonState();
+    this.updateOnChange(this.trigger);
 
     /** @description Listens for click and toggles expandable element's state. */
-    this.toggle.addEventListener('click', () => {
+    this.toggleEl.addEventListener('click', () => {
       this.expandCollapse();
     });
   }

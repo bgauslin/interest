@@ -11,6 +11,7 @@ elixir.config.js.outputFolder = 'ui/js';
 elixir(mix => {
   mix.browserify('calculator.js')
   .stylus('calculator.styl')
+  .copy('source/pwa', 'public/pwa')
   .copy('source/html', 'public')
   .copy('source/webfonts', 'public/ui/webfonts')
   .copy('source/icons', 'public/ui')

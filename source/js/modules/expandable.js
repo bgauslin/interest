@@ -18,12 +18,15 @@ const STORAGE_ITEM = 'table';
 
 /** @class */
 class Expandable {
-
-  constructor(target, toggle) {
-    this.target = document.querySelector(target);
-    this.toggle = document.querySelector(toggle);
+  /**
+   * @param {Object{target: string, toggle: string}} selectors: Element selectors.
+   */
+  constructor(selectors) {
+    this.target = document.querySelector(selectors.target);
+    this.toggle = document.querySelector(selectors.toggle);
   }
 
+  /** @description ... */
   expandCollapse() {
     const direction = this.target.hasAttribute(EXPANDED_ATTR) ? EXPANDED : COLLAPSED;
     const elHeight = this.target.scrollHeight;
@@ -52,7 +55,6 @@ class Expandable {
 
     localStorage.setItem(STORAGE_ITEM, direction);
     this.setToggleLabel();
-    return;
   }
 
   /** @description Sets expandable element's state via attribute. */
@@ -89,9 +91,13 @@ class Expandable {
     });
   }
 
+  /** @description ... */
   init() {
     this.setExpandableState();
     this.setToggleLabel();
+
+    // TODO: initialize a method that calls toggleButtonState() and passes in
+    // the quantity of periods when that input field changes.
 
     /** @description Listens for click and toggles expandable element's state. */
     this.toggle.addEventListener('click', () => {

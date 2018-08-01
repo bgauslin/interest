@@ -1,4 +1,3 @@
-import { Expandable } from './expandable';
 import { compound } from './calculations';
 
 /**
@@ -47,13 +46,6 @@ const USER_INPUTS = [
 
 /** @const {string} localStorage item containing user-provided input values. */
 const STORAGE_ITEM_VALUES = 'values';
-
-/** @const {string} */
-const EXPANDABLE_TARGET = '.table';
-
-/** @const {string} */
-const EXPANDABLE_TOGGLE = '.toggle__button';
-
 
 /** @class */
 class UserValues {
@@ -123,6 +115,7 @@ class UserValues {
     }
   }
 
+  /** @description ... */
   updateOnChange(selector) {
     const target = document.querySelector(selector);
     const config = {
@@ -137,18 +130,14 @@ class UserValues {
     observer.observe(target, config);
   }
 
+  /** @description ... */
   init() {
     this.createInputs();
-
-    const expandable = new Expandable(EXPANDABLE_TARGET, EXPANDABLE_TOGGLE);
-    expandable.init();
 
     const values = localStorage.getItem(STORAGE_ITEM_VALUES);
     if (values) {
       this.populateInputs(values);
       this.updateTotal();
-    } else {
-      expandable.toggleButtonState(0);
     }
 
     this.updateOnChange('[data-currency]');

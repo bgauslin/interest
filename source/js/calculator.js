@@ -1,3 +1,4 @@
+import { Expandable } from './modules/expandable';
 import { Settings } from './modules/settings';
 import { UserValues } from'./modules/userValues';
 import { Utilities } from './modules/utilities';
@@ -21,9 +22,16 @@ const utilities = new Utilities({
   id: 'UA-626192-11',
 });
 
+/** @instance */
+const expandable = new Expandable({
+  target: '.table',
+  toggle: '.toggle__button',
+});
+
 /** @description Waits until the DOM is ready to initialize app. */
 document.addEventListener('DOMContentLoaded', () => {
   settings.init();
   userValues.init();
+  expandable.init();
   utilities.init();
 });

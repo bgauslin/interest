@@ -79,13 +79,12 @@ const INACTIVE_ATTR = 'inactive';
 /** @class */
 class Settings {
   /**
-   * @param {!Object{mask: string, menu: string, toggle: string}} selectors:
-   * Element selectors.
+   * @param {!Object{mask: string, menu: string, toggle: string}} config
    */
-  constructor(selectors) {
-    this.mask = document.querySelector(selectors.mask);
-    this.menu = document.querySelector(selectors.menu);
-    this.toggle = document.querySelector(selectors.toggle);
+  constructor(config) {
+    this.mask = document.querySelector(config.mask);
+    this.menu = document.querySelector(config.menu);
+    this.toggle = document.querySelector(config.toggle);
   }
 
   /**

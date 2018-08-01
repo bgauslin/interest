@@ -6,22 +6,24 @@ const NO_TOUCH_ATTR = 'no-touch';
 
 /** @class */
 class Utilities {
-
+  /**
+   * @param {Object} config
+   */
   constructor(config) {
-    this.config = config;
+    this.analyticsSettings = config.analyticsSettings;
   }
 
   /**
    * @description Initializes Google Analytics tracking.
-   * @param {!Object} config: GA settings (id, hostname)
+   * @param {!Object} settings: GA settings (id, hostname)
    */
-  googleAnalytics(config) {
-    if (window.location.hostname === config.domain) {
+  googleAnalytics(settings) {
+    if (window.location.hostname === settings.domain) {
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga')
-      ga('create', config.id, 'auto')
+      ga('create', settings.id, 'auto')
       ga('send', 'pageview')
     }
   }
@@ -42,7 +44,7 @@ class Utilities {
   init() {
     this.hasJs();
     this.noTouch();
-    this.googleAnalytics(this.config);
+    this.googleAnalytics(this.analyticsSettings);
   }
 }
 

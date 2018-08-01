@@ -1,10 +1,5 @@
 import { Calculations } from './calculations';
 
-const calculations = new Calculations({
-  table: '.table__data',
-  attr: 'data-currency',
-});
-
 /**
  * @type {Array{Object{label: string, name: string, max: number, pattern: string, type: string}}}
  * HTML input elements.
@@ -49,20 +44,22 @@ const USER_INPUTS = [
   }
 ];
 
-/** @const {string} ... */
-const CURRENCY_ATTR = '[data-currency]';
-
-/** @const {string} localStorage item containing user-provided input values. */
-const STORAGE_ITEM_VALUES = 'values';
+/** @instance */
+const calculations = new Calculations({
+  currencyAttr: 'data-currency',
+  table: '.table__data',
+});
 
 /** @class */
 class UserValues {
   /**
-   * @param {Object{list: string, total: string}} selectors: Element selectors.
+   * @param {Object{list: string, storage: string, total: string, trigger: string}} config
    */
-  constructor(selectors) {
-    this.listEl = document.querySelector(selectors.list);
-    this.totalEl = document.querySelector(selectors.total);
+  constructor(config) {
+    this.listEl = document.querySelector(config.list);
+    this.storage = config.storage;
+    this.totalEl = document.querySelector(config.total);
+    this.trigger = config.trigger;
   }
 
   /** @description Creates and attaches input fields for user-provided values. */
@@ -118,7 +115,7 @@ class UserValues {
     });
 
     if (document.querySelectorAll(':invalid').length === 0) {
-      localStorage.setItem(STORAGE_ITEM_VALUES, values);
+      localStorage.setItem(this.storage, values);
       this.totalEl.textContent = calculations.compound(...values);
     }
   }
@@ -148,13 +145,13 @@ class UserValues {
   init() {
     this.createInputs();
 
-    const values = localStorage.getItem(STORAGE_ITEM_VALUES);
+    const values = localStorage.getItem(this.storage);
     if (values) {
       this.populateInputs(values);
       this.updateTotal();
     }
 
-    this.updateOnChange(CURRENCY_ATTR);
+    this.updateOnChange(this.trigger);
 
     document.addEventListener('keyup', () => {
       this.updateTotal();

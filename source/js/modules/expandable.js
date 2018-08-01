@@ -7,28 +7,33 @@ const EXPANDED = 'expand';
 /** @const {string} */
 const EXPANDED_ATTR = 'data-expanded';
 
-/** @const {string} Attribute that hides an element. */
+/** @const {string} */
 const HIDDEN_ATTR = 'data-hidden';
 
-/** @const {string} Attribute set on the target's source. */
+/** @const {string} */
 const TARGET_ATTR = 'data-target';
-
-/** @const {string} localStorage item name for expandable element's display. */
-const STORAGE_ITEM = 'table';
 
 /** @class */
 class Expandable {
   /**
-   * @param {Object{target: string, toggle: string, trigger: string}} selectors: Element selectors.
+   * @param {Object{myConfig}} config
+   * myConfig: {
+   *   storage: storage,
+   *   target: string,
+   *   toggle: string,
+   *   total: string,
+   *   trigger: string,
+   * }
    */
-  constructor(selectors) {
-    this.targetEl = document.querySelector(selectors.target);
-    this.toggleEl = document.querySelector(selectors.toggle);
-    this.totalEl = document.querySelector(selectors.total);
-    this.trigger = selectors.trigger;
+  constructor(config) {
+    this.storage = config.storage;
+    this.targetEl = document.querySelector(config.target);
+    this.toggleEl = document.querySelector(config.toggle);
+    this.totalEl = document.querySelector(config.total);
+    this.trigger = config.trigger;
   }
 
-  /** @description ... */
+  /** @description Expands / collapses an element. */
   expandCollapse() {
     const direction = this.targetEl.hasAttribute(EXPANDED_ATTR) ? COLLAPSED : EXPANDED;
     const elHeight = this.targetEl.scrollHeight;
@@ -54,19 +59,19 @@ class Expandable {
       this.targetEl.setAttribute(EXPANDED_ATTR, '');
     }
 
-    localStorage.setItem(STORAGE_ITEM, direction);
+    localStorage.setItem(this.storage, direction);
     this.setToggleLabel();
   }
 
-  /** @description Sets expandable element's state via attribute. */
+  /** @description Sets element states via attributes on initial load. */
   setStateOnLoad() {
-    if (localStorage.getItem(STORAGE_ITEM) !== EXPANDED) {
+    if (localStorage.getItem(this.storage) !== EXPANDED) {
       this.targetEl.style.height = 0;
       this.targetEl.removeAttribute(EXPANDED_ATTR);
     }
   }
 
-  /** @description ... */
+  /** @description Sets element states via attributes on change. */
   setState() {
     const trigger = document.querySelector(this.trigger);
     const value = trigger.value;
@@ -91,7 +96,7 @@ class Expandable {
     this.toggleEl.textContent = `${label} table`;
   }
 
-  /** @description ... */
+  /** @description Observes an attribute and calls a method when it changes. */
   updateOnChange(selector) {
     const target = document.querySelector(selector);
     const config = {
@@ -106,7 +111,7 @@ class Expandable {
     observer.observe(target, config);
   }
 
-  /** @description ... */
+  /** @description Initializes the elements' states. */
   init() {
     this.setStateOnLoad();
     this.setToggleLabel();

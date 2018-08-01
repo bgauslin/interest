@@ -3,6 +3,15 @@ import { Settings } from './modules/settings';
 import { UserValues } from'./modules/userValues';
 import { Utilities } from './modules/utilities';
 
+/** @instance */
+const expandable = new Expandable({
+  storage: 'table',
+  target: '.table',
+  toggle: '.toggle__button',
+  total: '.values__total',
+  trigger: '[name="periods"]',
+});
+
 /** @instance  */
 const settings = new Settings({
   mask: '.mask',
@@ -13,21 +22,17 @@ const settings = new Settings({
 /** @instance */
 const userValues = new UserValues({
   list: '.values__list',
+  storage: 'values',
   total: '.values__total',
+  trigger: '[data-currency]',
 });
 
 /** @instance */
 const utilities = new Utilities({
-  domain: 'gauslin.com',
-  id: 'UA-626192-11',
-});
-
-/** @instance */
-const expandable = new Expandable({
-  target: '.table',
-  toggle: '.toggle__button',
-  total: '.values__total',
-  trigger: '[name="periods"]',
+  analyticsSettings: {
+    domain: 'gauslin.com',
+    id: 'UA-626192-11',
+  },
 });
 
 /** @description Waits until the DOM is ready to initialize app. */

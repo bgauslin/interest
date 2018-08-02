@@ -154,11 +154,7 @@ class UserValues {
       this.updateTotal();
     }
 
-    this.updateOnChange(this.trigger);
-
-    document.addEventListener('keyup', () => {
-      this.updateTotal();
-    });
+    // this.updateOnChange(this.trigger);
   }
 }
 

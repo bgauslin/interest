@@ -42,3 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
   expandable.init();
   utilities.init();
 });
+
+/** @description Toggles component states on user input. */
+document.addEventListener('keyup', () => {
+  expandable.setState();
+  userValues.updateTotal();
+});

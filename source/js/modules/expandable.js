@@ -65,9 +65,11 @@ class Expandable {
 
   /** @description Sets element states via attributes on initial load. */
   setStateOnLoad() {
-    if (localStorage.getItem(this.storage) !== EXPANDED) {
-      this.targetEl.style.height = 0;
+    if (localStorage.getItem(this.storage) === EXPANDED) {
+      this.targetEl.setAttribute(EXPANDED_ATTR, '');
+    } else {
       this.targetEl.removeAttribute(EXPANDED_ATTR);
+      this.targetEl.style.height = 0;
     }
   }
 
@@ -75,7 +77,7 @@ class Expandable {
   setState() {
     const trigger = document.querySelector(this.trigger);
     const value = trigger.value;
-    const els = [this.targetEl, this.toggleEl, this.totalEl];
+    const els = [this.targetEl, this.toggleEl, this.totalEl]; // TODO: move this.totalEl into userValues(?)
     const threshold = 0;
 
     els.forEach((el) => {
@@ -96,27 +98,11 @@ class Expandable {
     this.toggleEl.textContent = `${label} table`;
   }
 
-  /** @description Observes an attribute and calls a method when it changes. */
-  updateOnChange(selector) {
-    const target = document.querySelector(selector);
-    const config = {
-      attributes: true,
-    };
-    const self = this;
-
-    const observer = new MutationObserver((mutation) => {
-      self.setState();
-    });
-
-    observer.observe(target, config);
-  }
-
   /** @description Initializes the elements' states. */
   init() {
     this.setStateOnLoad();
     this.setToggleLabel();
     this.setState();
-    this.updateOnChange(this.trigger);
 
     /** @description Listens for click and toggles expandable element's state. */
     this.toggleEl.addEventListener('click', () => {

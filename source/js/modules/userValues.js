@@ -62,7 +62,7 @@ class UserValues {
     this.listEl = document.querySelector(config.list);
     this.storage = config.storage;
     this.totalEl = document.querySelector(config.total);
-    this.trigger = config.trigger;
+    this.trigger = config.trigger; // TODO: rename 'trigger' param
   }
 
   /** @description Creates and attaches input fields for user-provided values. */
@@ -154,7 +154,7 @@ class UserValues {
       this.updateTotal();
     }
 
-    // this.updateOnChange(this.trigger);
+    this.updateOnChange(this.trigger);
   }
 }
 

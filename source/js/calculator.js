@@ -8,7 +8,6 @@ const expandable = new Expandable({
   storage: 'table',
   target: '.table',
   toggle: '.toggle__button',
-  total: '.values__total',
   trigger: '[name="periods"]',
 });
 
@@ -22,9 +21,10 @@ const settings = new Settings({
 /** @instance */
 const userValues = new UserValues({
   list: '.values__list',
+  periods: '[name="periods"]',
   storage: 'values',
   total: '.values__total',
-  trigger: '[data-currency]',
+  currencyAttr: '[data-currency]',
 });
 
 /** @instance */

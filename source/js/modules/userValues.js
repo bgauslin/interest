@@ -6,6 +6,9 @@ const calculations = new Calculations({
   table: '.table__data',
 });
 
+/** @const {string} */
+const HIDDEN_ATTR = 'data-hidden';
+
 /**
  * @type {Array{Object{label: string, name: string, max: number, pattern: string, type: string}}}
  * HTML input elements.
@@ -56,13 +59,14 @@ const INVALID_ATTR = ':invalid';
 /** @class */
 class UserValues {
   /**
-   * @param {Object{list: string, storage: string, total: string, trigger: string}} config
+   * @param {Object{list: string, storage: string, total: string, currencyAttr: string}} config
    */
   constructor(config) {
     this.listEl = document.querySelector(config.list);
+    this.periods = config.periods;
     this.storage = config.storage;
     this.totalEl = document.querySelector(config.total);
-    this.trigger = config.trigger; // TODO: rename 'trigger' param
+    this.currencyAttr = config.currencyAttr;
   }
 
   /** @description Creates and attaches input fields for user-provided values. */
@@ -107,6 +111,17 @@ class UserValues {
     }
   }
 
+  /** @description Sets 'total' element's state via attribute on input change. */
+  setTotalState() {
+    const periodsEl = document.querySelector(this.periods);
+
+    if (periodsEl.value <= 0) {
+      this.totalEl.setAttribute(HIDDEN_ATTR, '');
+    } else {
+      this.totalEl.removeAttribute(HIDDEN_ATTR);
+    }
+  }
+
   /** @description Updates DOM element with the total value after compounding. */
   updateTotal() {
     let values = [];
@@ -121,6 +136,8 @@ class UserValues {
       localStorage.setItem(this.storage, values);
       this.totalEl.textContent = calculations.compound(...values);
     }
+
+    this.setTotalState();
   }
 
   /**
@@ -147,14 +164,12 @@ class UserValues {
    */
   init() {
     this.createInputs();
-
     const values = localStorage.getItem(this.storage);
     if (values) {
       this.populateInputs(values);
       this.updateTotal();
     }
-
-    this.updateOnChange(this.trigger);
+    this.updateOnChange(this.currencyAttr);
   }
 }
 

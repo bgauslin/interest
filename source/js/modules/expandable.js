@@ -21,7 +21,6 @@ class Expandable {
    *   storage: storage,
    *   target: string,
    *   toggle: string,
-   *   total: string,
    *   trigger: string,
    * }
    */
@@ -29,8 +28,7 @@ class Expandable {
     this.storage = config.storage;
     this.targetEl = document.querySelector(config.target);
     this.toggleEl = document.querySelector(config.toggle);
-    this.totalEl = document.querySelector(config.total);
-    this.trigger = config.trigger;
+    this.trigger = config.trigger; // TODO: rename 'trigger'
   }
 
   /** @description Expands / collapses an element. */
@@ -75,9 +73,9 @@ class Expandable {
 
   /** @description Sets element states via attributes on change. */
   setState() {
-    const trigger = document.querySelector(this.trigger);
+    const trigger = document.querySelector(this.trigger); // TODO: rename 'trigger'
     const value = trigger.value;
-    const els = [this.targetEl, this.toggleEl, this.totalEl]; // TODO: move this.totalEl into userValues(?)
+    const els = [this.targetEl, this.toggleEl];
     const threshold = 0;
 
     els.forEach((el) => {

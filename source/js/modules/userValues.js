@@ -10,8 +10,14 @@ const calculations = new Calculations({
 const HIDDEN_ATTR = 'data-hidden';
 
 /**
- * @type {Array{Object{label: string, name: string, max: number, pattern: string, type: string}}}
- * HTML input elements.
+ * @type {Array{userInputs}} HTML input elements.
+ * userInputs {
+ *   label: string,
+ *   name: string,
+ *   max: number,
+ *   pattern: string,
+ *   type: string,
+ * }
  */
 const USER_INPUTS = [
   {
@@ -59,14 +65,20 @@ const INVALID_ATTR = ':invalid';
 /** @class */
 class UserValues {
   /**
-   * @param {Object{list: string, storage: string, total: string, currencyAttr: string}} config
+   * @param {Object{userValues}} config
+   * userValues {
+   *   currencyAttr: string,
+   *   list: string,
+   *   storage: string,
+   *   total: string,
+   * }
    */
   constructor(config) {
-    this.listEl = document.querySelector(config.list);
+    this.currencyAttr = config.currencyAttr;
     this.periods = config.periods;
     this.storage = config.storage;
+    this.listEl = document.querySelector(config.list);
     this.totalEl = document.querySelector(config.total);
-    this.currencyAttr = config.currencyAttr;
   }
 
   /** @description Creates and attaches input fields for user-provided values. */

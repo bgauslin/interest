@@ -21,11 +21,11 @@ const settings = new Settings({
 
 /** @instance */
 const userValues = new UserValues({
+  currencyAttr: '[data-currency]',
   list: '.values__list',
   periods: '[name="periods"]',
   storage: 'values',
   total: '.values__total',
-  currencyAttr: '[data-currency]',
 });
 
 /** @instance */

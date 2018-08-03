@@ -7,7 +7,11 @@ const EURO_FORMAT_THRESHOLD = 50000;
 /** @class ... */
 class Calculations {
   /**
-   * @param {Object{tableEl: string, currencyAttr: string}} config
+   * @param {Object{config}} config
+   * config {
+   *  tableEl: string,
+   *  currencyAttr: string,
+   * }
    */
   constructor(config) {
     this.tableEl = document.querySelector(config.table);

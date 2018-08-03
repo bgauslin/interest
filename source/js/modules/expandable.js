@@ -16,9 +16,9 @@ const TARGET_ATTR = 'data-target';
 /** @class */
 class Expandable {
   /**
-   * @param {Object{myConfig}} config
-   * myConfig: {
-   *   storage: storage,
+   * @param {Object{config}} config
+   * config: {
+   *   storage: string,
    *   target: string,
    *   toggle: string,
    *   trigger: string,

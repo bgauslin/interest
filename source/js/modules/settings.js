@@ -30,15 +30,16 @@ const CURRENCIES = {
       label: '₹',
       value: 'inr',
     },
-    // {
-    //   isoSymbol: 'WON',
-    //   label: '₩',
-    //   value: 'won',
-    // },
   ],
 };
 
-/** @enum {Array{Object{name: string, fallback: string}}} ... */
+/**
+  * @enum {Array{Object{settings}}} TODO...
+  * settings {
+  *   name: string,
+  *   fallback: string,
+  * }
+  */
 const SETTINGS = [
   {
     name: 'theme',

@@ -27,6 +27,7 @@ if ($_SERVER['SERVER_NAME'] == $prodServer) {
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="apple-touch-icon" href="/ui/touch-icon.png?t=<?php echo date('U') ?>">
     <link rel="icon" type="image/png" href="/ui/favicon.png?t=<?php echo date('U') ?>">
+	  <link rel="manifest" href="/pwa/manifest.json"></link>
     <link rel="stylesheet" href="<?php echo $css ?>">
   </head>
 
@@ -72,6 +73,18 @@ if ($_SERVER['SERVER_NAME'] == $prodServer) {
       </noscript>
 
     </div>
+
+    <script>
+      if (navigator.serviceWorker.controller) {
+        console.log('Active service worker found, no need to register')
+      } else {
+        navigator.serviceWorker.register('sw.js', {
+          scope: '/'
+        }).then(function(reg) {
+          console.log('Service worker has been registered for scope: ' + reg.scope);
+        });
+      }
+    </script>
 
     <script src="<?php echo $js ?>"></script>
 

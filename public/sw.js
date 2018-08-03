@@ -1,9 +1,14 @@
 // Service worker with cache-first network.
-var CACHE = 'pwabuilder-precache';
+var CACHE = 'precache';
 var precacheFiles = [
   'index.php',
   '/ui/css/calculator.css',
+  '/ui/icons/favicon.png',
   '/ui/js/calculator.js',
+  '/ui/webfonts/AvenirLTStd-Heavy.woff',
+  '/ui/webfonts/AvenirLTStd-Heavy.woff2',
+  '/ui/webfonts/AvenirLTStd-Medium.woff',
+  '/ui/webfonts/AvenirLTStd-Medium.woff2',
   '/ui/webfonts/AvenirNext-Variable.woff2',
 ];
 

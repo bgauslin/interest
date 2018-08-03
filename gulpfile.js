@@ -13,7 +13,7 @@ elixir(mix => {
   .stylus('calculator.styl')
   .copy('source/html', 'public')
   .copy('source/webfonts', 'public/ui/webfonts')
-  .copy('source/icons', 'public/ui')
+  .copy('source/icons', 'public/ui/icons')
   .copy('source/js/sw.js', 'public/sw.js')
   .copy('source/pwa', 'public/pwa')
   .livereload()

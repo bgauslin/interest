@@ -25,8 +25,8 @@ if ($_SERVER['SERVER_NAME'] == $prodServer) {
     <meta name="description" content="<?php echo $description ?>">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="apple-touch-icon" href="/ui/touch-icon.png?t=<?php echo date('U') ?>">
-    <link rel="icon" type="image/png" href="/ui/favicon.png?t=<?php echo date('U') ?>">
+    <link rel="apple-touch-icon" href="/ui/icons/touch-icon.png?t=<?php echo date('U') ?>">
+    <link rel="icon" type="image/png" href="/ui/icons/favicon.png">
 	  <link rel="manifest" href="/pwa/manifest.json"></link>
     <link rel="stylesheet" href="<?php echo $css ?>">
   </head>

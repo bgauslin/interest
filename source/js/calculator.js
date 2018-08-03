@@ -2,6 +2,7 @@ import { Expandable } from './modules/expandable';
 import { Settings } from './modules/settings';
 import { UserValues } from'./modules/userValues';
 import { Utilities } from './modules/utilities';
+import { registerServiceWorker } from './modules/registerServiceWorker';
 
 /** @instance */
 const expandable = new Expandable({
@@ -41,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
   userValues.init();
   expandable.init();
   utilities.init();
+  registerServiceWorker();
 });
 
 /** @description Toggles component states on user input. */

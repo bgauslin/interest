@@ -5,11 +5,16 @@
   left 0
   position fixed
   right 0
+  transform translate3d(0, 0, 0)
+  transition transform TRANSITION_SPEED ease
   top 0
   z-index 1
 
   @media BREAKPOINT_MEDIUM
     height HEADER_HEIGHT_MEDIUM
+
+.header.unpinned
+  transform translate3d(0, -100%, 0)
 
 .header__frame
   align-items center

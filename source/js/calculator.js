@@ -1,3 +1,4 @@
+import headroom from 'headroom.js';
 import { Expandable } from './modules/expandable';
 import { Settings } from './modules/settings';
 import { UserValues } from'./modules/userValues';
@@ -36,12 +37,25 @@ const utilities = new Utilities({
   },
 });
 
+/** @instance */
+const myHeadroom = new headroom(document.querySelector('.header'), {
+  offset: 0,
+  classes: {
+    'initial': 'animated',
+    'pinned': 'pinned',
+    'unpinned': 'unpinned',
+    'top': 'top',
+    'notTop': 'not-top',
+  }
+});
+
 /** @description Waits until the DOM is ready to initialize app. */
 document.addEventListener('DOMContentLoaded', () => {
   settings.init();
   userValues.init();
   expandable.init();
   utilities.init();
+  myHeadroom.init();
   registerServiceWorker();
 });
 

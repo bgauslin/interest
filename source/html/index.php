@@ -56,6 +56,9 @@ if ($_SERVER['SERVER_NAME'] == $prodServer) {
         <div class="table__frame">
           <table class="table__data"></table>
         </div>
+        <p class="rotate-device">
+          Rotate device to view <span>Interest</span> and <span>Growth</span> columns.
+        </p>
       </div>
 
       <div class="toggle">

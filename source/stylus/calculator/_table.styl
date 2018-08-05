@@ -81,3 +81,11 @@ td.growth::after
 
   @media BREAKPOINT_SMALL
     display table-cell
+
+.rotate-device
+  display none
+  font-size px_to_rem(12)
+  margin px_to_rem(12) COLUMN_GAP 0
+
+  @media screen and (max-width: BREAKPOINT_SMALL_UNITS) and (orientation: portrait)
+    display block

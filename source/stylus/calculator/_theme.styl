@@ -55,7 +55,11 @@ for name, theme in THEMES
     td.deposits::before
     td.interest::before
     td.balance::before
+    .rotate-device
       color theme['SYMBOL'];
+
+    .rotate-device span
+      color theme['TEXT'];
 
     @media BREAKPOINT_SMALL
       {body}&

@@ -20,6 +20,11 @@
     grid-column 2 / span 1
     position sticky
     top HEADER_HEIGHT_MEDIUM + ROW_GAP_MEDIUM
+    transition top TRANSITION_SPEED ease
+
+@media BREAKPOINT_LARGE
+  .header.unpinned ~ .values
+    top ROW_GAP_MEDIUM
 
 .values__list
   list-style none

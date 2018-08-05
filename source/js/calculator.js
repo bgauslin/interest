@@ -51,12 +51,12 @@ const myHeadroom = new headroom(document.querySelector('.header'), {
 
 /** @description Waits until the DOM is ready to initialize app. */
 document.addEventListener('DOMContentLoaded', () => {
+  registerServiceWorker();
   settings.init();
   userValues.init();
   expandable.init();
   utilities.init();
   myHeadroom.init();
-  // registerServiceWorker();
 });
 
 /** @description Toggles component states on user input. */

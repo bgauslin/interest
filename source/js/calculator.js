@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
   expandable.init();
   utilities.init();
   myHeadroom.init();
-  registerServiceWorker();
+  // registerServiceWorker();
 });
 
 /** @description Toggles component states on user input. */

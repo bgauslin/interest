@@ -3,7 +3,8 @@ import { Calculations } from './calculations';
 /** @instance */
 const calculations = new Calculations({
   currencyAttr: 'data-currency',
-  table: '.table__data',
+  table: '.table',
+  tableData: '.table__data',
 });
 
 /** @const {string} */
@@ -181,6 +182,7 @@ class UserValues {
       this.populateInputs(values);
       this.updateTotal();
     }
+    calculations.tableCaption();
     this.updateOnChange(this.currencyAttr);
   }
 }

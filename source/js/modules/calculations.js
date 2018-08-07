@@ -15,6 +15,7 @@ class Calculations {
    */
   constructor(config) {
     this.tableEl = document.querySelector(config.table);
+    this.tableDataEl = document.querySelector(config.tableData);
     this.currencyAttr = config.currencyAttr;
   }
 
@@ -141,7 +142,17 @@ class Calculations {
       `;
     });
 
-    this.tableEl.innerHTML = html;
+    this.tableDataEl.innerHTML = html;
+  }
+
+  /**
+   * @description Displays a caption after the table.
+   */
+  tableCaption() {
+    const caption = document.createElement('p');
+    caption.classList.add('rotate-device');
+    caption.innerHTML = 'Rotate device to view <span>Interest</span> and <span>Growth</span> columns.';
+    this.tableEl.appendChild(caption);
   }
 }
 

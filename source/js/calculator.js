@@ -51,7 +51,7 @@ const myHeadroom = new headroom(document.querySelector('.header'), {
 
 /** @description Waits until the DOM is ready to initialize app. */
 document.addEventListener('DOMContentLoaded', () => {
-  registerServiceWorker();
+  // registerServiceWorker();
   settings.init();
   userValues.init();
   expandable.init();

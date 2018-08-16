@@ -101,16 +101,14 @@ const customOpts = {
   entries: paths.js.src,
   debug: true
 };
-
 const opts = assign({}, watchify.args, customOpts);
-
 const b = watchify(browserify(opts));
 
 b.transform(babelify, {
   presets: ['@babel/preset-env']
 });
 
-function bundle() {
+const bundle = () => {
   return b.bundle()
     .pipe(source(paths.js.b_src))
     .pipe(buffer())
@@ -119,7 +117,6 @@ function bundle() {
 }
 
 // b.on('update', bundle);
-
 gulp.task('js', bundle);
 
 // Copy PWA assets.
@@ -185,6 +182,8 @@ gulp.task('watch', tasks.default, () => {
 gulp.task('browser-sync', ['watch'], () => {
   return browserSync({ proxy: devServer });
 });
+
+gulp.task('build', tasks.default);
 
 gulp.task('refresh', tasks.default, browserSync.reload);
 

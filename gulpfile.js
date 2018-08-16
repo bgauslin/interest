@@ -31,11 +31,11 @@ const paths = {
   },
   'js': {
     'src': 'source/js/' + project + '.js',
-    'dest': 'public/ui/js/' + project + '.js',
+    'dest': 'public/ui/' + project + '.js',
   },
   'stylus': {
     'src': 'source/stylus/' + project + '.styl',
-    'dest': 'public/ui/css',
+    'dest': 'public/ui',
   },
   'version': {
     'src': [

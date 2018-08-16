@@ -2,19 +2,19 @@
 $title = 'Compound Interest Calculator';
 $description = 'Mobile-friendly standalone web app that calculates compound interest';
 
-$prodServer = 'calculator.gauslin.com';
+$prod_server = 'calculator.gauslin.com';
 
-$cssPath = 'ui/css/calculator.css';
-$jsPath = 'ui/js/calculator.js';
+$css = 'calculator.css';
+$js = 'calculator.js';
 
-if ($_SERVER['SERVER_NAME'] == $prodServer) {
-  $manifest = file_get_contents('build/rev-manifest.json');
+if ($_SERVER['SERVER_NAME'] == $prod_server) {
+  $manifest = file_get_contents('build/manifest.json');
   $json = json_decode($manifest, true);
-  $css = '/build/' . $json[$cssPath];
-  $js = '/build/' . $json[$jsPath];
+  $css_path = '/build/ui/' . $json[$css];
+  $js_path = '/build/ui/' . $json[$js];
 } else {
-  $css = '/' . $cssPath;
-  $js = '/' . $jsPath;
+  $css_path = '/ui/' . $css;
+  $js_path = '/ui/' . $js;
 }
 ?>
 <!doctype html>
@@ -28,7 +28,7 @@ if ($_SERVER['SERVER_NAME'] == $prodServer) {
     <link rel="apple-touch-icon" href="/ui/icons/touch-icon.png?t=<?php echo date('U') ?>">
     <link rel="icon" type="image/png" href="/ui/icons/favicon.png">
 	  <?php // <link rel="manifest" href="/pwa/manifest.json"></link> ?>
-    <link rel="stylesheet" href="<?php echo $css ?>">
+    <link rel="stylesheet" href="<?php echo $css_path ?>">
   </head>
 
   <body ontouchstart no-touch no-js>
@@ -74,7 +74,7 @@ if ($_SERVER['SERVER_NAME'] == $prodServer) {
 
     </div>
 
-    <script src="<?php echo $js ?>"></script>
+    <script src="<?php echo $js_path ?>"></script>
 
   </body>
 </html>

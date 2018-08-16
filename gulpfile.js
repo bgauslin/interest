@@ -183,7 +183,10 @@ gulp.task('browser-sync', ['watch'], () => {
   return browserSync({ proxy: devServer });
 });
 
-gulp.task('build', tasks.default);
+gulp.task('build', tasks.default, () => {
+  b.close();
+  console.log('Build completed.')
+});
 
 gulp.task('refresh', tasks.default, browserSync.reload);
 

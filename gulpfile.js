@@ -132,7 +132,10 @@ gulp.task('stylus', () => {
       browsers: ['last 2 versions'],
       cascade: false
     }))
-    .pipe(cssnano())
+    .pipe(cssnano({
+      discardUnused: false,
+      minifyFontValues: false,
+    }))
     .pipe(gulp.dest(paths.stylus.dest));
 });
 

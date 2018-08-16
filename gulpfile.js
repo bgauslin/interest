@@ -1,15 +1,19 @@
 const gulp         = require('gulp');
 
+const assign       = require('lodash.assign');
 const autoprefixer = require('gulp-autoprefixer');
 const babelify     = require('babelify');
 const browserify   = require('browserify');
 const browserSync  = require('browser-sync');
+const buffer       = require('vinyl-buffer');
 const cssnano      = require('gulp-cssnano');
 const fs           = require('fs');
 const hash         = require('gulp-hash');
 const plumber      = require('gulp-plumber');
+const source       = require('vinyl-source-stream');
 const stylus       = require('gulp-stylus');
 const uglify       = require('gulp-uglify-es').default;
+const watchify     = require('watchify');
 
 const onError = (err) => console.log(err);
 
@@ -32,6 +36,8 @@ const paths = {
   'js': {
     'src': 'source/js/' + project + '.js',
     'dest': 'public/ui/' + project + '.js',
+    'b_src': project + '.js',
+    'b_dest': 'public/ui',
   },
   'stylus': {
     'src': 'source/stylus/' + project + '.styl',
@@ -90,15 +96,31 @@ gulp.task('icons', () => {
     .pipe(gulp.dest(paths.icons.dest));
 });
 
-// TODO: full 'js' task: browserify -> babelify -> uglify.
-gulp.task('js', () => {
-  browserify(paths.js.src)
-    .transform(babelify.configure({
-      presets: ['@babel/preset-env']
-    }))
-    .bundle()
-    .pipe(fs.createWriteStream(paths.js.dest));
+// Compile and uglify JavaScript.
+const customOpts = {
+  entries: paths.js.src,
+  debug: true
+};
+
+const opts = assign({}, watchify.args, customOpts);
+
+const b = watchify(browserify(opts));
+
+b.transform(babelify, {
+  presets: ['@babel/preset-env']
 });
+
+function bundle() {
+  return b.bundle()
+    .pipe(source(paths.js.b_src))
+    .pipe(buffer())
+    .pipe(uglify())
+    .pipe(gulp.dest(paths.js.b_dest));
+}
+
+// b.on('update', bundle);
+
+gulp.task('js', bundle);
 
 // Copy PWA assets.
 gulp.task('pwa', () => {

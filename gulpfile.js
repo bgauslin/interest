@@ -7,7 +7,6 @@ const browserify   = require('browserify');
 const browserSync  = require('browser-sync');
 const buffer       = require('vinyl-buffer');
 const cssnano      = require('gulp-cssnano');
-const fs           = require('fs');
 const hash         = require('gulp-hash');
 const plumber      = require('gulp-plumber');
 const source       = require('vinyl-source-stream');
@@ -80,7 +79,6 @@ const tasks = {
   ]
 };
 
-
 // ------------------------------------------------------------
 // Individual tasks.
 
@@ -144,12 +142,39 @@ gulp.task('sw', () => {
     .pipe(gulp.dest(paths.sw.dest));
 });
 
-// Uglify generated js.
-gulp.task('uglify', () => {
-  gulp.src(paths.js.dest)
-    .pipe(uglify())
-    .pipe(gulp.dest(paths.uglify.dest));
+// Copy webfonts.
+gulp.task('webfonts', () => {
+  gulp.src(paths.webfonts.src)
+    .pipe(gulp.dest(paths.webfonts.dest));
 });
+
+// ------------------------------------------------------------
+// Composite tasks.
+
+gulp.task('browser-sync', ['watch'], () => {
+  return browserSync({ proxy: devServer });
+});
+
+gulp.task('refresh', tasks.default, browserSync.reload);
+
+gulp.task('watch', tasks.default, () => {
+  const watcher = gulp.watch('./source/**/*', ['refresh']);
+  watcher.on('change', (event) => {
+    console.log(`File ${event.path} was ${event.type}, running tasks...`);
+  });
+});
+
+// ------------------------------------------------------------
+// Main tasks.
+
+// One-time build.
+gulp.task('build', tasks.default, () => {
+  b.close();
+  console.log('Build completed.')
+});
+
+// Build, listen, reload.
+gulp.task('default', ['browser-sync']);
 
 // Create hashed files for production.
 gulp.task('version', () => {
@@ -162,35 +187,3 @@ gulp.task('version', () => {
     }))
     .pipe(gulp.dest('.'));
 });
-
-// Copy webfonts.
-gulp.task('webfonts', () => {
-  gulp.src(paths.webfonts.src)
-    .pipe(gulp.dest(paths.webfonts.dest));
-});
-
-// ------------------------------------------------------------
-// Composite tasks.
-
-gulp.task('watch', tasks.default, () => {
-  const watcher = gulp.watch('./source/**/*', ['refresh']);
-  watcher.on('change', (event) => {
-    console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-  });
-});
-
-gulp.task('browser-sync', ['watch'], () => {
-  return browserSync({ proxy: devServer });
-});
-
-gulp.task('build', tasks.default, () => {
-  b.close();
-  console.log('Build completed.')
-});
-
-gulp.task('refresh', tasks.default, browserSync.reload);
-
-// ------------------------------------------------------------
-// Default task.
-
-gulp.task('default', ['browser-sync']);

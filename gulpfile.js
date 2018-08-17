@@ -133,7 +133,6 @@ const bundle = () => {
     .pipe(gulp.dest(paths.js.b_dest));
 }
 
-// b.on('update', bundle);
 gulp.task('js', bundle);
 
 // Copy PWA assets.

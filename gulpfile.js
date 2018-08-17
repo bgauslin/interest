@@ -9,6 +9,7 @@ const buffer       = require('vinyl-buffer');
 const cssnano      = require('gulp-cssnano');
 const hash         = require('gulp-hash');
 const plumber      = require('gulp-plumber');
+const rename       = require('gulp-rename');
 const source       = require('vinyl-source-stream');
 const stylus       = require('gulp-stylus');
 const uglify       = require('gulp-uglify-es').default;
@@ -24,6 +25,11 @@ const project = 'calculator';
 const devServer = project + '.gauslin.test';
 
 const paths = {
+  'apache': {
+    'src': 'source/apache/_htaccess',
+    'name': '.htaccess',
+    'dest': 'public',
+  },
   'html': {
     'src': 'source/html/**/*.*',
     'dest': 'public',
@@ -68,7 +74,8 @@ const paths = {
 };
 
 const tasks = {
-  'default': [
+  'build': [
+    'apache',
     'html',
     'icons',
     'js',
@@ -76,11 +83,23 @@ const tasks = {
     'stylus',
     // 'sw',
     'webfonts'
+  ],
+  'default': [
+    'html',
+    'js',
+    'stylus',
   ]
 };
 
 // ------------------------------------------------------------
 // Individual tasks.
+
+// Copy htaccess.
+gulp.task('apache', () => {
+  gulp.src(paths.apache.src)
+    .pipe(rename(paths.apache.name))
+    .pipe(gulp.dest(paths.apache.dest));
+});
 
 // Copy html.
 gulp.task('html', () => {
@@ -171,7 +190,7 @@ gulp.task('watch', tasks.default, () => {
 // Main tasks.
 
 // One-time build.
-gulp.task('build', tasks.default, () => {
+gulp.task('build', tasks.build, () => {
   b.close();
   console.log('Build completed.')
 });

@@ -1,6 +1,5 @@
 const gulp         = require('gulp');
 
-const assign       = require('lodash.assign');
 const autoprefixer = require('gulp-autoprefixer');
 const babelify     = require('babelify');
 const browserify   = require('browserify');
@@ -13,7 +12,6 @@ const rename       = require('gulp-rename');
 const source       = require('vinyl-source-stream');
 const stylus       = require('gulp-stylus');
 const uglify       = require('gulp-uglify-es').default;
-const watchify     = require('watchify');
 
 const onError = (err) => console.log(err);
 
@@ -114,26 +112,15 @@ gulp.task('icons', () => {
 });
 
 // Compile and uglify JavaScript.
-const customOpts = {
-  entries: paths.js.src,
-  debug: true
-};
-const opts = assign({}, watchify.args, customOpts);
-const b = watchify(browserify(opts));
-
-b.transform(babelify, {
-  presets: ['@babel/preset-env']
-});
-
-const bundle = () => {
-  return b.bundle()
+gulp.task('js', () => {
+  return browserify({ entries: paths.js.src, debug: true })
+    .transform('babelify', { presets: ['@babel/preset-env'] })
+    .bundle()
     .pipe(source(paths.js.b_src))
     .pipe(buffer())
     .pipe(uglify())
     .pipe(gulp.dest(paths.js.b_dest));
-}
-
-gulp.task('js', bundle);
+});
 
 // Copy PWA assets.
 gulp.task('pwa', () => {
@@ -189,10 +176,7 @@ gulp.task('watch', tasks.default, () => {
 // Main tasks.
 
 // One-time build.
-gulp.task('build', tasks.build, () => {
-  b.close();
-  console.log('Build completed.')
-});
+gulp.task('build', tasks.build, () => console.log('Build completed.'));
 
 // Build, listen, reload.
 gulp.task('default', ['browser-sync']);

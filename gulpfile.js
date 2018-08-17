@@ -1,5 +1,6 @@
-const gulp         = require('gulp');
+const pkg = require('./package.json');
 
+const gulp         = require('gulp');
 const autoprefixer = require('gulp-autoprefixer');
 const babelify     = require('babelify');
 const browserify   = require('browserify');
@@ -16,121 +17,47 @@ const uglify       = require('gulp-uglify-es').default;
 const onError = (err) => console.log(err);
 
 // ------------------------------------------------------------
-// Configuration.
-
-const project = 'calculator';
-
-const devServer = project + '.gauslin.test';
-
-const paths = {
-  'apache': {
-    'src': 'source/apache/_htaccess',
-    'name': '.htaccess',
-    'dest': 'public',
-  },
-  'html': {
-    'src': 'source/html/**/*.*',
-    'dest': 'public',
-  }, 
-  'icons': {
-    'src': 'source/icons/**/*.*',
-    'dest': 'public/ui/icons',
-  },
-  'js': {
-    'src': 'source/js/' + project + '.js',
-    'dest': 'public/ui/' + project + '.js',
-    'b_src': project + '.js',
-    'b_dest': 'public/ui',
-  },
-  'stylus': {
-    'src': 'source/stylus/' + project + '.styl',
-    'dest': 'public/ui',
-  },
-  'version': {
-    'src': [
-      'public/ui/' + project + '.css',
-      'public/ui/' + project + '.js',
-    ],
-    'dest': 'public/build/ui',
-    'manifestFile': 'public/build/manifest.json',
-  },
-  'pwa': {
-    'src': 'source/pwa/**/*.*',
-    'dest': 'public/pwa',
-  },
-  'sw': {
-    'src': 'source/js/sw.js',
-    'dest': 'public',
-  },
-  'uglify': {
-    'dest': 'public/ui',
-  },
-  'webfonts': {
-    'src': 'source/webfonts/**/*.*',
-    'dest': 'public/ui/webfonts',
-  },
-};
-
-const tasks = {
-  'build': [
-    'apache',
-    'html',
-    'icons',
-    'js',
-    'pwa',
-    'stylus',
-    // 'sw',
-    'webfonts'
-  ],
-  'default': [
-    'html',
-    'js',
-    'stylus',
-  ]
-};
-
-// ------------------------------------------------------------
 // Individual tasks.
 
 // Copy htaccess.
 gulp.task('apache', () => {
-  gulp.src(paths.apache.src)
-    .pipe(rename(paths.apache.name))
-    .pipe(gulp.dest(paths.apache.dest));
+  gulp.src(pkg.paths.apache.src)
+    .pipe(rename(pkg.paths.apache.name))
+    .pipe(gulp.dest(pkg.paths.apache.dest));
 });
 
 // Copy html.
 gulp.task('html', () => {
-  gulp.src(paths.html.src)
-    .pipe(gulp.dest(paths.html.dest));
+  gulp.src(pkg.paths.html.src)
+    .pipe(gulp.dest(pkg.paths.html.dest));
 });
 
 // Copy icons.
 gulp.task('icons', () => {
-  gulp.src(paths.icons.src)
-    .pipe(gulp.dest(paths.icons.dest));
+  gulp.src(pkg.paths.icons.src)
+    .pipe(gulp.dest(pkg.paths.icons.dest));
 });
 
 // Compile and uglify JavaScript.
 gulp.task('js', () => {
-  return browserify({ entries: paths.js.src, debug: true })
+  return browserify({ entries: pkg.paths.js.src, debug: true })
     .transform('babelify', { presets: ['@babel/preset-env'] })
     .bundle()
-    .pipe(source(paths.js.b_src))
+    .pipe(source(pkg.paths.js.b_src))
     .pipe(buffer())
     .pipe(uglify())
-    .pipe(gulp.dest(paths.js.b_dest));
+    .pipe(gulp.dest(pkg.paths.js.b_dest));
 });
 
 // Copy PWA assets.
 gulp.task('pwa', () => {
-  gulp.src(paths.pwa.src)
-    .pipe(gulp.dest(paths.pwa.dest));
+  gulp.src(pkg.paths.pwa.src)
+    .pipe(gulp.dest(pkg.paths.pwa.dest));
 });
 
 // Compile and minify stylus.
 gulp.task('stylus', () => {
-  gulp.src(paths.stylus.src)
+  gulp.src(pkg.paths.stylus.src)
     .pipe(plumber({ errorHandler: onError }))
     .pipe(stylus())
     .pipe(autoprefixer({
@@ -141,53 +68,55 @@ gulp.task('stylus', () => {
       discardUnused: false,
       minifyFontValues: false,
     }))
-    .pipe(gulp.dest(paths.stylus.dest));
+    .pipe(gulp.dest(pkg.paths.stylus.dest));
 });
 
 // Copy the Service Worker.
+// TODO: 'sw' is disabled for now
 gulp.task('sw', () => {
-  gulp.src(paths.sw.src)
-    .pipe(gulp.dest(paths.sw.dest));
+  return;
+  gulp.src(pkg.paths.sw.src)
+    .pipe(gulp.dest(pkg.paths.sw.dest));
 });
 
 // Copy webfonts.
 gulp.task('webfonts', () => {
-  gulp.src(paths.webfonts.src)
-    .pipe(gulp.dest(paths.webfonts.dest));
+  gulp.src(pkg.paths.webfonts.src)
+    .pipe(gulp.dest(pkg.paths.webfonts.dest));
 });
 
 // ------------------------------------------------------------
-// Composite tasks.
+// Composite tasks (in order of operation).
 
 gulp.task('browser-sync', ['watch'], () => {
-  return browserSync({ proxy: devServer });
+  return browserSync({ proxy: pkg.devServer });
 });
 
-gulp.task('refresh', tasks.default, browserSync.reload);
-
-gulp.task('watch', tasks.default, () => {
+gulp.task('watch', pkg.tasks.default, () => {
   const watcher = gulp.watch('./source/**/*', ['refresh']);
   watcher.on('change', (event) => {
     console.log(`File ${event.path} was ${event.type}, running tasks...`);
   });
 });
 
+gulp.task('refresh', pkg.tasks.default, browserSync.reload);
+
 // ------------------------------------------------------------
-// Main tasks.
+// Primary tasks.
 
 // One-time build.
-gulp.task('build', tasks.build, () => console.log('Build completed.'));
+gulp.task('build', pkg.tasks.build, () => console.log('Build completed.'));
 
 // Build, listen, reload.
 gulp.task('default', ['browser-sync']);
 
 // Create hashed files for production.
 gulp.task('version', () => {
-  gulp.src(paths.version.src)
+  gulp.src(pkg.paths.version.src)
     .pipe(plumber({ errorHandler: onError }))
     .pipe(hash())
-    .pipe(gulp.dest(paths.version.dest))
-    .pipe(hash.manifest(paths.version.manifestFile, {
+    .pipe(gulp.dest(pkg.paths.version.dest))
+    .pipe(hash.manifest(pkg.paths.version.manifestFile, {
       deleteOld: true,
     }))
     .pipe(gulp.dest('.'));

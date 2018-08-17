@@ -5,6 +5,72 @@
   "license": "UNLICENSED",
   "repository": "https://bitbucket.org/bgauslin/calculator",
   "private": true,
+  "devServer": "calculator.gauslin.test",
+  "paths": {
+    "apache": {
+      "src": "source/apache/_htaccess",
+      "name": ".htaccess",
+      "dest": "public"
+    },
+    "html": {
+      "src": "source/html/**/*.*",
+      "dest": "public"
+    }, 
+    "icons": {
+      "src": "source/icons/**/*.*",
+      "dest": "public/ui/icons"
+    },
+    "js": {
+      "src": "source/js/calculator.js",
+      "dest": "public/ui/calculator.js",
+      "b_src": "calculator.js",
+      "b_dest": "public/ui"
+    },
+    "stylus": {
+      "src": "source/stylus/calculator.styl",
+      "dest": "public/ui"
+    },
+    "version": {
+      "src": [
+        "public/ui/calculator.css",
+        "public/ui/calculator.js"
+      ],
+      "dest": "public/build/ui",
+      "manifestFile": "public/build/manifest.json"
+    },
+    "pwa": {
+      "src": "source/pwa/**/*.*",
+      "dest": "public/pwa"
+    },
+    "sw": {
+      "src": "source/js/sw.js",
+      "dest": "public"
+    },
+    "uglify": {
+      "dest": "public/ui"
+    },
+    "webfonts": {
+      "src": "source/webfonts/**/*.*",
+      "dest": "public/ui/webfonts"
+    }
+  },
+  "tasks": {
+    "build": [
+      "apache",
+      "html",
+      "icons",
+      "js",
+      "pwa",
+      "stylus",
+      "sw",
+      "webfonts"
+    ],
+    "default": [
+      "html",
+      "js",
+      "stylus"
+    ]
+  },
   "dependencies": {
     "fastclick": "^1.0.6",
     "headroom.js": "^0.9.4",

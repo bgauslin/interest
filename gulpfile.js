@@ -43,10 +43,10 @@ gulp.task('js', () => {
   return browserify({ entries: pkg.paths.js.src, debug: true })
     .transform('babelify', { presets: ['@babel/preset-env'] })
     .bundle()
-    .pipe(source(pkg.paths.js.b_src))
+    .pipe(source(pkg.paths.js.bundleSrc))
     .pipe(buffer())
     .pipe(uglify())
-    .pipe(gulp.dest(pkg.paths.js.b_dest));
+    .pipe(gulp.dest(pkg.paths.js.bundleDest));
 });
 
 // Copy PWA assets.

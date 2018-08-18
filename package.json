@@ -23,8 +23,8 @@
     "js": {
       "src": "source/js/calculator.js",
       "dest": "public/ui/calculator.js",
-      "b_src": "calculator.js",
-      "b_dest": "public/ui"
+      "bundleSrc": "calculator.js",
+      "bundleDest": "public/ui"
     },
     "stylus": {
       "src": "source/stylus/calculator.styl",

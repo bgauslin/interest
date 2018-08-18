@@ -13,11 +13,11 @@
       "dest": "public"
     },
     "html": {
-      "src": "source/html/**/*.*",
+      "src": "source/html/**/*",
       "dest": "public"
     }, 
     "icons": {
-      "src": "source/icons/**/*.*",
+      "src": "source/icons/**/*",
       "dest": "public/ui/icons"
     },
     "js": {
@@ -39,7 +39,7 @@
       "manifestFile": "public/build/manifest.json"
     },
     "pwa": {
-      "src": "source/pwa/**/*.*",
+      "src": "source/pwa/**/*",
       "dest": "public/pwa"
     },
     "sw": {
@@ -50,7 +50,7 @@
       "dest": "public/ui"
     },
     "webfonts": {
-      "src": "source/webfonts/**/*.*",
+      "src": "source/webfonts/**/*",
       "dest": "public/ui/webfonts"
     }
   },

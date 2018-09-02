@@ -150,8 +150,8 @@ class Calculations {
    */
   tableCaption() {
     const caption = document.createElement('p');
-    caption.classList.add('rotate-device');
-    caption.innerHTML = 'Rotate device to view <span>Interest</span> and <span>Growth</span> columns.';
+    caption.classList.add('rotate-screen');
+    caption.innerHTML = 'Rotate screen to view <span>Interest</span> and <span>Growth</span> columns.';
     this.tableEl.appendChild(caption);
   }
 }

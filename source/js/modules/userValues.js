@@ -101,7 +101,8 @@ class UserValues {
                  ${min}
                  ${max}
                  ${pattern}
-                 ${required}>
+                 ${required}
+                 aria-label="${el.label}">
         </li>
       `;
       html += input;

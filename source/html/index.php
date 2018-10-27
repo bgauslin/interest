@@ -23,7 +23,7 @@ if ($_SERVER['SERVER_NAME'] == $prod_server) {
     <meta charset="utf-8">
     <title><?php echo $title ?></title>
     <meta name="description" content="<?php echo $description ?>">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="apple-touch-icon" href="/ui/icons/touch-icon.png?t=<?php echo date('U') ?>">
     <link rel="icon" type="image/png" href="/ui/icons/favicon.png">
@@ -39,7 +39,7 @@ if ($_SERVER['SERVER_NAME'] == $prod_server) {
         <div class="header__frame">
           <h1 class="header__title"><?php echo $title ?></h1>
           <div class="settings">
-            <input class="settings__toggle" type="checkbox">
+            <input class="settings__toggle" type="checkbox" aria-label="Settings">
             <div class="menu">
               <div class="menu__content"></div>
             </div>

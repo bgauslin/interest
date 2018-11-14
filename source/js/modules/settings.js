@@ -89,6 +89,28 @@ class Settings {
   }
 
   /**
+   * @description Creates settings fields and populates them with user
+   * preferences or defaults.
+   */
+  init () {
+    // Attach settings elements to DOM and set defaults for first run.
+    let html = '';
+    SETTINGS.forEach((setting) => {
+      const { name, fallback } = setting;
+      html += `<div class="menu__group" data-setting="${name}"></div>`;
+      this.setOption(name, fallback);
+    });
+    this.menu.innerHTML = html;
+
+    // Populate settings elements.
+    this.makeOptions(THEMES, THEMES.name);
+    this.makeOptions(CURRENCIES, CURRENCIES.name);
+
+    // Set up element listeners.
+    this.initToggle();
+  }
+
+  /**
    * @description Sets an attribute on the body element and saves it to
    * localStorage.
    * @param {!string} name: The attribute to set on the body element.
@@ -181,29 +203,6 @@ class Settings {
       });
     });
   }
-
-  /**
-   * @description Creates settings fields and populates them with user
-   * preferences or defaults.
-   */
-  init () {
-    // Attach settings elements to DOM and set defaults for first run.
-    let html = '';
-    SETTINGS.forEach((setting) => {
-      const { name, fallback } = setting;
-      html += `<div class="menu__group" data-setting="${name}"></div>`;
-      this.setOption(name, fallback);
-    });
-    this.menu.innerHTML = html;
-
-    // Populate settings elements.
-    this.makeOptions(THEMES, THEMES.name);
-    this.makeOptions(CURRENCIES, CURRENCIES.name);
-
-    // Set up element listeners.
-    this.initToggle();
-  };
 }
-
 
 export { Settings };

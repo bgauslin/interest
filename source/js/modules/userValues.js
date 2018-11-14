@@ -82,6 +82,21 @@ class UserValues {
     this.totalEl = document.querySelector(config.total);
   }
 
+  /**
+   * @description Renders user-provided input fields, populates them if data
+   * exists, and adds an observer and listener for user-provided changes.
+   */
+  init() {
+    this.createInputs();
+    const values = localStorage.getItem(this.storage);
+    if (values) {
+      this.populateInputs(values);
+      this.updateTotal();
+    }
+    calculations.tableCaption();
+    this.updateOnChange(this.currencyAttr);
+  }
+
   /** @description Creates and attaches input fields for user-provided values. */
   createInputs() {
     let html = '';
@@ -171,22 +186,6 @@ class UserValues {
 
     observer.observe(target, config);
   }
-
-  /**
-   * @description Renders user-provided input fields, populates them if data
-   * exists, and adds an observer and listener for user-provided changes.
-   */
-  init() {
-    this.createInputs();
-    const values = localStorage.getItem(this.storage);
-    if (values) {
-      this.populateInputs(values);
-      this.updateTotal();
-    }
-    calculations.tableCaption();
-    this.updateOnChange(this.currencyAttr);
-  }
 }
-
 
 export { UserValues };

@@ -31,6 +31,18 @@ class Expandable {
     this.trigger = config.trigger; // TODO: rename 'trigger'
   }
 
+  /** @description Initializes the elements' states. */
+  init() {
+    this.setStateOnLoad();
+    this.setToggleLabel();
+    this.setState();
+
+    /** @description Listens for click and toggles expandable element's state. */
+    this.toggleEl.addEventListener('click', () => {
+      this.expandCollapse();
+    });
+  }
+
   /** @description Expands / collapses an element. */
   expandCollapse() {
     const direction = this.targetEl.hasAttribute(EXPANDED_ATTR) ? COLLAPSED : EXPANDED;
@@ -95,19 +107,6 @@ class Expandable {
     this.toggleEl.setAttribute(TARGET_ATTR, attr);
     this.toggleEl.textContent = `${label} table`;
   }
-
-  /** @description Initializes the elements' states. */
-  init() {
-    this.setStateOnLoad();
-    this.setToggleLabel();
-    this.setState();
-
-    /** @description Listens for click and toggles expandable element's state. */
-    this.toggleEl.addEventListener('click', () => {
-      this.expandCollapse();
-    });
-  }
 }
-
 
 export { Expandable };

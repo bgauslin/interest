@@ -13,6 +13,13 @@ class Utilities {
     this.analyticsSettings = config.analyticsSettings;
   }
 
+  /** @description Initializes all utilities. */
+  init() {
+    this.hasJs();
+    this.noTouch();
+    this.googleAnalytics(this.analyticsSettings);
+  }
+
   /**
    * @description Initializes Google Analytics tracking.
    * @param {!Object} settings: GA settings (id, hostname)
@@ -39,14 +46,6 @@ class Utilities {
       document.body.removeAttribute(NO_TOUCH_ATTR);
     }
   }
-
-  /** @description Initializes all utilities. */
-  init() {
-    this.hasJs();
-    this.noTouch();
-    this.googleAnalytics(this.analyticsSettings);
-  }
 }
-
 
 export { Utilities };

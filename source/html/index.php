@@ -2,10 +2,10 @@
 $title = 'Compound Interest Calculator';
 $description = 'Mobile-friendly standalone web app that calculates compound interest';
 
-$prod_server = 'calculator.gauslin.com';
+$prod_server = 'interest.gauslin.com';
 
-$css = 'calculator.css';
-$js = 'calculator.js';
+$css = 'interest.css';
+$js = 'interest.js';
 
 if ($_SERVER['SERVER_NAME'] == $prod_server) {
   $manifest = file_get_contents('build/manifest.json');
@@ -25,7 +25,7 @@ if ($_SERVER['SERVER_NAME'] == $prod_server) {
     <meta name="description" content="<?php echo $description ?>">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="Interest Calculator">
+    <meta name="apple-mobile-web-app-title" content="Interest">
     <link rel="apple-touch-icon" href="/ui/icons/touch-icon.png?t=<?php echo date('U') ?>">
     <link rel="icon" type="image/png" href="/ui/icons/favicon.png">
 	  <?php // <link rel="manifest" href="/pwa/manifest.json"></link> ?>

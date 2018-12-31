@@ -1,11 +1,11 @@
 {
-  "name": "calculator",
+  "name": "interest",
   "description": "Mobile-friendly stand-alone web app that calculates compound interest",
   "version": "1.0.0",
   "license": "UNLICENSED",
-  "repository": "https://bitbucket.org/bgauslin/calculator",
+  "repository": "https://bitbucket.org/bgauslin/interest",
   "private": true,
-  "devServer": "calculator.gauslin.test",
+  "devServer": "interest.gauslin.test",
   "paths": {
     "apache": {
       "src": "source/apache/_htaccess",
@@ -21,19 +21,19 @@
       "dest": "public/ui/icons"
     },
     "js": {
-      "src": "source/js/calculator.js",
-      "dest": "public/ui/calculator.js",
-      "bundleSrc": "calculator.js",
+      "src": "source/js/interest.js",
+      "dest": "public/ui/interest.js",
+      "bundleSrc": "interest.js",
       "bundleDest": "public/ui"
     },
     "stylus": {
-      "src": "source/stylus/calculator.styl",
+      "src": "source/stylus/interest.styl",
       "dest": "public/ui"
     },
     "version": {
       "src": [
-        "public/ui/calculator.css",
-        "public/ui/calculator.js"
+        "public/ui/interest.css",
+        "public/ui/interest.js"
       ],
       "dest": "public/build/ui",
       "manifestFile": "public/build/manifest.json"

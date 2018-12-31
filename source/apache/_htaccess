@@ -10,7 +10,6 @@ RewriteRule ^ https://%1%{REQUEST_URI} [L,R]
 Header always append X-Frame-Options SAMEORIGIN
 Header set X-XSS-Protection "1; mode=block"
 Header set Strict-Transport-Security "max-age=31536000" env=HTTPS
-#Header set Content-Security-Policy "default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self';"
 
 # Enable Keep-Alive
 Header set Connection keep-alive
@@ -21,8 +20,6 @@ Header set Connection keep-alive
     Header append Vary: Accept-Encoding
   </FilesMatch>
 </IfModule>
-
-# TODO: Last-Modified
 
 # Browser caching for static assets
 <filesMatch ".(css|jpg|jpeg|png|gif|js|ico|eot|ttf|woff|woff2)$">

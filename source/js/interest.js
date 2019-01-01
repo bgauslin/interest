@@ -32,8 +32,8 @@ const userValues = new UserValues({
 /** @instance */
 const utilities = new Utilities({
   analyticsSettings: {
-    domain: 'gauslin.com',
-    id: 'UA-626192-11',
+    domain: 'interest.gauslin.com',
+    id: 'UA-626192-19',
   },
 });
 

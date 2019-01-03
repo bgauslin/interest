@@ -11,14 +11,7 @@ const calculations = new Calculations({
 const HIDDEN_ATTR = 'data-hidden';
 
 /**
- * @type {Array{userInputs}} HTML input elements.
- * userInputs {
- *   label: string,
- *   name: string,
- *   max: number,
- *   pattern: string,
- *   type: string,
- * }
+ * @type {Array} HTML input elements.
  */
 const USER_INPUTS = [
   {
@@ -66,13 +59,11 @@ const INVALID_ATTR = ':invalid';
 /** @class */
 class UserValues {
   /**
-   * @param {Object{userValues}} config
-   * userValues {
-   *   currencyAttr: string,
-   *   list: string,
-   *   storage: string,
-   *   total: string,
-   * }
+   * @param {!Object} config
+   * @param {!string} config.currencyAttr
+   * @param {!string} config.list
+   * @param {!string} config.storage
+   * @param {!string} config.total
    */
   constructor(config) {
     this.currencyAttr = config.currencyAttr;
@@ -97,7 +88,9 @@ class UserValues {
     this.updateOnChange(this.currencyAttr);
   }
 
-  /** @description Creates and attaches input fields for user-provided values. */
+  /**
+   * @description Creates and attaches input fields for user-provided values.
+   */
   createInputs() {
     let html = '';
 
@@ -128,7 +121,7 @@ class UserValues {
 
   /**
    * Populates input fields with user-provided values.
-   * @param {!string} data: User values from localStorage, converted from a
+   * @param {!string} data - User values from localStorage, converted from a
    * string to an array.
    */
   populateInputs(data) {
@@ -140,7 +133,9 @@ class UserValues {
     }
   }
 
-  /** @description Sets 'total' element's state via attribute on input change. */
+  /**
+   * @description Sets 'total' element's state via attribute on input change.
+   */
   setTotalState() {
     const periodsEl = document.querySelector(this.periods);
 
@@ -151,7 +146,9 @@ class UserValues {
     }
   }
 
-  /** @description Updates DOM element with the total value after compounding. */
+  /**
+   * @description Updates DOM element with the total value after compounding.
+   */
   updateTotal() {
     let values = [];
 

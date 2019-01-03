@@ -16,13 +16,11 @@ const TARGET_ATTR = 'data-target';
 /** @class */
 class Expandable {
   /**
-   * @param {Object{config}} config
-   * config: {
-   *   storage: string,
-   *   target: string,
-   *   toggle: string,
-   *   trigger: string,
-   * }
+   * @param {!Object} config
+   * @param {!string} config.storage
+   * @param {!string} config.target
+   * @param {!string} config.toggle
+   * @param {!string} config.trigger
    */
   constructor(config) {
     this.storage = config.storage;
@@ -31,19 +29,23 @@ class Expandable {
     this.trigger = config.trigger; // TODO: rename 'trigger'
   }
 
-  /** @description Initializes the elements' states. */
+  /**
+   * @description Initializes the elements' states.
+   */
   init() {
     this.setStateOnLoad();
     this.setToggleLabel();
     this.setState();
 
-    /** @description Listens for click and toggles expandable element's state. */
+    // Listen for click and toggle expandable element's state.
     this.toggleEl.addEventListener('click', () => {
       this.expandCollapse();
     });
   }
 
-  /** @description Expands / collapses an element. */
+  /**
+   * @description Expands/collapses an element.
+   */
   expandCollapse() {
     const direction = this.targetEl.hasAttribute(EXPANDED_ATTR) ? COLLAPSED : EXPANDED;
     const elHeight = this.targetEl.scrollHeight;
@@ -73,7 +75,9 @@ class Expandable {
     this.setToggleLabel();
   }
 
-  /** @description Sets element states via attributes on initial load. */
+  /**
+   * @description Sets element states via attributes on initial load.
+   */
   setStateOnLoad() {
     if (localStorage.getItem(this.storage) === EXPANDED) {
       this.targetEl.setAttribute(EXPANDED_ATTR, '');
@@ -83,7 +87,9 @@ class Expandable {
     }
   }
 
-  /** @description Sets element states via attributes on change. */
+  /**
+   * @description Sets element states via attributes on change.
+   */
   setState() {
     const trigger = document.querySelector(this.trigger); // TODO: rename 'trigger'
     const value = trigger.value;
@@ -99,7 +105,9 @@ class Expandable {
     });
   }
 
-  /** @description Sets toggle label based on the target element's state. */
+  /**
+   * @description Sets toggle label based on the target element's state.
+   */
   setToggleLabel() {
     const attr = this.targetEl.hasAttribute(EXPANDED_ATTR) ? 'visible' : 'hidden';
     const label = this.targetEl.hasAttribute(EXPANDED_ATTR) ? 'Hide' : 'Show';

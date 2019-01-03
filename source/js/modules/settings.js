@@ -33,13 +33,7 @@ const CURRENCIES = {
   ],
 };
 
-/**
-  * @enum {Array{Object{settings}}} TODO...
-  * settings {
-  *   name: string,
-  *   fallback: string,
-  * }
-  */
+/** @enum {Array} */
 const SETTINGS = [
   {
     name: 'theme',
@@ -80,7 +74,10 @@ const INACTIVE_ATTR = 'inactive';
 /** @class */
 class Settings {
   /**
-   * @param {!Object{mask: string, menu: string, toggle: string}} config
+   * @param {!Object} config
+   * @param {!string} config.mask
+   * @param {!string} config.menu
+   * @param {!string} config.toggle
    */
   constructor(config) {
     this.mask = document.querySelector(config.mask);
@@ -113,20 +110,24 @@ class Settings {
   /**
    * @description Sets an attribute on the body element and saves it to
    * localStorage.
-   * @param {!string} name: The attribute to set on the body element.
-   * @param {!string} value: The value of the body attribute.
+   * @param {!string} name - The attribute to set on the body element.
+   * @param {!string} value - The value of the body attribute.
    */
   changeOption(name, value) {
     document.body.setAttribute(`data-${name}`, value);
     localStorage.setItem(name, value);
   }
 
-  /** @description Hides overlay mask. */
+  /**
+   * @description Hides overlay mask.
+   */
   disableMask() {
     this.mask.setAttribute(INACTIVE_ATTR, '');
   }
 
-  /** @description Shows overlay mask and adds a click listener. */
+  /**
+   * @description Shows overlay mask and adds a click listener.
+   */
   enableMask() {
     this.mask.removeAttribute(INACTIVE_ATTR);
     this.mask.addEventListener('click', () => {
@@ -135,7 +136,9 @@ class Settings {
     }, { once: true });
   }
 
-  /** @description Initializes menu toggle and overlay mask. */
+  /**
+   * @description Initializes menu toggle and overlay mask.
+   */
   initToggle() {
     this.toggle.addEventListener('click', () => {
       if (this.mask.hasAttribute(INACTIVE_ATTR)) {
@@ -148,9 +151,11 @@ class Settings {
 
   /**
    * @description Creates settings options and attaches them to the DOM.
-   * @param {!Object{label: string, name: string, options: string }} data:
-   * Object containing the options data.
-   * @param {!string} selector: Element that options are attached to.
+   * @param {!Object} data - All options data.
+   * @param {!string} data.label
+   * @param {!string} data.name
+   * @param {!string} data.options
+   * @param {!string} selector - Element that options are attached to.
    */
   makeOptions(data, selector) {
     const target = document.querySelector(`[data-setting="${selector}"]`);
@@ -176,8 +181,8 @@ class Settings {
 
   /**
    * @description Adds an attribute with a value, and saves it to localStorage.
-   * @param {!string} name: Name of the localStorage item and attribute to set.
-   * @param {?string=} fallback: Default value if none is stored yet.
+   * @param {!string} name - Name of the localStorage item and attribute to set.
+   * @param {?string=} fallback - Default value if none is stored yet.
    */
   setOption(name, fallback='') {
     const stored = localStorage.getItem(name);
@@ -188,7 +193,7 @@ class Settings {
 
   /**
    * @description Sets current option and adds listeners to each option.
-   * @param {!string} option: Attribute to set on the body element; also the
+   * @param {!string} option - Attribute to set on the body element; also the
    * name of the input.
    */
   updateOptions(option) {

@@ -4,14 +4,12 @@ const CURRENCY_RUPEES = 'inr';
 /** @const {number} */
 const EURO_FORMAT_THRESHOLD = 50000;
 
-/** @class ... */
+/** @class */
 class Calculations {
   /**
-   * @param {Object{config}} config
-   * config {
-   *  tableEl: string,
-   *  currencyAttr: string,
-   * }
+   * @param {!Object} config
+   * @param {!string} config.tableEl
+   * @param {!string} config.currencyAttr
    */
   constructor(config) {
     this.tableEl = document.querySelector(config.table);
@@ -20,21 +18,21 @@ class Calculations {
   }
 
   /**
-   * @param {!number} amount: Initial value.
-   * @param {!number} rate: Interest rate.
-   * @returns New value with interest applied to initial value.
+   * @param {!number} amount - Initial value.
+   * @param {!number} rate - Interest rate.
+   * @return New value with interest applied to initial value.
    */
   amountWithInterest(amount, rate) {
     return amount * (rate / 100 + 1);
   }
 
   /**
-   * @param {number} principal: Principal amount.
-   * @param {number} contribution: Contribution amount per period.
-   * @param {number} rate: Interest rate.
-   * @param {number} compounds: Compounding period. (e.g. yearly or monthly)
-   * @param {number} periods: Number of times to compound. (e.g. 10 years).
-   * @returns Formatted compounded total based on user-provided values.
+   * @param {!number} principal - Principal amount.
+   * @param {!number} contribution - Contribution amount per period.
+   * @param {!number} rate - Interest rate.
+   * @param {!number} compounds - Compounding period. (e.g. yearly or monthly)
+   * @param {!number} periods - Number of times to compound. (e.g. 10 years).
+   * @return Formatted compounded total based on user-provided values.
    */
   compound(principal, contribution, rate, compounds, periods) {
     const pmt = contribution;
@@ -63,14 +61,15 @@ class Calculations {
     // Pass the 'sums' array to a method and render it as a table.
     this.renderTable(sums);
 
+    // Destructure 'sums' in order to return 'balance'.
     const [year, deposits, interest, balance, growth] = sums[sums.length - 1];
 
     return balance;
   }
 
   /**
-   * @param {!number} amount: Unformatted value.
-   * @returns String with currency formatting. e.g. 12345.67123 => 12,345.67
+   * @param {!number} amount - Unformatted value.
+   * @return String with currency formatting. e.g. 12345.67123 => 12,345.67
    */
   formatCurrency(amount) {
     const currentCurrency = document.body.getAttribute(this.currencyAttr);
@@ -97,9 +96,9 @@ class Calculations {
   };
 
   /**
-   * @description Rupee formatting is weird, so it gets its own special function.
-   * @param {!number} rupees: Currency amount.
-   * @returns Amount in '##,##,###.##' format.
+   * @description Rupee formatting is weird, so it gets its own special method.
+   * @param {!number} rupees - Currency amount.
+   * @return Amount in '##,##,###.##' format.
    */
   formatRupee(rupees) {
     const string = rupees.toFixed(2).toString().split('.');
@@ -116,7 +115,12 @@ class Calculations {
 
   /**
    * @description Displays initial and compounded amounts for each time period.
-   * @param {!Array<string>} data - Formatted values.
+   * @param {!Array} data - Calculated values.
+   * @param {!number} data.year
+   * @param {!number} data.deposits
+   * @param {!number} data.interest
+   * @param {!number} data.balance
+   * @param {!number} data.growth
    */
   renderTable(data) {
     let html = `

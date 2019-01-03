@@ -7,13 +7,16 @@ const NO_TOUCH_ATTR = 'no-touch';
 /** @class */
 class Utilities {
   /**
-   * @param {Object} config
+   * @param {!Object} config
+   * @param {!Object} config.analyticsSettings
    */
   constructor(config) {
     this.analyticsSettings = config.analyticsSettings;
   }
 
-  /** @description Initializes all utilities. */
+  /**
+   * @description Initializes all utilities.
+   */
   init() {
     this.hasJs();
     this.noTouch();
@@ -22,7 +25,9 @@ class Utilities {
 
   /**
    * @description Initializes Google Analytics tracking.
-   * @param {!Object} settings: GA settings (id, hostname)
+   * @param {!Object} settings
+   * @param {!string} settings.id - Google Analytics ID.
+   * @param {!string} settings.domain - Production domain.
    */
   googleAnalytics(settings) {
     if (window.location.hostname === settings.domain) {
@@ -35,12 +40,16 @@ class Utilities {
     }
   }
 
-  /** @description Removes 'no-js' attribute if JS is enabled. */
+  /**
+   * @description Removes 'no-js' attribute if JS is enabled.
+   */
   hasJs() {
     document.body.removeAttribute(NO_JS_ATTR);
   }
 
-  /** @description Removes 'no-touch' attribute if device is touch-enabled. */
+  /**
+   * @description Removes 'no-touch' attribute if device is touch-enabled.
+   */
   noTouch() {
     if ('ontouchstart' in window || navigator.msMaxTouchPoints > 0) {
       document.body.removeAttribute(NO_TOUCH_ATTR);

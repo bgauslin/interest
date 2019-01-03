@@ -23,9 +23,16 @@ class Expandable {
    * @param {!string} config.trigger
    */
   constructor(config) {
+    /** @const {string} */
     this.storage = config.storage;
+
+    /** @const {Element} */
     this.targetEl = document.querySelector(config.target);
+
+    /** @const {Element} */
     this.toggleEl = document.querySelector(config.toggle);
+
+    /** @const {string} */
     this.trigger = config.trigger; // TODO: rename 'trigger'
   }
 
@@ -44,7 +51,7 @@ class Expandable {
   }
 
   /**
-   * @description Expands/collapses an element.
+   * @description Expands or collapses an element.
    */
   expandCollapse() {
     const direction = this.targetEl.hasAttribute(EXPANDED_ATTR) ? COLLAPSED : EXPANDED;

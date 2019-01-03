@@ -11,6 +11,7 @@ class Utilities {
    * @param {!Object} config.analyticsSettings
    */
   constructor(config) {
+    /** @const {Object} */
     this.analyticsSettings = config.analyticsSettings;
   }
 

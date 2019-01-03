@@ -1,14 +1,10 @@
 import { Calculations } from './calculations';
 
-/** @instance */
-const calculations = new Calculations({
-  currencyAttr: 'data-currency',
-  table: '.table',
-  tableData: '.table__data',
-});
-
 /** @const {string} */
 const HIDDEN_ATTR = 'data-hidden';
+
+/** @const {string} */
+const INVALID_SELECTOR = ':invalid';
 
 /**
  * @type {Array} HTML input elements.
@@ -53,8 +49,12 @@ const USER_INPUTS = [
   }
 ];
 
-/** @const {string} */
-const INVALID_ATTR = ':invalid';
+/** @instance */
+const calculations = new Calculations({
+  currencyAttr: 'data-currency',
+  table: '.table',
+  tableData: '.table__data',
+});
 
 /** @class */
 class UserValues {
@@ -62,14 +62,24 @@ class UserValues {
    * @param {!Object} config
    * @param {!string} config.currencyAttr
    * @param {!string} config.list
+   * @param {!number} config.periods
    * @param {!string} config.storage
    * @param {!string} config.total
    */
   constructor(config) {
+    /** @const {string} */
     this.currencyAttr = config.currencyAttr;
+
+    /** @const {number} */
     this.periods = config.periods;
+
+    /** @const {string} */
     this.storage = config.storage;
+
+    /** @const {Element} */
     this.listEl = document.querySelector(config.list);
+
+    /** @const {Element} */
     this.totalEl = document.querySelector(config.total);
   }
 
@@ -158,7 +168,7 @@ class UserValues {
       values.push(value);
     });
 
-    if (document.querySelectorAll(INVALID_ATTR).length === 0) {
+    if (document.querySelectorAll(INVALID_SELECTOR).length === 0) {
       localStorage.setItem(this.storage, values);
       this.totalEl.textContent = calculations.compound(...values);
     }

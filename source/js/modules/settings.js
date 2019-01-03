@@ -1,3 +1,10 @@
+/** @const {string} */
+const CHECKED_ATTR = 'checked';
+
+/** @const {string} */
+const INACTIVE_ATTR = 'inactive';
+
+// TODO: JSDoc updates...
 /**
  * @type {Object} Currency information for display and formatting.
  */
@@ -33,6 +40,7 @@ const CURRENCIES = {
   ],
 };
 
+// TODO: JSDoc updates...
 /** @enum {Array} */
 const SETTINGS = [
   {
@@ -45,6 +53,7 @@ const SETTINGS = [
   },
 ];
 
+// TODO: JSDoc updates...
 /** @enum {Object} Color theme options. */
 const THEMES = {
   label: 'Theme',
@@ -65,12 +74,6 @@ const THEMES = {
   ],
 };
 
-/** @const {string} */
-const CHECKED_ATTR = 'checked';
-
-/** @const {string} */
-const INACTIVE_ATTR = 'inactive';
-
 /** @class */
 class Settings {
   /**
@@ -80,14 +83,18 @@ class Settings {
    * @param {!string} config.toggle
    */
   constructor(config) {
+    /** @const {Element} */
     this.mask = document.querySelector(config.mask);
+
+    /** @const {Element} */
     this.menu = document.querySelector(config.menu);
+
+    /** @const {Element} */
     this.toggle = document.querySelector(config.toggle);
   }
 
   /**
-   * @description Creates settings fields and populates them with user
-   * preferences or defaults.
+   * @description Creates settings fields and populates them with user preferences or defaults.
    */
   init () {
     // Attach settings elements to DOM and set defaults for first run.
@@ -108,8 +115,7 @@ class Settings {
   }
 
   /**
-   * @description Sets an attribute on the body element and saves it to
-   * localStorage.
+   * @description Sets an attribute on the body element and saves it to localStorage.
    * @param {!string} name - The attribute to set on the body element.
    * @param {!string} value - The value of the body attribute.
    */
@@ -126,7 +132,7 @@ class Settings {
   }
 
   /**
-   * @description Shows overlay mask and adds a click listener.
+   * @description Shows overlay mask and adds a one-time click listener.
    */
   enableMask() {
     this.mask.removeAttribute(INACTIVE_ATTR);
@@ -150,7 +156,7 @@ class Settings {
   }
 
   /**
-   * @description Creates settings options and attaches them to the DOM.
+   * @description Creates all 'settings' options and attaches them to the DOM.
    * @param {!Object} data - All options data.
    * @param {!string} data.label
    * @param {!string} data.name
@@ -180,7 +186,7 @@ class Settings {
   }
 
   /**
-   * @description Adds an attribute with a value, and saves it to localStorage.
+   * @description Adds an attribute with a value and saves it to localStorage.
    * @param {!string} name - Name of the localStorage item and attribute to set.
    * @param {?string=} fallback - Default value if none is stored yet.
    */
@@ -193,8 +199,8 @@ class Settings {
 
   /**
    * @description Sets current option and adds listeners to each option.
-   * @param {!string} option - Attribute to set on the body element; also the
-   * name of the input.
+   * @param {!string} option - Attribute to set on the body element, which is also the
+   * 'name' of the input.
    */
   updateOptions(option) {
     const currentAttr = document.body.getAttribute(`data-${option}`);

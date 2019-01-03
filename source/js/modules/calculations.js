@@ -12,8 +12,13 @@ class Calculations {
    * @param {!string} config.currencyAttr
    */
   constructor(config) {
+    /** @const {Element} */
     this.tableEl = document.querySelector(config.table);
+
+    /** @const {Element} */
     this.tableDataEl = document.querySelector(config.tableData);
+
+    /** @const {string} */
     this.currencyAttr = config.currencyAttr;
   }
 
@@ -32,7 +37,7 @@ class Calculations {
    * @param {!number} rate - Interest rate.
    * @param {!number} compounds - Compounding period. (e.g. yearly or monthly)
    * @param {!number} periods - Number of times to compound. (e.g. 10 years).
-   * @return Formatted compounded total based on user-provided values.
+   * @return Balance based on user-provided values.
    */
   compound(principal, contribution, rate, compounds, periods) {
     const pmt = contribution;

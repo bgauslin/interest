@@ -4,9 +4,16 @@ const CHECKED_ATTR = 'checked';
 /** @const {string} */
 const INACTIVE_ATTR = 'inactive';
 
-// TODO: JSDoc updates...
+// TODO: PascalCase vs. SCREAMING_SNAKE_CASE
 /**
- * @type {Object} Currency information for display and formatting.
+ * @const {Object} CURRENCIES - Currency information for display and formatting.
+ * @const {string} CURRENCIES.label
+ * @const {string} CURRENCIES.name
+ * @const {Array} CURRENCIES.options
+ * @const {Object} CURRENCIES.options[]
+ * @const {string} CURRENCIES.options[].isoSymbol
+ * @const {string} CURRENCIES.options[].label
+ * @const {string} CURRENCIES.options[].value
  */
 const CURRENCIES = {
   label: 'Currency',
@@ -40,8 +47,13 @@ const CURRENCIES = {
   ],
 };
 
-// TODO: JSDoc updates...
-/** @enum {Array} */
+// TODO: PascalCase vs. SCREAMING_SNAKE_CASE
+/**
+ * @const {Array} SETTINGS
+ * @const {Object} SETTINGS[]
+ * @const {string} SETTINGS[].name
+ * @const {string} SETTINGS[].fallback
+ * */
 const SETTINGS = [
   {
     name: 'theme',
@@ -53,8 +65,16 @@ const SETTINGS = [
   },
 ];
 
-// TODO: JSDoc updates...
-/** @enum {Object} Color theme options. */
+// TODO: PascalCase vs. SCREAMING_SNAKE_CASE
+/**
+ * @const {Object} THEMES - Color theme options.
+ * @const {string} THEMES.label
+ * @const {string} THEMES.name
+ * @const {Array} THEMES.options
+ * @const {Object} THEMES.options[]
+ * @const {string} THEMES.options[].label
+ * @const {string} THEMES.options[].value
+ */
 const THEMES = {
   label: 'Theme',
   name: 'theme',

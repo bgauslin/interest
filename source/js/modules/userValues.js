@@ -7,7 +7,14 @@ const HIDDEN_ATTR = 'data-hidden';
 const INVALID_SELECTOR = ':invalid';
 
 /**
- * @type {Array} HTML input elements.
+ * @const {Array} USER_INPUTS - HTML input elements.
+ * @const {Object} USER_INPUTS[]
+ * @const {string} USER_INPUTS[].label
+ * @const {string} USER_INPUTS[].name
+ * @const {number} USER_INPUTS[].max
+ * @const {string} USER_INPUTS[].pattern
+ * @const {string} USER_INPUTS[].type
+ * @const {?boolean} USER_INPUTS[].required
  */
 const USER_INPUTS = [
   {

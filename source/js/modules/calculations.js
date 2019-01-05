@@ -72,7 +72,7 @@ class Calculations {
     this.renderTable_(sums);
 
     // Destructure 'sums' array and return 'balance' from it.
-    const [year, deposits, interest, balance, growth] = sums[sums.length - 1];
+    const [ year, deposits, interest, balance, growth ] = sums[sums.length - 1];
 
     return balance;
   }

@@ -51,7 +51,7 @@ const Currencies = {
  * @const {Object} UserSettings[]
  * @const {string} UserSettings[].name
  * @const {string} UserSettings[].fallback
- * */
+ */
 const UserSettings = [
   {
     name: 'theme',

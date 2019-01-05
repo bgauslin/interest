@@ -17,12 +17,15 @@ const TARGET_ATTR = 'data-target';
 class Expandable {
   /**
    * @param {!Object} config
+   * @param {!string} config.source
    * @param {!string} config.storage
    * @param {!string} config.target
    * @param {!string} config.toggle
-   * @param {!string} config.source
    */
   constructor(config) {
+    /** @const {string} */
+    this.source = config.source;
+
     /** @const {string} */
     this.storage = config.storage;
 
@@ -31,9 +34,6 @@ class Expandable {
 
     /** @const {Element} */
     this.toggleEl = document.querySelector(config.toggle);
-
-    /** @const {string} */
-    this.source = config.source;
   }
 
   /**

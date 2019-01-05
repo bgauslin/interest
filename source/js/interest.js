@@ -7,10 +7,10 @@ import { Utilities } from './modules/utilities';
 
 /** @instance */
 const expandable = new Expandable({
+  source: '[name="periods"]',
   storage: 'table',
   target: '.table',
   toggle: '.toggle__button',
-  source: '[name="periods"]',
 });
 
 /** @instance  */

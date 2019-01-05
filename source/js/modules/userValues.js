@@ -56,13 +56,6 @@ const UserInputs = [
   }
 ];
 
-/** @instance */
-const calculations = new Calculations({
-  currencyAttr: 'data-currency',
-  table: '.table',
-  tableData: '.table__data',
-});
-
 /** @class */
 class UserValues {
   /**
@@ -88,6 +81,13 @@ class UserValues {
 
     /** @const {Element} */
     this.totalEl = document.querySelector(config.total);
+
+    /** @instance */
+    this.calculations = new Calculations({
+      currencyAttr: 'data-currency',
+      table: '.table',
+      tableData: '.table__data',
+    });
   }
 
   /**
@@ -102,7 +102,7 @@ class UserValues {
       this.populateInputs_(values);
       this.updateTotal();
     }
-    calculations.tableCaption();
+    this.calculations.tableCaption();
     this.updateOnChange_(this.currencyAttr);
   }
 
@@ -181,7 +181,7 @@ class UserValues {
 
     if (document.querySelectorAll(INVALID_SELECTOR).length === 0) {
       localStorage.setItem(this.storage, values);
-      this.totalEl.textContent = calculations.compound(...values);
+      this.totalEl.textContent = this.calculations.compound(...values);
     }
 
     this.setTotalState_();

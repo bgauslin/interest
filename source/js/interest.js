@@ -10,7 +10,7 @@ const expandable = new Expandable({
   storage: 'table',
   target: '.table',
   toggle: '.toggle__button',
-  trigger: '[name="periods"]',
+  source: '[name="periods"]',
 });
 
 /** @instance  */

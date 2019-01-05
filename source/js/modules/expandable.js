@@ -20,7 +20,7 @@ class Expandable {
    * @param {!string} config.storage
    * @param {!string} config.target
    * @param {!string} config.toggle
-   * @param {!string} config.trigger
+   * @param {!string} config.source
    */
   constructor(config) {
     /** @const {string} */
@@ -33,7 +33,7 @@ class Expandable {
     this.toggleEl = document.querySelector(config.toggle);
 
     /** @const {string} */
-    this.trigger = config.trigger; // TODO: rename/refactor 'trigger'
+    this.source = config.source;
   }
 
   /**
@@ -89,12 +89,12 @@ class Expandable {
    * @public
    */
   setState() {
-    const trigger = document.querySelector(this.trigger); // TODO: rename/refactor 'trigger'
-    const value = trigger.value;
-    const els = [this.targetEl, this.toggleEl];
+    const sourceEl = document.querySelector(this.source);
+    const value = sourceEl.value;
+    const els = [ this.targetEl, this.toggleEl ];
     const threshold = 0;
 
-    els.forEach((el) => {
+    Array.from(els).forEach((el) => {
       if (value <= threshold) {
         el.setAttribute(HIDDEN_ATTR, '');
       } else {

@@ -167,6 +167,26 @@ class UserValues {
   }
 
   /**
+   * Watches an element's attributes for changes and updates
+   * the total's value and/or state.
+   * @param {!string} selector - CSS selector of element to observe.
+   * @private 
+   */
+  updateOnChange_(selector) {
+    const target = document.querySelector(selector);
+    const config = {
+      attributes: true,
+    };
+    const self = this;
+
+    const observer = new MutationObserver((mutation) => {
+      self.updateTotal();
+    });
+
+    observer.observe(target, config);
+  }
+
+  /**
    * Updates DOM element with total value after compounding.
    * @public
    */
@@ -185,26 +205,6 @@ class UserValues {
     }
 
     this.setTotalState_();
-  }
-
-  /**
-   * Watches an element's attributes for changes and updates
-   * the total's value and/or state.
-   * @param {!string} selector - CSS selector of element to observe.
-   * @private 
-   */
-  updateOnChange_(selector) {
-    const target = document.querySelector(selector);
-    const config = {
-      attributes: true,
-    };
-    const self = this;
-
-    const observer = new MutationObserver((mutation) => {
-      self.updateTotal();
-    });
-
-    observer.observe(target, config);
   }
 }
 

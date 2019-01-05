@@ -16,21 +16,23 @@ class Utilities {
   }
 
   /**
-   * @description Initializes all utilities.
+   * Initializes all utilities.
+   * @public
    */
   init() {
-    this.hasJs();
-    this.noTouch();
-    this.googleAnalytics(this.analyticsSettings);
+    this.hasJs_();
+    this.noTouch_();
+    this.googleAnalytics_(this.analyticsSettings);
   }
 
   /**
-   * @description Initializes Google Analytics tracking.
+   * Initializes Google Analytics tracking.
    * @param {!Object} settings
    * @param {!string} settings.id - Google Analytics ID.
    * @param {!string} settings.domain - Production domain.
+   * @private
    */
-  googleAnalytics(settings) {
+  googleAnalytics_(settings) {
     if (window.location.hostname === settings.domain) {
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -42,16 +44,18 @@ class Utilities {
   }
 
   /**
-   * @description Removes 'no-js' attribute if JS is enabled.
+   * Removes 'no-js' attribute if JS is enabled.
+   * @private
    */
-  hasJs() {
+  hasJs_() {
     document.body.removeAttribute(NO_JS_ATTR);
   }
 
   /**
-   * @description Removes 'no-touch' attribute if device is touch-enabled.
+   * Removes 'no-touch' attribute if device is touch-enabled.
+   * @private
    */
-  noTouch() {
+  noTouch_() {
     if ('ontouchstart' in window || navigator.msMaxTouchPoints > 0) {
       document.body.removeAttribute(NO_TOUCH_ATTR);
     }

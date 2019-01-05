@@ -33,27 +33,29 @@ class Expandable {
     this.toggleEl = document.querySelector(config.toggle);
 
     /** @const {string} */
-    this.trigger = config.trigger; // TODO: rename 'trigger'
+    this.trigger = config.trigger; // TODO: rename/refactor 'trigger'
   }
 
   /**
-   * @description Initializes the elements' states.
+   * Initializes all elements' states.
+   * @public
    */
   init() {
-    this.setStateOnLoad();
-    this.setToggleLabel();
+    this.setStateOnLoad_();
+    this.setToggleLabel_();
     this.setState();
 
     // Listen for click and toggle expandable element's state.
     this.toggleEl.addEventListener('click', () => {
-      this.expandCollapse();
+      this.expandCollapse_();
     });
   }
 
   /**
-   * @description Expands or collapses an element.
+   * Expands or collapses an element.
+   * @private
    */
-  expandCollapse() {
+  expandCollapse_() {
     const direction = this.targetEl.hasAttribute(EXPANDED_ATTR) ? COLLAPSED : EXPANDED;
     const elHeight = this.targetEl.scrollHeight;
 
@@ -79,26 +81,15 @@ class Expandable {
     }
 
     localStorage.setItem(this.storage, direction);
-    this.setToggleLabel();
+    this.setToggleLabel_();
   }
 
   /**
-   * @description Sets element states via attributes on initial load.
-   */
-  setStateOnLoad() {
-    if (localStorage.getItem(this.storage) === EXPANDED) {
-      this.targetEl.setAttribute(EXPANDED_ATTR, '');
-    } else {
-      this.targetEl.removeAttribute(EXPANDED_ATTR);
-      this.targetEl.style.height = 0;
-    }
-  }
-
-  /**
-   * @description Sets element states via attributes on change.
+   * Sets elements' states via attributes on change.
+   * @public
    */
   setState() {
-    const trigger = document.querySelector(this.trigger); // TODO: rename 'trigger'
+    const trigger = document.querySelector(this.trigger); // TODO: rename/refactor 'trigger'
     const value = trigger.value;
     const els = [this.targetEl, this.toggleEl];
     const threshold = 0;
@@ -113,9 +104,23 @@ class Expandable {
   }
 
   /**
-   * @description Sets toggle label based on the target element's state.
+   * Sets elements' states via attributes on initial page load.
+   * @private
    */
-  setToggleLabel() {
+  setStateOnLoad_() {
+    if (localStorage.getItem(this.storage) === EXPANDED) {
+      this.targetEl.setAttribute(EXPANDED_ATTR, '');
+    } else {
+      this.targetEl.removeAttribute(EXPANDED_ATTR);
+      this.targetEl.style.height = 0;
+    }
+  }
+
+  /**
+   * Sets toggle label based on the target element's state.
+   * @private
+   */
+  setToggleLabel_() {
     const attr = this.targetEl.hasAttribute(EXPANDED_ATTR) ? 'visible' : 'hidden';
     const label = this.targetEl.hasAttribute(EXPANDED_ATTR) ? 'Hide' : 'Show';
 

@@ -3,7 +3,7 @@ import { Expandable } from './modules/expandable';
 import { Settings } from './modules/settings';
 import { UserValues } from'./modules/userValues';
 import { Utilities } from './modules/utilities';
-import { registerServiceWorker } from './modules/registerServiceWorker';
+// import { registerServiceWorker } from './modules/registerServiceWorker';
 
 /** @instance */
 const expandable = new Expandable({
@@ -49,17 +49,23 @@ const myHeadroom = new headroom(document.querySelector('.header'), {
   }
 });
 
-/** @description Waits until the DOM is ready to initialize app. */
+/**
+ * Initialize app when DOM is ready.
+ * @listens
+ */
 document.addEventListener('DOMContentLoaded', () => {
-  // registerServiceWorker();
   settings.init();
   userValues.init();
   expandable.init();
   utilities.init();
   myHeadroom.init();
+// registerServiceWorker();
 });
 
-/** @description Toggles component states on user input. */
+/**
+ * Toggles component states on user input.
+ * @listens
+ */
 document.addEventListener('keyup', () => {
   expandable.setState();
   userValues.updateTotal();

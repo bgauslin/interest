@@ -7,16 +7,16 @@ const HIDDEN_ATTR = 'data-hidden';
 const INVALID_SELECTOR = ':invalid';
 
 /**
- * @const {Array} USER_INPUTS - HTML input elements.
- * @const {Object} USER_INPUTS[]
- * @const {string} USER_INPUTS[].label
- * @const {string} USER_INPUTS[].name
- * @const {number} USER_INPUTS[].max
- * @const {string} USER_INPUTS[].pattern
- * @const {string} USER_INPUTS[].type
- * @const {?boolean} USER_INPUTS[].required
+ * @const {Array} UserInputs - HTML input elements.
+ * @const {Object} UserInputs[]
+ * @const {string} UserInputs[].label
+ * @const {string} UserInputs[].name
+ * @const {number} UserInputs[].max
+ * @const {string} UserInputs[].pattern
+ * @const {string} UserInputs[].type
+ * @const {?boolean} UserInputs[].required
  */
-const USER_INPUTS = [
+const UserInputs = [
   {
     label: 'Principal',
     name: 'principal',
@@ -91,27 +91,29 @@ class UserValues {
   }
 
   /**
-   * @description Renders user-provided input fields, populates them if data
-   * exists, and adds an observer and listener for user-provided changes.
+   * Renders input fields for user-provided data, populates them if data exists,
+   * and adds an observer and listener for user-provided changes.
+   * @public
    */
   init() {
-    this.createInputs();
+    this.createInputs_();
     const values = localStorage.getItem(this.storage);
     if (values) {
-      this.populateInputs(values);
+      this.populateInputs_(values);
       this.updateTotal();
     }
     calculations.tableCaption();
-    this.updateOnChange(this.currencyAttr);
+    this.updateOnChange_(this.currencyAttr);
   }
 
   /**
-   * @description Creates and attaches input fields for user-provided values.
+   * Creates and attaches input fields for user-provided values.
+   * @private
    */
-  createInputs() {
+  createInputs_() {
     let html = '';
 
-    USER_INPUTS.forEach((el) => {
+    UserInputs.forEach((el) => {
       const min = (el.min) ? `min="${el.min}"` : '';
       const max = (el.max) ? `max="${el.max}"` : '';
       const pattern = (el.pattern) ? `pattern="${el.pattern}"` : '';
@@ -138,10 +140,10 @@ class UserValues {
 
   /**
    * Populates input fields with user-provided values.
-   * @param {!string} data - User values from localStorage, converted from a
-   * string to an array.
+   * @param {!string} data - User values from localStorage, converted from a string to an array.
+   * @private
    */
-  populateInputs(data) {
+  populateInputs_(data) {
     const values = data.split(',');
 
     for (let i = 0; i < values.length; i++) {
@@ -151,9 +153,10 @@ class UserValues {
   }
 
   /**
-   * @description Sets 'total' element's state via attribute on input change.
+   * Sets 'total' element's state via attribute on input change.
+   * @private
    */
-  setTotalState() {
+  setTotalState_() {
     const periodsEl = document.querySelector(this.periods);
 
     if (periodsEl.value <= 0) {
@@ -164,12 +167,13 @@ class UserValues {
   }
 
   /**
-   * @description Updates DOM element with the total value after compounding.
+   * Updates DOM element with total value after compounding.
+   * @public
    */
   updateTotal() {
     let values = [];
 
-    USER_INPUTS.forEach((el) => {
+    UserInputs.forEach((el) => {
       const el_ = document.querySelector(`[name=${el.name}]`);
       const value = Number(el_.value);
       values.push(value);
@@ -180,14 +184,16 @@ class UserValues {
       this.totalEl.textContent = calculations.compound(...values);
     }
 
-    this.setTotalState();
+    this.setTotalState_();
   }
 
   /**
-   * @description Watches an element's attributes for changes and updates
+   * Watches an element's attributes for changes and updates
    * the total's value and/or state.
+   * @param {!string} selector - CSS selector of element to observe.
+   * @private 
    */
-  updateOnChange(selector) {
+  updateOnChange_(selector) {
     const target = document.querySelector(selector);
     const config = {
       attributes: true,

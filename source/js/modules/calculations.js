@@ -8,7 +8,8 @@ const EURO_FORMAT_THRESHOLD = 50000;
 class Calculations {
   /**
    * @param {!Object} config
-   * @param {!string} config.tableEl
+   * @param {!string} config.table
+   * @param {!string} config.tableData
    * @param {!string} config.currencyAttr
    */
   constructor(config) {
@@ -23,21 +24,25 @@ class Calculations {
   }
 
   /**
+   * Calculates a value with interest applied to initial value.
    * @param {!number} amount - Initial value.
    * @param {!number} rate - Interest rate.
-   * @return New value with interest applied to initial value.
+   * @return {number}
+   * @private
    */
-  amountWithInterest(amount, rate) {
+  amountWithInterest_(amount, rate) {
     return amount * (rate / 100 + 1);
   }
 
   /**
+   * Calculates compound interest, renders calculated values, and returns the balance.
    * @param {!number} principal - Principal amount.
    * @param {!number} contribution - Contribution amount per period.
    * @param {!number} rate - Interest rate.
    * @param {!number} compounds - Compounding period. (e.g. yearly or monthly)
    * @param {!number} periods - Number of times to compound. (e.g. 10 years).
-   * @return Balance based on user-provided values.
+   * @return {number} Balance based on user-provided values.
+   * @public
    */
   compound(principal, contribution, rate, compounds, periods) {
     const pmt = contribution;
@@ -48,8 +53,8 @@ class Calculations {
     let sums = [];
 
     for (let i = 1; i <= periods; i++) {
-      principalCompounded = this.amountWithInterest(p, rate);
-      contributionCompounded = this.amountWithInterest(c, rate);
+      principalCompounded = this.amountWithInterest_(p, rate);
+      contributionCompounded = this.amountWithInterest_(c, rate);
       p = principalCompounded;
       c = pmt + contributionCompounded;
 
@@ -60,27 +65,29 @@ class Calculations {
       let growth = ((balance / deposits - 1) * 100).toFixed(1);
       if (growth === 'NaN') growth = 'N/A';
 
-      sums.push([i, this.formatCurrency(deposits), this.formatCurrency(interest), this.formatCurrency(balance), growth]);
+      sums.push([i, this.formatCurrency_(deposits), this.formatCurrency_(interest), this.formatCurrency_(balance), growth]);
     }
 
     // Pass the 'sums' array to a method and render it as a table.
-    this.renderTable(sums);
+    this.renderTable_(sums);
 
-    // Destructure 'sums' in order to return 'balance'.
+    // Destructure 'sums' array and return 'balance' from it.
     const [year, deposits, interest, balance, growth] = sums[sums.length - 1];
 
     return balance;
   }
 
   /**
+   * Formats an amount based on type of currency. 
    * @param {!number} amount - Unformatted value.
-   * @return String with currency formatting. e.g. 12345.67123 => 12,345.67
+   * @return {string} Formatted amount. e.g. 12345.67123 => 12,345.67
+   * @private
    */
-  formatCurrency(amount) {
+  formatCurrency_(amount) {
     const currentCurrency = document.body.getAttribute(this.currencyAttr);
 
     if (currentCurrency === CURRENCY_RUPEES) {
-      return this.formatRupee(amount);
+      return this.formatRupees_(amount);
     }
 
     const pattern = '\\d(?=(\\d{3})+\\D)';
@@ -101,11 +108,12 @@ class Calculations {
   };
 
   /**
-   * @description Rupee formatting is weird, so it gets its own special method.
+   * Formats currency for rupees (which is weird, so they get their own special method).
    * @param {!number} rupees - Currency amount.
-   * @return Amount in '##,##,###.##' format.
+   * @return {string} Amount in '##,##,###.##' format.
+   * @private
    */
-  formatRupee(rupees) {
+  formatRupees_(rupees) {
     const string = rupees.toFixed(2).toString().split('.');
     const amount = string[0];
     const decimal = string[1];
@@ -119,15 +127,16 @@ class Calculations {
   }
 
   /**
-   * @description Displays initial and compounded amounts for each time period.
+   * Renders initial and compounded amounts for each time period.
    * @param {!Array} data - Calculated values.
-   * @param {!number} data.year
-   * @param {!number} data.deposits
-   * @param {!number} data.interest
-   * @param {!number} data.balance
-   * @param {!number} data.growth
+   * @param {!number} data[].year
+   * @param {!number} data[].deposits
+   * @param {!number} data[].interest
+   * @param {!number} data[].balance
+   * @param {!number} data[].growth
+   * @private
    */
-  renderTable(data) {
+  renderTable_(data) {
     let html = `
       <tr>
         <th class="year">Year</th>
@@ -139,7 +148,7 @@ class Calculations {
     `;
 
     data.forEach((item) => {
-      const [year, deposits, interest, balance, growth] = item;
+      const [ year, deposits, interest, balance, growth ] = item;
       html += `
         <tr>
           <td class="year">${year}</td>
@@ -155,7 +164,8 @@ class Calculations {
   }
 
   /**
-   * @description Displays a caption after the table.
+   * Creates a caption element and renders it after the table.
+   * @public
    */
   tableCaption() {
     const caption = document.createElement('p');

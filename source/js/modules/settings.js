@@ -4,18 +4,17 @@ const CHECKED_ATTR = 'checked';
 /** @const {string} */
 const INACTIVE_ATTR = 'inactive';
 
-// TODO: PascalCase vs. SCREAMING_SNAKE_CASE
 /**
- * @const {Object} CURRENCIES - Currency information for display and formatting.
- * @const {string} CURRENCIES.label
- * @const {string} CURRENCIES.name
- * @const {Array} CURRENCIES.options
- * @const {Object} CURRENCIES.options[]
- * @const {string} CURRENCIES.options[].isoSymbol
- * @const {string} CURRENCIES.options[].label
- * @const {string} CURRENCIES.options[].value
+ * @const {Object} Currencies - Currency information for display and formatting.
+ * @const {string} Currencies.label
+ * @const {string} Currencies.name
+ * @const {Array} Currencies.options
+ * @const {Object} Currencies.options[]
+ * @const {string} Currencies.options[].isoSymbol
+ * @const {string} Currencies.options[].label
+ * @const {string} Currencies.options[].value
  */
-const CURRENCIES = {
+const Currencies = {
   label: 'Currency',
   name: 'currency',
   options: [
@@ -47,14 +46,13 @@ const CURRENCIES = {
   ],
 };
 
-// TODO: PascalCase vs. SCREAMING_SNAKE_CASE
 /**
- * @const {Array} SETTINGS
- * @const {Object} SETTINGS[]
- * @const {string} SETTINGS[].name
- * @const {string} SETTINGS[].fallback
+ * @const {Array} UserSettings
+ * @const {Object} UserSettings[]
+ * @const {string} UserSettings[].name
+ * @const {string} UserSettings[].fallback
  * */
-const SETTINGS = [
+const UserSettings = [
   {
     name: 'theme',
     fallback: 'light',
@@ -65,17 +63,16 @@ const SETTINGS = [
   },
 ];
 
-// TODO: PascalCase vs. SCREAMING_SNAKE_CASE
 /**
- * @const {Object} THEMES - Color theme options.
- * @const {string} THEMES.label
- * @const {string} THEMES.name
- * @const {Array} THEMES.options
- * @const {Object} THEMES.options[]
- * @const {string} THEMES.options[].label
- * @const {string} THEMES.options[].value
+ * @const {Object} Themes - Color theme options.
+ * @const {string} Themes.label
+ * @const {string} Themes.name
+ * @const {Array} Themes.options
+ * @const {Object} Themes.options[]
+ * @const {string} Themes.options[].label
+ * @const {string} Themes.options[].value
  */
-const THEMES = {
+const Themes = {
   label: 'Theme',
   name: 'theme',
   options: [
@@ -114,76 +111,82 @@ class Settings {
   }
 
   /**
-   * @description Creates settings fields and populates them with user preferences or defaults.
+   * Creates settings fields and populates them with user preferences or defaults.
+   * @public
    */
-  init () {
+  init() {
     // Attach settings elements to DOM and set defaults for first run.
     let html = '';
-    SETTINGS.forEach((setting) => {
+    UserSettings.forEach((setting) => {
       const { name, fallback } = setting;
       html += `<div class="menu__group" data-setting="${name}"></div>`;
-      this.setOption(name, fallback);
+      this.setOption_(name, fallback);
     });
     this.menu.innerHTML = html;
 
     // Populate settings elements.
-    this.makeOptions(THEMES, THEMES.name);
-    this.makeOptions(CURRENCIES, CURRENCIES.name);
+    this.makeOptions_(Themes, Themes.name);
+    this.makeOptions_(Currencies, Currencies.name);
 
     // Set up element listeners.
-    this.initToggle();
+    this.initToggle_();
   }
 
   /**
-   * @description Sets an attribute on the body element and saves it to localStorage.
+   * Sets an attribute on the body element and saves it to localStorage.
    * @param {!string} name - The attribute to set on the body element.
    * @param {!string} value - The value of the body attribute.
+   * @private
    */
-  changeOption(name, value) {
+  changeOption_(name, value) {
     document.body.setAttribute(`data-${name}`, value);
     localStorage.setItem(name, value);
   }
 
   /**
-   * @description Hides overlay mask.
+   * Hides overlay mask.
+   * @private
    */
-  disableMask() {
+  disableMask_() {
     this.mask.setAttribute(INACTIVE_ATTR, '');
   }
 
   /**
-   * @description Shows overlay mask and adds a one-time click listener.
+   * Shows overlay mask and adds a one-time click listener.
+   * @private
    */
-  enableMask() {
+  enableMask_() {
     this.mask.removeAttribute(INACTIVE_ATTR);
     this.mask.addEventListener('click', () => {
       this.toggle.checked = false;
-      this.disableMask();
+      this.disableMask_();
     }, { once: true });
   }
 
   /**
-   * @description Initializes menu toggle and overlay mask.
+   * Initializes menu toggle and overlay mask.
+   * @private
    */
-  initToggle() {
+  initToggle_() {
     this.toggle.addEventListener('click', () => {
       if (this.mask.hasAttribute(INACTIVE_ATTR)) {
-        this.enableMask();
+        this.enableMask_();
       } else {
-        this.disableMask();
+        this.disableMask_();
       }
     });
   }
 
   /**
-   * @description Creates all 'settings' options and attaches them to the DOM.
+   * Creates all 'settings' options and attaches them to the DOM.
    * @param {!Object} data - All options data.
    * @param {!string} data.label
    * @param {!string} data.name
    * @param {!string} data.options
    * @param {!string} selector - Element that options are attached to.
+   * @private
    */
-  makeOptions(data, selector) {
+  makeOptions_(data, selector) {
     const target = document.querySelector(`[data-setting="${selector}"]`);
     const { label, name, options } = data;
     let html = '';
@@ -202,15 +205,16 @@ class Settings {
     html += `</ul>`;
     target.innerHTML = html;
 
-    this.updateOptions(name);
+    this.updateOptions_(name);
   }
 
   /**
-   * @description Adds an attribute with a value and saves it to localStorage.
+   * Adds an attribute with a value and saves it to localStorage.
    * @param {!string} name - Name of the localStorage item and attribute to set.
    * @param {?string=} fallback - Default value if none is stored yet.
+   * @private
    */
-  setOption(name, fallback='') {
+  setOption_(name, fallback = '') {
     const stored = localStorage.getItem(name);
     const value = (stored) ? stored : fallback.toLowerCase();
     document.body.setAttribute(`data-${name}`, value);
@@ -218,11 +222,11 @@ class Settings {
   }
 
   /**
-   * @description Sets current option and adds listeners to each option.
-   * @param {!string} option - Attribute to set on the body element, which is also the
-   * 'name' of the input.
+   * Sets current option and adds a listener to each option.
+   * @param {!string} option - Attribute to set on the body element, which is also the 'name' of the input.
+   * @private
    */
-  updateOptions(option) {
+  updateOptions_(option) {
     const currentAttr = document.body.getAttribute(`data-${option}`);
 
     [...document.querySelectorAll(`[name=${option}]`)].forEach((input) => {
@@ -230,7 +234,7 @@ class Settings {
         input.setAttribute(CHECKED_ATTR, '');
       }
       input.addEventListener('click', () => {
-        this.changeOption(option, input.value);
+        this.changeOption_(option, input.value);
       });
     });
   }

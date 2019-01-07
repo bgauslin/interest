@@ -1,0 +1,126 @@
+// @type String
+TRANSITION_SPEED = .2s
+
+// @type String
+TRANSITION_SPEED_DRAWER = .5s
+
+// @type String
+HEADER_TEXT_SIZE = px_to_rem(16)
+
+// @type String
+HEADER_TEXT_SIZE_MEDIUM = px_to_rem(20)
+
+// @type String
+INPUT_TEXT_SIZE = px_to_rem(20)
+
+// @type String
+TABLE_TEXT_SIZE = px_to_em(13)
+
+// @type String
+TABLE_TEXT_SIZE_MEDIUM = px_to_em(15)
+
+// @type String
+VALUES_TOTAL_TEXT_SIZE = px_to_em(32)
+
+// @type String
+BUTTON_HEIGHT = px_to_rem(40)
+
+// @type String
+BUTTON_MARGIN = px_to_rem(32)
+
+// @type String
+CARD_CORNER_RADIUS = 8px
+
+// @type String
+CARD_PADDING = px_to_rem(24)
+
+// @type String
+HEADER_HEIGHT = px_to_rem(44)
+
+// @type String
+HEADER_HEIGHT_MEDIUM = px_to_rem(60)
+
+// @type String
+INPUT_HEIGHT = px_to_rem(32)
+
+// @type String
+INPUT_WIDTH = 5.5rem
+
+// @type String
+MENU_ARROW_SIZE = 10px
+
+// @type String
+MENU_CORNER_RADIUS = 4px
+
+// @type String
+MENU_ICON_SIZE = px_to_rem(12)
+
+// @type String
+MENU_ITEM_SIZE = px_to_rem(40)
+
+// @type String
+MENU_ITEM_TEXT_SIZE = px_to_em(22)
+
+// @type String
+MENU_PADDING = px_to_rem(16)
+
+// @type Hash
+MenuDimensions = {
+  ARROW_SIZE: 10px
+  CORNER_RADIUS: 4px
+  ICON_SIZE: px_to_rem(12)
+  ITEM_SIZE: px_to_rem(40)
+  ITEM_TEXT_SIZE: px_to_em(22)
+  PADDING: px_to_rem(16)
+}
+
+// @type String
+TABLE_MAX_WIDTH = px_to_rem(640)
+
+// @type String
+TABLE_PADDING_X = px_to_em(12)
+
+// @type String
+TABLE_PADDING_X_LARGE = px_to_em(16)
+
+// @type String
+TABLE_PADDING_Y = px_to_em(8)
+
+// @type String
+TOGGLE_ARROW_SIZE = 5px
+
+// @type String
+VALUES_MAX_WIDTH = px_to_rem(240)
+
+// @type String
+COLUMN_GAP = px_to_rem(16)
+
+// @type String
+ROW_GAP = px_to_rem(16)
+
+// @type String
+COLUMN_GAP_MEDIUM = px_to_rem(24)
+
+// @type String
+ROW_GAP_MEDIUM = px_to_rem(24)
+
+// @type String
+CONTENT_WIDTH_MEDIUM = TABLE_MAX_WIDTH
+
+// @type String
+CONTENT_WIDTH_LARGE = (VALUES_MAX_WIDTH + (2 * CARD_PADDING)) + TABLE_MAX_WIDTH + COLUMN_GAP_MEDIUM
+
+// @type String
+VALUES_WIDTH_GRID = VALUES_MAX_WIDTH + (2 * CARD_PADDING)
+
+// @type String
+BUTTON_ROW_HEIGHT_GRID = px_to_rem(96)
+
+
+// Breakpoints - based on grid and content (overrides values in global config).
+// @type Hash
+Breakpoints = {
+  SMALL: 'screen and (min-width: %s)' % (px_to_rem(420))
+  MEDIUM: 'screen and (min-width: %s)' % (CONTENT_WIDTH_MEDIUM + (2 * COLUMN_GAP_MEDIUM))
+  LARGE: 'screen and (min-width: %s)' % (CONTENT_WIDTH_LARGE + (2 * COLUMN_GAP_MEDIUM))
+}

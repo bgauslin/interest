@@ -9,20 +9,20 @@
   overflow hidden
   padding CARD_PADDING
 
-  @media BREAKPOINT_SMALL
+  @media Breakpoints.SMALL
     align-self start
     border-radius CARD_CORNER_RADIUS
 
-  @media BREAKPOINT_MEDIUM
+  @media Breakpoints.MEDIUM
     grid-row 2 / span 1
 
-  @media BREAKPOINT_LARGE
+  @media Breakpoints.LARGE
     grid-column 2 / span 1
     position sticky
     top HEADER_HEIGHT_MEDIUM + ROW_GAP_MEDIUM
     transition top TRANSITION_SPEED ease
 
-@media BREAKPOINT_LARGE
+@media Breakpoints.LARGE
   .header.unpinned ~ .values
     top ROW_GAP_MEDIUM
 
@@ -31,11 +31,11 @@
   margin 0 auto
   padding 0
 
-  @media BREAKPOINT_SMALL
+  @media Breakpoints.SMALL
     display flex
     flex-wrap wrap
 
-  @media BREAKPOINT_LARGE
+  @media Breakpoints.LARGE
     display block
     margin 0
 
@@ -45,13 +45,13 @@
   justify-content space-between
   margin 0 0 px_to_rem(16)
 
-  @media BREAKPOINT_SMALL
+  @media Breakpoints.SMALL
     flex 0 0 50%
 
 #compounds
   display none
 
-@media BREAKPOINT_SMALL
+@media Breakpoints.SMALL
   #principal
     order 1
   #rate
@@ -112,6 +112,6 @@
     opacity 0
     visibility hidden
 
-  @media BREAKPOINT_LARGE
+  @media Breakpoints.LARGE
     margin 0
     text-align left

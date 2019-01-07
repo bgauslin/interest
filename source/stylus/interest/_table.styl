@@ -12,15 +12,15 @@
   transition height TRANSITION_SPEED_DRAWER ease-out,
              opacity TRANSITION_SPEED ease-out
 
-  @media BREAKPOINT_SMALL
+  @media Breakpoints.SMALL
     grid-column 2 / span 1
 
-  @media BREAKPOINT_MEDIUM
+  @media Breakpoints.MEDIUM
     grid-row 3 / span 1
     height auto !important // always display table
     opacity 1
 
-  @media BREAKPOINT_LARGE
+  @media Breakpoints.LARGE
     grid-column 3 / 4
     grid-row 2 / span 1
     justify-self stretch
@@ -30,42 +30,42 @@
   display none
 
 .table[data-expanded]
-  @media BREAKPOINT_SMALL
+  @media Breakpoints.SMALL
     margin-top px_to_rem(16)
 
-  @media BREAKPOINT_MEDIUM
+  @media Breakpoints.MEDIUM
     margin-top 0
 
 .table__frame
   overflow-x auto
 
-  @media BREAKPOINT_SMALL
+  @media Breakpoints.SMALL
     border-radius CARD_CORNER_RADIUS
 
 th
 td
   padding TABLE_PADDING_Y TABLE_PADDING_X
 
-  @media BREAKPOINT_LARGE
+  @media Breakpoints.LARGE
     padding TABLE_PADDING_Y TABLE_PADDING_X_LARGE
 
   &:first-child
     text-align left
     padding-left COLUMN_GAP
 
-    @media BREAKPOINT_SMALL
+    @media Breakpoints.SMALL
       padding-left TABLE_PADDING_X
 
   &:last-child
     padding-right COLUMN_GAP
 
-    @media BREAKPOINT_SMALL
+    @media Breakpoints.SMALL
       padding-right TABLE_PADDING_X
 
   &.balance
     padding-right COLUMN_GAP
 
-    @media BREAKPOINT_SMALL
+    @media Breakpoints.SMALL
       padding-right TABLE_PADDING_X
 
 td.growth::after
@@ -79,7 +79,7 @@ td.growth::after
 .interest
   display none
 
-  @media BREAKPOINT_SMALL
+  @media Breakpoints.SMALL
     display table-cell
 
 .rotate-screen
@@ -87,5 +87,5 @@ td.growth::after
   font-size px_to_rem(12)
   margin px_to_rem(12) COLUMN_GAP 0
 
-  @media screen and (max-width: BREAKPOINT_SMALL_UNITS) and (orientation: portrait)
+  @media screen and (max-width: Breakpoints.SMALL_UNITS) and (orientation: portrait)
     display block

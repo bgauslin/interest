@@ -126,24 +126,15 @@ VALUES_WIDTH_GRID = VALUES_MAX_WIDTH + (2 * CARD_PADDING)
 // @type String
 BUTTON_ROW_HEIGHT_GRID = px_to_rem(96)
 
+
 // Breakpoints - based on grid and content (overrides values in global config).
-// @type String
-BREAKPOINT_SMALL_UNITS = px_to_rem(420)
+// @type Hash
+Breakpoints = {
+  SMALL: 'screen and (min-width: %s)' % (px_to_rem(420))
+  MEDIUM: 'screen and (min-width: %s)' % (CONTENT_WIDTH_MEDIUM + (2 * COLUMN_GAP_MEDIUM))
+  LARGE: 'screen and (min-width: %s)' % (CONTENT_WIDTH_LARGE + (2 * COLUMN_GAP_MEDIUM))
+}
 
-// @type String
-BREAKPOINT_MEDIUM_UNITS = CONTENT_WIDTH_MEDIUM + (2 * COLUMN_GAP_MEDIUM)
-
-// @type String
-BREAKPOINT_LARGE_UNITS = CONTENT_WIDTH_LARGE + (2 * COLUMN_GAP_MEDIUM)
-
-// @type String
-BREAKPOINT_SMALL = 'screen and (min-width: %s)' % BREAKPOINT_SMALL_UNITS
-
-// @type String
-BREAKPOINT_MEDIUM = 'screen and (min-width: %s)' % BREAKPOINT_MEDIUM_UNITS
-
-// @type String
-BREAKPOINT_LARGE = 'screen and (min-width: %s)' % BREAKPOINT_LARGE_UNITS
 
 
 font_face()

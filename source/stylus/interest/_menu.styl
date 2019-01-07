@@ -1,5 +1,5 @@
 .menu
-  background WHITE
+  background white
   border-radius MENU_CORNER_RADIUS
   color DARK_GREY
   margin-top (COLUMN_GAP / 2)
@@ -25,7 +25,7 @@
 // Menu arrow.
 .menu::before
   content ''
-  css_triangle(WHITE, MENU_ARROW_SIZE, 'up')
+  css_triangle(white, MENU_ARROW_SIZE, 'up')
   position absolute
   right 8px
   top (- MENU_ARROW_SIZE)
@@ -84,13 +84,13 @@
 
 // Styles for different option types.
 [data-type="currency"] .option__label
-  background OFF_WHITE
+  background OFF_white
   border 3px solid LIGHTER_GREY
   color LIGHT_GREY
   font-size MENU_ITEM_TEXT_SIZE
 
 [data-type="currency"] .option:checked + .option__label
-  background WHITE
+  background white
   color GREEN
 
 [data-type="theme"] .option__label
@@ -98,7 +98,7 @@
   color transparent
 
 .option__label[data-option="light"]
-  background WHITE
+  background white
 
 .option__label[data-option="sepia"]
   background SEPIA

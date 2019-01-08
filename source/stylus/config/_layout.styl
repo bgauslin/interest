@@ -5,18 +5,30 @@ TRANSITION_SPEED = .2s
 TRANSITION_SPEED_DRAWER = .5s
 
 // @type Hash
-ButtonDimensions = {
+Buttons = {
   HEIGHT: px_to_rem(40)
   ROW_HEIGHT: px_to_rem(96)
 }
 
 // @type Hash
-CardDimensions = {
+Cards = {
   CORNER_RADIUS: 8px
   PADDING: px_to_rem(24)
 }
 
-HeaderDimensions = {
+// @type Hash
+Grid = {
+  Base: {
+    COLUMN_GAP: px_to_rem(16)
+    ROW_GAP: px_to_rem(16)
+  }
+  Medium: {
+    COLUMN_GAP: px_to_rem(24)
+    ROW_GAP: px_to_rem(24)
+  }
+}
+
+Header = {
   Base: {
     HEIGHT: px_to_rem(44)  
   }
@@ -32,7 +44,7 @@ INPUT_HEIGHT = px_to_rem(32)
 INPUT_WIDTH = 5.5rem
 
 // @type Hash
-MenuDimensions = {
+Menu = {
   CORNER_RADIUS: 4px
   ITEM_SIZE: px_to_rem(40)
   PADDING: px_to_rem(16)
@@ -42,7 +54,7 @@ MenuDimensions = {
 MENU_ARROW_SIZE = 10px
 
 // @type hash
-TableDimensions = {
+Tables = {
   MAX_WIDTH: px_to_rem(640)
   PADDING_X: px_to_em(12)
   PADDING_X_LARGE: px_to_em(16)
@@ -52,22 +64,8 @@ TableDimensions = {
 // @type String
 TOGGLE_ARROW_SIZE = 5px
 
-// @type Hash
-GridDimensions = {
-  Base: {
-    COLUMN_GAP: px_to_rem(16)
-    ROW_GAP: px_to_rem(16)
-  }
-  Medium: {
-    COLUMN_GAP: px_to_rem(24)
-    ROW_GAP_MEDIUM: px_to_rem(24)
-  }
-}
 
-COLUMN_GAP = px_to_rem(16)
-ROW_GAP = px_to_rem(16)
-COLUMN_GAP_MEDIUM = px_to_rem(24)
-ROW_GAP_MEDIUM = px_to_rem(24)
+
 
 
 // @type String
@@ -78,13 +76,13 @@ VALUES_MAX_WIDTH = px_to_rem(240)
 // Compound dimensions
 // ----------------------------------------
 // @type String
-VALUES_WIDTH_GRID = VALUES_MAX_WIDTH + (2 * CardDimensions.PADDING)
+VALUES_WIDTH_GRID = VALUES_MAX_WIDTH + (2 * Cards.PADDING)
 
 // @type String
-CONTENT_WIDTH_MEDIUM = TableDimensions.MAX_WIDTH
+CONTENT_WIDTH_MEDIUM = Tables.MAX_WIDTH
 
 // @type String
-CONTENT_WIDTH_LARGE = (VALUES_MAX_WIDTH + (2 * CardDimensions.PADDING)) + TableDimensions.MAX_WIDTH + COLUMN_GAP_MEDIUM
+CONTENT_WIDTH_LARGE = (VALUES_MAX_WIDTH + (2 * Cards.PADDING)) + Tables.MAX_WIDTH + Grid.Medium.COLUMN_GAP
 
 // ----------------------------------------
 // Breakpoints
@@ -92,6 +90,6 @@ CONTENT_WIDTH_LARGE = (VALUES_MAX_WIDTH + (2 * CardDimensions.PADDING)) + TableD
 // @type Hash
 Breakpoints = {
   SMALL: 'screen and (min-width: %s)' % (px_to_rem(420))
-  MEDIUM: 'screen and (min-width: %s)' % (CONTENT_WIDTH_MEDIUM + (2 * COLUMN_GAP_MEDIUM))
-  LARGE: 'screen and (min-width: %s)' % (CONTENT_WIDTH_LARGE + (2 * COLUMN_GAP_MEDIUM))
+  MEDIUM: 'screen and (min-width: %s)' % (CONTENT_WIDTH_MEDIUM + (2 * Grid.Medium.COLUMN_GAP))
+  LARGE: 'screen and (min-width: %s)' % (CONTENT_WIDTH_LARGE + (2 * Grid.Medium.COLUMN_GAP))
 }

@@ -40,33 +40,33 @@
   overflow-x auto
 
   @media Breakpoints.SMALL
-    border-radius '%s' % CardDimensions.CORNER_RADIUS
+    border-radius '%s' % Cards.CORNER_RADIUS
 
 th
 td
-  padding '%s %s' % (TableDimensions.PADDING_Y TableDimensions.PADDING_X)
+  padding '%s %s' % (Tables.PADDING_Y Tables.PADDING_X)
 
   @media Breakpoints.LARGE
-    padding '%s %s' % (TableDimensions.PADDING_Y TableDimensions.PADDING_X_LARGE)
+    padding '%s %s' % (Tables.PADDING_Y Tables.PADDING_X_LARGE)
 
   &:first-child
     text-align left
-    padding-left COLUMN_GAP
+    padding-left '%s' % Grid.Base.COLUMN_GAP
 
     @media Breakpoints.SMALL
-      padding-left '%s' % TableDimensions.PADDING_X
+      padding-left '%s' % Tables.PADDING_X
 
   &:last-child
-    padding-right COLUMN_GAP
+    padding-right '%s' % Grid.Base.COLUMN_GAP
 
     @media Breakpoints.SMALL
-      padding-right '%s' % TableDimensions.PADDING_X
+      padding-right '%s' % Tables.PADDING_X
 
   &.balance
-    padding-right COLUMN_GAP
+    padding-right '%s' % Grid.Base.COLUMN_GAP
 
     @media Breakpoints.SMALL
-      padding-right '%s' % TableDimensions.PADDING_X
+      padding-right '%s' % Tables.PADDING_X
 
 td.growth::after
   content '%'
@@ -85,7 +85,7 @@ td.growth::after
 .rotate-screen
   display none
   font-size px_to_rem(12)
-  margin px_to_rem(12) COLUMN_GAP 0
+  margin px_to_rem(12) '%s' 0 %Grid.Base.COLUMN_GAP
 
   @media screen and (max-width: Breakpoints.SMALL_UNITS) and (orientation: portrait)
     display block

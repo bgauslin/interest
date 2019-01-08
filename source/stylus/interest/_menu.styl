@@ -1,9 +1,9 @@
 .menu
   background white
-  border-radius '%s' % MenuDimensions.CORNER_RADIUS
+  border-radius '%s' % Menu.CORNER_RADIUS
   color DARK_GREY
-  margin-top (COLUMN_GAP / 2)
-  max-width 'calc(100vw - %s)' % COLUMN_GAP
+  margin-top '%s' % (Grid.Base.COLUMN_GAP / 2)
+  max-width 'calc(100vw - %s)' % Grid.Base.COLUMN_GAP
   opacity 0
   position absolute
   right px_to_rem(-8)
@@ -39,7 +39,7 @@
   width 100%
 
 .menu__group
-  padding '%s' % MenuDimensions.PADDING
+  padding '%s' % Menu.PADDING
 
 .menu__group:not(:last-child)
   border-right 1px solid MEDIUM_GREY
@@ -56,10 +56,10 @@
 
 .item__label
   display block
-  height '%s' % MenuDimensions.ITEM_SIZE
+  height '%s' % Menu.ITEM_SIZE
   overflow hidden
   position relative
-  width '%s' % MenuDimensions.ITEM_SIZE
+  width '%s' % Menu.ITEM_SIZE
 
 [no-touch] .item__label:hover
   cursor pointer
@@ -73,10 +73,10 @@
   align-items center
   border-radius 50%
   display inline-flex
-  height '%s' % MenuDimensions.ITEM_SIZE
+  height '%s' % Menu.ITEM_SIZE
   justify-content center
   position relative
-  width '%s' % MenuDimensions.ITEM_SIZE
+  width '%s' % Menu.ITEM_SIZE
   z-index -1
 
 [no-touch] .option__label

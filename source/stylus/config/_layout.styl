@@ -4,16 +4,11 @@ TRANSITION_SPEED = .2s
 // @type String
 TRANSITION_SPEED_DRAWER = .5s
 
-
-// @type String
-BUTTON_HEIGHT = px_to_rem(40)
-
-// @type String
-BUTTON_MARGIN = px_to_rem(32)
-
-// @type String
-BUTTON_ROW_HEIGHT_GRID = px_to_rem(96)
-
+// @type Hash
+ButtonDimensions = {
+  HEIGHT: px_to_rem(40)
+  ROW_HEIGHT: px_to_rem(96)
+}
 
 // @type Hash
 CardDimensions = {
@@ -55,25 +50,33 @@ TableDimensions = {
 // @type String
 TOGGLE_ARROW_SIZE = 5px
 
+// @type Hash
+GridDimensions = {
+  Base: {
+    COLUMN_GAP: px_to_rem(16)
+    ROW_GAP: px_to_rem(16)
+  }
+  Medium: {
+    COLUMN_GAP: px_to_rem(24)
+    ROW_GAP_MEDIUM: px_to_rem(24)
+  }
+}
 
-// @type String
 COLUMN_GAP = px_to_rem(16)
-
-// @type String
 ROW_GAP = px_to_rem(16)
-
-// @type String
 COLUMN_GAP_MEDIUM = px_to_rem(24)
-
-// @type String
 ROW_GAP_MEDIUM = px_to_rem(24)
+
 
 // @type String
 VALUES_MAX_WIDTH = px_to_rem(240)
 
+
+// ----------------------------------------
+// Compound dimensions
+// ----------------------------------------
 // @type String
 VALUES_WIDTH_GRID = VALUES_MAX_WIDTH + (2 * CardDimensions.PADDING)
-
 
 // @type String
 CONTENT_WIDTH_MEDIUM = TableDimensions.MAX_WIDTH
@@ -81,8 +84,9 @@ CONTENT_WIDTH_MEDIUM = TableDimensions.MAX_WIDTH
 // @type String
 CONTENT_WIDTH_LARGE = (VALUES_MAX_WIDTH + (2 * CardDimensions.PADDING)) + TableDimensions.MAX_WIDTH + COLUMN_GAP_MEDIUM
 
-
-// Breakpoints - based on grid and content (overrides values in global config).
+// ----------------------------------------
+// Breakpoints
+// ----------------------------------------
 // @type Hash
 Breakpoints = {
   SMALL: 'screen and (min-width: %s)' % (px_to_rem(420))

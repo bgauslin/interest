@@ -1,6 +1,6 @@
 .menu
   background white
-  border-radius MENU_CORNER_RADIUS
+  border-radius '%s' % MenuDimensions.CORNER_RADIUS
   color DARK_GREY
   margin-top (COLUMN_GAP / 2)
   max-width 'calc(100vw - %s)' % COLUMN_GAP
@@ -39,7 +39,7 @@
   width 100%
 
 .menu__group
-  padding MENU_PADDING
+  padding '%s' % MenuDimensions.PADDING
 
 .menu__group:not(:last-child)
   border-right 1px solid MEDIUM_GREY
@@ -56,10 +56,10 @@
 
 .item__label
   display block
-  height MENU_ITEM_SIZE
+  height '%s' % MenuDimensions.ITEM_SIZE
   overflow hidden
   position relative
-  width MENU_ITEM_SIZE
+  width '%s' % MenuDimensions.ITEM_SIZE
 
 [no-touch] .item__label:hover
   cursor pointer
@@ -73,10 +73,10 @@
   align-items center
   border-radius 50%
   display inline-flex
-  height MENU_ITEM_SIZE
+  height '%s' % MenuDimensions.ITEM_SIZE
   justify-content center
   position relative
-  width MENU_ITEM_SIZE
+  width '%s' % MenuDimensions.ITEM_SIZE
   z-index -1
 
 [no-touch] .option__label
@@ -87,7 +87,7 @@
   background OFF_white
   border 3px solid LIGHTER_GREY
   color LIGHT_GREY
-  font-size MENU_ITEM_TEXT_SIZE
+  font-size '%s' % FontSizes.Base.MENU_ITEM
 
 [data-type="currency"] .option:checked + .option__label
   background white

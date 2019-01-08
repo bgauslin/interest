@@ -28,6 +28,10 @@ INPUT_HEIGHT = px_to_rem(32)
 // @type String
 INPUT_WIDTH = 5.5rem
 
+
+
+
+
 // @type String
 MENU_ARROW_SIZE = 10px
 
@@ -56,17 +60,13 @@ MenuDimensions = {
   PADDING: px_to_rem(16)
 }
 
-// @type String
-TABLE_MAX_WIDTH = px_to_rem(640)
-
-// @type String
-TABLE_PADDING_X = px_to_em(12)
-
-// @type String
-TABLE_PADDING_X_LARGE = px_to_em(16)
-
-// @type String
-TABLE_PADDING_Y = px_to_em(8)
+// @type hash
+TableDimensions = {
+  MAX_WIDTH: px_to_rem(640)
+  PADDING_X: px_to_em(12)
+  PADDING_X_LARGE: px_to_em(16)
+  PADDING_Y: px_to_em(8)
+}
 
 // @type String
 TOGGLE_ARROW_SIZE = 5px
@@ -87,10 +87,10 @@ COLUMN_GAP_MEDIUM = px_to_rem(24)
 ROW_GAP_MEDIUM = px_to_rem(24)
 
 // @type String
-CONTENT_WIDTH_MEDIUM = TABLE_MAX_WIDTH
+CONTENT_WIDTH_MEDIUM = TableDimensions.MAX_WIDTH
 
 // @type String
-CONTENT_WIDTH_LARGE = (VALUES_MAX_WIDTH + (2 * CARD_PADDING)) + TABLE_MAX_WIDTH + COLUMN_GAP_MEDIUM
+CONTENT_WIDTH_LARGE = (VALUES_MAX_WIDTH + (2 * CARD_PADDING)) + TableDimensions.MAX_WIDTH + COLUMN_GAP_MEDIUM
 
 // @type String
 VALUES_WIDTH_GRID = VALUES_MAX_WIDTH + (2 * CARD_PADDING)

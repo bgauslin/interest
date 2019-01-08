@@ -44,29 +44,29 @@
 
 th
 td
-  padding TABLE_PADDING_Y TABLE_PADDING_X
+  padding '%s %s' % (TableDimensions.PADDING_Y TableDimensions.PADDING_X)
 
   @media Breakpoints.LARGE
-    padding TABLE_PADDING_Y TABLE_PADDING_X_LARGE
+    padding '%s %s' % (TableDimensions.PADDING_Y TableDimensions.PADDING_X_LARGE)
 
   &:first-child
     text-align left
     padding-left COLUMN_GAP
 
     @media Breakpoints.SMALL
-      padding-left TABLE_PADDING_X
+      padding-left '%s' % TableDimensions.PADDING_X
 
   &:last-child
     padding-right COLUMN_GAP
 
     @media Breakpoints.SMALL
-      padding-right TABLE_PADDING_X
+      padding-right '%s' % TableDimensions.PADDING_X
 
   &.balance
     padding-right COLUMN_GAP
 
     @media Breakpoints.SMALL
-      padding-right TABLE_PADDING_X
+      padding-right '%s' % TableDimensions.PADDING_X
 
 td.growth::after
   content '%'

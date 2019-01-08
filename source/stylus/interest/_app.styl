@@ -1,11 +1,11 @@
 .app
   display grid
   grid-template-columns '%s auto %s' % (Grid.Base.COLUMN_GAP Grid.Base.COLUMN_GAP)
-  grid-template-rows '%s %s 1fr auto %s' % (Header.Base.HEIGHT COLUMN_GAP Buttons.ROW_HEIGHT)
+  grid-template-rows '%s %s 1fr auto %s' % (Header.Base.HEIGHT Grid.Base.COLUMN_GAP Buttons.ROW_HEIGHT)
   min-height 100vh
 
   @media Breakpoints.SMALL
-    grid-template-rows '%s %s auto auto %s' % (Header.Base.HEIGHT COLUMN_GAP Buttons.ROW_HEIGHT)
+    grid-template-rows '%s %s auto auto %s' % (Header.Base.HEIGHT Grid.Base.COLUMN_GAP Buttons.ROW_HEIGHT)
 
   @media Breakpoints.MEDIUM
     grid-row-gap '%s' % Grid.Base.ROW_GAP

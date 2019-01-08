@@ -4,17 +4,19 @@ TRANSITION_SPEED = .2s
 // @type String
 TRANSITION_SPEED_DRAWER = .5s
 
+
+
 // @type String
 BUTTON_HEIGHT = px_to_rem(40)
 
 // @type String
 BUTTON_MARGIN = px_to_rem(32)
 
-// @type String
-CARD_CORNER_RADIUS = 8px
-
-// @type String
-CARD_PADDING = px_to_rem(24)
+// @type Hash
+CardDimensions = {
+  CORNER_RADIUS: 8px
+  PADDING: px_to_rem(24)
+}
 
 // @type String
 HEADER_HEIGHT = px_to_rem(44)
@@ -27,10 +29,6 @@ INPUT_HEIGHT = px_to_rem(32)
 
 // @type String
 INPUT_WIDTH = 5.5rem
-
-
-
-
 
 // @type String
 MENU_ARROW_SIZE = 10px
@@ -45,9 +43,6 @@ MENU_ICON_SIZE = px_to_rem(12)
 MENU_ITEM_SIZE = px_to_rem(40)
 
 // @type String
-MENU_ITEM_TEXT_SIZE = px_to_em(22)
-
-// @type String
 MENU_PADDING = px_to_rem(16)
 
 // @type Hash
@@ -56,7 +51,6 @@ MenuDimensions = {
   CORNER_RADIUS: 4px
   ICON_SIZE: px_to_rem(12)
   ITEM_SIZE: px_to_rem(40)
-  ITEM_TEXT_SIZE: px_to_em(22)
   PADDING: px_to_rem(16)
 }
 
@@ -90,10 +84,10 @@ ROW_GAP_MEDIUM = px_to_rem(24)
 CONTENT_WIDTH_MEDIUM = TableDimensions.MAX_WIDTH
 
 // @type String
-CONTENT_WIDTH_LARGE = (VALUES_MAX_WIDTH + (2 * CARD_PADDING)) + TableDimensions.MAX_WIDTH + COLUMN_GAP_MEDIUM
+CONTENT_WIDTH_LARGE = (VALUES_MAX_WIDTH + (2 * CardDimensions.PADDING)) + TableDimensions.MAX_WIDTH + COLUMN_GAP_MEDIUM
 
 // @type String
-VALUES_WIDTH_GRID = VALUES_MAX_WIDTH + (2 * CARD_PADDING)
+VALUES_WIDTH_GRID = VALUES_MAX_WIDTH + (2 * CardDimensions.PADDING)
 
 // @type String
 BUTTON_ROW_HEIGHT_GRID = px_to_rem(96)

@@ -77,7 +77,7 @@
   body_font()
   border 0
   border-radius 0
-  font-size INPUT_TEXT_SIZE
+  font-size '%s' % FontSizes.Base.INPUT
   height INPUT_HEIGHT
   line-height 1
   order 1
@@ -95,9 +95,9 @@
 
 .values__total
   color GREEN
-  font-size VALUES_TOTAL_TEXT_SIZE
-  height VALUES_TOTAL_TEXT_SIZE
-  line-height VALUES_TOTAL_TEXT_SIZE
+  font-size '%s' % FontSizes.Base.VALUES_TOTAL
+  height  '%s' % FontSizes.Base.VALUES_TOTAL
+  line-height  '%s' % FontSizes.Base.VALUES_TOTAL
   margin 0 auto
   max-width 'calc(100vw - %s)' % (2 * (COLUMN_GAP + CARD_PADDING))
   opacity 1

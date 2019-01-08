@@ -33,11 +33,11 @@
     padding 0
 
 .header__title
-  font-size HEADER_TEXT_SIZE
+  font-size '%s' % FontSizes.Base.HEADER
   font_weight(600)
   line-height 1
   margin 0
   white-space nowrap
 
   @media Breakpoints.MEDIUM
-    font-size HEADER_TEXT_SIZE_MEDIUM
+    font-size '%s' % FontSizes.Medium.HEADER

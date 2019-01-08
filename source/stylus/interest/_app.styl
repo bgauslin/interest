@@ -1,19 +1,19 @@
 .app
   display grid
   grid-template-columns COLUMN_GAP auto COLUMN_GAP
-  grid-template-rows '%s %s 1fr auto %s' % (HEADER_HEIGHT COLUMN_GAP ButtonDimensions.ROW_HEIGHT)
+  grid-template-rows '%s %s 1fr auto %s' % (HeaderDimensions.Base.HEIGHT COLUMN_GAP ButtonDimensions.ROW_HEIGHT)
   min-height 100vh
 
   @media Breakpoints.SMALL
-    grid-template-rows '%s %s auto auto %s' % (HEADER_HEIGHT COLUMN_GAP ButtonDimensions.ROW_HEIGHT)
+    grid-template-rows '%s %s auto auto %s' % (HeaderDimensions.Base.HEIGHT COLUMN_GAP ButtonDimensions.ROW_HEIGHT)
 
   @media Breakpoints.MEDIUM
     grid-row-gap ROW_GAP
     grid-template-columns COLUMN_GAP_MEDIUM auto COLUMN_GAP_MEDIUM
-    grid-template-rows HEADER_HEIGHT_MEDIUM auto 1fr 0
+    grid-template-rows '%s auto 1fr 0' % HeaderDimensions.Medium.HEIGHT
 
   @media Breakpoints.LARGE
     grid-column-gap COLUMN_GAP_MEDIUM
     grid-row-gap ROW_GAP_MEDIUM
     grid-template-columns '1fr %s %s 1fr' % (VALUES_WIDTH_GRID TableDimensions.MAX_WIDTH)
-    grid-template-rows HEADER_HEIGHT_MEDIUM auto 0
+    grid-template-rows '%s auto 0' % HeaderDimensions.Medium.HEIGHT

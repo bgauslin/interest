@@ -23,10 +23,10 @@
 // Menu arrow.
 .menu::before
   content ''
-  css_triangle(white, ARROW_SIZE_MENU, 'up')
+  css_triangle(white, ArrowSizes.MENU, 'up')
   position absolute
   right 8px
-  top (- ARROW_SIZE_MENU)
+  top '-%s' % ArrowSizes.MENU
 
 // Menu container.
 .menu__content

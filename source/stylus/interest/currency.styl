@@ -1,4 +1,4 @@
-CURRENCIES = {
+Currencies = {
   eur: '€'
   gbp: '£'
   inr: '₹'
@@ -6,7 +6,7 @@ CURRENCIES = {
   yen: '¥'
 }
 
-for name, value in CURRENCIES
+for name, value in Currencies
   [data-currency=\"{name}\"]
     .values__total:not(:empty)
     td.deposits

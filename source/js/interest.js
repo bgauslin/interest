@@ -51,7 +51,7 @@ const myHeadroom = new headroom(document.querySelector('.header'), {
 
 /**
  * Initialize app when DOM is ready.
- * @listens
+ * @listens DOMContentLoaded
  */
 document.addEventListener('DOMContentLoaded', () => {
   settings.init();
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /**
  * Toggles component states on user input.
- * @listens
+ * @listens keyup
  */
 document.addEventListener('keyup', () => {
   expandable.setState();

@@ -111,7 +111,8 @@ class Settings {
   }
 
   /**
-   * Creates settings fields and populates them with user preferences or defaults.
+   * Creates settings fields and populates them with user preferences
+   * or defaults.
    * @public
    */
   init() {
@@ -223,7 +224,8 @@ class Settings {
 
   /**
    * Sets current option and adds a listener to each option.
-   * @param {!string} option - Attribute to set on the body element, which is also the 'name' of the input.
+   * @param {!string} option - Attribute to set on the body element,
+   *     which is also the 'name' of the input.
    * @private
    */
   updateOptions_(option) {

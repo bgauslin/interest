@@ -35,7 +35,8 @@ class Calculations {
   }
 
   /**
-   * Calculates compound interest, renders calculated values, and returns the balance.
+   * Calculates compound interest, renders calculated values,
+   * and returns the balance.
    * @param {!number} principal - Principal amount.
    * @param {!number} contribution - Contribution amount per period.
    * @param {!number} rate - Interest rate.
@@ -108,7 +109,8 @@ class Calculations {
   };
 
   /**
-   * Formats currency for rupees (which is weird, so they get their own special method).
+   * Formats currency for rupees (which is weird, so they get their
+   * own special method).
    * @param {!number} rupees - Currency amount.
    * @return {string} Amount in '##,##,###.##' format.
    * @private

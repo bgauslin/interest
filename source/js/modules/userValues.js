@@ -91,8 +91,8 @@ class UserValues {
   }
 
   /**
-   * Renders input fields for user-provided data, populates them if data exists,
-   * and adds an observer and listener for user-provided changes.
+   * Renders input fields for user-provided data, populates them if data
+   * exists, and adds an observer and listener for user-provided changes.
    * @public
    */
   init() {
@@ -140,7 +140,8 @@ class UserValues {
 
   /**
    * Populates input fields with user-provided values.
-   * @param {!string} data - User values from localStorage, converted from a string to an array.
+   * @param {!string} data - User values from localStorage, converted from
+   *     a string to an array.
    * @private
    */
   populateInputs_(data) {
@@ -167,8 +168,8 @@ class UserValues {
   }
 
   /**
-   * Watches an element's attributes for changes and updates
-   * the total's value and/or state.
+   * Watches an element's attributes for changes and updates the total's
+   * value and/or state.
    * @param {!string} selector - CSS selector of element to observe.
    * @private 
    */

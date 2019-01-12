@@ -3,7 +3,7 @@
   grid-column 2 / 3
   grid-row 5 / span 1
   justify-self center
-  transition margin TRANSITION_SPEED ease
+  transition '%s %s %s' % (margin Transitions.DEFAULT ease)
 
   @media Breakpoints.MEDIUM
     display none !important // hide the button since we don't need it
@@ -24,8 +24,7 @@
   line-height 1
   opacity 1
   padding 0 px_to_rem(12) 0 0 // adjust for toggle arrow
-  transition opacity TRANSITION_SPEED,
-             visibility TRANSITION_SPEED
+  transition '%s %s, %s %s' % (opacity Transitions.DEFAULT visibility Transitions.DEFAULT)
   visibility visibile
   width 50vw
   white-space nowrap
@@ -38,9 +37,7 @@
   visibility hidden
 
 [no-touch] .toggle__button
-  transition border TRANSITION_SPEED ease,
-             color TRANSITION_SPEED ease,
-             opacity TRANSITION_SPEED ease
+  transition '%s %s %s, %s %s %s, %s %s %s' % (border Transitions.DEFAULT ease color Transitions.DEFAULT ease opacity Transitions.DEFAULT ease)
 
 .toggle__button:focus
 .toggle__button:active
@@ -54,7 +51,7 @@
   content ''
   display inline-block
   margin-right px_to_rem(8)
-  transition transform TRANSITION_SPEED_DRAWER
+  transition '%s %s' % (transform Transitions.DRAWER)
 
 .toggle__button[data-target="visible"]::before
   transform rotate(-180deg)

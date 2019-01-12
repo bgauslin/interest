@@ -20,7 +20,7 @@
     grid-column 2 / span 1
     position sticky
     top '%s' % (Header.Medium.HEIGHT + Grid.Medium.ROW_GAP)
-    transition top TRANSITION_SPEED ease
+    transition '%s %s %s' % (top Transitions.DEFAULT ease)
 
 @media Breakpoints.LARGE
   .header.unpinned ~ .values
@@ -96,16 +96,15 @@
 .values__total
   color '%s' % Colors.GREEN
   font-size '%s' % FontSizes.Base.VALUES_TOTAL
-  height  '%s' % FontSizes.Base.VALUES_TOTAL
-  line-height  '%s' % FontSizes.Base.VALUES_TOTAL
+  height '%s' % FontSizes.Base.VALUES_TOTAL
+  line-height '%s' % FontSizes.Base.VALUES_TOTAL
   margin 0 auto
   max-width 'calc(100vw - %s)' % (2 * (Grid.Base.COLUMN_GAP + Cards.PADDING))
   opacity 1
   overflow hidden
   text-align center
   text-overflow ellipsis
-  transition opacity TRANSITION_SPEED,
-             visibility TRANSITION_SPEED
+  transition '%s %s %s %s' % (opacity Transitions.DEFAULT visibility Transitions.DEFAULT)
   visibility visible
 
   &[data-hidden]

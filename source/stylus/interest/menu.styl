@@ -7,9 +7,7 @@
   opacity 0
   position absolute
   right px_to_rem(-8)
-  transition opacity TRANSITION_SPEED ease-out,
-             transform TRANSITION_SPEED ease-out,
-             visibility TRANSITION_SPEED ease-out
+  transition '%s %s %s, %s %s %s, %s %s %s' % (opacity Transitions.DEFAULT ease-out transform Transitions.DEFAULT ease-out visibility Transitions.DEFAULT ease-out)
   transform 'translateY(-%s)' % px_to_rem(12)
   visibility hidden
   z-index -1
@@ -80,7 +78,7 @@
   z-index -1
 
 [no-touch] .option__label
-  transition border TRANSITION_SPEED
+  transition '%s %s' % (border Transitions.DEFAULT)
 
 // Styles for different option types.
 [data-type="currency"] .option__label

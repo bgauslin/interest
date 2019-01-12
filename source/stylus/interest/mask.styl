@@ -6,8 +6,7 @@
   position fixed
   right 0
   top 0
-  transition opacity TRANSITION_SPEED,
-             visibility TRANSITION_SPEED
+  transition '%s %s, %s %s' % (opacity Transitions.DEFAULT visibility Transitions.DEFAULT)
   visibility visible
 
 .mask[inactive]

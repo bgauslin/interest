@@ -1,20 +1,4 @@
-// TODO: Move functions and mixins into separate files.
-
-// @function px_to_em
-// @param Number px
-// @return String
-px_to_em(px)
-  em_units = px / 16
-  return em_units * 1em
-
-// @function px_to_rem
-// @param Number px
-// @return String
-px_to_rem(px)
-  rem_units = px / 16
-  return rem_units * 1rem
-
-// @mixin body_font
+// @mixin
 // @param Number weight [500]
 body_font(weight = 500)
   font-family 'Avenir Medium' sans-serif // fallback
@@ -24,7 +8,7 @@ body_font(weight = 500)
     font-family 'Avenir Variable', sans-serif
     font-variation-settings 'wght' weight
 
-// @mixin css_icon_menu
+// @mixin
 // @param Color color
 // @param String thickness [3px]
 css_icon_menu(color, thickness = 3px)
@@ -44,7 +28,7 @@ css_icon_menu(color, thickness = 3px)
     height height
     width width
 
-// @mixin css_triangle
+// @mixin
 // @param Color color
 // @param String size
 // @param String direction
@@ -68,7 +52,7 @@ css_triangle(color, size, direction)
   height 0
   width 0
 
-// @mixin font_face
+// @mixin
 font_face()
   @font-face
     font-family 'Avenir Variable'
@@ -81,7 +65,7 @@ font_face()
         url('/ui/webfonts/AvenirLTStd-Medium.woff') format('woff')
     font-weight 500
 
-// @mixin font_weight
+// @mixin
 // @param Number weight
 font_weight(weight)
   font-weight weight

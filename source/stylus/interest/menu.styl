@@ -1,7 +1,7 @@
 .menu
   background white
   border-radius '%s' % Menu.CORNER_RADIUS
-  color DARK_GREY
+  color '%s' % Colors.DARK_GREY
   margin-top '%s' % (Grid.Base.COLUMN_GAP / 2)
   max-width 'calc(100vw - %s)' % Grid.Base.COLUMN_GAP
   opacity 0
@@ -42,7 +42,7 @@
   padding '%s' % Menu.PADDING
 
 .menu__group:not(:last-child)
-  border-right 1px solid MEDIUM_GREY
+  border-right 1px solid '%' % Colors.MEDIUM_GREY
 
 // Settings lists.
 .menu__list
@@ -84,30 +84,30 @@
 
 // Styles for different option types.
 [data-type="currency"] .option__label
-  background OFF_white
-  border 3px solid LIGHTER_GREY
-  color LIGHT_GREY
+  background '%s' % Colors.OFF_white
+  border 3px solid '%' % Colors.LIGHTER_GREY
+  color '%s' % Colors.LIGHT_GREY
   font-size '%s' % FontSizes.Base.MENU_ITEM
 
 [data-type="currency"] .option:checked + .option__label
   background white
-  color GREEN
+  color '%s' % Colors.GREEN
 
 [data-type="theme"] .option__label
-  border 3px solid LIGHTER_GREY
+  border 3px solid '%s' % Colors.LIGHTER_GREY
   color transparent
 
 .option__label[data-option="light"]
   background white
 
 .option__label[data-option="sepia"]
-  background SEPIA_THEME
+  background '%s' % ThemeColors.SEPIA
 
 .option__label[data-option="dark"]
-  background DARK_THEME
+  background '%s' % ThemeColors.DARK
 
 .option:checked + .option__label
-  border-color GREEN
+  border-color '%s' % Colors.GREEN
 
 [no-touch] .item__label:hover .option:not(:checked) + .option__label
-  border-color LIGHT_GREY
+  border-color '%s' % Colors.LIGHT_GREY

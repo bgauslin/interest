@@ -11,9 +11,9 @@
 .toggle__button
   align-items center
   appearance none
-  background GREEN
+  background '%s' % Colors.GREEN
   body_font()
-  border 2px solid GREEN
+  border 2px solid '%s' % Colors.GREEN
   border-radius '%s' % (Buttons.HEIGHT / 2)
   color white
   display inline-flex
@@ -46,7 +46,7 @@
 .toggle__button:active
 [no-touch] .toggle__button:hover
   background 0
-  color GREEN
+  color '%s' % Colors.GREEN
   cursor pointer
 
 .toggle__button::before
@@ -62,4 +62,4 @@
 .toggle__button:focus::before
 .toggle__button:active::before
 [no-touch] .toggle__button:hover::before
-  border-top-color GREEN
+  border-top-color '%s' % Colors.GREEN

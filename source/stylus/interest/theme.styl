@@ -10,24 +10,24 @@ THEMES = {
     ZEBRA_STRIPE: mix(black, white, 3%)
   },
   sepia: {
-    BACKGROUND: SEPIA_THEME
-    BORDER: mix(black, SEPIA_THEME, 15%)
-    CANVAS: mix(black, SEPIA_THEME, 5%)
-    INPUT: mix(black, SEPIA_THEME, 90%)
-    INPUT_BORDER: mix(black, SEPIA_THEME, 30%)
-    SYMBOL: mix(black, SEPIA_THEME, 50%)
-    TEXT: mix(black, SEPIA_THEME, 80%)
-    ZEBRA_STRIPE: mix(black, SEPIA_THEME, 4%)
+    BACKGROUND: ThemeColors.SEPIA
+    BORDER: '%s' % mix(black, ThemeColors.SEPIA, 15%)
+    CANVAS: '%s' % mix(black, ThemeColors.SEPIA, 5%)
+    INPUT: '%s' % mix(black, ThemeColors.SEPIA, 90%)
+    INPUT_BORDER: '%s' % mix(black, ThemeColors.SEPIA, 30%)
+    SYMBOL: '%s' % mix(black, ThemeColors.SEPIA, 50%)
+    TEXT: '%s' % mix(black, ThemeColors.SEPIA, 80%)
+    ZEBRA_STRIPE: '%s' % mix(black, ThemeColors.SEPIA, 4%)
   },
   dark: {
-    BACKGROUND: DARK_THEME
+    BACKGROUND: ThemeColors.DARK
     BORDER: mix(black, white, 75%)
-    CANVAS: mix(black, DARK_THEME, 25%)
+    CANVAS: '%s' % mix(black, ThemeColors.DARK, 25%)
     INPUT: rgba(white, .85)
     INPUT_BORDER: mix(black, white, 65%)
     SYMBOL: rgba(white, .5)
     TEXT: rgba(white, .7)
-    ZEBRA_STRIPE: mix(black, DARK_THEME, 10%)
+    ZEBRA_STRIPE: '%s' % mix(black, ThemeColors.DARK, 10%)
   }
 }
 

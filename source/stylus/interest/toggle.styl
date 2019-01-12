@@ -14,12 +14,12 @@
   background '%s' % Colors.GREEN
   body_font()
   border 2px solid '%s' % Colors.GREEN
-  border-radius '%s' % (Buttons.HEIGHT / 2)
+  border-radius '%s' % (Elements.Button.HEIGHT / 2)
   color white
   display inline-flex
   font-size px_to_em(14)
   font_weight(600)
-  height '%s' % Buttons.HEIGHT
+  height '%s' % Elements.Button.HEIGHT
   justify-content center
   line-height 1
   opacity 1
@@ -47,7 +47,7 @@
   cursor pointer
 
 .toggle__button::before
-  css_triangle(white, ArrowSizes.TOGGLE, 'down')
+  css_triangle(white, Elements.Arrow.TOGGLE, 'down')
   content ''
   display inline-block
   margin-right px_to_rem(8)

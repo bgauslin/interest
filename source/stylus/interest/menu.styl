@@ -1,6 +1,6 @@
 .menu
   background white
-  border-radius '%s' % Menu.CORNER_RADIUS
+  border-radius '%s' % Elements.Menu.CORNER_RADIUS
   color '%s' % Colors.DARK_GREY
   margin-top '%s' % (Grid.Base.COLUMN_GAP / 2)
   max-width 'calc(100vw - %s)' % Grid.Base.COLUMN_GAP
@@ -23,10 +23,10 @@
 // Menu arrow.
 .menu::before
   content ''
-  css_triangle(white, ArrowSizes.MENU, 'up')
+  css_triangle(white, Elements.Arrow.MENU, 'up')
   position absolute
   right 8px
-  top '-%s' % ArrowSizes.MENU
+  top '-%s' % Elements.Arrow.MENU
 
 // Menu container.
 .menu__content
@@ -37,7 +37,7 @@
   width 100%
 
 .menu__group
-  padding '%s' % Menu.PADDING
+  padding '%s' % Elements.Menu.PADDING
 
 .menu__group:not(:last-child)
   border-right 1px solid '%s' % Colors.MEDIUM_GREY
@@ -54,10 +54,10 @@
 
 .item__label
   display block
-  height '%s' % Menu.ITEM_SIZE
+  height '%s' % Elements.Menu.ITEM_SIZE
   overflow hidden
   position relative
-  width '%s' % Menu.ITEM_SIZE
+  width '%s' % Elements.Menu.ITEM_SIZE
 
 [no-touch] .item__label:hover
   cursor pointer
@@ -71,10 +71,10 @@
   align-items center
   border-radius 50%
   display inline-flex
-  height '%s' % Menu.ITEM_SIZE
+  height '%s' % Elements.Menu.ITEM_SIZE
   justify-content center
   position relative
-  width '%s' % Menu.ITEM_SIZE
+  width '%s' % Elements.Menu.ITEM_SIZE
   z-index -1
 
 [no-touch] .option__label

@@ -1,22 +1,54 @@
 @import 'functions'
 
 // @type Hash
-ArrowSizes = {
-  MENU: 10px
-  TOGGLE: 5px
+Elements = {
+  Arrow: {
+    MENU: 10px
+    TOGGLE: 5px
+  }
+  Button: {
+    HEIGHT: px_to_rem(40)
+    ROW_HEIGHT: px_to_rem(96)
+  }
+  Card: {
+    CORNER_RADIUS: 8px
+    PADDING: px_to_rem(24)
+  }
+  Header: {
+    HEIGHT: {
+      Base: px_to_rem(44)
+      Medium: px_to_rem(60)
+    }
+  }
+  Input: {
+    HEIGHT: px_to_rem(32)
+    WIDTH: px_to_rem(88)
+  }
+  Menu: {
+    CORNER_RADIUS: 4px
+    ITEM_SIZE: px_to_rem(40)
+    PADDING: px_to_rem(16)
+  }
+  Table: {
+    MAX_WIDTH: px_to_rem(640)
+    PADDING_X: px_to_em(12)
+    PADDING_X_LARGE: px_to_em(16)
+    PADDING_Y: px_to_em(8)
+  }
+  UserValues: {
+    MAX_WIDTH: px_to_rem(240)
+  }
 }
 
 // @type Hash
-Buttons = {
-  HEIGHT: px_to_rem(40)
-  ROW_HEIGHT: px_to_rem(96)
-}
-
-// @type Hash
-Cards = {
-  CORNER_RADIUS: 8px
-  PADDING: px_to_rem(24)
-}
+// Header = {
+//   Base: {
+//     HEIGHT: px_to_rem(44)  
+//   }
+//   Medium: {
+//     HEIGHT: px_to_rem(60)
+//   }
+// }
 
 // @type Hash
 Grid = {
@@ -31,60 +63,24 @@ Grid = {
 }
 
 // @type Hash
-Header = {
-  Base: {
-    HEIGHT: px_to_rem(44)  
-  }
-  Medium: {
-    HEIGHT: px_to_rem(60)
-  }
-}
-
-// @type Hash
-Inputs = {
-  HEIGHT: px_to_rem(32)
-  WIDTH: px_to_rem(88)
-}
-
-// @type Hash
-Menu = {
-  CORNER_RADIUS: 4px
-  ITEM_SIZE: px_to_rem(40)
-  PADDING: px_to_rem(16)
-}
-
-// @type hash
-Tables = {
-  MAX_WIDTH: px_to_rem(640)
-  PADDING_X: px_to_em(12)
-  PADDING_X_LARGE: px_to_em(16)
-  PADDING_Y: px_to_em(8)
-}
-
-// @type Hash
 Transitions = {
   DEFAULT: .3s
   DRAWER: .5s
 }
 
-// @type String
-Values = {
-  MAX_WIDTH: px_to_rem(240)
-}
-
 // -----------------------------------------------------------------------------
 // Compound dimensions
 // @type String
-VALUES_GRID_WIDTH = Values.MAX_WIDTH + (2 * Cards.PADDING)
+VALUES_GRID_WIDTH = Elements.UserValues.MAX_WIDTH + (2 * Elements.Card.PADDING)
 
 // @type String
-CONTENT_WIDTH_LARGE = (Values.MAX_WIDTH + (2 * Cards.PADDING)) + Tables.MAX_WIDTH + Grid.Medium.COLUMN_GAP
+CONTENT_WIDTH_LARGE = (Elements.UserValues.MAX_WIDTH + (2 * Elements.Card.PADDING)) + Elements.Table.MAX_WIDTH + Grid.Medium.COLUMN_GAP
 
 // -----------------------------------------------------------------------------
 // Breakpoints
 // @type Hash
 Breakpoints = {
   SMALL: 'screen and (min-width: %s)' % (px_to_rem(420))
-  MEDIUM: 'screen and (min-width: %s)' % (Tables.MAX_WIDTH + (2 * Grid.Medium.COLUMN_GAP))
+  MEDIUM: 'screen and (min-width: %s)' % (Elements.Table.MAX_WIDTH + (2 * Grid.Medium.COLUMN_GAP))
   LARGE: 'screen and (min-width: %s)' % (CONTENT_WIDTH_LARGE + (2 * Grid.Medium.COLUMN_GAP))
 }

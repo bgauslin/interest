@@ -39,33 +39,33 @@
   overflow-x auto
 
   @media Breakpoints.SMALL
-    border-radius '%s' % Cards.CORNER_RADIUS
+    border-radius '%s' % Elements.Card.CORNER_RADIUS
 
 th
 td
-  padding '%s %s' % (Tables.PADDING_Y Tables.PADDING_X)
+  padding '%s %s' % (Elements.Table.PADDING_Y Elements.Table.PADDING_X)
 
   @media Breakpoints.LARGE
-    padding '%s %s' % (Tables.PADDING_Y Tables.PADDING_X_LARGE)
+    padding '%s %s' % (Elements.Table.PADDING_Y Elements.Table.PADDING_X_LARGE)
 
   &:first-child
     text-align left
     padding-left '%s' % Grid.Base.COLUMN_GAP
 
     @media Breakpoints.SMALL
-      padding-left '%s' % Tables.PADDING_X
+      padding-left '%s' % Elements.Table.PADDING_X
 
   &:last-child
     padding-right '%s' % Grid.Base.COLUMN_GAP
 
     @media Breakpoints.SMALL
-      padding-right '%s' % Tables.PADDING_X
+      padding-right '%s' % Elements.Table.PADDING_X
 
   &.balance
     padding-right '%s' % Grid.Base.COLUMN_GAP
 
     @media Breakpoints.SMALL
-      padding-right '%s' % Tables.PADDING_X
+      padding-right '%s' % Elements.Table.PADDING_X
 
 td.growth::after
   content '%'

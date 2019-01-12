@@ -9,12 +9,12 @@
   css_icon_menu(white)
   cursor pointer
   display none
-  height '%s' % Header.Base.HEIGHT
+  height '%s' % Elements.Header.HEIGHT.Base
   justify-content center
   margin 0 px_to_rem(-12) 0 0
   opacity 1
   transition '%s %s, %s %s' % (opacity Transitions.DEFAULT transform Transitions.DEFAULT)
-  width '%s' % Header.Base.HEIGHT
+  width '%s' % Elements.Header.HEIGHT.Base
 
   &:active
     transform scale(.85)
@@ -23,9 +23,9 @@
     opacity .75
 
   @media Breakpoints.MEDIUM
-    height '%s' % Header.Medium.HEIGHT
+    height '%s' % Elements.Header.HEIGHT.Medium
     margin-right px_to_rem(-20)
-    width '%s' % Header.Medium.HEIGHT
+    width '%s' % Elements.Header.HEIGHT.Medium
 
 [no-touch] .settings__toggle:hover
   opacity .75

@@ -7,11 +7,11 @@
   grid-row 3 / span 1
   justify-self stretch
   overflow hidden
-  padding '%s' % Cards.PADDING
+  padding '%s' % Elements.Card.PADDING
 
   @media Breakpoints.SMALL
     align-self start
-    border-radius '%s' % Cards.CORNER_RADIUS
+    border-radius '%s' % Elements.Card.CORNER_RADIUS
 
   @media Breakpoints.MEDIUM
     grid-row 2 / span 1
@@ -19,7 +19,7 @@
   @media Breakpoints.LARGE
     grid-column 2 / span 1
     position sticky
-    top '%s' % (Header.Medium.HEIGHT + Grid.Medium.ROW_GAP)
+    top '%s' % (Elements.Header.HEIGHT.Medium + Grid.Medium.ROW_GAP)
     transition '%s %s %s' % (top Transitions.DEFAULT ease)
 
 @media Breakpoints.LARGE
@@ -78,12 +78,12 @@
   border 0
   border-radius 0
   font-size '%s' % FontSizes.Base.INPUT
-  height '%s' % Inputs.HEIGHT
+  height '%s' % Elements.Input.HEIGHT
   line-height 1
   order 1
   padding 0
   text-align right
-  width '%s' % Inputs.WIDTH
+  width '%s' % Elements.Input.WIDTH
 
 .values__input:focus
   border-color '%s' % Colors.GREEN
@@ -99,7 +99,7 @@
   height '%s' % FontSizes.Base.VALUES_TOTAL
   line-height '%s' % FontSizes.Base.VALUES_TOTAL
   margin 0 auto
-  max-width 'calc(100vw - %s)' % (2 * (Grid.Base.COLUMN_GAP + Cards.PADDING))
+  max-width 'calc(100vw - %s)' % (2 * (Grid.Base.COLUMN_GAP + Elements.Card.PADDING))
   opacity 1
   overflow hidden
   text-align center

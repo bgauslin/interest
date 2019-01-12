@@ -1,7 +1,7 @@
 .header
   background '%s' % Colors.GREEN
   color white
-  height '%s' % Header.Base.HEIGHT
+  height '%s' % Elements.Header.HEIGHT.Base
   left 0
   position fixed
   right 0
@@ -11,7 +11,7 @@
   z-index 1
 
   @media Breakpoints.MEDIUM
-    height '%s' % Header.Medium.HEIGHT
+    height '%s' % Elements.Header.HEIGHT.Medium
 
 .header.unpinned
   transform translate3d(0, -100%, 0)
@@ -19,13 +19,13 @@
 .header__frame
   align-items center
   display flex
-  height '%s' % Header.Base.HEIGHT
+  height '%s' % Elements.Header.HEIGHT.Base
   justify-content space-between
   margin 0 auto
   padding '%s %s' % (0 Grid.Base.COLUMN_GAP)
 
   @media Breakpoints.MEDIUM
-    height '%s' % Header.Medium.HEIGHT
+    height '%s' % Elements.Header.HEIGHT.Medium
     padding '%s %s' % (0 Grid.Medium.COLUMN_GAP)
 
   @media Breakpoints.LARGE

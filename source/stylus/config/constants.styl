@@ -1,6 +1,23 @@
 @import 'functions'
 
 // @type Hash
+Colors = {
+  GREEN: #00ad45
+  Greys: {
+    DARK: #222
+    LIGHT: #aaa
+    LIGHTER: #ddd
+    MEDIUM: #555
+    OFF_WHITE: #f7f7f7
+  }
+  Themes: {
+    DARK: #282c35
+    SEPIA: #f8f2e3
+  }
+  WARNING: #c00
+}
+
+// @type Hash
 Elements = {
   Arrow: {
     MENU: 10px
@@ -41,14 +58,19 @@ Elements = {
 }
 
 // @type Hash
-// Header = {
-//   Base: {
-//     HEIGHT: px_to_rem(44)  
-//   }
-//   Medium: {
-//     HEIGHT: px_to_rem(60)
-//   }
-// }
+FontSizes = {
+  Base: {
+    HEADER: px_to_rem(16)
+    INPUT: px_to_rem(20)
+    MENU_ITEM: px_to_em(22)
+    TABLE: px_to_rem(13)
+    VALUES_TOTAL: px_to_rem(32)
+  }
+  Medium: {
+    HEADER: px_to_rem(20)
+    TABLE: px_to_rem(15)
+  }
+}
 
 // @type Hash
 Grid = {
@@ -69,15 +91,14 @@ Transitions = {
 }
 
 // -----------------------------------------------------------------------------
-// Compound dimensions
+// Calculated constants and breakpoints
+
 // @type String
 VALUES_GRID_WIDTH = Elements.UserValues.MAX_WIDTH + (2 * Elements.Card.PADDING)
 
 // @type String
 CONTENT_WIDTH_LARGE = (Elements.UserValues.MAX_WIDTH + (2 * Elements.Card.PADDING)) + Elements.Table.MAX_WIDTH + Grid.Medium.COLUMN_GAP
 
-// -----------------------------------------------------------------------------
-// Breakpoints
 // @type Hash
 Breakpoints = {
   SMALL: 'screen and (min-width: %s)' % (px_to_rem(420))

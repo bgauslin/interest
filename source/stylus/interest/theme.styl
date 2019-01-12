@@ -1,4 +1,5 @@
-THEMES = {
+// @type Hash
+Theming = {
   light: {
     BACKGROUND: white
     BORDER: mix(black, white, 15%)
@@ -10,29 +11,29 @@ THEMES = {
     ZEBRA_STRIPE: mix(black, white, 3%)
   },
   sepia: {
-    BACKGROUND: ThemeColors.SEPIA
-    BORDER: '%s' % mix(black, ThemeColors.SEPIA, 15%)
-    CANVAS: '%s' % mix(black, ThemeColors.SEPIA, 5%)
-    INPUT: '%s' % mix(black, ThemeColors.SEPIA, 90%)
-    INPUT_BORDER: '%s' % mix(black, ThemeColors.SEPIA, 30%)
-    SYMBOL: '%s' % mix(black, ThemeColors.SEPIA, 50%)
-    TEXT: '%s' % mix(black, ThemeColors.SEPIA, 80%)
-    ZEBRA_STRIPE: '%s' % mix(black, ThemeColors.SEPIA, 4%)
+    BACKGROUND: Colors.Themes.SEPIA
+    BORDER: '%s' % mix(black, Colors.Themes.SEPIA, 15%)
+    CANVAS: '%s' % mix(black, Colors.Themes.SEPIA, 5%)
+    INPUT: '%s' % mix(black, Colors.Themes.SEPIA, 90%)
+    INPUT_BORDER: '%s' % mix(black, Colors.Themes.SEPIA, 30%)
+    SYMBOL: '%s' % mix(black, Colors.Themes.SEPIA, 50%)
+    TEXT: '%s' % mix(black, Colors.Themes.SEPIA, 80%)
+    ZEBRA_STRIPE: '%s' % mix(black, Colors.Themes.SEPIA, 4%)
   },
   dark: {
-    BACKGROUND: ThemeColors.DARK
+    BACKGROUND: Colors.Themes.DARK
     BORDER: mix(black, white, 75%)
-    CANVAS: '%s' % mix(black, ThemeColors.DARK, 25%)
+    CANVAS: '%s' % mix(black, Colors.Themes.DARK, 25%)
     INPUT: rgba(white, .85)
     INPUT_BORDER: mix(black, white, 65%)
     SYMBOL: rgba(white, .5)
     TEXT: rgba(white, .7)
-    ZEBRA_STRIPE: '%s' % mix(black, ThemeColors.DARK, 10%)
+    ZEBRA_STRIPE: '%s' % mix(black, Colors.Themes.DARK, 10%)
   }
 }
 
 // NOTE: Semicolons after each property to avoid Stylus compiler complaints.
-for name, theme in THEMES
+for name, theme in Theming
   [data-theme=\"{name}\"]
     {body}&
       background theme['BACKGROUND'];

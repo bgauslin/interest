@@ -20,7 +20,7 @@
     grid-column 2 / span 1
     position sticky
     top '%s' % (Elements.Header.HEIGHT.Medium + Grid.Medium.ROW_GAP)
-    transition '%s %s %s' % (top Transitions.DEFAULT ease)
+    transition 'top %s ease' % Transitions.DEFAULT
 
 @media Breakpoints.LARGE
   .header.unpinned ~ .values
@@ -104,7 +104,7 @@
   overflow hidden
   text-align center
   text-overflow ellipsis
-  transition '%s %s %s %s' % (opacity Transitions.DEFAULT visibility Transitions.DEFAULT)
+  transition 'opacity %s, visibility %s' % (Transitions.DEFAULT Transitions.DEFAULT)
   visibility visible
 
   &[data-hidden]

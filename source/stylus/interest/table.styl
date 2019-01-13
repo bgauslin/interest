@@ -9,7 +9,7 @@
   overflow-x auto
   overflow-y hidden
   text-align center
-  transition '%s %s %s, %s %s %s' % (height Transitions.DRAWER ease-out opacity Transitions.DEFAULT ease-out)
+  transition 'height %s ease-out, opacity %s ease-out' % (Transitions.DRAWER Transitions.DEFAULT)
 
   @media Breakpoints.SMALL
     grid-column 2 / span 1

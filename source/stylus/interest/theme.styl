@@ -32,44 +32,43 @@ Theming = {
   }
 }
 
-// NOTE: Semicolons after each property to avoid Stylus compiler complaints.
 for name, theme in Theming
   [data-theme=\"{name}\"]
     {body}&
-      background theme['BACKGROUND'];
-      color theme['TEXT'];
+      background '%s' % theme.BACKGROUND
+      color '%s' % theme.TEXT
 
     .values__input
-      border-bottom 2px solid theme['INPUT_BORDER'];
+      border-bottom 2px solid '%s' % theme.INPUT_BORDER
 
     .values__input:not(:focus)
-      color theme['INPUT'];
+      color '%s' % theme.INPUT
 
     .table__frame
     tr:first-child
-      border-bottom 1px solid theme['BORDER'];
+      border-bottom 1px solid '%s' % theme.BORDER
 
     tr:nth-child(even)
-      background theme['ZEBRA_STRIPE'];
+      background '%s' % theme.ZEBRA_STRIPE
 
     td.growth::after
     td.deposits::before
     td.interest::before
     td.balance::before
     .rotate-screen
-      color theme['SYMBOL'];
+      color '%s' % theme.SYMBOL
 
     .rotate-screen span
-      color theme['TEXT'];
+      color '%s' % theme.TEXT
 
     @media Breakpoints.SMALL
       {body}&
-        background theme['CANVAS'];
+        background '%s' % theme.CANVAS
 
       .values
       .table__data
-        background theme['BACKGROUND'];
+        background '%s' % theme.BACKGROUND
 
       .values
       .table__frame
-        border 1px solid theme['BORDER'];
+        border 1px solid '%s' % theme.BORDER

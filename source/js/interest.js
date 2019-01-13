@@ -1,8 +1,8 @@
 import headroom from 'headroom.js';
-import { Expandable } from './modules/expandable';
-import { Settings } from './modules/settings';
-import { UserValues } from'./modules/userValues';
-import { Utilities } from './modules/utilities';
+import { Expandable } from './modules/Expandable';
+import { Settings } from './modules/Settings';
+import { UserValues } from'./modules/UserValues';
+import { Utilities } from './modules/Utilities';
 // import { registerServiceWorker } from './modules/registerServiceWorker';
 
 /** @instance */

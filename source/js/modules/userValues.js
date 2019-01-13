@@ -1,4 +1,4 @@
-import { Calculations } from './calculations';
+import { Calculations } from './Calculations';
 
 /** @const {string} */
 const HIDDEN_ATTR = 'data-hidden';

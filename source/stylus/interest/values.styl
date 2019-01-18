@@ -9,20 +9,20 @@
   overflow hidden
   padding '%s' % Elements.Card.PADDING
 
-  @media Breakpoints.SMALL
+  @media Breakpoint.SMALL
     align-self start
     border-radius '%s' % Elements.Card.CORNER_RADIUS
 
-  @media Breakpoints.MEDIUM
+  @media Breakpoint.MEDIUM
     grid-row 2 / span 1
 
-  @media Breakpoints.LARGE
+  @media Breakpoint.LARGE
     grid-column 2 / span 1
     position sticky
     top '%s' % (Elements.Header.HEIGHT.Medium + Grid.Medium.ROW_GAP)
-    transition 'top %s ease' % Transitions.DEFAULT
+    transition 'top %s ease' % Transition.DEFAULT
 
-@media Breakpoints.LARGE
+@media Breakpoint.LARGE
   .header.unpinned ~ .values
     top '%s' % Grid.Base.ROW_GAP
 
@@ -31,11 +31,11 @@
   margin 0 auto
   padding 0
 
-  @media Breakpoints.SMALL
+  @media Breakpoint.SMALL
     display flex
     flex-wrap wrap
 
-  @media Breakpoints.LARGE
+  @media Breakpoint.LARGE
     display block
     margin 0
 
@@ -45,13 +45,13 @@
   justify-content space-between
   margin 0 0 px_to_rem(16)
 
-  @media Breakpoints.SMALL
+  @media Breakpoint.SMALL
     flex 0 0 50%
 
 #compounds
   display none
 
-@media Breakpoints.SMALL
+@media Breakpoint.SMALL
   #principal
     order 1
   #rate
@@ -77,7 +77,7 @@
   body_font()
   border 0
   border-radius 0
-  font-size '%s' % FontSizes.Base.INPUT
+  font-size '%s' % FontSize.Base.INPUT
   height '%s' % Elements.Input.HEIGHT
   line-height 1
   order 1
@@ -86,31 +86,31 @@
   width '%s' % Elements.Input.WIDTH
 
 .values__input:focus
-  border-color '%s' % Colors.GREEN
-  color '%s' % Colors.GREEN
+  border-color '%s' % Color.GREEN
+  color '%s' % Color.GREEN
 
 .values__input:focus:invalid
-  border-color '%s' % Colors.WARNING
-  color '%s' % Colors.WARNING
+  border-color '%s' % Color.WARNING
+  color '%s' % Color.WARNING
 
 .values__total
-  color '%s' % Colors.GREEN
-  font-size '%s' % FontSizes.Base.VALUES_TOTAL
-  height '%s' % FontSizes.Base.VALUES_TOTAL
-  line-height '%s' % FontSizes.Base.VALUES_TOTAL
+  color '%s' % Color.GREEN
+  font-size '%s' % FontSize.Base.VALUES_TOTAL
+  height '%s' % FontSize.Base.VALUES_TOTAL
+  line-height '%s' % FontSize.Base.VALUES_TOTAL
   margin 0 auto
   max-width 'calc(100vw - %s)' % (2 * (Grid.Base.COLUMN_GAP + Elements.Card.PADDING))
   opacity 1
   overflow hidden
   text-align center
   text-overflow ellipsis
-  transition 'opacity %s, visibility %s' % (Transitions.DEFAULT Transitions.DEFAULT)
+  transition 'opacity %s, visibility %s' % (Transition.DEFAULT Transition.DEFAULT)
   visibility visible
 
   &[data-hidden]
     opacity 0
     visibility hidden
 
-  @media Breakpoints.LARGE
+  @media Breakpoint.LARGE
     margin 0
     text-align left

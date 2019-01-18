@@ -9,17 +9,17 @@
   overflow-x auto
   overflow-y hidden
   text-align center
-  transition 'height %s ease-out, opacity %s ease-out' % (Transitions.DRAWER Transitions.DEFAULT)
+  transition 'height %s ease-out, opacity %s ease-out' % (Transition.DRAWER Transition.DEFAULT)
 
-  @media Breakpoints.SMALL
+  @media Breakpoint.SMALL
     grid-column 2 / span 1
 
-  @media Breakpoints.MEDIUM
+  @media Breakpoint.MEDIUM
     grid-row 3 / span 1
     height auto !important // always display table
     opacity 1
 
-  @media Breakpoints.LARGE
+  @media Breakpoint.LARGE
     grid-column 3 / 4
     grid-row 2 / span 1
     justify-self stretch
@@ -29,42 +29,42 @@
   display none
 
 .table[data-expanded]
-  @media Breakpoints.SMALL
+  @media Breakpoint.SMALL
     margin-top px_to_rem(16)
 
-  @media Breakpoints.MEDIUM
+  @media Breakpoint.MEDIUM
     margin-top 0
 
 .table__frame
   overflow-x auto
 
-  @media Breakpoints.SMALL
+  @media Breakpoint.SMALL
     border-radius '%s' % Elements.Card.CORNER_RADIUS
 
 th
 td
   padding '%s %s' % (Elements.Table.PADDING_Y Elements.Table.PADDING_X)
 
-  @media Breakpoints.LARGE
+  @media Breakpoint.LARGE
     padding '%s %s' % (Elements.Table.PADDING_Y Elements.Table.PADDING_X_LARGE)
 
   &:first-child
     text-align left
     padding-left '%s' % Grid.Base.COLUMN_GAP
 
-    @media Breakpoints.SMALL
+    @media Breakpoint.SMALL
       padding-left '%s' % Elements.Table.PADDING_X
 
   &:last-child
     padding-right '%s' % Grid.Base.COLUMN_GAP
 
-    @media Breakpoints.SMALL
+    @media Breakpoint.SMALL
       padding-right '%s' % Elements.Table.PADDING_X
 
   &.balance
     padding-right '%s' % Grid.Base.COLUMN_GAP
 
-    @media Breakpoints.SMALL
+    @media Breakpoint.SMALL
       padding-right '%s' % Elements.Table.PADDING_X
 
 td.growth::after
@@ -78,7 +78,7 @@ td.growth::after
 .interest
   display none
 
-  @media Breakpoints.SMALL
+  @media Breakpoint.SMALL
     display table-cell
 
 .rotate-screen
@@ -86,5 +86,5 @@ td.growth::after
   font-size px_to_rem(12)
   margin px_to_rem(12) '%s' 0 %Grid.Base.COLUMN_GAP
 
-  @media screen and (max-width: Breakpoints.SMALL_UNITS) and (orientation: portrait)
+  @media screen and (max-width: Breakpoint.SMALL_UNITS) and (orientation: portrait)
     display block

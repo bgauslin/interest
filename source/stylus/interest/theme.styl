@@ -11,24 +11,24 @@ Theming = {
     ZEBRA_STRIPE: mix(black, white, 3%)
   },
   sepia: {
-    BACKGROUND: Colors.Themes.SEPIA
-    BORDER: '%s' % mix(black, Colors.Themes.SEPIA, 15%)
-    CANVAS: '%s' % mix(black, Colors.Themes.SEPIA, 5%)
-    INPUT: '%s' % mix(black, Colors.Themes.SEPIA, 90%)
-    INPUT_BORDER: '%s' % mix(black, Colors.Themes.SEPIA, 30%)
-    SYMBOL: '%s' % mix(black, Colors.Themes.SEPIA, 50%)
-    TEXT: '%s' % mix(black, Colors.Themes.SEPIA, 80%)
-    ZEBRA_STRIPE: '%s' % mix(black, Colors.Themes.SEPIA, 4%)
+    BACKGROUND: Color.Themes.SEPIA
+    BORDER: '%s' % mix(black, Color.Themes.SEPIA, 15%)
+    CANVAS: '%s' % mix(black, Color.Themes.SEPIA, 5%)
+    INPUT: '%s' % mix(black, Color.Themes.SEPIA, 90%)
+    INPUT_BORDER: '%s' % mix(black, Color.Themes.SEPIA, 30%)
+    SYMBOL: '%s' % mix(black, Color.Themes.SEPIA, 50%)
+    TEXT: '%s' % mix(black, Color.Themes.SEPIA, 80%)
+    ZEBRA_STRIPE: '%s' % mix(black, Color.Themes.SEPIA, 4%)
   },
   dark: {
-    BACKGROUND: Colors.Themes.DARK
+    BACKGROUND: Color.Themes.DARK
     BORDER: mix(black, white, 75%)
-    CANVAS: '%s' % mix(black, Colors.Themes.DARK, 25%)
+    CANVAS: '%s' % mix(black, Color.Themes.DARK, 25%)
     INPUT: rgba(white, .85)
     INPUT_BORDER: mix(black, white, 65%)
     SYMBOL: rgba(white, .5)
     TEXT: rgba(white, .7)
-    ZEBRA_STRIPE: '%s' % mix(black, Colors.Themes.DARK, 10%)
+    ZEBRA_STRIPE: '%s' % mix(black, Color.Themes.DARK, 10%)
   }
 }
 
@@ -61,7 +61,7 @@ for name, theme in Theming
     .rotate-screen span
       color '%s' % theme.TEXT
 
-    @media Breakpoints.SMALL
+    @media Breakpoint.SMALL
       {body}&
         background '%s' % theme.CANVAS
 

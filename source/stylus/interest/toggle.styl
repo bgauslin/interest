@@ -3,17 +3,17 @@
   grid-column 2 / 3
   grid-row 5 / span 1
   justify-self center
-  transition 'margin %s ease' % Transitions.DEFAULT
+  transition 'margin %s ease' % Transition.DEFAULT
 
-  @media Breakpoints.MEDIUM
+  @media Breakpoint.MEDIUM
     display none !important // hide the button since we don't need it
 
 .toggle__button
   align-items center
   appearance none
-  background '%s' % Colors.GREEN
+  background '%s' % Color.GREEN
   body_font()
-  border 2px solid '%s' % Colors.GREEN
+  border 2px solid '%s' % Color.GREEN
   border-radius '%s' % (Elements.Button.HEIGHT / 2)
   color white
   display inline-flex
@@ -24,12 +24,12 @@
   line-height 1
   opacity 1
   padding 0 px_to_rem(12) 0 0 // adjust for toggle arrow
-  transition 'opacity %s, visibility %s' % (Transitions.DEFAULT Transitions.DEFAULT)
+  transition 'opacity %s, visibility %s' % (Transition.DEFAULT Transition.DEFAULT)
   visibility visibile
   width 50vw
   white-space nowrap
 
-  @media Breakpoints.SMALL
+  @media Breakpoint.SMALL
     width 33vw
 
 .toggle__button[data-hidden]
@@ -37,13 +37,13 @@
   visibility hidden
 
 [no-touch] .toggle__button
-  transition 'border %s ease, color %s ease, opacity %s ease' % (Transitions.DEFAULT Transitions.DEFAULT Transitions.DEFAULT)
+  transition 'border %s ease, color %s ease, opacity %s ease' % (Transition.DEFAULT Transition.DEFAULT Transition.DEFAULT)
 
 .toggle__button:focus
 .toggle__button:active
 [no-touch] .toggle__button:hover
   background 0
-  color '%s' % Colors.GREEN
+  color '%s' % Color.GREEN
   cursor pointer
 
 .toggle__button::before
@@ -51,7 +51,7 @@
   content ''
   display inline-block
   margin-right px_to_rem(8)
-  transition 'transform %s' % Transitions.DRAWER
+  transition 'transform %s' % Transition.DRAWER
 
 .toggle__button[data-target="visible"]::before
   transform rotate(-180deg)
@@ -59,4 +59,4 @@
 .toggle__button:focus::before
 .toggle__button:active::before
 [no-touch] .toggle__button:hover::before
-  border-top-color '%s' % Colors.GREEN
+  border-top-color '%s' % Color.GREEN

@@ -1,18 +1,18 @@
 .menu
   background white
   border-radius '%s' % Elements.Menu.CORNER_RADIUS
-  color '%s' % Colors.Greys.DARK
+  color '%s' % Color.Greys.DARK
   margin-top '%s' % (Grid.Base.COLUMN_GAP / 2)
   max-width 'calc(100vw - %s)' % Grid.Base.COLUMN_GAP
   opacity 0
   position absolute
   right px_to_rem(-8)
-  transition 'opacity %s ease-out, transform %s ease-out, visibility %s ease-out' % (Transitions.DEFAULT Transitions.DEFAULT Transitions.DEFAULT)
+  transition 'opacity %s ease-out, transform %s ease-out, visibility %s ease-out' % (Transition.DEFAULT Transition.DEFAULT Transition.DEFAULT)
   transform 'translateY(-%s)' % px_to_rem(12)
   visibility hidden
   z-index -1
 
-  @media Breakpoints.MEDIUM
+  @media Breakpoint.MEDIUM
     margin-top -4px
 
 .settings__toggle:checked + .menu
@@ -40,7 +40,7 @@
   padding '%s' % Elements.Menu.PADDING
 
 .menu__group:not(:last-child)
-  border-right 1px solid '%s' % Colors.Greys.MEDIUM
+  border-right 1px solid '%s' % Color.Greys.MEDIUM
 
 // Settings lists.
 .menu__list
@@ -78,34 +78,34 @@
   z-index -1
 
 [no-touch] .option__label
-  transition 'border %s' % Transitions.DEFAULT
+  transition 'border %s' % Transition.DEFAULT
 
 // Styles for different option types.
 [data-type="currency"] .option__label
-  background '%s' % Colors.Greys.OFF_WHITE
-  border 3px solid '%s' % Colors.Greys.LIGHTER
-  color '%s' % Colors.Greys.LIGHT
-  font-size '%s' % FontSizes.Base.MENU_ITEM
+  background '%s' % Color.Greys.OFF_WHITE
+  border 3px solid '%s' % Color.Greys.LIGHTER
+  color '%s' % Color.Greys.LIGHT
+  font-size '%s' % FontSize.Base.MENU_ITEM
 
 [data-type="currency"] .option:checked + .option__label
   background white
-  color '%s' % Colors.GREEN
+  color '%s' % Color.GREEN
 
 [data-type="theme"] .option__label
-  border 3px solid '%s' % Colors.Greys.LIGHTER
+  border 3px solid '%s' % Color.Greys.LIGHTER
   color transparent
 
 .option__label[data-option="light"]
   background white
 
 .option__label[data-option="sepia"]
-  background '%s' % Colors.Themes.SEPIA
+  background '%s' % Color.Themes.SEPIA
 
 .option__label[data-option="dark"]
-  background '%s' % Colors.Themes.DARK
+  background '%s' % Color.Themes.DARK
 
 .option:checked + .option__label
-  border-color '%s' % Colors.GREEN
+  border-color '%s' % Color.GREEN
 
 [no-touch] .item__label:hover .option:not(:checked) + .option__label
-  border-color '%s' % Colors.Greys.LIGHT
+  border-color '%s' % Color.Greys.LIGHT

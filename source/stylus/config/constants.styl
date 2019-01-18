@@ -1,7 +1,7 @@
 @import 'functions'
 
 // @type Hash
-Colors = {
+Color = {
   GREEN: #00ad45
   Greys: {
     DARK: #222
@@ -58,7 +58,7 @@ Elements = {
 }
 
 // @type Hash
-FontSizes = {
+FontSize = {
   Base: {
     HEADER: px_to_rem(16)
     INPUT: px_to_rem(20)
@@ -85,7 +85,7 @@ Grid = {
 }
 
 // @type Hash
-Transitions = {
+Transition = {
   DEFAULT: .3s
   DRAWER: .5s
 }
@@ -100,7 +100,7 @@ VALUES_GRID_WIDTH = Elements.UserValues.MAX_WIDTH + (2 * Elements.Card.PADDING)
 CONTENT_WIDTH_LARGE = (Elements.UserValues.MAX_WIDTH + (2 * Elements.Card.PADDING)) + Elements.Table.MAX_WIDTH + Grid.Medium.COLUMN_GAP
 
 // @type Hash
-Breakpoints = {
+Breakpoint = {
   SMALL: 'screen and (min-width: %s)' % (px_to_rem(420))
   MEDIUM: 'screen and (min-width: %s)' % (Elements.Table.MAX_WIDTH + (2 * Grid.Medium.COLUMN_GAP))
   LARGE: 'screen and (min-width: %s)' % (CONTENT_WIDTH_LARGE + (2 * Grid.Medium.COLUMN_GAP))

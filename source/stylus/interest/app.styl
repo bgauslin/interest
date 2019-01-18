@@ -4,15 +4,15 @@
   grid-template-rows '%s %s %s %s %s' % (Elements.Header.HEIGHT.Base Grid.Base.COLUMN_GAP 1fr auto Elements.Button.ROW_HEIGHT)
   min-height 100vh
 
-  @media Breakpoints.SMALL
+  @media Breakpoint.SMALL
     grid-template-rows '%s %s %s %s %s' % (Elements.Header.HEIGHT.Base Grid.Base.COLUMN_GAP auto auto Elements.Button.ROW_HEIGHT)
 
-  @media Breakpoints.MEDIUM
+  @media Breakpoint.MEDIUM
     grid-row-gap '%s' % Grid.Base.ROW_GAP
     grid-template-columns '%s %s %s' % (Grid.Medium.COLUMN_GAP auto Grid.Medium.COLUMN_GAP)
     grid-template-rows '%s %s %s %s' % (Elements.Header.HEIGHT.Medium auto 1fr 0)
 
-  @media Breakpoints.LARGE
+  @media Breakpoint.LARGE
     grid-column-gap '%s' % Grid.Medium.COLUMN_GAP
     grid-row-gap '%s' % Grid.Medium.ROW_GAP
     grid-template-columns '%s %s %s %s' % (1fr VALUES_GRID_WIDTH Elements.Table.MAX_WIDTH 1fr)

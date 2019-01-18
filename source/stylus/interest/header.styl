@@ -1,16 +1,16 @@
 .header
-  background '%s' % Colors.GREEN
+  background '%s' % Color.GREEN
   color white
   height '%s' % Elements.Header.HEIGHT.Base
   left 0
   position fixed
   right 0
   transform translate3d(0, 0, 0)
-  transition 'transform %s ease' % Transitions.DEFAULT
+  transition 'transform %s ease' % Transition.DEFAULT
   top 0
   z-index 1
 
-  @media Breakpoints.MEDIUM
+  @media Breakpoint.MEDIUM
     height '%s' % Elements.Header.HEIGHT.Medium
 
 .header.unpinned
@@ -24,20 +24,20 @@
   margin 0 auto
   padding '%s %s' % (0 Grid.Base.COLUMN_GAP)
 
-  @media Breakpoints.MEDIUM
+  @media Breakpoint.MEDIUM
     height '%s' % Elements.Header.HEIGHT.Medium
     padding '%s %s' % (0 Grid.Medium.COLUMN_GAP)
 
-  @media Breakpoints.LARGE
+  @media Breakpoint.LARGE
     max-width CONTENT_WIDTH_LARGE
     padding 0
 
 .header__title
-  font-size '%s' % FontSizes.Base.HEADER
+  font-size '%s' % FontSize.Base.HEADER
   font_weight(600)
   line-height 1
   margin 0
   white-space nowrap
 
-  @media Breakpoints.MEDIUM
-    font-size '%s' % FontSizes.Medium.HEADER
+  @media Breakpoint.MEDIUM
+    font-size '%s' % FontSize.Medium.HEADER

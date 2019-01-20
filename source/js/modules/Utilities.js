@@ -1,8 +1,8 @@
-/** @const {string} */
-const NO_JS_ATTR = 'no-js';
-
-/** @const {string} */
-const NO_TOUCH_ATTR = 'no-touch';
+/** @enum {string} */
+const Attribute = {
+  NO_JS: 'no-js',
+  NO_TOUCH: 'no-touch',
+}
 
 /** @class */
 class Utilities {
@@ -22,6 +22,7 @@ class Utilities {
   init() {
     this.hasJs_();
     this.noTouch_();
+    this.viewportHeight();
     this.googleAnalytics_(this.analyticsSettings);
   }
 
@@ -48,7 +49,7 @@ class Utilities {
    * @private
    */
   hasJs_() {
-    document.body.removeAttribute(NO_JS_ATTR);
+    document.body.removeAttribute(Attribute.NO_JS);
   }
 
   /**
@@ -57,8 +58,19 @@ class Utilities {
    */
   noTouch_() {
     if ('ontouchstart' in window || navigator.msMaxTouchPoints > 0) {
-      document.body.removeAttribute(NO_TOUCH_ATTR);
+      document.body.removeAttribute(Attribute.NO_TOUCH);
     }
+  }
+
+  /**
+   * Sets custom property for viewport height that updates 'vh' calculation
+   * due to iOS Safari behavior where chrome appears and disappears when
+   * scrolling.
+   * @public
+   */
+  viewportHeight() {
+    const viewportUnit = window.innerHeight / 100;
+    document.documentElement.style.setProperty('--viewport-unit', `${viewportUnit}px`);
   }
 }
 

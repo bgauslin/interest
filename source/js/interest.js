@@ -57,9 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
   settings.init();
   userValues.init();
   expandable.init();
-  utilities.init();
   myHeadroom.init();
-// registerServiceWorker();
+  utilities.init();
+  // registerServiceWorker();
 });
 
 /**
@@ -70,3 +70,11 @@ document.addEventListener('keyup', () => {
   expandable.setState();
   userValues.updateTotal();
 });
+
+/**
+ * Updates 'vh' value when window is resized.
+ * @listens resize
+ */
+window.addEventListener('resize', () => {
+  utilities.viewportHeight();
+}, { passive: true });

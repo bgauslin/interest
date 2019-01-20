@@ -2,7 +2,8 @@
   display grid
   grid-template-columns '%s %s %s' % (Grid.Base.COLUMN_GAP auto Grid.Base.COLUMN_GAP)
   grid-template-rows '%s %s %s %s %s' % (Elements.Header.HEIGHT.Base Grid.Base.COLUMN_GAP 1fr auto Elements.Button.ROW_HEIGHT)
-  min-height 100vh
+  min-height 100vh // fallback
+  min-height calc(var(--viewport-unit, 1vh) * 100)
 
   @media Breakpoint.SMALL
     grid-template-rows '%s %s %s %s %s' % (Elements.Header.HEIGHT.Base Grid.Base.COLUMN_GAP auto auto Elements.Button.ROW_HEIGHT)

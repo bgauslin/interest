@@ -27,7 +27,7 @@ if ($_SERVER['SERVER_NAME'] == $prod_server) {
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Interest">
     <link rel="apple-touch-icon" href="/ui/icons/touch-icon.png?t=<?php echo date('U') ?>">
-    <link rel="icon" type="image/png" href="/ui/icons/favicon.png">
+    <link rel="icon" type="image/png" href="/ui/icons/favicon.png?t=<?php echo date('U') ?>">
 	  <?php // <link rel="manifest" href="/pwa/manifest.json"></link> ?>
     <link rel="stylesheet" href="<?php echo $css_path ?>">
   </head>

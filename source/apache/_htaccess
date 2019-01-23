@@ -2,31 +2,29 @@ Options -Indexes
 
 RewriteEngine on
 
-# Redirect www to non-www
+# Redirect www to non-www.
 RewriteCond %{HTTP_HOST} ^www\.(.+)$
 RewriteRule ^ https://%1%{REQUEST_URI} [L,R]
 
-# Set security policies
+# Set security policies.
 Header always append X-Frame-Options SAMEORIGIN
 Header set X-XSS-Protection "1; mode=block"
 Header set Strict-Transport-Security "max-age=31536000" env=HTTPS
 
-# Enable Keep-Alive
+# Enable Keep-Alive.
 Header set Connection keep-alive
 
-# Vary: Accept-Encoding header
-<IfModule mod_headers.c>
-  <FilesMatch "\.(js|css|xml|gz)$">
-    Header append Vary: Accept-Encoding
-  </FilesMatch>
-</IfModule>
+# Vary: Accept-Encoding header.
+<FilesMatch "\.(js|css|xml|gz)$">
+  Header append Vary: Accept-Encoding
+</FilesMatch>
 
-# Browser caching for static assets
+# Browser caching for static assets.
 <filesMatch ".(css|jpg|jpeg|png|gif|js|ico|eot|ttf|woff|woff2)$">
   Header set Cache-Control "max-age=2592000, public"
 </filesMatch>
 
-# Enable compression
+# Enable gzip compression.
 <ifModule mod_gzip.c>
   mod_gzip_on Yes
   mod_gzip_dechunk Yes

@@ -77,5 +77,9 @@ if ($_SERVER['SERVER_NAME'] == $prod_server) {
 
     <script src="<?php echo $js_path ?>"></script>
 
+  <?php if ($_SERVER['SERVER_NAME'] != $prod_server) { ?>
+    <div id="css-debugger" src="/ui/breakpoints.json" theme="light"></div>
+    <script src="https://css.gauslin.com/js/debugger.js"></script>
+  <?php } ?>
   </body>
 </html>

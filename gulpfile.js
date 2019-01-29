@@ -49,6 +49,12 @@ gulp.task('js', () => {
     .pipe(gulp.dest(pkg.paths.js.bundleDest));
 });
 
+// Copy JSON.
+gulp.task('json', () => {
+  gulp.src(pkg.paths.json.src)
+    .pipe(gulp.dest(pkg.paths.json.dest));
+});
+
 // Copy PWA assets.
 gulp.task('pwa', () => {
   gulp.src(pkg.paths.pwa.src)

@@ -26,6 +26,10 @@
       "bundleSrc": "interest.js",
       "bundleDest": "public/ui"
     },
+    "json": {
+      "src": "source/json/**/*",
+      "dest": "public/ui"
+    },
     "stylus": {
       "src": "source/stylus/interest.styl",
       "dest": "public/ui"
@@ -57,6 +61,7 @@
       "html",
       "icons",
       "js",
+      "json",
       "pwa",
       "stylus",
       "sw",

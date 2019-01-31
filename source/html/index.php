@@ -63,6 +63,10 @@ if ($_SERVER['SERVER_NAME'] == $prod_server) {
         <button class="toggle__button"></button>
       </div>
 
+      <footer class="footer">
+        <p class="footer__copyright">© <?php echo date('Y'); ?> <a href="https://gauslin.com" title="Ben Gauslin’s Website">Ben Gauslin</a></p>
+      </footer>
+
       <div class="mask" inactive></div>
 
       <noscript>

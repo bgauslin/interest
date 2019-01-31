@@ -1,20 +1,17 @@
 .app
   display grid
-  grid-template-columns '%s %s %s' % (Grid.Base.COLUMN_GAP auto Grid.Base.COLUMN_GAP)
-  grid-template-rows '%s %s %s %s %s' % (Elements.Header.HEIGHT.Base Grid.Base.COLUMN_GAP 1fr auto Elements.Button.ROW_HEIGHT)
+  grid-template-columns '%s auto %s' % (Grid.Base.COLUMN_GAP Grid.Base.COLUMN_GAP)
+  grid-template-rows '%s %s 1fr auto %s auto' % (Elements.Header.HEIGHT.Base Grid.Base.COLUMN_GAP Elements.Button.ROW_HEIGHT)
   min-height 100vh // fallback
   min-height calc(var(--viewport-unit, 1vh) * 100)
 
-  @media Breakpoint.SMALL
-    grid-template-rows '%s %s %s %s %s' % (Elements.Header.HEIGHT.Base Grid.Base.COLUMN_GAP auto auto Elements.Button.ROW_HEIGHT)
-
   @media Breakpoint.MEDIUM
     grid-row-gap '%s' % Grid.Base.ROW_GAP
-    grid-template-columns '%s %s %s' % (Grid.Medium.COLUMN_GAP auto Grid.Medium.COLUMN_GAP)
-    grid-template-rows '%s %s %s %s' % (Elements.Header.HEIGHT.Medium auto 1fr 0)
+    grid-template-columns '%s auto %s' % (Grid.Medium.COLUMN_GAP Grid.Medium.COLUMN_GAP)
+    grid-template-rows '%s auto 1fr auto' % Elements.Header.HEIGHT.Medium
 
   @media Breakpoint.LARGE
     grid-column-gap '%s' % Grid.Medium.COLUMN_GAP
     grid-row-gap '%s' % Grid.Medium.ROW_GAP
-    grid-template-columns '%s %s %s %s' % (1fr VALUES_GRID_WIDTH Elements.Table.MAX_WIDTH 1fr)
-    grid-template-rows '%s %s %s' % (Elements.Header.HEIGHT.Medium auto 0)
+    grid-template-columns '1fr %s %s 1fr' % (VALUES_GRID_WIDTH Elements.Table.MAX_WIDTH)
+    grid-template-rows '%s 1fr auto' % Elements.Header.HEIGHT.Medium

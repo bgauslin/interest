@@ -32,7 +32,7 @@ if ($_SERVER['SERVER_NAME'] == $prod_server) {
     <link rel="stylesheet" href="<?php echo $css_path ?>">
   </head>
 
-  <body no-touch no-js>
+  <body ontouchstart no-touch no-js>
 
     <div class="app">
 

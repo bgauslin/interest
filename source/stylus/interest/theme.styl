@@ -61,6 +61,14 @@ for name, theme in Theming
     .rotate-screen span
       color '%s' % theme.TEXT
 
+    .footer
+      background '%s' % theme.ZEBRA_STRIPE
+      border-top 1px solid '%s' % theme.BORDER
+      color '%s' % theme.SYMBOL 
+    
+    .footer__copyright > a
+      link(theme.SYMBOL, theme.SYMBOL, theme.TEXT, theme.TEXT)
+
     @media Breakpoint.SMALL
       {body}&
         background '%s' % theme.CANVAS

@@ -72,3 +72,23 @@ font_weight(weight)
 
   @supports (font-variation-settings: normal)
     font-variation-settings 'wght' weight
+
+// @mixin
+// @param Color link
+// @param Color visited
+// @param Color hover
+// @param Color active
+link(link, visited, hover, active)
+  &
+    &:link
+      color link
+
+    &:visited
+      color visited
+
+    &:active
+      color active
+
+  [no-touch]&
+    &:hover
+      color hover

@@ -1,7 +1,4 @@
-// TODO: theming for footer
 .footer
-  background white
-  border-top 1px solid black
   grid-column 1 / span 3
   grid-row 6
 
@@ -13,14 +10,13 @@
     grid-row 3
 
 .footer__copyright
-  font-size px_to_em(13)
+  font-size '%s' % FontSize.Base.SMALLPRINT
   margin 0
   padding px_to_rem(16) 0
   text-align center
 
 .footer__copyright > a
-  color black
+  font_weight(600)
 
-
-
-
+[no-touch] .footer__copyright > a
+  transition color '%s' % Transition.DEFAULT

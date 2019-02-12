@@ -10,13 +10,11 @@
     grid-row 3
 
 .footer__copyright
-  font-size '%s' % FontSize.Base.SMALLPRINT
+  font-size '%s' % FontSize.Base.COPYRIGHT
   margin 0
   padding px_to_rem(16) 0
   text-align center
 
-.footer__copyright > a
+.footer__link
   font_weight(600)
-
-[no-touch] .footer__copyright > a
-  transition color '%s' % Transition.DEFAULT
+  transition 'color %s' % Transition.DEFAULT

@@ -64,7 +64,7 @@ if ($_SERVER['SERVER_NAME'] == $prod_server) {
       </div>
 
       <footer class="footer">
-        <p class="footer__copyright">© <?php echo date('Y'); ?> <a href="https://gauslin.com" title="Ben Gauslin’s Website">Ben Gauslin</a></p>
+        <p class="footer__copyright">© <?php echo date('Y'); ?> <a class="footer__link" href="https://gauslin.com" title="Ben Gauslin’s Website (opens in a new window)" target="_blank" rel="noopener">Ben Gauslin</a></p>
       </footer>
 
       <div class="mask" inactive></div>

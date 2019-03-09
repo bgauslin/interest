@@ -101,9 +101,12 @@ VALUES_GRID_WIDTH = Elements.UserValues.MAX_WIDTH + (2 * Elements.Card.PADDING)
 // @type String
 CONTENT_WIDTH_LARGE = (Elements.UserValues.MAX_WIDTH + (2 * Elements.Card.PADDING)) + Elements.Table.MAX_WIDTH + Grid.Medium.COLUMN_GAP
 
+// @type String
+BREAKPOINT_SMALL_UNITS = px_to_rem(420)
+
 // @type Hash
 Breakpoint = {
-  SMALL:  'screen and (min-width: %s)' % (px_to_rem(420))
+  SMALL:  'screen and (min-width: %s)' % BREAKPOINT_SMALL_UNITS
   MEDIUM: 'screen and (min-width: %s)' % (Elements.Table.MAX_WIDTH + (2 * Grid.Medium.COLUMN_GAP))
   LARGE:  'screen and (min-width: %s)' % (CONTENT_WIDTH_LARGE + (2 * Grid.Medium.COLUMN_GAP))
 }

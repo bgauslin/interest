@@ -84,7 +84,7 @@ td.growth::after
 .rotate-screen
   display none
   font-size '%s' % FontSize.Base.SMALLPRINT
-  margin px_to_rem(12) '%s' 0 %Grid.Base.COLUMN_GAP
+  margin px_to_rem(12) '%s' 0 % Grid.Base.COLUMN_GAP
 
-  @media screen and (max-width: Breakpoint.SMALL_UNITS) and (orientation: portrait)
+  @media screen and (max-width BREAKPOINT_SMALL_UNITS) and (orientation portrait)
     display block

@@ -5,16 +5,11 @@
   left 0
   position fixed
   right 0
-  transform translate3d(0, 0, 0)
-  transition 'transform %s ease' % Transition.DEFAULT
   top 0
   z-index 1
 
   @media Breakpoint.MEDIUM
     height '%s' % Elements.Header.HEIGHT.Medium
-
-.header.unpinned
-  transform translate3d(0, -100%, 0)
 
 .header__frame
   align-items center

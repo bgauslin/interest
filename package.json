@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "license": "UNLICENSED",
   "repository": "https://github.com/bgauslin/interest",
-  "private": true,
   "devServer": "interest.gauslin.test",
   "paths": {
     "apache": {

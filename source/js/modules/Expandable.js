@@ -60,9 +60,9 @@ class Expandable {
     const elHeight = this.targetEl.scrollHeight;
 
     if (direction === COLLAPSED) {
-      requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
         this.targetEl.style.height = `${elHeight}px`;
-        requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
           this.targetEl.style.height = 0;
         });
       });

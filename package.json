@@ -17,7 +17,7 @@
     },
     "icons": {
       "src": "source/icons/**/*",
-      "dest": "public/ui/icons"
+      "dest": "public"
     },
     "js": {
       "src": "source/js/interest.js",

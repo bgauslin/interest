@@ -1,0 +1,30 @@
+:root
+  [data-theme=light]
+    --background white
+    --border mix(black, white, 15%)
+    --canvas mix(black, white, 2%)
+    --input black
+    --input-border mix(black, white, 15%)
+    --symbol rgba(black, .5)
+    --text rgba(black, .8)
+    --zebra-stripe mix(black, white, 3%)
+
+  [data-theme=sepia]
+    --background '%s' % Color.Themes.SEPIA
+    --border '%s' % mix(black, Color.Themes.SEPIA, 15%)
+    --canvas '%s' % mix(black, Color.Themes.SEPIA, 5%)
+    --input '%s' % mix(black, Color.Themes.SEPIA, 90%)
+    --input-border '%s' % mix(black, Color.Themes.SEPIA, 30%)
+    --symbol '%s' % mix(black, Color.Themes.SEPIA, 50%)
+    --text '%s' % mix(black, Color.Themes.SEPIA, 80%)
+    --zebra-stripe '%s' % mix(black, Color.Themes.SEPIA, 4%)
+
+  [data-theme=dark]
+    --background '%s' % Color.Themes.DARK
+    --border mix(black, white, 75%)
+    --canvas '%s' % mix(black, Color.Themes.DARK, 25%)
+    --input rgba(white, .85)
+    --input-border mix(black, white, 65%)
+    --symbol rgba(white, .5)
+    --text rgba(white, .7)
+    --zebra-stripe '%s' % mix(black, Color.Themes.DARK, 10%)

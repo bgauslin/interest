@@ -1,7 +1,7 @@
 .table
   box-sizing border-box
-  grid-column 1 / 4
-  grid-row 4 / span 1
+  grid-column 1 / span 4
+  grid-row 4
   height auto
   justify-self stretch
   margin 0
@@ -12,16 +12,16 @@
   transition 'height %s ease-out, opacity %s ease-out' % (Transition.DRAWER Transition.DEFAULT)
 
   @media Breakpoint.SMALL
-    grid-column 2 / span 1
+    grid-column 2
 
   @media Breakpoint.MEDIUM
-    grid-row 3 / span 1
+    grid-row 3
     height auto !important // always display table
     opacity 1
 
   @media Breakpoint.LARGE
-    grid-column 3 / 4
-    grid-row 2 / span 1
+    grid-column 3
+    grid-row 2
     justify-self stretch
     padding 0
 
@@ -36,10 +36,16 @@
     margin-top 0
 
 .table__frame
+  border-bottom 1px solid var(--border)
   overflow-x auto
 
   @media Breakpoint.SMALL
+    border 1px solid var(--border)
     border-radius '%s' % Elements.Card.CORNER_RADIUS
+
+@media Breakpoint.SMALL
+  .table__data
+    background var(--background)
 
 th
 td
@@ -67,6 +73,18 @@ td
     @media Breakpoint.SMALL
       padding-right '%s' % Elements.Table.PADDING_X
 
+tr:first-child
+  border-bottom 1px solid var(--border)
+
+tr:nth-child(even)
+  background var(--zebra-stripe)
+
+td.growth::after
+td.deposits::before
+td.interest::before
+td.balance::before
+  color var(--symbol)
+
 td.growth::after
   content '%'
   margin-left px_to_em(4)
@@ -82,9 +100,13 @@ td.growth::after
     display table-cell
 
 .rotate-screen
+  color var(--symbol)
   display none
   font-size '%s' % FontSize.Base.SMALLPRINT
   margin px_to_rem(12) '%s' 0 % Grid.Base.COLUMN_GAP
 
   @media screen and (max-width BREAKPOINT_SMALL_UNITS) and (orientation portrait)
     display block
+
+.rotate-screen span
+  color var(--text)

@@ -2,8 +2,8 @@
   align-self center
   display flex
   flex-direction column
-  grid-column 2 / span 2
-  grid-row 3 / span 1
+  grid-column 2
+  grid-row 3
   justify-content center
   justify-self stretch
   overflow hidden
@@ -14,10 +14,10 @@
     border-radius '%s' % Elements.Card.CORNER_RADIUS
 
   @media Breakpoint.MEDIUM
-    grid-row 2 / span 1
+    grid-row 2
 
   @media Breakpoint.LARGE
-    grid-column 2 / span 1
+    grid-column 2
     position sticky
     top '%s' % (Elements.Header.HEIGHT.Medium + Grid.Medium.ROW_GAP)
 
@@ -71,6 +71,7 @@
   background 0
   body_font()
   border 0
+  border-bottom 2px solid var(--input-border)
   border-radius 0
   font-size '%s' % FontSize.Base.INPUT
   height '%s' % Elements.Input.HEIGHT
@@ -87,6 +88,9 @@
 .values__input:focus:invalid
   border-color '%s' % Color.WARNING
   color '%s' % Color.WARNING
+
+.values__input:not(:focus)
+  color var(--input)
 
 .values__total
   color '%s' % Color.GREEN

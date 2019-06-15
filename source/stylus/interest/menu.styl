@@ -1,7 +1,7 @@
 .menu
   background white
   border-radius '%s' % Elements.Menu.CORNER_RADIUS
-  color '%s' % Color.Greys.DARK
+  color var(--color-grey-dark)
   margin-top (GRID_GAP / 2)
   max-width 'calc(100vw - %s)' % GRID_GAP
   opacity 0
@@ -40,7 +40,7 @@
   padding '%s' % Elements.Menu.PADDING
 
 .menu__group:not(:last-child)
-  border-right 1px solid '%s' % Color.Greys.MEDIUM
+  border-right 1px solid var(--color-grey-medium)
 
 // Settings lists.
 .menu__list
@@ -81,31 +81,31 @@
   transition 'border %s' % Transition.DEFAULT
 
 // Styles for different option types.
-[data-type="currency"] .option__label
-  background '%s' % Color.Greys.OFF_WHITE
-  border 3px solid '%s' % Color.Greys.LIGHTER
-  color '%s' % Color.Greys.LIGHT
+[data-type=currency] .option__label
+  background var(--color-off-white)
+  border 3px solid var(--color-grey-lighter)
+  color var(--color-grey-light)
   font-size '%s' % FontSize.Base.MENU_ITEM
 
-[data-type="currency"] .option:checked + .option__label
+[data-type=currency] .option:checked + .option__label
   background white
-  color '%s' % Color.GREEN
+  color var(--color-green)
 
-[data-type="theme"] .option__label
-  border 3px solid '%s' % Color.Greys.LIGHTER
+[data-type=theme] .option__label
+  border 3px solid var(--color-grey-lighter)
   color transparent
 
-.option__label[data-option="light"]
+.option__label[data-option=light]
   background white
 
-.option__label[data-option="sepia"]
-  background '%s' % Color.Themes.SEPIA
+.option__label[data-option=sepia]
+  background '%s' % Theme.SEPIA
 
-.option__label[data-option="dark"]
-  background '%s' % Color.Themes.DARK
+.option__label[data-option=dark]
+  background '%s' % Theme.DARK
 
 .option:checked + .option__label
-  border-color '%s' % Color.GREEN
+  border-color var(--color-green)
 
 [no-touch] .item__label:hover .option:not(:checked) + .option__label
-  border-color '%s' % Color.Greys.LIGHT
+  border-color var(--color-grey-light)

@@ -82,18 +82,18 @@
   width '%s' % Elements.Input.WIDTH
 
 .values__input:focus
-  border-color '%s' % Color.GREEN
-  color '%s' % Color.GREEN
+  border-color var(--color-green)
+  color var(--color-green)
 
 .values__input:focus:invalid
-  border-color '%s' % Color.WARNING
-  color '%s' % Color.WARNING
+  border-color var(--color-warning)
+  color var(--color-warning)
 
 .values__input:not(:focus)
   color var(--input)
 
 .values__total
-  color '%s' % Color.GREEN
+  color var(--color-green)
   font-size '%s' % FontSize.Base.VALUES_TOTAL
   height '%s' % FontSize.Base.VALUES_TOTAL
   line-height '%s' % FontSize.Base.VALUES_TOTAL

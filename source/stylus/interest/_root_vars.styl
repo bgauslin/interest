@@ -1,8 +1,16 @@
 :root
+  --color-green #00ad45
+  --color-grey-dark #222
+  --color-grey-light #aaa
+  --color-grey-lighter #ddd
+  --color-grey-medium #555
+  --color-off-white #f7f7f7
+  --color-warning #c00
+
   --grid-gap GRID_GAP
 
-  @media Breakpoint.MEDIUM
-    --grid-gap GRID_GAP_MEDIUM
+  @media Breakpoint.medium
+    --grid-gap GRID_GAP_medium
 
   [data-theme=light]
     --background white
@@ -15,21 +23,21 @@
     --zebra-stripe mix(black, white, 3%)
 
   [data-theme=sepia]
-    --background '%s' % Color.Themes.SEPIA
-    --border '%s' % mix(black, Color.Themes.SEPIA, 15%)
-    --canvas '%s' % mix(black, Color.Themes.SEPIA, 5%)
-    --input '%s' % mix(black, Color.Themes.SEPIA, 90%)
-    --input-border '%s' % mix(black, Color.Themes.SEPIA, 30%)
-    --symbol '%s' % mix(black, Color.Themes.SEPIA, 50%)
-    --text '%s' % mix(black, Color.Themes.SEPIA, 80%)
-    --zebra-stripe '%s' % mix(black, Color.Themes.SEPIA, 4%)
+    --background '%s' % Theme.SEPIA
+    --border '%s' % mix(black, Theme.SEPIA, 15%)
+    --canvas '%s' % mix(black, Theme.SEPIA, 5%)
+    --input '%s' % mix(black, Theme.SEPIA, 90%)
+    --input-border '%s' % mix(black, Theme.SEPIA, 30%)
+    --symbol '%s' % mix(black, Theme.SEPIA, 50%)
+    --text '%s' % mix(black, Theme.SEPIA, 80%)
+    --zebra-stripe '%s' % mix(black, Theme.SEPIA, 4%)
 
   [data-theme=dark]
-    --background '%s' % Color.Themes.DARK
+    --background '%s' % Theme.DARK
     --border mix(black, white, 75%)
-    --canvas '%s' % mix(black, Color.Themes.DARK, 25%)
+    --canvas '%s' % mix(black, Theme.DARK, 25%)
     --input rgba(white, .85)
     --input-border mix(black, white, 65%)
     --symbol rgba(white, .5)
     --text rgba(white, .7)
-    --zebra-stripe '%s' % mix(black, Color.Themes.DARK, 10%)
+    --zebra-stripe '%s' % mix(black, Theme.DARK, 10%)

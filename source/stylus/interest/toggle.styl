@@ -11,9 +11,9 @@
 .toggle__button
   align-items center
   appearance none
-  background '%s' % Color.GREEN
+  background var(--color-green)
   body_font()
-  border 2px solid '%s' % Color.GREEN
+  border 2px solid var(--color-green)
   border-radius '%s' % (Elements.Button.HEIGHT / 2)
   color white
   display inline-flex
@@ -43,7 +43,7 @@
 .toggle__button:active
 [no-touch] .toggle__button:hover
   background 0
-  color '%s' % Color.GREEN
+  color var(--color-green)
   cursor pointer
 
 .toggle__button::before
@@ -53,10 +53,10 @@
   margin-right px_to_rem(8)
   transition 'transform %s' % Transition.DRAWER
 
-.toggle__button[data-target="visible"]::before
+.toggle__button[data-target=visible]::before
   transform rotate(-180deg)
 
 .toggle__button:focus::before
 .toggle__button:active::before
 [no-touch] .toggle__button:hover::before
-  border-top-color '%s' % Color.GREEN
+  border-top-color var(--color-green)

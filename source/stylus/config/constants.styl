@@ -7,46 +7,6 @@ Theme = {
 }
 
 // @type Hash
-Elements = {
-  Arrow: {
-    MENU: 10px
-    TOGGLE: 5px
-  }
-  Button: {
-    HEIGHT: px_to_rem(40)
-    ROW_HEIGHT: px_to_rem(96)
-  }
-  Card: {
-    CORNER_RADIUS: 8px
-    PADDING: px_to_rem(24)
-  }
-  Header: {
-    HEIGHT: {
-      Base: px_to_rem(44)
-      Medium: px_to_rem(60)
-    }
-  }
-  Input: {
-    HEIGHT: px_to_rem(32)
-    WIDTH: px_to_rem(88)
-  }
-  Menu: {
-    CORNER_RADIUS: 4px
-    ITEM_SIZE: px_to_rem(40)
-    PADDING: px_to_rem(16)
-  }
-  Table: {
-    MAX_WIDTH: px_to_rem(640)
-    PADDING_X: px_to_em(12)
-    PADDING_X_LARGE: px_to_em(16)
-    PADDING_Y: px_to_em(8)
-  }
-  UserValues: {
-    MAX_WIDTH: px_to_rem(240)
-  }
-}
-
-// @type Hash
 FontSize = {
   Base: {
     HEADER: px_to_rem(16)
@@ -63,21 +23,66 @@ FontSize = {
   }
 }
 
+// @type Hash
+Elements = {
+  Arrow: {
+    MENU: 10px
+    TOGGLE: 5px
+  }
+  Button: {
+    HEIGHT: px_to_rem(40)
+    ROW_HEIGHT: px_to_rem(96)
+  }
+  Header: {
+    HEIGHT: {
+      Base: px_to_rem(44)
+      Medium: px_to_rem(60)
+    }
+  }
+  Input: {
+    HEIGHT: px_to_rem(32)
+    WIDTH: px_to_rem(88)
+  }
+  Menu: {
+    ITEM_SIZE: px_to_rem(40)
+    PADDING: px_to_rem(16)
+  }
+  Table: {
+    PADDING_X: px_to_em(12)
+    PADDING_X_LARGE: px_to_em(16)
+    PADDING_Y: px_to_em(8)
+  }
+}
+
+// @const String
+CARD_PADDING = px_to_rem(24)
+
+// @const String
+CORNER_RADIUS_CARD = 8px
+
+// @const String
+CORNER_RADIUS_MENU = 8px
+
 // @const String
 GRID_GAP = px_to_rem(16)
 
 // @const String
 GRID_GAP_MEDIUM = px_to_rem(24)
 
+// @const String
+TABLE_MAX_WIDTH = px_to_rem(640)
+
+// @const String
+VALUES_MAX_WIDTH = px_to_rem(240)
 
 // -----------------------------------------------------------------------------
 // Calculated constants and breakpoints
 
 // @type String
-VALUES_GRID_WIDTH = Elements.UserValues.MAX_WIDTH + (2 * Elements.Card.PADDING)
+VALUES_GRID_WIDTH = VALUES_MAX_WIDTH + (2 * CARD_PADDING)
 
 // @type String
-CONTENT_WIDTH_LARGE = (Elements.UserValues.MAX_WIDTH + (2 * Elements.Card.PADDING)) + Elements.Table.MAX_WIDTH + GRID_GAP_MEDIUM
+CONTENT_WIDTH_LARGE = (VALUES_MAX_WIDTH + (2 * CARD_PADDING)) + TABLE_MAX_WIDTH + GRID_GAP_MEDIUM
 
 // @type String
 BREAKPOINT_SMALL_UNITS = px_to_rem(420)
@@ -85,6 +90,6 @@ BREAKPOINT_SMALL_UNITS = px_to_rem(420)
 // @type Hash
 Breakpoint = {
   SMALL:  'screen and (min-width: %s)' % BREAKPOINT_SMALL_UNITS
-  MEDIUM: 'screen and (min-width: %s)' % (Elements.Table.MAX_WIDTH + (GRID_GAP_MEDIUM * 2))
+  MEDIUM: 'screen and (min-width: %s)' % (TABLE_MAX_WIDTH + (GRID_GAP_MEDIUM * 2))
   LARGE:  'screen and (min-width: %s)' % (CONTENT_WIDTH_LARGE + (GRID_GAP_MEDIUM * 2))
 }

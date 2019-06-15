@@ -7,11 +7,11 @@
   justify-content center
   justify-self stretch
   overflow hidden
-  padding '%s' % Elements.Card.PADDING
+  padding CARD_PADDING
 
   @media Breakpoint.SMALL
     align-self start
-    border-radius '%s' % Elements.Card.CORNER_RADIUS
+    border-radius CORNER_RADIUS_CARD
 
   @media Breakpoint.MEDIUM
     grid-row 2
@@ -98,7 +98,7 @@
   height '%s' % FontSize.Base.VALUES_TOTAL
   line-height '%s' % FontSize.Base.VALUES_TOTAL
   margin 1rem auto 0
-  max-width 'calc(100vw - %s)' % (2 * (GRID_GAP + Elements.Card.PADDING))
+  max-width 'calc(100vw - %s)' % (2 * (GRID_GAP + CARD_PADDING))
   opacity 1
   overflow hidden
   text-align center

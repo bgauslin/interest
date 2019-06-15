@@ -1,13 +1,12 @@
 .app
   display grid
-  grid-template-columns var(--grid-gap) auto var(--grid-gap)
+  grid-template-columns var(--grid-gap) 1fr var(--grid-gap)
   grid-template-rows var(--header-height) var(--grid-gap) 1fr auto BUTTON_ROW_HEIGHT auto
   min-height 100vh // fallback
   min-height calc(var(--viewport-unit, 1vh) * 100)
 
   @media Breakpoint.MEDIUM
     grid-row-gap var(--grid-gap)
-    grid-template-columns var(--grid-gap) auto var(--grid-gap)
     grid-template-rows var(--header-height) auto 1fr auto
 
   @media Breakpoint.LARGE

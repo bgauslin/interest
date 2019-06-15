@@ -19,7 +19,7 @@
   @media Breakpoint.LARGE
     grid-column 2
     position sticky
-    top '%s' % (Elements.Header.HEIGHT.Medium + GRID_GAP_MEDIUM)
+    top 'calc(var(--header-height) + %s)' % GRID_GAP_MEDIUM
 
 .values__list
   list-style none

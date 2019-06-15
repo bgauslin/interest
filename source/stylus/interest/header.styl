@@ -1,26 +1,20 @@
 .header
   background var(--color-green)
   color white
-  height '%s' % Elements.Header.HEIGHT.Base
+  height var(--header-height)
   left 0
   position fixed
   right 0
   top 0
   z-index 1
 
-  @media Breakpoint.MEDIUM
-    height '%s' % Elements.Header.HEIGHT.Medium
-
 .header__frame
   align-items center
   display flex
-  height '%s' % Elements.Header.HEIGHT.Base
+  height var(--header-height)
   justify-content space-between
   margin 0 auto
   padding 0 var(--grid-gap)
-
-  @media Breakpoint.MEDIUM
-    height '%s' % Elements.Header.HEIGHT.Medium
 
   @media Breakpoint.LARGE
     max-width CONTENT_WIDTH_LARGE

@@ -19,7 +19,7 @@
   @media Breakpoint.LARGE
     grid-column 2
     position sticky
-    top '%s' % (Elements.Header.HEIGHT.Medium + Grid.Medium.ROW_GAP)
+    top '%s' % (Elements.Header.HEIGHT.Medium + GRID_GAP_MEDIUM)
 
 .values__list
   list-style none
@@ -98,7 +98,7 @@
   height '%s' % FontSize.Base.VALUES_TOTAL
   line-height '%s' % FontSize.Base.VALUES_TOTAL
   margin 1rem auto 0
-  max-width 'calc(100vw - %s)' % (2 * (Grid.Base.COLUMN_GAP + Elements.Card.PADDING))
+  max-width 'calc(100vw - %s)' % (2 * (GRID_GAP + Elements.Card.PADDING))
   opacity 1
   overflow hidden
   text-align center

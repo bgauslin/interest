@@ -75,22 +75,17 @@ FontSize = {
 }
 
 // @type Hash
-Grid = {
-  Base: {
-    COLUMN_GAP: px_to_rem(16)
-    ROW_GAP: px_to_rem(16)
-  }
-  Medium: {
-    COLUMN_GAP: px_to_rem(24)
-    ROW_GAP: px_to_rem(24)
-  }
-}
-
-// @type Hash
 Transition = {
   DEFAULT: .3s
   DRAWER: .5s
 }
+
+// @const String
+GRID_GAP = px_to_rem(16)
+
+// @const String
+GRID_GAP_MEDIUM = px_to_rem(24)
+
 
 // -----------------------------------------------------------------------------
 // Calculated constants and breakpoints
@@ -99,7 +94,7 @@ Transition = {
 VALUES_GRID_WIDTH = Elements.UserValues.MAX_WIDTH + (2 * Elements.Card.PADDING)
 
 // @type String
-CONTENT_WIDTH_LARGE = (Elements.UserValues.MAX_WIDTH + (2 * Elements.Card.PADDING)) + Elements.Table.MAX_WIDTH + Grid.Medium.COLUMN_GAP
+CONTENT_WIDTH_LARGE = (Elements.UserValues.MAX_WIDTH + (2 * Elements.Card.PADDING)) + Elements.Table.MAX_WIDTH + GRID_GAP_MEDIUM
 
 // @type String
 BREAKPOINT_SMALL_UNITS = px_to_rem(420)
@@ -107,6 +102,6 @@ BREAKPOINT_SMALL_UNITS = px_to_rem(420)
 // @type Hash
 Breakpoint = {
   SMALL:  'screen and (min-width: %s)' % BREAKPOINT_SMALL_UNITS
-  MEDIUM: 'screen and (min-width: %s)' % (Elements.Table.MAX_WIDTH + (2 * Grid.Medium.COLUMN_GAP))
-  LARGE:  'screen and (min-width: %s)' % (CONTENT_WIDTH_LARGE + (2 * Grid.Medium.COLUMN_GAP))
+  MEDIUM: 'screen and (min-width: %s)' % (Elements.Table.MAX_WIDTH + (GRID_GAP_MEDIUM * 2))
+  LARGE:  'screen and (min-width: %s)' % (CONTENT_WIDTH_LARGE + (GRID_GAP_MEDIUM * 2))
 }

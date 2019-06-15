@@ -56,19 +56,19 @@ td
 
   &:first-child
     text-align left
-    padding-left '%s' % Grid.Base.COLUMN_GAP
+    padding-left GRID_GAP
 
     @media Breakpoint.SMALL
       padding-left '%s' % Elements.Table.PADDING_X
 
   &:last-child
-    padding-right '%s' % Grid.Base.COLUMN_GAP
+    padding-right GRID_GAP
 
     @media Breakpoint.SMALL
       padding-right '%s' % Elements.Table.PADDING_X
 
   &.balance
-    padding-right '%s' % Grid.Base.COLUMN_GAP
+    padding-right GRID_GAP
 
     @media Breakpoint.SMALL
       padding-right '%s' % Elements.Table.PADDING_X
@@ -103,7 +103,7 @@ td.growth::after
   color var(--symbol)
   display none
   font-size '%s' % FontSize.Base.SMALLPRINT
-  margin px_to_rem(12) '%s' 0 % Grid.Base.COLUMN_GAP
+  margin px_to_rem(12) GRID_GAP 0
 
   @media screen and (max-width BREAKPOINT_SMALL_UNITS) and (orientation portrait)
     display block

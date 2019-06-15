@@ -17,11 +17,10 @@
   height '%s' % Elements.Header.HEIGHT.Base
   justify-content space-between
   margin 0 auto
-  padding '%s %s' % (0 Grid.Base.COLUMN_GAP)
+  padding 0 var(--grid-gap)
 
   @media Breakpoint.MEDIUM
     height '%s' % Elements.Header.HEIGHT.Medium
-    padding '%s %s' % (0 Grid.Medium.COLUMN_GAP)
 
   @media Breakpoint.LARGE
     max-width CONTENT_WIDTH_LARGE

@@ -49,29 +49,26 @@
 
 th
 td
-  padding '%s %s' % (Elements.Table.PADDING_Y Elements.Table.PADDING_X)
-
-  @media Breakpoint.LARGE
-    padding '%s %s' % (Elements.Table.PADDING_Y Elements.Table.PADDING_X_LARGE)
+  padding var(--table-padding-y) var(--table-padding-x)
 
   &:first-child
     text-align left
     padding-left GRID_GAP
 
     @media Breakpoint.SMALL
-      padding-left '%s' % Elements.Table.PADDING_X
+      padding-left var(--table-padding-x)
 
   &:last-child
     padding-right GRID_GAP
 
     @media Breakpoint.SMALL
-      padding-right '%s' % Elements.Table.PADDING_X
+      padding-right var(--table-padding-x)
 
   &.balance
     padding-right GRID_GAP
 
     @media Breakpoint.SMALL
-      padding-right '%s' % Elements.Table.PADDING_X
+      padding-right var(--table-padding-x)
 
 tr:first-child
   border-bottom 1px solid var(--border)

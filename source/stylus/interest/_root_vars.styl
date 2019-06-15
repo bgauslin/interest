@@ -9,6 +9,8 @@
 
   --grid-gap GRID_GAP
   --header-height px_to_rem(44)
+  --table-padding-x px_to_em(12)
+  --table-padding-y px_to_em(8)
 
   --transition .3s
   --transition-slow .5s
@@ -16,6 +18,9 @@
   @media Breakpoint.MEDIUM
     --grid-gap GRID_GAP_MEDIUM
     --header-height px_to_rem(60)
+
+  @media Breakpoint.LARGE
+    --table-padding-x px_to_em(16)
 
   [data-theme=light]
     --background white

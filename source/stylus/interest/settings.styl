@@ -13,7 +13,7 @@
   justify-content center
   margin 0 px_to_rem(-12) 0 0
   opacity 1
-  transition 'opacity %s, transform %s' % (Transition.DEFAULT Transition.DEFAULT)
+  transition opacity var(--transition), transform var(--transition)
   width '%s' % Elements.Header.HEIGHT.Base
 
   &:active

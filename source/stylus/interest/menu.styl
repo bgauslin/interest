@@ -7,7 +7,7 @@
   opacity 0
   position absolute
   right px_to_rem(-8)
-  transition 'opacity %s ease-out, transform %s ease-out, visibility %s ease-out' % (Transition.DEFAULT Transition.DEFAULT Transition.DEFAULT)
+  transition opacity var(--transition) ease-out, transform var(--transition) ease-out, visibility var(--transition) ease-out
   transform 'translateY(-%s)' % px_to_rem(12)
   visibility hidden
   z-index -1
@@ -78,7 +78,7 @@
   z-index -1
 
 [no-touch] .option__label
-  transition 'border %s' % Transition.DEFAULT
+  transition border var(--transition)
 
 // Styles for different option types.
 [data-type=currency] .option__label

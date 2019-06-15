@@ -91,7 +91,7 @@ class Expandable {
   setState() {
     const sourceEl = document.querySelector(this.source);
     const value = sourceEl.value;
-    const els = [ this.targetEl, this.toggleEl ];
+    const els = [this.targetEl, this.toggleEl];
     const threshold = 0;
 
     Array.from(els).forEach((el) => {

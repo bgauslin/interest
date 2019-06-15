@@ -73,7 +73,7 @@ class Calculations {
     this.renderTable_(sums);
 
     // Destructure 'sums' array and return 'balance' from it.
-    const [ year, deposits, interest, balance, growth ] = sums[sums.length - 1];
+    const [year, deposits, interest, balance, growth] = sums[sums.length - 1];
 
     return balance;
   }
@@ -150,7 +150,7 @@ class Calculations {
     `;
 
     data.forEach((item) => {
-      const [ year, deposits, interest, balance, growth ] = item;
+      const [year, deposits, interest, balance, growth] = item;
       html += `
         <tr>
           <td class="year">${year}</td>

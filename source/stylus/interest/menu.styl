@@ -1,6 +1,6 @@
 .menu
   background white
-  border-radius CORNER_RADIUS_MENU
+  border-radius px_to_rem(4)
   color var(--color-grey-dark)
   margin-top (GRID_GAP / 2)
   max-width 'calc(100vw - %s)' % GRID_GAP
@@ -37,7 +37,7 @@
   width 100%
 
 .menu__group
-  padding '%s' % Elements.Menu.PADDING
+  padding px_to_rem(16)
 
 .menu__group:not(:last-child)
   border-right 1px solid var(--color-grey-medium)
@@ -54,10 +54,10 @@
 
 .item__label
   display block
-  height '%s' % Elements.Menu.ITEM_SIZE
+  height MENU_ITEM_SIZE
   overflow hidden
   position relative
-  width '%s' % Elements.Menu.ITEM_SIZE
+  width MENU_ITEM_SIZE
 
 [no-touch] .item__label:hover
   cursor pointer
@@ -71,10 +71,10 @@
   align-items center
   border-radius 50%
   display inline-flex
-  height '%s' % Elements.Menu.ITEM_SIZE
+  height MENU_ITEM_SIZE
   justify-content center
   position relative
-  width '%s' % Elements.Menu.ITEM_SIZE
+  width MENU_ITEM_SIZE
   z-index -1
 
 [no-touch] .option__label

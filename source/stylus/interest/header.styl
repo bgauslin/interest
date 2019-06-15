@@ -21,11 +21,8 @@
     padding 0
 
 .header__title
-  font-size '%s' % FontSize.Base.HEADER
+  font-size var(--f-header)
   font_weight(600)
   line-height 1
   margin 0
   white-space nowrap
-
-  @media Breakpoint.MEDIUM
-    font-size '%s' % FontSize.Medium.HEADER

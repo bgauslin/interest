@@ -1,6 +1,6 @@
 # Compound Interest Calculator
 
-[interest.gauslin.com][url]
+[Interest.Gauslin.com](https://interest.gauslin.com)
 
 Frustrated with the user experience of compound interest calculators I found online or downloaded from the App Store, I decided to make my own.
 
@@ -12,8 +12,6 @@ This project is pretty straightforward in that it does what it says on the tin, 
 - On small screens, a table showing annual compounding data can be [expanded or collapsed][expandable], with additional data displayed when the [device orientation][orientation] is changed.
 - Stylus [hashes and constants][constants] work with CSS custom properties to determine [light, dark, and sepia][theming] theming; media query [breakpoints][breakpoints]; all [branding and typography][root_vars]; and [grid layout][grid].
 
-
-[url]: https://interest.gauslin.com
 
 [calculations]: https://github.com/bgauslin/interest/blob/aca64aa715aec6eb104ba1c0b46d28478730a82a/source/js/modules/Calculations.js#L48-L79
 [formatting]: https://github.com/bgauslin/interest/blob/aca64aa715aec6eb104ba1c0b46d28478730a82a/source/js/modules/Calculations.js#L87-L109

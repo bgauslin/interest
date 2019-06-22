@@ -29,11 +29,17 @@ class Expandable {
     /** @const {string} */
     this.storage = config.storage;
 
-    /** @const {Element} */
-    this.targetEl = document.querySelector(config.target);
+    /** @const {string} */
+    this.target = config.target;
+
+    /** @const {string} */
+    this.toggle = config.toggle;
 
     /** @const {Element} */
-    this.toggleEl = document.querySelector(config.toggle);
+    this.targetEl = null;
+
+    /** @const {Element} */
+    this.toggleEl = null;
   }
 
   /**
@@ -41,14 +47,19 @@ class Expandable {
    * @public
    */
   init() {
-    this.setStateOnLoad_();
-    this.setToggleLabel_();
-    this.setState();
+    this.targetEl = document.querySelector(this.target);
+    this.toggleEl = document.querySelector(this.toggle);
 
-    // Listen for click and toggle expandable element's state.
-    this.toggleEl.addEventListener('click', () => {
-      this.expandCollapse_();
-    });
+    if (this.targetEl && this.toggleEl) {
+      this.setStateOnLoad_();
+      this.setToggleLabel_();
+      this.setState();
+
+      // Listen for click and toggle expandable element's state.
+      this.toggleEl.addEventListener('click', () => {
+        this.expandCollapse_();
+      });
+    }
   }
 
   /**

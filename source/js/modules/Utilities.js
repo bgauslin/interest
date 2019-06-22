@@ -50,6 +50,9 @@ class Utilities {
    */
   hasJs_() {
     document.body.removeAttribute(Attribute.NO_JS);
+    [...document.getElementsByTagName('noscript')].forEach((el) => {
+      el.remove();
+    });
   }
 
   /**

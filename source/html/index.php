@@ -1,9 +1,7 @@
 <?php
 $title = 'Compound Interest Calculator';
 $description = 'Mobile-friendly standalone web app that calculates compound interest';
-
 $prod_server = 'interest.gauslin.com';
-
 $css = 'interest.css';
 $js = 'interest.js';
 
@@ -33,40 +31,6 @@ if ($_SERVER['SERVER_NAME'] == $prod_server) {
   <body ontouchstart no-touch no-js>
 
     <div class="app">
-
-      <header class="header">
-        <div class="header__frame">
-          <h1 class="header__title"><?php echo $title ?></h1>
-          <div class="settings">
-            <input class="settings__toggle" type="checkbox" aria-label="Settings">
-            <div class="menu">
-              <div class="menu__content"></div>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <div class="values">
-        <ul class="values__list"></ul>
-        <div class="values__total"></div>
-      </div>
-
-      <div class="table">
-        <div class="table__frame">
-          <table class="table__data"></table>
-        </div>
-      </div>
-
-      <div class="toggle">
-        <button class="toggle__button"></button>
-      </div>
-
-      <footer class="footer">
-        <p class="footer__copyright">© <?php echo date('Y'); ?> <a class="footer__link" href="https://gauslin.com" title="Ben Gauslin’s Website (opens in a new window)" target="_blank" rel="noopener">Ben Gauslin</a></p>
-      </footer>
-
-      <div class="mask" inactive></div>
-
       <noscript>
         <div class="no-js">
           <p class="no-js__message">
@@ -74,7 +38,6 @@ if ($_SERVER['SERVER_NAME'] == $prod_server) {
           </p>
         </div>
       </noscript>
-
     </div>
 
     <script src="<?php echo $js_path ?>"></script>

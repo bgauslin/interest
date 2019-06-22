@@ -1,6 +1,7 @@
 import { Expandable } from './modules/Expandable';
 import { Settings } from './modules/Settings';
 import { UserValues } from'./modules/UserValues';
+import { Templates } from './modules/Templates';
 import { Utilities } from './modules/Utilities';
 // import { registerServiceWorker } from './modules/registerServiceWorker';
 
@@ -17,6 +18,11 @@ const settings = new Settings({
   mask: '.mask',
   menu: '.menu__content',
   toggle: '.settings__toggle',
+});
+
+/** @instance  */
+const templates = new Templates({
+  target: '.app',
 });
 
 /** @instance */
@@ -37,16 +43,24 @@ const utilities = new Utilities({
 });
 
 /**
- * Initialize app when DOM is ready.
+ * Updates DOM in preparation for app initialization.
  * @listens DOMContentLoaded
  */
 document.addEventListener('DOMContentLoaded', () => {
+  utilities.init();
+  templates.init();
+});
+
+/**
+ * Initializes the app when the DOM is ready.
+ * @listens 
+ */
+document.addEventListener('ready', () => {
   settings.init();
   userValues.init();
   expandable.init();
-  utilities.init();
   // registerServiceWorker();
-});
+}, { once: true });
 
 /**
  * Toggles component states on user input.

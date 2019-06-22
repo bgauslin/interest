@@ -5,16 +5,16 @@ const CHECKED_ATTR = 'checked';
 const INACTIVE_ATTR = 'inactive';
 
 /**
- * @const {Object} Currencies - Currency information for display and formatting.
- * @const {string} Currencies.label
- * @const {string} Currencies.name
- * @const {Array} Currencies.options
- * @const {Object} Currencies.options[]
- * @const {string} Currencies.options[].isoSymbol
- * @const {string} Currencies.options[].label
- * @const {string} Currencies.options[].value
+ * @const {Object} Currency - Currency information for display and formatting.
+ * @const {string} Currency.label
+ * @const {string} Currency.name
+ * @const {Array} Currency.options
+ * @const {Object} Currency.options[]
+ * @const {string} Currency.options[].isoSymbol
+ * @const {string} Currency.options[].label
+ * @const {string} Currency.options[].value
  */
-const Currencies = {
+const Currency = {
   label: 'Currency',
   name: 'currency',
   options: [
@@ -64,30 +64,21 @@ const UserSettings = [
 ];
 
 /**
- * @const {Object} Themes - Color theme options.
- * @const {string} Themes.label
- * @const {string} Themes.name
- * @const {Array} Themes.options
- * @const {Object} Themes.options[]
- * @const {string} Themes.options[].label
- * @const {string} Themes.options[].value
+ * @const {Object} Theme - Color theme options.
+ * @const {string} Theme.label
+ * @const {string} Theme.name
+ * @const {Array} Theme.options
+ * @const {Object} Theme.options[]
+ * @const {string} Theme.options[].label
+ * @const {string} Theme.options[].value
  */
-const Themes = {
+const Theme = {
   label: 'Theme',
   name: 'theme',
   options: [
-    {
-      label: 'Light',
-      value: 'light',
-    },
-    {
-      label: 'Sepia',
-      value: 'sepia',
-    },
-    {
-      label: 'Dark',
-      value: 'dark',
-    },
+    { label: 'Light', value: 'light' },
+    { label: 'Sepia', value: 'sepia' },
+    { label: 'Dark', value: 'dark' },
   ],
 };
 
@@ -100,14 +91,23 @@ class Settings {
    * @param {!string} config.toggle
    */
   constructor(config) {
-    /** @const {Element} */
-    this.mask = document.querySelector(config.mask);
+    /** @const {string} */
+    this.mask = config.mask;
+
+    /** @const {string} */
+    this.menu = config.menu;
+
+    /** @const {string} */
+    this.toggle = config.toggle;
 
     /** @const {Element} */
-    this.menu = document.querySelector(config.menu);
+    this.maskEl = null;
 
     /** @const {Element} */
-    this.toggle = document.querySelector(config.toggle);
+    this.menuEL = null;
+
+    /** @const {Element} */
+    this.toggleEL = null;
   }
 
   /**
@@ -116,21 +116,27 @@ class Settings {
    * @public
    */
   init() {
-    // Attach settings elements to DOM and set defaults for first run.
-    let html = '';
-    UserSettings.forEach((setting) => {
-      const { name, fallback } = setting;
-      html += `<div class="menu__group" data-setting="${name}"></div>`;
-      this.setOption_(name, fallback);
-    });
-    this.menu.innerHTML = html;
+    this.maskEl = document.querySelector(this.mask);
+    this.menuEl = document.querySelector(this.menu);
+    this.toggleEl = document.querySelector(this.toggle);
+    
+    if (this.maskEl && this.menuEl && this.toggleEl) {
+      // Attach settings elements to DOM and set defaults for first run.
+      let html = '';
+      UserSettings.forEach((setting) => {
+        const { name, fallback } = setting;
+        html += `<div class="menu__group" data-setting="${name}"></div>`;
+        this.setOption_(name, fallback);
+      });
+      this.menuEl.innerHTML = html;
 
-    // Populate settings elements.
-    this.makeOptions_(Themes, Themes.name);
-    this.makeOptions_(Currencies, Currencies.name);
+      // Populate settings elements.
+      this.makeOptions_(Theme, Theme.name);
+      this.makeOptions_(Currency, Currency.name);
 
-    // Set up element listeners.
-    this.initToggle_();
+      // Set up element listeners.
+      this.initToggle_();
+    }
   }
 
   /**
@@ -149,7 +155,7 @@ class Settings {
    * @private
    */
   disableMask_() {
-    this.mask.setAttribute(INACTIVE_ATTR, '');
+    this.maskEl.setAttribute(INACTIVE_ATTR, '');
   }
 
   /**
@@ -157,9 +163,9 @@ class Settings {
    * @private
    */
   enableMask_() {
-    this.mask.removeAttribute(INACTIVE_ATTR);
-    this.mask.addEventListener('click', () => {
-      this.toggle.checked = false;
+    this.maskEl.removeAttribute(INACTIVE_ATTR);
+    this.maskEl.addEventListener('click', () => {
+      this.toggleEl.checked = false;
       this.disableMask_();
     }, { once: true });
   }
@@ -169,8 +175,8 @@ class Settings {
    * @private
    */
   initToggle_() {
-    this.toggle.addEventListener('click', () => {
-      if (this.mask.hasAttribute(INACTIVE_ATTR)) {
+    this.toggleEl.addEventListener('click', () => {
+      if (this.maskEl.hasAttribute(INACTIVE_ATTR)) {
         this.enableMask_();
       } else {
         this.disableMask_();
@@ -231,12 +237,12 @@ class Settings {
   updateOptions_(option) {
     const currentAttr = document.body.getAttribute(`data-${option}`);
 
-    [...document.querySelectorAll(`[name=${option}]`)].forEach((input) => {
-      if (currentAttr == input.value) {
-        input.setAttribute(CHECKED_ATTR, '');
+    [...document.querySelectorAll(`[name=${option}]`)].forEach((el) => {
+      if (currentAttr == el.value) {
+        el.setAttribute(CHECKED_ATTR, '');
       }
-      input.addEventListener('click', () => {
-        this.changeOption_(option, input.value);
+      el.addEventListener('click', () => {
+        this.changeOption_(option, el.value);
       });
     });
   }

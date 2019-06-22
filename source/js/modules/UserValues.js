@@ -70,24 +70,26 @@ class UserValues {
     /** @const {string} */
     this.currencyAttr = config.currencyAttr;
 
+    /** @const {string} */
+    this.list = config.list;
+
     /** @const {number} */
     this.periods = config.periods;
 
     /** @const {string} */
     this.storage = config.storage;
 
-    /** @const {Element} */
-    this.listEl = document.querySelector(config.list);
+    /** @const {string} */
+    this.total = config.total;
 
     /** @const {Element} */
-    this.totalEl = document.querySelector(config.total);
+    this.listEl = null;
+
+    /** @const {Element} */
+    this.totalEl = null;
 
     /** @instance */
-    this.calculations = new Calculations({
-      currencyAttr: 'data-currency',
-      table: '.table',
-      tableData: '.table__data',
-    });
+    this.calculations = null;
   }
 
   /**
@@ -96,14 +98,25 @@ class UserValues {
    * @public
    */
   init() {
-    this.createInputs_();
-    const values = localStorage.getItem(this.storage);
-    if (values) {
-      this.populateInputs_(values);
-      this.updateTotal();
+    this.listEl = document.querySelector(this.list);
+    this.totalEl = document.querySelector(this.total);
+
+    if (this.listEl && this.totalEl) {
+      this.calculations = new Calculations({
+        currencyAttr: 'data-currency',
+        table: '.table',
+        tableData: '.table__data',
+      });
+
+      this.createInputs_();
+      const values = localStorage.getItem(this.storage);
+      if (values) {
+        this.populateInputs_(values);
+        this.updateTotal();
+      }
+      this.calculations.tableCaption();
+      this.updateOnChange_(this.currencyAttr);
     }
-    this.calculations.tableCaption();
-    this.updateOnChange_(this.currencyAttr);
   }
 
   /**

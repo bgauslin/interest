@@ -125,7 +125,7 @@ class Settings {
       let html = '';
       UserSettings.forEach((setting) => {
         const { name, fallback } = setting;
-        html += `<div class="menu__group" data-setting="${name}"></div>`;
+        html += `<div class="menu__group" setting="${name}"></div>`;
         this.setOption_(name, fallback);
       });
       this.menuEl.innerHTML = html;
@@ -146,7 +146,7 @@ class Settings {
    * @private
    */
   changeOption_(name, value) {
-    document.body.setAttribute(`data-${name}`, value);
+    document.body.setAttribute(name, value);
     localStorage.setItem(name, value);
   }
 
@@ -194,16 +194,16 @@ class Settings {
    * @private
    */
   makeOptions_(data, selector) {
-    const target = document.querySelector(`[data-setting="${selector}"]`);
+    const target = document.querySelector(`[setting="${selector}"]`);
     const { label, name, options } = data;
     let html = '';
     html += `<ul class="menu__list">`;
     options.forEach((option) => {
       const item = `
-        <li class="item" data-type="${name}">
+        <li class="item" type="${name}">
           <label class="item__label">
             <input class="option" type="radio" name="${name}" value="${option.value}">
-            <span class="option__label" data-option="${option.value}">${option.label}</span>
+            <span class="option__label" option="${option.value}">${option.label}</span>
           </label>
         </li>
       `;
@@ -224,7 +224,7 @@ class Settings {
   setOption_(name, fallback = '') {
     const stored = localStorage.getItem(name);
     const value = (stored) ? stored : fallback.toLowerCase();
-    document.body.setAttribute(`data-${name}`, value);
+    document.body.setAttribute(name, value);
     localStorage.setItem(name, value);
   }
 
@@ -235,7 +235,7 @@ class Settings {
    * @private
    */
   updateOptions_(option) {
-    const currentAttr = document.body.getAttribute(`data-${option}`);
+    const currentAttr = document.body.getAttribute(option);
 
     [...document.querySelectorAll(`[name=${option}]`)].forEach((el) => {
       if (currentAttr == el.value) {

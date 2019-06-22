@@ -32,7 +32,7 @@
   @media Breakpoint.LARGE
     --table-padding-x px_to_em(16)
 
-  [data-theme=light]
+  [theme=light]
     --background white
     --border mix(black, white, 15%)
     --canvas mix(black, white, 2%)
@@ -42,7 +42,7 @@
     --text rgba(black, .8)
     --zebra-stripe mix(black, white, 3%)
 
-  [data-theme=sepia]
+  [theme=sepia]
     --background '%s' % Theme.SEPIA
     --border '%s' % mix(black, Theme.SEPIA, 15%)
     --canvas '%s' % mix(black, Theme.SEPIA, 5%)
@@ -52,7 +52,7 @@
     --text '%s' % mix(black, Theme.SEPIA, 80%)
     --zebra-stripe '%s' % mix(black, Theme.SEPIA, 4%)
 
-  [data-theme=dark]
+  [theme=dark]
     --background '%s' % Theme.DARK
     --border mix(black, white, 75%)
     --canvas '%s' % mix(black, Theme.DARK, 25%)

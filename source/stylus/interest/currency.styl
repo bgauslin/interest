@@ -7,7 +7,7 @@ Currencies = {
 }
 
 for name, value in Currencies
-  [data-currency={name}]
+  [currency={name}]
     .values__total:not(:empty)
     td.deposits
     td.interest
@@ -16,7 +16,7 @@ for name, value in Currencies
         content value
         margin-right px_to_em(4)
 
-[data-currency] .values__total:not(:empty)::before
+[currency] .values__total:not(:empty)::before
   color inherit
 
 @media Breakpoint.SMALL

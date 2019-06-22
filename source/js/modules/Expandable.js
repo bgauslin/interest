@@ -5,13 +5,13 @@ const COLLAPSED = 'collapse';
 const EXPANDED = 'expand';
 
 /** @const {string} */
-const EXPANDED_ATTR = 'data-expanded';
+const EXPANDED_ATTR = 'expanded';
 
 /** @const {string} */
-const HIDDEN_ATTR = 'data-hidden';
+const HIDDEN_ATTR = 'hidden';
 
 /** @const {string} */
-const TARGET_ATTR = 'data-target';
+const TARGET_ATTR = 'target';
 
 /** @class */
 class Expandable {

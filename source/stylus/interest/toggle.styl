@@ -32,7 +32,7 @@
   @media Breakpoint.SMALL
     width 33vw
 
-.toggle__button[data-hidden]
+.toggle__button[hidden]
   opacity 0
   visibility hidden
 
@@ -53,7 +53,7 @@
   margin-right px_to_rem(8)
   transition transform var(--transition-slow)
 
-.toggle__button[data-target=visible]::before
+.toggle__button[target=visible]::before
   transform rotate(-180deg)
 
 .toggle__button:focus::before

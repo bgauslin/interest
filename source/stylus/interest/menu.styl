@@ -81,27 +81,27 @@
   transition border var(--transition)
 
 // Styles for different option types.
-[data-type=currency] .option__label
+[type=currency] .option__label
   background var(--color-off-white)
   border 3px solid var(--color-grey-lighter)
   color var(--color-grey-light)
   font-size var(--font-size-menu-item)
 
-[data-type=currency] .option:checked + .option__label
+[type=currency] .option:checked + .option__label
   background white
   color var(--color-green)
 
-[data-type=theme] .option__label
+[type=theme] .option__label
   border 3px solid var(--color-grey-lighter)
   color transparent
 
-.option__label[data-option=light]
+.option__label[option=light]
   background white
 
-.option__label[data-option=sepia]
+.option__label[option=sepia]
   background '%s' % Theme.SEPIA
 
-.option__label[data-option=dark]
+.option__label[option=dark]
   background '%s' % Theme.DARK
 
 .option:checked + .option__label

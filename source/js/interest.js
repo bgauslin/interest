@@ -27,7 +27,7 @@ const templates = new Templates({
 
 /** @instance */
 const userValues = new UserValues({
-  currencyAttr: '[data-currency]',
+  currencyAttr: '[currency]',
   list: '.values__list',
   periods: '[name="periods"]',
   storage: 'values',

@@ -1,7 +1,7 @@
 import { Calculations } from './Calculations';
 
 /** @const {string} */
-const HIDDEN_ATTR = 'data-hidden';
+const HIDDEN_ATTR = 'hidden';
 
 /** @const {string} */
 const INVALID_SELECTOR = ':invalid';
@@ -103,7 +103,7 @@ class UserValues {
 
     if (this.listEl && this.totalEl) {
       this.calculations = new Calculations({
-        currencyAttr: 'data-currency',
+        currencyAttr: 'currency',
         table: '.table',
         tableData: '.table__data',
       });

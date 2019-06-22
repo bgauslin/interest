@@ -113,11 +113,12 @@ class UserValues {
   createInputs_() {
     let html = '';
 
-    UserInputs.forEach((el) => {
+    UserInputs.forEach((el, index) => {
       const min = (el.min) ? `min="${el.min}"` : '';
       const max = (el.max) ? `max="${el.max}"` : '';
       const pattern = (el.pattern) ? `pattern="${el.pattern}"` : '';
       const required = (el.required) ? 'required' : '';
+      const autofocus = (index === 0) ? 'autofocus' : '';
 
       const input = `
         <li id="${el.name}" class="values__item">
@@ -129,6 +130,7 @@ class UserValues {
                  ${max}
                  ${pattern}
                  ${required}
+                 ${autofocus}
                  aria-label="${el.label}">
         </li>
       `;

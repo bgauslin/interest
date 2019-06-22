@@ -8,10 +8,9 @@ const Attribute = {
 class Utilities {
   /**
    * @param {!Object} config
-   * @param {!Object} config.analyticsSettings
    */
   constructor(config) {
-    /** @const {Object} */
+    /** @const {?Object} */
     this.analyticsSettings = config.analyticsSettings;
   }
 

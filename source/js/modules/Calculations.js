@@ -13,13 +13,13 @@ class Calculations {
    * @param {!string} config.currencyAttr
    */
   constructor(config) {
-    /** @const {Element} */
+    /** @const {!Element} */
     this.tableEl = document.querySelector(config.table);
 
-    /** @const {Element} */
+    /** @const {!Element} */
     this.tableDataEl = document.querySelector(config.tableData);
 
-    /** @const {string} */
+    /** @const {!string} */
     this.currencyAttr = config.currencyAttr;
   }
 

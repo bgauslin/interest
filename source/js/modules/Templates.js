@@ -14,10 +14,13 @@ const MENU_LOCATION = '.header__frame';
 class Templates {
   /**
    * @param {!Object} config
-   * @param {!string} config.target
    */
   constructor(config) {
+    /** @const {!string} */
     this.target = config.target;
+
+    /** @const {?Element} */
+    this.targetEl = null;
   }
 
   /**

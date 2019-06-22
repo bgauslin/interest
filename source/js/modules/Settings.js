@@ -86,27 +86,24 @@ const Theme = {
 class Settings {
   /**
    * @param {!Object} config
-   * @param {!string} config.mask
-   * @param {!string} config.menu
-   * @param {!string} config.toggle
    */
   constructor(config) {
-    /** @const {string} */
+    /** @const {!string} */
     this.mask = config.mask;
 
-    /** @const {string} */
+    /** @const {!string} */
     this.menu = config.menu;
 
-    /** @const {string} */
+    /** @const {!string} */
     this.toggle = config.toggle;
 
-    /** @const {Element} */
+    /** @const {?Element} */
     this.maskEl = null;
 
-    /** @const {Element} */
+    /** @const {?Element} */
     this.menuEL = null;
 
-    /** @const {Element} */
+    /** @const {?Element} */
     this.toggleEL = null;
   }
 

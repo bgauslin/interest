@@ -17,28 +17,24 @@ const TARGET_ATTR = 'target';
 class Expandable {
   /**
    * @param {!Object} config
-   * @param {!string} config.source
-   * @param {!string} config.storage
-   * @param {!string} config.target
-   * @param {!string} config.toggle
    */
   constructor(config) {
-    /** @const {string} */
+    /** @const {!string} */
     this.source = config.source;
 
-    /** @const {string} */
+    /** @const {!string} */
     this.storage = config.storage;
 
-    /** @const {string} */
+    /** @const {!string} */
     this.target = config.target;
 
-    /** @const {string} */
+    /** @const {!string} */
     this.toggle = config.toggle;
 
-    /** @const {Element} */
+    /** @const {?Element} */
     this.targetEl = null;
 
-    /** @const {Element} */
+    /** @const {?Element} */
     this.toggleEl = null;
   }
 

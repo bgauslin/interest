@@ -60,36 +60,28 @@ const UserInputs = [
 class UserValues {
   /**
    * @param {!Object} config
-   * @param {!string} config.currencyAttr
-   * @param {!string} config.list
-   * @param {!number} config.periods
-   * @param {!string} config.storage
-   * @param {!string} config.total
    */
   constructor(config) {
-    /** @const {string} */
+    /** @const {!string} */
     this.currencyAttr = config.currencyAttr;
 
-    /** @const {string} */
+    /** @const {!string} */
     this.list = config.list;
 
-    /** @const {number} */
+    /** @const {!number} */
     this.periods = config.periods;
 
-    /** @const {string} */
+    /** @const {!string} */
     this.storage = config.storage;
 
-    /** @const {string} */
+    /** @const {!string} */
     this.total = config.total;
 
-    /** @const {Element} */
+    /** @const {?Element} */
     this.listEl = null;
 
-    /** @const {Element} */
+    /** @const {?Element} */
     this.totalEl = null;
-
-    /** @instance */
-    this.calculations = null;
   }
 
   /**

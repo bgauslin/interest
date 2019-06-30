@@ -4,7 +4,7 @@ const FOOTER_INFO = {
   title: 'Ben Gauslin’s Website',
   url: 'https://gauslin.com',
   yearStart: '2018',
-  yearEnd: new Date().getFullYear().toString().substr(-2), 
+  yearEnd: new Date().getFullYear().toString().substr(-2),
 }
 
 /** @const {string} */

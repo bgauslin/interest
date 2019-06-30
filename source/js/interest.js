@@ -6,9 +6,6 @@ import { Templates } from './modules/Templates';
 import { Utilities } from './modules/Utilities';
 // import { registerServiceWorker } from './modules/registerServiceWorker';
 
-/** Attach FastClick */
-fastclick(document.body);
-
 /** @instance */
 const expandable = new Expandable({
   source: '[name="periods"]',
@@ -51,9 +48,10 @@ const utilities = new Utilities({
  * @listens DOMContentLoaded
  */
 document.addEventListener('DOMContentLoaded', () => {
+  fastclick(document.body);
   utilities.init();
   templates.init();
-});
+}, { once: true });
 
 /**
  * Initializes the app when the DOM is ready.

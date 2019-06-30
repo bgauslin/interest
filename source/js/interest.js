@@ -1,9 +1,13 @@
+import fastclick from 'fastclick';
 import { Expandable } from './modules/Expandable';
 import { Settings } from './modules/Settings';
 import { UserValues } from'./modules/UserValues';
 import { Templates } from './modules/Templates';
 import { Utilities } from './modules/Utilities';
 // import { registerServiceWorker } from './modules/registerServiceWorker';
+
+/** Attach FastClick */
+fastclick(document.body);
 
 /** @instance */
 const expandable = new Expandable({

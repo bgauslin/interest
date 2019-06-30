@@ -73,7 +73,7 @@
   border 0
   border-bottom 2px solid var(--input-border)
   border-radius 0
-  font-size var(--font-size-input)
+  font-size var(--input)
   height px_to_rem(32)
   line-height 1
   order 1
@@ -82,21 +82,21 @@
   width px_to_rem(88)
 
 .values__input:focus
-  border-color var(--color-green)
-  color var(--color-green)
+  border-color var(--green)
+  color var(--green)
 
 .values__input:focus:invalid
-  border-color var(--color-warning)
-  color var(--color-warning)
+  border-color var(--warning)
+  color var(--warning)
 
 .values__input:not(:focus)
   color var(--input)
 
 .values__total
-  color var(--color-green)
-  font-size var(--font-size-total)
-  height var(--font-size-total)
-  line-height var(--font-size-total)
+  color var(--green)
+  font-size var(--total)
+  height var(--total)
+  line-height var(--total)
   margin 1rem auto 0
   max-width 'calc(100vw - %s)' % (2 * (GRID_GAP + CARD_PADDING))
   opacity 1

@@ -1,7 +1,7 @@
 .menu
   background white
   border-radius px_to_rem(4)
-  color var(--color-grey-dark)
+  color var(--dark-grey)
   margin-top (GRID_GAP / 2)
   max-width 'calc(100vw - %s)' % GRID_GAP
   opacity 0
@@ -40,7 +40,7 @@
   padding px_to_rem(16)
 
 .menu__group:not(:last-child)
-  border-right 1px solid var(--color-grey-medium)
+  border-right 1px solid var(--medium-grey)
 
 // Settings lists.
 .menu__list
@@ -82,17 +82,17 @@
 
 // Styles for different option types.
 [type=currency] .option__label
-  background var(--color-off-white)
-  border 3px solid var(--color-grey-lighter)
-  color var(--color-grey-light)
-  font-size var(--font-size-menu-item)
+  background var(--off-white)
+  border 3px solid var(--lighter-grey)
+  color var(--light-grey)
+  font-size var(--menu-item)
 
 [type=currency] .option:checked + .option__label
   background white
-  color var(--color-green)
+  color var(--green)
 
 [type=theme] .option__label
-  border 3px solid var(--color-grey-lighter)
+  border 3px solid var(--lighter-grey)
   color transparent
 
 .option__label[option=light]
@@ -105,7 +105,7 @@
   background '%s' % Theme.DARK
 
 .option:checked + .option__label
-  border-color var(--color-green)
+  border-color var(--green)
 
 [no-touch] .item__label:hover .option:not(:checked) + .option__label
-  border-color var(--color-grey-light)
+  border-color var(--light-grey)

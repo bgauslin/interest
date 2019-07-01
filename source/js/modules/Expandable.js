@@ -4,14 +4,12 @@ const COLLAPSED = 'collapse';
 /** @const {string} */
 const EXPANDED = 'expand';
 
-/** @const {string} */
-const EXPANDED_ATTR = 'expanded';
-
-/** @const {string} */
-const HIDDEN_ATTR = 'hidden';
-
-/** @const {string} */
-const TARGET_ATTR = 'target';
+/** @enum {string} */
+const Attribute = {
+  EXPANDED: 'expanded',
+  HIDDEN: 'hidden',
+  TARGET: 'target',
+}
 
 /** @class */
 class Expandable {
@@ -63,7 +61,7 @@ class Expandable {
    * @private
    */
   expandCollapse_() {
-    const direction = this.targetEl.hasAttribute(EXPANDED_ATTR) ? COLLAPSED : EXPANDED;
+    const direction = this.targetEl.hasAttribute(Attribute.EXPANDED) ? COLLAPSED : EXPANDED;
     const elHeight = this.targetEl.scrollHeight;
 
     if (direction === COLLAPSED) {
@@ -73,7 +71,7 @@ class Expandable {
           this.targetEl.style.height = 0;
         });
       });
-      this.targetEl.removeAttribute(EXPANDED_ATTR);
+      this.targetEl.removeAttribute(Attribute.EXPANDED);
     }
 
     if (direction === EXPANDED) {
@@ -84,7 +82,7 @@ class Expandable {
         this.targetEl.removeEventListener('transitionend', null, false);
       }, { once: true });
 
-      this.targetEl.setAttribute(EXPANDED_ATTR, '');
+      this.targetEl.setAttribute(Attribute.EXPANDED, '');
     }
 
     localStorage.setItem(this.storage, direction);
@@ -103,9 +101,9 @@ class Expandable {
 
     Array.from(els).forEach((el) => {
       if (value <= threshold) {
-        el.setAttribute(HIDDEN_ATTR, '');
+        el.setAttribute(Attribute.HIDDEN, '');
       } else {
-        el.removeAttribute(HIDDEN_ATTR);
+        el.removeAttribute(Attribute.HIDDEN);
       }
     });
   }
@@ -116,9 +114,9 @@ class Expandable {
    */
   setStateOnLoad_() {
     if (localStorage.getItem(this.storage) === EXPANDED) {
-      this.targetEl.setAttribute(EXPANDED_ATTR, '');
+      this.targetEl.setAttribute(Attribute.EXPANDED, '');
     } else {
-      this.targetEl.removeAttribute(EXPANDED_ATTR);
+      this.targetEl.removeAttribute(Attribute.EXPANDED);
       this.targetEl.style.height = 0;
     }
   }
@@ -128,10 +126,10 @@ class Expandable {
    * @private
    */
   setToggleLabel_() {
-    const attr = this.targetEl.hasAttribute(EXPANDED_ATTR) ? 'visible' : 'hidden';
-    const label = this.targetEl.hasAttribute(EXPANDED_ATTR) ? 'Hide' : 'Show';
+    const attr = this.targetEl.hasAttribute(Attribute.EXPANDED) ? 'visible' : 'hidden';
+    const label = this.targetEl.hasAttribute(Attribute.EXPANDED) ? 'Hide' : 'Show';
 
-    this.toggleEl.setAttribute(TARGET_ATTR, attr);
+    this.toggleEl.setAttribute(Attribute.TARGET, attr);
     this.toggleEl.textContent = `${label} table`;
   }
 }

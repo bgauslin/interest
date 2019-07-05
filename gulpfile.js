@@ -41,7 +41,15 @@ gulp.task('icons', () => {
 // Compile and uglify JavaScript.
 gulp.task('js', () => {
   return browserify({ entries: pkg.paths.js.src, debug: true })
-    .transform('babelify', {'presets': [['@babel/preset-env', {'targets': {'node': 'current'}}]]})
+    .transform(babelify.configure({
+      presets: [
+        ['@babel/preset-env', {
+          targets: {
+            node: 'current'
+          }
+        }]
+      ]
+    }))
     .bundle()
     .pipe(source(pkg.paths.js.bundleSrc))
     .pipe(buffer())

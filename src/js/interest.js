@@ -53,7 +53,7 @@ const utilities = new Utilities({
  * @listens DOMContentLoaded
  */
 document.addEventListener('DOMContentLoaded', () => {
-  // fastclick(document.body); // TODO: Get fastclick working
+  fastclick.attach(document.body);
   utilities.init();
   templates.init();
 }, { once: true });

@@ -11,8 +11,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new CopyPlugin([
-      { from: 'src/apache' },
-      { from: 'src/icons' },
+      { from: 'src/root' },
     ]),
     new HtmlWebpackPlugin({
       inject: false,

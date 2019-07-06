@@ -13,14 +13,11 @@ const MENU_LOCATION = '.header__frame';
 /** @class */
 class Templates {
   /**
-   * @param {!Object} config
+   * @param {!string} id
    */
-  constructor(config) {
+  constructor(id) {
     /** @const {!string} */
-    this.app = config.appClassName;
-
-    /** @const {?Element} */
-    this.appEl = null;
+    this.id = id;
   }
 
   /**
@@ -28,17 +25,16 @@ class Templates {
    * @public
    */
   init() {
-    document.body.innerHTML += `<div class="${this.app}"></div>`;
-    this.appEl = document.querySelector(`.${this.app}`);
+    const app = document.getElementById(this.id);
     
     // Render everything into the DOM.
-    this.appEl.innerHTML += this.renderHeaderEl_();
+    app.innerHTML += this.renderHeaderEl_();
     this.renderMenuEl_(MENU_LOCATION);
-    this.appEl.innerHTML += this.renderUserValuesEl_();
-    this.appEl.innerHTML += this.renderTableEl_();
-    this.appEl.innerHTML += this.renderToggleEl_();
-    this.appEl.innerHTML += this.renderFooterEl_();
-    this.appEl.innerHTML += this.renderMaskEl_();
+    app.innerHTML += this.renderUserValuesEl_();
+    app.innerHTML += this.renderTableEl_();
+    app.innerHTML += this.renderToggleEl_();
+    app.innerHTML += this.renderFooterEl_();
+    app.innerHTML += this.renderMaskEl_();
 
     // Dispatch custom event and let modules know there's now a DOM for them.
     document.dispatchEvent(new CustomEvent('ready'));

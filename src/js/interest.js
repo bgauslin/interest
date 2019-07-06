@@ -27,9 +27,7 @@ const settings = new Settings({
 });
 
 /** @instance  */
-const templates = new Templates({
-  appClassName: 'app',
-});
+const templates = new Templates('app');
 
 /** @instance */
 const userValues = new UserValues({

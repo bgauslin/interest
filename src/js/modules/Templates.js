@@ -28,7 +28,7 @@ class Templates {
    * @public
    */
   init() {
-    document.body.innerHTML = `<div class="${this.app}"></div>`;
+    document.body.innerHTML += `<div class="${this.app}"></div>`;
     this.appEl = document.querySelector(`.${this.app}`);
     
     // Render everything into the DOM.
@@ -40,25 +40,8 @@ class Templates {
     this.appEl.innerHTML += this.renderFooterEl_();
     this.appEl.innerHTML += this.renderMaskEl_();
 
-    // Add the CSS debugger.
-    this.renderCssDebugger_();
-
     // Dispatch custom event and let modules know there's now a DOM for them.
     document.dispatchEvent(new CustomEvent('ready'));
-  }
-
-  /**
-   * Renders CSS debugger elements into the DOM on development server.
-   * @private
-   */
-  // TODO: Get CSS debugger working.
-  renderCssDebugger_() {
-    if (process.env.NODE_ENV === 'development') {
-      document.body.innerHTML += `
-        <div id="css-debugger" src="/breakpoints.json" theme="light"></div>
-        <script src="https://css.gauslin.com/js/debugger.js" defer async></script>
-      `;
-    }
   }
 
   /**

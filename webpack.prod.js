@@ -13,7 +13,14 @@ module.exports = merge(common, {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      title: 'Compount Interest Calculator',
+      meta: {
+        'description': 'Mobile-friendly standalone web app that calculates compound interest',
+        'viewport': 'width=device-width,initial-scale=1',
+        'apple-mobile-web-app-capable': 'yes',
+        'apple-mobile-web-app-title': 'Interest',
+      },
       hash: true
-    }),
+    })
   ],
 });

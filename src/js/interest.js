@@ -5,6 +5,11 @@ import { UserValues } from'./modules/UserValues';
 import { Templates } from './modules/Templates';
 import { Utilities } from './modules/Utilities';
 // import { registerServiceWorker } from './modules/registerServiceWorker';
+import '../stylus/interest.styl';
+
+if (process.env.NODE_ENV !== 'production') {
+  console.warn('Development mode');
+}
 
 /** @instance */
 const expandable = new Expandable({
@@ -23,7 +28,7 @@ const settings = new Settings({
 
 /** @instance  */
 const templates = new Templates({
-  target: '.app',
+  appClassName: 'app',
 });
 
 /** @instance */
@@ -48,7 +53,7 @@ const utilities = new Utilities({
  * @listens DOMContentLoaded
  */
 document.addEventListener('DOMContentLoaded', () => {
-  fastclick(document.body);
+  // fastclick(document.body); // TODO: Get fastclick working
   utilities.init();
   templates.init();
 }, { once: true });

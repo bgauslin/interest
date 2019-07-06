@@ -17,10 +17,10 @@ class Templates {
    */
   constructor(config) {
     /** @const {!string} */
-    this.target = config.target;
+    this.app = config.appClassName;
 
     /** @const {?Element} */
-    this.targetEl = null;
+    this.appEl = null;
   }
 
   /**
@@ -28,19 +28,36 @@ class Templates {
    * @public
    */
   init() {
-    this.targetEl = document.querySelector(this.target);
+    document.body.innerHTML = `<div class="${this.app}"></div>`;
+    this.appEl = document.querySelector(`.${this.app}`);
+    
+    // Render everything into the DOM.
+    this.appEl.innerHTML += this.renderHeaderEl_();
+    this.renderMenuEl_(MENU_LOCATION);
+    this.appEl.innerHTML += this.renderUserValuesEl_();
+    this.appEl.innerHTML += this.renderTableEl_();
+    this.appEl.innerHTML += this.renderToggleEl_();
+    this.appEl.innerHTML += this.renderFooterEl_();
+    this.appEl.innerHTML += this.renderMaskEl_();
 
-    if (this.targetEl) {
-      this.targetEl.innerHTML += this.renderHeaderEl_();
-      this.renderMenuEl_(MENU_LOCATION);
-      this.targetEl.innerHTML += this.renderUserValuesEl_();
-      this.targetEl.innerHTML += this.renderTableEl_();
-      this.targetEl.innerHTML += this.renderToggleEl_();
-      this.targetEl.innerHTML += this.renderFooterEl_();
-      this.targetEl.innerHTML += this.renderMaskEl_();
+    // Add the CSS debugger.
+    this.renderCssDebugger_();
 
-      // Dispatch custom event and let modules know there's now a DOM for them.
-      document.dispatchEvent(new CustomEvent('ready'));
+    // Dispatch custom event and let modules know there's now a DOM for them.
+    document.dispatchEvent(new CustomEvent('ready'));
+  }
+
+  /**
+   * Renders CSS debugger elements into the DOM on development server.
+   * @private
+   */
+  // TODO: Get CSS debugger working.
+  renderCssDebugger_() {
+    if (process.env.NODE_ENV === 'development') {
+      document.body.innerHTML += `
+        <div id="css-debugger" src="/breakpoints.json" theme="light"></div>
+        <script src="https://css.gauslin.com/js/debugger.js" defer async></script>
+      `;
     }
   }
 

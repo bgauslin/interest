@@ -4,97 +4,43 @@
   "version": "1.0.0",
   "license": "UNLICENSED",
   "repository": "https://github.com/bgauslin/interest",
-  "devServer": "interest.gauslin.test",
-  "paths": {
-    "apache": {
-      "src": "source/apache/_htaccess",
-      "name": ".htaccess",
-      "dest": "public"
-    },
-    "html": {
-      "src": "source/html/**/*",
-      "dest": "public"
-    },
-    "icons": {
-      "src": "source/icons/**/*",
-      "dest": "public"
-    },
-    "js": {
-      "src": "source/js/interest.js",
-      "dest": "public/ui/interest.js",
-      "bundleSrc": "interest.js",
-      "bundleDest": "public/ui"
-    },
-    "json": {
-      "src": "source/json/**/*",
-      "dest": "public/ui"
-    },
-    "stylus": {
-      "src": "source/stylus/interest.styl",
-      "dest": "public/ui"
-    },
-    "version": {
-      "src": [
-        "public/ui/interest.css",
-        "public/ui/interest.js"
-      ],
-      "dest": "public/build/ui",
-      "manifestFile": "public/build/manifest.json"
-    },
-    "pwa": {
-      "src": "source/pwa/**/*",
-      "dest": "public/pwa"
-    },
-    "sw": {
-      "src": "source/js/sw.js",
-      "dest": "public"
-    },
-    "webfonts": {
-      "src": "source/webfonts/**/*",
-      "dest": "public/ui/webfonts"
+  "scripts": {
+    "start": "webpack-dev-server --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
     }
   },
-  "tasks": {
-    "build": [
-      "apache",
-      "html",
-      "icons",
-      "js",
-      "json",
-      "pwa",
-      "stylus",
-      "sw",
-      "webfonts"
-    ],
-    "default": [
-      "html",
-      "js",
-      "stylus"
-    ]
-  },
+  "browserslist": [
+    "last 2 version",
+    ">1%",
+    "iOS >= 9",
+    "not dead"
+  ],
   "dependencies": {
     "fastclick": "^1.0.6",
     "imagesloaded": "^4.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-rc.1",
-    "@babel/preset-env": "^7.0.0-rc.1",
-    "@babel/register": "^7.0.0-rc.1",
-    "babel-core": "^6.26.3",
-    "babel-preset-es2015": "^6.24.1",
-    "babelify": "next",
-    "browser-sync": "^2.24.6",
-    "browserify": "^16.2.2",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-cssnano": "^2.1.2",
-    "gulp-hash": "^4.2.2",
-    "gulp-plumber": "^1.1.0",
-    "gulp-rename": "^1.4.0",
-    "gulp-stylus": "^2.7.0",
-    "gulp-uglify": "^3.0.1",
-    "gulp-uglify-es": "^1.0.4",
-    "vinyl-buffer": "^1.0.1",
-    "vinyl-source-stream": "^2.0.0"
+    "autoprefixer": "^9.6.1",
+    "@babel/core": "^7.5.0",
+    "@babel/preset-env": "^7.5.0",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.0.3",
+    "css-loader": "^3.0.0",
+    "file-loader": "^4.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "postcss-loader": "^3.0.0",
+    "style-loader": "^0.23.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "uglifyjs-webpack-plugin": "^2.1.3",
+    "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2",
+    "webpack-merge": "^4.2.1"
   }
 }

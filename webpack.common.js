@@ -6,6 +6,7 @@ module.exports = {
   entry: './src/js/interest.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
   },
   plugins: [
     new CleanWebpackPlugin(),

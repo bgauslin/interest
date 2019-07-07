@@ -1,7 +1,6 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/js/interest.js',
@@ -13,31 +12,6 @@ module.exports = {
     new CopyPlugin([
       { from: 'src/root' },
     ]),
-    new HtmlWebpackPlugin({
-      inject: false,
-      template: require('html-webpack-template'),
-      lang: 'en',
-      title: 'Compount Interest Calculator',
-      meta: [
-        {
-          name: 'description',
-          content: 'Mobile-friendly standalone web app that calculates compound interest',
-        },
-        {
-          name: 'viewport',
-          content: 'width=device-width,initial-scale=1',
-        },
-        {
-          name: 'apple-mobile-web-app-capable',
-          content: 'yes',
-        },
-        {
-          name: 'apple-mobile-web-app-title',
-          content: 'Interest',
-        }
-      ],
-      bodyHtmlSnippet: '<div class="app" id="app"></div>',
-    })
   ],
   module: {
     rules: [
@@ -59,6 +33,13 @@ module.exports = {
           'css-loader',
           'postcss-loader',
           'stylus-loader',
+        ]
+      },
+      {
+        test: /\.pug$/,
+        use: [
+          'raw-loader',
+          'pug-html-loader',
         ]
       },
       {

@@ -1,9 +1,12 @@
 .footer
+  align-items center
   background var(--zebra-stripe)
   border-top 1px solid var(--border)
   color var(--symbol)
   grid-column 1 / span 3
   grid-row 6
+  // height var(--footer-height)
+  // padding 0 1rem
 
   @media Breakpoint.MEDIUM
     grid-row 4
@@ -12,13 +15,16 @@
     grid-column 1 / span 4
     grid-row 3
 
-.footer__copyright
+.copyright
   font-size var(--fineprint)
   margin 0
-  padding px_to_rem(16) 0
+  padding 0
   text-align center
 
-.footer__link
+.copyright__years
+  margin-right px_to_em(4)
+
+.copyright__owner
   link(var(--symbol), var(--symbol), var(--text), var(--text))
   transition color var(--transition)
   webfont_weight(600)

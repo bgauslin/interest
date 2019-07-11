@@ -48,9 +48,9 @@ class Templates {
     const { label, title, url, yearStart, yearEnd } = FOOTER_INFO;
     return `
       <footer class="footer">
-        <p class="footer__copyright">
-          © ${yearStart}-${yearEnd}
-          <a class="footer__link"
+        <p class="copyright">
+          <span class="copyright__years">© ${yearStart}-${yearEnd}</span>
+          <a class="copyright__owner"
              href="${url}"
              title="${title} (opens in a new window)"
              target="_blank"

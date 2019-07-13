@@ -12,9 +12,6 @@ const MENU_LOCATION = '.header__frame';
 
 /** @class */
 class Templates {
-  /**
-   * @param {!string} id
-   */
   constructor(id) {
     /** @const {!string} */
     this.id = id;

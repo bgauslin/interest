@@ -88,23 +88,23 @@ class Settings {
    * @param {!Object} config
    */
   constructor(config) {
-    /** @const {!string} */
-    this.mask = config.mask;
+    /** @private {!string} */
+    this.mask_ = config.mask;
 
-    /** @const {!string} */
-    this.menu = config.menu;
+    /** @private {!string} */
+    this.menu_ = config.menu;
 
-    /** @const {!string} */
-    this.toggle = config.toggle;
+    /** @private {!string} */
+    this.toggle_ = config.toggle;
 
-    /** @const {?Element} */
-    this.maskEl = null;
+    /** @private {?Element} */
+    this.maskEl_ = null;
 
-    /** @const {?Element} */
-    this.menuEL = null;
+    /** @private {?Element} */
+    this.menuEl_ = null;
 
-    /** @const {?Element} */
-    this.toggleEL = null;
+    /** @private {?Element} */
+    this.toggleEl_ = null;
   }
 
   /**
@@ -113,11 +113,11 @@ class Settings {
    * @public
    */
   init() {
-    this.maskEl = document.querySelector(this.mask);
-    this.menuEl = document.querySelector(this.menu);
-    this.toggleEl = document.querySelector(this.toggle);
+    this.maskEl_ = document.querySelector(this.mask_);
+    this.menuEl_ = document.querySelector(this.menu_);
+    this.toggleEl_ = document.querySelector(this.toggle_);
     
-    if (this.maskEl && this.menuEl && this.toggleEl) {
+    if (this.maskEl_ && this.menuEl_ && this.toggleEl_) {
       // Attach settings elements to DOM and set defaults for first run.
       let html = '';
       UserSettings.forEach((setting) => {
@@ -152,7 +152,7 @@ class Settings {
    * @private
    */
   disableMask_() {
-    this.maskEl.setAttribute(INACTIVE_ATTR, '');
+    this.maskEl_.setAttribute(INACTIVE_ATTR, '');
   }
 
   /**
@@ -160,9 +160,9 @@ class Settings {
    * @private
    */
   enableMask_() {
-    this.maskEl.removeAttribute(INACTIVE_ATTR);
-    this.maskEl.addEventListener('click', () => {
-      this.toggleEl.checked = false;
+    this.maskEl_.removeAttribute(INACTIVE_ATTR);
+    this.maskEl_.addEventListener('click', () => {
+      this.toggleEl_.checked = false;
       this.disableMask_();
     }, { once: true });
   }
@@ -172,8 +172,8 @@ class Settings {
    * @private
    */
   initToggle_() {
-    this.toggleEl.addEventListener('click', () => {
-      if (this.maskEl.hasAttribute(INACTIVE_ATTR)) {
+    this.toggleEl_.addEventListener('click', () => {
+      if (this.maskEl_.hasAttribute(INACTIVE_ATTR)) {
         this.enableMask_();
       } else {
         this.disableMask_();

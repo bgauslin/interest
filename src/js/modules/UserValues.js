@@ -62,26 +62,26 @@ class UserValues {
    * @param {!Object} config
    */
   constructor(config) {
-    /** @const {!string} */
-    this.currencyAttr = config.currencyAttr;
+    /** @private {!string} */
+    this.currencyAttr_ = config.currencyAttr;
 
-    /** @const {!string} */
-    this.list = config.list;
+    /** @private {!string} */
+    this.list_ = config.list;
 
-    /** @const {!number} */
-    this.periods = config.periods;
+    /** @private {!number} */
+    this.periods_ = config.periods;
 
-    /** @const {!string} */
-    this.storage = config.storage;
+    /** @private {!string} */
+    this.storage_ = config.storage;
 
-    /** @const {!string} */
-    this.total = config.total;
+    /** @private {!string} */
+    this.total_ = config.total;
 
-    /** @const {?Element} */
-    this.listEl = null;
+    /** @private {?Element} */
+    this.listEl_ = null;
 
-    /** @const {?Element} */
-    this.totalEl = null;
+    /** @private {?Element} */
+    this.totalEl_ = null;
   }
 
   /**
@@ -90,10 +90,10 @@ class UserValues {
    * @public
    */
   init() {
-    this.listEl = document.querySelector(this.list);
-    this.totalEl = document.querySelector(this.total);
+    this.listEl_ = document.querySelector(this.list_);
+    this.totalEl_ = document.querySelector(this.total_);
 
-    if (this.listEl && this.totalEl) {
+    if (this.listEl_ && this.totalEl_) {
       this.calculations = new Calculations({
         currencyAttr: 'currency',
         table: '.table',
@@ -101,13 +101,13 @@ class UserValues {
       });
 
       this.createInputs_();
-      const values = localStorage.getItem(this.storage);
+      const values = localStorage.getItem(this.storage_);
       if (values) {
         this.populateInputs_(values);
         this.updateTotal();
       }
       this.calculations.tableCaption();
-      this.updateOnChange_(this.currencyAttr);
+      this.updateOnChange_(this.currencyAttr_);
     }
   }
 
@@ -142,7 +142,7 @@ class UserValues {
       html += input;
     });
 
-    this.listEl.innerHTML = html;
+    this.listEl_.innerHTML = html;
   }
 
   /**
@@ -155,7 +155,7 @@ class UserValues {
     const values = data.split(',');
 
     for (let i = 0; i < values.length; i++) {
-      const input = this.listEl.querySelectorAll('li')[i].querySelector('input');
+      const input = this.listEl_.querySelectorAll('li')[i].querySelector('input');
       input.value = values[i];
     }
   }
@@ -165,12 +165,12 @@ class UserValues {
    * @private
    */
   setTotalState_() {
-    const periodsEl = document.querySelector(this.periods);
+    const periodsEl = document.querySelector(this.periods_);
 
     if (periodsEl.value <= 0) {
-      this.totalEl.setAttribute(HIDDEN_ATTR, '');
+      this.totalEl_.setAttribute(HIDDEN_ATTR, '');
     } else {
-      this.totalEl.removeAttribute(HIDDEN_ATTR);
+      this.totalEl_.removeAttribute(HIDDEN_ATTR);
     }
   }
 
@@ -208,8 +208,8 @@ class UserValues {
     });
 
     if (document.querySelectorAll(INVALID_SELECTOR).length === 0) {
-      localStorage.setItem(this.storage, values);
-      this.totalEl.textContent = this.calculations.compound(...values);
+      localStorage.setItem(this.storage_, values);
+      this.totalEl_.textContent = this.calculations.compound(...values);
     }
 
     this.setTotalState_();

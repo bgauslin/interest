@@ -13,14 +13,14 @@ class Calculations {
    * @param {!string} config.currencyAttr
    */
   constructor(config) {
-    /** @const {!Element} */
-    this.tableEl = document.querySelector(config.table);
+    /** @private {!Element} */
+    this.tableEl_ = document.querySelector(config.table);
 
-    /** @const {!Element} */
-    this.tableDataEl = document.querySelector(config.tableData);
+    /** @private {!Element} */
+    this.tableDataEl_ = document.querySelector(config.tableData);
 
-    /** @const {!string} */
-    this.currencyAttr = config.currencyAttr;
+    /** @private {!string} */
+    this.currencyAttr_ = config.currencyAttr;
   }
 
   /**
@@ -85,7 +85,7 @@ class Calculations {
    * @private
    */
   formatCurrency_(amount) {
-    const currentCurrency = document.body.getAttribute(this.currencyAttr);
+    const currentCurrency = document.body.getAttribute(this.currencyAttr_);
 
     if (currentCurrency === CURRENCY_RUPEES) {
       return this.formatRupees_(amount);
@@ -162,7 +162,7 @@ class Calculations {
       `;
     });
 
-    this.tableDataEl.innerHTML = html;
+    this.tableDataEl_.innerHTML = html;
   }
 
   /**
@@ -173,7 +173,7 @@ class Calculations {
     const caption = document.createElement('p');
     caption.classList.add('rotate-screen');
     caption.innerHTML = 'Rotate screen to view <span>Interest</span> and <span>Growth</span> columns.';
-    this.tableEl.appendChild(caption);
+    this.tableEl_.appendChild(caption);
   }
 }
 

@@ -125,7 +125,7 @@ class Settings {
         html += `<div class="menu__group" setting="${name}"></div>`;
         this.setOption_(name, fallback);
       });
-      this.menuEl.innerHTML = html;
+      this.menuEl_.innerHTML = html;
 
       // Populate settings elements.
       this.makeOptions_(Theme, Theme.name);

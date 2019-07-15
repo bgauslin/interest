@@ -17,23 +17,23 @@ class Expandable {
    * @param {!Object} config
    */
   constructor(config) {
-    /** @const {!string} */
-    this.source = config.source;
+    /** @private {!string} */
+    this.source_ = config.source;
 
-    /** @const {!string} */
-    this.storage = config.storage;
+    /** @private {!string} */
+    this.storage_ = config.storage;
 
-    /** @const {!string} */
-    this.target = config.target;
+    /** @private {!string} */
+    this.target_ = config.target;
 
-    /** @const {!string} */
-    this.toggle = config.toggle;
+    /** @private {!string} */
+    this.toggle_ = config.toggle;
 
-    /** @const {?Element} */
-    this.targetEl = null;
+    /** @private {?Element} */
+    this.targetEl_ = null;
 
-    /** @const {?Element} */
-    this.toggleEl = null;
+    /** @private {?Element} */
+    this.toggleEl_ = null;
   }
 
   /**
@@ -41,16 +41,16 @@ class Expandable {
    * @public
    */
   init() {
-    this.targetEl = document.querySelector(this.target);
-    this.toggleEl = document.querySelector(this.toggle);
+    this.targetEl_ = document.querySelector(this.target_);
+    this.toggleEl_ = document.querySelector(this.toggle_);
 
-    if (this.targetEl && this.toggleEl) {
+    if (this.targetEl_ && this.toggleEl_) {
       this.setStateOnLoad_();
       this.setToggleLabel_();
       this.setState();
 
       // Listen for click and toggle expandable element's state.
-      this.toggleEl.addEventListener('click', () => {
+      this.toggleEl_.addEventListener('click', () => {
         this.expandCollapse_();
       });
     }
@@ -61,31 +61,31 @@ class Expandable {
    * @private
    */
   expandCollapse_() {
-    const direction = this.targetEl.hasAttribute(Attribute.EXPANDED) ? COLLAPSED : EXPANDED;
-    const elHeight = this.targetEl.scrollHeight;
+    const direction = this.targetEl_.hasAttribute(Attribute.EXPANDED) ? COLLAPSED : EXPANDED;
+    const elHeight = this.targetEl_.scrollHeight;
 
     if (direction === COLLAPSED) {
       window.requestAnimationFrame(() => {
-        this.targetEl.style.height = `${elHeight}px`;
+        this.targetEl_.style.height = `${elHeight}px`;
         window.requestAnimationFrame(() => {
-          this.targetEl.style.height = 0;
+          this.targetEl_.style.height = 0;
         });
       });
-      this.targetEl.removeAttribute(Attribute.EXPANDED);
+      this.targetEl_.removeAttribute(Attribute.EXPANDED);
     }
 
     if (direction === EXPANDED) {
-      this.targetEl.style.height = `${elHeight}px`;
+      this.targetEl_.style.height = `${elHeight}px`;
 
-      this.targetEl.addEventListener('transitionend', () => {
-        this.targetEl.style.height = null;
-        this.targetEl.removeEventListener('transitionend', null, false);
+      this.targetEl_.addEventListener('transitionend', () => {
+        this.targetEl_.style.height = null;
+        this.targetEl_.removeEventListener('transitionend', null, false);
       }, { once: true });
 
-      this.targetEl.setAttribute(Attribute.EXPANDED, '');
+      this.targetEl_.setAttribute(Attribute.EXPANDED, '');
     }
 
-    localStorage.setItem(this.storage, direction);
+    localStorage.setItem(this.storage_, direction);
     this.setToggleLabel_();
   }
 
@@ -94,9 +94,9 @@ class Expandable {
    * @public
    */
   setState() {
-    const sourceEl = document.querySelector(this.source);
+    const sourceEl = document.querySelector(this.source_);
     const value = sourceEl.value;
-    const els = [this.targetEl, this.toggleEl];
+    const els = [this.targetEl_, this.toggleEl_];
     const threshold = 0;
 
     Array.from(els).forEach((el) => {
@@ -113,11 +113,11 @@ class Expandable {
    * @private
    */
   setStateOnLoad_() {
-    if (localStorage.getItem(this.storage) === EXPANDED) {
-      this.targetEl.setAttribute(Attribute.EXPANDED, '');
+    if (localStorage.getItem(this.storage_) === EXPANDED) {
+      this.targetEl_.setAttribute(Attribute.EXPANDED, '');
     } else {
-      this.targetEl.removeAttribute(Attribute.EXPANDED);
-      this.targetEl.style.height = 0;
+      this.targetEl_.removeAttribute(Attribute.EXPANDED);
+      this.targetEl_.style.height = 0;
     }
   }
 
@@ -126,11 +126,11 @@ class Expandable {
    * @private
    */
   setToggleLabel_() {
-    const attr = this.targetEl.hasAttribute(Attribute.EXPANDED) ? 'visible' : 'hidden';
-    const label = this.targetEl.hasAttribute(Attribute.EXPANDED) ? 'Hide' : 'Show';
+    const attr = this.targetEl_.hasAttribute(Attribute.EXPANDED) ? 'visible' : 'hidden';
+    const label = this.targetEl_.hasAttribute(Attribute.EXPANDED) ? 'Hide' : 'Show';
 
-    this.toggleEl.setAttribute(Attribute.TARGET, attr);
-    this.toggleEl.textContent = `${label} table`;
+    this.toggleEl_.setAttribute(Attribute.TARGET, attr);
+    this.toggleEl_.textContent = `${label} table`;
   }
 }
 

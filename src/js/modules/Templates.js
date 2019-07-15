@@ -16,8 +16,8 @@ class Templates {
    * @param {!string} id
    */
   constructor(id) {
-    /** @const {!string} */
-    this.id = id;
+    /** @private {!string} */
+    this.id_ = id;
   }
 
   /**
@@ -25,7 +25,7 @@ class Templates {
    * @public
    */
   init() {
-    const app = document.getElementById(this.id);
+    const app = document.getElementById(this.id_);
     
     // Render everything into the DOM.
     app.innerHTML += this.renderHeaderEl_();

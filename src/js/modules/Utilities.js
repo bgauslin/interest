@@ -7,8 +7,8 @@ class Utilities {
    * @param {!Object} config
    */
   constructor(config) {
-    /** @const {?Object} */
-    this.analyticsSettings = config.analyticsSettings;
+    /** @private {?Object} */
+    this.analyticsSettings_ = config.analyticsSettings;
   }
 
   /**
@@ -18,7 +18,7 @@ class Utilities {
   init() {
     this.noTouch_();
     this.viewportHeight();
-    this.googleAnalytics_(this.analyticsSettings);
+    this.googleAnalytics_(this.analyticsSettings_); // TODO: replace with dotenv
   }
 
   /**

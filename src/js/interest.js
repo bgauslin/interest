@@ -7,10 +7,6 @@ import { Utilities } from './modules/Utilities';
 // import { registerServiceWorker } from './modules/registerServiceWorker';
 import '../stylus/interest.styl';
 
-if (process.env.NODE_ENV !== 'production') {
-  console.warn('Development mode');
-}
-
 /** @instance */
 const expandable = new Expandable({
   source: '[name="periods"]',

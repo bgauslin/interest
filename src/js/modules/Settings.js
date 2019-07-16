@@ -1,8 +1,16 @@
-/** @const {string} */
-const CHECKED_ATTR = 'checked';
+/** @enum {string} */
+const Attribute = {
+  CHECKED: 'checked',
+  CURRENCY: 'currency',
+  OPEN: 'open',
+  THEME: 'theme',
+};
 
-/** @const {string} */
-const OPEN_ATTR = 'open';
+/** @enum {string} */
+const CssClass = {
+  MASK: 'mask',
+  TOGGLE: 'settings__toggle',
+};
 
 /** @const {Array<Object>} */
 const UserSettings = [
@@ -54,6 +62,15 @@ class Settings extends HTMLElement {
     super();
   }
 
+  // static get observedAttributes() {
+  //   return [Attribute.THEME, Attribute.CURRENCY];
+  // }
+
+  /** @callback */
+  // attributeChangedCallback(name, oldValue, newValue) {
+  //   console.log(`attributeChangedCallback for ${name}`);
+  // }
+
   /** @callback */
   connectedCallback() {
     this.setupDom_();
@@ -72,9 +89,10 @@ class Settings extends HTMLElement {
       const { name, fallback, options } = setting;
       let optionsHtml = '';
       options.forEach((option) => {
+        // TODO: Simplify markup and styles for options.
         optionsHtml += `
           <li class="item" type="${name}">
-            <label class="item__label">
+            <label class="item__label" for="${option.value}">
               <input class="option" type="radio" name="${name}" value="${option.value}">
               <span class="option__label" option="${option.value}">${option.label}</span>
             </label>
@@ -92,13 +110,13 @@ class Settings extends HTMLElement {
     });
 
     this.innerHTML = `
-      <button class="settings__toggle" aria-label="Settings">${this.renderIcon_('cog')}</button>
+      <button class="${CssClass.TOGGLE}" aria-label="Settings">${this.renderIcon_('cog')}</button>
       <div class="menu">
         <div class="menu__content">
           ${menuGroups}
         </div>
       </div>
-      <div class="mask"></div>
+      <div class="${CssClass.MASK}"></div>
     `;
   }
 
@@ -123,13 +141,26 @@ class Settings extends HTMLElement {
    */
   handleEvents_() {
     this.addEventListener('click', (e) => {
-      if (e.target.classList.contains('settings__toggle')) {
-        if (this.hasAttribute(OPEN_ATTR)) {
-          this.removeAttribute(OPEN_ATTR);
+      // Toggle the menu open/closed.
+      if (e.target.classList.contains(CssClass.TOGGLE)) {
+        if (this.hasAttribute(Attribute.OPEN)) {
+          this.removeAttribute(Attribute.OPEN);
         } else {
-          this.setAttribute(OPEN_ATTR, '');
+          this.setAttribute(Attribute.OPEN, '');
         }
       }
+
+      // Change the current theme or currency.
+      const value = e.target.getAttribute('for');
+      if (value) {
+        console.log(value);
+        // this.setAttribute(COLOR_ATTR, value);
+      }
+    });
+
+    // Close the menu when clicking outside of the menu.
+    document.querySelector(`.${CssClass.MASK}`).addEventListener('click', (e) => {
+      this.removeAttribute(Attribute.OPEN);
     });
   }
 

@@ -8,26 +8,6 @@ all_webfonts()
 
 // @mixin
 // @param Color color
-// @param String thickness [3px]
-css_icon_menu(color, thickness = 3px)
-  width = (thickness * 6)
-  border_top = (thickness * 3)
-  border_bottom = thickness
-  height = thickness
-
-  &
-    align-items center
-    display inline-flex
-
-  &::before
-    border-bottom border_bottom solid color
-    border-top border_top double color
-    content ''
-    height height
-    width width
-
-// @mixin
-// @param Color color
 // @param String size
 // @param String direction
 css_triangle(color, size, direction)

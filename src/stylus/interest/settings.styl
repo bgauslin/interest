@@ -3,12 +3,13 @@
   z-index 1
 
 .settings__toggle
+  align-items center
   appearance none
   background 0
   border 0
-  css_icon_menu(white)
+  color white // TODO: use a custom property
   cursor pointer
-  display none
+  display flex
   height var(--header-height)
   justify-content center
   margin 0 px_to_rem(-12) 0 0
@@ -16,14 +17,15 @@
   transition opacity var(--transition), transform var(--transition)
   width var(--header-height)
 
-  &:active
-    transform scale(.85)
-
-  &:checked
-    opacity .75
-
   @media Breakpoint.MEDIUM
     margin-right px_to_rem(-20)
 
+.settings__toggle:active
+  transform scale(.85)
+
+.settings[open] .settings__toggle
 [no-touch] .settings__toggle:hover
   opacity .75
+
+.icon
+  flex 0 0 px_to_rem(24)

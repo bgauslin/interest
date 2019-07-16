@@ -10,12 +10,11 @@
   transition opacity var(--transition) ease-out, transform var(--transition) ease-out, visibility var(--transition) ease-out
   transform 'translateY(-%s)' % px_to_rem(12)
   visibility hidden
-  z-index -1
 
   @media Breakpoint.MEDIUM
     margin-top -4px
 
-.settings__toggle:checked + .menu
+.settings[open] .menu
   opacity 1
   transform translateY(0)
   visibility visible

@@ -1,7 +1,6 @@
 require('dotenv').config();
 import fastclick from 'fastclick';
 import { Expandable } from './modules/Expandable';
-import { Settings } from './modules/Settings';
 import { UserValues } from'./modules/UserValues';
 import { Templates } from './modules/Templates';
 import { Utilities } from './modules/Utilities';
@@ -14,13 +13,6 @@ const expandable = new Expandable({
   storage: 'table',
   target: '.table',
   toggle: '.toggle__button',
-});
-
-/** @instance  */
-const settings = new Settings({
-  mask: '.mask',
-  menu: '.menu__content',
-  toggle: '.settings__toggle',
 });
 
 /** @instance  */
@@ -53,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
  * @listens 
  */
 document.addEventListener('ready', () => {
-  settings.init();
   userValues.init();
   expandable.init();
   // registerServiceWorker();

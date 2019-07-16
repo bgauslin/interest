@@ -1,3 +1,4 @@
+require('dotenv').config();
 import fastclick from 'fastclick';
 import { Expandable } from './modules/Expandable';
 import { Settings } from './modules/Settings';
@@ -35,12 +36,7 @@ const userValues = new UserValues({
 });
 
 /** @instance */
-const utilities = new Utilities({
-  analyticsSettings: {
-    domain: 'interest.gauslin.com',
-    id: 'UA-626192-19',
-  },
-});
+const utilities = new Utilities();
 
 /**
  * Updates DOM in preparation for app initialization.

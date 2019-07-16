@@ -1,6 +1,7 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: './src/js/interest.js',
@@ -13,7 +14,11 @@ module.exports = {
     new CopyPlugin([
       { from: 'src/root' },
     ]),
+    new Dotenv(),
   ],
+  node: {
+    fs: 'empty',
+  },
   module: {
     rules: [
       {

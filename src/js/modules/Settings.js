@@ -160,7 +160,7 @@ class Settings extends HTMLElement {
     });
 
     // Close the menu when clicking outside of the menu.
-    document.querySelector(`.${CssClass.MASK}`).addEventListener('click', (e) => {
+    document.querySelector(`.${CssClass.MASK}`).addEventListener('click', () => {
       this.removeAttribute(Attribute.OPEN);
     });
   }

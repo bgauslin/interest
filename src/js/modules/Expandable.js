@@ -1,6 +1,5 @@
 /** @enum {string} */
 const Attribute = {
-  COLLAPSED: 'collapsed',
   EXPANDED: 'expanded',
   HIDDEN: 'hidden',
   TARGET: 'target',
@@ -11,20 +10,20 @@ class Expandable extends HTMLElement {
   constructor() {
     super();
 
-    /** @private {!string} */
-    // this.storage_ = config.storage;
+    /** @private {?Element} */
+    this.buttonEl_ = null;
 
     /** @private {?Element} */
     this.targetEl_ = null;
   }
 
   static get observedAttributes() {
-    return [Attribute.COLLAPSED, Attribute.EXPANDED];
+    return [Attribute.EXPANDED];
   }
 
   /** @callback */
-  attributeChangedCallback(name) {
-    console.log(name);
+  attributeChangedCallback(name, oldValue, newValue) {
+    this.expandCollapse_(newValue);
   }
 
   /** @callback */
@@ -33,19 +32,12 @@ class Expandable extends HTMLElement {
     this.targetEl_ = document.getElementById(target);
 
     if (this.targetEl_) {
-      console.log('this.targetEl_', this.targetEl_);
       this.innerHTML = '<button></button>';
-
-      // this.setStateOnLoad_();
-      // this.setLabel_();
-      // this.setState();
-
-      // Listen for click and toggle expandable element's state.
-      // this.addEventListener('click', () => {
-      //   this.expandCollapse_();
-      // });
+      this.buttonEl_ = this.querySelector('button');
+      this.setInitialState_();
+      // this.updateState();
+      this.handleEvents_();
     }
-    this.removeAttribute(Attribute.TARGET);
   }
 
   /** @callback */
@@ -53,14 +45,42 @@ class Expandable extends HTMLElement {
   }
 
   /**
-   * Expands or collapses an element.
+   * Listens for button click and toggles expandable state.
    * @private
    */
-  expandCollapse_(direction) {
+  handleEvents_() {
+    this.addEventListener('click', () => {
+      const expanded = (this.getAttribute(Attribute.EXPANDED) === 'true'); // convert string to boolean
+      this.setAttribute(Attribute.EXPANDED, !expanded);
+    });
+  }
+
+  /**
+   * Expands or collapses an element.
+   * @param {boolean} expanded
+   * @private
+   */
+  expandCollapse_(expanded) {
+    if (!this.targetEl_) {
+      return;
+    }
+
     let label;
     const elHeight = this.targetEl_.scrollHeight;
+    const isExpanded = (expanded === 'true'); // convert string to boolean
+    
+    // Collapse the target element.
+    if (isExpanded) {
+      label = 'Hide';
+      this.targetEl_.style.height = `${elHeight}px`;
+      this.targetEl_.addEventListener('transitionend', () => {
+        this.targetEl_.style.height = null;
+        this.targetEl_.removeEventListener('transitionend', null, false);
+      }, { once: true });
+      // this.targetEl_.setAttribute(Attribute.EXPANDED, '');
 
-    if (direction === Attribute.COLLAPSED) {
+    // Expand the target element.
+    } else {
       label = 'Show';
       window.requestAnimationFrame(() => {
         this.targetEl_.style.height = `${elHeight}px`;
@@ -71,51 +91,33 @@ class Expandable extends HTMLElement {
       // this.targetEl_.removeAttribute(Attribute.EXPANDED);
     }
 
-    if (direction === EXPANDED) {
-      label = 'Hide';
-
-      this.targetEl_.style.height = `${elHeight}px`;
-      this.targetEl_.addEventListener('transitionend', () => {
-        this.targetEl_.style.height = null;
-        this.targetEl_.removeEventListener('transitionend', null, false);
-      }, { once: true });
-      // this.targetEl_.setAttribute(Attribute.EXPANDED, '');
-    }
-
-    localStorage.setItem(this.storage_, direction);
-    this.textContent = `${label} table`;
+    localStorage.setItem(Attribute.EXPANDED, expanded);
+    this.buttonEl_.textContent = `${label} table`;
   }
 
   /**
-   * Sets elements' states via attributes on change.
+   * TODO: Add a better comment here.
    * @public
    */
-  setState() {
-    const sourceEl = document.querySelector(this.source_);
-    const value = sourceEl.value;
-    const els = [this.targetEl_, this.toggleEl_];
+  updateState() {
     const threshold = 0;
+    const value = 0; // TODO: Update this.
+    const isExpanded = (value <= threshold);
 
-    Array.from(els).forEach((el) => {
-      if (value <= threshold) {
-        el.setAttribute(Attribute.HIDDEN, '');
-      } else {
-        el.removeAttribute(Attribute.HIDDEN);
-      }
+    const els = [this, this.targetEl_];
+    Array.from(els).forEach((el) => {  
+      el.setAttribute(Attribute.HIDDEN, isExpanded);
     });
   }
 
   /**
-   * Sets elements' states via attributes on initial page load.
+   * Sets the initial state of the expandable and its target on page load
+   * based on whether state has been saved to localStorage.
    * @private
    */
-  setStateOnLoad_() {
-    if (localStorage.getItem(this.storage_) === Attribute.EXPANDED) {
-      this.setAttribute(Attribute.EXPANDED, '');
-    } else {
-      this.removeAttribute(Attribute.EXPANDED);
-      this.targetEl_.style.height = 0;
-    }
+  setInitialState_() {
+    const initialState = localStorage.getItem(Attribute.EXPANDED) || false;
+    this.setAttribute(Attribute.EXPANDED, initialState);
   }
 }
 

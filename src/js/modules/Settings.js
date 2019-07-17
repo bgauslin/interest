@@ -68,6 +68,7 @@ class Settings extends HTMLElement {
 
   /** @callback */
   attributeChangedCallback(name, oldValue, newValue) {
+    console.log(name);
     this.updateOption_(name, oldValue, newValue);
   }
 
@@ -86,7 +87,7 @@ class Settings extends HTMLElement {
     let menuGroups = '';
 
     UserSettings.forEach((setting) => {
-      const { name, fallback, options } = setting;
+      const { name, options } = setting;
       let optionsHtml = '';
       options.forEach((option) => {
         optionsHtml += `

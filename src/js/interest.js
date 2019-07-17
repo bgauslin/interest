@@ -35,7 +35,6 @@ const utilities = new Utilities();
  * @listens DOMContentLoaded
  */
 document.addEventListener('DOMContentLoaded', () => {
-  fastclick.attach(document.body);
   utilities.init();
   templates.init();
 }, { once: true });
@@ -47,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('ready', () => {
   userValues.init();
   expandable.init();
+  fastclick.attach(document.body);
   // registerServiceWorker();
 }, { once: true });
 

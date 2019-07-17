@@ -1,4 +1,4 @@
-.toggle
+my-expandable
   align-self center
   grid-column 2
   grid-row 5
@@ -8,7 +8,7 @@
   @media Breakpoint.MEDIUM
     display none !important // hide the button since we don't need it
 
-.toggle__button
+my-expandable > button
   align-items center
   background var(--green)
   border 2px solid var(--green)
@@ -30,31 +30,31 @@
   @media Breakpoint.SMALL
     width 33vw
 
-.toggle__button[hidden]
+my-expandable > button[hidden]
   opacity 0
   visibility hidden
 
-[no-touch] .toggle__button
+[no-touch] my-expandable > button
   transition border var(--transition) ease, color var(--transition) ease, opacity var(--transition) ease
 
-.toggle__button:focus
-.toggle__button:active
-[no-touch] .toggle__button:hover
+my-expandable > button:focus
+my-expandable > button:active
+[no-touch] my-expandable > button:hover
   background 0
   color var(--green)
   cursor pointer
 
-.toggle__button::before
+my-expandable > button::before
   css_triangle(white, 5px, 'down')
   content ''
   display inline-block
   margin-right px_to_rem(8)
   transition transform var(--transition-slow)
 
-.toggle__button[target=visible]::before
+my-expandable > button[target=visible]::before
   transform rotate(-180deg)
 
-.toggle__button:focus::before
-.toggle__button:active::before
-[no-touch] .toggle__button:hover::before
+my-expandable > button:focus::before
+my-expandable > button:active::before
+[no-touch] my-expandable > button:hover::before
   border-top-color var(--green)

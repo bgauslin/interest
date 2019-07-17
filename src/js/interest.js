@@ -1,22 +1,13 @@
 require('dotenv').config();
 import fastclick from 'fastclick';
-import { Expandable } from './modules/Expandable';
+import { App } from './modules/App';
 import { UserValues } from'./modules/UserValues';
-import { Templates } from './modules/Templates';
 import { Utilities } from './modules/Utilities';
 // import { registerServiceWorker } from './modules/registerServiceWorker';
 import '../stylus/interest.styl';
 
-/** @instance */
-const expandable = new Expandable({
-  source: '[name="periods"]',
-  storage: 'table',
-  target: '.table',
-  toggle: '.toggle__button',
-});
-
 /** @instance  */
-const templates = new Templates('app');
+const app = new App('app');
 
 /** @instance */
 const userValues = new UserValues({
@@ -35,9 +26,8 @@ const utilities = new Utilities();
  * @listens DOMContentLoaded
  */
 document.addEventListener('DOMContentLoaded', () => {
-  fastclick.attach(document.body);
   utilities.init();
-  templates.init();
+  app.init();
 }, { once: true });
 
 /**
@@ -46,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 document.addEventListener('ready', () => {
   userValues.init();
-  expandable.init();
+  fastclick.attach(document.body);
   // registerServiceWorker();
 }, { once: true });
 
@@ -55,7 +45,7 @@ document.addEventListener('ready', () => {
  * @listens keyup
  */
 document.addEventListener('keyup', () => {
-  expandable.setState();
+  // expandable.setState();
   userValues.updateTotal();
 });
 

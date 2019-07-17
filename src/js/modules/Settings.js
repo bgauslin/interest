@@ -136,9 +136,11 @@ class Settings extends HTMLElement {
 
   /**
    * Handles all events on the element, and adds a listener to the mask that
-   * closed the menu when it's open and clicked.
+   * closes the menu when the mask is clicked.
    * @private
    */
+  // TODO: Debug intermittent touch responsiveness when clicking the settings
+  // toggle button.
   handleEvents_() {
     this.addEventListener('click', (e) => {
       // Toggle the menu open/closed.

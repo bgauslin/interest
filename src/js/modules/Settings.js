@@ -62,19 +62,19 @@ class Settings extends HTMLElement {
     super();
   }
 
-  // static get observedAttributes() {
-  //   return [Attribute.THEME, Attribute.CURRENCY];
-  // }
+  static get observedAttributes() {
+    return [Attribute.THEME, Attribute.CURRENCY];
+  }
 
   /** @callback */
-  // attributeChangedCallback(name, oldValue, newValue) {
-  //   console.log(`attributeChangedCallback for ${name}`);
-  // }
+  attributeChangedCallback(name, oldValue, newValue) {
+    this.updateOption_(name, oldValue, newValue);
+  }
 
   /** @callback */
   connectedCallback() {
     this.setupDom_();
-    this.setupStorage_();
+    this.setupDefaults_();
     this.handleEvents_();
   }
 
@@ -89,7 +89,6 @@ class Settings extends HTMLElement {
       const { name, fallback, options } = setting;
       let optionsHtml = '';
       options.forEach((option) => {
-        // TODO: Simplify markup and styles for options.
         optionsHtml += `
           <li class="item" type="${name}">
             <label class="item__label" for="${option.value}">
@@ -121,22 +120,22 @@ class Settings extends HTMLElement {
   }
 
   /**
-   * Retrieves user value from localStorage if it exists, and if not, uses
-   * fallback value. Then the element sets that value as a body attribute for
-   * styling and saves it to localStorage for later visits.
+   * Retrieves user values from localStorage if they exist, and sets a fallback
+   * value if not. The value is then set on this element, which triggers the 
+   * attributeChangedCallback.
    * @private
    */
-  setupStorage_() {
+  setupDefaults_() {
     UserSettings.forEach((setting) => {
       const { name, fallback } = setting;
       const value = localStorage.getItem(name) || fallback;
-      document.body.setAttribute(name, value);
-      localStorage.setItem(name, value);
+      this.setAttribute(name, value);
     });
   }
 
   /**
-   * TODO...
+   * Handles all events on the element, and adds a listener to the mask that
+   * closed the menu when it's open and clicked.
    * @private
    */
   handleEvents_() {
@@ -151,10 +150,12 @@ class Settings extends HTMLElement {
       }
 
       // Change the current theme or currency.
-      const value = e.target.getAttribute('for');
-      if (value) {
-        console.log(value);
-        // this.setAttribute(COLOR_ATTR, value);
+      const hasLabel = e.target.getAttribute('for');
+      if (hasLabel) {
+        const el = e.target.querySelector('[name]');
+        const name = el.getAttribute('name');
+        const value = el.getAttribute('value');
+        this.setAttribute(name, value);
       }
     });
 
@@ -165,34 +166,22 @@ class Settings extends HTMLElement {
   }
 
   /**
-   * Sets current option and adds a listener to each option.
-   * @param {!string} option - Attribute to set on the body element,
-   *     which is also the 'name' of the input.
+   * Sets current option.
+   * @param {!string} name - Attribute to set on the body element.
+   * @param {!string} oldValue - Attribute's previous value.
+   * @param {!string} newValue - Attribute's new value.
    * @private
    */
-  updateOptions_(option) {
-    const currentAttr = document.body.getAttribute(option);
+  updateOption_(name, oldValue, newValue) {
+    const oldEl = this.querySelector(`[value=${oldValue}]`);
+    const newEl = this.querySelector(`[value=${newValue}]`);
 
-    [...document.querySelectorAll(`[name=${option}]`)].forEach((el) => {
-      if (currentAttr == el.value) {
-        el.setAttribute(CHECKED_ATTR, '');
-      }
-      el.addEventListener('click', () => {
-        this.changeOption_(option, el.value);
-      });
-    });
-  }
+    if (oldEl) oldEl.checked = false;
+    if (newEl) newEl.checked = true;
 
-  /**
-   * Sets an attribute on the body element and saves it to localStorage.
-   * @param {!string} name - The attribute to set on the body element.
-   * @param {!string} value - The value of the body attribute.
-   * @private
-   */
-  changeOption_(name, value) {
-    document.body.setAttribute(name, value);
-    localStorage.setItem(name, value);
-  }
+    document.body.setAttribute(name, newValue);
+    localStorage.setItem(name, newValue);
+  } 
 
   /**
    * Renders an inline SVG icon.

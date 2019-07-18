@@ -54,5 +54,5 @@ document.addEventListener('keyup', () => {
  * @listens resize
  */
 window.addEventListener('resize', () => {
-  utilities.viewportHeight();
+  tools.viewportHeight();
 }, { passive: true });

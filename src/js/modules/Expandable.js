@@ -54,7 +54,8 @@ class Expandable extends HTMLElement {
   }
 
   /**
-   * TODO: Add a better comment here.
+   * TODO: Hide expandable when there are fewer than a certain number of
+   * table rows relative to available screen real estate.
    * @public
    */
   // updateState() {

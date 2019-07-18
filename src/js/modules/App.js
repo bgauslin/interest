@@ -50,17 +50,27 @@ class App {
   renderContent_() {
     this.appEl_.innerHTML += `
       <user-values class="values"></user-values>
+      ${this.renderTable_('table')}
+      <my-expandable target="table"></my-expandable>
+    `;
+  }
 
-      <div class="table" id="table">
-        <div class="table__frame">
-          <table class="table__data"></table>
+  /**
+   * Renders table markup for calculated user values.
+   * @param {!string} classname
+   * @param {?string=} id
+   * @private
+   */
+  renderTable_(classname, id = classname) {
+    return `
+      <div class="${classname}" id="${id}">
+        <div class="${classname}__frame">
+          <table class="${classname}__data"></table>
         </div>
         <p class="rotate-screen">
           Rotate screen to view <span>Interest</span> and <span>Growth</span> columns.
         </p>
       </div>
-      
-      <my-expandable target="table"></my-expandable>
     `;
   }
 

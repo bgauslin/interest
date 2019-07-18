@@ -82,6 +82,7 @@ class UserValues extends HTMLElement {
   connectedCallback() {
     this.setupDom_();
     this.setupValues_();
+    this.handleEvents_();
   }
 
   /**
@@ -127,8 +128,6 @@ class UserValues extends HTMLElement {
   handleEvents_() {
     this.addEventListener('keyup', () => {
       this.updateTotal_();
-      // TODO: Dispatch a custom event that expandable listens for:
-      // expandable.setState();
     });
   }
 
@@ -223,12 +222,15 @@ class UserValues extends HTMLElement {
     let values = [];
 
     UserInputs.forEach((el) => {
-      const el_ = document.querySelector(`[name=${el.name}]`);
+      const el_ = this.querySelector(`[name=${el.name}]`);
       const value = Number(el_.value);
       values.push(value);
     });
 
-    if (document.querySelectorAll(INVALID_SELECTOR).length === 0) {
+    // TODO: Dispatch a custom event that expandable listens for:
+    // expandable.setState();
+
+    if (this.querySelectorAll(INVALID_SELECTOR).length === 0) {
       localStorage.setItem(LOCAL_STORAGE, values);
       this.totalEl_.textContent = this.calculations.compound(...values);
     }

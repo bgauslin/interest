@@ -2,9 +2,9 @@
 const NO_TOUCH_ATTR = 'no-touch';
 
 /** @class */
-class Utilities {
+class Tools {
   /**
-   * Initializes all utilities.
+   * Initializes handy site-wide methods.
    * @public
    */
   init() {
@@ -52,4 +52,4 @@ class Utilities {
   }
 }
 
-export { Utilities };
+export { Tools };

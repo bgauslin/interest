@@ -1,13 +1,16 @@
 require('dotenv').config();
 import fastclick from 'fastclick';
 import { App } from './modules/App';
+import { Tools } from './modules/Tools';
 import { UserValues } from'./modules/UserValues';
-import { Utilities } from './modules/Utilities';
 // import { registerServiceWorker } from './modules/registerServiceWorker';
 import '../stylus/interest.styl';
 
 /** @instance  */
 const app = new App('app');
+
+/** @instance */
+const tools = new Tools();
 
 /** @instance */
 const userValues = new UserValues({
@@ -18,16 +21,13 @@ const userValues = new UserValues({
   total: '.values__total',
 });
 
-/** @instance */
-const utilities = new Utilities();
-
 /**
  * Updates DOM in preparation for app initialization.
  * @listens DOMContentLoaded
  */
 document.addEventListener('DOMContentLoaded', () => {
-  utilities.init();
   app.init();
+  tools.init();
 }, { once: true });
 
 /**

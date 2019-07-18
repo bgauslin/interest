@@ -1,10 +1,16 @@
 import { Calculations } from './Calculations';
 
 /** @const {string} */
+const CURRENCY_ATTR = 'currency';
+
+/** @const {string} */
 const HIDDEN_ATTR = 'hidden';
 
 /** @const {string} */
 const INVALID_SELECTOR = ':invalid';
+
+/** @const {string} */
+const LOCAL_STORAGE = 'values';
 
 /**
  * @const {Array} UserInputs - HTML input elements.
@@ -57,25 +63,9 @@ const UserInputs = [
 ];
 
 /** @class */
-class UserValues {
-  /**
-   * @param {!Object} config
-   */
-  constructor(config) {
-    /** @private {!string} */
-    this.currencyAttr_ = config.currencyAttr;
-
-    /** @private {!string} */
-    this.list_ = config.list;
-
-    /** @private {!number} */
-    this.periods_ = config.periods;
-
-    /** @private {!string} */
-    this.storage_ = config.storage;
-
-    /** @private {!string} */
-    this.total_ = config.total;
+class UserValues extends HTMLElement {
+  constructor() {
+    super();
 
     /** @private {?Element} */
     this.listEl_ = null;
@@ -89,11 +79,30 @@ class UserValues {
    * exists, and adds an observer and listener for user-provided changes.
    * @public
    */
-  init() {
-    this.listEl_ = document.querySelector(this.list_);
-    this.totalEl_ = document.querySelector(this.total_);
+  connectedCallback() {
+    this.setupDom_();
+    this.setupValues_();
+  }
+
+  /**
+   * @private
+   */
+  setupDom_() {
+    this.innerHTML = `
+      <ul class="values__list"></ul>
+      <div class="values__total"></div>
+    `;
+  }
+
+  /**
+   * @private
+   */
+  setupValues_() {
+    this.listEl_ = this.querySelector('.values__list');
+    this.totalEl_ = this.querySelector('.values__total');
 
     if (this.listEl_ && this.totalEl_) {
+
       this.calculations = new Calculations({
         currencyAttr: 'currency',
         table: '.table',
@@ -101,14 +110,26 @@ class UserValues {
       });
 
       this.createInputs_();
-      const values = localStorage.getItem(this.storage_);
+      const values = localStorage.getItem(LOCAL_STORAGE);
+
       if (values) {
         this.populateInputs_(values);
-        this.updateTotal();
+        this.updateTotal_();
       }
-      this.calculations.tableCaption();
-      this.updateOnChange_(this.currencyAttr_);
+
+      this.updateOnChange_(CURRENCY_ATTR);
     }
+  }
+
+  /**
+   * @private
+   */
+  handleEvents_() {
+    this.addEventListener('keyup', () => {
+      this.updateTotal_();
+      // TODO: Dispatch a custom event that expandable listens for:
+      // expandable.setState();
+    });
   }
 
   /**
@@ -165,7 +186,7 @@ class UserValues {
    * @private
    */
   setTotalState_() {
-    const periodsEl = document.querySelector(this.periods_);
+    const periodsEl = document.querySelector('[name=periods]');
 
     if (periodsEl.value <= 0) {
       this.totalEl_.setAttribute(HIDDEN_ATTR, '');
@@ -177,18 +198,18 @@ class UserValues {
   /**
    * Watches an element's attributes for changes and updates the total's
    * value and/or state.
-   * @param {!string} selector - CSS selector of element to observe.
+   * @param {!string} attr - CSS selector of element to observe.
    * @private 
    */
-  updateOnChange_(selector) {
-    const target = document.querySelector(selector);
+  updateOnChange_(attr) {
+    const target = document.querySelector(`[${attr}]`);
     const config = {
       attributes: true,
     };
     const self = this;
 
     const observer = new MutationObserver((mutation) => {
-      self.updateTotal();
+      self.updateTotal_();
     });
 
     observer.observe(target, config);
@@ -196,9 +217,9 @@ class UserValues {
 
   /**
    * Updates DOM element with total value after compounding.
-   * @public
+   * @private
    */
-  updateTotal() {
+  updateTotal_() {
     let values = [];
 
     UserInputs.forEach((el) => {
@@ -208,7 +229,7 @@ class UserValues {
     });
 
     if (document.querySelectorAll(INVALID_SELECTOR).length === 0) {
-      localStorage.setItem(this.storage_, values);
+      localStorage.setItem(LOCAL_STORAGE, values);
       this.totalEl_.textContent = this.calculations.compound(...values);
     }
 

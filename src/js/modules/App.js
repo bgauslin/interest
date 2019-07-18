@@ -1,20 +1,12 @@
 import { Expandable } from './Expandable';
 import { Settings } from './Settings';
-
-/** @const {Object} */
-const FOOTER_INFO = {
-  label: 'Ben Gauslin',
-  title: 'Ben Gauslin’s Website',
-  url: 'https://gauslin.com',
-  yearStart: '2018',
-  yearEnd: new Date().getFullYear().toString().substr(-2),
-}
+import { UserValues } from'./UserValues';
 
 /** @class */
 class App {
   constructor(id) {
-    /** @private {!string} */
-    this.id_ = id;
+    /** @private {!Element} */
+    this.appEl_ = document.getElementById(id);
   }
 
   /**
@@ -25,12 +17,12 @@ class App {
     // Register custom elements
     customElements.define('my-expandable', Expandable);
     customElements.define('user-settings', Settings);
+    customElements.define('user-values', UserValues);
     
     // Render everything into the DOM.
-    const app = document.getElementById(this.id_);
-    app.innerHTML += this.renderHeader_();
-    app.innerHTML += this.renderContent_();
-    app.innerHTML += this.renderFooter_();
+    this.renderHeader_();
+    this.renderContent_();
+    this.renderFooter_();
 
     // Dispatch custom event and let modules know there's now a DOM for them.
     document.dispatchEvent(new CustomEvent('ready'));
@@ -41,7 +33,7 @@ class App {
    * @private
    */
   renderHeader_() {
-    return `
+    this.appEl_.innerHTML += `
       <header class="header">
         <div class="header__frame">
           <h1 class="header__title">${document.title}</h1>
@@ -56,18 +48,18 @@ class App {
    * @private
    */
   renderContent_() {
-    return `
-      <div class="values">
-        <ul class="values__list"></ul>
-        <div class="values__total"></div>
-      </div>
+    this.appEl_.innerHTML += `
+      <user-values class="values"></user-values>
 
       <div class="table" id="table">
         <div class="table__frame">
           <table class="table__data"></table>
         </div>
+        <p class="rotate-screen">
+          Rotate screen to view <span>Interest</span> and <span>Growth</span> columns.
+        </p>
       </div>
-
+      
       <my-expandable target="table"></my-expandable>
     `;
   }
@@ -78,7 +70,7 @@ class App {
    */
   renderFooter_() {
     const { label, title, url, yearStart, yearEnd } = FOOTER_INFO;
-    return `
+    this.appEl_.innerHTML += `
       <footer class="footer">
         <p class="copyright">
           <span class="copyright__years">© ${yearStart}-${yearEnd}</span>
@@ -91,6 +83,15 @@ class App {
       </footer>
     `;
   }
+}
+
+/** @const {Object} */
+const FOOTER_INFO = {
+  label: 'Ben Gauslin',
+  title: 'Ben Gauslin’s Website',
+  url: 'https://gauslin.com',
+  yearStart: '2018',
+  yearEnd: new Date().getFullYear().toString().substr(-2),
 }
 
 export { App };

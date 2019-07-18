@@ -51,7 +51,7 @@ my-expandable > button::before
   margin-right px_to_rem(8)
   transition transform var(--transition-slow)
 
-my-expandable[expanded=true] > button::before
+my-expandable[expanded] > button::before
   transform rotate(-180deg)
 
 my-expandable > button:focus::before

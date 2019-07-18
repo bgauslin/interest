@@ -1,3 +1,5 @@
+import fastclick from 'fastclick';
+
 /** @const {string} */
 const NO_TOUCH_ATTR = 'no-touch';
 
@@ -34,6 +36,7 @@ class Tools {
    */
   noTouch_() {
     if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+      fastclick.attach(document.body);
       return;
     } else {
       document.body.setAttribute(NO_TOUCH_ATTR, '');

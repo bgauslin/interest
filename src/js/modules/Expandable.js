@@ -77,6 +77,9 @@ class Expandable extends HTMLElement {
    * @private
    */
   initialState_() {
+    // TODO: If expanded is saved and true, and there are also values, don't
+    // animate the target on initial page load. Just display it at is native
+    // height.
     this.targetEl_.style.height = 0;
     if (localStorage.getItem(EXPANDED_ATTR) === 'true') {
       this.setAttribute(EXPANDED_ATTR, '');

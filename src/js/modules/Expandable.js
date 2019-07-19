@@ -27,18 +27,19 @@ class Expandable extends HTMLElement {
     /** @private {?Element} */
     this.totalEl_ = null;
 
-    // Toggle expanded attribute on click.
+    /** @private {MutationObserver} */
+    this.observer_ = new MutationObserver(() => {
+      this.setVisibility_();
+    });
+
+    /** @listens click */
     this.addEventListener('click', () => {
+      // Toggle expanded attribute.
       if (this.hasAttribute(EXPANDED_ATTR)) {
         this.removeAttribute(EXPANDED_ATTR);
       } else {
         this.setAttribute(EXPANDED_ATTR, '');
       }
-    });
-
-    // Toggle visibility based on state of the total.
-    this.observer_ = new MutationObserver(() => {
-      this.setVisibility_();
     });
   }
 
@@ -54,13 +55,13 @@ class Expandable extends HTMLElement {
 
   /** @callback */
   connectedCallback() {
+    this.innerHTML = `<button class="${this.baseClass_}__button"></button>`;
+
+    this.buttonEl_ = this.querySelector('button');
     this.targetEl_ = document.getElementById(this.target_);
     this.totalEl_ = document.querySelector('.values__total');
 
-    this.innerHTML = `<button class="${this.baseClass_}__button"></button>`;
-    this.buttonEl_ = this.querySelector('button');
     this.initialState_();
-    this.setVisibility_()
 
     this.observer_.observe(this.totalEl_, { attributes: true });
   }
@@ -81,11 +82,12 @@ class Expandable extends HTMLElement {
       this.setAttribute(EXPANDED_ATTR, '');
     }
     this.updateLabel_();
+    this.setVisibility_();
   }
 
   /**
-   * If the total is hidden, this should be hidden as well since there's
-   * no target to expand/collapse.
+   * If the total is empty, this element should be hidden since there's no
+   * target to expand/collapse.
    * @private
    */
   setVisibility_() {
@@ -97,15 +99,13 @@ class Expandable extends HTMLElement {
   }
 
   /**
-   * Expands or collapses an element.
+   * Expands or collapses the target element.
    * @param {!string} action Either 'expand' or 'collapse'
    * @private
    */
   expandCollapse_(action) {
     if (!this.targetEl_) return;
-
-    this.updateLabel_();
-
+    
     const elHeight = this.targetEl_.scrollHeight;
 
     if (action === 'expand') {
@@ -124,6 +124,8 @@ class Expandable extends HTMLElement {
         });
       });
     }
+
+    this.updateLabel_();
   }
 
   /**

@@ -1,3 +1,4 @@
+import { ClickMask } from './ClickMask';
 import { Expandable } from './Expandable';
 import { Settings } from './Settings';
 import { UserValues } from'./UserValues';
@@ -15,6 +16,7 @@ class App {
    */
   init() {
     // Register custom elements
+    customElements.define('click-mask', ClickMask);
     customElements.define('my-expandable', Expandable);
     customElements.define('user-settings', Settings);
     customElements.define('user-values', UserValues);
@@ -37,7 +39,7 @@ class App {
       <header class="header">
         <div class="header__frame">
           <h1 class="header__title">${document.title}</h1>
-          <user-settings class="settings"></user-settings>
+          <user-settings class="settings" id="settings"></user-settings>
         </div>
       </header>
     `;
@@ -52,6 +54,7 @@ class App {
       <user-values class="values"></user-values>
       ${this.renderTable_('table')}
       <my-expandable target="table" label="table"></my-expandable>
+      <click-mask target="settings"></click-mask>
     `;
   }
 

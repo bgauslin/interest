@@ -68,12 +68,6 @@ class Settings extends HTMLElement {
           this.removeAttribute(OPEN_ATTR);
         } else {
           this.setAttribute(OPEN_ATTR, '');
-
-          window.requestAnimationFrame(() => {
-            document.addEventListener('click', () => {
-              this.removeAttribute(OPEN_ATTR);
-            }, { once: true });
-          });
         }
       }
 

@@ -38,7 +38,6 @@ class Expandable extends HTMLElement {
 
     /** @listens click */
     this.addEventListener('click', () => {
-      // Toggle expanded attribute.
       if (this.hasAttribute(EXPANDED_ATTR)) {
         this.removeAttribute(EXPANDED_ATTR);
       } else {
@@ -72,9 +71,10 @@ class Expandable extends HTMLElement {
    * @private
    */
   setup_() {
+    this.observer_.observe(this.totalEl_, { attributes: true });
+
     this.innerHTML = `<button class="${this.baseClass_}__button"></button>`;
     this.buttonEl_ = this.querySelector('button');
-    this.observer_.observe(this.totalEl_, { attributes: true });
 
     if (localStorage.getItem(EXPANDED_ATTR) === 'true') {
       this.setAttribute(EXPANDED_ATTR, '');
@@ -84,8 +84,8 @@ class Expandable extends HTMLElement {
       this.targetEl_.removeAttribute(EXPANDED_ATTR);
     }
 
-    this.updateLabel_();
     this.setVisibility_();
+    this.updateLabel_();
 
     this.hasSetup_ = true;
   }
@@ -111,7 +111,7 @@ class Expandable extends HTMLElement {
    * @private
    */
   expandCollapse_(action) {
-    if (!this.targetEl_ || !this.hasSetup_) {
+    if (!this.hasSetup_) {
       return;
     }
 

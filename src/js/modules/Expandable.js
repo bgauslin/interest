@@ -25,10 +25,11 @@ class Expandable extends HTMLElement {
     this.target_ = this.getAttribute('target');
 
     /** @private {?Element} */
-    this.targetEl_ = null;
+    this.targetEl_ = document.getElementById(this.target_);
 
+    // TODO: Refactor this.totalEl_ to not be hard-coded
     /** @private {?Element} */
-    this.totalEl_ = null;
+    this.totalEl_ = document.querySelector('.values__total');
 
     /** @private {MutationObserver} */
     this.observer_ = new MutationObserver(() => {
@@ -58,14 +59,6 @@ class Expandable extends HTMLElement {
 
   /** @callback */
   connectedCallback() {
-    this.innerHTML = `<button class="${this.baseClass_}__button"></button>`;
-
-    this.buttonEl_ = this.querySelector('button');
-    this.targetEl_ = document.getElementById(this.target_);
-    this.totalEl_ = document.querySelector('.values__total');
-
-    this.observer_.observe(this.totalEl_, { attributes: true });
-
     this.setup_();
   }
 
@@ -75,11 +68,14 @@ class Expandable extends HTMLElement {
   }
 
   /**
-   * Sets the initial state of the expandable and its target on page load
-   * based on whether state has been saved to localStorage.
+   * Sets initial state of the expandable and related elements on page load.
    * @private
    */
   setup_() {
+    this.innerHTML = `<button class="${this.baseClass_}__button"></button>`;
+    this.buttonEl_ = this.querySelector('button');
+    this.observer_.observe(this.totalEl_, { attributes: true });
+
     if (localStorage.getItem(EXPANDED_ATTR) === 'true') {
       this.setAttribute(EXPANDED_ATTR, '');
       this.targetEl_.setAttribute(EXPANDED_ATTR, '');

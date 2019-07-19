@@ -54,7 +54,7 @@ class App {
       <user-values class="values"></user-values>
       ${this.renderTable_('table')}
       <my-expandable target="table" label="table"></my-expandable>
-      <click-mask target="settings"></click-mask>
+      <click-mask class="click-mask" target="settings"></click-mask>
     `;
   }
 

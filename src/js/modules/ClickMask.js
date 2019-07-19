@@ -2,18 +2,12 @@
 const ACTIVE_ATTR = 'active';
 
 /** @const {string} */
-const CLASSNAME = 'click-mask';
-
-/** @const {string} */
 const OPEN_ATTR = 'open';
 
 /** @class */
 class ClickMask extends HTMLElement {
   constructor() {
     super();
-
-    // Add a classname for styling.
-    this.classList.add(CLASSNAME);
 
     /** @const {!string} */
     this.target_ = this.getAttribute('target');

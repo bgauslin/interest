@@ -1,40 +1,21 @@
 require('dotenv').config();
-import fastclick from 'fastclick';
-import { Expandable } from './modules/Expandable';
-import { UserValues } from'./modules/UserValues';
-import { Templates } from './modules/Templates';
-import { Utilities } from './modules/Utilities';
+import { App } from './modules/App';
+import { Tools } from './modules/Tools';
 // import { registerServiceWorker } from './modules/registerServiceWorker';
 import '../stylus/interest.styl';
 
-/** @instance */
-const expandable = new Expandable({
-  source: '[name="periods"]',
-  storage: 'table',
-  target: '.table',
-  toggle: '.toggle__button',
-});
-
 /** @instance  */
-const templates = new Templates('app');
+const app = new App('app');
 
 /** @instance */
-const userValues = new UserValues({
-  currencyAttr: '[currency]',
-  list: '.values__list',
-  periods: '[name="periods"]',
-  storage: 'values',
-  total: '.values__total',
-});
-
-/** @instance */
-const utilities = new Utilities();
+const tools = new Tools();
 
 /**
- * Updates DOM in preparation for app initialization.
+ * Updates DOM with all app elements.
  * @listens DOMContentLoaded
  */
 document.addEventListener('DOMContentLoaded', () => {
+<<<<<<< HEAD
   utilities.init();
   templates.init();
 }, { once: true });
@@ -60,9 +41,16 @@ document.addEventListener('keyup', () => {
 });
 
 /**
+=======
+  app.init();
+  tools.init();
+}, { once: true });
+
+/**
+>>>>>>> custom_elements
  * Updates 'vh' value when window is resized.
  * @listens resize
  */
 window.addEventListener('resize', () => {
-  utilities.viewportHeight();
+  tools.viewportHeight();
 }, { passive: true });

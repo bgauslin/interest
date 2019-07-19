@@ -164,17 +164,6 @@ class Calculations {
 
     this.tableDataEl_.innerHTML = html;
   }
-
-  /**
-   * Creates a caption element and renders it after the table.
-   * @public
-   */
-  tableCaption() {
-    const caption = document.createElement('p');
-    caption.classList.add('rotate-screen');
-    caption.innerHTML = 'Rotate screen to view <span>Interest</span> and <span>Growth</span> columns.';
-    this.tableEl_.appendChild(caption);
-  }
 }
 
 export { Calculations };

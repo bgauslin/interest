@@ -103,10 +103,10 @@
   transition opacity var(--transition), visibility var(--transition)
   visibility visible
 
-  &[hidden]
-    opacity 0
-    visibility hidden
-
   @media Breakpoint.LARGE
-    margin .5rem 0 00
+    margin .5rem 0 0
     text-align left
+
+.values__total[empty]
+  opacity 0
+  visibility hidden

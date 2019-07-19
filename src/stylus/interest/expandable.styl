@@ -1,28 +1,31 @@
-.toggle
+.expandable
   align-self center
   grid-column 2
   grid-row 5
   justify-self center
-  transition margin var(--transition) ease
+  opacity 1
+  transition margin var(--transition) ease, opacity var(--transition) ease
+  visibility visibile
 
   @media Breakpoint.MEDIUM
     display none !important // hide the button since we don't need it
 
-.toggle__button
+.expandable[hidden]
+  opacity 0
+  visibility hidden
+
+.expandable__button
   align-items center
   background var(--green)
   border 2px solid var(--green)
   border-radius (BUTTON_HEIGHT / 2)
   color white
-  display inline-flex
+  display flex
   font-size px_to_em(14)
   height BUTTON_HEIGHT
   justify-content center
   line-height 1
-  opacity 1
   padding 0 px_to_rem(12) 0 0 // adjust for toggle arrow
-  transition opacity var(--transition), visibility var(--transition)
-  visibility visibile
   webfont(600)
   width 50vw
   white-space nowrap
@@ -30,31 +33,27 @@
   @media Breakpoint.SMALL
     width 33vw
 
-.toggle__button[hidden]
-  opacity 0
-  visibility hidden
+[no-touch] .expandable__button
+  transition border var(--transition) ease, color var(--transition) ease
 
-[no-touch] .toggle__button
-  transition border var(--transition) ease, color var(--transition) ease, opacity var(--transition) ease
-
-.toggle__button:focus
-.toggle__button:active
-[no-touch] .toggle__button:hover
+.expandable__button:focus
+.expandable__button:active
+[no-touch] .expandable__button:hover
   background 0
   color var(--green)
   cursor pointer
 
-.toggle__button::before
-  css_triangle(white, 5px, 'down')
+.expandable__button::before
   content ''
+  css_triangle(white, 5px, 'down')
   display inline-block
   margin-right px_to_rem(8)
   transition transform var(--transition-slow)
 
-.toggle__button[target=visible]::before
+.expandable[expanded] > .expandable__button::before
   transform rotate(-180deg)
 
-.toggle__button:focus::before
-.toggle__button:active::before
-[no-touch] .toggle__button:hover::before
+.expandable__button:focus::before
+.expandable__button:active::before
+[no-touch] .expandable__button:hover::before
   border-top-color var(--green)

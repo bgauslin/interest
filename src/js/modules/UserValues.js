@@ -1,10 +1,10 @@
 import { Calculations } from './Calculations';
 
 /** @const {string} */
-const HIDDEN_ATTR = 'hidden';
+const EMPTY_ATTR = 'empty';
 
 /** @const {string} */
-const INVALID_SELECTOR = ':invalid';
+const LOCAL_STORAGE = 'values';
 
 /**
  * @const {Array} UserInputs - HTML input elements.
@@ -57,43 +57,65 @@ const UserInputs = [
 ];
 
 /** @class */
-class UserValues {
-  /**
-   * @param {!Object} config
-   */
-  constructor(config) {
-    /** @private {!string} */
-    this.currencyAttr_ = config.currencyAttr;
+class UserValues extends HTMLElement {
+  constructor() {
+    super();
 
-    /** @private {!string} */
-    this.list_ = config.list;
-
-    /** @private {!number} */
-    this.periods_ = config.periods;
-
-    /** @private {!string} */
-    this.storage_ = config.storage;
-
-    /** @private {!string} */
-    this.total_ = config.total;
+    /** @private {?Element} */
+    this.currencyEl_ = null;
 
     /** @private {?Element} */
     this.listEl_ = null;
 
     /** @private {?Element} */
     this.totalEl_ = null;
+
+    /** @private {MutationObserver} */
+    this.observer_ = new MutationObserver(() => {
+      this.updateTotal_();
+    });
+
+    /** @listens keyup */
+    this.addEventListener('keyup', () => {
+      this.updateTotal_();
+    });
+  }
+
+  /** @callback */
+  connectedCallback() {
+    this.setupDom_();
+    this.setValues_();
+    this.setVisibility_();
+    this.currencyEl_ = document.querySelector('[currency]');
+    this.observer_.observe(this.currencyEl_, { attributes: true });
+  }
+
+  /** @callback */
+  disconnectedCallback() {
+    this.observer_.disconnect();
   }
 
   /**
-   * Renders input fields for user-provided data, populates them if data
-   * exists, and adds an observer and listener for user-provided changes.
-   * @public
+   * TODO: consolidate/refactor setupDom_() and setValues_()
+   * @private
    */
-  init() {
-    this.listEl_ = document.querySelector(this.list_);
-    this.totalEl_ = document.querySelector(this.total_);
+  setupDom_() {
+    this.innerHTML = `
+      <ul class="values__list"></ul>
+      <div class="values__total"></div>
+    `;
+  }
+
+  /**
+   * TODO: consolidate/refactor setupDom_() and setValues_()
+   * @private
+   */
+  setValues_() {
+    this.listEl_ = this.querySelector('.values__list');
+    this.totalEl_ = this.querySelector('.values__total');
 
     if (this.listEl_ && this.totalEl_) {
+
       this.calculations = new Calculations({
         currencyAttr: 'currency',
         table: '.table',
@@ -101,13 +123,12 @@ class UserValues {
       });
 
       this.createInputs_();
-      const values = localStorage.getItem(this.storage_);
+      const values = localStorage.getItem(LOCAL_STORAGE);
+
       if (values) {
         this.populateInputs_(values);
-        this.updateTotal();
+        this.updateTotal_();
       }
-      this.calculations.tableCaption();
-      this.updateOnChange_(this.currencyAttr_);
     }
   }
 
@@ -161,58 +182,39 @@ class UserValues {
   }
 
   /**
-   * Sets 'total' element's state via attribute on input change.
+   * Toggles visibility of the 'total' element based on user-provided values.
    * @private
    */
-  setTotalState_() {
-    const periodsEl = document.querySelector(this.periods_);
+  setVisibility_() {
+    // TODO: Add element to the constructor.
+    const periodsEl = this.querySelector('[name=periods]');
 
     if (periodsEl.value <= 0) {
-      this.totalEl_.setAttribute(HIDDEN_ATTR, '');
+      this.totalEl_.setAttribute(EMPTY_ATTR, '');
     } else {
-      this.totalEl_.removeAttribute(HIDDEN_ATTR);
+      this.totalEl_.removeAttribute(EMPTY_ATTR);
     }
-  }
-
-  /**
-   * Watches an element's attributes for changes and updates the total's
-   * value and/or state.
-   * @param {!string} selector - CSS selector of element to observe.
-   * @private 
-   */
-  updateOnChange_(selector) {
-    const target = document.querySelector(selector);
-    const config = {
-      attributes: true,
-    };
-    const self = this;
-
-    const observer = new MutationObserver((mutation) => {
-      self.updateTotal();
-    });
-
-    observer.observe(target, config);
   }
 
   /**
    * Updates DOM element with total value after compounding.
-   * @public
+   * @private
    */
-  updateTotal() {
+  updateTotal_() {
     let values = [];
 
     UserInputs.forEach((el) => {
-      const el_ = document.querySelector(`[name=${el.name}]`);
+      const el_ = this.querySelector(`[name=${el.name}]`);
       const value = Number(el_.value);
       values.push(value);
     });
 
-    if (document.querySelectorAll(INVALID_SELECTOR).length === 0) {
-      localStorage.setItem(this.storage_, values);
+    if (this.querySelectorAll(':invalid').length === 0) {
       this.totalEl_.textContent = this.calculations.compound(...values);
+      localStorage.setItem(LOCAL_STORAGE, values);
     }
 
-    this.setTotalState_();
+    this.setVisibility_();
   }
 }
 

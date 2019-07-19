@@ -1,10 +1,12 @@
+import fastclick from 'fastclick';
+
 /** @const {string} */
 const NO_TOUCH_ATTR = 'no-touch';
 
 /** @class */
-class Utilities {
+class Tools {
   /**
-   * Initializes all utilities.
+   * Initializes handy site-wide methods.
    * @public
    */
   init() {
@@ -29,12 +31,12 @@ class Utilities {
   }
 
   /**
-   * Adds 'no-touch' attribute if not a touch-enabled device.
+   * Attaches fastclick for touch devices; adds 'no-touch' attribute otherwise.
    * @private
    */
   noTouch_() {
     if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
-      return;
+      fastclick.attach(document.body);
     } else {
       document.body.setAttribute(NO_TOUCH_ATTR, '');
     }
@@ -52,4 +54,4 @@ class Utilities {
   }
 }
 
-export { Utilities };
+export { Tools };

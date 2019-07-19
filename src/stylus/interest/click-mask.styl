@@ -1,4 +1,4 @@
-.mask
+.click-mask
   background rgba(black, .8)
   bottom 0
   left 0
@@ -9,9 +9,9 @@
   top 0
   transition opacity var(--transition), visibility var(--transition)
   visibility hidden
-  z-index -1
 
-.settings[open] .mask
+.click-mask[active]
   opacity 1
   pointer-events auto
   visibility visible
+  z-index 1

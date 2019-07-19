@@ -1,136 +1,147 @@
 /** @const {string} */
-const COLLAPSED = 'collapse';
+const EXPANDED_ATTR = 'expanded';
 
 /** @const {string} */
-const EXPANDED = 'expand';
-
-/** @enum {string} */
-const Attribute = {
-  EXPANDED: 'expanded',
-  HIDDEN: 'hidden',
-  TARGET: 'target',
-}
+const HIDDEN_ATTR = 'hidden';
 
 /** @class */
-class Expandable {
-  /**
-   * @param {!Object} config
-   */
-  constructor(config) {
-    /** @private {!string} */
-    this.source_ = config.source;
+class Expandable extends HTMLElement {
+  constructor() {
+    super();
+
+    /** @private {?string} */
+    this.baseClass_ = this.className;
+
+    /** @private {?Element} */
+    this.buttonEl_ = null;
 
     /** @private {!string} */
-    this.storage_ = config.storage;
+    this.label_ = this.getAttribute('label');
 
     /** @private {!string} */
-    this.target_ = config.target;
-
-    /** @private {!string} */
-    this.toggle_ = config.toggle;
+    this.target_ = this.getAttribute('target');
 
     /** @private {?Element} */
     this.targetEl_ = null;
 
     /** @private {?Element} */
-    this.toggleEl_ = null;
+    this.totalEl_ = null;
+
+    /** @private {MutationObserver} */
+    this.observer_ = new MutationObserver(() => {
+      this.setVisibility_();
+    });
+
+    /** @listens click */
+    this.addEventListener('click', () => {
+      // Toggle expanded attribute.
+      if (this.hasAttribute(EXPANDED_ATTR)) {
+        this.removeAttribute(EXPANDED_ATTR);
+      } else {
+        this.setAttribute(EXPANDED_ATTR, '');
+      }
+    });
+  }
+
+  static get observedAttributes() {
+    return [EXPANDED_ATTR];
+  }
+
+  /** @callback */
+  attributeChangedCallback(name, oldValue, newValue) {
+    const direction = (newValue === '') ? 'expand' : 'collapse';
+    this.expandCollapse_(direction);
+  }
+
+  /** @callback */
+  connectedCallback() {
+    this.innerHTML = `<button class="${this.baseClass_}__button"></button>`;
+
+    this.buttonEl_ = this.querySelector('button');
+    this.targetEl_ = document.getElementById(this.target_);
+    this.totalEl_ = document.querySelector('.values__total');
+
+    this.initialState_();
+
+    this.observer_.observe(this.totalEl_, { attributes: true });
+  }
+
+  /** @callback */
+  disconnectedCallback() {
+    this.observer_.disconnect();
   }
 
   /**
-   * Initializes all elements' states.
-   * @public
+   * Sets the initial state of the expandable and its target on page load
+   * based on whether state has been saved to localStorage.
+   * @private
    */
-  init() {
-    this.targetEl_ = document.querySelector(this.target_);
-    this.toggleEl_ = document.querySelector(this.toggle_);
+  initialState_() {
+    // TODO: If expanded is saved and true, and there are also values, don't
+    // animate the target on initial page load. Just display it at is native
+    // height.
+    this.targetEl_.style.height = 0;
+    if (localStorage.getItem(EXPANDED_ATTR) === 'true') {
+      this.setAttribute(EXPANDED_ATTR, '');
+    }
+    this.updateLabel_();
+    this.setVisibility_();
+  }
 
-    if (this.targetEl_ && this.toggleEl_) {
-      this.setStateOnLoad_();
-      this.setToggleLabel_();
-      this.setState();
-
-      // Listen for click and toggle expandable element's state.
-      this.toggleEl_.addEventListener('click', () => {
-        this.expandCollapse_();
-      });
+  /**
+   * If the total is empty, this element should be hidden since there's no
+   * target to expand/collapse.
+   * @private
+   */
+  setVisibility_() {
+    if (this.totalEl_.hasAttribute('empty')) {
+      this.setAttribute(HIDDEN_ATTR, '');
+      this.targetEl_.setAttribute(HIDDEN_ATTR, '');
+    } else {
+      this.removeAttribute(HIDDEN_ATTR);
+      this.targetEl_.removeAttribute(HIDDEN_ATTR);
     }
   }
 
   /**
-   * Expands or collapses an element.
+   * Expands or collapses the target element.
+   * @param {!string} action Either 'expand' or 'collapse'
    * @private
    */
-  expandCollapse_() {
-    const direction = this.targetEl_.hasAttribute(Attribute.EXPANDED) ? COLLAPSED : EXPANDED;
+  expandCollapse_(action) {
+    if (!this.targetEl_) return;
+    
     const elHeight = this.targetEl_.scrollHeight;
 
-    if (direction === COLLAPSED) {
+    if (action === 'expand') {
+      this.targetEl_.style.height = `${elHeight}px`;
+      this.targetEl_.setAttribute(EXPANDED_ATTR, '');
+      this.targetEl_.addEventListener('transitionend', () => {
+        this.targetEl_.style.height = null;
+        this.targetEl_.removeEventListener('transitionend', null, false);
+      }, { once: true });
+    } else {
+      this.targetEl_.removeAttribute(EXPANDED_ATTR);
       window.requestAnimationFrame(() => {
         this.targetEl_.style.height = `${elHeight}px`;
         window.requestAnimationFrame(() => {
           this.targetEl_.style.height = 0;
         });
       });
-      this.targetEl_.removeAttribute(Attribute.EXPANDED);
     }
 
-    if (direction === EXPANDED) {
-      this.targetEl_.style.height = `${elHeight}px`;
-
-      this.targetEl_.addEventListener('transitionend', () => {
-        this.targetEl_.style.height = null;
-        this.targetEl_.removeEventListener('transitionend', null, false);
-      }, { once: true });
-
-      this.targetEl_.setAttribute(Attribute.EXPANDED, '');
-    }
-
-    localStorage.setItem(this.storage_, direction);
-    this.setToggleLabel_();
+    this.updateLabel_();
   }
 
   /**
-   * Sets elements' states via attributes on change.
-   * @public
-   */
-  setState() {
-    const sourceEl = document.querySelector(this.source_);
-    const value = sourceEl.value;
-    const els = [this.targetEl_, this.toggleEl_];
-    const threshold = 0;
-
-    Array.from(els).forEach((el) => {
-      if (value <= threshold) {
-        el.setAttribute(Attribute.HIDDEN, '');
-      } else {
-        el.removeAttribute(Attribute.HIDDEN);
-      }
-    });
-  }
-
-  /**
-   * Sets elements' states via attributes on initial page load.
+   * Updates label text based on whether the element is expanded.
    * @private
    */
-  setStateOnLoad_() {
-    if (localStorage.getItem(this.storage_) === EXPANDED) {
-      this.targetEl_.setAttribute(Attribute.EXPANDED, '');
-    } else {
-      this.targetEl_.removeAttribute(Attribute.EXPANDED);
-      this.targetEl_.style.height = 0;
-    }
-  }
-
-  /**
-   * Sets toggle label based on the target element's state.
-   * @private
-   */
-  setToggleLabel_() {
-    const attr = this.targetEl_.hasAttribute(Attribute.EXPANDED) ? 'visible' : 'hidden';
-    const label = this.targetEl_.hasAttribute(Attribute.EXPANDED) ? 'Hide' : 'Show';
-
-    this.toggleEl_.setAttribute(Attribute.TARGET, attr);
-    this.toggleEl_.textContent = `${label} table`;
+  updateLabel_() {
+    const expanded = this.hasAttribute(EXPANDED_ATTR);
+    const prefix = expanded ? 'Hide' : 'Show';
+    this.buttonEl_.textContent = `${prefix} ${this.label_}`;
+    localStorage.setItem(EXPANDED_ATTR, expanded);
   }
 }
 

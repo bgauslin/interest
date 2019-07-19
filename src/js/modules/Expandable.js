@@ -60,6 +60,7 @@ class Expandable extends HTMLElement {
     this.innerHTML = `<button class="${this.baseClass_}__button"></button>`;
     this.buttonEl_ = this.querySelector('button');
     this.initialState_();
+    this.setVisibility_()
 
     this.observer_.observe(this.totalEl_, { attributes: true });
   }
@@ -88,12 +89,11 @@ class Expandable extends HTMLElement {
    * @private
    */
   setVisibility_() {
-    if (this.totalEl_.hasAttribute(HIDDEN_ATTR)) {
+    if (this.totalEl_.hasAttribute('empty')) {
       this.setAttribute(HIDDEN_ATTR, '');
     } else {
       this.removeAttribute(HIDDEN_ATTR);
     }
-    console.log('totalEl changed!');
   }
 
   /**

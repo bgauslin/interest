@@ -1,7 +1,7 @@
 import { Calculations } from './Calculations';
 
 /** @const {string} */
-const HIDDEN_ATTR = 'hidden';
+const EMPTY_ATTR = 'empty';
 
 /** @const {string} */
 const LOCAL_STORAGE = 'values';
@@ -189,9 +189,9 @@ class UserValues extends HTMLElement {
     const periodsEl = this.querySelector('[name=periods]');
 
     if (periodsEl.value <= 0) {
-      this.totalEl_.setAttribute(HIDDEN_ATTR, '');
+      this.totalEl_.setAttribute(EMPTY_ATTR, '');
     } else {
-      this.totalEl_.removeAttribute(HIDDEN_ATTR);
+      this.totalEl_.removeAttribute(EMPTY_ATTR);
     }
   }
 

@@ -25,9 +25,6 @@ class App {
     this.renderHeader_();
     this.renderContent_();
     this.renderFooter_();
-
-    // Dispatch custom event and let modules know there's now a DOM for them.
-    document.dispatchEvent(new CustomEvent('ready'));
   }
 
   /**
@@ -46,7 +43,7 @@ class App {
   }
 
   /**
-   * Renders user inputs, table, and expandable button into the DOM.
+   * Renders user inputs, table, expandable, and click mask into the DOM.
    * @private
    */
   renderContent_() {
@@ -59,7 +56,7 @@ class App {
   }
 
   /**
-   * Renders table markup for calculated user values.
+   * Renders table element for displaying calculated user values.
    * @param {!string} classname
    * @param {?string=} id
    * @private
@@ -78,11 +75,16 @@ class App {
   }
 
   /**
-   * Renders footer element into the DOM.
+   * Renders footer element with copyright info and a link into the DOM.
    * @private
    */
   renderFooter_() {
-    const { label, title, url, yearStart, yearEnd } = FOOTER_INFO;
+    const label = 'Ben Gauslin';
+    const title = 'Ben Gauslin’s Website';
+    const url = 'https://gauslin.com';
+    const yearStart = '2018';
+    const yearEnd = new Date().getFullYear().toString().substr(-2);
+
     this.appEl_.innerHTML += `
       <footer class="footer">
         <p class="copyright">
@@ -96,15 +98,6 @@ class App {
       </footer>
     `;
   }
-}
-
-/** @const {Object} */
-const FOOTER_INFO = {
-  label: 'Ben Gauslin',
-  title: 'Ben Gauslin’s Website',
-  url: 'https://gauslin.com',
-  yearStart: '2018',
-  yearEnd: new Date().getFullYear().toString().substr(-2),
 }
 
 export { App };

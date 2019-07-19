@@ -15,6 +15,9 @@ class Expandable extends HTMLElement {
     /** @private {?Element} */
     this.buttonEl_ = null;
 
+    /** @private {boolean} */
+    this.hasSetup_ = false;
+
     /** @private {!string} */
     this.label_ = this.getAttribute('label');
 
@@ -61,9 +64,9 @@ class Expandable extends HTMLElement {
     this.targetEl_ = document.getElementById(this.target_);
     this.totalEl_ = document.querySelector('.values__total');
 
-    this.initialState_();
-
     this.observer_.observe(this.totalEl_, { attributes: true });
+
+    this.setup_();
   }
 
   /** @callback */
@@ -76,16 +79,19 @@ class Expandable extends HTMLElement {
    * based on whether state has been saved to localStorage.
    * @private
    */
-  initialState_() {
-    // TODO: If expanded is saved and true, and there are also values, don't
-    // animate the target on initial page load. Just display it at is native
-    // height.
-    this.targetEl_.style.height = 0;
+  setup_() {
     if (localStorage.getItem(EXPANDED_ATTR) === 'true') {
       this.setAttribute(EXPANDED_ATTR, '');
+      this.targetEl_.setAttribute(EXPANDED_ATTR, '');
+    } else {
+      this.targetEl_.style.height = 0;
+      this.targetEl_.removeAttribute(EXPANDED_ATTR);
     }
+
     this.updateLabel_();
     this.setVisibility_();
+
+    this.hasSetup_ = true;
   }
 
   /**
@@ -109,19 +115,24 @@ class Expandable extends HTMLElement {
    * @private
    */
   expandCollapse_(action) {
-    if (!this.targetEl_) return;
-    
+    if (!this.targetEl_ || !this.hasSetup_) {
+      return;
+    }
+
     const elHeight = this.targetEl_.scrollHeight;
 
     if (action === 'expand') {
-      this.targetEl_.style.height = `${elHeight}px`;
       this.targetEl_.setAttribute(EXPANDED_ATTR, '');
+
+      this.targetEl_.style.height = `${elHeight}px`;
       this.targetEl_.addEventListener('transitionend', () => {
         this.targetEl_.style.height = null;
         this.targetEl_.removeEventListener('transitionend', null, false);
       }, { once: true });
+
     } else {
       this.targetEl_.removeAttribute(EXPANDED_ATTR);
+
       window.requestAnimationFrame(() => {
         this.targetEl_.style.height = `${elHeight}px`;
         window.requestAnimationFrame(() => {

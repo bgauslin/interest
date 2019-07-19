@@ -61,6 +61,7 @@ class Settings extends HTMLElement {
   constructor() {
     super();
 
+    /** @listens click */
     this.addEventListener('click', (e) => {
       // Toggle the menu open/closed.
       if (e.target.classList.contains(CssClass.TOGGLE)) {
@@ -83,7 +84,7 @@ class Settings extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [THEME_ATTR, CURRENCY_ATTR];
+    return [CURRENCY_ATTR, THEME_ATTR];
   }
 
   /** @callback */

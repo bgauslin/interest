@@ -21,15 +21,23 @@ class ClickMask extends HTMLElement {
     });
   }
 
+  /** @callback */
   connectedCallback() {
     this.targetEl_ = document.getElementById(this.target_);
     this.observer_.observe(this.targetEl_, { attributes: true });
   }
 
+  /** @callback */
   disconnectedCallback() {
     this.observer_.disconnect();
   }
 
+  /**
+   * Toggles active state on the element based on its target's state. If the
+   * element is active, clicking on it will make it inactive and change its
+   * target's state.
+   * @private
+   */
   updateState_() {
     if (this.targetEl_.hasAttribute(OPEN_ATTR)) {
       this.setAttribute(ACTIVE_ATTR, '');

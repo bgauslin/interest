@@ -15,39 +15,11 @@ const tools = new Tools();
  * @listens DOMContentLoaded
  */
 document.addEventListener('DOMContentLoaded', () => {
-<<<<<<< HEAD
-  utilities.init();
-  templates.init();
-}, { once: true });
-
-/**
- * Initializes the app when the DOM is ready.
- * @listens 
- */
-document.addEventListener('ready', () => {
-  userValues.init();
-  expandable.init();
-  fastclick.attach(document.body);
-  // registerServiceWorker();
-}, { once: true });
-
-/**
- * Toggles component states on user input.
- * @listens keyup
- */
-document.addEventListener('keyup', () => {
-  expandable.setState();
-  userValues.updateTotal();
-});
-
-/**
-=======
   app.init();
   tools.init();
 }, { once: true });
 
 /**
->>>>>>> custom_elements
  * Updates 'vh' value when window is resized.
  * @listens resize
  */

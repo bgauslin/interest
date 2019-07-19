@@ -53,7 +53,7 @@ class App {
     this.appEl_.innerHTML += `
       <user-values class="values"></user-values>
       ${this.renderTable_('table')}
-      <my-expandable target="table" label="table"></my-expandable>
+      <my-expandable class="expandable" target="table" label="table"></my-expandable>
       <click-mask class="click-mask" target="settings"></click-mask>
     `;
   }

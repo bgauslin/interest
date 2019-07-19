@@ -1,13 +1,7 @@
 import { Calculations } from './Calculations';
 
 /** @const {string} */
-const CURRENCY_ATTR = 'currency';
-
-/** @const {string} */
 const HIDDEN_ATTR = 'hidden';
-
-/** @const {string} */
-const INVALID_SELECTOR = ':invalid';
 
 /** @const {string} */
 const LOCAL_STORAGE = 'values';
@@ -68,24 +62,39 @@ class UserValues extends HTMLElement {
     super();
 
     /** @private {?Element} */
+    this.currencyEl_ = null;
+
+    /** @private {?Element} */
     this.listEl_ = null;
 
     /** @private {?Element} */
     this.totalEl_ = null;
+
+    this.addEventListener('keyup', () => {
+      this.updateTotal_();
+    });
+
+    this.observer_ = new MutationObserver(() => {
+      this.updateTotal_();
+    });
   }
 
-  /**
-   * Renders input fields for user-provided data, populates them if data
-   * exists, and adds an observer and listener for user-provided changes.
-   * @public
-   */
+  /** @callback */
   connectedCallback() {
     this.setupDom_();
-    this.setupValues_();
-    this.handleEvents_();
+    this.setValues_();
+    this.setVisibility_();
+    this.currencyEl_ = document.querySelector('[currency]');
+    this.observer_.observe(this.currencyEl_, { attributes: true });
+  }
+
+  /** @callback */
+  disconnectedCallback() {
+    this.observer_.disconnect();
   }
 
   /**
+   * Inserts HTML elements into the DOM.
    * @private
    */
   setupDom_() {
@@ -96,9 +105,10 @@ class UserValues extends HTMLElement {
   }
 
   /**
+   * TODO: Add comment here...
    * @private
    */
-  setupValues_() {
+  setValues_() {
     this.listEl_ = this.querySelector('.values__list');
     this.totalEl_ = this.querySelector('.values__total');
 
@@ -117,18 +127,7 @@ class UserValues extends HTMLElement {
         this.populateInputs_(values);
         this.updateTotal_();
       }
-
-      this.updateOnChange_(CURRENCY_ATTR);
     }
-  }
-
-  /**
-   * @private
-   */
-  handleEvents_() {
-    this.addEventListener('keyup', () => {
-      this.updateTotal_();
-    });
   }
 
   /**
@@ -181,37 +180,19 @@ class UserValues extends HTMLElement {
   }
 
   /**
-   * Sets 'total' element's state via attribute on input change.
+   * TODO: When there are no values (i.e. of initial page load), expandable
+   * and table should have 'hidden' attributes set on them.
+   * Toggles visibility of elements when all user-provided values are valid.
    * @private
    */
-  setTotalState_() {
-    const periodsEl = document.querySelector('[name=periods]');
+  setVisibility_() {
+    const periodsEl = this.querySelector('[name=periods]');
 
     if (periodsEl.value <= 0) {
       this.totalEl_.setAttribute(HIDDEN_ATTR, '');
     } else {
       this.totalEl_.removeAttribute(HIDDEN_ATTR);
     }
-  }
-
-  /**
-   * Watches an element's attributes for changes and updates the total's
-   * value and/or state.
-   * @param {!string} attr - CSS selector of element to observe.
-   * @private 
-   */
-  updateOnChange_(attr) {
-    const target = document.querySelector(`[${attr}]`);
-    const config = {
-      attributes: true,
-    };
-    const self = this;
-
-    const observer = new MutationObserver((mutation) => {
-      self.updateTotal_();
-    });
-
-    observer.observe(target, config);
   }
 
   /**
@@ -227,15 +208,12 @@ class UserValues extends HTMLElement {
       values.push(value);
     });
 
-    // TODO: Dispatch a custom event that expandable listens for:
-    // expandable.setState();
-
-    if (this.querySelectorAll(INVALID_SELECTOR).length === 0) {
-      localStorage.setItem(LOCAL_STORAGE, values);
+    if (this.querySelectorAll(':invalid').length === 0) {
       this.totalEl_.textContent = this.calculations.compound(...values);
+      localStorage.setItem(LOCAL_STORAGE, values);
     }
 
-    this.setTotalState_();
+    this.setVisibility_();
   }
 }
 

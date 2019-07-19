@@ -9,6 +9,9 @@ class Expandable extends HTMLElement {
   constructor() {
     super();
 
+    /** @private {?string} */
+    this.baseClass_ = this.className;
+
     /** @private {?Element} */
     this.buttonEl_ = null;
 
@@ -21,6 +24,9 @@ class Expandable extends HTMLElement {
     /** @private {?Element} */
     this.targetEl_ = null;
 
+    /** @private {?Element} */
+    this.totalEl_ = null;
+
     // Toggle expanded attribute on click.
     this.addEventListener('click', () => {
       if (this.hasAttribute(EXPANDED_ATTR)) {
@@ -28,6 +34,11 @@ class Expandable extends HTMLElement {
       } else {
         this.setAttribute(EXPANDED_ATTR, '');
       }
+    });
+
+    // Toggle visibility based on state of the total.
+    this.observer_ = new MutationObserver(() => {
+      this.setVisibility_();
     });
   }
 
@@ -44,11 +55,18 @@ class Expandable extends HTMLElement {
   /** @callback */
   connectedCallback() {
     this.targetEl_ = document.getElementById(this.target_);
-    if (this.targetEl_) {
-      this.innerHTML = '<button></button>';
-      this.buttonEl_ = this.querySelector('button');
-      this.initialState_();
-    }
+    this.totalEl_ = document.querySelector('.values__total');
+
+    this.innerHTML = `<button class="${this.baseClass_}__button"></button>`;
+    this.buttonEl_ = this.querySelector('button');
+    this.initialState_();
+
+    this.observer_.observe(this.totalEl_, { attributes: true });
+  }
+
+  /** @callback */
+  disconnectedCallback() {
+    this.observer_.disconnect();
   }
 
   /**
@@ -62,10 +80,20 @@ class Expandable extends HTMLElement {
       this.setAttribute(EXPANDED_ATTR, '');
     }
     this.updateLabel_();
+  }
 
-    // TODO: Hide expandable when there are fewer than a certain number of
-    // table rows relative to available screen real estate.
-    // this.setAttribute(HIDDEN_ATTR, '');
+  /**
+   * If the total is hidden, this should be hidden as well since there's
+   * no target to expand/collapse.
+   * @private
+   */
+  setVisibility_() {
+    if (this.totalEl_.hasAttribute(HIDDEN_ATTR)) {
+      this.setAttribute(HIDDEN_ATTR, '');
+    } else {
+      this.removeAttribute(HIDDEN_ATTR);
+    }
+    console.log('totalEl changed!');
   }
 
   /**

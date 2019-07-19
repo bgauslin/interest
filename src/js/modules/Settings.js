@@ -158,43 +158,6 @@ class Settings extends HTMLElement {
   }
 
   /**
-<<<<<<< HEAD
-   * Handles all events on the element, and adds a listener to the mask that
-   * closes the menu when the mask is clicked.
-   * @private
-   */
-  // TODO: Debug intermittent touch responsiveness when clicking the settings
-  // toggle button.
-  handleEvents_() {
-    this.addEventListener('click', (e) => {
-      // Toggle the menu open/closed.
-      if (e.target.classList.contains(CssClass.TOGGLE)) {
-        if (this.hasAttribute(Attribute.OPEN)) {
-          this.removeAttribute(Attribute.OPEN);
-        } else {
-          this.setAttribute(Attribute.OPEN, '');
-        }
-      }
-
-      // Change the current theme or currency.
-      const hasLabel = e.target.getAttribute('for');
-      if (hasLabel) {
-        const el = e.target.querySelector('[name]');
-        const name = el.getAttribute('name');
-        const value = el.getAttribute('value');
-        this.setAttribute(name, value);
-      }
-    });
-
-    // Close the menu when clicking outside of the menu.
-    document.querySelector(`.${CssClass.MASK}`).addEventListener('click', (e) => {
-      this.removeAttribute(Attribute.OPEN);
-    });
-  }
-
-  /**
-=======
->>>>>>> custom_elements
    * Sets current option.
    * @param {!string} name - Attribute to set on the body element.
    * @param {!string} oldValue - Attribute's previous value.

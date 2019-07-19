@@ -96,8 +96,10 @@ class Expandable extends HTMLElement {
   setVisibility_() {
     if (this.totalEl_.hasAttribute('empty')) {
       this.setAttribute(HIDDEN_ATTR, '');
+      this.targetEl_.setAttribute(HIDDEN_ATTR, '');
     } else {
       this.removeAttribute(HIDDEN_ATTR);
+      this.targetEl_.removeAttribute(HIDDEN_ATTR);
     }
   }
 

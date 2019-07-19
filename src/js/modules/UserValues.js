@@ -70,11 +70,13 @@ class UserValues extends HTMLElement {
     /** @private {?Element} */
     this.totalEl_ = null;
 
-    this.addEventListener('keyup', () => {
+    /** @private {MutationObserver} */
+    this.observer_ = new MutationObserver(() => {
       this.updateTotal_();
     });
 
-    this.observer_ = new MutationObserver(() => {
+    /** @listens keyup */
+    this.addEventListener('keyup', () => {
       this.updateTotal_();
     });
   }
@@ -94,7 +96,7 @@ class UserValues extends HTMLElement {
   }
 
   /**
-   * Inserts HTML elements into the DOM.
+   * TODO: consolidate/refactor setupDom_() and setValues_()
    * @private
    */
   setupDom_() {
@@ -105,7 +107,7 @@ class UserValues extends HTMLElement {
   }
 
   /**
-   * TODO: Add comment here...
+   * TODO: consolidate/refactor setupDom_() and setValues_()
    * @private
    */
   setValues_() {
@@ -180,12 +182,11 @@ class UserValues extends HTMLElement {
   }
 
   /**
-   * TODO: When there are no values (i.e. of initial page load), expandable
-   * and table should have 'hidden' attributes set on them.
-   * Toggles visibility of elements when all user-provided values are valid.
+   * Toggles visibility of the 'total' element based on user-provided values.
    * @private
    */
   setVisibility_() {
+    // TODO: Add element to the constructor.
     const periodsEl = this.querySelector('[name=periods]');
 
     if (periodsEl.value <= 0) {

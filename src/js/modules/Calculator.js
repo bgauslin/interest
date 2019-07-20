@@ -5,7 +5,7 @@ const CURRENCY_RUPEES = 'inr';
 const EURO_FORMAT_THRESHOLD = 50000;
 
 /** @class */
-class Calculations {
+class Calculator {
   constructor(currencyAttr) {
     /** @private {!string} */
     this.currencyAttr_ = currencyAttr;
@@ -111,4 +111,4 @@ class Calculations {
   }
 }
 
-export { Calculations };
+export { Calculator };

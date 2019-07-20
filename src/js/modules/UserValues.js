@@ -1,4 +1,4 @@
-import { Calculations } from './Calculations';
+import { Calculator } from './Calculator';
 
 /** @const {string} */
 const EMPTY_ATTR = 'empty';
@@ -61,17 +61,20 @@ class UserValues extends HTMLElement {
   constructor() {
     super();
 
+    /** @private {instance} */
+    this.calculator_ = new Calculator('currency');
+
     /** @private {?Element} */
-    this.currencyEl_ = null;
+    this.currencyEl_ = document.querySelector('[currency]');
 
     /** @private {?Element} */
     this.listEl_ = null;
 
     /** @private {!Element} */
-    this.tableEl_ = null;
+    this.tableEl_ = document.querySelector('.table');
 
     /** @private {!Element} */
-    this.tableDataEl_ = null;
+    this.tableDataEl_ = document.querySelector('.table__data');
 
     /** @private {?Element} */
     this.totalEl_ = null;
@@ -95,11 +98,6 @@ class UserValues extends HTMLElement {
     this.setupDom_();
     this.setValues_();
     this.setVisibility_();
-    
-    // Assign constructor variables to elements outside of the custom element.
-    this.currencyEl_ = document.querySelector('[currency]');
-    this.tableEl_ = document.querySelector('.table');
-    this.tableDataEl_ = document.querySelector('.table__data');
 
     // Observe the global 'currency' attribute for updating data formatting.
     this.observer_.observe(this.currencyEl_, { attributes: true });
@@ -119,6 +117,8 @@ class UserValues extends HTMLElement {
       <ul class="values__list"></ul>
       <div class="values__total"></div>
     `;
+    this.listEl_ = this.querySelector('.values__list');
+    this.totalEl_ = this.querySelector('.values__total');
   }
 
   /**
@@ -126,13 +126,7 @@ class UserValues extends HTMLElement {
    * @private
    */
   setValues_() {
-    this.listEl_ = this.querySelector('.values__list');
-    this.totalEl_ = this.querySelector('.values__total');
-
     if (this.listEl_ && this.totalEl_) {
-
-      this.calculations = new Calculations('currency');
-
       this.createInputs_();
       const values = localStorage.getItem(LOCAL_STORAGE);
 
@@ -222,7 +216,7 @@ class UserValues extends HTMLElement {
 
     if (this.querySelectorAll(':invalid').length === 0) {
       // Calculate all sums from user data and render it all in a table.
-      this.sums_ = this.calculations.compound(...values);
+      this.sums_ = this.calculator_.compound(...values);
       this.renderTable_();
 
       // Destructure last item in 'sums' array and display 'balance' from it.

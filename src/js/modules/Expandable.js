@@ -32,9 +32,7 @@ class Expandable extends HTMLElement {
     this.totalEl_ = document.querySelector('.values__total');
 
     /** @private {MutationObserver} */
-    this.observer_ = new MutationObserver(() => {
-      this.setVisibility_();
-    });
+    this.observer_ = new MutationObserver(() => this.setVisibility_());
 
     /** @listens click */
     this.addEventListener('click', () => {

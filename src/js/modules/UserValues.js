@@ -106,9 +106,7 @@ class UserValues extends HTMLElement {
     this.calculator_ = new Calculator();
 
     /** @private {MutationObserver} */
-    this.observer_ = new MutationObserver(() => {
-      this.updateTotal_();
-    });
+    this.observer_ = new MutationObserver(() => this.updateTotal_());
 
     /** @listens keyup */
     this.addEventListener('keyup', () => this.updateTotal_());

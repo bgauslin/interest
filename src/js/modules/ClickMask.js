@@ -16,9 +16,7 @@ class ClickMask extends HTMLElement {
     this.targetEl_ = null;
 
     /** @const {MutationObserver} */
-    this.observer_ = new MutationObserver(() => {
-      this.updateState_();
-    });
+    this.observer_ = new MutationObserver(() => this.updateState_());
   }
 
   /** @callback */

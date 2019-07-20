@@ -111,9 +111,7 @@ class UserValues extends HTMLElement {
     });
 
     /** @listens keyup */
-    this.addEventListener('keyup', () => {
-      this.updateTotal_();
-    });
+    this.addEventListener('keyup', () => this.updateTotal_());
   }
 
   /** @callback */

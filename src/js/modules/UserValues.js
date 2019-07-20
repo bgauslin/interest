@@ -57,22 +57,23 @@ const UserInputs = [
 ];
 
 /**
- * CSS selectors for DOM elements outside of this element.
- * @enum {string}
- */
-const Selector = {
-  CURRENCY: '[currency]',
-  TABLE: '.table',
-  TABLE_DATA: '.table__data',
-};
-
-/**
  * CSS selectors for elements created by this custom element.
  * @enum {string}
  */
 const CssClass = {
   LIST: 'values__list',
+  TABLE: 'table',
+  TABLE_DATA: 'table__data',
   TOTAL: 'values__total',
+};
+
+/**
+ * CSS selectors for DOM elements.
+ * @enum {string}
+ */
+const Selector = {
+  CURRENCY: '[currency]',
+  PERIODS: '[name=periods]',
 };
 
 /** @class */
@@ -84,16 +85,19 @@ class UserValues extends HTMLElement {
     this.listEl_ = null;
 
     /** @private {?Element} */
+    this.periodsEl_ = null;
+
+    /** @private {?Element} */
     this.totalEl_ = null;
 
     /** @private {?Element} */
     this.currencyEl_ = document.querySelector(Selector.CURRENCY);
 
     /** @private {!Element} */
-    this.tableEl_ = document.querySelector(Selector.TABLE);
+    this.tableEl_ = document.querySelector(`.${CssClass.TABLE}`);
 
     /** @private {!Element} */
-    this.tableDataEl_ = document.querySelector(Selector.TABLE_DATA);
+    this.tableDataEl_ = document.querySelector(`.${CssClass.TABLE_DATA}`);
 
     /** @private {!Array} */
     this.sums_ = [];
@@ -116,8 +120,6 @@ class UserValues extends HTMLElement {
   connectedCallback() {
     this.setupDom_();
     this.setVisibility_();
-
-    // Observe the global 'currency' attribute for updating data formatting.
     this.observer_.observe(this.currencyEl_, { attributes: true });
   }
 
@@ -131,29 +133,7 @@ class UserValues extends HTMLElement {
    * @private
    */
   setupDom_() {
-    this.innerHTML = `
-      <ul class="${CssClass.LIST}"></ul>
-      <div class="${CssClass.TOTAL}"></div>
-    `;
-    this.listEl_ = this.querySelector(`.${CssClass.LIST}`);
-    this.totalEl_ = this.querySelector(`.${CssClass.TOTAL}`);
-
-    this.createInputs_();
-
-    const storedUserValues = localStorage.getItem(LOCAL_STORAGE);
-    if (storedUserValues) {
-      this.populateInputs_(storedUserValues);
-      this.updateTotal_();
-    }
-  }
-
-  /**
-   * Creates and attaches input fields for user-provided values.
-   * @private
-   */
-  createInputs_() {
-    let html = '';
-
+    let listHtml = '';
     UserInputs.forEach((el, index) => {
       const min = (el.min) ? `min="${el.min}"` : '';
       const max = (el.max) ? `max="${el.max}"` : '';
@@ -175,10 +155,25 @@ class UserValues extends HTMLElement {
                  aria-label="${el.label}">
         </li>
       `;
-      html += input;
+      listHtml += input;
     });
 
-    this.listEl_.innerHTML = html;
+    this.innerHTML = `
+      <ul class="${CssClass.LIST}">
+        ${listHtml}
+      </ul>
+      <div class="${CssClass.TOTAL}"></div>
+    `;
+
+    this.listEl_ = this.querySelector(`.${CssClass.LIST}`);
+    this.totalEl_ = this.querySelector(`.${CssClass.TOTAL}`);
+    this.periodsEl_ = this.querySelector(Selector.PERIODS);
+
+    const storedUserValues = localStorage.getItem(LOCAL_STORAGE);
+    if (storedUserValues) {
+      this.populateInputs_(storedUserValues);
+      this.updateTotal_();
+    }
   }
 
   /**
@@ -195,14 +190,12 @@ class UserValues extends HTMLElement {
   }
 
   /**
-   * Toggles visibility of the 'total' element based on user-provided values.
+   * Toggles visibility of the 'total' element if there's at least one period
+   * of calculated compounding values.
    * @private
    */
   setVisibility_() {
-    // TODO: Add element to the constructor.
-    const periodsEl = this.querySelector('[name=periods]');
-
-    if (periodsEl.value <= 0) {
+    if (this.periodsEl_.value <= 0) {
       this.totalEl_.setAttribute(EMPTY_ATTR, '');
     } else {
       this.totalEl_.removeAttribute(EMPTY_ATTR);
@@ -210,7 +203,7 @@ class UserValues extends HTMLElement {
   }
 
   /**
-   * Updates DOM element with total value after compounding.
+   * Updates 'total value' DOM element after calculating all compounding values.
    * @private
    */
   updateTotal_() {
@@ -239,7 +232,7 @@ class UserValues extends HTMLElement {
   }
 
   /**
-   * Renders initial and compounded amounts for each time period.
+   * Renders initial and compounded amounts for each period.
    * @private
    */
   renderTable_() {

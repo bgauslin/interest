@@ -207,12 +207,8 @@ class UserValues extends HTMLElement {
    * @private
    */
   updateTotal_() {
-    let values = [];
-
-    UserInputs.forEach((el) => {
-      const el_ = this.querySelector(`[name=${el.name}]`);
-      const value = Number(el_.value);
-      values.push(value);
+    const values = UserInputs.map(el => {
+      return parseInt(this.querySelector(`[name=${el.name}]`).value);
     });
 
     if (this.querySelectorAll(':invalid').length === 0) {
@@ -221,7 +217,8 @@ class UserValues extends HTMLElement {
       this.renderTable_();
 
       // Destructure last item in 'sums' array and display 'balance' from it.
-      const [year, deposits, interest, balance, growth] = this.sums_[this.sums_.length - 1];
+      const lastSum = this.sums_[this.sums_.length - 1];
+      const [year, deposits, interest, balance, growth] = lastSum;
       this.totalEl_.textContent = balance;
 
       // Save user values to localStorage.

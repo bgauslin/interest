@@ -99,7 +99,7 @@ class UserValues extends HTMLElement {
     this.sums_ = [];
 
     /** @private {instance} */
-    this.calculator_ = new Calculator('currency');
+    this.calculator_ = new Calculator();
 
     /** @private {MutationObserver} */
     this.observer_ = new MutationObserver(() => {

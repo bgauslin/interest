@@ -1,4 +1,7 @@
 /** @const {string} */
+const CURRENCY_ATTR = 'currency';
+
+/** @const {string} */
 const CURRENCY_RUPEES = 'inr';
 
 /** @const {number} */
@@ -6,11 +9,6 @@ const EURO_FORMAT_THRESHOLD = 50000;
 
 /** @class */
 class Calculator {
-  constructor(currencyAttr) {
-    /** @private {!string} */
-    this.currencyAttr_ = currencyAttr;
-  }
-
   /**
    * Calculates a value with interest applied to initial value.
    * @param {!number} amount - Initial value.
@@ -67,7 +65,7 @@ class Calculator {
    * @private
    */
   formatCurrency_(amount) {
-    const currentCurrency = document.body.getAttribute(this.currencyAttr_);
+    const currentCurrency = document.body.getAttribute(CURRENCY_ATTR);
 
     if (currentCurrency === CURRENCY_RUPEES) {
       return this.formatRupees_(amount);

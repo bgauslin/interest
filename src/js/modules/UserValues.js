@@ -67,8 +67,17 @@ class UserValues extends HTMLElement {
     /** @private {?Element} */
     this.listEl_ = null;
 
+    /** @private {!Element} */
+    this.tableEl_ = null;
+
+    /** @private {!Element} */
+    this.tableDataEl_ = null;
+
     /** @private {?Element} */
     this.totalEl_ = null;
+
+    /** @private {!Array} */
+    this.sums_ = [];
 
     /** @private {MutationObserver} */
     this.observer_ = new MutationObserver(() => {
@@ -86,7 +95,13 @@ class UserValues extends HTMLElement {
     this.setupDom_();
     this.setValues_();
     this.setVisibility_();
+    
+    // Assign constructor variables to elements outside of the custom element.
     this.currencyEl_ = document.querySelector('[currency]');
+    this.tableEl_ = document.querySelector('.table');
+    this.tableDataEl_ = document.querySelector('.table__data');
+
+    // Observe the global 'currency' attribute for updating data formatting.
     this.observer_.observe(this.currencyEl_, { attributes: true });
   }
 
@@ -116,11 +131,7 @@ class UserValues extends HTMLElement {
 
     if (this.listEl_ && this.totalEl_) {
 
-      this.calculations = new Calculations({
-        currencyAttr: 'currency',
-        table: '.table',
-        tableData: '.table__data',
-      });
+      this.calculations = new Calculations('currency');
 
       this.createInputs_();
       const values = localStorage.getItem(LOCAL_STORAGE);
@@ -210,11 +221,50 @@ class UserValues extends HTMLElement {
     });
 
     if (this.querySelectorAll(':invalid').length === 0) {
-      this.totalEl_.textContent = this.calculations.compound(...values);
+      // Calculate all sums from user data and render it all in a table.
+      this.sums_ = this.calculations.compound(...values);
+      this.renderTable_();
+
+      // Destructure last item in 'sums' array and display 'balance' from it.
+      const [year, deposits, interest, balance, growth] = this.sums_[this.sums_.length - 1];
+      this.totalEl_.textContent = balance;
+
+      // Save user values to localStorage.
       localStorage.setItem(LOCAL_STORAGE, values);
     }
 
     this.setVisibility_();
+  }
+
+  /**
+   * Renders initial and compounded amounts for each time period.
+   * @private
+   */
+  renderTable_() {
+    let tableHtml = `
+      <tr>
+        <th class="year">Year</th>
+        <th class="deposits">Deposits</th>
+        <th class="interest">Interest</th>
+        <th class="balance">Balance</th>
+        <th class="growth">Growth</th>
+      </tr>
+    `;
+
+    this.sums_.forEach((item) => {
+      const [year, deposits, interest, balance, growth] = item;
+      tableHtml += `
+        <tr>
+          <td class="year">${year}</td>
+          <td class="deposits">${deposits}</td>
+          <td class="interest">${interest}</td>
+          <td class="balance">${balance}</td>
+          <td class="growth">${growth}</td>
+        </tr>
+      `;
+    });
+
+    this.tableDataEl_.innerHTML = tableHtml;
   }
 }
 

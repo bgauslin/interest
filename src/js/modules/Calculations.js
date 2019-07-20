@@ -6,21 +6,9 @@ const EURO_FORMAT_THRESHOLD = 50000;
 
 /** @class */
 class Calculations {
-  /**
-   * @param {!Object} config
-   * @param {!string} config.table
-   * @param {!string} config.tableData
-   * @param {!string} config.currencyAttr
-   */
-  constructor(config) {
-    /** @private {!Element} */
-    this.tableEl_ = document.querySelector(config.table);
-
-    /** @private {!Element} */
-    this.tableDataEl_ = document.querySelector(config.tableData);
-
+  constructor(currencyAttr) {
     /** @private {!string} */
-    this.currencyAttr_ = config.currencyAttr;
+    this.currencyAttr_ = currencyAttr;
   }
 
   /**
@@ -51,7 +39,7 @@ class Calculations {
     let c = pmt;
     let principalCompounded;
     let contributionCompounded;
-    let sums = [];
+    const sums = [];
 
     for (let i = 1; i <= periods; i++) {
       principalCompounded = this.amountWithInterest_(p, rate);
@@ -69,13 +57,7 @@ class Calculations {
       sums.push([i, this.formatCurrency_(deposits), this.formatCurrency_(interest), this.formatCurrency_(balance), growth]);
     }
 
-    // Pass the 'sums' array to a method and render it as a table.
-    this.renderTable_(sums);
-
-    // Destructure 'sums' array and return 'balance' from it.
-    const [year, deposits, interest, balance, growth] = sums[sums.length - 1];
-
-    return balance;
+    return sums;
   }
 
   /**
@@ -126,43 +108,6 @@ class Calculations {
     if (thousands) hundreds = `,${hundreds}`;
 
     return `${thousandsFormatted}${hundreds}.${decimal}`;
-  }
-
-  /**
-   * Renders initial and compounded amounts for each time period.
-   * @param {!Array} data - Calculated values.
-   * @param {!number} data[].year
-   * @param {!number} data[].deposits
-   * @param {!number} data[].interest
-   * @param {!number} data[].balance
-   * @param {!number} data[].growth
-   * @private
-   */
-  renderTable_(data) {
-    let html = `
-      <tr>
-        <th class="year">Year</th>
-        <th class="deposits">Deposits</th>
-        <th class="interest">Interest</th>
-        <th class="balance">Balance</th>
-        <th class="growth">Growth</th>
-      </tr>
-    `;
-
-    data.forEach((item) => {
-      const [year, deposits, interest, balance, growth] = item;
-      html += `
-        <tr>
-          <td class="year">${year}</td>
-          <td class="deposits">${deposits}</td>
-          <td class="interest">${interest}</td>
-          <td class="balance">${balance}</td>
-          <td class="growth">${growth}</td>
-        </tr>
-      `;
-    });
-
-    this.tableDataEl_.innerHTML = html;
   }
 }
 

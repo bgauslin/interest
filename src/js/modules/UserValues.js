@@ -56,31 +56,50 @@ const UserInputs = [
   }
 ];
 
+/**
+ * CSS selectors for DOM elements outside of this element.
+ * @enum {string}
+ */
+const Selector = {
+  CURRENCY: '[currency]',
+  TABLE: '.table',
+  TABLE_DATA: '.table__data',
+};
+
+/**
+ * CSS selectors for elements created by this custom element.
+ * @enum {string}
+ */
+const CssClass = {
+  LIST: 'values__list',
+  TOTAL: 'values__total',
+};
+
 /** @class */
 class UserValues extends HTMLElement {
   constructor() {
     super();
 
-    /** @private {instance} */
-    this.calculator_ = new Calculator('currency');
-
-    /** @private {?Element} */
-    this.currencyEl_ = document.querySelector('[currency]');
-
     /** @private {?Element} */
     this.listEl_ = null;
-
-    /** @private {!Element} */
-    this.tableEl_ = document.querySelector('.table');
-
-    /** @private {!Element} */
-    this.tableDataEl_ = document.querySelector('.table__data');
 
     /** @private {?Element} */
     this.totalEl_ = null;
 
+    /** @private {?Element} */
+    this.currencyEl_ = document.querySelector(Selector.CURRENCY);
+
+    /** @private {!Element} */
+    this.tableEl_ = document.querySelector(Selector.TABLE);
+
+    /** @private {!Element} */
+    this.tableDataEl_ = document.querySelector(Selector.TABLE_DATA);
+
     /** @private {!Array} */
     this.sums_ = [];
+
+    /** @private {instance} */
+    this.calculator_ = new Calculator('currency');
 
     /** @private {MutationObserver} */
     this.observer_ = new MutationObserver(() => {
@@ -96,7 +115,6 @@ class UserValues extends HTMLElement {
   /** @callback */
   connectedCallback() {
     this.setupDom_();
-    this.setValues_();
     this.setVisibility_();
 
     // Observe the global 'currency' attribute for updating data formatting.
@@ -109,31 +127,23 @@ class UserValues extends HTMLElement {
   }
 
   /**
-   * TODO: consolidate/refactor setupDom_() and setValues_()
+   * Creates DOM elements and populates them if there are stored user values.
    * @private
    */
   setupDom_() {
     this.innerHTML = `
-      <ul class="values__list"></ul>
-      <div class="values__total"></div>
+      <ul class="${CssClass.LIST}"></ul>
+      <div class="${CssClass.TOTAL}"></div>
     `;
-    this.listEl_ = this.querySelector('.values__list');
-    this.totalEl_ = this.querySelector('.values__total');
-  }
+    this.listEl_ = this.querySelector(`.${CssClass.LIST}`);
+    this.totalEl_ = this.querySelector(`.${CssClass.TOTAL}`);
 
-  /**
-   * TODO: consolidate/refactor setupDom_() and setValues_()
-   * @private
-   */
-  setValues_() {
-    if (this.listEl_ && this.totalEl_) {
-      this.createInputs_();
-      const values = localStorage.getItem(LOCAL_STORAGE);
+    this.createInputs_();
 
-      if (values) {
-        this.populateInputs_(values);
-        this.updateTotal_();
-      }
+    const storedUserValues = localStorage.getItem(LOCAL_STORAGE);
+    if (storedUserValues) {
+      this.populateInputs_(storedUserValues);
+      this.updateTotal_();
     }
   }
 
@@ -173,16 +183,14 @@ class UserValues extends HTMLElement {
 
   /**
    * Populates input fields with user-provided values.
-   * @param {!string} data - User values from localStorage, converted from
-   *     a string to an array.
+   * @param {!string} userValues - User values from localStorage
    * @private
    */
-  populateInputs_(data) {
-    const values = data.split(',');
-
-    for (let i = 0; i < values.length; i++) {
+  populateInputs_(userValues) {
+    const data = userValues.split(','); // Convert string to array
+    for (let i = 0; i < data.length; i++) {
       const input = this.listEl_.querySelectorAll('li')[i].querySelector('input');
-      input.value = values[i];
+      input.value = data[i];
     }
   }
 

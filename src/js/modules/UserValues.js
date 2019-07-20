@@ -57,7 +57,7 @@ const UserInputs = [
 ];
 
 /**
- * CSS selectors for elements created by this custom element.
+ * CSS classnames for DOM elements.
  * @enum {string}
  */
 const CssClass = {

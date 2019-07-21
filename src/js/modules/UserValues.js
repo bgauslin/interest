@@ -99,6 +99,9 @@ class UserValues extends HTMLElement {
     /** @private {!Element} */
     this.tableDataEl_ = document.querySelector(`.${CssClass.TABLE_DATA}`);
 
+    /** @private {?string} */
+    this.userValues_ = localStorage.getItem(LOCAL_STORAGE);
+
     /** @private {!Array} */
     this.sums_ = [];
 
@@ -114,7 +117,7 @@ class UserValues extends HTMLElement {
 
   /** @callback */
   connectedCallback() {
-    this.setupDom_();
+    this.setup_();
     this.setVisibility_();
     this.observer_.observe(this.currencyEl_, { attributes: true });
   }
@@ -128,7 +131,7 @@ class UserValues extends HTMLElement {
    * Creates DOM elements and populates them if there are stored user values.
    * @private
    */
-  setupDom_() {
+  setup_() {
     let listHtml = '';
     UserInputs.forEach((el, index) => {
       const min = (el.min) ? `min="${el.min}"` : '';
@@ -165,20 +168,18 @@ class UserValues extends HTMLElement {
     this.totalEl_ = this.querySelector(`.${CssClass.TOTAL}`);
     this.periodsEl_ = this.querySelector(Selector.PERIODS);
 
-    const storedUserValues = localStorage.getItem(LOCAL_STORAGE);
-    if (storedUserValues) {
-      this.populateInputs_(storedUserValues);
+    if (this.userValues_) {
+      this.populateInputs_();
       this.updateTotal_();
     }
   }
 
   /**
    * Populates input fields with user-provided values.
-   * @param {!string} userValues - User values from localStorage
    * @private
    */
-  populateInputs_(userValues) {
-    const data = userValues.split(','); // Convert string to array
+  populateInputs_() {
+    const data = this.userValues_.split(','); // Convert string to array
     for (let i = 0; i < data.length; i++) {
       const input = this.listEl_.querySelectorAll('li')[i].querySelector('input');
       input.value = data[i];
@@ -203,8 +204,8 @@ class UserValues extends HTMLElement {
    * @private
    */
   updateTotal_() {
-    const values = UserInputs.map(el => {
-      return parseInt(this.querySelector(`[name=${el.name}]`).value);
+    const values = UserInputs.map(field => {
+      return parseInt(this.querySelector(`[name=${field.name}]`).value);
     });
 
     if (this.querySelectorAll(':invalid').length === 0) {

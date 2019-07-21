@@ -13,7 +13,7 @@ const CssClass = {
 };
 
 /** @const {Array<Object>} */
-const UserSettings = [
+const Settings = [
   {
     name: 'theme',
     fallback: 'light',
@@ -57,7 +57,7 @@ const UserSettings = [
 ];
 
 /** @class */
-class Settings extends HTMLElement {
+class UserSettings extends HTMLElement {
   constructor() {
     super();
 
@@ -115,7 +115,7 @@ class Settings extends HTMLElement {
    * @private
    */
   setDefaults_() {
-    UserSettings.forEach((setting) => {
+    Settings.forEach((setting) => {
       const { name, fallback } = setting;
       const value = localStorage.getItem(name) || fallback;
       this.setAttribute(name, value);
@@ -147,7 +147,7 @@ class Settings extends HTMLElement {
   setup_() {
     let menuGroups = '';
 
-    UserSettings.forEach((setting) => {
+    Settings.forEach((setting) => {
       const { name, options } = setting;
       let optionsHtml = '';
       options.forEach((option) => {
@@ -185,4 +185,4 @@ class Settings extends HTMLElement {
   }
 }
 
-export { Settings };
+export { UserSettings };

@@ -1,6 +1,6 @@
 import { ClickMask } from './ClickMask';
 import { Expandable } from './Expandable';
-import { Settings } from './Settings';
+import { UserSettings } from './UserSettings';
 import { UserValues } from'./UserValues';
 
 /** @class */
@@ -18,7 +18,7 @@ class App {
     // Register custom elements
     customElements.define('click-mask', ClickMask);
     customElements.define('my-expandable', Expandable);
-    customElements.define('user-settings', Settings);
+    customElements.define('user-settings', UserSettings);
     customElements.define('user-values', UserValues);
     
     // Render everything into the DOM.

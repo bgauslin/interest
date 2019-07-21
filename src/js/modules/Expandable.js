@@ -21,13 +21,13 @@ class Expandable extends HTMLElement {
     /** @private {!string} */
     this.target_ = this.getAttribute('target');
 
-    /** @private {?Element} */
+    /** @private {!Element} */
     this.targetEl_ = document.getElementById(this.target_);
 
     // TODO: Refactor this.totalEl_ to:
     // a) not be tied to the element's classname, and
     // b) not be hard-coded in the querySelector.
-    /** @private {?Element} */
+    /** @private {!Element} */
     this.totalEl_ = document.querySelector('.values__total');
 
     /** @private {MutationObserver} */
@@ -90,8 +90,8 @@ class Expandable extends HTMLElement {
   }
 
   /**
-   * If the total is empty, expandable should be hidden since there's no
-   * target to expand/collapse.
+   * Hides the expandable if the total is empty since there's no target to
+   * expand/collapse.
    * @private
    */
   setVisibility_() {

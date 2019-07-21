@@ -90,7 +90,7 @@ class UserValues extends HTMLElement {
     /** @private {?Element} */
     this.totalEl_ = null;
 
-    /** @private {?Element} */
+    /** @private {!Element} */
     this.currencyEl_ = document.querySelector(Selector.CURRENCY);
 
     /** @private {!Element} */

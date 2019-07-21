@@ -12,7 +12,7 @@ class ClickMask extends HTMLElement {
     /** @const {!string} */
     this.target_ = this.getAttribute('target');
 
-    /** @const {?Element} */
+    /** @const {!Element} */
     this.targetEl_ = document.getElementById(this.target_);
 
     /** @const {MutationObserver} */

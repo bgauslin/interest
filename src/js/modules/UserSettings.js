@@ -86,7 +86,7 @@ class UserSettings extends HTMLElement {
   }
 
   /**
-   * Toggle the menu open/closed, and changes the current theme or currency.
+   * Toggles the menu open/closed, and changes the current theme or currency.
    * @param {!BrowserEvent} e
    * @private
    */
@@ -109,8 +109,8 @@ class UserSettings extends HTMLElement {
   }
 
   /**
-   * Retrieves user values from localStorage if they exist, and sets a fallback
-   * value if not. The value is then set on this element, which triggers the 
+   * Retrieves user values from localStorage if they exist, and sets a
+   * fallback value if not. The value is then set, which triggers the 
    * attributeChangedCallback.
    * @private
    */
@@ -141,7 +141,7 @@ class UserSettings extends HTMLElement {
   }
 
   /**
-   * Attaches settings elements to DOM and set defaults for first run.
+   * Attaches settings elements to the DOM and set defaults for first run.
    * @private
    */
   setup_() {

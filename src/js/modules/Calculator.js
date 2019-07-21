@@ -29,8 +29,8 @@ class Calculator {
    * @param {!number} principal - Principal amount.
    * @param {!number} contribution - Contribution amount per period.
    * @param {!number} rate - Interest rate.
-   * @param {!number} compounds - Compounding period. (e.g. yearly or monthly)
-   * @param {!number} periods - Number of times to compound. (e.g. 10 years).
+   * @param {!number} compounds - Compounding period (e.g. yearly or monthly).
+   * @param {!number} periods - Number of times to compound (e.g. 10 years).
    * @return {Array} Sums based on user-provided values.
    * @public
    */
@@ -64,7 +64,7 @@ class Calculator {
   /**
    * Formats an amount based on type of currency. 
    * @param {!number} amount - Unformatted value.
-   * @return {string} Formatted amount. e.g. 12345.67123 => 12,345.67
+   * @return {string} Formatted amount (e.g. 12345.67123 => 12,345.67).
    * @private
    */
   formatCurrency_(amount) {

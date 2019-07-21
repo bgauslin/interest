@@ -31,7 +31,7 @@ class Calculator {
    * @param {!number} rate - Interest rate.
    * @param {!number} compounds - Compounding period. (e.g. yearly or monthly)
    * @param {!number} periods - Number of times to compound. (e.g. 10 years).
-   * @return {number} Balance based on user-provided values.
+   * @return {Array} Sums based on user-provided values.
    * @public
    */
   compound(principal, contribution, rate, compounds, periods) {

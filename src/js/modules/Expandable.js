@@ -9,9 +9,6 @@ class Expandable extends HTMLElement {
   constructor() {
     super();
 
-    /** @private {?string} */
-    this.baseClass_ = this.className;
-
     /** @private {?Element} */
     this.buttonEl_ = null;
 
@@ -27,7 +24,9 @@ class Expandable extends HTMLElement {
     /** @private {?Element} */
     this.targetEl_ = document.getElementById(this.target_);
 
-    // TODO: Refactor this.totalEl_ to not be hard-coded
+    // TODO: Refactor this.totalEl_ to:
+    // a) not be tied to the element's classname, and
+    // b) not be hard-coded in the querySelector.
     /** @private {?Element} */
     this.totalEl_ = document.querySelector('.values__total');
 
@@ -66,13 +65,14 @@ class Expandable extends HTMLElement {
   }
 
   /**
-   * Sets initial state of the expandable and related elements on page load.
+   * Adds a button element to the DOM, and sets initial state of the expandable
+   * and related elements.
    * @private
    */
   setup_() {
     this.observer_.observe(this.totalEl_, { attributes: true });
 
-    this.innerHTML = `<button class="${this.baseClass_}__button"></button>`;
+    this.innerHTML = `<button class="${this.className}__button"></button>`;
     this.buttonEl_ = this.querySelector('button');
 
     if (localStorage.getItem(EXPANDED_ATTR) === 'true') {
@@ -90,7 +90,7 @@ class Expandable extends HTMLElement {
   }
 
   /**
-   * If the total is empty, this element should be hidden since there's no
+   * If the total is empty, expandable should be hidden since there's no
    * target to expand/collapse.
    * @private
    */
@@ -106,7 +106,7 @@ class Expandable extends HTMLElement {
 
   /**
    * Expands or collapses the target element.
-   * @param {!string} action Either 'expand' or 'collapse'
+   * @param {!string} action - Either 'expand' or 'collapse'.
    * @private
    */
   expandCollapse_(action) {
@@ -140,7 +140,7 @@ class Expandable extends HTMLElement {
   }
 
   /**
-   * Updates label text based on whether the element is expanded.
+   * Updates label text based on whether the element is expanded or collapsed.
    * @private
    */
   updateLabel_() {

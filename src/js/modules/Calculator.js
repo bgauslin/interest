@@ -2,10 +2,10 @@
 const CURRENCY_ATTR = 'currency';
 
 /** @const {string} */
-const CURRENCY_RUPEES = 'inr';
+const EUROS = 'eur';
 
 /** @const {string} */
-const CURRENCY_EUROS = 'eur';
+const RUPEES = 'inr';
 
 /** @const {number} */
 const EURO_FORMAT_THRESHOLD = 50000;
@@ -69,20 +69,20 @@ class Calculator {
    */
   formatCurrency_(amount) {
     const currency = document.body.getAttribute(CURRENCY_ATTR);
-    const pattern = '\\d(?=(\\d{3})+\\D)';
     let thousands = ',';
     let decimals = '.';
 
-    if (currency === CURRENCY_RUPEES) {
+    if (currency === RUPEES) {
       return this.formatRupees_(amount);
     }
 
-    if (currency === CURRENCY_EUROS) {
+    if (currency === EUROS) {
       thousands = (amount > EURO_FORMAT_THRESHOLD) ? ',' : '.';
       decimals = (amount > EURO_FORMAT_THRESHOLD) ? '.' : ',';
     }
 
-    return amount.toFixed(2).replace('.', decimals).replace(new RegExp(pattern, 'g'), '$&' + thousands);
+    return amount.toFixed(2).replace('.', decimals).replace(
+      new RegExp('\\d(?=(\\d{3})+\\D)', 'g'), '$&' + thousands);
   };
 
   /**

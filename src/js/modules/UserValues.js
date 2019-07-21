@@ -175,15 +175,16 @@ class UserValues extends HTMLElement {
   }
 
   /**
-   * Populates input fields with user-provided values.
+   * Converts stored user-provided values to an array, then populates each input
+   * element with its corresponding user value.
    * @private
    */
   populateInputs_() {
-    const data = this.userValues_.split(','); // Convert string to array
-    for (let i = 0; i < data.length; i++) {
-      const input = this.listEl_.querySelectorAll('li')[i].querySelector('input');
-      input.value = data[i];
-    }
+    const values = this.userValues_.split(',');
+    UserInputs.forEach((field, index) => {
+      const input = this.querySelector(`[name=${field.name}]`);
+      input.value = values[index];
+    });
   }
 
   /**

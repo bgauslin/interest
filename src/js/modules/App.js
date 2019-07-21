@@ -79,11 +79,14 @@ class App {
    * @private
    */
   renderFooter_() {
-    const label = 'Ben Gauslin';
-    const title = 'Ben Gauslin’s Website';
-    const url = 'https://gauslin.com';
-    const yearStart = '2018';
-    const yearEnd = new Date().getFullYear().toString().substr(-2);
+    const footer = {
+      label: 'Ben Gauslin',
+      title: 'Ben Gauslin’s Website',
+      url: 'https://gauslin.com',
+      yearStart: '2018',
+      yearEnd: new Date().getFullYear().toString().substr(-2),
+    };
+    const { label, title, url, yearStart, yearEnd } = footer;
 
     this.appEl_.innerHTML += `
       <footer class="footer">

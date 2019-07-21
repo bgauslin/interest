@@ -62,25 +62,7 @@ class Settings extends HTMLElement {
     super();
 
     /** @listens click */
-    this.addEventListener('click', (e) => {
-      // Toggle the menu open/closed.
-      if (e.target.classList.contains(CssClass.TOGGLE)) {
-        if (this.hasAttribute(OPEN_ATTR)) {
-          this.removeAttribute(OPEN_ATTR);
-        } else {
-          this.setAttribute(OPEN_ATTR, '');
-        }
-      }
-
-      // Change the current theme or currency.
-      const hasLabel = e.target.getAttribute('for');
-      if (hasLabel) {
-        const el = e.target.querySelector('[name]');
-        const name = el.getAttribute('name');
-        const value = el.getAttribute('value');
-        this.setAttribute(name, value);
-      }
-    });
+    this.addEventListener('click', (e) => this.handleEvents_(e));
   }
 
   static get observedAttributes() {
@@ -94,15 +76,75 @@ class Settings extends HTMLElement {
 
   /** @callback */
   connectedCallback() {
-    this.setupDom_();
+    this.setup_();
     this.setDefaults_();
+  }
+
+  /** @callback */
+  disconnectedCallback() {
+    this.removeEventListener('click', null);
+  }
+
+  /**
+   * Toggle the menu open/closed, and changes the current theme or currency.
+   * @param {!BrowserEvent} e
+   * @private
+   */
+  handleEvents_(e) {
+    if (e.target.classList.contains(CssClass.TOGGLE)) {
+      if (this.hasAttribute(OPEN_ATTR)) {
+        this.removeAttribute(OPEN_ATTR);
+      } else {
+        this.setAttribute(OPEN_ATTR, '');
+      }
+    }
+
+    const hasLabel = e.target.getAttribute('for');
+    if (hasLabel) {
+      const el = e.target.querySelector('[name]');
+      const name = el.getAttribute('name');
+      const value = el.getAttribute('value');
+      this.setAttribute(name, value);
+    }
+  }
+
+  /**
+   * Retrieves user values from localStorage if they exist, and sets a fallback
+   * value if not. The value is then set on this element, which triggers the 
+   * attributeChangedCallback.
+   * @private
+   */
+  setDefaults_() {
+    UserSettings.forEach((setting) => {
+      const { name, fallback } = setting;
+      const value = localStorage.getItem(name) || fallback;
+      this.setAttribute(name, value);
+    });
+  }
+
+  /**
+   * Sets current option.
+   * @param {!string} name - Attribute to set on the body element.
+   * @param {!string} oldValue - Attribute's previous value.
+   * @param {!string} newValue - Attribute's new value.
+   * @private
+   */
+  updateOption_(name, oldValue, newValue) {
+    const oldEl = this.querySelector(`[value=${oldValue}]`);
+    const newEl = this.querySelector(`[value=${newValue}]`);
+
+    if (oldEl) oldEl.checked = false;
+    if (newEl) newEl.checked = true;
+
+    document.body.setAttribute(name, newValue);
+    localStorage.setItem(name, newValue);
   }
 
   /**
    * Attaches settings elements to DOM and set defaults for first run.
    * @private
    */
-  setupDom_() {
+  setup_() {
     let menuGroups = '';
 
     UserSettings.forEach((setting) => {
@@ -141,38 +183,6 @@ class Settings extends HTMLElement {
       </div>
     `;
   }
-
-  /**
-   * Retrieves user values from localStorage if they exist, and sets a fallback
-   * value if not. The value is then set on this element, which triggers the 
-   * attributeChangedCallback.
-   * @private
-   */
-  setDefaults_() {
-    UserSettings.forEach((setting) => {
-      const { name, fallback } = setting;
-      const value = localStorage.getItem(name) || fallback;
-      this.setAttribute(name, value);
-    });
-  }
-
-  /**
-   * Sets current option.
-   * @param {!string} name - Attribute to set on the body element.
-   * @param {!string} oldValue - Attribute's previous value.
-   * @param {!string} newValue - Attribute's new value.
-   * @private
-   */
-  updateOption_(name, oldValue, newValue) {
-    const oldEl = this.querySelector(`[value=${oldValue}]`);
-    const newEl = this.querySelector(`[value=${newValue}]`);
-
-    if (oldEl) oldEl.checked = false;
-    if (newEl) newEl.checked = true;
-
-    document.body.setAttribute(name, newValue);
-    localStorage.setItem(name, newValue);
-  } 
 }
 
 export { Settings };

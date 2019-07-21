@@ -13,7 +13,7 @@ class ClickMask extends HTMLElement {
     this.target_ = this.getAttribute('target');
 
     /** @const {?Element} */
-    this.targetEl_ = null;
+    this.targetEl_ = document.getElementById(this.target_);
 
     /** @const {MutationObserver} */
     this.observer_ = new MutationObserver(() => this.updateState_());
@@ -21,7 +21,6 @@ class ClickMask extends HTMLElement {
 
   /** @callback */
   connectedCallback() {
-    this.targetEl_ = document.getElementById(this.target_);
     this.observer_.observe(this.targetEl_, { attributes: true });
   }
 

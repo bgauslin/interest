@@ -62,6 +62,7 @@ class Expandable extends HTMLElement {
   /** @callback */
   disconnectedCallback() {
     this.observer_.disconnect();
+    this.removeEventListener('click', null);
   }
 
   /**

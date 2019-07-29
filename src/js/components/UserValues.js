@@ -1,4 +1,4 @@
-import { Calculator } from './Calculator';
+import { Calculator } from '../modules/Calculator';
 
 /** @const {string} */
 const EMPTY_ATTR = 'empty';

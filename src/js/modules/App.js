@@ -1,13 +1,13 @@
-import { ClickMask } from './ClickMask';
-import { Expandable } from './Expandable';
-import { UserSettings } from './UserSettings';
-import { UserValues } from'./UserValues';
+import { ClickMask } from '../components/ClickMask';
+import { Expandable } from '../components/Expandable';
+import { UserSettings } from '../components/UserSettings';
+import { UserValues } from'../components/UserValues';
 
 /** @class */
 class App {
-  constructor(id) {
+  constructor(selector) {
     /** @private {!Element} */
-    this.appEl_ = document.getElementById(id);
+    this.appEl_ = document.querySelector(selector);
   }
 
   /**

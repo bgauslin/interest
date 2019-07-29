@@ -1,11 +1,12 @@
 require('dotenv').config();
 import { App } from './modules/App';
 import { Tools } from './modules/Tools';
-// import { registerServiceWorker } from './modules/registerServiceWorker';
+
+// Stylesheet for Webpack
 import '../stylus/interest.styl';
 
 /** @instance  */
-const app = new App('app');
+const app = new App('#app');
 
 /** @instance */
 const tools = new Tools();

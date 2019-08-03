@@ -2,6 +2,7 @@
   background white
   border-radius px_to_rem(4)
   color var(--dark-grey)
+  elevation(2)
   margin-top (GRID_GAP / 2)
   max-width 'calc(100vw - %s)' % GRID_GAP
   opacity 0
@@ -19,13 +20,19 @@
   transform translateY(0)
   visibility visible
 
-// Menu arrow.
+// Menu arrow via rotated square with a shadow.
 .menu::before
+  background white
+  clip-path polygon(px_to_rem(-8) px_to_rem(-8), px_to_rem(-8) px_to_rem(24), px_to_rem(24) px_to_rem(-8))
   content ''
-  css_triangle(white, ARROW_MENU, 'up')
+  display block
+  elevation(2)
+  height MENU_ARROW
   position absolute
-  right 8px
-  top (- ARROW_MENU)
+  right px_to_rem(10)
+  top (- MENU_ARROW / 2)
+  transform rotate(45deg)
+  width MENU_ARROW
 
 // Menu container.
 .menu__content

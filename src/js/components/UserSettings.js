@@ -92,10 +92,13 @@ class UserSettings extends HTMLElement {
    */
   handleEvents_(e) {
     if (e.target.classList.contains(CssClass.TOGGLE)) {
-      if (this.hasAttribute(OPEN_ATTR)) {
-        this.removeAttribute(OPEN_ATTR);
-      } else {
+      if (!this.hasAttribute(OPEN_ATTR)) {
         this.setAttribute(OPEN_ATTR, '');
+        window.requestAnimationFrame(() => {
+          document.addEventListener('click', () => {
+            this.removeAttribute(OPEN_ATTR);
+          }, { once: true });
+        });
       }
     }
 

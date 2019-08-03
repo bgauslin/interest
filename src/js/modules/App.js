@@ -1,4 +1,3 @@
-import { ClickMask } from '../components/ClickMask';
 import { Expandable } from '../components/Expandable';
 import { UserSettings } from '../components/UserSettings';
 import { UserValues } from'../components/UserValues';
@@ -16,7 +15,6 @@ class App {
    */
   init() {
     // Register custom elements
-    customElements.define('click-mask', ClickMask);
     customElements.define('my-expandable', Expandable);
     customElements.define('user-settings', UserSettings);
     customElements.define('user-values', UserValues);
@@ -51,7 +49,6 @@ class App {
       <user-values class="values"></user-values>
       ${this.renderTable_('table')}
       <my-expandable class="expandable" target="table" label="table"></my-expandable>
-      <click-mask class="click-mask" target="settings"></click-mask>
     `;
   }
 

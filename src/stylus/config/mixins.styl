@@ -7,6 +7,30 @@ all_webfonts()
     src url('../webfonts/AvenirNext-Variable.woff2') format('woff2')
 
 // @mixin
+// @param Color color
+// @param String size
+// @param String direction
+css_triangle(color, size, direction)
+  if direction == 'up'
+    border-bottom size solid color
+    border-left size solid transparent
+    border-right size solid transparent
+  if direction == 'down'
+    border-left size solid transparent
+    border-right size solid transparent
+    border-top size solid color
+  if direction == 'right'
+    border-bottom size solid transparent
+    border-left size solid color
+    border-top size solid transparent
+  if direction == 'left'
+    border-bottom size solid transparent
+    border-right size solid color
+    border-top size solid transparent
+  height 0
+  width 0
+
+// @mixin
 // @param Number level
 elevation(level)
   if (level == 0)

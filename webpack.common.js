@@ -4,7 +4,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  entry: './src/js/interest.js',
+  entry: './src/js/interest.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
@@ -19,10 +19,13 @@ module.exports = {
   node: {
     fs: 'empty',
   },
+  resolve: {
+    extensions: ['.js', '.ts']
+  },
   module: {
     rules: [
       {
-        test: /\.m?js$/,
+        test: /\.(ts|js)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',

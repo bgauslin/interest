@@ -5,10 +5,7 @@ import { Tools } from './modules/Tools';
 // Stylesheet for Webpack
 import '../stylus/interest.styl';
 
-/** @instance  */
 const app = new App('#app');
-
-/** @instance */
 const tools = new Tools();
 
 /**

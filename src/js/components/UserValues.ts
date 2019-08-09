@@ -69,12 +69,12 @@ enum Selector {
 };
 
 class UserValues extends HTMLElement {
-  listEl_: Element;
+  listEl_: HTMLElement;
   periodsEl_: HTMLInputElement;
-  totalEl_: Element;
-  currencyEl_: Element;
-  tableEl_: Element;
-  tableDataEl_: Element;
+  totalEl_: HTMLElement;
+  currencyEl_: HTMLElement;
+  tableEl_: HTMLElement;
+  tableDataEl_: HTMLElement;
   userValues_: string;
   sums_: Array<number>;
   observer_: MutationObserver;
@@ -89,7 +89,6 @@ class UserValues extends HTMLElement {
     this.observer_ = new MutationObserver(() => this.updateTotal_());
 
     // TODO: Fix TS warning for this.calculator_
-    /** @private {instance} */
     this.calculator_ = new Calculator();
 
     /** @listens keyup */
@@ -160,8 +159,8 @@ class UserValues extends HTMLElement {
   private populateInputs_(): void {
     const values = this.userValues_.split(',');
     UserInputs.forEach((field, index) => {
-      const input = this.querySelector(`[name=${field.name}]`) as HTMLInputElement;
-      input.value = values[index];
+      const inputEl = this.querySelector(`[name=${field.name}]`) as HTMLInputElement;
+      inputEl.value = values[index];
     });
   }
 
@@ -170,20 +169,21 @@ class UserValues extends HTMLElement {
    * of calculated compounding values.
    */
   private setVisibility_(): void {
-    if (parseInt(this.periodsEl_.value) <= 0) {
+    if (!this.periodsEl_.value || parseInt(this.periodsEl_.value) <= 0) {
       this.totalEl_.setAttribute(EMPTY_ATTR, '');
     } else {
       this.totalEl_.removeAttribute(EMPTY_ATTR);
     }
   }
 
-  // TODO: Fix TS warnings.
+  // TODO: Fix TS warning for this.calculator_
   /**
    * Updates 'total value' DOM element after calculating all compounding values.
    */
   private updateTotal_(): void {
     const values = UserInputs.map(field => {
-      return parseInt(this.querySelector(`[name=${field.name}]`).value);
+      const inputEL = this.querySelector(`[name=${field.name}]`) as HTMLInputElement;
+      return parseInt(inputEL.value);
     });
 
     if (this.querySelectorAll(':invalid').length === 0) {
@@ -194,10 +194,10 @@ class UserValues extends HTMLElement {
       // Destructure last item in 'sums' array and display 'balance' from it.
       const lastSum = this.sums_[this.sums_.length - 1];
       const [year, deposits, interest, balance, growth] = lastSum;
-      this.totalEl_.textContent = balance;
+      this.totalEl_.textContent = String(balance);
 
       // Save user values to localStorage.
-      localStorage.setItem(LOCAL_STORAGE, values);
+      localStorage.setItem(LOCAL_STORAGE, String(values));
     }
 
     this.setVisibility_();
@@ -207,7 +207,7 @@ class UserValues extends HTMLElement {
    * Renders initial and compounded amounts for each period.
    */
   private renderTable_(): void {
-    let tableHtml = `
+    let tableHtml: string = `
       <tr>
         <th class="year">Year</th>
         <th class="deposits">Deposits</th>

@@ -1,17 +1,12 @@
-/** @const {string} */
-const CURRENCY_ATTR = 'currency';
+const CURRENCY_ATTR: string = 'currency';
+const OPEN_ATTR: string = 'open';
+const THEME_ATTR: string = 'theme';
 
-/** @const {string} */
-const OPEN_ATTR = 'open';
-
-/** @const {string} */
-const THEME_ATTR = 'theme';
-
-/** @enum {string} */
-const CssClass = {
-  TOGGLE: 'settings__toggle',
+enum CssClass {
+  TOGGLE = 'settings__toggle',
 };
 
+// TODO: TS type/array/object/interface
 /** @const {Array<Object>} */
 const Settings = [
   {
@@ -56,12 +51,9 @@ const Settings = [
   }
 ];
 
-/** @class */
 class UserSettings extends HTMLElement {
   constructor() {
     super();
-
-    /** @listens click */
     this.addEventListener('click', (e) => this.handleEvents_(e));
   }
 
@@ -69,29 +61,26 @@ class UserSettings extends HTMLElement {
     return [CURRENCY_ATTR, THEME_ATTR];
   }
 
-  /** @callback */
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback(name: string, oldValue: string, newValue: string): void {
     this.updateOption_(name, oldValue, newValue);
   }
 
-  /** @callback */
-  connectedCallback() {
+  connectedCallback(): void {
     this.setup_();
     this.setDefaults_();
   }
 
-  /** @callback */
-  disconnectedCallback() {
+  disconnectedCallback(): void {
     this.removeEventListener('click', null);
   }
 
   /**
    * Toggles the menu open/closed, and changes the current theme or currency.
-   * @param {!BrowserEvent} e
-   * @private
    */
-  handleEvents_(e) {
-    if (e.target.classList.contains(CssClass.TOGGLE)) {
+  private handleEvents_(e: Event): void {
+    const target = <HTMLElement>e.target;
+
+    if (target.classList.contains(CssClass.TOGGLE)) {
       if (!this.hasAttribute(OPEN_ATTR)) {
         this.setAttribute(OPEN_ATTR, '');
         window.requestAnimationFrame(() => {
@@ -102,9 +91,9 @@ class UserSettings extends HTMLElement {
       }
     }
 
-    const hasLabel = e.target.getAttribute('for');
+    const hasLabel = target.getAttribute('for');
     if (hasLabel) {
-      const el = e.target.querySelector('[name]');
+      const el = target.querySelector('[name]');
       const name = el.getAttribute('name');
       const value = el.getAttribute('value');
       this.setAttribute(name, value);
@@ -115,9 +104,8 @@ class UserSettings extends HTMLElement {
    * Retrieves user values from localStorage if they exist, and sets a
    * fallback value if not. The value is then set, which triggers the 
    * attributeChangedCallback.
-   * @private
    */
-  setDefaults_() {
+  private setDefaults_(): void {
     Settings.forEach((setting) => {
       const { name, fallback } = setting;
       const value = localStorage.getItem(name) || fallback;
@@ -127,14 +115,10 @@ class UserSettings extends HTMLElement {
 
   /**
    * Sets current option.
-   * @param {!string} name - Attribute to set on the body element.
-   * @param {!string} oldValue - Attribute's previous value.
-   * @param {!string} newValue - Attribute's new value.
-   * @private
    */
-  updateOption_(name, oldValue, newValue) {
-    const oldEl = this.querySelector(`[value=${oldValue}]`);
-    const newEl = this.querySelector(`[value=${newValue}]`);
+  private updateOption_(name: string, oldValue: string, newValue: string): void {
+    const oldEl = this.querySelector(`[value=${oldValue}]`) as HTMLInputElement;
+    const newEl = this.querySelector(`[value=${newValue}]`) as HTMLInputElement;
 
     if (oldEl) oldEl.checked = false;
     if (newEl) newEl.checked = true;
@@ -145,9 +129,8 @@ class UserSettings extends HTMLElement {
 
   /**
    * Attaches settings elements to the DOM and set defaults for first run.
-   * @private
    */
-  setup_() {
+  private setup_(): void {
     let menuGroups = '';
 
     Settings.forEach((setting) => {

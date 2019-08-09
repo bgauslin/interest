@@ -1,45 +1,26 @@
-/** @const {string} */
-const CURRENCY_ATTR = 'currency';
+const CURRENCY_ATTR: string = 'currency';
+const EURO_FORMAT_THRESHOLD: number = 50000;
+const EUROS: string = 'eur';
+const RUPEES: string = 'inr';
 
-/** @const {string} */
-const EUROS = 'eur';
-
-/** @const {string} */
-const RUPEES = 'inr';
-
-/** @const {number} */
-const EURO_FORMAT_THRESHOLD = 50000;
-
-/** @class */
 class Calculator {
   /**
    * Calculates a value with interest applied to initial value.
-   * @param {!number} amount - Initial value.
-   * @param {!number} rate - Interest rate.
-   * @return {number}
-   * @private
    */
-  amountWithInterest_(amount, rate) {
+  private amountWithInterest_(amount: number, rate: number): number {
     return amount * (rate / 100 + 1);
   }
 
+  // TODO: remove 'compounds' parameter
   /**
-   * Calculates compound interest, renders calculated values,
-   * and returns the balance.
-   * @param {!number} principal - Principal amount.
-   * @param {!number} contribution - Contribution amount per period.
-   * @param {!number} rate - Interest rate.
-   * @param {!number} compounds - Compounding period (e.g. yearly or monthly).
-   * @param {!number} periods - Number of times to compound (e.g. 10 years).
-   * @return {Array} Sums based on user-provided values.
-   * @public
+   * Calculates compound interest and returns an array of all calculated values.
    */
-  compound(principal, contribution, rate, compounds, periods) {
+  public compound(principal: number, contribution: number, rate: number, compounds: number, periods: number): Array<number> {
     const pmt = contribution;
     let p = principal;
     let c = pmt;
-    let principalCompounded;
-    let contributionCompounded;
+    let principalCompounded: number;
+    let contributionCompounded: number;
     const sums = [];
 
     for (let i = 1; i <= periods; i++) {
@@ -62,12 +43,9 @@ class Calculator {
   }
 
   /**
-   * Formats an amount based on type of currency. 
-   * @param {!number} amount - Unformatted value.
-   * @return {string} Formatted amount (e.g. 12345.67123 => 12,345.67).
-   * @private
+   * Formats an amount based on currency type: 12345.67123 => 12,345.67.
    */
-  formatCurrency_(amount) {
+  private formatCurrency_(amount: number): string {
     const currency = document.body.getAttribute(CURRENCY_ATTR);
     let thousands = ',';
     let decimals = '.';
@@ -87,12 +65,9 @@ class Calculator {
 
   /**
    * Formats currency for rupees (which is weird, so they get their
-   * own special method).
-   * @param {!number} rupees - Currency amount.
-   * @return {string} Amount in '##,##,###.##' format.
-   * @private
+   * own special method), and returns amount in '##,##,###.##' format.
    */
-  formatRupees_(rupees) {
+  private formatRupees_(rupees: number): string {
     const string = rupees.toFixed(2).toString().split('.');
     const amount = string[0];
     const decimal = string[1];

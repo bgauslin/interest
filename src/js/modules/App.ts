@@ -2,18 +2,24 @@ import { Expandable } from '../components/Expandable';
 import { UserSettings } from '../components/UserSettings';
 import { UserValues } from'../components/UserValues';
 
-/** @class */
+enum FooterInfo {
+  label = 'Ben Gauslin',
+  title = 'Ben Gauslin’s Website',
+  url = 'https://gauslin.com',
+  yearStart = '2018',
+};
+
 class App {
-  constructor(selector) {
-    /** @private {!Element} */
+  appEl_: Element;
+
+  constructor(selector: string) {
     this.appEl_ = document.querySelector(selector);
   }
 
   /**
    * Renders all HTML for the app.
-   * @public
    */
-  init() {
+  public init(): void {
     // Register custom elements
     customElements.define('my-expandable', Expandable);
     customElements.define('user-settings', UserSettings);
@@ -27,9 +33,8 @@ class App {
 
   /**
    * Renders header element into the DOM.
-   * @private
    */
-  renderHeader_() {
+  private renderHeader_(): void {
     this.appEl_.innerHTML += `
       <header class="header">
         <div class="header__frame">
@@ -42,9 +47,8 @@ class App {
 
   /**
    * Renders user inputs, table, expandable, and click mask into the DOM.
-   * @private
    */
-  renderContent_() {
+  private renderContent_(): void {
     this.appEl_.innerHTML += `
       <user-values class="values"></user-values>
       ${this.renderTable_('table')}
@@ -53,12 +57,9 @@ class App {
   }
 
   /**
-   * Renders table element for displaying calculated user values.
-   * @param {!string} classname
-   * @param {?string=} id
-   * @private
+   * Returns rendered table element for displaying calculated user values.
    */
-  renderTable_(classname, id = classname) {
+  private renderTable_(classname: string, id: string = classname): string {
     return `
       <div class="${classname}" id="${id}">
         <div class="${classname}__frame">
@@ -73,30 +74,24 @@ class App {
 
   /**
    * Renders footer element with copyright info and a link into the DOM.
-   * @private
    */
-  renderFooter_() {
-    const footer = {
-      label: 'Ben Gauslin',
-      title: 'Ben Gauslin’s Website',
-      url: 'https://gauslin.com',
-      yearStart: '2018',
-      yearEnd: new Date().getFullYear().toString().substr(-2),
-    };
-    const { label, title, url, yearStart, yearEnd } = footer;
-
-    this.appEl_.innerHTML += `
-      <footer class="footer">
-        <p class="copyright">
-          <span class="copyright__years">© ${yearStart}-${yearEnd}</span>
-          <a class="copyright__owner"
-             href="${url}"
-             title="${title} (opens in a new window)"
-             target="_blank"
-             rel="noopener">${label}</a>
-        </p>
-      </footer>
+  private renderFooter_(): void {
+    const { label, title, url, yearStart } = FooterInfo;
+    const yearEnd = new Date().getFullYear().toString().substr(-2);
+    const html = `\
+      <footer class="footer">\
+        <p class="copyright">\
+          <span class="copyright__years">© ${yearStart}-${yearEnd}</span>\
+          <a class="copyright__owner" \
+             href="${url}" \
+             title="${title} (opens in a new window)" \
+             target="_blank" \
+             rel="noopener">${label}</a>\
+        </p>\
+      </footer>\
     `;
+
+    this.appEl_.innerHTML += html.replace(/\s\s/g, '');
   }
 }
 

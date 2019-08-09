@@ -1,37 +1,28 @@
-/** @const {string} */
-const EXPANDED_ATTR = 'expanded';
+const EXPANDED_ATTR: string = 'expanded';
+const HIDDEN_ATTR: string = 'hidden';
 
-/** @const {string} */
-const HIDDEN_ATTR = 'hidden';
+// TODO: [1] Refactor/relocate this.totalEl_ to App, add an observer, and set
+// attributes on elements via App method.
 
-/** @class */
 class Expandable extends HTMLElement {
+  buttonEl_: HTMLElement;
+  hasSetup_: boolean;
+  label_: string;
+  observer_: MutationObserver;
+  target_: string;
+  targetEl_: HTMLElement;
+  totalEl_: HTMLElement;
+  
   constructor() {
     super();
 
-    /** @private {?Element} */
-    this.buttonEl_ = null;
-
-    /** @private {boolean} */
+    // this.buttonEl_ = null;
     this.hasSetup_ = false;
-
-    /** @private {!string} */
     this.label_ = this.getAttribute('label');
-
-    /** @private {!string} */
-    this.target_ = this.getAttribute('target');
-
-    /** @private {!Element} */
-    this.targetEl_ = document.getElementById(this.target_);
-
-    // TODO: Refactor this.totalEl_ to:
-    // a) not be tied to the element's classname, and
-    // b) not be hard-coded in the querySelector.
-    /** @private {!Element} */
-    this.totalEl_ = document.querySelector('.values__total');
-
-    /** @private {MutationObserver} */
     this.observer_ = new MutationObserver(() => this.setVisibility_());
+    this.target_ = this.getAttribute('target');
+    this.targetEl_ = document.getElementById(this.target_);
+    this.totalEl_ = document.querySelector('.values__total'); // [1]
 
     /** @listens click */
     this.addEventListener('click', () => {
@@ -47,19 +38,16 @@ class Expandable extends HTMLElement {
     return [EXPANDED_ATTR];
   }
 
-  /** @callback */
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback(name: string, oldValue: string, newValue: string): void {
     const direction = (newValue === '') ? 'expand' : 'collapse';
     this.expandCollapse_(direction);
   }
 
-  /** @callback */
-  connectedCallback() {
+  connectedCallback(): void {
     this.setup_();
   }
 
-  /** @callback */
-  disconnectedCallback() {
+  disconnectedCallback(): void {
     this.observer_.disconnect();
     this.removeEventListener('click', null);
   }
@@ -67,11 +55,9 @@ class Expandable extends HTMLElement {
   /**
    * Adds a button element to the DOM, and sets initial state of the expandable
    * and related elements.
-   * @private
    */
-  setup_() {
+  private setup_(): void {
     this.observer_.observe(this.totalEl_, { attributes: true });
-
     this.innerHTML = `<button class="${this.className}__button"></button>`;
     this.buttonEl_ = this.querySelector('button');
 
@@ -79,22 +65,20 @@ class Expandable extends HTMLElement {
       this.setAttribute(EXPANDED_ATTR, '');
       this.targetEl_.setAttribute(EXPANDED_ATTR, '');
     } else {
-      this.targetEl_.style.height = 0;
+      this.targetEl_.style.height = '0';
       this.targetEl_.removeAttribute(EXPANDED_ATTR);
     }
 
     this.setVisibility_();
     this.updateLabel_();
-
     this.hasSetup_ = true;
   }
 
   /**
    * Hides the expandable if the total is empty since there's no target to
    * expand/collapse.
-   * @private
    */
-  setVisibility_() {
+  private setVisibility_(): void {
     if (this.totalEl_.hasAttribute('empty')) {
       this.setAttribute(HIDDEN_ATTR, '');
       this.targetEl_.setAttribute(HIDDEN_ATTR, '');
@@ -106,10 +90,8 @@ class Expandable extends HTMLElement {
 
   /**
    * Expands or collapses the target element.
-   * @param {!string} action - Either 'expand' or 'collapse'.
-   * @private
    */
-  expandCollapse_(action) {
+  private expandCollapse_(action: string): void {
     if (!this.hasSetup_) {
       return;
     }
@@ -131,7 +113,7 @@ class Expandable extends HTMLElement {
       window.requestAnimationFrame(() => {
         this.targetEl_.style.height = `${elHeight}px`;
         window.requestAnimationFrame(() => {
-          this.targetEl_.style.height = 0;
+          this.targetEl_.style.height = '0';
         });
       });
     }
@@ -141,13 +123,12 @@ class Expandable extends HTMLElement {
 
   /**
    * Updates label text based on whether the element is expanded or collapsed.
-   * @private
    */
-  updateLabel_() {
+  private updateLabel_(): void {
     const expanded = this.hasAttribute(EXPANDED_ATTR);
     const prefix = expanded ? 'Hide' : 'Show';
     this.buttonEl_.textContent = `${prefix} ${this.label_}`;
-    localStorage.setItem(EXPANDED_ATTR, expanded);
+    localStorage.setItem(EXPANDED_ATTR, String(expanded));
   }
 }
 

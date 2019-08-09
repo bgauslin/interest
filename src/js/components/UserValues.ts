@@ -1,11 +1,9 @@
 import { Calculator } from '../modules/Calculator';
 
-/** @const {string} */
-const EMPTY_ATTR = 'empty';
+const EMPTY_ATTR: string = 'empty';
+const LOCAL_STORAGE: string = 'values';
 
-/** @const {string} */
-const LOCAL_STORAGE = 'values';
-
+// TODO: TS array/object/interface
 /**
  * @const {Array} UserInputs - HTML input elements.
  * @const {Object} UserInputs[]
@@ -56,83 +54,63 @@ const UserInputs = [
   }
 ];
 
-/**
- * CSS classnames for DOM elements.
- * @enum {string}
- */
-const CssClass = {
-  LIST: 'values__list',
-  TABLE: 'table',
-  TABLE_DATA: 'table__data',
-  TOTAL: 'values__total',
+/** CSS classnames for DOM elements. */
+enum CssClass {
+  LIST = 'values__list',
+  TABLE = 'table',
+  TABLE_DATA = 'table__data',
+  TOTAL = 'values__total',
 };
 
-/**
- * CSS selectors for DOM elements.
- * @enum {string}
- */
-const Selector = {
-  CURRENCY: '[currency]',
-  PERIODS: '[name=periods]',
+/** CSS selectors for DOM elements. */
+enum Selector {
+  CURRENCY = '[currency]',
+  PERIODS = '[name=periods]',
 };
 
-/** @class */
 class UserValues extends HTMLElement {
+  listEl_: Element;
+  periodsEl_: HTMLInputElement;
+  totalEl_: Element;
+  currencyEl_: Element;
+  tableEl_: Element;
+  tableDataEl_: Element;
+  userValues_: string;
+  sums_: Array<number>;
+  observer_: MutationObserver;
+
   constructor() {
     super();
 
-    /** @private {?Element} */
-    this.listEl_ = null;
-
-    /** @private {?Element} */
-    this.periodsEl_ = null;
-
-    /** @private {?Element} */
-    this.totalEl_ = null;
-
-    /** @private {!Element} */
     this.currencyEl_ = document.querySelector(Selector.CURRENCY);
-
-    /** @private {!Element} */
     this.tableEl_ = document.querySelector(`.${CssClass.TABLE}`);
-
-    /** @private {!Element} */
     this.tableDataEl_ = document.querySelector(`.${CssClass.TABLE_DATA}`);
-
-    /** @private {?string} */
     this.userValues_ = localStorage.getItem(LOCAL_STORAGE);
+    this.observer_ = new MutationObserver(() => this.updateTotal_());
 
-    /** @private {!Array} */
-    this.sums_ = [];
-
+    // TODO: Fix TS warning for this.calculator_
     /** @private {instance} */
     this.calculator_ = new Calculator();
-
-    /** @private {MutationObserver} */
-    this.observer_ = new MutationObserver(() => this.updateTotal_());
 
     /** @listens keyup */
     this.addEventListener('keyup', () => this.updateTotal_());
   }
 
-  /** @callback */
-  connectedCallback() {
+  connectedCallback(): void {
     this.setup_();
     this.setVisibility_();
     this.observer_.observe(this.currencyEl_, { attributes: true });
   }
 
-  /** @callback */
-  disconnectedCallback() {
+  disconnectedCallback(): void {
     this.observer_.disconnect();
     this.removeEventListener('keyup', null);
   }
 
   /**
    * Creates DOM elements and populates them if there are stored user values.
-   * @private
    */
-  setup_() {
+  private setup_(): void {
     let listHtml = '';
     UserInputs.forEach((el, index) => {
       const min = (el.min) ? `min="${el.min}"` : '';
@@ -178,12 +156,11 @@ class UserValues extends HTMLElement {
   /**
    * Converts stored user-provided values to an array, then populates each input
    * element with its corresponding user value.
-   * @private
    */
-  populateInputs_() {
+  private populateInputs_(): void {
     const values = this.userValues_.split(',');
     UserInputs.forEach((field, index) => {
-      const input = this.querySelector(`[name=${field.name}]`);
+      const input = this.querySelector(`[name=${field.name}]`) as HTMLInputElement;
       input.value = values[index];
     });
   }
@@ -191,21 +168,20 @@ class UserValues extends HTMLElement {
   /**
    * Toggles visibility of the 'total' element if there's at least one period
    * of calculated compounding values.
-   * @private
    */
-  setVisibility_() {
-    if (this.periodsEl_.value <= 0) {
+  private setVisibility_(): void {
+    if (parseInt(this.periodsEl_.value) <= 0) {
       this.totalEl_.setAttribute(EMPTY_ATTR, '');
     } else {
       this.totalEl_.removeAttribute(EMPTY_ATTR);
     }
   }
 
+  // TODO: Fix TS warnings.
   /**
    * Updates 'total value' DOM element after calculating all compounding values.
-   * @private
    */
-  updateTotal_() {
+  private updateTotal_(): void {
     const values = UserInputs.map(field => {
       return parseInt(this.querySelector(`[name=${field.name}]`).value);
     });
@@ -229,9 +205,8 @@ class UserValues extends HTMLElement {
 
   /**
    * Renders initial and compounded amounts for each period.
-   * @private
    */
-  renderTable_() {
+  private renderTable_(): void {
     let tableHtml = `
       <tr>
         <th class="year">Year</th>

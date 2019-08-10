@@ -88,7 +88,7 @@ class UserValues extends HTMLElement {
     this.userValues_ = localStorage.getItem(LOCAL_STORAGE);
     this.observer_ = new MutationObserver(() => this.updateTotal_());
 
-    // TODO: Fix TS warning for this.calculator_
+    // TODO: Fix TS warning.
     this.calculator_ = new Calculator();
 
     /** @listens keyup */
@@ -176,7 +176,7 @@ class UserValues extends HTMLElement {
     }
   }
 
-  // TODO: Fix TS warning for this.calculator_
+  // TODO: Fix TS warnings.
   /**
    * Updates 'total value' DOM element after calculating all compounding values.
    */

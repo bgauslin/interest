@@ -26,7 +26,6 @@ class Tools {
     }
   }
 
-  // TODO: Fix TS warning about fastclick.attach()
   /**
    * Attaches fastclick for touch devices; adds 'no-touch' attribute otherwise.
    */

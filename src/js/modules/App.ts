@@ -2,18 +2,29 @@ import { Expandable } from '../components/Expandable';
 import { UserSettings } from '../components/UserSettings';
 import { UserValues } from'../components/UserValues';
 
+const EMPTY_ATTR: string = 'empty';
+const HIDDEN_ATTR: string = 'hidden';
+
+enum Visibility {
+  Source = '.values__total',
+  Targets = '.expandable, .table',
+}
+
 enum FooterInfo {
-  label = 'Ben Gauslin',
-  title = 'Ben Gauslin’s Website',
-  url = 'https://gauslin.com',
-  yearStart = '2018',
+  Label = 'Ben Gauslin',
+  Title = 'Ben Gauslin’s Website',
+  Url = 'https://gauslin.com',
+  YearStart = '2018',
 };
 
 class App {
   appEl_: HTMLElement;
+  observer_: MutationObserver;
+  visibilitySourceEl_: HTMLElement;
 
   constructor(selector: string) {
     this.appEl_ = document.querySelector(selector);
+    this.observer_ = new MutationObserver(() => this.setVisibility_());
   }
 
   /**
@@ -27,6 +38,24 @@ class App {
     this.renderHeader_();
     this.renderContent_();
     this.renderFooter_();
+
+    this.visibilitySourceEl_ = document.querySelector(Visibility.Source);
+    this.observer_.observe(this.visibilitySourceEl_, { attributes: true });
+    this.setVisibility_();
+  }
+
+  /**
+   * Hides elements if an observed element is empty since there's no target
+   * for the expandable to expand/collapse.
+   */
+  private setVisibility_(): void {
+    const els = document.querySelectorAll(Visibility.Targets);
+
+    if (this.visibilitySourceEl_.hasAttribute(EMPTY_ATTR)) {
+      els.forEach(el => el.setAttribute(HIDDEN_ATTR, ''));
+    } else {
+      els.forEach(el => el.removeAttribute(HIDDEN_ATTR));
+    }
   }
 
   /**
@@ -77,17 +106,17 @@ class App {
    * Renders footer element into the DOM.
    */
   private renderFooter_(): void {
-    const { label, title, url, yearStart } = FooterInfo;
+    const { Label, Title, Url, YearStart } = FooterInfo;
     const yearEnd = new Date().getFullYear().toString().substr(-2);
     const html = `\
       <footer class="footer">\
         <p class="copyright">\
-          <span class="copyright__years">© ${yearStart}-${yearEnd}</span>\
+          <span class="copyright__years">© ${YearStart}-${yearEnd}</span>\
           <a class="copyright__owner" \
-             href="${url}" \
-             title="${title} (opens in a new window)" \
+             href="${Url}" \
+             title="${Title} (opens in a new window)" \
              target="_blank" \
-             rel="noopener">${label}</a>\
+             rel="noopener">${Label}</a>\
         </p>\
       </footer>\
     `;

@@ -1,28 +1,19 @@
 const EXPANDED_ATTR: string = 'expanded';
-const HIDDEN_ATTR: string = 'hidden';
-
-// TODO: [1] Refactor/relocate this.totalEl_ to App, add an observer, and set
-// attributes on elements via App method.
 
 class Expandable extends HTMLElement {
   buttonEl_: HTMLElement;
   hasSetup_: boolean;
   label_: string;
-  observer_: MutationObserver;
   target_: string;
   targetEl_: HTMLElement;
-  totalEl_: HTMLElement;
-  
+
   constructor() {
     super();
 
-    // this.buttonEl_ = null;
     this.hasSetup_ = false;
     this.label_ = this.getAttribute('label');
-    this.observer_ = new MutationObserver(() => this.setVisibility_());
     this.target_ = this.getAttribute('target');
     this.targetEl_ = document.getElementById(this.target_);
-    this.totalEl_ = document.querySelector('.values__total'); // [1]
 
     /** @listens click */
     this.addEventListener('click', () => {
@@ -48,7 +39,6 @@ class Expandable extends HTMLElement {
   }
 
   disconnectedCallback(): void {
-    this.observer_.disconnect();
     this.removeEventListener('click', null);
   }
 
@@ -57,7 +47,6 @@ class Expandable extends HTMLElement {
    * and related elements.
    */
   private setup_(): void {
-    this.observer_.observe(this.totalEl_, { attributes: true });
     this.innerHTML = `<button class="${this.className}__button"></button>`;
     this.buttonEl_ = this.querySelector('button');
 
@@ -69,23 +58,8 @@ class Expandable extends HTMLElement {
       this.targetEl_.removeAttribute(EXPANDED_ATTR);
     }
 
-    this.setVisibility_();
     this.updateLabel_();
     this.hasSetup_ = true;
-  }
-
-  /**
-   * Hides the expandable if the total is empty since there's no target to
-   * expand/collapse.
-   */
-  private setVisibility_(): void {
-    if (this.totalEl_.hasAttribute('empty')) {
-      this.setAttribute(HIDDEN_ATTR, '');
-      this.targetEl_.setAttribute(HIDDEN_ATTR, '');
-    } else {
-      this.removeAttribute(HIDDEN_ATTR);
-      this.targetEl_.removeAttribute(HIDDEN_ATTR);
-    }
   }
 
   /**

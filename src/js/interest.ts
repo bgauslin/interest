@@ -1,16 +1,13 @@
 require('dotenv').config();
 import { App } from './modules/App';
 import { Tools } from './modules/Tools';
-
-// Stylesheet for Webpack
-import '../stylus/interest.styl';
+import '../stylus/interest.styl'; // Stylesheet for Webpack
 
 const app = new App('#app');
 const tools = new Tools();
 
 /**
- * Updates DOM with all app elements.
- * @listens DOMContentLoaded
+ * Initializes app when DOM is loaded.
  */
 document.addEventListener('DOMContentLoaded', () => {
   app.init();
@@ -19,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /**
  * Updates 'vh' value when window is resized.
- * @listens resize
  */
 window.addEventListener('resize', () => {
   tools.viewportHeight();

@@ -83,7 +83,6 @@ class UserValues extends HTMLElement {
     this.tableEl_ = document.querySelector(`.${CssClass.TABLE}`);
     this.userValues_ = localStorage.getItem(LOCAL_STORAGE);
 
-    /** @listens keyup */
     this.addEventListener('keyup', () => this.updateTotal_());
   }
 

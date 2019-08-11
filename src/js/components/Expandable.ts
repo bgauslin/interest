@@ -15,7 +15,6 @@ class Expandable extends HTMLElement {
     this.target_ = this.getAttribute('target');
     this.targetEl_ = document.getElementById(this.target_);
 
-    /** @listens click */
     this.addEventListener('click', () => {
       if (this.hasAttribute(EXPANDED_ATTR)) {
         this.removeAttribute(EXPANDED_ATTR);

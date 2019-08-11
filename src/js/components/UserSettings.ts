@@ -1,12 +1,17 @@
-const CURRENCY_ATTR: string = 'currency';
-const OPEN_ATTR: string = 'open';
-const THEME_ATTR: string = 'theme';
+interface SettingsOptions {
+  label: string,
+  value: string,
+}
 
 interface SettingsFields {
   name: string,
   fallback: string,
-  options: Object[],
+  options: SettingsOptions[],
 }
+
+const CURRENCY_ATTR: string = 'currency';
+const OPEN_ATTR: string = 'open';
+const THEME_ATTR: string = 'theme';
 
 enum CssClass {
   TOGGLE = 'settings__toggle',
@@ -26,31 +31,11 @@ const Settings: SettingsFields[] = [
     name: 'currency',
     fallback: 'usd',
     options: [
-      {
-        isoSymbol: 'USD',
-        label: '$',
-        value: 'usd',
-      },
-      {
-        isoSymbol: 'EUR',
-        label: '€',
-        value: 'eur',
-      },
-      {
-        isoSymbol: 'GBP',
-        label: '£',
-        value: 'gbp',
-      },
-      {
-        isoSymbol: 'YEN',
-        label: '¥',
-        value: 'yen',
-      },
-      {
-        isoSymbol: 'INR',
-        label: '₹',
-        value: 'inr',
-      },
+      { label: '$', value: 'usd' },
+      { label: '€', value: 'eur' },
+      { label: '£', value: 'gbp' },
+      { label: '¥', value: 'yen' },
+      { label: '₹', value: 'inr' },
     ]
   }
 ];
@@ -61,7 +46,7 @@ class UserSettings extends HTMLElement {
     this.addEventListener('click', (e) => this.handleEvents_(e));
   }
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [CURRENCY_ATTR, THEME_ATTR];
   }
 

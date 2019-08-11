@@ -24,7 +24,7 @@ class Expandable extends HTMLElement {
     });
   }
 
-  static get observedAttributes() {
+  static get observedAttributes(): string[] {
     return [EXPANDED_ATTR];
   }
 

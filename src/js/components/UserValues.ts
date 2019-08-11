@@ -37,13 +37,6 @@ const UserInputs: InputAttributes[] = [
     type: 'text',
   },
   {
-    label: 'Compounds per period',
-    name: 'compounds',
-    max: 12,
-    pattern: '[0-9]{1,2}',
-    type: 'number',
-  },
-  {
     label: 'Years to grow',
     name: 'periods',
     min: 1,

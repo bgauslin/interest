@@ -11,11 +11,10 @@ class Calculator {
     return amount * (rate / 100 + 1);
   }
 
-  // TODO: remove 'compounds' parameter
   /**
    * Calculates compound interest and returns an array of all calculated values.
    */
-  public compound(principal: number, contribution: number, rate: number, compounds: number, periods: number): Array<number> {
+  public compound(principal: number, contribution: number, rate: number, periods: number): Array<number> {
     const pmt = contribution;
     let p = principal;
     let c = pmt;

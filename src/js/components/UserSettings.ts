@@ -2,13 +2,17 @@ const CURRENCY_ATTR: string = 'currency';
 const OPEN_ATTR: string = 'open';
 const THEME_ATTR: string = 'theme';
 
+interface SettingsFields {
+  name: string,
+  fallback: string,
+  options: Object[],
+}
+
 enum CssClass {
   TOGGLE = 'settings__toggle',
 };
 
-// TODO: TS type/array/object/interface
-/** @const {Array<Object>} */
-const Settings = [
+const Settings: SettingsFields[] = [
   {
     name: 'theme',
     fallback: 'light',

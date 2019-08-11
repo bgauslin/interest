@@ -1,20 +1,20 @@
 import { Calculator } from '../modules/Calculator';
 
+interface InputAttributes {
+  label: string,
+  name: string,
+  max: number,
+  min?: number,
+  pattern: string,
+  type: string,
+  required?: boolean,
+}
+
 const EMPTY_ATTR: string = 'empty';
+
 const LOCAL_STORAGE: string = 'values';
 
-// TODO: TS array/object/interface
-/**
- * @const {Array} UserInputs - HTML input elements.
- * @const {Object} UserInputs[]
- * @const {string} UserInputs[].label
- * @const {string} UserInputs[].name
- * @const {number} UserInputs[].max
- * @const {string} UserInputs[].pattern
- * @const {string} UserInputs[].type
- * @const {?boolean} UserInputs[].required
- */
-const UserInputs = [
+const UserInputs: InputAttributes[] = [
   {
     label: 'Principal',
     name: 'principal',
@@ -32,7 +32,7 @@ const UserInputs = [
   {
     label: 'Interest rate',
     name: 'rate',
-    max: '99',
+    max: 99,
     pattern: '[0-9]{0,2}[\\.]?[0-9]{1,2}',
     type: 'text',
   },
@@ -54,7 +54,7 @@ const UserInputs = [
   }
 ];
 
-/** CSS classnames for DOM elements. */
+// CSS classnames for DOM elements.
 enum CssClass {
   LIST = 'values__list',
   TABLE = 'table',
@@ -62,34 +62,33 @@ enum CssClass {
   TOTAL = 'values__total',
 };
 
-/** CSS selectors for DOM elements. */
+// CSS selectors for DOM elements.
 enum Selector {
   CURRENCY = '[currency]',
   PERIODS = '[name=periods]',
 };
 
 class UserValues extends HTMLElement {
-  listEl_: HTMLElement;
-  periodsEl_: HTMLInputElement;
-  totalEl_: HTMLElement;
+  calculator_: any;
   currencyEl_: HTMLElement;
-  tableEl_: HTMLElement;
-  tableDataEl_: HTMLElement;
-  userValues_: string;
-  sums_: Array<number>;
+  listEl_: HTMLElement;
   observer_: MutationObserver;
+  periodsEl_: HTMLInputElement;
+  sums_: Array<number>;
+  tableDataEl_: HTMLElement;
+  tableEl_: HTMLElement;
+  totalEl_: HTMLElement;
+  userValues_: string;
 
   constructor() {
     super();
 
-    this.currencyEl_ = document.querySelector(Selector.CURRENCY);
-    this.tableEl_ = document.querySelector(`.${CssClass.TABLE}`);
-    this.tableDataEl_ = document.querySelector(`.${CssClass.TABLE_DATA}`);
-    this.userValues_ = localStorage.getItem(LOCAL_STORAGE);
-    this.observer_ = new MutationObserver(() => this.updateTotal_());
-
-    // TODO: Fix TS warning.
     this.calculator_ = new Calculator();
+    this.currencyEl_ = document.querySelector(Selector.CURRENCY);
+    this.observer_ = new MutationObserver(() => this.updateTotal_());
+    this.tableDataEl_ = document.querySelector(`.${CssClass.TABLE_DATA}`);
+    this.tableEl_ = document.querySelector(`.${CssClass.TABLE}`);
+    this.userValues_ = localStorage.getItem(LOCAL_STORAGE);
 
     /** @listens keyup */
     this.addEventListener('keyup', () => this.updateTotal_());
@@ -176,7 +175,6 @@ class UserValues extends HTMLElement {
     }
   }
 
-  // TODO: Fix TS warnings.
   /**
    * Updates 'total value' DOM element after calculating all compounding values.
    */
@@ -193,6 +191,7 @@ class UserValues extends HTMLElement {
 
       // Destructure last item in 'sums' array and display 'balance' from it.
       const lastSum = this.sums_[this.sums_.length - 1];
+      // TODO: Fix TS warning:
       const [year, deposits, interest, balance, growth] = lastSum;
       this.totalEl_.textContent = String(balance);
 

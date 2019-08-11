@@ -103,10 +103,10 @@ class UserValues extends HTMLElement {
   private setup_(): void {
     let listHtml = '';
     UserInputs.forEach((el, index) => {
-      const min = (el.min) ? `min="${el.min}"` : '';
-      const max = (el.max) ? `max="${el.max}"` : '';
-      const pattern = (el.pattern) ? `pattern="${el.pattern}"` : '';
-      const required = (el.required) ? 'required' : '';
+      const min = el.min ? `min="${el.min}"` : '';
+      const max = el.max ? `max="${el.max}"` : '';
+      const pattern = el.pattern ? `pattern="${el.pattern}"` : '';
+      const required = el.required ? 'required' : '';
       const autofocus = (index === 0) ? 'autofocus' : '';
 
       const input = `

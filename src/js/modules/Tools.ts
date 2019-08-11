@@ -30,7 +30,7 @@ class Tools {
    * Attaches fastclick for touch devices; adds 'no-touch' attribute otherwise.
    */
   private noTouch_(): void {
-    if (('ontouchstart' in window) || (<any>window).DocumentTouch) {
+    if ('ontouchstart' in window || (<any>window).DocumentTouch) {
       fastclick.attach(document.body);
     } else {
       document.body.setAttribute(NO_TOUCH_ATTR, '');

@@ -7,7 +7,6 @@ interface InputAttributes {
   min?: number,
   pattern: string,
   type: string,
-  required?: boolean,
 }
 
 const EMPTY_ATTR: string = 'empty';
@@ -43,7 +42,6 @@ const UserInputs: InputAttributes[] = [
     max: 100,
     pattern: '[0-9]+',
     type: 'number',
-    required: true,
   }
 ];
 
@@ -103,24 +101,15 @@ class UserValues extends HTMLElement {
   private setup_(): void {
     let listHtml = '';
     UserInputs.forEach((el, index) => {
+      const autofocus = (index === 0) ? 'autofocus' : '';
       const min = el.min ? `min="${el.min}"` : '';
       const max = el.max ? `max="${el.max}"` : '';
       const pattern = el.pattern ? `pattern="${el.pattern}"` : '';
-      const required = el.required ? 'required' : '';
-      const autofocus = (index === 0) ? 'autofocus' : '';
 
       const input = `
         <li id="${el.name}" class="values__item">
           <label for="${el.name}" class="values__label">${el.label}</label>
-          <input class="values__input"
-                 type="${el.type}"
-                 name="${el.name}"
-                 ${min}
-                 ${max}
-                 ${pattern}
-                 ${required}
-                 ${autofocus}
-                 aria-label="${el.label}">
+          <input class="values__input" type="${el.type}" name="${el.name}" ${min} ${max} ${pattern} aria-label="${el.label}" required ${autofocus}>
         </li>
       `;
       listHtml += input;

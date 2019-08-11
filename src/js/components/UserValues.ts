@@ -1,4 +1,4 @@
-import { Calculator } from '../modules/Calculator';
+import { Calculator, Sums } from '../modules/Calculator';
 
 interface InputAttributes {
   label: string,
@@ -67,7 +67,7 @@ class UserValues extends HTMLElement {
   listEl_: HTMLElement;
   observer_: MutationObserver;
   periodsEl_: HTMLInputElement;
-  sums_: Array<number>;
+  sums_: Sums[];
   tableDataEl_: HTMLElement;
   tableEl_: HTMLElement;
   totalEl_: HTMLElement;
@@ -148,10 +148,10 @@ class UserValues extends HTMLElement {
    * element with its corresponding user value.
    */
   private populateInputs_(): void {
-    const values = this.userValues_.split(',');
-    UserInputs.forEach((field, index) => {
+    const values = JSON.parse(this.userValues_);
+    UserInputs.forEach((field) => {
       const inputEl = this.querySelector(`[name=${field.name}]`) as HTMLInputElement;
-      inputEl.value = values[index];
+      inputEl.value = values[field.name];
     });
   }
 
@@ -171,24 +171,25 @@ class UserValues extends HTMLElement {
    * Updates 'total value' DOM element after calculating all compounding values.
    */
   private updateTotal_(): void {
-    const values = UserInputs.map(field => {
-      const inputEL = this.querySelector(`[name=${field.name}]`) as HTMLInputElement;
-      return parseInt(inputEL.value);
+    const values = {};
+    UserInputs.forEach((field) => {
+      const el = this.querySelector(`[name=${field.name}]`) as HTMLInputElement;
+      if (el.value) {
+        values[field.name] = Number(el.value);
+      }
     });
 
     if (this.querySelectorAll(':invalid').length === 0) {
       // Calculate all sums from user data and render it all in a table.
-      this.sums_ = this.calculator_.compound(...values);
+      this.sums_ = this.calculator_.compound(values);
       this.renderTable_();
 
-      // Destructure last item in 'sums' array and display 'balance' from it.
+      // Get last item in sums array to display final balance.
       const lastSum = this.sums_[this.sums_.length - 1];
-      // TODO: Fix TS warning:
-      const [year, deposits, interest, balance, growth] = lastSum;
-      this.totalEl_.textContent = String(balance);
+      this.totalEl_.textContent = lastSum.balance;
 
       // Save user values to localStorage.
-      localStorage.setItem(LOCAL_STORAGE, String(values));
+      localStorage.setItem(LOCAL_STORAGE, JSON.stringify(values));
     }
 
     this.setVisibility_();
@@ -208,8 +209,8 @@ class UserValues extends HTMLElement {
       </tr>
     `;
 
-    this.sums_.forEach((item) => {
-      const [year, deposits, interest, balance, growth] = item;
+    this.sums_.forEach((item: Sums) => {
+      const { year, deposits, interest, balance, growth } = item;
       tableHtml += `
         <tr>
           <td class="year">${year}</td>

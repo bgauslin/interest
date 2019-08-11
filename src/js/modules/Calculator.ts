@@ -1,6 +1,24 @@
+interface CompoundingValues {
+  principal: number,
+  contribution: number,
+  rate: number,
+  periods: number,
+}
+
+interface Sums {
+  year: string,
+  deposits: string,
+  interest: string,
+  balance: string,
+  growth: string,
+}
+
 const CURRENCY_ATTR: string = 'currency';
+
 const EURO_FORMAT_THRESHOLD: number = 50000;
+
 const EUROS: string = 'eur';
+
 const RUPEES: string = 'inr';
 
 class Calculator {
@@ -14,14 +32,15 @@ class Calculator {
   /**
    * Calculates compound interest and returns an array of all calculated values.
    */
-  public compound(principal: number, contribution: number, rate: number, periods: number): Array<number> {
+  public compound(values: CompoundingValues): Sums[] {
+    const { principal, contribution, rate, periods } = values;
     const pmt = contribution;
     let p = principal;
     let c = pmt;
     let principalCompounded: number;
     let contributionCompounded: number;
-    const sums = [];
 
+    const sums = [];
     for (let i = 1; i <= periods; i++) {
       principalCompounded = this.amountWithInterest_(p, rate);
       contributionCompounded = this.amountWithInterest_(c, rate);
@@ -35,7 +54,13 @@ class Calculator {
       let growth = ((balance / deposits - 1) * 100).toFixed(1);
       if (growth === 'NaN') growth = 'N/A';
 
-      sums.push([i, this.formatCurrency_(deposits), this.formatCurrency_(interest), this.formatCurrency_(balance), growth]);
+      sums.push({
+        year: String(i),
+        deposits: this.formatCurrency_(deposits),
+        interest: this.formatCurrency_(interest),
+        balance: this.formatCurrency_(balance),
+        growth,
+      });
     }
 
     return sums;
@@ -80,4 +105,4 @@ class Calculator {
   }
 }
 
-export { Calculator };
+export { Calculator, Sums };

@@ -34,13 +34,14 @@ class Calculator {
    */
   public compound(values: CompoundingValues): Sums[] {
     const { principal, contribution, rate, periods } = values;
+    const sums = [];
+
     const pmt = contribution;
-    let p = principal;
-    let c = pmt;
+    let p: number = principal;
+    let c: number = pmt;
     let principalCompounded: number;
     let contributionCompounded: number;
 
-    const sums = [];
     for (let i = 1; i <= periods; i++) {
       principalCompounded = this.amountWithInterest_(p, rate);
       contributionCompounded = this.amountWithInterest_(c, rate);
@@ -51,8 +52,10 @@ class Calculator {
       const balance = principalCompounded + contributionCompounded;
       const interest = balance - deposits;
 
-      let growth = ((balance / deposits - 1) * 100).toFixed(1);
-      if (growth === 'NaN') growth = 'N/A';
+      let growth: string = ((balance / deposits - 1) * 100).toFixed(1);
+      if (growth === 'NaN') {
+        growth = 'N/A'
+      };
 
       sums.push({
         year: String(i),

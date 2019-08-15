@@ -3,6 +3,7 @@ import { UserSettings } from '../components/UserSettings';
 import { UserValues } from'../components/UserValues';
 
 const EMPTY_ATTR: string = 'empty';
+
 const HIDDEN_ATTR: string = 'hidden';
 
 enum Visibility {

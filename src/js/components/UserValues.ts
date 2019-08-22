@@ -7,6 +7,7 @@ interface InputAttributes {
   min?: number,
   pattern: string,
   type: string,
+  inputmode: string,
 }
 
 const EMPTY_ATTR: string = 'empty';
@@ -20,6 +21,7 @@ const UserInputs: InputAttributes[] = [
     max: 999999,
     pattern: '[0-9]+',
     type: 'number',
+    inputmode: 'decimal',
   },
   {
     label: 'Yearly addition',
@@ -27,6 +29,7 @@ const UserInputs: InputAttributes[] = [
     max: 999999,
     pattern: '[0-9]+',
     type: 'number',
+    inputmode: 'decimal',
   },
   {
     label: 'Interest rate',
@@ -34,6 +37,7 @@ const UserInputs: InputAttributes[] = [
     max: 99,
     pattern: '[0-9]{0,2}[\\.]?[0-9]{1,2}',
     type: 'text',
+    inputmode: 'decimal',
   },
   {
     label: 'Years to grow',
@@ -42,6 +46,7 @@ const UserInputs: InputAttributes[] = [
     max: 100,
     pattern: '[0-9]+',
     type: 'number',
+    inputmode: 'decimal',
   }
 ];
 
@@ -102,6 +107,7 @@ class UserValues extends HTMLElement {
     let listHtml = '';
     UserInputs.forEach((el, index) => {
       const autofocus = (index === 0) ? 'autofocus' : '';
+
       const min = el.min ? `min="${el.min}"` : '';
       const max = el.max ? `max="${el.max}"` : '';
       const pattern = el.pattern ? `pattern="${el.pattern}"` : '';
@@ -109,7 +115,7 @@ class UserValues extends HTMLElement {
       const input = `
         <li id="${el.name}" class="values__item">
           <label for="${el.name}" class="values__label">${el.label}</label>
-          <input class="values__input" type="${el.type}" name="${el.name}" ${min} ${max} ${pattern} aria-label="${el.label}" required ${autofocus}>
+          <input class="values__input" type="${el.type}" name="${el.name}" inputmode="${el.inputmode}" ${min} ${max} ${pattern} aria-label="${el.label}" required ${autofocus}>
         </li>
       `;
       listHtml += input;

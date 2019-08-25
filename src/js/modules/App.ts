@@ -1,14 +1,10 @@
-import { Expandable } from '../components/Expandable';
-import { UserSettings } from '../components/UserSettings';
-import { UserValues } from'../components/UserValues';
-
 const EMPTY_ATTR: string = 'empty';
 
 const HIDDEN_ATTR: string = 'hidden';
 
 enum Visibility {
-  Source = '.values__total',
-  Targets = '.expandable, .table',
+  SOURCE = '.values__total',
+  TARGETS = '.expandable, .table',
 }
 
 enum FooterInfo {
@@ -29,18 +25,14 @@ class App {
   }
 
   /**
-   * Registers custom elements and renders all HTML for the app.
+   * Renders all HTML for the app.
    */
   public init(): void {
-    customElements.define('my-expandable', Expandable);
-    customElements.define('user-settings', UserSettings);
-    customElements.define('user-values', UserValues);
-
     this.renderHeader_();
     this.renderContent_();
     this.renderFooter_();
 
-    this.visibilitySourceEl_ = document.querySelector(Visibility.Source);
+    this.visibilitySourceEl_ = document.querySelector(Visibility.SOURCE);
     this.observer_.observe(this.visibilitySourceEl_, { attributes: true });
     this.setVisibility_();
   }
@@ -50,7 +42,7 @@ class App {
    * for the expandable to expand/collapse.
    */
   private setVisibility_(): void {
-    const els = document.querySelectorAll(Visibility.Targets);
+    const els = document.querySelectorAll(Visibility.TARGETS);
 
     if (this.visibilitySourceEl_.hasAttribute(EMPTY_ATTR)) {
       els.forEach(el => el.setAttribute(HIDDEN_ATTR, ''));

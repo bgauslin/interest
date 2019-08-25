@@ -23,13 +23,6 @@ const RUPEES: string = 'inr';
 
 class Calculator {
   /**
-   * Calculates a value with interest applied to initial value.
-   */
-  private amountWithInterest_(amount: number, rate: number): number {
-    return amount * (rate / 100 + 1);
-  }
-
-  /**
    * Calculates compound interest and returns an array of all calculated values.
    */
   public compound(values: CompoundingValues): Sums[] {
@@ -67,6 +60,13 @@ class Calculator {
     }
 
     return sums;
+  }
+
+  /**
+   * Calculates a value with interest applied to initial value.
+   */
+  private amountWithInterest_(amount: number, rate: number): number {
+    return amount * (rate / 100 + 1);
   }
 
   /**

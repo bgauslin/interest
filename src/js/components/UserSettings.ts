@@ -1,6 +1,6 @@
 interface SettingsFields {
-  name: string,
   fallback: string,
+  name: string,
   options: SettingsOptions[],
 }
 

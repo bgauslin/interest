@@ -1,13 +1,13 @@
 import { Calculator, Sums } from '../modules/Calculator';
 
 interface InputAttributes {
+  inputmode: string,
   label: string,
-  name: string,
   max: number,
   min?: number,
+  name: string,
   pattern: string,
   type: string,
-  inputmode: string,
 }
 
 const EMPTY_ATTR: string = 'empty';
@@ -16,37 +16,37 @@ const LOCAL_STORAGE: string = 'values';
 
 const UserInputs: InputAttributes[] = [
   {
+    inputmode: 'decimal',
     label: 'Principal',
+    max: 999999,
     name: 'principal',
-    max: 999999,
     pattern: '[0-9]+',
     type: 'number',
-    inputmode: 'decimal',
   },
   {
+    inputmode: 'decimal',
     label: 'Yearly addition',
-    name: 'contribution',
     max: 999999,
+    name: 'contribution',
     pattern: '[0-9]+',
     type: 'number',
-    inputmode: 'decimal',
   },
   {
+    inputmode: 'decimal',
     label: 'Interest rate',
-    name: 'rate',
     max: 99,
+    name: 'rate',
     pattern: '[0-9]{0,2}[\\.]?[0-9]{1,2}',
     type: 'text',
-    inputmode: 'decimal',
   },
   {
+    inputmode: 'decimal',
     label: 'Years to grow',
-    name: 'periods',
-    min: 1,
     max: 100,
+    min: 1,
+    name: 'periods',
     pattern: '[0-9]+',
     type: 'number',
-    inputmode: 'decimal',
   }
 ];
 

@@ -1,16 +1,16 @@
 interface CompoundingValues {
-  principal: number,
   contribution: number,
-  rate: number,
   periods: number,
+  principal: number,
+  rate: number,
 }
 
 interface Sums {
-  year: string,
-  deposits: string,
-  interest: string,
   balance: string,
+  deposits: string,
   growth: string,
+  interest: string,
+  year: string,
 }
 
 const CURRENCY_ATTR: string = 'currency';
@@ -26,7 +26,7 @@ class Calculator {
    * Calculates compound interest and returns an array of all calculated values.
    */
   public compound(values: CompoundingValues): Sums[] {
-    const { principal, contribution, rate, periods } = values;
+    const { contribution, principal, periods, rate } = values;
     const sums = [];
 
     const pmt = contribution;
@@ -51,11 +51,11 @@ class Calculator {
       };
 
       sums.push({
-        year: String(i),
-        deposits: this.formatCurrency_(deposits),
-        interest: this.formatCurrency_(interest),
         balance: this.formatCurrency_(balance),
+        deposits: this.formatCurrency_(deposits),
         growth,
+        interest: this.formatCurrency_(interest),
+        year: String(i),
       });
     }
 
@@ -91,8 +91,8 @@ class Calculator {
   };
 
   /**
-   * Formats currency for rupees (which is weird, so they get their
-   * own special method), and returns amount in '##,##,###.##' format.
+   * Formats currency for rupees (which has its own formatting, so it get its
+   * own method), and returns amount in '##,##,###.##' format.
    */
   private formatRupees_(rupees: number): string {
     const string = rupees.toFixed(2).toString().split('.');
@@ -102,7 +102,9 @@ class Calculator {
     const thousands = amount.substring(0, lastThree);
     const thousandsFormatted = thousands.replace(/\B(?=(\d{2})+(?!\d))/g, ',');
     let hundreds = amount.substring(lastThree);
-    if (thousands) hundreds = `,${hundreds}`;
+    if (thousands) {
+      hundreds = `,${hundreds}`;
+    }
 
     return `${thousandsFormatted}${hundreds}.${decimal}`;
   }

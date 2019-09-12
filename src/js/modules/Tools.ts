@@ -31,7 +31,7 @@ class Tools {
    */
   private noTouch_(): void {
     if ('ontouchstart' in window || (<any>window).DocumentTouch) {
-      fastclick.attach(document.body);
+      fastclick['attach'](document.body);
     } else {
       document.body.setAttribute(NO_TOUCH_ATTR, '');
     }

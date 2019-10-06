@@ -9,23 +9,20 @@ import '../stylus/interest.styl'; // Stylesheet for Webpack
 /** 
  * Define all custom elements.
  */
-customElements.define('my-expandable', Expandable);
-customElements.define('user-settings', UserSettings);
-customElements.define('user-values', UserValues);
+const map = new Map();
+map.set(Expandable, 'my-expandable');
+map.set(UserSettings, 'user-settings');
+map.set(UserValues, 'user-values');
+map.forEach((key, value) => customElements.define(key, value));
 
 /** 
- * Create class instances.
+ * Create class instances and initialize them.
  */ 
 const app = new App('#app');
 const tools = new Tools();
 
-/**
- * Initialize app when DOM is loaded.
- */
-document.addEventListener('DOMContentLoaded', () => {
-  app.init();
-  tools.init();
-}, { once: true });
+app.init();
+tools.init();
 
 /**
  * Update 'vh' value when window is resized.

@@ -1,8 +1,8 @@
 .menu
+  elevation(2)
   background white
   border-radius px_to_rem(4)
   color var(--dark-grey)
-  elevation(2)
   margin-top (GRID_GAP / 2)
   max-width 'calc(100vw - %s)' % GRID_GAP
   opacity 0
@@ -22,11 +22,11 @@
 
 // Menu arrow via rotated square with a shadow.
 .menu::before
+  elevation(2)
   background white
   clip-path polygon(px_to_rem(-8) px_to_rem(-8), px_to_rem(-8) px_to_rem(24), px_to_rem(24) px_to_rem(-8))
   content ''
   display block
-  elevation(2)
   height MENU_ARROW
   position absolute
   right px_to_rem(10)

@@ -56,13 +56,13 @@ enum CssClass {
   TABLE = 'table',
   TABLE_DATA = 'table__data',
   TOTAL = 'values__total',
-};
+}
 
 // CSS selectors for DOM elements.
 enum Selector {
   CURRENCY = '[currency]',
   PERIODS = '[name=periods]',
-};
+}
 
 class UserValues extends HTMLElement {
   calculator_: any;

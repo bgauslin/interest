@@ -12,7 +12,7 @@ enum FooterInfo {
   Title = 'Ben Gauslin’s Website',
   Url = 'https://gauslin.com',
   YearStart = '2018',
-};
+}
 
 class App {
   appEl_: HTMLElement;

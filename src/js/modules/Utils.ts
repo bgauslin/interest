@@ -2,14 +2,15 @@ import fastclick from 'fastclick';
 
 const NO_TOUCH_ATTR: string = 'no-touch';
 
-class Tools {
+class Utils {
   /**
    * Initializes handy site-wide methods.
    */
   public init(): void {
     this.noTouch_();
-    this.viewportHeight();
     this.googleAnalytics_();
+    this.viewportHeight_();
+    window.addEventListener('resize', () => this.viewportHeight_(), { passive: true });
   }
 
   /**
@@ -42,10 +43,10 @@ class Tools {
    * due to iOS Safari behavior where chrome appears and disappears when
    * scrolling.
    */
-  public viewportHeight(): void {
+  private viewportHeight_(): void {
     const viewportUnit = window.innerHeight / 100;
     document.documentElement.style.setProperty('--viewport-unit', `${viewportUnit}px`);
   }
 }
 
-export { Tools };
+export { Utils };

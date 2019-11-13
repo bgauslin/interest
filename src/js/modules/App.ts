@@ -1,3 +1,5 @@
+import { Utils } from './Utils';
+
 const EMPTY_ATTR: string = 'empty';
 
 const HIDDEN_ATTR: string = 'hidden';
@@ -15,19 +17,23 @@ enum FooterInfo {
 }
 
 class App {
-  appEl_: HTMLElement;
-  observer_: MutationObserver;
-  visibilitySourceEl_: HTMLElement;
-
+  private appEl_: HTMLElement;
+  private observer_: MutationObserver;
+  private utils_: any;
+  private visibilitySourceEl_: HTMLElement;
+  
   constructor(selector: string) {
     this.appEl_ = document.querySelector(selector);
     this.observer_ = new MutationObserver(() => this.setVisibility_());
+    this.utils_ = new Utils();
   }
 
   /**
    * Renders all HTML for the app.
    */
   public init(): void {
+    this.utils_.init();
+
     this.renderHeader_();
     this.renderContent_();
     this.renderFooter_();

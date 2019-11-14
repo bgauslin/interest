@@ -4,7 +4,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  entry: ['@babel/polyfill', './src/js/interest.ts'],
+  entry: ['./src/js/interest.ts'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
@@ -31,13 +31,10 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: [
-              '@babel/preset-env',
               '@babel/typescript',
             ],
             plugins: [
-              "@babel/proposal-class-properties",
-              "@babel/proposal-object-rest-spread",
-              'transform-regenerator',
+              'babel-plugin-transform-es2015-modules-commonjs',
             ],
           }
         }

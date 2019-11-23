@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = merge(common, {
   mode: 'development',
   output: {
-    filename: 'interest.js',
+    filename: '[name].js',
   },
   devServer: {
     contentBase: './dist'

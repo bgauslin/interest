@@ -4,7 +4,9 @@ const CopyPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  entry: ['./src/js/interest.ts'],
+  entry: {
+    app: './src/js/interest.ts',
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',

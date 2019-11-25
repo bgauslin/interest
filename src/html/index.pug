@@ -1,6 +1,5 @@
 - const title = "Compound Interest Calculator"
 - const description = "Progressive web app for calculating compound interest"
-- const devMode = (process.env.NODE_ENV !== 'production')
 
 doctype html
 html(lang="en")
@@ -30,5 +29,5 @@ html(lang="en")
           target="_blank",
           rel="noopener",
         ) Ben Gauslin
-    if devMode
+    if (process.env.NODE_ENV === 'development')
       script(src="https://css.gauslin.com/debugger.js" data-src="/breakpoints.json")

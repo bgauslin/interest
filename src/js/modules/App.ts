@@ -34,7 +34,7 @@ class App {
 
     this.updateHeader_();
     this.renderContent_();
-    this.updateCopyright_();
+    this.updateCopyright_('2018');
 
     this.visibilitySourceEl_ = document.querySelector(Visibility.SOURCE);
     this.observer_.observe(this.visibilitySourceEl_, { attributes: true });
@@ -96,11 +96,10 @@ class App {
   }
 
   /**
-   * Renders copyright years based on current year.
+   * Updates copyright blurb with current year.
    */
-  private updateCopyright_(): void {
+  private updateCopyright_(start: string): void {
     const el = document.querySelector('.copyright__years');
-    const start = '2018';
     const end = new Date().getFullYear().toString().substr(-2);
     el.textContent = `© ${start}–${end}`;
   }

@@ -17,13 +17,11 @@ enum FooterInfo {
 }
 
 class App {
-  private appEl_: HTMLElement;
   private observer_: MutationObserver;
   private utils_: any;
   private visibilitySourceEl_: HTMLElement;
   
-  constructor(selector: string) {
-    this.appEl_ = document.querySelector(selector);
+  constructor() {
     this.observer_ = new MutationObserver(() => this.setVisibility_());
     this.utils_ = new Utils();
   }
@@ -69,7 +67,7 @@ class App {
         </div>\
       </header>\
     `;
-    this.appEl_.innerHTML += html.replace(/\s\s/g, '');
+    document.body.innerHTML += html.replace(/\s\s/g, '');
   }
 
   /**
@@ -81,7 +79,7 @@ class App {
       ${this.renderTable_('table')}\
       <my-expandable class="expandable" target="table" label="table"></my-expandable>\
     `;
-    this.appEl_.innerHTML += html.replace(/\s\s/g, '');
+    document.body.innerHTML += html.replace(/\s\s/g, '');
   }
 
   /**
@@ -120,7 +118,7 @@ class App {
       </footer>\
     `;
 
-    this.appEl_.innerHTML += html.replace(/\s\s/g, '');
+    document.body.innerHTML += html.replace(/\s\s/g, '');
   }
 }
 

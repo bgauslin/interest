@@ -14,5 +14,5 @@ map.set(UserValues, 'user-values');
 map.forEach((key, value) => customElements.define(key, value));
 
 // Create app instance and initialize it.
-const app = new App('#app');
+const app = new App();
 app.init();

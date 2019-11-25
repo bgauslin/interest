@@ -2,6 +2,7 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 
@@ -20,6 +21,10 @@ module.exports = {
       { from: 'src/pwa', to: 'pwa' },
     ]),
     new Dotenv(),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'src/html/index.pug',
+    }),
     new WorkboxPlugin.InjectManifest({
       swSrc: 'src/js/sw.js',
       swDest: 'sw.js',

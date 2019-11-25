@@ -11,13 +11,6 @@ enum CssClass {
   NO_JS = 'no-js',
 }
 
-enum FooterInfo {
-  label = 'Ben Gauslin',
-  title = 'Ben Gauslin’s Website',
-  url = 'https://gauslin.com',
-  yearStart = '2018',
-}
-
 enum Visibility {
   SOURCE = '.values__total',
   TARGETS = '.expandable, .table',
@@ -41,7 +34,7 @@ class App {
 
     this.updateHeader_();
     this.renderContent_();
-    this.updateFooter_();
+    this.updateCopyright_();
 
     this.visibilitySourceEl_ = document.querySelector(Visibility.SOURCE);
     this.observer_.observe(this.visibilitySourceEl_, { attributes: true });
@@ -103,25 +96,13 @@ class App {
   }
 
   /**
-   * Renders footer element into the DOM.
+   * Renders copyright years based on current year.
    */
-  private updateFooter_(): void {
-    const { label, title, url, yearStart } = FooterInfo;
-    const yearEnd = new Date().getFullYear().toString().substr(-2);
-
-    const yearsEl = document.querySelector('.copyright__years');
-    const ownerEl = document.querySelector('.copyright__owner');
-
-    const ownerElHtml = `\
-      <a class="copyright__owner" \
-          href="${url}" \
-          title="${title} (opens in a new window)" \
-          target="_blank" \
-          rel="noopener">${label}</a>\
-    `;
-
-    yearsEl.textContent = `© ${yearStart}–${yearEnd}`;
-    ownerEl.innerHTML = ownerElHtml.replace(/\s\s/g, '');
+  private updateCopyright_(): void {
+    const el = document.querySelector('.copyright__years');
+    const start = '2018';
+    const end = new Date().getFullYear().toString().substr(-2);
+    el.textContent = `© ${start}–${end}`;
   }
 }
 

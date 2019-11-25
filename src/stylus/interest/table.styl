@@ -1,7 +1,5 @@
 .table
   box-sizing border-box
-  grid-column 1 / span 4
-  grid-row 4
   height auto
   justify-self stretch
   margin 0
@@ -11,29 +9,23 @@
   text-align center
   transition height var(--transition-slow) ease-out, opacity var(--transition-slow) ease-out
 
-  @media Breakpoint.SMALL
-    grid-column 2
-
   @media Breakpoint.MEDIUM
-    grid-row 3
     height auto !important // always display table
     opacity 1
 
   @media Breakpoint.LARGE
-    grid-column 3
-    grid-row 2
     justify-self stretch
+    margin-top var(--grid-gap)
     padding 0
 
 .table[hidden]
   display none
 
 .table[expanded]
-  @media Breakpoint.SMALL
-    margin-top px_to_rem(16)
+  margin-bottom px_to_rem(16)
 
   @media Breakpoint.MEDIUM
-    margin-top 0
+    margin-bottom 0
 
 .table__frame
   border-bottom 1px solid var(--border)

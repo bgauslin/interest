@@ -2,8 +2,6 @@
   align-self center
   display flex
   flex-direction column
-  grid-column 2
-  grid-row 3
   justify-content center
   justify-self stretch
   overflow hidden
@@ -12,12 +10,9 @@
   @media Breakpoint.SMALL
     align-self start
     border-radius CORNER_RADIUS_CARD
-
-  @media Breakpoint.MEDIUM
-    grid-row 2
+    margin-top var(--grid-gap)
 
   @media Breakpoint.LARGE
-    grid-column 2
     position sticky
     top 'calc(var(--header-height) + %s)' % GRID_GAP_MEDIUM
 

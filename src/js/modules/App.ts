@@ -10,10 +10,10 @@ enum Visibility {
 }
 
 enum FooterInfo {
-  Label = 'Ben Gauslin',
-  Title = 'Ben Gauslin’s Website',
-  Url = 'https://gauslin.com',
-  YearStart = '2018',
+  label = 'Ben Gauslin',
+  title = 'Ben Gauslin’s Website',
+  url = 'https://gauslin.com',
+  yearStart = '2018',
 }
 
 class App {
@@ -32,9 +32,9 @@ class App {
   public init(): void {
     this.utils_.init();
 
-    this.renderHeader_();
+    this.updateHeader_();
     this.renderContent_();
-    this.renderFooter_();
+    this.updateFooter_();
 
     this.visibilitySourceEl_ = document.querySelector(Visibility.SOURCE);
     this.observer_.observe(this.visibilitySourceEl_, { attributes: true });
@@ -56,30 +56,24 @@ class App {
   }
 
   /**
-   * Renders header element into the DOM.
+   * Renders additional elements into the header.
    */
-  private renderHeader_(): void {
-    const html = `\
-      <header class="header">\
-        <div class="header__frame">\
-          <h1 class="header__title">${document.title}</h1>\
-          <user-settings class="settings" id="settings"></user-settings>\
-        </div>\
-      </header>\
-    `;
-    document.body.innerHTML += html.replace(/\s\s/g, '');
+  private updateHeader_(): void {
+    const headerEl = document.querySelector('.header__frame');
+    headerEl.innerHTML += '<user-settings class="settings" id="settings"></user-settings>';
   }
 
   /**
    * Renders user inputs, table, expandable, and click mask into the DOM.
    */
   private renderContent_(): void {
+    const contentEl = document.querySelector('.content');
     const html = `
       <user-values class="values"></user-values>\
       ${this.renderTable_('table')}\
       <my-expandable class="expandable" target="table" label="table"></my-expandable>\
     `;
-    document.body.innerHTML += html.replace(/\s\s/g, '');
+    contentEl.innerHTML = html.replace(/\s\s/g, '');
   }
 
   /**
@@ -102,23 +96,23 @@ class App {
   /**
    * Renders footer element into the DOM.
    */
-  private renderFooter_(): void {
-    const { Label, Title, Url, YearStart } = FooterInfo;
+  private updateFooter_(): void {
+    const { label, title, url, yearStart } = FooterInfo;
     const yearEnd = new Date().getFullYear().toString().substr(-2);
-    const html = `\
-      <footer class="footer">\
-        <p class="copyright">\
-          <span class="copyright__years">© ${YearStart}–${yearEnd}</span>\
-          <a class="copyright__owner" \
-             href="${Url}" \
-             title="${Title} (opens in a new window)" \
-             target="_blank" \
-             rel="noopener">${Label}</a>\
-        </p>\
-      </footer>\
+
+    const yearsEl = document.querySelector('.copyright__years');
+    const ownerEl = document.querySelector('.copyright__owner');
+
+    const ownerElHtml = `\
+      <a class="copyright__owner" \
+          href="${url}" \
+          title="${title} (opens in a new window)" \
+          target="_blank" \
+          rel="noopener">${label}</a>\
     `;
 
-    document.body.innerHTML += html.replace(/\s\s/g, '');
+    yearsEl.textContent = `© ${yearStart}–${yearEnd}`;
+    ownerEl.innerHTML = ownerElHtml.replace(/\s\s/g, '');
   }
 }
 

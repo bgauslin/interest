@@ -1,0 +1,13 @@
+.content
+  display grid
+  grid-column 1 / 4
+  grid-row 2
+  grid-template-rows minmax(auto, 1fr) auto auto
+
+  @media Breakpoint.SMALL
+    grid-column 2
+    grid-gap var(--grid-gap)
+    grid-template-rows auto 1fr auto
+
+  @media Breakpoint.LARGE
+    grid-template-columns VALUES_GRID_WIDTH TABLE_MAX_WIDTH

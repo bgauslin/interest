@@ -2,10 +2,11 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: {
-    app: './src/js/interest.ts',
+    interest: './src/js/interest.ts',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -43,13 +44,18 @@ module.exports = {
       },
       {
         test: /\.styl$/,
-        exclude: /node_modules/, 
         use: [
-          'style-loader',
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: process.env.NODE_ENV === 'development',
+              reloadAll: true,
+            },
+          },
           'css-loader',
           'postcss-loader',
           'stylus-loader',
-        ]
+        ],
       },
       {
         test: /\.pug$/,

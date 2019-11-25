@@ -1,12 +1,14 @@
 import { Utils } from './Utils';
 
-const EMPTY_ATTR: string = 'empty';
+enum Attribute {
+  EMPTY = 'empty',
+  HIDDEN = 'hidden',
+}
 
-const HIDDEN_ATTR: string = 'hidden';
-
-enum Visibility {
-  SOURCE = '.values__total',
-  TARGETS = '.expandable, .table',
+enum CssClass {
+  CONTENT = 'content',
+  HEADER = 'header__frame',
+  NO_JS = 'no-js',
 }
 
 enum FooterInfo {
@@ -14,6 +16,11 @@ enum FooterInfo {
   title = 'Ben Gauslin’s Website',
   url = 'https://gauslin.com',
   yearStart = '2018',
+}
+
+enum Visibility {
+  SOURCE = '.values__total',
+  TARGETS = '.expandable, .table',
 }
 
 class App {
@@ -48,10 +55,10 @@ class App {
   private setVisibility_(): void {
     const els = document.querySelectorAll(Visibility.TARGETS);
 
-    if (this.visibilitySourceEl_.hasAttribute(EMPTY_ATTR)) {
-      els.forEach(el => el.setAttribute(HIDDEN_ATTR, ''));
+    if (this.visibilitySourceEl_.hasAttribute(Attribute.EMPTY)) {
+      els.forEach(el => el.setAttribute(Attribute.HIDDEN, ''));
     } else {
-      els.forEach(el => el.removeAttribute(HIDDEN_ATTR));
+      els.forEach(el => el.removeAttribute(Attribute.HIDDEN));
     }
   }
 
@@ -59,7 +66,7 @@ class App {
    * Renders additional elements into the header.
    */
   private updateHeader_(): void {
-    const headerEl = document.querySelector('.header__frame');
+    const headerEl = document.querySelector(`.${CssClass.HEADER}`);
     headerEl.innerHTML += '<user-settings class="settings" id="settings"></user-settings>';
   }
 
@@ -67,13 +74,15 @@ class App {
    * Renders user inputs, table, expandable, and click mask into the DOM.
    */
   private renderContent_(): void {
-    const contentEl = document.querySelector('.content');
+    const contentEl = document.querySelector(`.${CssClass.NO_JS}`);
     const html = `
       <user-values class="values"></user-values>\
       ${this.renderTable_('table')}\
       <my-expandable class="expandable" target="table" label="table"></my-expandable>\
     `;
     contentEl.innerHTML = html.replace(/\s\s/g, '');
+    contentEl.classList.add(`${CssClass.CONTENT}`);
+    contentEl.classList.remove(`${CssClass.NO_JS}`);
   }
 
   /**

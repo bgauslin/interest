@@ -1,7 +1,7 @@
 workbox.precaching.precacheAndRoute(self.__precacheManifest);
 
 workbox.routing.registerRoute(
-  /https:\/\/assets\.gausin\.com/,
+  /https:\/\/assets\.gauslin\.com/,
   new workbox.strategies.NetworkFirst({
     cacheName: 'webfonts',
     plugins: [

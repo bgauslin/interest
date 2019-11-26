@@ -107,26 +107,27 @@ class UserValues extends HTMLElement {
     let listHtml = '';
     UserInputs.forEach((el, index) => {
       const autofocus = (index === 0) ? 'autofocus' : '';
-
       const min = el.min ? `min="${el.min}"` : '';
       const max = el.max ? `max="${el.max}"` : '';
       const pattern = el.pattern ? `pattern="${el.pattern}"` : '';
 
-      const input = `
-        <li id="${el.name}" class="values__item">
-          <label for="${el.name}" class="values__label">${el.label}</label>
-          <input class="values__input" type="${el.type}" name="${el.name}" inputmode="${el.inputmode}" ${min} ${max} ${pattern} aria-label="${el.label}" required ${autofocus}>
-        </li>
+      const input = `\
+        <li id="${el.name}" class="values__item">\
+          <label for="${el.name}" class="values__label">${el.label}</label>\
+          <input class="values__input" type="${el.type}" name="${el.name}" inputmode="${el.inputmode}" ${min} ${max} ${pattern} aria-label="${el.label}" required ${autofocus}>\
+        </li>\
       `;
       listHtml += input;
     });
 
-    this.innerHTML = `
-      <ul class="${CssClass.LIST}">
-        ${listHtml}
-      </ul>
-      <div class="${CssClass.TOTAL}"></div>
+    const html = `\
+      <ul class="${CssClass.LIST}">\
+        ${listHtml}\
+      </ul>\
+      <div class="${CssClass.TOTAL}"></div>\
     `;
+
+    this.innerHTML = html.replace(/\s\s/g, '');
 
     this.listEl_ = this.querySelector(`.${CssClass.LIST}`);
     this.totalEl_ = this.querySelector(`.${CssClass.TOTAL}`);
@@ -194,30 +195,30 @@ class UserValues extends HTMLElement {
    * Renders initial and compounded amounts for each period.
    */
   private renderTable_(): void {
-    let tableHtml: string = `
-      <tr>
-        <th class="year">Year</th>
-        <th class="deposits">Deposits</th>
-        <th class="interest">Interest</th>
-        <th class="balance">Balance</th>
-        <th class="growth">Growth</th>
-      </tr>
+    let tableHtml: string = `\
+      <tr>\
+        <th class="year">Year</th>\
+        <th class="deposits">Deposits</th>\
+        <th class="interest">Interest</th>\
+        <th class="balance">Balance</th>\
+        <th class="growth">Growth</th>\
+      </tr>\
     `;
 
     this.sums_.forEach((item: Sums) => {
       const { year, deposits, interest, balance, growth } = item;
-      tableHtml += `
-        <tr>
-          <td class="year">${year}</td>
-          <td class="deposits">${deposits}</td>
-          <td class="interest">${interest}</td>
-          <td class="balance">${balance}</td>
-          <td class="growth">${growth}</td>
-        </tr>
+      tableHtml += `\
+        <tr>\
+          <td class="year">${year}</td>\
+          <td class="deposits">${deposits}</td>\
+          <td class="interest">${interest}</td>\
+          <td class="balance">${balance}</td>\
+          <td class="growth">${growth}</td>\
+        </tr>\
       `;
     });
 
-    this.tableDataEl_.innerHTML = tableHtml;
+    this.tableDataEl_.innerHTML = tableHtml.replace(/\s\s/g, '');
   }
 }
 

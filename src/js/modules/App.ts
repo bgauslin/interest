@@ -68,7 +68,7 @@ class App {
    */
   private renderContent_(): void {
     const contentEl = document.querySelector(`.${CssClass.NO_JS}`);
-    const html = `
+    const html = `\
       <user-values class="values"></user-values>\
       ${this.renderTable_('table')}\
       <my-expandable class="expandable" target="table" label="table"></my-expandable>\

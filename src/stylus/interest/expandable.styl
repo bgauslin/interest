@@ -2,15 +2,14 @@
   align-self center
   justify-self center
   opacity 1
-  transition margin var(--transition) ease, opacity var(--transition) ease
-  visibility visibile
+  transition opacity var(--transition) ease
 
   @media Breakpoint.MEDIUM
     display none !important // hide the button since we don't need it
 
 .expandable[hidden]
   opacity 0
-  visibility hidden
+  pointer-events none
 
 .expandable__button
   webfont(600)

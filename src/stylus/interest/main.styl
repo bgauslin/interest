@@ -8,13 +8,13 @@
   display grid
   grid-column 1 / 4
   grid-row 2
-  grid-template-rows minmax(auto, 1fr) auto auto
+  grid-template-rows minmax(auto, 1fr) auto (BUTTON_HEIGHT * 2)
   padding 0 env(safe-area-inset-right) 0 env(safe-area-inset-left)
 
   @media Breakpoint.SMALL
     grid-column 2
     grid-gap var(--grid-gap)
-    grid-template-rows auto 1fr auto
+    grid-template-rows auto 1fr
 
   @media Breakpoint.LARGE
     grid-template-columns VALUES_GRID_WIDTH 1fr

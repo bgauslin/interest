@@ -11,19 +11,21 @@
   opacity 0
   pointer-events none
 
+// [1] Knockout via theme's body background.
+// [2] Adjust right padding to coordinate with toggle arrow.
 .expandable__button
   webfont(600)
   align-items center
   background var(--green)
   border 2px solid var(--green)
   border-radius (BUTTON_HEIGHT / 2)
-  color white
+  color var(--background) // [1]
   display flex
   font-size px_to_em(14)
   height BUTTON_HEIGHT
   justify-content center
   line-height 1
-  padding 0 px_to_rem(12) 0 0 // adjust for toggle arrow
+  padding 0 px_to_rem(12) 0 0 // [2]
   width 50vw
   white-space nowrap
 
@@ -40,8 +42,9 @@
   color var(--green)
   cursor pointer
 
+// [1] Knockout via theme's body background.
 .expandable__button::before
-  css_triangle(white, 5px, 'down')
+  css_triangle(var(--background), 5px, 'down') // [1]
   content ''
   display inline-block
   margin-right px_to_rem(8)

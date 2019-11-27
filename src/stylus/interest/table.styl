@@ -1,5 +1,8 @@
+// [1] Make variable font commas and decimal points align across table cells.
+// [2] Table should always display at this breakpoint and higher.
 .table
   box-sizing border-box
+  font-variant-numeric tabular-nums // [1]
   height auto
   justify-self stretch
   margin 0
@@ -8,9 +11,9 @@
   overflow-y hidden
   text-align center
   transition height var(--transition-slow) ease-out, opacity var(--transition-slow) ease-out
-
+  
   @media Breakpoint.MEDIUM
-    height auto !important // always display table
+    height auto !important // [2]
     opacity 1
 
   @media Breakpoint.LARGE
@@ -21,6 +24,7 @@
 .table[hidden]
   display none
 
+// TODO: Revisit/refactor table bottom margin and expandable button layout.
 .table[expanded]
   margin-bottom px_to_rem(16)
 

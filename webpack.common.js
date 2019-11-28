@@ -28,7 +28,7 @@ module.exports = {
     new WorkboxPlugin.InjectManifest({
       swSrc: 'src/js/sw.js',
       swDest: 'sw.js',
-      exclude: [/\.htaccess$/, /robots\.txt$/],
+      exclude: [/\.htaccess$/, /robots\.txt$/, /\.DS_Store$/],
     }),
   ],
   node: {

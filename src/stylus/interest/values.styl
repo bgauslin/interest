@@ -3,7 +3,6 @@
   display flex
   flex-direction column
   justify-content center
-  justify-self stretch
   overflow hidden
   padding CARD_PADDING
 
@@ -13,8 +12,9 @@
     margin-top var(--grid-gap)
 
   @media Breakpoint.LARGE
+    margin-top 0
     position sticky
-    top 'calc(var(--sticky-offset) + %s)' % GRID_GAP_MEDIUM
+    top calc(var(--sticky-offset) + var(--grid-gap))
 
 .values__list
   list-style none

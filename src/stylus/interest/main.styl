@@ -9,7 +9,10 @@
   grid-column 1 / 4
   grid-row 2
   grid-template-rows minmax(auto, 1fr) auto (BUTTON_HEIGHT * 2)
+  margin 0 auto
+  max-width CONTENT_WIDTH_LARGE
   padding 0 env(safe-area-inset-right) 0 env(safe-area-inset-left)
+  width 100%
 
   @media Breakpoint.SMALL
     grid-column 2
@@ -18,6 +21,3 @@
 
   @media Breakpoint.LARGE
     grid-template-columns VALUES_GRID_WIDTH 1fr
-    max-width CONTENT_WIDTH_LARGE
-    margin 0 auto
-    width 100%

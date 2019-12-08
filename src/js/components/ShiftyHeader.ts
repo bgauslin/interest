@@ -1,3 +1,8 @@
+enum CustomProperty {
+  OFFSET = '--sticky-offset',
+  SHIFT = '--sticky-shift',
+}
+
 class ShiftyHeader extends HTMLElement {
   private height_: number;
   private scrollChange_: number;
@@ -46,9 +51,11 @@ class ShiftyHeader extends HTMLElement {
         this.shift_ = 0;
       }
 
-      // Set custom property values for elements that shift vertically.
-      document.documentElement.style.setProperty('--sticky-offset', `${(this.height_ - this.shift_) / 16}rem`);
-      document.documentElement.style.setProperty('--sticky-shift', `-${this.shift_ / 16}rem`);
+      // Set CSS values for related elements to reference.
+      document.documentElement.style.setProperty(
+        CustomProperty.OFFSET, `${(this.height_ - this.shift_) / 16}rem`);
+      document.documentElement.style.setProperty(
+        CustomProperty.SHIFT, `-${this.shift_ / 16}rem`);
 
       // Update yScrollLast for determining scroll change on next tick.
       this.yScrollLast_ = (this.yScroll_ <= 0) ? 0 : this.yScroll_;

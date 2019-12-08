@@ -46,11 +46,9 @@ class ShiftyHeader extends HTMLElement {
         this.shift_ = 0;
       }
 
-      // Set custom property value for other elements that need it.
-      document.documentElement.style.setProperty('--sticky-offset', `${this.height_ - this.shift_}px`);
-
-      // Apply CSS transform to shift the element vertically.
-      this.style.transform = `translate3d(0, ${-this.shift_}px, 0)`;
+      // Set custom property values for elements that shift vertically.
+      document.documentElement.style.setProperty('--sticky-offset', `${(this.height_ - this.shift_) / 16}rem`);
+      document.documentElement.style.setProperty('--sticky-shift', `-${this.shift_ / 16}rem`);
 
       // Update yScrollLast for determining scroll change on next tick.
       this.yScrollLast_ = (this.yScroll_ <= 0) ? 0 : this.yScroll_;

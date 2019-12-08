@@ -46,6 +46,9 @@ class ShiftyHeader extends HTMLElement {
         this.shift_ = 0;
       }
 
+      // Set custom property value for other elements that need it.
+      document.documentElement.style.setProperty('--sticky-offset', `${this.height_ - this.shift_}px`);
+
       // Apply CSS transform to shift the element vertically.
       this.style.transform = `translate3d(0, ${-this.shift_}px, 0)`;
 

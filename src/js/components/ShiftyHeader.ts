@@ -27,9 +27,7 @@ class ShiftyHeader extends HTMLElement {
   }
 
   private resize_(): void {
-    window.addEventListener('resize', () => {
-      this.getHeight_();
-    }, { passive: true });
+    window.addEventListener('resize', () => this.getHeight_());
   }
 
   private applyShift_(): void {

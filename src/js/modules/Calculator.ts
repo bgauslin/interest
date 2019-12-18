@@ -26,7 +26,7 @@ class Calculator {
    * Calculates compound interest and returns an array of all calculated values.
    */
   public compound(values: CompoundingValues): Sums[] {
-    const { contribution, principal, periods, rate } = values;
+    const {contribution, principal, periods, rate} = values;
     const sums = [];
 
     const pmt = contribution;
@@ -110,4 +110,4 @@ class Calculator {
   }
 }
 
-export { Calculator, Sums };
+export {Calculator, Sums};

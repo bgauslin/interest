@@ -75,7 +75,7 @@ class UserSettings extends HTMLElement {
         window.requestAnimationFrame(() => {
           document.addEventListener('click', () => {
             this.removeAttribute(OPEN_ATTR);
-          }, { once: true });
+          }, {once: true});
         });
       }
     }
@@ -96,7 +96,7 @@ class UserSettings extends HTMLElement {
    */
   private setDefaults_(): void {
     Settings.forEach((setting) => {
-      const { name, fallback } = setting;
+      const {name, fallback} = setting;
       const value = localStorage.getItem(name) || fallback;
       this.setAttribute(name, value);
     });
@@ -123,7 +123,7 @@ class UserSettings extends HTMLElement {
     let menuGroups = '';
 
     Settings.forEach((setting) => {
-      const { name, options } = setting;
+      const {name, options} = setting;
       let optionsHtml = '';
       options.forEach((option) => {
         optionsHtml += `\
@@ -162,4 +162,4 @@ class UserSettings extends HTMLElement {
   }
 }
 
-export { UserSettings };
+export {UserSettings};

@@ -78,7 +78,7 @@ class Expandable extends HTMLElement {
       this.targetEl_.addEventListener('transitionend', () => {
         this.targetEl_.style.height = null;
         this.targetEl_.removeEventListener('transitionend', null, false);
-      }, { once: true });
+      }, {once: true});
 
     } else {
       this.targetEl_.removeAttribute(EXPANDED_ATTR);
@@ -105,4 +105,4 @@ class Expandable extends HTMLElement {
   }
 }
 
-export { Expandable };
+export {Expandable};

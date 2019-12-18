@@ -1,4 +1,4 @@
-import { Calculator, Sums } from '../modules/Calculator';
+import {Calculator, Sums} from '../modules/Calculator';
 
 interface InputAttributes {
   inputmode: string,
@@ -206,7 +206,7 @@ class UserValues extends HTMLElement {
     `;
 
     this.sums_.forEach((item: Sums) => {
-      const { year, deposits, interest, balance, growth } = item;
+      const {year, deposits, interest, balance, growth} = item;
       tableHtml += `\
         <tr>\
           <td class="year">${year}</td>\
@@ -222,4 +222,4 @@ class UserValues extends HTMLElement {
   }
 }
 
-export { UserValues };
+export {UserValues};

@@ -1,10 +1,10 @@
 require('dotenv').config();
 
-import { App } from './modules/App';
-import { Expandable } from './components/Expandable';
-import { ShiftyHeader } from './components/ShiftyHeader';
-import { UserSettings } from './components/UserSettings';
-import { UserValues } from'./components/UserValues';
+import {App} from './modules/App';
+import {Expandable} from './components/Expandable';
+import {ShiftyHeader} from './components/ShiftyHeader';
+import {UserSettings} from './components/UserSettings';
+import {UserValues} from'./components/UserValues';
 
 import '../stylus/interest.styl';
 

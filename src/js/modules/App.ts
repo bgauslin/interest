@@ -1,4 +1,4 @@
-import { Utils } from './Utils';
+import {Utils} from './Utils';
 
 enum Attribute {
   EMPTY = 'empty',
@@ -37,7 +37,7 @@ class App {
     this.updateCopyright_('2018');
 
     this.visibilitySourceEl_ = document.querySelector(Visibility.SOURCE);
-    this.observer_.observe(this.visibilitySourceEl_, { attributes: true });
+    this.observer_.observe(this.visibilitySourceEl_, {attributes: true});
     this.setVisibility_();
   }
 
@@ -105,4 +105,4 @@ class App {
   }
 }
 
-export { App };
+export {App};

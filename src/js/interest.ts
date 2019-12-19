@@ -16,11 +16,8 @@ map.set(UserSettings, 'user-settings');
 map.set(UserValues, 'user-values');
 map.forEach((key, value) => customElements.define(key, value));
 
-// Create app instance and initialize it.
-window.addEventListener('DOMContentLoaded', () => {
-  const app = new App();
-  app.init();
-});
+// Initialize the app.
+window.addEventListener('DOMContentLoaded', () => new App().init());
 
 // Register the Service Worker.
 if ('serviceWorker' in navigator) {

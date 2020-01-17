@@ -49,9 +49,9 @@ class App {
     const els = document.querySelectorAll(Visibility.TARGETS);
 
     if (this.visibilitySourceEl_.hasAttribute(Attribute.EMPTY)) {
-      els.forEach(el => el.setAttribute(Attribute.HIDDEN, ''));
+      els.forEach((el) => el.setAttribute(Attribute.HIDDEN, ''));
     } else {
-      els.forEach(el => el.removeAttribute(Attribute.HIDDEN));
+      els.forEach((el) => el.removeAttribute(Attribute.HIDDEN));
     }
   }
 
@@ -71,7 +71,7 @@ class App {
     const html = `\
       <user-values class="values"></user-values>\
       ${this.renderTable_('table')}\
-      <my-expandable class="expandable" target="table" label="table"></my-expandable>\
+      <app-expandable class="expandable" target="table" label="table"></app-expandable>\
     `;
     contentEl.innerHTML = html.replace(/\s\s/g, '');
     contentEl.classList.add(`${CssClass.CONTENT}`);

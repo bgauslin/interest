@@ -10,11 +10,8 @@ interface SettingsOptions {
 }
 
 const CURRENCY_ATTR: string = 'currency';
-
 const OPEN_ATTR: string = 'open';
-
 const THEME_ATTR: string = 'theme';
-
 const TOGGLE_CLASS: string = 'settings__toggle';
 
 const Settings: SettingsFields[] = [

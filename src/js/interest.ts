@@ -10,7 +10,7 @@ import '../stylus/interest.styl';
 
 // Define all custom elements.
 const map = new Map();
-map.set(Expandable, 'my-expandable');
+map.set(Expandable, 'app-expandable');
 map.set(ShiftyHeader, 'app-header');
 map.set(UserSettings, 'user-settings');
 map.set(UserValues, 'user-values');

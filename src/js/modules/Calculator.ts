@@ -14,11 +14,8 @@ interface Sums {
 }
 
 const CURRENCY_ATTR: string = 'currency';
-
 const EURO_FORMAT_THRESHOLD: number = 50000;
-
 const EUROS: string = 'eur';
-
 const RUPEES: string = 'inr';
 
 class Calculator {

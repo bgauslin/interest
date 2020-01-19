@@ -5,7 +5,7 @@ class Utils {
    * Initializes handy site-wide methods.
    */
   public init(): void {
-    this.isTouchEnabled_();
+    this.touchEnabled_();
     this.googleAnalytics_();
     this.viewportHeight_();
     window.addEventListener('resize', () => this.viewportHeight_());
@@ -28,7 +28,7 @@ class Utils {
   /**
    * Removes 'no-touch' attribute and adds fastclick if device is touch-enabled.
    */
-  private isTouchEnabled_(): void {
+  private touchEnabled_(): void {
     if ('ontouchstart' in window || (<any>window).DocumentTouch) {
       document.body.removeAttribute('no-touch');
       fastclick['attach'](document.body);

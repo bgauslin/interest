@@ -106,8 +106,13 @@ class UserSettings extends HTMLElement {
     const oldEl = <HTMLInputElement>this.querySelector(`[value=${oldValue}]`);
     const newEl = <HTMLInputElement>this.querySelector(`[value=${newValue}]`);
 
-    if (oldEl) oldEl.checked = false;
-    if (newEl) newEl.checked = true;
+    if (oldEl) {
+      oldEl.checked = false;
+    }
+
+    if (newEl) {
+      newEl.checked = true;
+    }
 
     document.body.setAttribute(name, newValue);
     localStorage.setItem(name, newValue);

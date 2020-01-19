@@ -18,7 +18,7 @@ enum Visibility {
 
 class App {
   private observer_: MutationObserver;
-  private utils_: any;
+  private utils_: Utils;
   private visibilitySourceEl_: HTMLElement;
   
   constructor() {

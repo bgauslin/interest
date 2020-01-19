@@ -103,8 +103,8 @@ class UserSettings extends HTMLElement {
    * Sets current option.
    */
   private updateOption_(name: string, oldValue: string, newValue: string): void {
-    const oldEl = this.querySelector(`[value=${oldValue}]`) as HTMLInputElement;
-    const newEl = this.querySelector(`[value=${newValue}]`) as HTMLInputElement;
+    const oldEl = <HTMLInputElement>this.querySelector(`[value=${oldValue}]`);
+    const newEl = <HTMLInputElement>this.querySelector(`[value=${newValue}]`);
 
     if (oldEl) oldEl.checked = false;
     if (newEl) newEl.checked = true;

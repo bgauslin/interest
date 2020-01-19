@@ -73,7 +73,6 @@ class Expandable extends HTMLElement {
 
     if (action === 'expand') {
       this.targetEl_.setAttribute(EXPANDED_ATTR, '');
-
       this.targetEl_.style.height = `${elHeight}px`;
       this.targetEl_.addEventListener('transitionend', () => {
         this.targetEl_.style.height = null;
@@ -82,7 +81,6 @@ class Expandable extends HTMLElement {
 
     } else {
       this.targetEl_.removeAttribute(EXPANDED_ATTR);
-
       window.requestAnimationFrame(() => {
         this.targetEl_.style.height = `${elHeight}px`;
         window.requestAnimationFrame(() => {

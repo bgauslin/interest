@@ -6,6 +6,7 @@ import {ShiftyHeader} from './components/ShiftyHeader';
 import {UserSettings} from './components/UserSettings';
 import {UserValues} from'./components/UserValues';
 
+// Import styles for injecting into the DOM.
 import '../stylus/interest.styl';
 
 // Define all custom elements.

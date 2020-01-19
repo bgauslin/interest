@@ -1,4 +1,4 @@
-import {Calculator, Sums} from '../modules/Calculator';
+import {Calculator, CompoundingValues, Sums} from '../modules/Calculator';
 
 interface InputAttributes {
   inputmode: string,
@@ -177,7 +177,7 @@ class UserValues extends HTMLElement {
 
     if (this.querySelectorAll(':invalid').length === 0) {
       // Calculate all sums from user data and render it all in a table.
-      this.sums_ = this.calculator_.compound(values);
+      this.sums_ = this.calculator_.compound(<CompoundingValues>values);
       this.renderTable_();
 
       // Get last item in sums array to display final balance.

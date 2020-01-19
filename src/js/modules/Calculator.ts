@@ -107,4 +107,4 @@ class Calculator {
   }
 }
 
-export {Calculator, Sums};
+export {Calculator, CompoundingValues, Sums};

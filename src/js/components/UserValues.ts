@@ -65,7 +65,7 @@ enum Selector {
 }
 
 class UserValues extends HTMLElement {
-  calculator_: any;
+  calculator_: Calculator;
   currencyEl_: HTMLElement;
   listEl_: HTMLElement;
   observer_: MutationObserver;

@@ -40,7 +40,7 @@ const Settings: SettingsFields[] = [
 class UserSettings extends HTMLElement {
   constructor() {
     super();
-    this.addEventListener('click', (e) => this.handleEvents_(e));
+    this.addEventListener('click', (e: Event) => this.handleEvents_(e));
   }
 
   static get observedAttributes(): string[] {

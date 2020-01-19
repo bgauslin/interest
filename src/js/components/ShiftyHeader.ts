@@ -5,15 +5,9 @@ enum CustomProperty {
 
 class ShiftyHeader extends HTMLElement {
   private height_: number;
-  private scrollChange_: number;
-  private shift_: number;
-  private yScroll_: number;
-  private yScrollLast_: number;
 
   constructor() {
     super();
-    this.shift_ = 0;
-    this.yScrollLast_ = 0;
   }
 
   connectedCallback(): void {
@@ -31,32 +25,37 @@ class ShiftyHeader extends HTMLElement {
   }
 
   private applyShift_(): void {
+    let scrollChange: number;
+    let shift: number = 0;
+    let yScroll: number;
+    let yScrollLast: number = 0;
+  
     document.addEventListener('scroll', () => {
       // Get current scroll position.
-      this.yScroll_ = window.pageYOffset || document.documentElement.scrollTop;
+      yScroll = window.pageYOffset || document.documentElement.scrollTop;
       
       // Update shift value based on change in scroll position if it's within
       // height bounds.
-      this.scrollChange_ = this.yScroll_ - this.yScrollLast_;
-      if (this.shift_ > 0 || this.shift_ < this.height_) {
-        this.shift_ += this.scrollChange_;
+      scrollChange = yScroll - yScrollLast;
+      if (shift > 0 || shift < this.height_) {
+        shift += scrollChange;
       }
 
       // Reset shift value if it exceeds height bounds.
-      if (this.shift_ > this.height_) {
-        this.shift_ = this.height_;
-      } else if (this.shift_ < 0) {
-        this.shift_ = 0;
+      if (shift > this.height_) {
+        shift = this.height_;
+      } else if (shift < 0) {
+        shift = 0;
       }
 
       // Set CSS values for related elements to reference.
       document.documentElement.style.setProperty(
-        CustomProperty.OFFSET, `${(this.height_ - this.shift_) / 16}rem`);
+        CustomProperty.OFFSET, `${(this.height_ - shift) / 16}rem`);
       document.documentElement.style.setProperty(
-        CustomProperty.SHIFT, `-${this.shift_ / 16}rem`);
+        CustomProperty.SHIFT, `-${shift / 16}rem`);
 
       // Update yScrollLast for determining scroll change on next tick.
-      this.yScrollLast_ = (this.yScroll_ <= 0) ? 0 : this.yScroll_;
+      yScrollLast = (yScroll <= 0) ? 0 : yScroll;
 
     }, false);
   }

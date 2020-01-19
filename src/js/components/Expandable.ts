@@ -73,7 +73,7 @@ class Expandable extends HTMLElement {
 
     if (action === 'expand') {
       this.targetEl_.setAttribute(EXPANDED_ATTR, '');
-      this.targetEl_.style.height = `${elHeight}px`;
+      this.targetEl_.style.height = `${elHeight / 16}rem`;
       this.targetEl_.addEventListener('transitionend', () => {
         this.targetEl_.style.height = null;
         this.targetEl_.removeEventListener('transitionend', null, false);
@@ -82,7 +82,7 @@ class Expandable extends HTMLElement {
     } else {
       this.targetEl_.removeAttribute(EXPANDED_ATTR);
       window.requestAnimationFrame(() => {
-        this.targetEl_.style.height = `${elHeight}px`;
+        this.targetEl_.style.height = `${elHeight / 16}rem`;
         window.requestAnimationFrame(() => {
           this.targetEl_.style.height = '0';
         });

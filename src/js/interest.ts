@@ -1,10 +1,10 @@
 require('dotenv').config();
 
 import {App} from './modules/App';
-import {Expandable} from './components/Expandable';
-import {ShiftyHeader} from './components/ShiftyHeader';
-import {UserSettings} from './components/UserSettings';
-import {UserValues} from'./components/UserValues';
+import {Expandable} from './custom_elements/Expandable';
+import {ShiftyHeader} from './custom_elements/ShiftyHeader';
+import {UserSettings} from './custom_elements/UserSettings';
+import {UserValues} from'./custom_elements/UserValues';
 
 // Import styles for injecting into the DOM.
 import '../stylus/interest.styl';

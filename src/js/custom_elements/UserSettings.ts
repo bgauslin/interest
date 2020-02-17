@@ -47,17 +47,17 @@ class UserSettings extends HTMLElement {
     return [CURRENCY_ATTR, THEME_ATTR];
   }
 
-  attributeChangedCallback(name: string, oldValue: string, newValue: string): void {
-    this.updateOption_(name, oldValue, newValue);
-  }
-
   connectedCallback(): void {
     this.setup_();
     this.setDefaults_();
   }
 
+  attributeChangedCallback(name: string, oldValue: string, newValue: string): void {
+    this.updateOption_(name, oldValue, newValue);
+  }
+
   disconnectedCallback(): void {
-    this.removeEventListener('click', null);
+    this.removeEventListener('click', this.handleEvents_);
   }
 
   /**

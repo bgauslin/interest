@@ -78,15 +78,13 @@ class UserValues extends HTMLElement {
 
   constructor() {
     super();
-
     this.calculator_ = new Calculator();
     this.currencyEl_ = document.querySelector(Selector.CURRENCY);
     this.observer_ = new MutationObserver(() => this.updateTotal_());
     this.tableDataEl_ = document.querySelector(`.${CssClass.TABLE_DATA}`);
     this.tableEl_ = document.querySelector(`.${CssClass.TABLE}`);
     this.userValues_ = localStorage.getItem(LOCAL_STORAGE);
-
-    this.addEventListener('keyup', () => this.updateTotal_());
+    this.addEventListener('keyup', this.updateTotal_);
   }
 
   connectedCallback(): void {
@@ -97,7 +95,7 @@ class UserValues extends HTMLElement {
 
   disconnectedCallback(): void {
     this.observer_.disconnect();
-    this.removeEventListener('keyup', null);
+    this.removeEventListener('keyup', this.updateTotal_);
   }
 
   /**

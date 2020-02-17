@@ -11,19 +11,11 @@ class Expandable extends HTMLElement {
 
   constructor() {
     super();
-
     this.hasSetup_ = false;
     this.label_ = this.getAttribute(LABEL_ATTR);
     this.target_ = this.getAttribute(TARGET_ATTR);
     this.targetEl_ = document.getElementById(this.target_);
-
-    this.addEventListener('click', () => {
-      if (this.hasAttribute(EXPANDED_ATTR)) {
-        this.removeAttribute(EXPANDED_ATTR);
-      } else {
-        this.setAttribute(EXPANDED_ATTR, '');
-      }
-    });
+    this.addEventListener('click', this.toggleExpanded_);
   }
 
   static get observedAttributes(): string[] {
@@ -40,7 +32,7 @@ class Expandable extends HTMLElement {
   }
 
   disconnectedCallback(): void {
-    this.removeEventListener('click', null);
+    this.removeEventListener('click', this.toggleExpanded_);
   }
 
   /**
@@ -61,6 +53,17 @@ class Expandable extends HTMLElement {
 
     this.updateLabel_();
     this.hasSetup_ = true;
+  }
+
+  /**
+   * Toggles attribute which triggers the attributeChanged callback.
+   */
+  private toggleExpanded_(): void {
+    if (this.hasAttribute(EXPANDED_ATTR)) {
+      this.removeAttribute(EXPANDED_ATTR);
+    } else {
+      this.setAttribute(EXPANDED_ATTR, '');
+    }
   }
 
   /**

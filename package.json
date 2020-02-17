@@ -23,7 +23,7 @@
   ],
   "dependencies": {
     "@types/fastclick": "^1.0.28",
-    "fastclick": "^1.0.6" 
+    "fastclick": "^1.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",
@@ -46,6 +46,7 @@
     "style-loader": "^0.23.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
+    "terser-webpack-plugin": "^2.3.5",
     "typescript": "^3.5.3",
     "webpack": "^4.35.2",
     "webpack-cli": "^3.3.5",

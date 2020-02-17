@@ -21,8 +21,10 @@ map.forEach((key, value) => customElements.define(key, value));
 window.addEventListener('DOMContentLoaded', () => new App().init());
 
 // Register the Service Worker.
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js');
-  });
+if (process.env.NODE_ENV === 'production') {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js');
+    });
+  }
 }

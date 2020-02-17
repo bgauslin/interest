@@ -3,6 +3,7 @@ enum CustomProperty {
   SHIFT = '--sticky-shift',
 }
 
+// TODO: Refactor ShiftyHeader custom element with disconnectedCallback.
 class ShiftyHeader extends HTMLElement {
   private height_: number;
 

@@ -3,50 +3,37 @@ import {Calculator, CompoundingValues, Sums} from '../modules/Calculator';
 interface InputAttributes {
   inputmode: string,
   label: string,
-  max: number,
-  min?: number,
   name: string,
   pattern: string,
-  type: string,
 }
 
 const EMPTY_ATTR: string = 'empty';
-
 const LOCAL_STORAGE: string = 'values';
 
 const UserInputs: InputAttributes[] = [
   {
-    inputmode: 'decimal',
+    inputmode: 'number',
     label: 'Principal',
-    max: 999999,
     name: 'principal',
     pattern: '[0-9]+',
-    type: 'number',
   },
   {
-    inputmode: 'decimal',
+    inputmode: 'number',
     label: 'Yearly addition',
-    max: 999999,
     name: 'contribution',
     pattern: '[0-9]+',
-    type: 'number',
   },
   {
     inputmode: 'decimal',
     label: 'Interest rate',
-    max: 99,
     name: 'rate',
     pattern: '[0-9]{0,2}[\\.]?[0-9]{1,2}',
-    type: 'text',
   },
   {
-    inputmode: 'decimal',
+    inputmode: 'number',
     label: 'Years to grow',
-    max: 100,
-    min: 1,
     name: 'periods',
     pattern: '[0-9]+',
-    type: 'number',
   }
 ];
 
@@ -105,14 +92,12 @@ class UserValues extends HTMLElement {
     let listHtml = '';
     UserInputs.forEach((el, index) => {
       const autofocus = (index === 0) ? 'autofocus' : '';
-      const min = el.min ? `min="${el.min}"` : '';
-      const max = el.max ? `max="${el.max}"` : '';
-      const pattern = el.pattern ? `pattern="${el.pattern}"` : '';
-
+      let {inputmode, label, name, pattern} = el;
+      pattern = pattern ? `pattern="${pattern}"` : '';
       const input = `\
-        <li id="${el.name}" class="values__item">\
-          <label for="${el.name}" class="values__label">${el.label}</label>\
-          <input class="values__input" type="${el.type}" name="${el.name}" inputmode="${el.inputmode}" ${min} ${max} ${pattern} aria-label="${el.label}" required ${autofocus}>\
+        <li id="${name}" class="values__item">\
+          <label for="${name}" class="values__label">${label}</label>\
+          <input class="values__input" type="text" name="${name}" inputmode="${inputmode}" ${pattern} aria-label="${label}" required ${autofocus}>\
         </li>\
       `;
       listHtml += input;

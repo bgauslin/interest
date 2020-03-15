@@ -12,13 +12,13 @@ const LOCAL_STORAGE: string = 'values';
 
 const UserInputs: InputAttributes[] = [
   {
-    inputmode: 'number',
+    inputmode: 'numeric',
     label: 'Principal',
     name: 'principal',
     pattern: '[0-9]+',
   },
   {
-    inputmode: 'number',
+    inputmode: 'numeric',
     label: 'Yearly addition',
     name: 'contribution',
     pattern: '[0-9]+',
@@ -30,7 +30,7 @@ const UserInputs: InputAttributes[] = [
     pattern: '[0-9]{0,2}[\\.]?[0-9]{1,2}',
   },
   {
-    inputmode: 'number',
+    inputmode: 'numeric',
     label: 'Years to grow',
     name: 'periods',
     pattern: '[0-9]+',

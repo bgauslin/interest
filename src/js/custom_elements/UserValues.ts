@@ -40,7 +40,6 @@ const UserInputs: InputAttributes[] = [
 // CSS classnames for DOM elements.
 enum CssClass {
   LIST = 'values__list',
-  TABLE = 'table',
   TABLE_DATA = 'table__data',
   TOTAL = 'values__total',
 }
@@ -52,16 +51,14 @@ enum Selector {
 }
 
 class UserValues extends HTMLElement {
-  calculator_: Calculator;
-  currencyEl_: HTMLElement;
-  listEl_: HTMLElement;
-  observer_: MutationObserver;
-  periodsEl_: HTMLInputElement;
-  sums_: Sums[];
-  tableDataEl_: HTMLElement;
-  tableEl_: HTMLElement;
-  totalEl_: HTMLElement;
-  userValues_: string;
+  private calculator_: Calculator;
+  private currencyEl_: HTMLElement;
+  private observer_: MutationObserver;
+  private periodsEl_: HTMLInputElement;
+  private sums_: Sums[];
+  private tableDataEl_: HTMLElement;
+  private totalEl_: HTMLElement;
+  private userValues_: string;
 
   constructor() {
     super();
@@ -69,7 +66,6 @@ class UserValues extends HTMLElement {
     this.currencyEl_ = document.querySelector(Selector.CURRENCY);
     this.observer_ = new MutationObserver(() => this.updateTotal_());
     this.tableDataEl_ = document.querySelector(`.${CssClass.TABLE_DATA}`);
-    this.tableEl_ = document.querySelector(`.${CssClass.TABLE}`);
     this.userValues_ = localStorage.getItem(LOCAL_STORAGE);
     this.addEventListener('keyup', this.updateTotal_);
   }
@@ -77,7 +73,7 @@ class UserValues extends HTMLElement {
   connectedCallback(): void {
     this.setup_();
     this.setVisibility_();
-    this.observer_.observe(this.currencyEl_, { attributes: true });
+    this.observer_.observe(this.currencyEl_, {attributes: true});
   }
 
   disconnectedCallback(): void {
@@ -102,17 +98,14 @@ class UserValues extends HTMLElement {
       `;
       listHtml += input;
     });
-
     const html = `\
       <ul class="${CssClass.LIST}">\
         ${listHtml}\
       </ul>\
       <div class="${CssClass.TOTAL}"></div>\
     `;
-
     this.innerHTML = html.replace(/\s\s/g, '');
 
-    this.listEl_ = this.querySelector(`.${CssClass.LIST}`);
     this.totalEl_ = this.querySelector(`.${CssClass.TOTAL}`);
     this.periodsEl_ = this.querySelector(Selector.PERIODS);
 

@@ -3,11 +3,11 @@ const LABEL_ATTR: string = 'label';
 const TARGET_ATTR: string = 'target';
 
 class Expandable extends HTMLElement {
-  buttonEl_: HTMLElement;
-  hasSetup_: boolean;
-  label_: string;
-  target_: string;
-  targetEl_: HTMLElement;
+  private buttonEl_: HTMLElement;
+  private hasSetup_: boolean;
+  private label_: string;
+  private target_: string;
+  private targetEl_: HTMLElement;
 
   constructor() {
     super();

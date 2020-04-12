@@ -25,7 +25,7 @@
   display none
 
 .table[expanded]
-  margin-bottom px_to_rem(16)
+  margin-bottom rem(16)
 
   @media Breakpoint.MEDIUM
     margin-bottom 0
@@ -79,7 +79,7 @@ td.balance::before
 
 td.growth::after
   content '%'
-  margin-left px_to_em(4)
+  margin-left em(4)
 
 .year
   padding-right 0
@@ -95,7 +95,7 @@ td.growth::after
   color var(--symbol)
   display none
   font-size var(--fineprint)
-  margin px_to_rem(12) GRID_GAP 0
+  margin rem(12) GRID_GAP 0
 
   @media screen and (max-width BREAKPOINT_SMALL_UNITS) and (orientation portrait)
     display block

@@ -1,15 +1,15 @@
 .menu
   elevation(2)
   background white
-  border-radius px_to_rem(4)
+  border-radius rem(4)
   color var(--dark-grey)
   margin-top (GRID_GAP / 2)
   max-width 'calc(100vw - %s)' % GRID_GAP
   opacity 0
   position absolute
-  right px_to_rem(-8)
+  right rem(-8)
   transition opacity var(--transition) ease-out, transform var(--transition) ease-out, visibility var(--transition) ease-out
-  transform 'translateY(-%s)' % px_to_rem(12)
+  transform 'translateY(-%s)' % rem(12)
   visibility hidden
 
   @media Breakpoint.MEDIUM
@@ -24,12 +24,12 @@
 .menu::before
   elevation(2)
   background white
-  clip-path polygon(px_to_rem(-8) px_to_rem(-8), px_to_rem(-8) px_to_rem(24), px_to_rem(24) px_to_rem(-8))
+  clip-path polygon(rem(-8) rem(-8), rem(-8) rem(24), rem(24) rem(-8))
   content ''
   display block
   height MENU_ARROW
   position absolute
-  right px_to_rem(10)
+  right rem(10)
   top (- MENU_ARROW / 2)
   transform rotate(45deg)
   width MENU_ARROW
@@ -43,7 +43,7 @@
   width 100%
 
 .menu__group
-  padding px_to_rem(16)
+  padding rem(16)
 
 .menu__group:not(:last-child)
   border-right 1px solid var(--lighter-grey)
@@ -56,7 +56,7 @@
   padding 0
 
 .item:not(:last-child)
-  margin 0 px_to_rem(12) 0 0
+  margin 0 rem(12) 0 0
 
 .item__label
   display block

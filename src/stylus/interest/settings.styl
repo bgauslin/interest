@@ -10,13 +10,13 @@
   display flex
   height var(--header-height)
   justify-content center
-  margin 0 px_to_rem(-12) 0 0
+  margin 0 rem(-12) 0 0
   opacity 1
   transition opacity var(--transition), transform var(--transition)
   width var(--header-height)
 
   @media Breakpoint.MEDIUM
-    margin-right px_to_rem(-20)
+    margin-right rem(-20)
 
 .settings__toggle:active
   transform scale(.85)
@@ -25,5 +25,5 @@
   opacity .75
 
 .settings__icon
-  flex 0 0 px_to_rem(20)
+  flex 0 0 rem(20)
   pointer-events none

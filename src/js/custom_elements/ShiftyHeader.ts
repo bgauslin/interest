@@ -16,9 +16,6 @@ class ShiftyHeader extends HTMLElement {
     super();
     this.shift_ = 0;
     this.yScrollLast_ = 0;
-
-    // Listener references bound to custom element so that they're removed
-    // when custom element is disconnected.
     this.resizeListener_ = this.getHeight_.bind(this);
     this.scrollListener_ = this.applyShift_.bind(this);
     window.addEventListener('resize', this.resizeListener_);

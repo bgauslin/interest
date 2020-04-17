@@ -63,17 +63,17 @@ class UserValues extends HTMLElement {
   constructor() {
     super();
     this.calculator_ = new Calculator();
-    this.currencyEl_ = document.querySelector(Selector.CURRENCY);
     this.observer_ = new MutationObserver(() => this.updateTotal_());
-    this.tableDataEl_ = document.querySelector(`.${CssClass.TABLE_DATA}`);
-    this.userValues_ = localStorage.getItem(LOCAL_STORAGE);
     this.addEventListener('keyup', this.updateTotal_);
   }
 
   connectedCallback(): void {
+    this.currencyEl_ = document.querySelector(Selector.CURRENCY);
+    this.tableDataEl_ = document.querySelector(`.${CssClass.TABLE_DATA}`);
+    this.userValues_ = localStorage.getItem(LOCAL_STORAGE);
+    this.observer_.observe(this.currencyEl_, {attributes: true});
     this.setup_();
     this.setVisibility_();
-    this.observer_.observe(this.currencyEl_, {attributes: true});
   }
 
   disconnectedCallback(): void {

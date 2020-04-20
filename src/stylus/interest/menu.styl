@@ -65,6 +65,9 @@
   position relative
   width MENU_ITEM_SIZE
 
+.item__label:focus
+  outline none
+
 [no-touch] .item__label:hover
   cursor pointer
 
@@ -112,5 +115,6 @@
 .option:checked + .option__label
   border-color var(--green)
 
+.item__label:focus .option:not(:checked) + .option__label
 [no-touch] .item__label:hover .option:not(:checked) + .option__label
   border-color var(--light-grey)

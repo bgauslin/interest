@@ -38,9 +38,13 @@ const Settings: SettingsFields[] = [
 ];
 
 class UserSettings extends HTMLElement {
+  private closeMenuListener_: any;
+  private toggleButton_: HTMLButtonElement;
+
   constructor() {
     super();
-    this.addEventListener('click', this.handleEvents_);
+    this.closeMenuListener_ = this.closeMenu_.bind(this);
+    this.addEventListener('click', this.handleClick_);
   }
 
   static get observedAttributes(): string[] {
@@ -57,22 +61,23 @@ class UserSettings extends HTMLElement {
   }
 
   disconnectedCallback(): void {
-    this.removeEventListener('click', this.handleEvents_);
+    this.removeEventListener('click', this.handleClick_);
+    document.removeEventListener('click', this.closeMenuListener_);
   }
 
   /**
    * Toggles the menu open/closed, and changes the current theme or currency.
    */
-  private handleEvents_(e: Event): void {
+  private handleClick_(e: Event): void {
     const target = <HTMLElement>e.target;
 
-    if (target.classList.contains(TOGGLE_CLASS)) {
-      if (!this.hasAttribute(OPEN_ATTR)) {
+    if (target === this.toggleButton_) {
+      if (this.hasAttribute(OPEN_ATTR)) {
+        this.closeMenu_();
+      } else {
         this.setAttribute(OPEN_ATTR, '');
         window.requestAnimationFrame(() => {
-          document.addEventListener('click', () => {
-            this.removeAttribute(OPEN_ATTR);
-          }, {once: true});
+          document.addEventListener('click', this.closeMenuListener_);
         });
       }
     }
@@ -84,6 +89,15 @@ class UserSettings extends HTMLElement {
       const value = el.getAttribute('value');
       this.setAttribute(name, value);
     }
+  }
+
+  /**
+   * Closes the menu and removes the listener that gets set when the menu is
+   * opened by the toggle button.
+   */
+  private closeMenu_(): void {
+    this.removeAttribute(OPEN_ATTR);
+    document.removeEventListener('click', this.closeMenuListener_);
   }
 
   /**
@@ -130,7 +144,7 @@ class UserSettings extends HTMLElement {
       options.forEach((option) => {
         optionsHtml += `\
           <li class="item" type="${name}">\
-            <label class="item__label" for="${option.value}">\
+            <label class="item__label" for="${option.value}" tabindex="0">\
               <input class="option" type="radio" name="${name}" value="${option.value}">\
               <span class="option__label" option="${option.value}">${option.label}</span>\
             </label>\
@@ -161,6 +175,7 @@ class UserSettings extends HTMLElement {
     `;
 
     this.innerHTML = html.replace(/\s\s/g, '');
+    this.toggleButton_ = this.querySelector(`.${TOGGLE_CLASS}`);
   }
 }
 

@@ -8,7 +8,10 @@ interface InputAttributes {
 }
 
 const EMPTY_ATTR: string = 'empty';
+const LIST_CLASSNAME: string = 'values__list';
 const LOCAL_STORAGE: string = 'values';
+const TABLE_DATA_CLASSNAME: string  = 'table__data';
+const TOTAL_CLASSNAME: string  = 'values__total';
 
 const UserInputs: InputAttributes[] = [
   {
@@ -37,19 +40,6 @@ const UserInputs: InputAttributes[] = [
   }
 ];
 
-// CSS classnames for DOM elements.
-enum CssClass {
-  LIST = 'values__list',
-  TABLE_DATA = 'table__data',
-  TOTAL = 'values__total',
-}
-
-// CSS selectors for DOM elements.
-enum Selector {
-  CURRENCY = '[currency]',
-  PERIODS = '[name=periods]',
-}
-
 class UserValues extends HTMLElement {
   private calculator_: Calculator;
   private currencyEl_: HTMLElement;
@@ -68,8 +58,8 @@ class UserValues extends HTMLElement {
   }
 
   connectedCallback(): void {
-    this.currencyEl_ = document.querySelector(Selector.CURRENCY);
-    this.tableDataEl_ = document.querySelector(`.${CssClass.TABLE_DATA}`);
+    this.currencyEl_ = document.querySelector('[currency]');
+    this.tableDataEl_ = document.querySelector(`.${TABLE_DATA_CLASSNAME}`);
     this.userValues_ = localStorage.getItem(LOCAL_STORAGE);
     this.observer_.observe(this.currencyEl_, {attributes: true});
     this.setup_();
@@ -99,15 +89,15 @@ class UserValues extends HTMLElement {
       listHtml += input;
     });
     const html = `\
-      <ul class="${CssClass.LIST}">\
+      <ul class="${LIST_CLASSNAME}">\
         ${listHtml}\
       </ul>\
-      <div class="${CssClass.TOTAL}"></div>\
+      <div class="${TOTAL_CLASSNAME}"></div>\
     `;
     this.innerHTML = html.replace(/\s\s/g, '');
 
-    this.totalEl_ = this.querySelector(`.${CssClass.TOTAL}`);
-    this.periodsEl_ = this.querySelector(Selector.PERIODS);
+    this.totalEl_ = this.querySelector(`.${TOTAL_CLASSNAME}`);
+    this.periodsEl_ = this.querySelector('[name=periods]');
 
     if (this.userValues_) {
       this.populateInputs_();

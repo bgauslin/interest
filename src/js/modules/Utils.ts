@@ -1,8 +1,11 @@
 import fastclick from 'fastclick';
 
+/**
+ * Adds site-wide features for enhancing a website's UX.
+ */
 class Utils {
   /**
-   * Initializes handy site-wide methods.
+   * Initializes all site-wide features.
    */
   public init(): void {
     this.touchEnabled_();

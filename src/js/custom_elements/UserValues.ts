@@ -40,6 +40,10 @@ const UserInputs: InputAttributes[] = [
   }
 ];
 
+/**
+ * Custom element that renders input fields and calculates compound interest
+ * based on user-provided values.
+ */
 class UserValues extends HTMLElement {
   private calculator_: Calculator;
   private currencyEl_: HTMLElement;

@@ -18,6 +18,9 @@ const EURO_FORMAT_THRESHOLD: number = 50000;
 const EUROS: string = 'eur';
 const RUPEES: string = 'inr';
 
+/**
+ * Formulas for calculating compound interest and formatting currency.
+ */
 class Calculator {
   /**
    * Calculates compound interest and returns an array of all calculated values.

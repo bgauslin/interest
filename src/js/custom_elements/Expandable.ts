@@ -2,6 +2,10 @@ const EXPANDED_ATTR: string = 'expanded';
 const LABEL_ATTR: string = 'label';
 const TARGET_ATTR: string = 'target';
 
+/**
+ * Custom element that expands/collapses a target element when its source
+ * element is clicked.
+ */
 class Expandable extends HTMLElement {
   private buttonEl_: HTMLElement;
   private hasSetup_: boolean;

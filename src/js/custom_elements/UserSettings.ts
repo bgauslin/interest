@@ -37,6 +37,9 @@ const Settings: SettingsFields[] = [
   }
 ];
 
+/**
+ * Custom element that lets a user set the app's theme colors and currency.
+ */
 class UserSettings extends HTMLElement {
   private closeMenuListener_: any;
   private toggleButton_: HTMLButtonElement;

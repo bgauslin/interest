@@ -3,6 +3,10 @@ enum CustomProperty {
   SHIFT = '--sticky-shift',
 }
 
+/**
+ * Custom element that shifts a fixed header in and out of the viewport
+ * depending on scroll direction.
+ */
 class ShiftyHeader extends HTMLElement {
   private height_: number;
   private resizeListener_: any;

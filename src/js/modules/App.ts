@@ -6,12 +6,8 @@ const EMPTY_ATTR: string = 'empty';
 const HEADER_SELECTOR: string = '.header__frame';
 const HIDDEN_ATTR: string = 'hidden';
 const NO_JS_CLASS: string = 'no-js';
-
-// TODO(App): Move to custom element.
-enum Visibility {
-  SOURCE = '.values__total',
-  TARGETS = '.expandable, .table',
-}
+const VISIBLE_SOURCE_SELECTOR: string = '.values__total';
+const VISIBLE_TARGETS_SELECTOR: string = '.expandable, .table';
 
 /**
  * Updates the DOM with all app elements and creates a Utils instance for
@@ -21,11 +17,11 @@ class App {
   private observer_: MutationObserver;
   private startYear_: string;
   private utils_: Utils;
-  private visibilitySourceEl_: HTMLElement;
+  private visibleSourceEl_: HTMLElement;
   
   constructor(startYear: string) {
     this.startYear_ = startYear;
-    this.observer_ = new MutationObserver(() => this.setVisibility_());
+    this.observer_ = new MutationObserver(() => this.toggleVisibility_());
     this.utils_ = new Utils();
   }
 
@@ -35,27 +31,30 @@ class App {
   public init(): void {
     this.utils_.init();
 
+    // Render all app elements.
     this.updateHeader_();
     this.renderContent_();
     this.updateCopyright_();
 
-    // TODO(App): Move to custom element.
-    this.visibilitySourceEl_ = document.querySelector(Visibility.SOURCE);
-    this.observer_.observe(this.visibilitySourceEl_, {attributes: true});
-    this.setVisibility_();
+    // Observe empty element for toggling other elements' visibility.
+    this.visibleSourceEl_ = document.querySelector(VISIBLE_SOURCE_SELECTOR);
+    this.observer_.observe(this.visibleSourceEl_, {attributes: true});
+    this.toggleVisibility_();
   }
 
   /**
-   * Hides elements if an observed element is empty since there's no target
-   * for the expandable to expand/collapse.
+   * Hides target elements if the observed source element is empty since
+   * there's no target for the expandable to expand/collapse.
+   * Note: Because the source and target elements are standard HTML elements
+   * (not custom elements), this is handled by the App instance.
    */
-  private setVisibility_(): void {
-    const els = document.querySelectorAll(Visibility.TARGETS);
+  private toggleVisibility_(): void {
+    const targets = document.querySelectorAll(VISIBLE_TARGETS_SELECTOR);
 
-    if (this.visibilitySourceEl_.hasAttribute(EMPTY_ATTR)) {
-      els.forEach((el) => el.setAttribute(HIDDEN_ATTR, ''));
+    if (this.visibleSourceEl_.hasAttribute(EMPTY_ATTR)) {
+      targets.forEach((target) => target.setAttribute(HIDDEN_ATTR, ''));
     } else {
-      els.forEach((el) => el.removeAttribute(HIDDEN_ATTR));
+      targets.forEach((target) => target.removeAttribute(HIDDEN_ATTR));
     }
   }
 

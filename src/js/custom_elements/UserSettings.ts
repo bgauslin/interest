@@ -76,7 +76,7 @@ class UserSettings extends HTMLElement {
    * click will close it.
    */
   private handleClick_(e: Event): void {
-    const target = <HTMLElement>e.target;
+    const target = e.target as HTMLElement;
 
     if (target === this.toggleButton_) {
       if (this.hasAttribute(OPEN_ATTR)) {
@@ -98,7 +98,7 @@ class UserSettings extends HTMLElement {
   private handleKey_(e: KeyboardEvent): void {
     switch (e.code) {
       case 'Enter':
-        this.setOption_(<HTMLElement>e.target);
+        this.setOption_(e.target as HTMLElement);
         break;
       case 'Escape':
         this.closeMenu_();
@@ -134,8 +134,8 @@ class UserSettings extends HTMLElement {
    * Sets current option.
    */
   private updateOption_(name: string, oldValue: string, newValue: string): void {
-    const oldEl = <HTMLInputElement>this.querySelector(`[value=${oldValue}]`);
-    const newEl = <HTMLInputElement>this.querySelector(`[value=${newValue}]`);
+    const oldEl = this.querySelector(`[value=${oldValue}]`) as HTMLInputElement;
+    const newEl = this.querySelector(`[value=${newValue}]`) as HTMLInputElement;
 
     if (oldEl) {
       oldEl.checked = false;

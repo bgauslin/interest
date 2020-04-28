@@ -116,7 +116,7 @@ class UserValues extends HTMLElement {
   private populateInputs_(): void {
     const values = JSON.parse(this.userValues_);
     UserInputs.forEach((field) => {
-      const inputEl = <HTMLInputElement>this.querySelector(`[name=${field.name}]`);
+      const inputEl = this.querySelector(`[name=${field.name}]`) as HTMLInputElement;
       inputEl.value = values[field.name];
     });
   }
@@ -139,7 +139,7 @@ class UserValues extends HTMLElement {
   private updateTotal_(): void {
     const values = {};
     UserInputs.forEach((field) => {
-      const el = <HTMLInputElement>this.querySelector(`[name=${field.name}]`);
+      const el = this.querySelector(`[name=${field.name}]`) as HTMLInputElement;
       if (el.value) {
         values[field.name] = Number(el.value);
       }

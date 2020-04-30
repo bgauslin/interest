@@ -4,9 +4,7 @@ import fastclick from 'fastclick';
  * Adds site-wide features for enhancing a website's UX.
  */
 class Utils {
-  /**
-   * Initializes all site-wide features.
-   */
+
   public init(): void {
     this.touchEnabled_();
     this.googleAnalytics_();

@@ -18,11 +18,18 @@ html(lang="en")
     app-header.header
       div.header__frame
         h1.header__title= title
+        user-settings.settings#settings
     main.no-js
       noscript Please <a href="https://www.enable-javascript.com/" title="How to enable JavaScript in your browser">enable JavaScript</a> to view this app.
+      user-values.values
+      div.table#table
+        div.table__frame
+          table.table__data
+        p.rotate-screen Rotate screen to view <span>Interest</span> and <span>Growth</span> columns.
+      app-expandable.expandable(target="table" label="table")
     footer.footer
       p.copyright
-        span.copyright__years © 2018
+        span.copyright__years(year="2018") © 2018
         a.copyright__owner(
           href="https://gauslin.com",
           title="Ben Gauslin’s Website",

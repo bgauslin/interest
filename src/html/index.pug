@@ -27,7 +27,6 @@ html(lang="en")
           table.table__data
         p.rotate-screen Rotate screen to view <span>Interest</span> and <span>Growth</span> columns.
       app-expandable.expandable(target="table" label="table")
-      visibility-toggle(source=".values__total" target=".expandable, .table")
     footer.footer
       p.copyright
         span.copyright__years(year="2018") © 2018
@@ -37,5 +36,6 @@ html(lang="en")
           target="_blank",
           rel="noopener",
         ) Ben Gauslin
+    visibility-toggle(source=".values__total" target=".expandable, .table")
     if (process.env.NODE_ENV === 'development')
       script(src="https://css.gauslin.com/debugger.js" data-src="/breakpoints.json")

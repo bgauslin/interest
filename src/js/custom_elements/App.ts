@@ -1,24 +1,21 @@
-import {Utils} from './Utils';
+import {Utils} from '../Modules/Utils';
 
 const CONTENT_CLASS: string = 'content';
 const COPYRIGHT_SELECTOR: string = '.copyright__years';
 const NO_JS_CLASS: string = 'no-js';
 const YEAR_ATTR: string = 'year';
 
-// TODO: Refactor App as a custom element.
 /**
  * Updates the DOM with all app elements and creates a Utils instance for
  * enhancing UX.
  */
-class App {
+class App extends HTMLElement {
   constructor() {
+    super();
     new Utils().init();
   }
 
-  /**
-   * Updates HTML for the app.
-   */
-  public init(): void {
+  connectedCallback(): void {
     this.updateContent_();
     this.updateCopyright_();
   }
@@ -37,14 +34,16 @@ class App {
    * Updates copyright years with the current year.
    */
   private updateCopyright_(): void {
-    const el = document.querySelector(COPYRIGHT_SELECTOR);
-    const startYear = el.getAttribute(YEAR_ATTR);
+    const startYear = this.getAttribute(YEAR_ATTR);
+    this.removeAttribute(YEAR_ATTR);
+
+    const el = this.querySelector(COPYRIGHT_SELECTOR);
+    
     const currentYear = new Date().getFullYear().toString();
     const startDecade = startYear.substr(-2);
     const currentDecade = currentYear.substr(-2);
 
     el.textContent = (startDecade !== currentDecade) ? `© ${startYear}–${currentDecade}` : `© ${startYear}`;
-    el.removeAttribute(YEAR_ATTR);
   }
 }
 

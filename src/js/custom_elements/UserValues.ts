@@ -8,10 +8,8 @@ interface InputAttributes {
 }
 
 const EMPTY_ATTR: string = 'empty';
-const LIST_CLASSNAME: string = 'values__list';
 const LOCAL_STORAGE: string = 'values';
-const TABLE_DATA_CLASSNAME: string  = 'table__data';
-const TOTAL_CLASSNAME: string  = 'values__total';
+const TARGET_ATTR: string = 'target';
 
 const UserInputs: InputAttributes[] = [
   {
@@ -50,7 +48,7 @@ class UserValues extends HTMLElement {
   private observer_: MutationObserver;
   private periodsEl_: HTMLInputElement;
   private sums_: Sums[];
-  private tableDataEl_: HTMLElement;
+  private tableEl_: HTMLElement;
   private totalEl_: HTMLElement;
   private userValues_: string;
 
@@ -63,9 +61,11 @@ class UserValues extends HTMLElement {
 
   connectedCallback(): void {
     this.currencyEl_ = document.querySelector('[currency]');
-    this.tableDataEl_ = document.querySelector(`.${TABLE_DATA_CLASSNAME}`);
+    this.tableEl_ = document.querySelector(this.getAttribute(TARGET_ATTR));
     this.userValues_ = localStorage.getItem(LOCAL_STORAGE);
     this.observer_.observe(this.currencyEl_, {attributes: true});
+
+    this.removeAttribute(TARGET_ATTR);
     this.setup_();
     this.setVisibility_();
   }
@@ -85,22 +85,22 @@ class UserValues extends HTMLElement {
       let {inputmode, label, name, pattern} = el;
       pattern = pattern ? `pattern="${pattern}"` : '';
       const input = `\
-        <li id="${name}" class="values__item">\
-          <label for="${name}" class="values__label">${label}</label>\
-          <input class="values__input" type="text" name="${name}" inputmode="${inputmode}" ${pattern} aria-label="${label}" required ${autofocus}>\
+        <li id="${name}" class="${this.className}__item">\
+          <label for="${name}" class="${this.className}__label">${label}</label>\
+          <input class="${this.className}__input" type="text" name="${name}" inputmode="${inputmode}" ${pattern} aria-label="${label}" required ${autofocus}>\
         </li>\
       `;
       listHtml += input;
     });
     const html = `\
-      <ul class="${LIST_CLASSNAME}">\
+      <ul class="${this.className}__list">\
         ${listHtml}\
       </ul>\
-      <div class="${TOTAL_CLASSNAME}"></div>\
+      <div class="${this.className}__total"></div>\
     `;
     this.innerHTML = html.replace(/\s\s/g, '');
 
-    this.totalEl_ = this.querySelector(`.${TOTAL_CLASSNAME}`);
+    this.totalEl_ = this.querySelector(`.${this.className}__total`);
     this.periodsEl_ = this.querySelector('[name=periods]');
 
     if (this.userValues_) {
@@ -188,7 +188,7 @@ class UserValues extends HTMLElement {
       `;
     });
 
-    this.tableDataEl_.innerHTML = tableHtml.replace(/\s\s/g, '');
+    this.tableEl_.innerHTML = tableHtml.replace(/\s\s/g, '');
   }
 }
 

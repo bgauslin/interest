@@ -2,7 +2,7 @@
   align-self center
   justify-self center
   opacity 1
-  transition opacity var(--transition) ease
+  transition opacity TRANSITION_SPEED ease
 
   @media Breakpoint.MEDIUM
     display none !important // hide the button since we don't need it
@@ -33,7 +33,7 @@
     width 33vw
 
 [no-touch] .expandable__button
-  transition border var(--transition) ease, color var(--transition) ease
+  transition border TRANSITION_SPEED ease, color TRANSITION_SPEED ease
 
 .expandable__button:focus
 .expandable__button:active

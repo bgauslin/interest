@@ -2,11 +2,7 @@ import {Utils} from './Utils';
 
 const CONTENT_CLASS: string = 'content';
 const COPYRIGHT_SELECTOR: string = '.copyright__years';
-const EMPTY_ATTR: string = 'empty';
-const HIDDEN_ATTR: string = 'hidden';
 const NO_JS_CLASS: string = 'no-js';
-const VISIBLE_SOURCE_SELECTOR: string = '.values__total';
-const VISIBLE_TARGETS_SELECTOR: string = '.expandable, .table';
 const YEAR_ATTR: string = 'year';
 
 // TODO: Refactor App as a custom element.
@@ -15,43 +11,16 @@ const YEAR_ATTR: string = 'year';
  * enhancing UX.
  */
 class App {
-  private observer_: MutationObserver;
-  private visibleSourceEl_: HTMLElement;
-  
   constructor() {
-    this.observer_ = new MutationObserver(() => this.toggleVisibility_());
+    new Utils().init();
   }
 
   /**
-   * Renders all HTML for the app.
+   * Updates HTML for the app.
    */
   public init(): void {
-    new Utils().init();
-
-    // Update app elements.
     this.updateContent_();
     this.updateCopyright_();
-
-    // Observe empty element for toggling other elements' visibility.
-    this.visibleSourceEl_ = document.querySelector(VISIBLE_SOURCE_SELECTOR);
-    this.observer_.observe(this.visibleSourceEl_, {attributes: true});
-    this.toggleVisibility_();
-  }
-
-  /**
-   * Hides target elements if the observed source element is empty since
-   * there's no target for the expandable to expand/collapse.
-   * Note: Because the source and target elements are standard HTML elements
-   * (not custom elements), this is handled by the App instance.
-   */
-  private toggleVisibility_(): void {
-    const targets = document.querySelectorAll(VISIBLE_TARGETS_SELECTOR);
-
-    if (this.visibleSourceEl_.hasAttribute(EMPTY_ATTR)) {
-      targets.forEach((target) => target.setAttribute(HIDDEN_ATTR, ''));
-    } else {
-      targets.forEach((target) => target.removeAttribute(HIDDEN_ATTR));
-    }
   }
 
   /**

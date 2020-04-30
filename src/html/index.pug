@@ -27,6 +27,7 @@ html(lang="en")
           table.table__data
         p.rotate-screen Rotate screen to view <span>Interest</span> and <span>Growth</span> columns.
       app-expandable.expandable(target="table" label="table")
+      visibility-toggle(source=".values__total" target=".expandable, .table")
     footer.footer
       p.copyright
         span.copyright__years(year="2018") © 2018

@@ -7,11 +7,10 @@ const TARGET_ATTR: string = 'target';
  * element is clicked.
  */
 class Expandable extends HTMLElement {
-  private buttonEl_: HTMLElement;
+  private button_: HTMLElement;
   private hasSetup_: boolean;
   private label_: string;
-  private target_: string;
-  private targetEl_: HTMLElement;
+  private target_: HTMLElement;
 
   constructor() {
     super();
@@ -30,8 +29,8 @@ class Expandable extends HTMLElement {
 
   connectedCallback(): void {
     this.label_ = this.getAttribute(LABEL_ATTR);
-    this.target_ = this.getAttribute(TARGET_ATTR);
-    this.targetEl_ = document.getElementById(this.target_);
+    this.target_ = document.getElementById(this.getAttribute(TARGET_ATTR));
+    [LABEL_ATTR, TARGET_ATTR].forEach((attr) => this.removeAttribute(attr));
     this.setup_();
   }
 
@@ -45,14 +44,14 @@ class Expandable extends HTMLElement {
    */
   private setup_(): void {
     this.innerHTML = `<button class="${this.className}__button"></button>`;
-    this.buttonEl_ = this.querySelector('button');
+    this.button_ = this.querySelector('button');
 
     if (localStorage.getItem(EXPANDED_ATTR) === 'true') {
       this.setAttribute(EXPANDED_ATTR, '');
-      this.targetEl_.setAttribute(EXPANDED_ATTR, '');
+      this.target_.setAttribute(EXPANDED_ATTR, '');
     } else {
-      this.targetEl_.style.height = '0';
-      this.targetEl_.removeAttribute(EXPANDED_ATTR);
+      this.target_.style.height = '0';
+      this.target_.removeAttribute(EXPANDED_ATTR);
     }
 
     this.updateLabel_();
@@ -78,21 +77,21 @@ class Expandable extends HTMLElement {
       return;
     }
 
-    const elHeight = this.targetEl_.scrollHeight;
+    const elHeight = this.target_.scrollHeight;
 
     if (action === 'expand') {
-      this.targetEl_.setAttribute(EXPANDED_ATTR, '');
-      this.targetEl_.style.height = `${elHeight / 16}rem`;
-      this.targetEl_.addEventListener('transitionend', () => {
-        this.targetEl_.style.height = null;
+      this.target_.setAttribute(EXPANDED_ATTR, '');
+      this.target_.style.height = `${elHeight / 16}rem`;
+      this.target_.addEventListener('transitionend', () => {
+        this.target_.style.height = null;
       }, {once: true});
 
     } else {
-      this.targetEl_.removeAttribute(EXPANDED_ATTR);
+      this.target_.removeAttribute(EXPANDED_ATTR);
       window.requestAnimationFrame(() => {
-        this.targetEl_.style.height = `${elHeight / 16}rem`;
+        this.target_.style.height = `${elHeight / 16}rem`;
         window.requestAnimationFrame(() => {
-          this.targetEl_.style.height = '0';
+          this.target_.style.height = '0';
         });
       });
     }
@@ -106,7 +105,7 @@ class Expandable extends HTMLElement {
   private updateLabel_(): void {
     const expanded = this.hasAttribute(EXPANDED_ATTR);
     const prefix = expanded ? 'Hide' : 'Show';
-    this.buttonEl_.textContent = `${prefix} ${this.label_}`;
+    this.button_.textContent = `${prefix} ${this.label_}`;
     localStorage.setItem(EXPANDED_ATTR, String(expanded));
   }
 }

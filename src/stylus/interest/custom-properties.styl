@@ -1,12 +1,5 @@
+// TODO: Make transition values constants since they don't ever change.
 :root
-  --green #00ad45
-  --dark-grey #222
-  --light-grey #aaa
-  --lighter-grey #ddd
-  --medium-grey #555
-  --off-white #f7f7f7
-  --warning #c00
-
   --site-header rem(16)
   --input rem(20)
   --menu-item em(22)
@@ -50,21 +43,21 @@
     --zebra-stripe mix(black, white, 3%)
 
   [theme=sepia]
-    --background '%s' % Theme.SEPIA
-    --border '%s' % mix(black, Theme.SEPIA, 15%)
-    --canvas '%s' % mix(black, Theme.SEPIA, 5%)
-    --input '%s' % mix(black, Theme.SEPIA, 90%)
-    --input-border '%s' % mix(black, Theme.SEPIA, 30%)
-    --symbol '%s' % mix(black, Theme.SEPIA, 50%)
-    --text '%s' % mix(black, Theme.SEPIA, 80%)
-    --zebra-stripe '%s' % mix(black, Theme.SEPIA, 4%)
+    --background SEPIA_THEME
+    --border mix(black, SEPIA_THEME, 15%)
+    --canvas mix(black, SEPIA_THEME, 5%)
+    --input mix(black, SEPIA_THEME, 90%)
+    --input-border mix(black, SEPIA_THEME, 30%)
+    --symbol mix(black, SEPIA_THEME, 50%)
+    --text mix(black, SEPIA_THEME, 80%)
+    --zebra-stripe mix(black, SEPIA_THEME, 4%)
 
   [theme=dark]
-    --background '%s' % Theme.DARK
+    --background DARK_THEME
     --border mix(black, white, 75%)
-    --canvas '%s' % mix(black, Theme.DARK, 25%)
+    --canvas mix(black, DARK_THEME, 25%)
     --input rgba(white, .85)
     --input-border mix(black, white, 65%)
     --symbol rgba(white, .5)
     --text rgba(white, .7)
-    --zebra-stripe '%s' % mix(black, Theme.DARK, 10%)
+    --zebra-stripe mix(black, DARK_THEME, 10%)

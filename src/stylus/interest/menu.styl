@@ -2,7 +2,7 @@
   elevation(2)
   background white
   border-radius rem(4)
-  color var(--dark-grey)
+  color DARK_GREY
   margin-top (GRID_GAP / 2)
   max-width 'calc(100vw - %s)' % GRID_GAP
   opacity 0
@@ -49,7 +49,7 @@
   padding rem(16)
 
 .menu__group:not(:last-child)
-  border-right 1px solid var(--lighter-grey)
+  border-right 1px solid LIGHTER_GREY
 
 // Settings lists.
 .menu__list
@@ -93,31 +93,31 @@
 
 // Styles for different option types.
 [type=currency] .option__label
-  background var(--off-white)
-  border 3px solid var(--lighter-grey)
-  color var(--light-grey)
+  background OFF_WHITE
+  border 3px solid LIGHTER_GREY
+  color LIGHT_GREY
   font-size var(--menu-item)
 
 [type=currency] .option:checked + .option__label
   background white
-  color var(--green)
+  color GREEN
 
 [type=theme] .option__label
-  border 3px solid var(--lighter-grey)
+  border 3px solid LIGHTER_GREY
   color transparent
 
 .option__label[option=light]
   background white
 
 .option__label[option=sepia]
-  background '%s' % Theme.SEPIA
+  background SEPIA_THEME
 
 .option__label[option=dark]
-  background '%s' % Theme.DARK
+  background DARK_THEME
 
 .option:checked + .option__label
-  border-color var(--green)
+  border-color GREEN
 
 .item__label:focus .option:not(:checked) + .option__label
 [no-touch] .item__label:hover .option:not(:checked) + .option__label
-  border-color var(--light-grey)
+  border-color LIGHT_GREY

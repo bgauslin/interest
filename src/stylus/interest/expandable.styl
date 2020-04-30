@@ -16,8 +16,8 @@
 .expandable__button
   webfont(600)
   align-items center
-  background var(--green)
-  border 2px solid var(--green)
+  background GREEN
+  border 2px solid GREEN
   border-radius (BUTTON_HEIGHT / 2)
   color var(--background) // [1]
   display flex
@@ -39,7 +39,7 @@
 .expandable__button:active
 [no-touch] .expandable__button:hover
   background 0
-  color var(--green)
+  color GREEN
   cursor pointer
 
 // [1] Knockout via theme's body background.
@@ -56,4 +56,4 @@
 .expandable__button:focus::before
 .expandable__button:active::before
 [no-touch] .expandable__button:hover::before
-  border-top-color var(--green)
+  border-top-color GREEN

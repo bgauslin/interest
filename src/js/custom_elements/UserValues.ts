@@ -166,15 +166,17 @@ class UserValues extends HTMLElement {
    */
   private renderTable_(): void {
     let tableHtml: string = `\
-      <tr>\
-        <th class="year">Year</th>\
-        <th class="deposits">Deposits</th>\
-        <th class="interest">Interest</th>\
-        <th class="balance">Balance</th>\
-        <th class="growth">Growth</th>\
-      </tr>\
+      <thead>\
+        <tr>\
+          <th class="year">Year</th>\
+          <th class="deposits">Deposits</th>\
+          <th class="interest">Interest</th>\
+          <th class="balance">Balance</th>\
+          <th class="growth">Growth</th>\
+        </tr>\
+      </thead>\
     `;
-
+    tableHtml += '<tbody>';
     this.sums_.forEach((item: Sums) => {
       const {year, deposits, interest, balance, growth} = item;
       tableHtml += `\
@@ -187,6 +189,7 @@ class UserValues extends HTMLElement {
         </tr>\
       `;
     });
+    tableHtml += '</tbody>';
 
     this.tableEl_.innerHTML = tableHtml.replace(/\s\s/g, '');
   }

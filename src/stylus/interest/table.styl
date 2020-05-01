@@ -65,10 +65,10 @@ td
     @media Breakpoint.SMALL
       padding-right var(--table-padding-x)
 
-tr:first-child
+thead > tr
   border-bottom 1px solid var(--border)
 
-tr:nth-child(even)
+tbody > tr:nth-child(odd)
   background var(--zebra-stripe)
 
 td.growth::after

@@ -62,10 +62,11 @@ class UserValues extends HTMLElement {
   connectedCallback(): void {
     this.currencyEl_ = document.querySelector('[currency]');
     this.tableEl_ = document.querySelector(this.getAttribute(TARGET_ATTR));
+    this.removeAttribute(TARGET_ATTR);
+
     this.userValues_ = localStorage.getItem(LOCAL_STORAGE);
     this.observer_.observe(this.currencyEl_, {attributes: true});
 
-    this.removeAttribute(TARGET_ATTR);
     this.setup_();
     this.setVisibility_();
   }

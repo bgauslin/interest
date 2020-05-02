@@ -17,6 +17,14 @@ class VisibilityToggle extends HTMLElement {
   }
 
   connectedCallback(): void {
+    this.setup_();
+  }
+
+  disconnectedCallback(): void {
+    this.observer_.disconnect();
+  }
+
+  private setup_(): void {
     this.source_ = document.querySelector(this.getAttribute(SOURCE_ATTR));
     this.targets_ = document.querySelectorAll(this.getAttribute(TARGET_ATTR));
 

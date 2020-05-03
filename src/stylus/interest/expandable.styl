@@ -2,7 +2,7 @@
   align-self center
   justify-self center
   opacity 1
-  transition opacity TRANSITION_SPEED ease
+  transition opacity TRANSITION ease
 
   @media Breakpoint.MEDIUM
     display none !important // hide the button since we don't need it
@@ -33,7 +33,7 @@
     width 33vw
 
 [no-touch] .expandable__button
-  transition border TRANSITION_SPEED ease, color TRANSITION_SPEED ease
+  transition border TRANSITION ease, color TRANSITION ease
 
 .expandable__button:focus
 .expandable__button:active
@@ -48,7 +48,7 @@
   content ''
   display inline-block
   margin-right rem(8)
-  transition transform TRANSITION_SPEED_SLOW
+  transition transform TRANSITION_SLOW
 
 .expandable[expanded] > .expandable__button::before
   transform rotate(-180deg)

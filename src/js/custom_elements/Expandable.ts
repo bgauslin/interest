@@ -1,3 +1,4 @@
+const ARIA_EXPANDED_ATTR: string = 'aria-expanded';
 const EXPANDED_ATTR: string = 'expanded';
 const LABEL_ATTR: string = 'label';
 const TARGET_ATTR: string = 'target';
@@ -43,7 +44,11 @@ class Expandable extends HTMLElement {
    * and related elements.
    */
   private setup_(): void {
-    this.innerHTML = `<button class="${this.className}__button"></button>`;
+    const buttonId = `${this.className}-button`;
+    const html = `\
+      <button class="${this.className}__button" id="${buttonId}"></button>\
+    `;
+    this.innerHTML = html.replace(/\s\s/g, '');
     this.button_ = this.querySelector('button');
 
     if (localStorage.getItem(EXPANDED_ATTR) === 'true') {
@@ -53,6 +58,11 @@ class Expandable extends HTMLElement {
       this.target_.style.height = '0';
       this.target_.removeAttribute(EXPANDED_ATTR);
     }
+
+    this.button_.setAttribute(ARIA_EXPANDED_ATTR,
+        String(this.hasAttribute(EXPANDED_ATTR)));
+    this.button_.setAttribute('aria-controls', this.target_.id);
+    this.target_.setAttribute('aria-controlledby', buttonId);
 
     this.updateLabel_();
     this.hasSetup_ = true;
@@ -67,6 +77,8 @@ class Expandable extends HTMLElement {
     } else {
       this.setAttribute(EXPANDED_ATTR, '');
     }
+    this.button_.setAttribute(ARIA_EXPANDED_ATTR,
+      String(this.hasAttribute(EXPANDED_ATTR)));
   }
 
   /**

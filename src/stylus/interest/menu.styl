@@ -13,7 +13,7 @@
   visibility hidden
 
   @media Breakpoint.MEDIUM
-    margin-top -4px
+    margin-top 4px
 
 .settings[open] .menu
   opacity 1
@@ -29,10 +29,13 @@
   display block
   height MENU_ARROW
   position absolute
-  right rem(10)
+  right rem(12)
   top (- MENU_ARROW / 2)
   transform rotate(45deg)
   width MENU_ARROW
+
+  @media Breakpoint.MEDIUM
+    right rem(10)
 
 // Menu container.
 .menu__content

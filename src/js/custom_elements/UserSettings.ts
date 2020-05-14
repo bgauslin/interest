@@ -203,9 +203,10 @@ class UserSettings extends HTMLElement {
     const html = `\
       <button class="${TOGGLE_CLASS}" \
         tabindex="0" \
-        id="menu-toggle" \
-        aria-controls="menu" \
+        id="settings-toggle" \
         title="${label}" \
+        aria-haspopup="true" \
+        aria-controls="settings-menu" \
         aria-label="${label}" \
         ${ARIA_EXPANDED_ATTR}="false">\
         <svg class="settings__icon" viewbox="0 0 24 24" aria-hidden="true">\
@@ -213,8 +214,8 @@ class UserSettings extends HTMLElement {
         </svg>\
       </button>\
       <div class="${MENU_CLASS}" \
-        id="menu" \
-        aria-controlledby="menu-toggle" \
+        id="settings-menu" \
+        aria-labelledby="settings-toggle" \
         aria-hidden="true">\
         <div class="menu__content">\
           ${menuGroups}\

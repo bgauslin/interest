@@ -87,8 +87,14 @@ class UserValues extends HTMLElement {
       pattern = pattern ? `pattern="${pattern}"` : '';
       const input = `\
         <li id="${name}" class="${this.className}__item">\
-          <label for="${name}" class="${this.className}__label">${label}</label>\
-          <input class="${this.className}__input" type="text" name="${name}" inputmode="${inputmode}" ${pattern} aria-label="${label}" required ${autofocus}>\
+          <label for="${name}" class="${this.className}__label">\
+            ${label}\
+          </label>\
+          <input \
+            class="${this.className}__input" \
+            type="text" name="${name}" \
+            inputmode="${inputmode}" \
+            ${pattern} aria-label="${label}" required ${autofocus}>\
         </li>\
       `;
       listHtml += input;
@@ -117,7 +123,8 @@ class UserValues extends HTMLElement {
   private populateInputs_(): void {
     const values = JSON.parse(this.userValues_);
     UserInputs.forEach((field) => {
-      const inputEl = this.querySelector(`[name=${field.name}]`) as HTMLInputElement;
+      const inputEl =
+          this.querySelector(`[name=${field.name}]`) as HTMLInputElement;
       inputEl.value = values[field.name];
     });
   }

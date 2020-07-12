@@ -49,7 +49,8 @@ class App extends HTMLElement {
    * scrolling.
    */
   private viewportHeight_(): void {
-    document.documentElement.style.setProperty('--vh', `${window.innerHeight / 100}px`);
+    document.documentElement.style.setProperty(
+        '--vh', `${window.innerHeight / 100}px`);
   }
 
   /**

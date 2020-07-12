@@ -36,9 +36,13 @@ class VisibilityToggle extends HTMLElement {
 
   private toggleVisibility_(): void {
     if (this.source_.hasAttribute(EMPTY_ATTR)) {
-      this.targets_.forEach((target: HTMLElement) => target.setAttribute(HIDDEN_ATTR, ''));
+      this.targets_.forEach((target: HTMLElement) => {
+        return target.setAttribute(HIDDEN_ATTR, '');
+      });
     } else {
-      this.targets_.forEach((target: HTMLElement) => target.removeAttribute(HIDDEN_ATTR));
+      this.targets_.forEach((target: HTMLElement) => {
+        return target.removeAttribute(HIDDEN_ATTR);
+      });
     }
   }
 }

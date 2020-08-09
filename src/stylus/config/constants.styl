@@ -1,95 +1,46 @@
 @import 'functions'
 
 // -----------------------------------------------------------------------------
-// Theme colors.
+// Colors.
 
-// @const String
-DARK_THEME = #282c35
-
-// @const String
-SEPIA_THEME = #f8f2e3
-
-// -----------------------------------------------------------------------------
-// General colors.
-
-// @const String
-DARK_GREY = #222
-
-// @const String
-LIGHT_GREY = #aaa
-
-// @const String
-LIGHTER_GREY = #ddd
-
-// @const String
-OFF_WHITE = #f7f7f7
-
-// @const String
-GREEN = #00ad45
-
-// @const String
-WARNING = #c00
+brand-color = #00ad45
+grey-dark = #222
+grey-light = #aaa
+grey-lighter = #ddd
+off-white = #f7f7f7
+theme-dark = #282c35
+theme-sepia = #f8f2e3
+warning-color = #c00
 
 // -----------------------------------------------------------------------------
 // Transitions.
 
-// @const String
-TRANSITION = .3s
-
-// @const String
-TRANSITION_SLOW = .5s
+transition = .3s
+transition-slow = .5s
 
 // -----------------------------------------------------------------------------
 // Dimensions.
 
-// @const String
-BUTTON_HEIGHT = rem(40)
-
-// @const String
-BUTTON_ROW_HEIGHT = rem(96)
-
-// @const String
-CARD_PADDING = rem(24)
-
-// @const String
-CORNER_RADIUS_CARD = rem(8)
-
-// @const String
-GRID_GAP = rem(16)
-
-// @const String
-GRID_GAP_MEDIUM = rem(24)
-
-// @const String
-MENU_ARROW = rem(16)
-
-// @const String
-MENU_ITEM_SIZE = rem(40)
-
-// @const String
-TABLE_MAX_WIDTH = rem(640)
-
-// @const String
-VALUES_MAX_WIDTH = rem(240)
-
-// @const String
-VALUES_TOTAL_SIZE = rem(32)
+breakpoint-small-units = rem(420)
+button-height = rem(40)
+card-corner-radius = rem(8)
+card-padding = rem(24)
+grid-gap = rem(16)
+grid-gap-medium = rem(24)
+menu-arrow = rem(16)
+menu-item-size = rem(40)
+table-max-width = rem(640)
+values-max-width = rem(240)
+values-total-size = rem(32)
 
 // -----------------------------------------------------------------------------
 // Calculated constants and breakpoints.
 
-// @type String
-VALUES_GRID_WIDTH = VALUES_MAX_WIDTH + (2 * CARD_PADDING)
+values-grid-width = values-max-width + (2 * card-padding)
+content-width-large = (values-max-width + (2 * card-padding)) + table-max-width + grid-gap-medium
 
-// @type String
-CONTENT_WIDTH_LARGE = (VALUES_MAX_WIDTH + (2 * CARD_PADDING)) + TABLE_MAX_WIDTH + GRID_GAP_MEDIUM
-
-// @type String
-BREAKPOINT_SMALL_UNITS = rem(420)
-
-// @type Hash
-Breakpoint = {
-  SMALL:  'screen and (min-width: %s)' % BREAKPOINT_SMALL_UNITS
-  MEDIUM: 'screen and (min-width: %s)' % (TABLE_MAX_WIDTH + (GRID_GAP_MEDIUM * 2))
-  LARGE:  'screen and (min-width: %s)' % (CONTENT_WIDTH_LARGE + (GRID_GAP_MEDIUM * 2))
+breakpoint = {
+  small:  'screen and (min-width: %s)' % breakpoint-small-units
+  medium: 'screen and (min-width: %s)' % (table-max-width + (grid-gap-medium * 2))
+  large:  'screen and (min-width: %s)' % (content-width-large + (grid-gap-medium * 2))
 }

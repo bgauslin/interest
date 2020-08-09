@@ -4,14 +4,14 @@
   flex-direction column
   justify-content center
   overflow hidden
-  padding CARD_PADDING
+  padding card-padding
 
-  @media Breakpoint.SMALL
+  @media breakpoint.small
     align-self start
-    border-radius CORNER_RADIUS_CARD
+    border-radius card-corner-radius
     margin-top var(--grid-gap)
 
-  @media Breakpoint.LARGE
+  @media breakpoint.large
     position sticky
     top calc(var(--sticky-offset) + var(--grid-gap))
 
@@ -20,11 +20,11 @@
   margin 0 auto
   padding 0
 
-  @media Breakpoint.SMALL
+  @media breakpoint.small
     display flex
     flex-wrap wrap
 
-  @media Breakpoint.LARGE
+  @media breakpoint.large
     display block
     margin 0
 
@@ -33,10 +33,10 @@
   display flex
   margin 0 0 rem(16)
 
-  @media Breakpoint.SMALL
+  @media breakpoint.small
     flex 0 0 50%
 
-@media Breakpoint.SMALL
+@media breakpoint.small
   #principal
     order 1
   #rate
@@ -70,31 +70,31 @@
   width rem(88)
 
 .values__input:focus
-  border-bottom-color GREEN
-  color GREEN
+  border-bottom-color brand-color
+  color brand-color
 
 .values__input:focus:invalid
-  border-bottom-color WARNING
-  color WARNING
+  border-bottom-color warning-color
+  color warning-color
 
 .values__input:not(:focus)
   color var(--input)
 
 .values__total
-  color GREEN
-  font-size VALUES_TOTAL_SIZE
-  height VALUES_TOTAL_SIZE
-  line-height VALUES_TOTAL_SIZE
+  color brand-color
+  font-size values-total-size
+  height values-total-size
+  line-height values-total-size
   margin 1rem auto 0
-  max-width 'calc(100vw - %s)' % (2 * (GRID_GAP + CARD_PADDING))
+  max-width 'calc(100vw - %s)' % (2 * (grid-gap + card-padding))
   opacity 1
   overflow hidden
   text-align center
   text-overflow ellipsis
-  transition opacity TRANSITION, visibility TRANSITION
+  transition opacity transition, visibility transition
   visibility visible
 
-  @media Breakpoint.LARGE
+  @media breakpoint.large
     margin .5rem 0 0
     text-align left
 

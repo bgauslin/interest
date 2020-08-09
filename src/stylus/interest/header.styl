@@ -1,6 +1,6 @@
 // [1] Knockout via theme's body background.
 .header
-  background GREEN
+  background brand-color
   color var(--background) // [1]
   height var(--header-height)
   left 0
@@ -17,10 +17,10 @@
   height var(--header-height)
   justify-content space-between
   margin 0 auto
-  max-width CONTENT_WIDTH_LARGE
+  max-width content-width-large
   padding 0 var(--grid-gap)
 
-  @media Breakpoint.LARGE
+  @media breakpoint.large
     padding 0
 
 .header__title

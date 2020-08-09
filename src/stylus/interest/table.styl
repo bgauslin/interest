@@ -10,13 +10,13 @@
   overflow-x auto
   overflow-y hidden
   text-align center
-  transition height TRANSITION_SLOW ease-out, opacity TRANSITION_SLOW ease-out
+  transition height transition-slow ease-out, opacity transition-slow ease-out
   
-  @media Breakpoint.MEDIUM
+  @media breakpoint.medium
     height auto !important // [2]
     opacity 1
 
-  @media Breakpoint.LARGE
+  @media breakpoint.large
     justify-self stretch
     margin-top var(--grid-gap)
     padding 0
@@ -27,18 +27,18 @@
 .table[expanded]
   margin-bottom rem(16)
 
-  @media Breakpoint.MEDIUM
+  @media breakpoint.medium
     margin-bottom 0
 
 .table__frame
   border-bottom 1px solid var(--border)
   overflow-x auto
 
-  @media Breakpoint.SMALL
+  @media breakpoint.small
     border 1px solid var(--border)
-    border-radius CORNER_RADIUS_CARD
+    border-radius card-corner-radius
 
-@media Breakpoint.SMALL
+@media breakpoint.small
   .table__data
     background var(--background)
 
@@ -48,21 +48,21 @@ td
 
   &:first-child
     text-align left
-    padding-left GRID_GAP
+    padding-left grid-gap
 
-    @media Breakpoint.SMALL
+    @media breakpoint.small
       padding-left var(--table-padding-x)
 
   &:last-child
-    padding-right GRID_GAP
+    padding-right grid-gap
 
-    @media Breakpoint.SMALL
+    @media breakpoint.small
       padding-right var(--table-padding-x)
 
   &.balance
-    padding-right GRID_GAP
+    padding-right grid-gap
 
-    @media Breakpoint.SMALL
+    @media breakpoint.small
       padding-right var(--table-padding-x)
 
 thead > tr
@@ -88,16 +88,16 @@ td.growth::after
 .interest
   display none
 
-  @media Breakpoint.SMALL
+  @media breakpoint.small
     display table-cell
 
 .rotate-screen
   color var(--symbol)
   display none
   font-size var(--fineprint)
-  margin rem(12) GRID_GAP 0
+  margin rem(12) grid-gap 0
 
-  @media screen and (max-width BREAKPOINT_SMALL_UNITS) and (orientation portrait)
+  @media screen and (max-width breakpoint-small-units) and (orientation portrait)
     display block
 
 .rotate-screen span

@@ -2,17 +2,17 @@
   elevation(2)
   background white
   border-radius rem(4)
-  color DARK_GREY
-  margin-top (GRID_GAP / 2)
-  max-width 'calc(100vw - %s)' % GRID_GAP
+  color grey-dark
+  margin-top (grid-gap / 2)
+  max-width 'calc(100vw - %s)' % grid-gap
   opacity 0
   position absolute
   right rem(-8)
-  transition opacity TRANSITION ease-out, transform TRANSITION ease-out, visibility TRANSITION ease-out
+  transition opacity transition ease-out, transform transition ease-out, visibility transition ease-out
   transform 'translateY(-%s)' % rem(12)
   visibility hidden
 
-  @media Breakpoint.MEDIUM
+  @media breakpoint.medium
     margin-top 4px
 
 .settings[open] .menu
@@ -27,14 +27,14 @@
   clip-path polygon(rem(-8) rem(-8), rem(-8) rem(24), rem(24) rem(-8))
   content ''
   display block
-  height MENU_ARROW
+  height menu-arrow
   position absolute
   right rem(12)
-  top (- MENU_ARROW / 2)
+  top (- menu-arrow / 2)
   transform rotate(45deg)
-  width MENU_ARROW
+  width menu-arrow
 
-  @media Breakpoint.MEDIUM
+  @media breakpoint.medium
     right rem(10)
 
 // Menu container.
@@ -52,7 +52,7 @@
   padding rem(16)
 
 .menu__group:not(:last-child)
-  border-right 1px solid LIGHTER_GREY
+  border-right 1px solid grey-lighter
 
 // Settings lists.
 .menu__list
@@ -66,10 +66,10 @@
 
 .item__label
   display block
-  height MENU_ITEM_SIZE
+  height menu-item-size
   overflow hidden
   position relative
-  width MENU_ITEM_SIZE
+  width menu-item-size
 
 .item__label:focus
   outline none
@@ -85,42 +85,42 @@
   align-items center
   border-radius 50%
   display inline-flex
-  height MENU_ITEM_SIZE
+  height menu-item-size
   justify-content center
   position relative
-  width MENU_ITEM_SIZE
+  width menu-item-size
   z-index -1
 
 [no-touch] .option__label
-  transition border TRANSITION
+  transition border transition
 
 // Styles for different option types.
 [type=currency] .option__label
-  background OFF_WHITE
-  border 3px solid LIGHTER_GREY
-  color LIGHT_GREY
+  background off-white
+  border 3px solid grey-lighter
+  color grey-light
   font-size em(22)
 
 [type=currency] .option:checked + .option__label
   background white
-  color GREEN
+  color brand-color
 
 [type=theme] .option__label
-  border 3px solid LIGHTER_GREY
+  border 3px solid grey-lighter
   color transparent
 
 .option__label[option=light]
   background white
 
 .option__label[option=sepia]
-  background SEPIA_THEME
+  background theme-sepia
 
 .option__label[option=dark]
-  background DARK_THEME
+  background theme-dark
 
 .option:checked + .option__label
-  border-color GREEN
+  border-color brand-color
 
 .item__label:focus .option:not(:checked) + .option__label
 [no-touch] .item__label:hover .option:not(:checked) + .option__label
-  border-color LIGHT_GREY
+  border-color grey-light

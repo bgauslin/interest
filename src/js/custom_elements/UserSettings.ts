@@ -59,16 +59,16 @@ export class UserSettings extends HTMLElement {
     return [CURRENCY_ATTR, THEME_ATTR];
   }
 
-  connectedCallback(): void {
+  connectedCallback() {
     this.setup();
     this.setUserOptions();
   }
 
-  attributeChangedCallback(name: string, oldValue: string, newValue: string): void {
+  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     this.updateOption(name, oldValue, newValue);
   }
 
-  disconnectedCallback(): void {
+  disconnectedCallback() {
     this.removeEventListener('click', this.handleClick);
     this.removeEventListener('keyup', this.handleKey);
     document.removeEventListener('click', this.closeMenuListener);
@@ -79,7 +79,7 @@ export class UserSettings extends HTMLElement {
    * theme or currency if an option was clicked. If the menu is open, the next
    * click will close it.
    */
-  private handleClick(e: Event): void {
+  private handleClick(e: Event) {
     const target = e.target as HTMLElement;
 
     if (target === this.toggleButton) {
@@ -101,7 +101,7 @@ export class UserSettings extends HTMLElement {
   /**
    * Adds keyboard navigation to the menu.
    */
-  private handleKey(e: KeyboardEvent): void {
+  private handleKey(e: KeyboardEvent) {
     switch (e.code) {
       case 'Enter':
         this.setOption(e.target as HTMLElement);
@@ -115,7 +115,7 @@ export class UserSettings extends HTMLElement {
   /**
    * Updates the settings attribute and closes the menu.
    */
-  private setOption(target: HTMLElement): void {
+  private setOption(target: HTMLElement) {
     const newOption = target.getAttribute('for');
     if (newOption) {
       const el = target.querySelector('[name]');
@@ -131,7 +131,7 @@ export class UserSettings extends HTMLElement {
    * Closes the menu and removes the click-to-close listener that's added when
    * the menu is opened by the toggle button.
    */
-  private closeMenu(): void {
+  private closeMenu() {
     this.removeAttribute(OPEN_ATTR);
     document.removeEventListener('click', this.closeMenuListener);
     this.toggleButton.setAttribute(ARIA_EXPANDED_ATTR, 'false');
@@ -141,7 +141,7 @@ export class UserSettings extends HTMLElement {
   /**
    * Sets current option.
    */
-  private updateOption(name: string, oldValue: string, newValue: string): void {
+  private updateOption(name: string, oldValue: string, newValue: string) {
     const oldEl = this.querySelector(`[value=${oldValue}]`) as HTMLInputElement;
     const newEl = this.querySelector(`[value=${newValue}]`) as HTMLInputElement;
 
@@ -162,7 +162,7 @@ export class UserSettings extends HTMLElement {
    * fallback value if not. The value is then set, which triggers the 
    * attributeChangedCallback.
    */
-  private setUserOptions(): void {
+  private setUserOptions() {
     Settings.forEach((setting) => {
       const {name, fallback} = setting;
       const value = localStorage.getItem(name) || fallback;
@@ -173,7 +173,7 @@ export class UserSettings extends HTMLElement {
   /**
    * Attaches settings elements to the DOM and set defaults for first run.
    */
-  private setup(): void {
+  private setup() {
     let menuGroups = '';
 
     Settings.forEach((setting) => {

@@ -26,21 +26,21 @@ export class ShiftyHeader extends HTMLElement {
     document.addEventListener('scroll', this.scrollListener);
   }
 
-  connectedCallback(): void {
+  connectedCallback() {
     this.getHeight();
     this.applyShift();
   }
 
-  disconnectedCallback(): void {
+  disconnectedCallback() {
     window.removeEventListener('resize', this.resizeListener);
     document.removeEventListener('scroll', this.scrollListener);
   }
 
-  private getHeight(): void {
+  private getHeight() {
     this.height = this.offsetHeight;
   }
 
-  private applyShift(): void {
+  private applyShift() {
     // Get current scroll position.
     this.yScroll = window.pageYOffset || document.documentElement.scrollTop;
     

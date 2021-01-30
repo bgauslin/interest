@@ -16,15 +16,15 @@ export class VisibilityToggle extends HTMLElement {
     this.observer = new MutationObserver(() => this.toggleVisibility());
   }
 
-  connectedCallback(): void {
+  connectedCallback() {
     this.setup();
   }
 
-  disconnectedCallback(): void {
+  disconnectedCallback() {
     this.observer.disconnect();
   }
 
-  private setup(): void {
+  private setup() {
     this.source = document.querySelector(this.getAttribute(SOURCE_ATTR));
     this.targets = document.querySelectorAll(this.getAttribute(TARGET_ATTR));
 
@@ -34,7 +34,7 @@ export class VisibilityToggle extends HTMLElement {
     [SOURCE_ATTR, TARGET_ATTR].forEach((attr) => this.removeAttribute(attr));
   }
 
-  private toggleVisibility(): void {
+  private toggleVisibility() {
     if (this.source.hasAttribute(EMPTY_ATTR)) {
       this.targets.forEach((target) => {
         const el = target as HTMLElement;

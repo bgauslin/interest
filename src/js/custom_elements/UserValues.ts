@@ -59,7 +59,7 @@ export class UserValues extends HTMLElement {
     this.addEventListener('keyup', this.updateTotal);
   }
 
-  connectedCallback(): void {
+  connectedCallback() {
     this.currencyEl = document.querySelector('[currency]');
     this.tableEl = document.querySelector(this.getAttribute(TARGET_ATTR));
     this.removeAttribute(TARGET_ATTR);
@@ -71,7 +71,7 @@ export class UserValues extends HTMLElement {
     this.setVisibility();
   }
 
-  disconnectedCallback(): void {
+  disconnectedCallback() {
     this.observer.disconnect();
     this.removeEventListener('keyup', this.updateTotal);
   }
@@ -79,7 +79,7 @@ export class UserValues extends HTMLElement {
   /**
    * Creates DOM elements and populates them if there are stored user values.
    */
-  private setup_(): void {
+  private setup_() {
     let listHtml = '';
     UserInputs.forEach((el, index) => {
       const autofocus = (index === 0) ? 'autofocus' : '';
@@ -120,7 +120,7 @@ export class UserValues extends HTMLElement {
    * Converts stored user-provided values to an array, then populates each input
    * element with its corresponding user value.
    */
-  private populateInputs(): void {
+  private populateInputs() {
     const values = JSON.parse(this.userValues);
     UserInputs.forEach((field) => {
       const inputEl =
@@ -133,7 +133,7 @@ export class UserValues extends HTMLElement {
    * Toggles visibility of the 'total' element if there's at least one period
    * of calculated compounding values.
    */
-  private setVisibility(): void {
+  private setVisibility() {
     if (!this.periodsEl.value || parseInt(this.periodsEl.value) <= 0) {
       this.totalEl.setAttribute(EMPTY_ATTR, '');
     } else {
@@ -144,7 +144,7 @@ export class UserValues extends HTMLElement {
   /**
    * Updates 'total value' DOM element after calculating all compounding values.
    */
-  private updateTotal(): void {
+  private updateTotal() {
     const values = {};
     UserInputs.forEach((field) => {
       const el = this.querySelector(`[name=${field.name}]`) as HTMLInputElement;
@@ -172,7 +172,7 @@ export class UserValues extends HTMLElement {
   /**
    * Renders initial and compounded amounts for each period.
    */
-  private renderTable(): void {
+  private renderTable() {
     let tableHtml: string = `\
       <thead>\
         <tr>\

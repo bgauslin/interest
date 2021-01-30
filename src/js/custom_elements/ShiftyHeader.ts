@@ -7,66 +7,64 @@ enum CustomProperty {
  * Custom element that shifts a fixed header in and out of the viewport
  * depending on scroll direction.
  */
-class ShiftyHeader extends HTMLElement {
-  private height_: number;
-  private resizeListener_: any;
-  private scrollChange_: number;
-  private scrollListener_: any;
-  private shift_: number;
-  private yScroll_: number;
-  private yScrollLast_: number;
+export class ShiftyHeader extends HTMLElement {
+  private height: number;
+  private resizeListener: any;
+  private scrollChange: number;
+  private scrollListener: any;
+  private shift: number;
+  private yScroll: number;
+  private yScrollLast: number;
 
   constructor() {
     super();
-    this.shift_ = 0;
-    this.yScrollLast_ = 0;
-    this.resizeListener_ = this.getHeight_.bind(this);
-    this.scrollListener_ = this.applyShift_.bind(this);
-    window.addEventListener('resize', this.resizeListener_);
-    document.addEventListener('scroll', this.scrollListener_);
+    this.shift = 0;
+    this.yScrollLast = 0;
+    this.resizeListener = this.getHeight.bind(this);
+    this.scrollListener = this.applyShift.bind(this);
+    window.addEventListener('resize', this.resizeListener);
+    document.addEventListener('scroll', this.scrollListener);
   }
 
   connectedCallback(): void {
-    this.getHeight_();
-    this.applyShift_();
+    this.getHeight();
+    this.applyShift();
   }
 
   disconnectedCallback(): void {
-    window.removeEventListener('resize', this.resizeListener_);
-    document.removeEventListener('scroll', this.scrollListener_);
+    window.removeEventListener('resize', this.resizeListener);
+    document.removeEventListener('scroll', this.scrollListener);
   }
 
-  private getHeight_(): void {
-    this.height_ = this.offsetHeight;
+  private getHeight(): void {
+    this.height = this.offsetHeight;
   }
 
-  private applyShift_(): void {
+  private applyShift(): void {
     // Get current scroll position.
-    this.yScroll_ = window.pageYOffset || document.documentElement.scrollTop;
+    this.yScroll = window.pageYOffset || document.documentElement.scrollTop;
     
     // Update shift value based on change in scroll position if it's within
     // height bounds.
-    this.scrollChange_ = this.yScroll_ - this.yScrollLast_;
-    if (this.shift_ > 0 || this.shift_ < this.height_) {
-      this.shift_ += this.scrollChange_;
+    this.scrollChange = this.yScroll - this.yScrollLast;
+    if (this.shift > 0 || this.shift < this.height) {
+      this.shift += this.scrollChange;
     }
 
     // Reset shift value if it exceeds height bounds.
-    if (this.shift_ > this.height_) {
-      this.shift_ = this.height_;
-    } else if (this.shift_ < 0) {
-      this.shift_ = 0;
+    if (this.shift > this.height) {
+      this.shift = this.height;
+    } else if (this.shift < 0) {
+      this.shift = 0;
     }
 
     // Set CSS values for related elements to reference.
     document.documentElement.style.setProperty(
-      CustomProperty.OFFSET, `${(this.height_ - this.shift_) / 16}rem`);
+      CustomProperty.OFFSET, `${(this.height - this.shift) / 16}rem`);
     document.documentElement.style.setProperty(
-      CustomProperty.SHIFT, `-${this.shift_ / 16}rem`);
+      CustomProperty.SHIFT, `-${this.shift / 16}rem`);
 
     // Update yScrollLast for determining scroll change on next tick.
-    this.yScrollLast_ = (this.yScroll_ <= 0) ? 0 : this.yScroll_;
+    this.yScrollLast = (this.yScroll <= 0) ? 0 : this.yScroll;
   }
 }
-
-export {ShiftyHeader};

@@ -6,45 +6,45 @@ const TARGET_ATTR: string = 'target';
 /**
  * Observes a source element for toggling the visibility of target elements.
  */
-class VisibilityToggle extends HTMLElement {
-  private observer_: MutationObserver;
-  private source_: HTMLElement;
-  private targets_: NodeList;
+export class VisibilityToggle extends HTMLElement {
+  private observer: MutationObserver;
+  private source: HTMLElement;
+  private targets: NodeList;
   
   constructor() {
     super();
-    this.observer_ = new MutationObserver(() => this.toggleVisibility_());
+    this.observer = new MutationObserver(() => this.toggleVisibility());
   }
 
   connectedCallback(): void {
-    this.setup_();
+    this.setup();
   }
 
   disconnectedCallback(): void {
-    this.observer_.disconnect();
+    this.observer.disconnect();
   }
 
-  private setup_(): void {
-    this.source_ = document.querySelector(this.getAttribute(SOURCE_ATTR));
-    this.targets_ = document.querySelectorAll(this.getAttribute(TARGET_ATTR));
+  private setup(): void {
+    this.source = document.querySelector(this.getAttribute(SOURCE_ATTR));
+    this.targets = document.querySelectorAll(this.getAttribute(TARGET_ATTR));
 
-    this.observer_.observe(this.source_, {attributes: true});
-    this.toggleVisibility_();
+    this.observer.observe(this.source, {attributes: true});
+    this.toggleVisibility();
 
     [SOURCE_ATTR, TARGET_ATTR].forEach((attr) => this.removeAttribute(attr));
   }
 
-  private toggleVisibility_(): void {
-    if (this.source_.hasAttribute(EMPTY_ATTR)) {
-      this.targets_.forEach((target: HTMLElement) => {
-        return target.setAttribute(HIDDEN_ATTR, '');
+  private toggleVisibility(): void {
+    if (this.source.hasAttribute(EMPTY_ATTR)) {
+      this.targets.forEach((target) => {
+        const el = target as HTMLElement;
+        return el.setAttribute(HIDDEN_ATTR, '');
       });
     } else {
-      this.targets_.forEach((target: HTMLElement) => {
-        return target.removeAttribute(HIDDEN_ATTR);
+      this.targets.forEach((target) => {
+        const el = target as HTMLElement;
+        return el.removeAttribute(HIDDEN_ATTR);
       });
     }
   }
 }
-
-export {VisibilityToggle};

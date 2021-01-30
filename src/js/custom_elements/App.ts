@@ -3,32 +3,32 @@ import fastclick from 'fastclick';
 /**
  * Custom element that sets up the DOM and initializes site-wide features.
  */
-class App extends HTMLElement {
-  private hasSetup_: boolean;
+export class App extends HTMLElement {
+  private hasSetup: boolean;
 
   constructor() {
     super();
-    window.addEventListener('resize', this.viewportHeight_);
+    window.addEventListener('resize', this.viewportHeight);
   }
 
   connectedCallback(): void {
-    if (!this.hasSetup_) {
-      this.setupDom_();
-      this.touchEnabled_();
-      this.googleAnalytics_();
-      this.viewportHeight_();
-      this.hasSetup_ = true;
+    if (!this.hasSetup) {
+      this.setupDom();
+      this.touchEnabled();
+      this.googleAnalytics();
+      this.viewportHeight();
+      this.hasSetup = true;
     }
   }
 
   disconnectedCallback(): void {
-    window.removeEventListener('resize', this.viewportHeight_);
+    window.removeEventListener('resize', this.viewportHeight);
   }
 
   /**
    * Removes 'no JS' attribute and element from the DOM.
    */
-  private setupDom_(): void {
+  private setupDom(): void {
     document.body.removeAttribute('no-js');
     document.querySelector('noscript').remove();
   }
@@ -36,7 +36,7 @@ class App extends HTMLElement {
   /**
    * Removes 'no-touch' attribute and adds fastclick if device is touch-enabled.
    */
-  private touchEnabled_(): void {
+  private touchEnabled(): void {
     if ('ontouchstart' in window || (window as any).DocumentTouch) {
       document.body.removeAttribute('no-touch');
       fastclick['attach'](document.body);
@@ -48,7 +48,7 @@ class App extends HTMLElement {
    * due to iOS Safari behavior where chrome appears and disappears when
    * scrolling.
    */
-  private viewportHeight_(): void {
+  private viewportHeight(): void {
     document.documentElement.style.setProperty(
         '--vh', `${window.innerHeight / 100}px`);
   }
@@ -56,7 +56,7 @@ class App extends HTMLElement {
   /**
    * Initializes Google Analytics tracking.
    */
-  private googleAnalytics_(): void {
+  private googleAnalytics(): void {
     if (process.env.NODE_ENV === 'production') {
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*(new Date() as any);a=s.createElement(o),
@@ -67,5 +67,3 @@ class App extends HTMLElement {
     }
   }
 }
-
-export {App};

@@ -43,16 +43,16 @@ const Settings: SettingsFields[] = [
 /**
  * Custom element that lets a user set the app's theme colors and currency.
  */
-class UserSettings extends HTMLElement {
-  private closeMenuListener_: any;
-  private menu_: HTMLElement;
-  private toggleButton_: HTMLButtonElement;
+export class UserSettings extends HTMLElement {
+  private closeMenuListener: any;
+  private menu: HTMLElement;
+  private toggleButton: HTMLButtonElement;
 
   constructor() {
     super();
-    this.closeMenuListener_ = this.closeMenu_.bind(this);
-    this.addEventListener('click', this.handleClick_);
-    this.addEventListener('keyup', this.handleKey_);
+    this.closeMenuListener = this.closeMenu.bind(this);
+    this.addEventListener('click', this.handleClick);
+    this.addEventListener('keyup', this.handleKey);
   }
 
   static get observedAttributes(): string[] {
@@ -60,18 +60,18 @@ class UserSettings extends HTMLElement {
   }
 
   connectedCallback(): void {
-    this.setup_();
-    this.setUserOptions_();
+    this.setup();
+    this.setUserOptions();
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string): void {
-    this.updateOption_(name, oldValue, newValue);
+    this.updateOption(name, oldValue, newValue);
   }
 
   disconnectedCallback(): void {
-    this.removeEventListener('click', this.handleClick_);
-    this.removeEventListener('keyup', this.handleKey_);
-    document.removeEventListener('click', this.closeMenuListener_);
+    this.removeEventListener('click', this.handleClick);
+    this.removeEventListener('keyup', this.handleKey);
+    document.removeEventListener('click', this.closeMenuListener);
   }
 
   /**
@@ -79,35 +79,35 @@ class UserSettings extends HTMLElement {
    * theme or currency if an option was clicked. If the menu is open, the next
    * click will close it.
    */
-  private handleClick_(e: Event): void {
+  private handleClick(e: Event): void {
     const target = e.target as HTMLElement;
 
-    if (target === this.toggleButton_) {
+    if (target === this.toggleButton) {
       if (this.hasAttribute(OPEN_ATTR)) {
-        this.closeMenu_();
+        this.closeMenu();
       } else {
         this.setAttribute(OPEN_ATTR, '');
-        this.toggleButton_.setAttribute(ARIA_EXPANDED_ATTR, 'true');
-        this.menu_.setAttribute(ARIA_HIDDEN_ATTR, 'false');
+        this.toggleButton.setAttribute(ARIA_EXPANDED_ATTR, 'true');
+        this.menu.setAttribute(ARIA_HIDDEN_ATTR, 'false');
         window.requestAnimationFrame(() => {
-          document.addEventListener('click', this.closeMenuListener_);
+          document.addEventListener('click', this.closeMenuListener);
         });
       }
     } else {
-      this.setOption_(target);
+      this.setOption(target);
     }
   }
 
   /**
    * Adds keyboard navigation to the menu.
    */
-  private handleKey_(e: KeyboardEvent): void {
+  private handleKey(e: KeyboardEvent): void {
     switch (e.code) {
       case 'Enter':
-        this.setOption_(e.target as HTMLElement);
+        this.setOption(e.target as HTMLElement);
         break;
       case 'Escape':
-        this.closeMenu_();
+        this.closeMenu();
         break;
     }
   }
@@ -115,7 +115,7 @@ class UserSettings extends HTMLElement {
   /**
    * Updates the settings attribute and closes the menu.
    */
-  private setOption_(target: HTMLElement): void {
+  private setOption(target: HTMLElement): void {
     const newOption = target.getAttribute('for');
     if (newOption) {
       const el = target.querySelector('[name]');
@@ -123,7 +123,7 @@ class UserSettings extends HTMLElement {
       const value = el.getAttribute('value');
       this.setAttribute(name, value);
 
-      this.closeMenu_();
+      this.closeMenu();
     }
   }
 
@@ -131,17 +131,17 @@ class UserSettings extends HTMLElement {
    * Closes the menu and removes the click-to-close listener that's added when
    * the menu is opened by the toggle button.
    */
-  private closeMenu_(): void {
+  private closeMenu(): void {
     this.removeAttribute(OPEN_ATTR);
-    document.removeEventListener('click', this.closeMenuListener_);
-    this.toggleButton_.setAttribute(ARIA_EXPANDED_ATTR, 'false');
-    this.menu_.setAttribute(ARIA_HIDDEN_ATTR, 'true');
+    document.removeEventListener('click', this.closeMenuListener);
+    this.toggleButton.setAttribute(ARIA_EXPANDED_ATTR, 'false');
+    this.menu.setAttribute(ARIA_HIDDEN_ATTR, 'true');
   }
 
   /**
    * Sets current option.
    */
-  private updateOption_(name: string, oldValue: string, newValue: string): void {
+  private updateOption(name: string, oldValue: string, newValue: string): void {
     const oldEl = this.querySelector(`[value=${oldValue}]`) as HTMLInputElement;
     const newEl = this.querySelector(`[value=${newValue}]`) as HTMLInputElement;
 
@@ -162,7 +162,7 @@ class UserSettings extends HTMLElement {
    * fallback value if not. The value is then set, which triggers the 
    * attributeChangedCallback.
    */
-  private setUserOptions_(): void {
+  private setUserOptions(): void {
     Settings.forEach((setting) => {
       const {name, fallback} = setting;
       const value = localStorage.getItem(name) || fallback;
@@ -173,7 +173,7 @@ class UserSettings extends HTMLElement {
   /**
    * Attaches settings elements to the DOM and set defaults for first run.
    */
-  private setup_(): void {
+  private setup(): void {
     let menuGroups = '';
 
     Settings.forEach((setting) => {
@@ -234,9 +234,7 @@ class UserSettings extends HTMLElement {
 
     this.innerHTML = html.replace(/\s\s/g, '');
 
-    this.toggleButton_ = this.querySelector(`.${TOGGLE_CLASS}`);
-    this.menu_ = this.querySelector(`.${MENU_CLASS}`);
+    this.toggleButton = this.querySelector(`.${TOGGLE_CLASS}`);
+    this.menu = this.querySelector(`.${MENU_CLASS}`);
   }
 }
-
-export {UserSettings};

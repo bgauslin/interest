@@ -36,8 +36,8 @@ class Calculator {
     let contributionCompounded: number;
 
     for (let i = 1; i <= periods; i++) {
-      principalCompounded = this.amountWithInterest_(p, rate);
-      contributionCompounded = this.amountWithInterest_(c, rate);
+      principalCompounded = this.amountWithInterest(p, rate);
+      contributionCompounded = this.amountWithInterest(c, rate);
       p = principalCompounded;
       c = pmt + contributionCompounded;
 
@@ -51,10 +51,10 @@ class Calculator {
       };
 
       sums.push({
-        balance: this.formatCurrency_(balance),
-        deposits: this.formatCurrency_(deposits),
+        balance: this.formatCurrency(balance),
+        deposits: this.formatCurrency(deposits),
         growth,
-        interest: this.formatCurrency_(interest),
+        interest: this.formatCurrency(interest),
         year: String(i),
       });
     }
@@ -65,20 +65,20 @@ class Calculator {
   /**
    * Calculates a value with interest applied to initial value.
    */
-  private amountWithInterest_(amount: number, rate: number): number {
+  private amountWithInterest(amount: number, rate: number): number {
     return amount * (rate / 100 + 1);
   }
 
   /**
    * Formats an amount based on currency type: 12345.67123 => 12,345.67.
    */
-  private formatCurrency_(amount: number): string {
+  private formatCurrency(amount: number): string {
     const currency = document.body.getAttribute(CURRENCY_ATTR);
     let thousands = ',';
     let decimals = '.';
 
     if (currency === RUPEES) {
-      return this.formatRupees_(amount);
+      return this.formatRupees(amount);
     }
 
     if (currency === EUROS) {
@@ -94,7 +94,7 @@ class Calculator {
    * Formats currency for rupees (which has its own formatting, so it get its
    * own method), and returns amount in '##,##,###.##' format.
    */
-  private formatRupees_(rupees: number): string {
+  private formatRupees(rupees: number): string {
     const string = rupees.toFixed(2).toString().split('.');
     const amount = string[0];
     const decimal = string[1];

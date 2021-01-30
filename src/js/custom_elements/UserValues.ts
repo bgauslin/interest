@@ -42,38 +42,38 @@ const UserInputs: InputAttributes[] = [
  * Custom element that renders input fields and calculates compound interest
  * based on user-provided values.
  */
-class UserValues extends HTMLElement {
-  private calculator_: Calculator;
-  private currencyEl_: HTMLElement;
-  private observer_: MutationObserver;
-  private periodsEl_: HTMLInputElement;
-  private sums_: Sums[];
-  private tableEl_: HTMLElement;
-  private totalEl_: HTMLElement;
-  private userValues_: string;
+export class UserValues extends HTMLElement {
+  private calculator: Calculator;
+  private currencyEl: HTMLElement;
+  private observer: MutationObserver;
+  private periodsEl: HTMLInputElement;
+  private sums: Sums[];
+  private tableEl: HTMLElement;
+  private totalEl: HTMLElement;
+  private userValues: string;
 
   constructor() {
     super();
-    this.calculator_ = new Calculator();
-    this.observer_ = new MutationObserver(() => this.updateTotal_());
-    this.addEventListener('keyup', this.updateTotal_);
+    this.calculator = new Calculator();
+    this.observer = new MutationObserver(() => this.updateTotal());
+    this.addEventListener('keyup', this.updateTotal);
   }
 
   connectedCallback(): void {
-    this.currencyEl_ = document.querySelector('[currency]');
-    this.tableEl_ = document.querySelector(this.getAttribute(TARGET_ATTR));
+    this.currencyEl = document.querySelector('[currency]');
+    this.tableEl = document.querySelector(this.getAttribute(TARGET_ATTR));
     this.removeAttribute(TARGET_ATTR);
 
-    this.userValues_ = localStorage.getItem(LOCAL_STORAGE);
-    this.observer_.observe(this.currencyEl_, {attributes: true});
+    this.userValues = localStorage.getItem(LOCAL_STORAGE);
+    this.observer.observe(this.currencyEl, {attributes: true});
 
     this.setup_();
-    this.setVisibility_();
+    this.setVisibility();
   }
 
   disconnectedCallback(): void {
-    this.observer_.disconnect();
-    this.removeEventListener('keyup', this.updateTotal_);
+    this.observer.disconnect();
+    this.removeEventListener('keyup', this.updateTotal);
   }
 
   /**
@@ -107,12 +107,12 @@ class UserValues extends HTMLElement {
     `;
     this.innerHTML = html.replace(/\s\s/g, '');
 
-    this.totalEl_ = this.querySelector(`.${this.className}__total`);
-    this.periodsEl_ = this.querySelector('[name=periods]');
+    this.totalEl = this.querySelector(`.${this.className}__total`);
+    this.periodsEl = this.querySelector('[name=periods]');
 
-    if (this.userValues_) {
-      this.populateInputs_();
-      this.updateTotal_();
+    if (this.userValues) {
+      this.populateInputs();
+      this.updateTotal();
     }
   }
 
@@ -120,8 +120,8 @@ class UserValues extends HTMLElement {
    * Converts stored user-provided values to an array, then populates each input
    * element with its corresponding user value.
    */
-  private populateInputs_(): void {
-    const values = JSON.parse(this.userValues_);
+  private populateInputs(): void {
+    const values = JSON.parse(this.userValues);
     UserInputs.forEach((field) => {
       const inputEl =
           this.querySelector(`[name=${field.name}]`) as HTMLInputElement;
@@ -133,18 +133,18 @@ class UserValues extends HTMLElement {
    * Toggles visibility of the 'total' element if there's at least one period
    * of calculated compounding values.
    */
-  private setVisibility_(): void {
-    if (!this.periodsEl_.value || parseInt(this.periodsEl_.value) <= 0) {
-      this.totalEl_.setAttribute(EMPTY_ATTR, '');
+  private setVisibility(): void {
+    if (!this.periodsEl.value || parseInt(this.periodsEl.value) <= 0) {
+      this.totalEl.setAttribute(EMPTY_ATTR, '');
     } else {
-      this.totalEl_.removeAttribute(EMPTY_ATTR);
+      this.totalEl.removeAttribute(EMPTY_ATTR);
     }
   }
 
   /**
    * Updates 'total value' DOM element after calculating all compounding values.
    */
-  private updateTotal_(): void {
+  private updateTotal(): void {
     const values = {};
     UserInputs.forEach((field) => {
       const el = this.querySelector(`[name=${field.name}]`) as HTMLInputElement;
@@ -155,24 +155,24 @@ class UserValues extends HTMLElement {
 
     if (this.querySelectorAll(':invalid').length === 0) {
       // Calculate all sums from user data and render it all in a table.
-      this.sums_ = this.calculator_.compound(<CompoundingValues>values);
-      this.renderTable_();
+      this.sums = this.calculator.compound(<CompoundingValues>values);
+      this.renderTable();
 
       // Get last item in sums array to display final balance.
-      const lastSum = this.sums_[this.sums_.length - 1];
-      this.totalEl_.textContent = lastSum.balance;
+      const lastSum = this.sums[this.sums.length - 1];
+      this.totalEl.textContent = lastSum.balance;
 
       // Save user values to localStorage.
       localStorage.setItem(LOCAL_STORAGE, JSON.stringify(values));
     }
 
-    this.setVisibility_();
+    this.setVisibility();
   }
 
   /**
    * Renders initial and compounded amounts for each period.
    */
-  private renderTable_(): void {
+  private renderTable(): void {
     let tableHtml: string = `\
       <thead>\
         <tr>\
@@ -185,7 +185,7 @@ class UserValues extends HTMLElement {
       </thead>\
     `;
     tableHtml += '<tbody>';
-    this.sums_.forEach((item: Sums) => {
+    this.sums.forEach((item: Sums) => {
       const {year, deposits, interest, balance, growth} = item;
       tableHtml += `\
         <tr>\
@@ -199,8 +199,6 @@ class UserValues extends HTMLElement {
     });
     tableHtml += '</tbody>';
 
-    this.tableEl_.innerHTML = tableHtml.replace(/\s\s/g, '');
+    this.tableEl.innerHTML = tableHtml.replace(/\s\s/g, '');
   }
 }
-
-export {UserValues};

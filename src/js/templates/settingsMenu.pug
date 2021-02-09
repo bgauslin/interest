@@ -1,0 +1,22 @@
+.menu(
+  id="settings-menu"
+  aria-labelledby="settings-toggle"
+  aria-hidden="true"
+)
+  .menu__content
+    each setting in settings
+      .menu__group(setting=setting.name)
+        ul.menu__list
+          each option in setting.options
+            li.item(type=setting.name)
+              label.item__label(
+                for=option.value
+                tabindex="0"
+              )
+                input.option(
+                  type="radio"
+                  name=setting.name
+                  value=option.value
+                  tabindex="-1"
+                )
+                span.option__label(option=option.value) #{option.label}

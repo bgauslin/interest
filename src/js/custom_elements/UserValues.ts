@@ -52,7 +52,6 @@ export class UserValues extends HTMLElement {
   private tableTemplate: any;
   private totalEl: HTMLElement;
   private userValues: string;
-  private userValuesTemplate: any;
 
   constructor() {
     super();
@@ -70,7 +69,6 @@ export class UserValues extends HTMLElement {
     this.observer.observe(this.currencyEl, {attributes: true});
 
     this.tableTemplate = require('../templates/userTableData.pug');
-    this.userValuesTemplate = require('../templates/userValues.pug');
 
     this.setup();
     this.setVisibility();
@@ -85,7 +83,8 @@ export class UserValues extends HTMLElement {
    * Creates DOM elements and populates them if there are stored user values.
    */
   private setup() {
-    this.innerHTML = this.userValuesTemplate({list: UserInputs});
+    const userValuesTemplate = require('../templates/userValues.pug');
+    this.innerHTML = userValuesTemplate({list: UserInputs});
 
     this.totalEl = this.querySelector('.values__total');
     this.periodsEl = this.querySelector('[name=periods]');
@@ -136,7 +135,7 @@ export class UserValues extends HTMLElement {
     if (this.querySelectorAll(':invalid').length === 0) {
       // Calculate all sums from user data and render it all in the table.
       this.sums = this.calculator.compound(<CompoundingValues>values);
-      this.tableEl.innerHTML += this.tableTemplate({table: this.sums});
+      this.tableEl.innerHTML = this.tableTemplate({table: this.sums});
 
       // Get last item in sums array to display final balance.
       const lastSum = this.sums[this.sums.length - 1];

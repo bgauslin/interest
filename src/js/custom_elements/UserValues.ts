@@ -49,8 +49,10 @@ export class UserValues extends HTMLElement {
   private periodsEl: HTMLInputElement;
   private sums: Sums[];
   private tableEl: HTMLElement;
+  private tableTemplate: any;
   private totalEl: HTMLElement;
   private userValues: string;
+  private userValuesTemplate: any;
 
   constructor() {
     super();
@@ -67,7 +69,10 @@ export class UserValues extends HTMLElement {
     this.userValues = localStorage.getItem(LOCAL_STORAGE);
     this.observer.observe(this.currencyEl, {attributes: true});
 
-    this.setup_();
+    this.tableTemplate = require('../templates/userTableData.pug');
+    this.userValuesTemplate = require('../templates/userValues.pug');
+
+    this.setup();
     this.setVisibility();
   }
 
@@ -79,35 +84,10 @@ export class UserValues extends HTMLElement {
   /**
    * Creates DOM elements and populates them if there are stored user values.
    */
-  private setup_() {
-    let listHtml = '';
-    UserInputs.forEach((el, index) => {
-      const autofocus = (index === 0) ? 'autofocus' : '';
-      let {inputmode, label, name, pattern} = el;
-      pattern = pattern ? `pattern="${pattern}"` : '';
-      const input = `\
-        <li id="${name}" class="${this.className}__item">\
-          <label for="${name}" class="${this.className}__label">\
-            ${label}\
-          </label>\
-          <input \
-            class="${this.className}__input" \
-            type="text" name="${name}" \
-            inputmode="${inputmode}" \
-            ${pattern} aria-label="${label}" required ${autofocus}>\
-        </li>\
-      `;
-      listHtml += input;
-    });
-    const html = `\
-      <ul class="${this.className}__list">\
-        ${listHtml}\
-      </ul>\
-      <div class="${this.className}__total"></div>\
-    `;
-    this.innerHTML = html.replace(/\s\s/g, '');
+  private setup() {
+    this.innerHTML = this.userValuesTemplate({list: UserInputs});
 
-    this.totalEl = this.querySelector(`.${this.className}__total`);
+    this.totalEl = this.querySelector('.values__total');
     this.periodsEl = this.querySelector('[name=periods]');
 
     if (this.userValues) {
@@ -154,9 +134,9 @@ export class UserValues extends HTMLElement {
     });
 
     if (this.querySelectorAll(':invalid').length === 0) {
-      // Calculate all sums from user data and render it all in a table.
+      // Calculate all sums from user data and render it all in the table.
       this.sums = this.calculator.compound(<CompoundingValues>values);
-      this.renderTable();
+      this.tableEl.innerHTML += this.tableTemplate({table: this.sums});
 
       // Get last item in sums array to display final balance.
       const lastSum = this.sums[this.sums.length - 1];
@@ -167,38 +147,5 @@ export class UserValues extends HTMLElement {
     }
 
     this.setVisibility();
-  }
-
-  /**
-   * Renders initial and compounded amounts for each period.
-   */
-  private renderTable() {
-    let tableHtml: string = `\
-      <thead>\
-        <tr>\
-          <th class="year">Year</th>\
-          <th class="deposits">Deposits</th>\
-          <th class="interest">Interest</th>\
-          <th class="balance">Balance</th>\
-          <th class="growth">Growth</th>\
-        </tr>\
-      </thead>\
-    `;
-    tableHtml += '<tbody>';
-    this.sums.forEach((item: Sums) => {
-      const {year, deposits, interest, balance, growth} = item;
-      tableHtml += `\
-        <tr>\
-          <td class="year">${year}</td>\
-          <td class="deposits">${deposits}</td>\
-          <td class="interest">${interest}</td>\
-          <td class="balance">${balance}</td>\
-          <td class="growth">${growth}</td>\
-        </tr>\
-      `;
-    });
-    tableHtml += '</tbody>';
-
-    this.tableEl.innerHTML = tableHtml.replace(/\s\s/g, '');
   }
 }

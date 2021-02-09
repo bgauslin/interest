@@ -68,7 +68,7 @@ export class UserValues extends HTMLElement {
     this.userValues = localStorage.getItem(LOCAL_STORAGE);
     this.observer.observe(this.currencyEl, {attributes: true});
 
-    this.tableTemplate = require('../templates/userTableData.pug');
+    this.tableTemplate = require('../templates/table.pug');
 
     this.setup();
     this.setVisibility();
@@ -83,8 +83,8 @@ export class UserValues extends HTMLElement {
    * Creates DOM elements and populates them if there are stored user values.
    */
   private setup() {
-    const userValuesTemplate = require('../templates/userValues.pug');
-    this.innerHTML = userValuesTemplate({list: UserInputs});
+    const valuesTemplate = require('../templates/values.pug');
+    this.innerHTML = valuesTemplate({list: UserInputs});
 
     this.totalEl = this.querySelector('.values__total');
     this.periodsEl = this.querySelector('[name=periods]');

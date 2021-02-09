@@ -172,11 +172,8 @@ export class UserSettings extends HTMLElement {
    * Attaches settings elements to the DOM and set defaults for first run.
    */
   private setup() {
-    const menuTemplate = require('../templates/settingsMenu.pug');
-    const buttonTemplate = require('../templates/settingsButton.pug');
-
-    this.innerHTML += buttonTemplate();
-    this.innerHTML += menuTemplate({settings: Settings});
+    const template = require('../templates/settings.pug');
+    this.innerHTML = template({settings: Settings});
     
     this.toggleButton = this.querySelector('.settings__toggle');
     this.menu = this.querySelector('.menu');

@@ -29,18 +29,16 @@ html(lang="en")
           table.table__data
         p.rotate-screen Rotate screen to view <span>Interest</span> and <span>Growth</span> columns.
       app-expandable.expandable(target="table" label="table")
-    footer.footer
-      p.footer__blurb.footer__blurb--copyright
-        span.footer__years © 2018–#{currentYear}
-        a.footer__link(
-          href="https://gauslin.com"
-          title="Visit Ben Gauslin’s Website"
-        ) Ben Gauslin
-      p.footer__blurb.footer__blurb--repo
-        a.footer__link(
-          href="https://github.com/bgauslin/interest"
-          title="View source code on GitHub"
-        ) GitHub
+    footer
+      span © 2018–#{currentYear}
+      a(
+        href="https://gauslin.com"
+        title="Visit Ben Gauslin’s Website"
+      ) Ben Gauslin
+      a(
+        href="https://github.com/bgauslin/interest"
+        title="View source code on GitHub"
+      ) GitHub
     visibility-toggle(source=".values__total" target=".expandable, .table")
     x-tools
   if (process.env.NODE_ENV === 'development')

@@ -1,62 +1,56 @@
-.expandable
-  align-self center
-  justify-self center
-  opacity 1
-  transition opacity transition ease
-
-  @media breakpoint.medium
-    display none !important // hide the button since we don't need it
-
-.expandable[hidden]
-  opacity 0
-  pointer-events none
-
-// [1] Knockout via theme's body background.
-// [2] Adjust right padding to coordinate with toggle arrow.
-.expandable__button
+expand-able
   webfont(600)
   align-items center
   background brand-color
   border 2px solid brand-color
   border-radius (button-height / 2)
   color var(--background) // [1]
+  cursor pointer
   display flex
   font-size em(14)
   height button-height
   justify-content center
   line-height 1
+  margin auto
+  opacity 1
   padding 0 rem(12) 0 0 // [2]
-  width 50vw
+  transition opacity transition ease-out
   white-space nowrap
 
   @media breakpoint.small
     width 33vw
 
-[no-touch] .expandable__button
-  transition border transition ease, color transition ease
+  &[hidden]
+    opacity 0
+    pointer-events none
+    visibility hidden
 
-.expandable__button:focus
-.expandable__button:active
-[no-touch] .expandable__button:hover
-  background 0
-  color brand-color
-  cursor pointer
+  &:focus
+  &:active
+  [no-touch] &:hover
+    background transparent
+    color brand-color
 
-// [1] Knockout via theme's body background.
-.expandable__button::before
-  css-triangle(var(--background), 5px, 'down') // [1]
-  content ''
-  display inline-block
-  margin-right rem(8)
-  transition transform transition-slow
+  [no-touch] &
+    transition background transition ease, border transition ease, color transition ease
 
-.expandable[expanded] > .expandable__button::before
-  transform rotate(-180deg)
+  &::before
+    css-triangle(var(--background), 5px, 'down')
+    content ''
+    display inline-block
+    margin-right rem(8)
+    transition transform transition-slow
 
-.expandable__button:focus::before
-.expandable__button:active::before
-[no-touch] .expandable__button:hover::before
-  border-top-color brand-color
+  &:focus::before
+  &:active::before
+  [no-touch] &:hover::before
+    border-top-color brand-color
 
-[no-js] .expandable
-  display none
+  [no-touch] &::before
+    transition border-top-color transition ease
+
+  &[aria-expanded=true]::before
+    transform rotate(-180deg)
+
+  [no-js] &
+    display none

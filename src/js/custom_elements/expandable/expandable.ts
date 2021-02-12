@@ -1,6 +1,6 @@
 const ARIA_EXPANDED_ATTR: string = 'aria-expanded';
-const EXPANDED_ATTR: string = 'expanded';
 const LABEL_ATTR: string = 'label';
+const STORAGE_ITEM: string = 'expanded';
 const TARGET_ATTR: string = 'target';
 
 /**
@@ -8,7 +8,6 @@ const TARGET_ATTR: string = 'target';
  * element is clicked.
  */
 export class Expandable extends HTMLElement {
-  private button: HTMLElement;
   private hasSetup: boolean;
   private label: string;
   private target: HTMLElement;
@@ -20,18 +19,15 @@ export class Expandable extends HTMLElement {
   }
 
   static get observedAttributes(): string[] {
-    return [EXPANDED_ATTR];
+    return [ARIA_EXPANDED_ATTR];
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
-    const direction = (newValue === '') ? 'expand' : 'collapse';
+    const direction = (newValue === 'true') ? 'expand' : 'collapse';
     this.expandCollapse(direction);
   }
 
   connectedCallback() {
-    this.label = this.getAttribute(LABEL_ATTR);
-    this.target = document.getElementById(this.getAttribute(TARGET_ATTR));
-    [LABEL_ATTR, TARGET_ATTR].forEach((attr) => this.removeAttribute(attr));
     this.setup();
   }
 
@@ -44,27 +40,30 @@ export class Expandable extends HTMLElement {
    * and related elements.
    */
   private setup() {
-    const buttonId = `${this.className}-button`;
-    const html = `\
-      <button class="${this.className}__button" id="${buttonId}"></button>\
-    `;
-    this.innerHTML = html.replace(/\s\s/g, '');
-    this.button = this.querySelector('button');
+    this.label = this.getAttribute(LABEL_ATTR);
+    this.target = document.getElementById(this.getAttribute(TARGET_ATTR));
+    
+    console.log('this.target', this.target);
 
-    if (localStorage.getItem(EXPANDED_ATTR) === 'true') {
-      this.setAttribute(EXPANDED_ATTR, '');
-      this.target.setAttribute(EXPANDED_ATTR, '');
-    } else {
-      this.target.style.height = '0';
-      this.target.removeAttribute(EXPANDED_ATTR);
+    if (!this.label || !this.target) {
+      return;
     }
 
-    this.button.setAttribute(ARIA_EXPANDED_ATTR,
-        String(this.hasAttribute(EXPANDED_ATTR)));
-    this.button.setAttribute('aria-controls', this.target.id);
-    this.target.setAttribute('aria-controlledby', buttonId);
+    this.setAttribute('role', 'button');
+    this.setAttribute('aria-controls', this.target.id);
+
+    if (localStorage.getItem(STORAGE_ITEM) === 'true') {
+      this.setAttribute(ARIA_EXPANDED_ATTR, 'true');
+      this.target.setAttribute(ARIA_EXPANDED_ATTR, 'true');
+    } else {
+      this.target.setAttribute(ARIA_EXPANDED_ATTR, 'false');
+      this.target.style.height = '0';
+    }
 
     this.updateLabel();
+
+    [LABEL_ATTR, TARGET_ATTR].forEach((attr) => this.removeAttribute(attr));
+    
     this.hasSetup = true;
   }
 
@@ -72,13 +71,8 @@ export class Expandable extends HTMLElement {
    * Toggles attribute which triggers the attributeChanged callback.
    */
   private toggleExpanded() {
-    if (this.hasAttribute(EXPANDED_ATTR)) {
-      this.removeAttribute(EXPANDED_ATTR);
-    } else {
-      this.setAttribute(EXPANDED_ATTR, '');
-    }
-    this.button.setAttribute(ARIA_EXPANDED_ATTR,
-      String(this.hasAttribute(EXPANDED_ATTR)));
+    const expanded = this.getAttribute(ARIA_EXPANDED_ATTR) === 'true';
+    this.setAttribute(ARIA_EXPANDED_ATTR, `${!expanded}`);
   }
 
   /**
@@ -92,14 +86,13 @@ export class Expandable extends HTMLElement {
     const elHeight = this.target.scrollHeight;
 
     if (action === 'expand') {
-      this.target.setAttribute(EXPANDED_ATTR, '');
+      this.target.setAttribute(ARIA_EXPANDED_ATTR, 'true');
       this.target.style.height = `${elHeight / 16}rem`;
       this.target.addEventListener('transitionend', () => {
         this.target.style.height = null;
       }, {once: true});
-
     } else {
-      this.target.removeAttribute(EXPANDED_ATTR);
+      this.target.setAttribute(ARIA_EXPANDED_ATTR, 'false');
       window.requestAnimationFrame(() => {
         this.target.style.height = `${elHeight / 16}rem`;
         window.requestAnimationFrame(() => {
@@ -115,11 +108,11 @@ export class Expandable extends HTMLElement {
    * Updates label text based on whether the element is expanded or collapsed.
    */
   private updateLabel() {
-    const expanded = this.hasAttribute(EXPANDED_ATTR);
+    const expanded = this.getAttribute(ARIA_EXPANDED_ATTR) === 'true';
     const prefix = expanded ? 'Hide' : 'Show';
-    this.button.textContent = `${prefix} ${this.label}`;
-    localStorage.setItem(EXPANDED_ATTR, String(expanded));
+    this.textContent = `${prefix} ${this.label}`;
+    localStorage.setItem(STORAGE_ITEM, String(expanded));
   }
 }
 
-customElements.define('app-expandable', Expandable);
+customElements.define('expand-able', Expandable);

@@ -86,7 +86,7 @@ export class UserValues extends HTMLElement {
     const valuesTemplate = require('./user_values.pug');
     this.innerHTML = valuesTemplate({list: UserInputs});
 
-    this.totalEl = this.querySelector('.values__total');
+    this.totalEl = this.querySelector('.total');
     this.periodsEl = this.querySelector('[name=periods]');
 
     if (this.userValues) {

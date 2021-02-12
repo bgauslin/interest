@@ -8,18 +8,10 @@ Currencies = {
 
 for name, value in Currencies
   [currency={name}]
-    .values__total:not(:empty)
+    user-values .total:not(:empty)
     td.deposits
     td.interest
     td.balance
       &::before
         content value
         margin-right em(4)
-
-[currency] .values__total:not(:empty)::before
-  color inherit
-
-@media breakpoint.small
-  .values
-    background var(--background)
-    border 1px solid var(--border)

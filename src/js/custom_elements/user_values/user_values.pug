@@ -1,16 +1,13 @@
-ul.values__list
+ul
   each item, index in list
-    li.values__item(id=item.name)
-      label.values__label(
-        for=item.name
-      )= item.label
-      input.values__input(
+    li(id=item.name)
+      label(for=item.name)= item.label
+      input(
         type="text"
         name=item.name
         inputmode=item.inputmode
-        aria-label=item.label
         autofocus=(index === 0)
         pattern=(item.pattern ? item.pattern : false)
         required
       )
-.values__total
+.total

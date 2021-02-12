@@ -1,4 +1,4 @@
-import {Calculator, CompoundingValues, Sums} from '../modules/Calculator';
+import {Calculator, CompoundingValues, Sums} from '../../modules/Calculator';
 
 interface InputAttributes {
   inputmode: string,
@@ -68,7 +68,7 @@ export class UserValues extends HTMLElement {
     this.userValues = localStorage.getItem(LOCAL_STORAGE);
     this.observer.observe(this.currencyEl, {attributes: true});
 
-    this.tableTemplate = require('../templates/table.pug');
+    this.tableTemplate = require('./table.pug');
 
     this.setup();
     this.setVisibility();
@@ -83,7 +83,7 @@ export class UserValues extends HTMLElement {
    * Creates DOM elements and populates them if there are stored user values.
    */
   private setup() {
-    const valuesTemplate = require('../templates/values.pug');
+    const valuesTemplate = require('./user_values.pug');
     this.innerHTML = valuesTemplate({list: UserInputs});
 
     this.totalEl = this.querySelector('.values__total');
@@ -148,3 +148,5 @@ export class UserValues extends HTMLElement {
     this.setVisibility();
   }
 }
+
+customElements.define('user-values', UserValues);

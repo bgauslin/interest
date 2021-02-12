@@ -67,3 +67,5 @@ export class App extends HTMLElement {
     }
   }
 }
+
+customElements.define('compound-interest', App);

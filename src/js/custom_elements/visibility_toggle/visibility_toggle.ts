@@ -48,3 +48,5 @@ export class VisibilityToggle extends HTMLElement {
     }
   }
 }
+
+customElements.define('visibility-toggle', VisibilityToggle);

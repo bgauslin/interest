@@ -121,3 +121,5 @@ export class Expandable extends HTMLElement {
     localStorage.setItem(EXPANDED_ATTR, String(expanded));
   }
 }
+
+customElements.define('app-expandable', Expandable);

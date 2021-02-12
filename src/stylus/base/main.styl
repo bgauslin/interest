@@ -1,4 +1,4 @@
-.content
+main
   display grid
   grid-column 1 / 4
   grid-row 2
@@ -15,3 +15,11 @@
 
   @media breakpoint.large
     grid-template-columns values-grid-width 1fr
+
+[no-js] main
+  align-self center
+  grid-column 2
+  grid-row 2
+  grid-template-columns 1fr !important
+  grid-template-rows 1fr !important
+  text-align center

@@ -17,31 +17,31 @@ html(lang="en")
     link(rel="manifest" href="/pwa/manifest.json")
     link(rel="preload" href="https://assets.gauslin.com/fonts/AvenirNext-Variable.woff2" as="font" type="font/woff2" crossorigin="crossorigin")
   body(no-touch no-js)
-    compound-interest.app
-      app-header.header
-        div.header__frame
-          h1.header__title= title
-          user-settings.settings#settings
-      main
-        noscript Please <a href="https://www.enable-javascript.com/" title="How to enable JavaScript in your browser">enable JavaScript</a> to view this app.
-        user-values.values(target=".table__data")
-        div.table#table
-          div.table__frame
-            table.table__data
-          p.rotate-screen Rotate screen to view <span>Interest</span> and <span>Growth</span> columns.
-        app-expandable.expandable(target="table" label="table")
-      footer.footer
-        p.footer__blurb.footer__blurb--copyright
-          span.footer__years © 2018–#{currentYear}
-          a.footer__link(
-            href="https://gauslin.com"
-            title="Visit Ben Gauslin’s Website"
-          ) Ben Gauslin
-        p.footer__blurb.footer__blurb--repo
-          a.footer__link(
-            href="https://github.com/bgauslin/interest"
-            title="View source code on GitHub"
-          ) GitHub
-      visibility-toggle(source=".values__total" target=".expandable, .table")
-    if (process.env.NODE_ENV === 'development')
-      script(src="https://css.gauslin.com/debugger.js" data-src="/breakpoints.json")
+    app-header.header
+      div.header__frame
+        h1.header__title= title
+        user-settings.settings#settings
+    main
+      noscript Please <a href="https://www.enable-javascript.com/" title="How to enable JavaScript in your browser">enable JavaScript</a> to view this app.
+      user-values.values(target=".table__data")
+      div.table#table
+        div.table__frame
+          table.table__data
+        p.rotate-screen Rotate screen to view <span>Interest</span> and <span>Growth</span> columns.
+      app-expandable.expandable(target="table" label="table")
+    footer.footer
+      p.footer__blurb.footer__blurb--copyright
+        span.footer__years © 2018–#{currentYear}
+        a.footer__link(
+          href="https://gauslin.com"
+          title="Visit Ben Gauslin’s Website"
+        ) Ben Gauslin
+      p.footer__blurb.footer__blurb--repo
+        a.footer__link(
+          href="https://github.com/bgauslin/interest"
+          title="View source code on GitHub"
+        ) GitHub
+    visibility-toggle(source=".values__total" target=".expandable, .table")
+    x-tools
+  if (process.env.NODE_ENV === 'development')
+    script(src="https://css.gauslin.com/debugger.js" data-src="/breakpoints.json")

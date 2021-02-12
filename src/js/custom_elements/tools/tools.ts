@@ -3,7 +3,7 @@ import fastclick from 'fastclick';
 /**
  * Custom element that sets up the DOM and initializes site-wide features.
  */
-export class App extends HTMLElement {
+export class Tools extends HTMLElement {
   private hasSetup: boolean;
 
   constructor() {
@@ -68,4 +68,4 @@ export class App extends HTMLElement {
   }
 }
 
-customElements.define('compound-interest', App);
+customElements.define('x-tools', Tools);

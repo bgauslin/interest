@@ -1,5 +1,4 @@
-// [1] Knockout via theme's body background.
-.header
+app-header
   background brand-color
   color var(--background) // [1]
   height var(--header-height)
@@ -11,7 +10,7 @@
   transform translate3d(0, var(--sticky-shift), 0)
   z-index 2
 
-.header__frame
+app-header > div
   align-items center
   display flex
   height var(--header-height)
@@ -23,7 +22,7 @@
   @media breakpoint.large
     padding 0
 
-.header__title
+app-header h1
   font-size var(--site-header)
   line-height 1
   margin 0

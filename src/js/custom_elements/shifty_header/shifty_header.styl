@@ -11,20 +11,20 @@ shifty-header
   transform translate3d(0, var(--sticky-shift), 0)
   z-index 2
 
-shifty-header > div
-  align-items center
-  display flex
-  height var(--header-height)
-  justify-content space-between
-  margin 0 auto
-  max-width content-width-large
-  padding 0 var(--grid-gap)
+  & > div
+    align-items center
+    display flex
+    height var(--header-height)
+    justify-content space-between
+    margin 0 auto
+    max-width content-width-large
+    padding 0 var(--grid-gap)
 
-  @media breakpoint.large
-    padding 0
+    @media breakpoint.large
+      padding 0
 
-shifty-header h1
-  font-size var(--site-header)
-  line-height 1
-  margin 0
-  white-space nowrap
+  & h1
+    font-size var(--site-header)
+    line-height 1
+    margin 0
+    white-space nowrap

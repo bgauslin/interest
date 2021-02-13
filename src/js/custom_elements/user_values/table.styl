@@ -1,5 +1,4 @@
 // [1] Make variable font commas and decimal points align across table cells.
-// [2] Table should always display at this breakpoint and higher.
 .table
   box-sizing border-box
   font-variant-numeric tabular-nums // [1]
@@ -13,12 +12,11 @@
   text-align center
   transition height transition-slow ease-out, opacity transition-slow ease-out
   
-  @media breakpoint.medium
-    height auto !important // [2]
-    opacity 1
-
+  // [1] Table should always display at this breakpoint and higher.
   @media breakpoint.large
+    height auto !important // [2]
     justify-self stretch
+    opacity 1
     padding 0
 
 .table[hidden]

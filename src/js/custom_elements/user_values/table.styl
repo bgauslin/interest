@@ -1,7 +1,6 @@
-// [1] Make variable font commas and decimal points align across table cells.
 .table
   box-sizing border-box
-  font-variant-numeric tabular-nums // [1]
+  font-variant-numeric tabular-nums // Align , and . across cells.
   grid-area table
   height auto
   justify-self stretch
@@ -11,22 +10,15 @@
   overflow-y hidden
   text-align center
   transition height transition-slow ease-out, opacity transition-slow ease-out
-  
-  // [1] Table should always display at this breakpoint and higher.
+
   @media breakpoint.large
-    height auto !important // [2]
+    height auto !important // Always display on large screens and up.
     justify-self stretch
     opacity 1
     padding 0
 
 .table[hidden]
   display none
-
-.table[aria-expanded=true]
-  margin-bottom rem(16)
-
-  @media breakpoint.medium
-    margin-bottom 0
 
 .table__frame
   border-bottom 1px solid var(--border)

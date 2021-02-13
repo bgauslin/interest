@@ -2,6 +2,9 @@ main
   display grid
   grid-column 1 / 4
   grid-row 2
+  grid-template-areas 'values'\
+                      'table'\
+                      'expandable'
   grid-template-rows minmax(auto, 1fr) auto (button-height * 2)
   margin 0 auto
   max-width content-width-large
@@ -11,10 +14,11 @@ main
   @media breakpoint.small
     grid-column 2
     grid-gap var(--grid-gap)
-    grid-template-rows auto 1fr
 
   @media breakpoint.large
+    grid-template-areas 'values table'
     grid-template-columns values-grid-width 1fr
+    grid-template-rows auto
 
 [no-js] main
   align-self center

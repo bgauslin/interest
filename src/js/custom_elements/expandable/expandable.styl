@@ -8,6 +8,7 @@ expand-able
   cursor pointer
   display flex
   font-size em(14)
+  grid-area expandable
   height button-height
   justify-content center
   line-height 1
@@ -19,6 +20,9 @@ expand-able
 
   @media breakpoint.small
     width 33vw
+
+  @media breakpoint.large
+    display none
 
   &[hidden]
     opacity 0

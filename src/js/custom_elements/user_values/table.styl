@@ -1,6 +1,8 @@
-.table
+// Collapsible outer wrapper whose box model ensures all of its children are
+// hidden when collapsed.
+.panel
   box-sizing border-box
-  font-variant-numeric tabular-nums // Align , and . across cells.
+  font-variant-numeric tabular-nums // Align commas and decimal points across cells.
   grid-area table
   height auto
   justify-self stretch
@@ -16,11 +18,15 @@
     justify-self stretch
     opacity 1
     padding 0
+  
+  [no-js] &
+    display none
 
-.table[hidden]
+.panel[hidden]
   display none
 
-.table__frame
+// Outer wrapper for a table that makes its overflowing content scrollable.
+.frame
   border-bottom 1px solid var(--border)
   overflow-x auto
 
@@ -28,8 +34,9 @@
     border 1px solid var(--border)
     border-radius card-corner-radius
 
-@media breakpoint.small
-  table
+// Table styles for first/last cells and alternating rows.
+table
+  @media breakpoint.small
     background var(--background)
 
 th
@@ -61,16 +68,7 @@ thead > tr
 tbody > tr:nth-child(odd)
   background var(--zebra-stripe)
 
-td.growth::after
-td.deposits::before
-td.interest::before
-td.balance::before
-  color var(--symbol)
-
-td.growth::after
-  content '%'
-  margin-left em(4)
-
+// Table classnames.
 .year
   padding-right 0
 
@@ -81,6 +79,17 @@ td.growth::after
   @media breakpoint.small
     display table-cell
 
+td.growth::after
+td.deposits::before
+td.interest::before
+td.balance::before
+  color var(--symbol)
+
+td.growth::after
+  content '%'
+  margin-left em(4)
+
+// Footnotes after the table.
 .rotate-screen
   color var(--symbol)
   display none
@@ -90,8 +99,5 @@ td.growth::after
   @media screen and (max-width breakpoint-small-units) and (orientation portrait)
     display block
 
-.rotate-screen span
+.rotate-screen > span
   color var(--text)
-
-[no-js] .table
-  display none

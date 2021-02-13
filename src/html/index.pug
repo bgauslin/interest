@@ -24,10 +24,10 @@ html(lang="en")
     main
       noscript Please <a href="https://www.enable-javascript.com/" title="How to enable JavaScript in your browser">enable JavaScript</a> to view this app.
       user-values(target="#data")
-      expand-able(id="expandable" label="table" target="panel")
+      expand-able(id="expandable" target="panel" label="table")
       div.panel(id="panel")
-        div.frame
-          table#data
+        div.table-frame
+          table(id="data")
         p.rotate-screen Rotate screen to view <span>Interest</span> and <span>Growth</span> columns.
     footer
       span © 2018–#{currentYear}
@@ -39,7 +39,7 @@ html(lang="en")
         href="https://github.com/bgauslin/interest"
         title="View source code on GitHub"
       ) GitHub
-    visibility-toggle(source=".total" target="#expandable, .table")
+    visibility-toggle(source=".total" target="#expandable, #panel")
     x-tools
   if (process.env.NODE_ENV === 'development')
     script(src="https://css.gauslin.com/debugger.js" data-src="/breakpoints.json")

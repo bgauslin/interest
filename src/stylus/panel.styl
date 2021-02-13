@@ -1,0 +1,26 @@
+// Collapsible outer wrapper whose box model ensures all of its children are
+// hidden when collapsed.
+.panel
+  box-sizing border-box
+  font-variant-numeric tabular-nums // Align commas and decimal points across cells.
+  grid-area table
+  height auto
+  justify-self stretch
+  margin 0
+  opacity 1
+  overflow-x auto
+  overflow-y hidden
+  text-align center
+  transition height transition-slow ease-out, opacity transition-slow ease-out
+
+  @media breakpoint.large
+    height auto !important // Always display on large screens and up.
+    justify-self stretch
+    opacity 1
+    padding 0
+  
+  [no-js] &
+    display none
+
+.panel[hidden]
+  display none

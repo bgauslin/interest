@@ -4,7 +4,7 @@ expand-able
   background brand-color
   border 2px solid brand-color
   border-radius (button-height / 2)
-  color var(--background) // [1]
+  color var(--background)
   cursor pointer
   display flex
   font-size em(14)
@@ -14,19 +14,17 @@ expand-able
   line-height 1
   margin auto
   opacity 1
-  padding 0 rem(12) 0 0 // [2]
+  padding 0 rem(24) 0 rem(14)
   transition opacity transition ease-out
   white-space nowrap
-
-  @media breakpoint.small
-    width 33vw
-
-  @media breakpoint.large
-    visibility hidden
 
   &[hidden]
     opacity 0
     pointer-events none
+    visibility hidden
+
+  // Widget isn't necessary (or useful) on large screens, so don't show it.
+  @media breakpoint.large
     visibility hidden
 
   &:focus

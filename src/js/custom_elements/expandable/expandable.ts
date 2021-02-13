@@ -43,8 +43,6 @@ export class Expandable extends HTMLElement {
     this.label = this.getAttribute(LABEL_ATTR);
     this.target = document.getElementById(this.getAttribute(TARGET_ATTR));
     
-    console.log('this.target', this.target);
-
     if (!this.label || !this.target) {
       return;
     }

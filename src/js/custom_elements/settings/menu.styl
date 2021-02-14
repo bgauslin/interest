@@ -1,8 +1,9 @@
-.menu
+[id=menu]
   elevation(2)
   background white
   border-radius rem(4)
   color grey-dark
+  display flex
   margin-top (grid-gap / 2)
   max-width 'calc(100vw - %s)' % grid-gap
   opacity 0
@@ -37,31 +38,34 @@
     @media breakpoint.medium
       right rem(10)
 
-// Menu container.
-.menu__content
-  display flex
-  -webkit-overflow-scrolling touch
-  overflow-x auto
-  max-width 100%
-  width 100%
+  // Menu container with overflow scrolling.
+  & > div
+    display flex
+    -webkit-overflow-scrolling touch
+    overflow-x auto
 
-.menu__content::-webkit-scrollbar
-  display none
+  & > div::-webkit-scrollbar
+    display none
 
-// Settings lists.
-.menu
+  // Settings lists.
   ul
     display flex
     list-style none
     margin 0
+    max-width 100%
     padding rem(16)
+    width 100%
 
-  ul:not(:last-child)
-    border-right 1px solid grey-lighter
+    &:not(:last-child)
+      border-right 1px solid grey-lighter
 
-  li:not(:last-child)
-    margin 0 rem(12) 0 0
+  li
+    margin 0
 
+    &:not(:last-child)
+      margin-right rem(12)
+
+  // Settings options via radio buttons inside clickable <label> elements.
   label
     cursor pointer
     display block

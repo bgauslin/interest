@@ -176,7 +176,7 @@ export class UserSettings extends HTMLElement {
     this.innerHTML = template({settings: Settings});
     this.button =
         document.getElementById('settings-toggle') as HTMLButtonElement;
-    this.menu = this.querySelector('.menu');
+    this.menu = document.getElementById('menu');
   }
 }
 

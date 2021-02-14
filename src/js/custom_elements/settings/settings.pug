@@ -22,9 +22,9 @@ button(
   .menu__content
     each setting in settings
       .menu__group(setting=setting.name)
-        ul.menu__list
+        ul
           each option in setting.options
-            li.item(type=setting.name)
+            li(type=setting.name)
               label.item__label(
                 for=option.value
                 tabindex="0"

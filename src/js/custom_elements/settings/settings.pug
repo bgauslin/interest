@@ -21,18 +21,17 @@ button(
 )
   .menu__content
     each setting in settings
-      .menu__group(setting=setting.name)
-        ul
-          each option in setting.options
-            li(type=setting.name)
-              label.item__label(
-                for=option.value
-                tabindex="0"
+      ul(setting=setting.name)
+        each option in setting.options
+          li(type=setting.name)
+            label.item__label(
+              for=option.value
+              tabindex="0"
+            )
+              input.option(
+                type="radio"
+                name=setting.name
+                value=option.value
+                tabindex="-1"
               )
-                input.option(
-                  type="radio"
-                  name=setting.name
-                  value=option.value
-                  tabindex="-1"
-                )
-                span.option__label(option=option.value) #{option.label}
+              span.option__label(option=option.value) #{option.label}

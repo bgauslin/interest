@@ -48,23 +48,19 @@
 .menu__content::-webkit-scrollbar
   display none
 
-// Menu groups.
-.menu__group
-  padding rem(16)
-
-.menu__group:not(:last-child)
-  border-right 1px solid grey-lighter
-
 // Settings lists.
-.menu ul
-  display flex
-  list-style none
-  margin 0
-  padding 0
+.menu
+  ul
+    display flex
+    list-style none
+    margin 0
+    padding rem(16)
 
-.menu li:not(:last-child)
-  margin 0 rem(12) 0 0
+  ul:not(:last-child)
+    border-right 1px solid grey-lighter
 
+  li:not(:last-child)
+    margin 0 rem(12) 0 0
 
 .item__label
   display block

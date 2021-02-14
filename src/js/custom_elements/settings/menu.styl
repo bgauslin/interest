@@ -15,27 +15,27 @@
   @media breakpoint.medium
     margin-top 4px
 
-.settings[open] .menu
-  opacity 1
-  transform translateY(0)
-  visibility visible
+  &[aria-hidden=false]
+    opacity 1
+    transform translateY(0)
+    visibility visible
 
-// Menu arrow via rotated square with a shadow.
-.menu::before
-  elevation(2)
-  background white
-  clip-path polygon(rem(-8) rem(-8), rem(-8) rem(24), rem(24) rem(-8))
-  content ''
-  display block
-  height menu-arrow
-  position absolute
-  right rem(12)
-  top (- menu-arrow / 2)
-  transform rotate(45deg)
-  width menu-arrow
+  // Menu arrow via rotated square with a drop shadow.
+  &::before
+    elevation(2)
+    background white
+    clip-path polygon(rem(-8) rem(-8), rem(-8) rem(24), rem(24) rem(-8))
+    content ''
+    display block
+    height menu-arrow
+    position absolute
+    right rem(12)
+    top (- menu-arrow / 2)
+    transform rotate(45deg)
+    width menu-arrow
 
-  @media breakpoint.medium
-    right rem(10)
+    @media breakpoint.medium
+      right rem(10)
 
 // Menu container.
 .menu__content
@@ -48,6 +48,7 @@
 .menu__content::-webkit-scrollbar
   display none
 
+// Menu groups.
 .menu__group
   padding rem(16)
 

@@ -42,9 +42,9 @@ const Settings: SettingsFields[] = [
  * Custom element that lets a user set the app's theme colors and currency.
  */
 export class UserSettings extends HTMLElement {
+  private button: HTMLButtonElement;
   private closeMenuListener: any;
   private menu: HTMLElement;
-  private toggleButton: HTMLButtonElement;
 
   constructor() {
     super();
@@ -80,12 +80,12 @@ export class UserSettings extends HTMLElement {
   private handleClick(e: Event) {
     const target = e.target as HTMLElement;
 
-    if (target === this.toggleButton) {
+    if (target === this.button) {
       if (this.hasAttribute(OPEN_ATTR)) {
         this.closeMenu();
       } else {
         this.setAttribute(OPEN_ATTR, '');
-        this.toggleButton.setAttribute(ARIA_EXPANDED_ATTR, 'true');
+        this.button.setAttribute(ARIA_EXPANDED_ATTR, 'true');
         this.menu.setAttribute(ARIA_HIDDEN_ATTR, 'false');
         window.requestAnimationFrame(() => {
           document.addEventListener('click', this.closeMenuListener);
@@ -132,7 +132,7 @@ export class UserSettings extends HTMLElement {
   private closeMenu() {
     this.removeAttribute(OPEN_ATTR);
     document.removeEventListener('click', this.closeMenuListener);
-    this.toggleButton.setAttribute(ARIA_EXPANDED_ATTR, 'false');
+    this.button.setAttribute(ARIA_EXPANDED_ATTR, 'false');
     this.menu.setAttribute(ARIA_HIDDEN_ATTR, 'true');
   }
 
@@ -174,8 +174,8 @@ export class UserSettings extends HTMLElement {
   private setup() {
     const template = require('./settings.pug');
     this.innerHTML = template({settings: Settings});
-    
-    this.toggleButton = this.querySelector('.settings__toggle');
+    this.button =
+        document.getElementById('settings-toggle') as HTMLButtonElement;
     this.menu = this.querySelector('.menu');
   }
 }

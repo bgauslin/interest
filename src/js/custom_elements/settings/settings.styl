@@ -1,11 +1,10 @@
-.settings
+user-settings
   position relative
   z-index 1
 
-// [1] Knockout via theme's body background.
-.settings__toggle
+user-settings > button
   align-items center
-  color var(--background) // [1]
+  color var(--background)
   cursor pointer
   display flex
   height var(--header-height)
@@ -18,15 +17,15 @@
   @media breakpoint.medium
     margin-right rem(-20)
 
-.settings__toggle:focus
-  transform scale(1.25)
+  &:focus
+    transform scale(1.25)
 
-.settings__toggle:active
-  transform scale(.85)
+  &:active
+    transform scale(.85)
 
-[no-touch] .settings__toggle:hover
-  opacity .75
+  [no-touch] &:hover
+    opacity .75
 
-.settings__icon
-  flex 0 0 rem(20)
-  pointer-events none
+  > svg
+    flex 0 0 rem(20)
+    pointer-events none

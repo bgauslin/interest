@@ -62,63 +62,57 @@
   li:not(:last-child)
     margin 0 rem(12) 0 0
 
-.item__label
-  display block
-  height menu-item-size
-  overflow hidden
-  position relative
-  width menu-item-size
+  label
+    cursor pointer
+    display block
+    height menu-item-size
+    outline 0
+    overflow hidden
+    position relative
+    width menu-item-size
 
-.item__label:focus
-  outline none
+  [type=radio]
+    position absolute
 
-[no-touch] .item__label:hover
-  cursor pointer
+  label > span
+    align-items center
+    border-radius 50%
+    display inline-flex
+    height menu-item-size
+    justify-content center
+    position relative
+    width menu-item-size
+    z-index -1
 
-// Settings options.
-.option
-  position absolute
+    [no-touch] &
+      transition border transition
 
-.option__label
-  align-items center
-  border-radius 50%
-  display inline-flex
-  height menu-item-size
-  justify-content center
-  position relative
-  width menu-item-size
-  z-index -1
+  [type=currency] label > span
+    background off-white
+    border 3px solid grey-lighter
+    color grey-light
+    font-size em(22)
 
-[no-touch] .option__label
-  transition border transition
+  [type=currency] input:checked + span
+    background white
+    color brand-color
 
-// Styles for different option types.
-[type=currency] .option__label
-  background off-white
-  border 3px solid grey-lighter
-  color grey-light
-  font-size em(22)
+  [type=theme] label > span
+    border 3px solid grey-lighter
+    color transparent
 
-[type=currency] .option:checked + .option__label
-  background white
-  color brand-color
+  span[option=light]
+    background white
 
-[type=theme] .option__label
-  border 3px solid grey-lighter
-  color transparent
+  span[option=sepia]
+    background theme-sepia
 
-.option__label[option=light]
-  background white
+  span[option=dark]
+    background theme-dark
 
-.option__label[option=sepia]
-  background theme-sepia
+  input:checked + span
+    border-color brand-color
 
-.option__label[option=dark]
-  background theme-dark
-
-.option:checked + .option__label
-  border-color brand-color
-
-.item__label:focus .option:not(:checked) + .option__label
-[no-touch] .item__label:hover .option:not(:checked) + .option__label
-  border-color grey-light
+  label:focus > input:not(:checked) + span
+  [no-touch] & label:hover > input:not(:checked) + span
+    border-color grey-light

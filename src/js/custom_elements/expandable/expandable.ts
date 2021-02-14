@@ -1,4 +1,5 @@
 const ARIA_EXPANDED_ATTR: string = 'aria-expanded';
+const ARIA_HIDDEN_ATTR: string = 'aria-hidden';
 const LABEL_ATTR: string = 'label';
 const STORAGE_ITEM: string = 'expanded';
 const TARGET_ATTR: string = 'target';
@@ -52,10 +53,10 @@ export class Expandable extends HTMLElement {
 
     if (localStorage.getItem(STORAGE_ITEM) === 'true') {
       this.setAttribute(ARIA_EXPANDED_ATTR, 'true');
-      this.target.setAttribute(ARIA_EXPANDED_ATTR, 'true');
+      this.target.setAttribute(ARIA_HIDDEN_ATTR, 'false');
     } else {
-      this.target.setAttribute(ARIA_EXPANDED_ATTR, 'false');
       this.target.style.height = '0';
+      this.target.setAttribute(ARIA_HIDDEN_ATTR, 'true');
     }
 
     this.updateLabel();
@@ -83,13 +84,13 @@ export class Expandable extends HTMLElement {
     const elHeight = this.target.scrollHeight;
 
     if (action === 'expand') {
-      this.target.setAttribute(ARIA_EXPANDED_ATTR, 'true');
+      this.target.setAttribute(ARIA_HIDDEN_ATTR, 'false');
       this.target.style.height = `${elHeight / 16}rem`;
       this.target.addEventListener('transitionend', () => {
         this.target.style.height = null;
       }, {once: true});
     } else {
-      this.target.setAttribute(ARIA_EXPANDED_ATTR, 'false');
+      this.target.setAttribute(ARIA_HIDDEN_ATTR, 'true');
       window.requestAnimationFrame(() => {
         this.target.style.height = `${elHeight / 16}rem`;
         window.requestAnimationFrame(() => {

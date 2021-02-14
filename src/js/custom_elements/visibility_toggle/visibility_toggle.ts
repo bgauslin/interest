@@ -35,16 +35,13 @@ export class VisibilityToggle extends HTMLElement {
   }
 
   private toggleVisibility() {
-    if (this.source.hasAttribute(EMPTY_ATTR)) {
-      this.targets.forEach((target) => {
-        const el = target as HTMLElement;
-        return el.setAttribute(HIDDEN_ATTR, '');
-      });
-    } else {
-      this.targets.forEach((target) => {
-        const el = target as HTMLElement;
-        return el.removeAttribute(HIDDEN_ATTR);
-      });
+    for (const target of this.targets) {
+      const el = target as HTMLElement;
+      if (this.source.hasAttribute(EMPTY_ATTR)) {
+        el.setAttribute(HIDDEN_ATTR, '');
+      } else {
+        el.removeAttribute(HIDDEN_ATTR);
+      }
     }
   }
 }

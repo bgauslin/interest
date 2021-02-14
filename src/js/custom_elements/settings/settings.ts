@@ -158,11 +158,11 @@ export class UserSettings extends HTMLElement {
    * attributeChangedCallback.
    */
   private setUserOptions() {
-    Settings.forEach((setting) => {
+    for (const setting of Settings) {
       const {name, fallback} = setting;
       const value = localStorage.getItem(name) || fallback;
       this.setAttribute(name, value);
-    });
+    }
   }
 
   /**

@@ -101,11 +101,11 @@ export class UserValues extends HTMLElement {
    */
   private populateInputs() {
     const values = JSON.parse(this.userValues);
-    UserInputs.forEach((field) => {
+    for (const field of UserInputs) {
       const inputEl =
           this.querySelector(`[name=${field.name}]`) as HTMLInputElement;
       inputEl.value = values[field.name];
-    });
+    }
   }
 
   /**
@@ -125,12 +125,12 @@ export class UserValues extends HTMLElement {
    */
   private updateTotal() {
     const values = {};
-    UserInputs.forEach((field) => {
+    for (const field of UserInputs) {
       const el = this.querySelector(`[name=${field.name}]`) as HTMLInputElement;
       if (el.value) {
         values[field.name] = Number(el.value);
       }
-    });
+    }
 
     if (this.querySelectorAll(':invalid').length === 0) {
       // Calculate all sums from user data and render it all in the table.

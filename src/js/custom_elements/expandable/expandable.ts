@@ -59,9 +59,8 @@ export class Expandable extends HTMLElement {
     }
 
     this.updateLabel();
-
     [LABEL_ATTR, TARGET_ATTR].forEach((attr) => this.removeAttribute(attr));
-    
+
     this.hasSetup = true;
   }
 

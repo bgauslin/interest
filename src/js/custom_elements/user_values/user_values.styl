@@ -13,14 +13,14 @@ user-values
     border 1px solid var(--border)
     border-radius card-corner-radius
 
-    // See related 'li' breakpoint.small rules below.
-    #principal
+    // Reorder fields for side-by-side layout at small breakpoint.
+    [field=principal]
       order 1
-    #rate
+    [field=rate]
       order 2
-    #contribution
+    [field=contribution]
       order 3
-    #periods
+    [field=periods]
       order 4
 
   @media breakpoint.large
@@ -48,6 +48,8 @@ user-values
     display flex
     margin 0 0 rem(16)
 
+    // Place fields in side-by-side layout to reduce vertical real estate at
+    // small breakpoint
     @media breakpoint.small
       flex 0 0 50%
 

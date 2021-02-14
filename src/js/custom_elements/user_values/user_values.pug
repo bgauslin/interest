@@ -1,9 +1,10 @@
 ul
   each item, index in list
-    li(id=item.name)
+    li(field=item.name)
       label(for=item.name)= item.label
       input(
         type="text"
+        id=item.name
         name=item.name
         inputmode=item.inputmode
         pattern=(item.pattern ? item.pattern : false)

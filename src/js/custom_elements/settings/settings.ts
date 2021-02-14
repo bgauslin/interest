@@ -12,7 +12,6 @@ interface SettingsOptions {
 const ARIA_EXPANDED_ATTR: string = 'aria-expanded';
 const ARIA_HIDDEN_ATTR: string = 'aria-hidden';
 const CURRENCY_ATTR: string = 'currency';
-const OPEN_ATTR: string = 'open';
 const THEME_ATTR: string = 'theme';
 
 const Settings: SettingsFields[] = [
@@ -81,10 +80,9 @@ export class UserSettings extends HTMLElement {
     const target = e.target as HTMLElement;
 
     if (target === this.button) {
-      if (this.hasAttribute(OPEN_ATTR)) {
+      if (this.button.getAttribute(ARIA_EXPANDED_ATTR) === 'true') {
         this.closeMenu();
       } else {
-        this.setAttribute(OPEN_ATTR, '');
         this.button.setAttribute(ARIA_EXPANDED_ATTR, 'true');
         this.menu.setAttribute(ARIA_HIDDEN_ATTR, 'false');
         window.requestAnimationFrame(() => {
@@ -116,9 +114,9 @@ export class UserSettings extends HTMLElement {
   private setOption(target: HTMLElement) {
     const newOption = target.getAttribute('for');
     if (newOption) {
-      const el = target.querySelector('[name]');
-      const name = el.getAttribute('name');
-      const value = el.getAttribute('value');
+      const element = target.querySelector('[name]');
+      const name = element.getAttribute('name');
+      const value = element.getAttribute('value');
       this.setAttribute(name, value);
 
       this.closeMenu();
@@ -130,7 +128,6 @@ export class UserSettings extends HTMLElement {
    * the menu is opened by the toggle button.
    */
   private closeMenu() {
-    this.removeAttribute(OPEN_ATTR);
     document.removeEventListener('click', this.closeMenuListener);
     this.button.setAttribute(ARIA_EXPANDED_ATTR, 'false');
     this.menu.setAttribute(ARIA_HIDDEN_ATTR, 'true');
@@ -140,15 +137,15 @@ export class UserSettings extends HTMLElement {
    * Sets current option.
    */
   private updateOption(name: string, oldValue: string, newValue: string) {
-    const oldEl = this.querySelector(`[value=${oldValue}]`) as HTMLInputElement;
-    const newEl = this.querySelector(`[value=${newValue}]`) as HTMLInputElement;
+    const oldElement = this.querySelector(`[value=${oldValue}]`) as HTMLInputElement;
+    const newElement = this.querySelector(`[value=${newValue}]`) as HTMLInputElement;
 
-    if (oldEl) {
-      oldEl.checked = false;
+    if (oldElement) {
+      oldElement.checked = false;
     }
 
-    if (newEl) {
-      newEl.checked = true;
+    if (newElement) {
+      newElement.checked = true;
     }
 
     document.body.setAttribute(name, newValue);

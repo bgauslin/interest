@@ -1,8 +1,8 @@
 const ARIA_EXPANDED_ATTR: string = 'aria-expanded';
 const ARIA_HIDDEN_ATTR: string = 'aria-hidden';
+const FOR_ATTR: string = 'for';
 const LABEL_ATTR: string = 'label';
 const STORAGE_ITEM: string = 'expanded';
-const TARGET_ATTR: string = 'target';
 
 /**
  * Custom element that expands/collapses a target element when its source
@@ -42,7 +42,7 @@ export class Expandable extends HTMLElement {
    */
   private setup() {
     this.label = this.getAttribute(LABEL_ATTR);
-    this.target = document.getElementById(this.getAttribute(TARGET_ATTR));
+    this.target = document.getElementById(this.getAttribute(FOR_ATTR));
     
     if (!this.label || !this.target) {
       return;
@@ -60,7 +60,7 @@ export class Expandable extends HTMLElement {
     }
 
     this.updateLabel();
-    [LABEL_ATTR, TARGET_ATTR].forEach((attr) => this.removeAttribute(attr));
+    [FOR_ATTR, LABEL_ATTR].forEach((attr) => this.removeAttribute(attr));
 
     this.hasSetup = true;
   }

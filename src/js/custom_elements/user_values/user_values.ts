@@ -8,8 +8,8 @@ interface InputAttributes {
 }
 
 const EMPTY_ATTR: string = 'empty';
-const LOCAL_STORAGE: string = 'values';
-const TARGET_ATTR: string = 'target';
+const FOR_ATTR: string = 'for';
+const STORAGE_ITEM: string = 'values';
 
 const UserInputs: InputAttributes[] = [
   {
@@ -44,13 +44,13 @@ const UserInputs: InputAttributes[] = [
  */
 export class UserValues extends HTMLElement {
   private calculator: Calculator;
-  private currencyEl: HTMLElement;
+  private currency: HTMLElement;
   private observer: MutationObserver;
-  private periodsEl: HTMLInputElement;
+  private periods: HTMLInputElement;
   private sums: Sums[];
-  private tableEl: HTMLElement;
+  private table: HTMLElement;
   private tableTemplate: any;
-  private totalEl: HTMLElement;
+  private total: HTMLElement;
   private userValues: string;
 
   constructor() {
@@ -61,12 +61,12 @@ export class UserValues extends HTMLElement {
   }
 
   connectedCallback() {
-    this.currencyEl = document.querySelector('[currency]');
-    this.tableEl = document.querySelector(this.getAttribute(TARGET_ATTR));
-    this.removeAttribute(TARGET_ATTR);
+    this.currency = document.querySelector('[currency]');
+    this.table = document.getElementById(this.getAttribute(FOR_ATTR));
+    this.removeAttribute(FOR_ATTR);
 
-    this.userValues = localStorage.getItem(LOCAL_STORAGE);
-    this.observer.observe(this.currencyEl, {attributes: true});
+    this.userValues = localStorage.getItem(STORAGE_ITEM);
+    this.observer.observe(this.currency, {attributes: true});
 
     this.tableTemplate = require('./table.pug');
 
@@ -86,8 +86,8 @@ export class UserValues extends HTMLElement {
     const valuesTemplate = require('./user_values.pug');
     this.innerHTML = valuesTemplate({list: UserInputs});
 
-    this.totalEl = this.querySelector('.total');
-    this.periodsEl = this.querySelector('[name=periods]');
+    this.total = this.querySelector('.total');
+    this.periods = this.querySelector('[name=periods]');
 
     if (this.userValues) {
       this.populateInputs();
@@ -113,10 +113,10 @@ export class UserValues extends HTMLElement {
    * of calculated compounding values.
    */
   private setVisibility() {
-    if (!this.periodsEl.value || parseInt(this.periodsEl.value) <= 0) {
-      this.totalEl.setAttribute(EMPTY_ATTR, '');
+    if (!this.periods.value || parseInt(this.periods.value) <= 0) {
+      this.total.setAttribute(EMPTY_ATTR, '');
     } else {
-      this.totalEl.removeAttribute(EMPTY_ATTR);
+      this.total.removeAttribute(EMPTY_ATTR);
     }
   }
 
@@ -135,14 +135,14 @@ export class UserValues extends HTMLElement {
     if (this.querySelectorAll(':invalid').length === 0) {
       // Calculate all sums from user data and render it all in the table.
       this.sums = this.calculator.compound(<CompoundingValues>values);
-      this.tableEl.innerHTML = this.tableTemplate({table: this.sums});
+      this.table.innerHTML = this.tableTemplate({table: this.sums});
 
       // Get last item in sums array to display final balance.
       const lastSum = this.sums[this.sums.length - 1];
-      this.totalEl.textContent = lastSum.balance;
+      this.total.textContent = lastSum.balance;
 
       // Save user values to localStorage.
-      localStorage.setItem(LOCAL_STORAGE, JSON.stringify(values));
+      localStorage.setItem(STORAGE_ITEM, JSON.stringify(values));
     }
 
     this.setVisibility();

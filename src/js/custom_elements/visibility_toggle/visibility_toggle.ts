@@ -1,7 +1,7 @@
 const EMPTY_ATTR: string = 'empty';
 const HIDDEN_ATTR: string = 'hidden';
 const SOURCE_ATTR: string = 'source';
-const TARGET_ATTR: string = 'target';
+const TARGETS_ATTR: string = 'targets';
 
 /**
  * Observes a source element for toggling the visibility of target elements.
@@ -26,12 +26,12 @@ export class VisibilityToggle extends HTMLElement {
 
   private setup() {
     this.source = document.querySelector(this.getAttribute(SOURCE_ATTR));
-    this.targets = document.querySelectorAll(this.getAttribute(TARGET_ATTR));
+    this.targets = document.querySelectorAll(this.getAttribute(TARGETS_ATTR));
 
     this.observer.observe(this.source, {attributes: true});
     this.toggleVisibility();
 
-    [SOURCE_ATTR, TARGET_ATTR].forEach((attr) => this.removeAttribute(attr));
+    [SOURCE_ATTR, TARGETS_ATTR].forEach((attr) => this.removeAttribute(attr));
   }
 
   private toggleVisibility() {

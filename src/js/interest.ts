@@ -7,10 +7,8 @@ import './custom_elements/tools/tools';
 import './custom_elements/user_values/user_values';
 import './custom_elements/visibility_toggle/visibility_toggle';
 
-// Import styles for injecting into the DOM.
 import '../stylus/index.styl';
 
-// Register the Service Worker.
 if (process.env.NODE_ENV === 'production') {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {

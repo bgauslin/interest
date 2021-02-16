@@ -36,11 +36,11 @@ export class VisibilityToggle extends HTMLElement {
 
   private toggleVisibility() {
     for (const target of this.targets) {
-      const el = target as HTMLElement;
+      const element = target as HTMLElement;
       if (this.source.hasAttribute(EMPTY_ATTR)) {
-        el.setAttribute(HIDDEN_ATTR, '');
+        element.setAttribute(HIDDEN_ATTR, '');
       } else {
-        el.removeAttribute(HIDDEN_ATTR);
+        element.removeAttribute(HIDDEN_ATTR);
       }
     }
   }

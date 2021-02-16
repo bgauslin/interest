@@ -97,10 +97,10 @@ export class UserSettings extends HTMLElement {
   /**
    * Adds keyboard navigation to the menu.
    */
-  private handleKey(e: KeyboardEvent) {
-    switch (e.code) {
+  private handleKey(event: KeyboardEvent) {
+    switch (event.code) {
       case 'Enter':
-        this.setOption(e.target as HTMLElement);
+        this.setOption(event.target as HTMLElement);
         break;
       case 'Escape':
         this.closeMenu();

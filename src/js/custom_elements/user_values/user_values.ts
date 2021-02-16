@@ -102,9 +102,8 @@ export class UserValues extends HTMLElement {
   private populateInputs() {
     const values = JSON.parse(this.userValues);
     for (const field of UserInputs) {
-      const inputEl =
-          this.querySelector(`[name=${field.name}]`) as HTMLInputElement;
-      inputEl.value = values[field.name];
+      const input = this.querySelector(`[name=${field.name}]`) as HTMLInputElement;
+      input.value = values[field.name];
     }
   }
 
@@ -126,9 +125,9 @@ export class UserValues extends HTMLElement {
   private updateTotal() {
     const values = {};
     for (const field of UserInputs) {
-      const el = this.querySelector(`[name=${field.name}]`) as HTMLInputElement;
-      if (el.value) {
-        values[field.name] = Number(el.value);
+      const input = this.querySelector(`[name=${field.name}]`) as HTMLInputElement;
+      if (input.value) {
+        values[field.name] = Number(input.value);
       }
     }
 

@@ -1,8 +1,7 @@
 [id=menu]
   elevation(2)
-  background white
+  background var(--card-background)
   border-radius rem(4)
-  color grey-dark
   display flex
   margin-top (grid-gap / 2)
   max-width 'calc(100vw - %s)' % grid-gap
@@ -24,7 +23,7 @@
   // Menu arrow via rotated square with a drop shadow.
   &::before
     elevation(2)
-    background white
+    background var(--body-background)
     clip-path polygon(rem(-8) rem(-8), rem(-8) rem(24), rem(24) rem(-8))
     content ''
     display block
@@ -56,9 +55,6 @@
     padding rem(16)
     width 100%
 
-    &:not(:last-child)
-      border-right 1px solid grey-lighter
-
   li
     margin 0
 
@@ -80,8 +76,12 @@
 
   label > span
     align-items center
+    background var(--label-background)
+    border 3px solid var(--label-border, var(--border))
     border-radius 50%
+    color var(--label-color)
     display inline-flex
+    font-size em(22)
     height menu-item-size
     justify-content center
     position relative
@@ -91,19 +91,10 @@
     [no-touch] &
       transition border transition
 
-  [type=currency] label > span
-    background off-white
-    border 3px solid grey-lighter
-    color grey-light
-    font-size em(22)
-
-  [type=currency] input:checked + span
-    background white
-    color brand-color
-
   input:checked + span
-    border-color brand-color
+    border-color var(--brand-color)
+    color var(--brand-color)
 
   label:focus > input:not(:checked) + span
   [no-touch] & label:hover > input:not(:checked) + span
-    border-color grey-light
+    border-color var(--label-color)

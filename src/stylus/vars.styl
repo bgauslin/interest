@@ -22,21 +22,33 @@
     --table-padding-x em(16)
 
   // Light/dark theme.
-  --background white
-  --border mix(black, white, 15%)
-  --canvas mix(black, white, 2%)
-  --input black
-  --input-border mix(black, white, 15%)
-  --symbol rgba(black, .5)
-  --text rgba(black, .8)
+  --brand-color #00ad45
+
+  --body-background mix(black, white, 2%)
+  --card-background white
   --zebra-stripe mix(black, white, 3%)
+  
+  --border #ccc
+  --input black
+  --label-background #f7f7f7
+  --label-color #aaa
+  --symbol rgba(black, .5) 
+  --text rgba(black, .8)
+  --warning #c00
 
   @media (prefers-color-scheme dark)
-    --background theme-dark
-    --border mix(black, white, 75%)
-    --canvas mix(black, theme-dark, 25%)
+    base-dark = #282c35
+    --brand-color #4dc67d
+    
+    --body-background mix(black, base-dark, 25%)
+    --card-background base-dark
+    --zebra-stripe mix(black, base-dark, 10%)
+
+    --border #444
     --input rgba(white, .85)
-    --input-border mix(black, white, 65%)
+    --label-background transparent
+    --label-border #555 // dark mode only
+    --label-color #eee
     --symbol rgba(white, .5)
     --text rgba(white, .7)
-    --zebra-stripe mix(black, theme-dark, 10%)
+    --warning #db4d4d

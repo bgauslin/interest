@@ -9,7 +9,7 @@ user-values
 
   @media breakpoint.small
     align-self start
-    background var(--background)
+    background var(--card-background)
     border 1px solid var(--border)
     border-radius card-corner-radius
 
@@ -65,7 +65,7 @@ user-values
 
   input
     webfont()
-    border-bottom 2px solid var(--input-border)
+    border-bottom 2px solid var(--border)
     border-top 2px solid transparent
     border-radius 0
     font-size var(--input)
@@ -77,18 +77,18 @@ user-values
     width rem(88)
 
     &:focus
-      border-bottom-color brand-color
-      color brand-color
+      border-bottom-color var(--brand-color)
+      color var(--brand-color)
 
     &:focus:invalid
-      border-bottom-color warning-color
-      color warning-color
+      border-bottom-color var(--warning)
+      color var(--warning)
 
     &:not(:focus)
       color var(--input)
 
 .total
-  color brand-color
+  color var(--brand-color)
   font-size values-total-size
   height values-total-size
   line-height values-total-size

@@ -1,5 +1,5 @@
 body
-  background var(--background)
+  background var(--body-background)
   color var(--text)
   display grid
   grid-template-areas:
@@ -11,7 +11,7 @@ body
   min-height calc(var(--vh, 1vh) * 100)
 
   @media breakpoint.small
-    background var(--canvas)
+    background var(--body-background)
     grid-gap 0 var(--grid-gap)
     grid-template-areas:
       'header header header'\

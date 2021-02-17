@@ -1,10 +1,10 @@
 expand-able
   webfont(600)
   align-items center
-  background brand-color
-  border 2px solid brand-color
+  background var(--brand-color)
+  border 2px solid var(--brand-color)
   border-radius (button-height / 2)
-  color var(--background)
+  color var(--card-background)
   cursor pointer
   display flex
   font-size em(14)
@@ -32,13 +32,13 @@ expand-able
   &:active
   [no-touch] &:hover
     background transparent
-    color brand-color
+    color var(--brand-color)
 
   [no-touch] &
     transition background transition ease, border transition ease, color transition ease
 
   &::before
-    css-triangle(var(--background), 5px, 'down')
+    css-triangle(var(--card-background), 5px, 'down')
     content ''
     display inline-block
     margin-right rem(8)
@@ -47,7 +47,7 @@ expand-able
   &:focus::before
   &:active::before
   [no-touch] &:hover::before
-    border-top-color brand-color
+    border-top-color var(--brand-color)
 
   [no-touch] &::before
     transition border-top-color transition ease

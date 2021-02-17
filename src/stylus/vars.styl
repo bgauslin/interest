@@ -1,4 +1,5 @@
 :root
+  // Layout and typography.
   --fineprint rem(12)
   --footer-height rem(48)
   --grid-gap grid-gap
@@ -20,27 +21,17 @@
   @media breakpoint.large
     --table-padding-x em(16)
 
-  [theme=light]
-    --background white
-    --border mix(black, white, 15%)
-    --canvas mix(black, white, 2%)
-    --input black
-    --input-border mix(black, white, 15%)
-    --symbol rgba(black, .5)
-    --text rgba(black, .8)
-    --zebra-stripe mix(black, white, 3%)
+  // Light/dark theme.
+  --background white
+  --border mix(black, white, 15%)
+  --canvas mix(black, white, 2%)
+  --input black
+  --input-border mix(black, white, 15%)
+  --symbol rgba(black, .5)
+  --text rgba(black, .8)
+  --zebra-stripe mix(black, white, 3%)
 
-  [theme=sepia]
-    --background theme-sepia
-    --border mix(black, theme-sepia, 15%)
-    --canvas mix(black, theme-sepia, 5%)
-    --input mix(black, theme-sepia, 90%)
-    --input-border mix(black, theme-sepia, 30%)
-    --symbol mix(black, theme-sepia, 50%)
-    --text mix(black, theme-sepia, 80%)
-    --zebra-stripe mix(black, theme-sepia, 4%)
-
-  [theme=dark]
+  @media (prefers-color-scheme dark)
     --background theme-dark
     --border mix(black, white, 75%)
     --canvas mix(black, theme-dark, 25%)

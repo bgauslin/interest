@@ -1,4 +1,5 @@
-dark-background = #262626
+background-dark = #262626
+background-light = #f9f9f9
 
 :root
   // Layout and typography.
@@ -25,7 +26,8 @@ dark-background = #262626
   // Light/dark theme.
   --brand-color #00ad45
 
-  --body-background mix(black, white, 2%)
+  --body-background background-light
+  --header-background rgba(background-light, .33)
   --card-background white
   --zebra-stripe mix(black, white, 3%)
   
@@ -40,7 +42,8 @@ dark-background = #262626
   @media (prefers-color-scheme dark)
     --brand-color #4dc67d
     
-    --body-background dark-background
+    --body-background background-dark
+    --header-background rgba(background-dark, .33)
     --card-background rgba(white, .05)
     --zebra-stripe rgba(white, .03)
 

@@ -1,6 +1,6 @@
-shifty-header
-  background var(--body-background)
-  border-bottom 1px solid var(--border)
+header
+  backdrop-filter blur(10px)
+  background var(--header-background)
   grid-area header
   height var(--header-height)
   left 0
@@ -8,10 +8,9 @@ shifty-header
   position fixed
   right 0
   top 0
-  transform translate3d(0, var(--sticky-shift), 0)
   z-index 2
 
-  header
+  & > div
     align-items center
     display flex
     height var(--header-height)

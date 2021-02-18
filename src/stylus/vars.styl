@@ -1,3 +1,5 @@
+dark-background = #262626
+
 :root
   // Layout and typography.
   --fineprint rem(12)
@@ -36,12 +38,11 @@
   --warning #c00
 
   @media (prefers-color-scheme dark)
-    base-dark = #282c35
     --brand-color #4dc67d
     
-    --body-background mix(black, base-dark, 25%)
-    --card-background base-dark
-    --zebra-stripe mix(black, base-dark, 10%)
+    --body-background dark-background
+    --card-background rgba(white, .05)
+    --zebra-stripe rgba(white, .03)
 
     --border #444
     --input rgba(white, .85)

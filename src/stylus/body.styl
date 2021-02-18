@@ -4,10 +4,9 @@ body
   display grid
   grid-template-areas:
     'header'\
-    'main'\
-    'footer'
+    'main'
   grid-template-columns 1fr
-  grid-template-rows var(--header-height) 1fr auto
+  grid-template-rows var(--header-height) 1fr
   min-height calc(var(--vh, 1vh) * 100)
 
   @media breakpoint.small
@@ -15,6 +14,5 @@ body
     grid-gap 0 var(--grid-gap)
     grid-template-areas:
       'header header header'\
-      '. main .'\
-      'footer footer footer'
+      '. main .'
     grid-template-columns 0 1fr 0

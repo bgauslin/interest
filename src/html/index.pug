@@ -1,6 +1,5 @@
 - const title = "Compound Interest Calculator"
 - const description = "Progressive web app for calculating compound interest"
-- const currentYear = new Date().getFullYear()
 
 doctype html
 html(lang="en")
@@ -35,11 +34,6 @@ html(lang="en")
         .table-frame
           table(id="data")
         p.rotate-screen Rotate screen to view <span>Interest</span> and <span>Growth</span> columns.
-    footer
-      a(
-        href="https://gauslin.com"
-        title="Visit Ben Gauslin’s Website"
-      ) © #{currentYear} Ben Gauslin
     visibility-toggle(source=".total" targets="#expandable, #panel")
     x-tools
   if (process.env.NODE_ENV === 'development')

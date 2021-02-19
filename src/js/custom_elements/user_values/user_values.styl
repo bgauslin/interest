@@ -10,7 +10,7 @@ user-values
   @media breakpoint.small
     align-self start
     background var(--card-background)
-    border 1px solid var(--border)
+    border 1px solid var(--card-border)
     border-radius card-corner-radius
 
     // Reorder fields for side-by-side layout at small breakpoint.
@@ -25,7 +25,7 @@ user-values
 
   @media breakpoint.large
     position sticky
-    top calc(var(--header-height) + var(--grid-gap))
+    top var(--header-height)
 
   [no-js] &
     display none
@@ -65,7 +65,7 @@ user-values
 
   input
     webfont()
-    border-bottom 2px solid var(--border)
+    border-bottom 2px solid var(--input-border)
     border-top 2px solid transparent
     border-radius 0
     font-size var(--input)

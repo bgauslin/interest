@@ -1,6 +1,4 @@
 [id=menu]
-  elevation(2)
-  background var(--card-background)
   border-radius rem(4)
   display flex
   margin-top (grid-gap / 2)
@@ -20,10 +18,14 @@
     transform translateY(0)
     visibility visible
 
+  &
+  &::before
+    background var(--menu-background)
+    box-shadow var(--menu-shadow)
+
   // Menu arrow via rotated square with a drop shadow.
   &::before
     elevation(2)
-    background var(--card-background)
     clip-path polygon(rem(-8) rem(-8), rem(-8) rem(24), rem(24) rem(-8))
     content ''
     display block

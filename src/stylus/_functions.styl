@@ -1,4 +1,17 @@
 // @function
+// @param Number level
+// @return String box-shadow property
+elevation(level)
+  if (level == 0)
+    0 0 10px 0 rgba(black, .1)
+
+  if (level == 1)
+    arguments = 0 0 3px rgba(black, .2), 0 0 3px rgba(black, .3)
+
+  if (level == 2)
+    arguments = 0 0 6px rgba(black, .2), 0 0 6px rgba(black, .3)
+
+// @function
 // @param Number value
 // @return String
 em(value)

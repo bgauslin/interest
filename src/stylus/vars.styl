@@ -1,55 +1,44 @@
-
 :root
-  // Layout and typography.
-  --fineprint rem(12)
+  // Typography.
+  --fineprint-font-size rem(12)
+  --header-font-size rem(16)
+  --input-font-size rem(20)
+  --table-font-size rem(13)
+
+  // Layout.
   --grid-gap grid-gap
   --header-height rem(48)
-  --input rem(20)
-  --site-header rem(16)
-  --table rem(13)
   --table-padding-x em(12)
   --table-padding-y em(8)
 
   @media breakpoint.medium
-    --fineprint rem(14)
+    --fineprint-font-size rem(14)
+    --header-font-size rem(20)
+    --table-font-size rem(15)
     --grid-gap grid-gap-medium
     --header-height rem(60)
-    --site-header rem(20)
-    --table rem(15)
 
   @media breakpoint.large
     --table-padding-x em(16)
 
-  // Light/dark theme.
-  --body-background background-light
-  --brand-color #00ad45
-  --card-border #ccc
-  --card-background white
-  --header-background rgba(background-light, .33)
-  --input black
-  --input-border #ccc
-  --label-background #f7f7f7
-  --label-color #aaa
-  --menu-background white
-  --menu-shadow elevation(2)
-  --symbol rgba(black, .5) 
-  --text rgba(black, .8)
-  --warning #c00
-  --zebra-stripe mix(black, white, 3%)
-  
+  // Default/light mode.
+  --background-0 background-0
+  --background-1 background-1
+  --header-background rgba(background-0, .33)
+  --text-2-color text-2-color
+  --theme-color theme-color
+  --warning-color warning-color
+
+  // Dark mode.
   @media (prefers-color-scheme dark)
-    --body-background background-dark
-    --brand-color #4dc67d
-    --card-background mix(white, background-dark, 5%)
-    --card-border 0
-    --header-background rgba(background-dark, .33)
-    --input rgba(white, .85)
-    --input-border #555
-    --label-background transparent
-    --label-color #888
-    --menu-background mix(white, background-dark, 5%)
-    --menu-shadow 0 0 0 1px #555
-    --symbol rgba(white, .5)
-    --text rgba(white, .7)
-    --warning #db4d4d
-    --zebra-stripe mix(white, background-dark, 8%)
+    --background-0 background-0-dark
+    --background-1 background-1-dark
+    --card-border-color transparent
+    --header-background rgba(background-0-dark, .33)
+    --input-border-color text-2-color
+    --menu-box-shadow 0 0 0 1px border-color-dark
+    --table-row-background mix(white, black, 8%)
+    --text-1-color text-1-color-dark
+    --text-2-color text-2-color-dark
+    --theme-color theme-color-dark
+    --warning-color warning-color-dark

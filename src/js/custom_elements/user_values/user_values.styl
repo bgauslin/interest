@@ -9,8 +9,8 @@ user-values
 
   @media breakpoint.small
     align-self start
-    background var(--card-background)
-    border 1px solid var(--card-border)
+    background var(--background-1)
+    border 1px solid var(--card-border-color, border-color)
     border-radius card-corner-radius
 
     // Reorder fields for side-by-side layout at small breakpoint.
@@ -65,10 +65,10 @@ user-values
 
   input
     webfont()
-    border-bottom 2px solid var(--input-border)
+    border-bottom 2px solid var(--input-border-color, border-color)
     border-top 2px solid transparent
     border-radius 0
-    font-size var(--input)
+    font-size var(--input-font-size)
     height rem(32)
     line-height 1
     order 1
@@ -77,18 +77,18 @@ user-values
     width rem(88)
 
     &:focus
-      border-bottom-color var(--brand-color)
-      color var(--brand-color)
+      border-bottom-color var(--theme-color)
+      color var(--theme-color)
 
     &:focus:invalid
-      border-bottom-color var(--warning)
-      color var(--warning)
+      border-bottom-color var(--warning-color)
+      color var(--warning-color)
 
     &:not(:focus)
-      color var(--input)
+      color var(--text-1-color)
 
 .total
-  color var(--brand-color)
+  color var(--theme-color)
   font-size values-total-size
   height values-total-size
   line-height values-total-size

@@ -20,8 +20,8 @@
 
   &
   &::before
-    background var(--menu-background)
-    box-shadow var(--menu-shadow)
+    background var(--background-1)
+    box-shadow var(--menu-box-shadow, elevation(2))
 
   // Menu arrow via rotated square with a drop shadow.
   &::before
@@ -78,10 +78,9 @@
 
   label > span
     align-items center
-    background var(--label-background)
-    border 3px solid var(--input-border)
+    border 3px solid var(--text-2-color)
     border-radius 50%
-    color var(--label-color)
+    color var(--text-2-color)
     display inline-flex
     font-size em(22)
     height menu-item-size
@@ -94,9 +93,10 @@
       transition border transition, color transition
 
   input:checked + span
-    border-color var(--brand-color)
-    color var(--brand-color)
+    border-color var(--theme-color)
+    color var(--theme-color)
 
   label:focus > input:not(:checked) + span
   [no-touch] & label:hover > input:not(:checked) + span
-    border-color var(--label-color)
+    border-color var(--text-1-color)
+    color var(--text-1-color)

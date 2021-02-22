@@ -1,6 +1,5 @@
 // Outer wrapper for a table that makes its overflowing content scrollable.
 .table-frame
-  border-bottom 1px solid var(--card-border-color, border-color)
   overflow-x auto
 
   @media breakpoint.small
@@ -38,7 +37,8 @@ td
       padding-right var(--table-padding-x)
 
 thead > tr
-  border-bottom 1px solid var(--card-border-color, border-color)
+  @media breakpoint.small
+    border-bottom 1px solid var(--card-border-color, border-color)
 
 tbody > tr:nth-child(odd)
   background var(--table-row-background, table-row-background)

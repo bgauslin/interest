@@ -3,19 +3,18 @@ user-settings
   z-index 1
 
 user-settings > button
-  align-items center
+  border-radius 50%
   color var(--text-1-color)
   cursor pointer
   display flex
-  height var(--header-height)
-  justify-content center
+  height button-height
   margin 0 rem(-12) 0 0
   opacity 1
   transition opacity transition, transform transition
-  width var(--header-height)
+  width button-height
 
-  @media breakpoint.medium
-    margin-right rem(-20)
+  @media breakpoint.large
+    backdrop-filter backdrop-effect
 
   &:focus
     transform scale(1.25)
@@ -28,4 +27,5 @@ user-settings > button
 
   > svg
     flex 0 0 rem(20)
+    margin auto
     pointer-events none

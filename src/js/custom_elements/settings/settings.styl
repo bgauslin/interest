@@ -10,21 +10,16 @@ user-settings > button
   display flex
   height button-height
   opacity 1
-  transition opacity transition, transform transition
+  transition background transition, transform transition
   width button-height
 
-  @media breakpoint.large
-    backdrop-filter backdrop-effect
-
+  &:active
   &:focus
   [no-touch] &:hover
-    transform scale(1.25)
-
-  [no-touch] &:hover
-    opacity .75
+    background var(--background-2)
 
   &:active
-    transform scale(.85)
+    transform scale(.9)
 
   svg
     fill currentColor

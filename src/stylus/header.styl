@@ -1,5 +1,5 @@
 header
-  backdrop-filter backdrop-effect
+  background var(--header-background)
   grid-area header
   height var(--header-height)
   left 0
@@ -9,8 +9,13 @@ header
   top 0
   z-index 2
 
+  @supports (backdrop-filter backdrop-effect)
+    backdrop-filter backdrop-effect
+    background var(--header-backdrop-background)
+
   @media breakpoint.large
     backdrop-filter none
+    background 0
 
   & > div
     align-items center

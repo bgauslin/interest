@@ -31,7 +31,9 @@ export class VisibilityToggle extends HTMLElement {
     this.observer.observe(this.source, {attributes: true});
     this.toggleVisibility();
 
-    [SOURCE_ATTR, TARGETS_ATTR].forEach((attr) => this.removeAttribute(attr));
+    for (const attribute of [SOURCE_ATTR, TARGETS_ATTR]) {
+      this.removeAttribute(attribute);
+    }
   }
 
   private toggleVisibility() {

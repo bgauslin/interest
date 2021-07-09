@@ -9,9 +9,9 @@ interface SettingsOptions {
   value: string,
 }
 
-const ARIA_EXPANDED_ATTR: string = 'aria-expanded';
-const ARIA_HIDDEN_ATTR: string = 'aria-hidden';
-const CURRENCY_ATTR: string = 'currency';
+const ARIA_EXPANDED_ATTR = 'aria-expanded';
+const ARIA_HIDDEN_ATTR = 'aria-hidden';
+const CURRENCY_ATTR = 'currency';
 
 const Settings: SettingsFields[] = [
   {
@@ -32,7 +32,7 @@ const Settings: SettingsFields[] = [
  */
 export class UserSettings extends HTMLElement {
   private button: HTMLButtonElement;
-  private closeMenuListener: any;
+  private closeMenuListener: EventListenerObject;
   private menu: HTMLElement;
 
   constructor() {

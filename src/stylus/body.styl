@@ -2,16 +2,13 @@ body
   background var(--background-0)
   color var(--text-1-color)
   display grid
-  grid-template-areas:
-    'header'\
-    'main'
-  grid-template-columns 1fr
-  grid-template-rows var(--header-height) 1fr
+  grid-template:
+    'header' var(--header-height) \
+    'main' 1fr / 1fr
   min-height calc(var(--vh, 1vh) * 100)
 
   @media breakpoint.small
     grid-gap 0 var(--grid-gap)
-    grid-template-areas:
-      'header header header'\
-      '. main .'
-    grid-template-columns 0 1fr 0
+    grid-template:
+      'header header header' var(--header-height) \
+      '. main .' 1fr / 0 1fr 0

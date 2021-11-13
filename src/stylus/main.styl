@@ -1,9 +1,6 @@
 main
   display grid
-  grid:
-    'values' minmax(auto, 1fr) \
-    'table' \
-    'expandable' (button-height * 3)
+  grid var(--grid)
   grid-area main
   margin 0 auto
   max-width content-width-large
@@ -11,21 +8,7 @@ main
   width 100%
 
   @media breakpoint.small
-    grid:
-      '.' 0 \
-      'values' minmax(auto, 1fr) \
-      'table' \
-      'expandable' (button-height * 3) \
-      '.' 0
-    grid-gap var(--grid-gap)
-
-  @media breakpoint.large
-    grid:
-      'values table' 1fr \
-      'expandable expandable' 0 \
-      '. .' 0 / values-grid-width 1fr
+    gap var(--gap)
 
 [no-js] main
   align-self center
-  grid unset
-

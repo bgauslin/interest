@@ -19,19 +19,19 @@ td
 
   &:first-child
     text-align left
-    padding-left grid-gap
+    padding-left gap
 
     @media breakpoint.small
       padding-left var(--table-padding-x)
 
   &:last-child
-    padding-right grid-gap
+    padding-right gap
 
     @media breakpoint.small
       padding-right var(--table-padding-x)
 
   &.balance
-    padding-right grid-gap
+    padding-right gap
 
     @media breakpoint.small
       padding-right var(--table-padding-x)
@@ -69,7 +69,7 @@ td.growth::after
   color var(--text-2-color)
   display none
   font-size var(--fineprint-font-size)
-  margin rem(12) grid-gap 0
+  margin rem(12) gap 0
 
   @media screen and (max-width breakpoint-small-units) and (orientation portrait)
     display block

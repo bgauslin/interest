@@ -10,7 +10,8 @@ body
   min-height 'max(var(--vh, 100vh), 100vh)' % null // [1]
 
   @media breakpoint.small
+    gap 0 var(--gap)
     grid:
       'header header header' var(--header-height) \
       '. main .' 1fr / 0 1fr 0
-    grid-gap 0 var(--grid-gap)
+

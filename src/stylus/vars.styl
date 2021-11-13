@@ -6,32 +6,31 @@ body
 
   // Layout.
   --gap gap
+  --header-content-padding 0 var(--gap)
   --header-height rem(48)
   --table-padding-x em(12)
   --table-padding-y em(8)
-
-  @media breakpoint.medium
-    --fineprint-font-size rem(14)
-    --header-font-size rem(20)
-    --table-font-size rem(15)
-    --gap gap-medium
-    --header-height rem(60)
-
-  @media breakpoint.large
-    --table-padding-x em(16)
 
   // Default/light mode.
   --background-0 background-0
   --background-1 background-1
   --background-2 background-2
   --header-backdrop-background header-backdrop-background
+  --header-backdrop-filter backdrop-effect
   --header-background header-background
   --text-2-color text-2-color
   --theme-color theme-color
   --warning-color warning-color
 
-  // Dark mode.
-  @media (prefers-color-scheme dark)
+// User setting button in the header.
+user-settings
+  --button-background 0
+  --button-backdrop-filter none
+  --button-backdrop-background 0
+
+// Dark mode.
+@media (prefers-color-scheme dark)
+  body
     --background-0 background-0-dark
     --background-1 background-1-dark
     --background-2 background-2-dark
@@ -46,24 +45,68 @@ body
     --theme-color theme-color-dark
     --warning-color warning-color-dark
 
+// Default layouts.
+body
+  --grid:
+    'header' var(--header-height) \
+    'main' 1fr / 1fr
+
 main
   --grid:
     'values' minmax(auto, 1fr) \
     'table' \
     'expandable' (button-height * 3)
 
-  @media breakpoint.small
+[no-js] main
+  --grid unset
+
+
+
+// Small breakpoint layout.
+@media breakpoint.small
+  body
     --grid:
-      '.' 0 \
+      'header header header' var(--header-height) \
+      '. main .' 1fr / 0 1fr 0
+
+  main
+    --grid:
       'values' minmax(auto, 1fr) \
       'table' \
-      'expandable' (button-height * 3) \
+      'expandable' (button-height * 2) \
       '.' 0
 
-  @media breakpoint.large
+// Medium breakpoint layout and typography.
+@media breakpoint.medium
+  body
+    --fineprint-font-size rem(14)
+    --header-font-size rem(20)
+    --table-font-size rem(15)
+    --gap gap-medium
+    --header-height rem(60)
+
+// Large breakpoint layout.
+@media breakpoint.large
+  body
+    --gap 0
+    --header-content-padding 0
+    --table-padding-x em(16)
+    --header-backdrop-filter none
+    --header-backdrop-background 0
+    --header-background 0
+
+  main
+    --gap 0 gap-medium
     --grid:
       'values table' 1fr \
       'expandable expandable' 0 / values-grid-width 1fr
 
-[no-js] main
-  --grid unset
+  user-settings
+    --button-backdrop-background header-backdrop-background
+    --button-backdrop-filter backdrop-effect
+    --button-background header-background
+
+  @media (prefers-color-scheme dark)
+    user-settings
+      --button-background header-background-dark
+      --button-backdrop-background header-backdrop-background-dark

@@ -6,6 +6,7 @@ user-settings
     margin-right 0
 
 user-settings > button
+  background var(--button-background)
   border-radius 50%
   color var(--text-1-color)
   cursor pointer
@@ -15,12 +16,9 @@ user-settings > button
   transition background transition, transform transition
   width button-height
 
-  @media breakpoint.large
-    background var(--header-background)
-
-    @supports (backdrop-filter backdrop-effect)
-      backdrop-filter backdrop-effect
-      background var(--header-backdrop-background)
+  @supports (backdrop-filter backdrop-effect)
+    backdrop-filter var(--button-backdrop-filter)
+    background var(--button-backdrop-background)
 
   &:active
   &:focus

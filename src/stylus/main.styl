@@ -1,14 +1,12 @@
 main
   display grid
+  gap var(--gap)
   grid var(--grid)
   grid-area main
   margin 0 auto
   max-width content-width-large
   padding 0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)
   width 100%
-
-  @media breakpoint.small
-    gap var(--gap)
 
 [no-js] main
   align-self center

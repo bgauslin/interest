@@ -49,8 +49,7 @@ export class Tools extends HTMLElement {
    * scrolling.
    */
   private viewportHeight() {
-    document.documentElement.style.setProperty(
-        '--vh', `${window.innerHeight / 100}px`);
+    document.body.style.setProperty('--vh', `${window.innerHeight}px`);
   }
 
   /**

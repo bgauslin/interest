@@ -8,8 +8,7 @@ body
   --table-font-size rem(13)
 
   // Layout.
-  --gap gap
-  --header-content-padding 0 var(--gap)
+  --header-content-padding 0 var(--gap, gap)
   --header-height rem(48)
   --table-padding-x em(12)
   --table-padding-y em(8)
@@ -18,6 +17,7 @@ body
   --background-0 background-0
   --background-1 background-1
   --background-2 background-2
+  --card-border-color border-color
   --header-backdrop-background header-backdrop-background
   --header-backdrop-filter backdrop-effect
   --header-background header-background
@@ -61,6 +61,10 @@ main
 [no-js] main
   --grid unset
 
+.panel
+  --first-item-padding-x-start gap
+  --last-item-padding-x-end gap
+
 user-settings
   --button-background 0
   --button-backdrop-filter none
@@ -77,6 +81,7 @@ user-values
 
 @media breakpoint.small
   body
+    --gap gap
     --grid:
       'header header header' var(--header-height) \
       '. main .' 1fr / 0 1fr 0
@@ -87,6 +92,14 @@ user-values
       'table' \
       'expandable' (button-height * 2) \
       '.' 0
+
+  .panel
+    --frame-border 1px solid var(--card-border-color)
+    --frame-border-radius card-corner-radius
+    --table-background var(--background-1)
+    --thead-border-bottom 1px solid var(--card-border-color)
+    --first-item-padding-x-start var(--table-padding-x)
+    --last-item-padding-x-end var(--table-padding-x)
 
   user-settings
     --margin-inline-end 0
@@ -102,10 +115,10 @@ user-values
 @media breakpoint.medium
   body
     --fineprint-font-size rem(14)
-    --header-font-size rem(20)
-    --table-font-size rem(15)
     --gap gap-medium
+    --header-font-size rem(20)
     --header-height rem(60)
+    --table-font-size rem(15)
 
 // -----------------------------------------------------------------------------
 // Large breakpoint layout and colors.
@@ -113,11 +126,11 @@ user-values
 @media breakpoint.large
   body
     --gap 0
-    --header-content-padding 0
-    --table-padding-x em(16)
     --header-backdrop-filter none
     --header-backdrop-background 0
     --header-background 0
+    --header-content-padding 0
+    --table-padding-x em(16)
 
   main
     --gap 0 gap-medium

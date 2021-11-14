@@ -1,17 +1,13 @@
 // Outer wrapper for a table that makes its overflowing content scrollable.
 .table-frame
+  border var(--frame-border)
+  border-radius var(--frame-border-radius)
   overflow-x auto
-
-  @media breakpoint.small
-    border 1px solid var(--card-border-color, border-color)
-    border-radius card-corner-radius
 
 // Table styles for first/last cells and alternating rows.
 table
+  background var(--table-background)
   font-variant-numeric tabular-nums // Align commas and decimal points across cells.
-
-  @media breakpoint.small
-    background var(--background-1)
 
 th
 td
@@ -19,26 +15,14 @@ td
 
   &:first-child
     text-align left
-    padding-left gap
-
-    @media breakpoint.small
-      padding-left var(--table-padding-x)
+    padding-left var(--first-item-padding-x-start)
 
   &:last-child
-    padding-right gap
-
-    @media breakpoint.small
-      padding-right var(--table-padding-x)
-
   &.balance
-    padding-right gap
-
-    @media breakpoint.small
-      padding-right var(--table-padding-x)
+    padding-right var(--last-item-padding-x-end)
 
 thead > tr
-  @media breakpoint.small
-    border-bottom 1px solid var(--card-border-color, border-color)
+  border-bottom var(--thead-border-bottom)
 
 tbody > tr:nth-child(odd)
   background var(--table-row-background, table-row-background)

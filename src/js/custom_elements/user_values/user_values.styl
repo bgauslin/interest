@@ -6,6 +6,8 @@ user-values
   justify-content center
   overflow hidden
   padding card-padding
+  position var(--position)
+  top var(--top)
 
   @media breakpoint.small
     align-self start
@@ -23,35 +25,21 @@ user-values
     [field=periods]
       order 4
 
-  @media breakpoint.large
-    position sticky
-    top var(--header-height)
-
   [no-js] &
     display none
 
   & > ul
+    display var(--list-display)
+    flex-wrap wrap
     list-style none
-    margin 0 auto
+    margin var(--list-margin)
     padding 0
-
-    @media breakpoint.small
-      display flex
-      flex-wrap wrap
-
-    @media breakpoint.large
-      display block
-      margin 0
 
   li
     align-items center
     display flex
+    flex var(--item-flex)
     margin 0 0 rem(16)
-
-    // Place fields in side-by-side layout to reduce vertical real estate at
-    // small breakpoint
-    @media breakpoint.small
-      flex 0 0 50%
 
   label
     flex 1
@@ -93,18 +81,14 @@ user-values
   font-size values-total-size
   height values-total-size
   line-height values-total-size
-  margin 1rem auto 0
+  margin var(--total-margin)
   max-width 'calc(100vw - %s)' % (2 * (gap + card-padding))
   opacity 1
   overflow hidden
-  text-align center
+  text-align var(--total-text-align)
   text-overflow ellipsis
   transition opacity transition, visibility transition
   visibility visible
-
-  @media breakpoint.large
-    margin .5rem 0 0
-    text-align left
 
   &[empty]
     opacity 0

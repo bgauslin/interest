@@ -1,3 +1,6 @@
+// -----------------------------------------------------------------------------
+// Base typography, layout, colors.
+
 body
   // Typography.
   --fineprint-font-size rem(12)
@@ -22,13 +25,9 @@ body
   --theme-color theme-color
   --warning-color warning-color
 
-// User setting button in the header.
-user-settings
-  --button-background 0
-  --button-backdrop-filter none
-  --button-backdrop-background 0
-
+// -----------------------------------------------------------------------------
 // Dark mode.
+
 @media (prefers-color-scheme dark)
   body
     --background-0 background-0-dark
@@ -45,7 +44,9 @@ user-settings
     --theme-color theme-color-dark
     --warning-color warning-color-dark
 
-// Default layouts.
+// -----------------------------------------------------------------------------
+// Base layout.
+
 body
   --grid:
     'header' var(--header-height) \
@@ -60,9 +61,20 @@ main
 [no-js] main
   --grid unset
 
+user-settings
+  --button-background 0
+  --button-backdrop-filter none
+  --button-backdrop-background 0
+  --margin-inline-end rem(-12)
 
+user-values
+  --list-margin 0 auto
+  --total-margin 1rem auto 0
+  --total-text-align center
 
+// -----------------------------------------------------------------------------
 // Small breakpoint layout.
+
 @media breakpoint.small
   body
     --grid:
@@ -76,7 +88,17 @@ main
       'expandable' (button-height * 2) \
       '.' 0
 
+  user-settings
+    --margin-inline-end 0
+
+  // Place fields in side-by-side layout to reduce vertical real estate
+  user-values
+    --item-flex 50%
+    --list-display flex
+
+// -----------------------------------------------------------------------------
 // Medium breakpoint layout and typography.
+
 @media breakpoint.medium
   body
     --fineprint-font-size rem(14)
@@ -85,7 +107,9 @@ main
     --gap gap-medium
     --header-height rem(60)
 
-// Large breakpoint layout.
+// -----------------------------------------------------------------------------
+// Large breakpoint layout and colors.
+
 @media breakpoint.large
   body
     --gap 0
@@ -110,3 +134,11 @@ main
     user-settings
       --button-background header-background-dark
       --button-backdrop-background header-backdrop-background-dark
+
+  user-values
+    --list-display block
+    --list-margin 0
+    --position sticky
+    --top var(--header-height)
+    --total-margin .5rem 0 0
+    --total-text-align left

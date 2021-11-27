@@ -1,9 +1,8 @@
-// [1] Formatting hack to render vanilla CSS function instead of calling
-// built-in Stylus function.
 body
   background var(--background-0)
   color var(--text-1-color)
   display grid
   gap var(--gap)
   grid var(--grid)
-  min-height 'max(var(--vh, 100vh), 100vh)' % null // [1]
+  min-height 100vh
+  min-height -webkit-fill-available

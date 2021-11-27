@@ -16,13 +16,8 @@ export class Tools extends HTMLElement {
       this.setupDom();
       this.touchEnabled();
       this.googleAnalytics();
-      this.viewportHeight();
       this.hasSetup = true;
     }
-  }
-
-  disconnectedCallback() {
-    window.removeEventListener('resize', this.viewportHeight);
   }
 
   /**
@@ -41,15 +36,6 @@ export class Tools extends HTMLElement {
       document.body.removeAttribute('no-touch');
       fastclick['attach'](document.body);
     }
-  }
-
-  /**
-   * Sets custom property for viewport height that updates 'vh' calculation
-   * due to iOS Safari behavior where chrome appears and disappears when
-   * scrolling.
-   */
-  private viewportHeight() {
-    document.body.style.setProperty('--vh', `${window.innerHeight}px`);
   }
 
   /**

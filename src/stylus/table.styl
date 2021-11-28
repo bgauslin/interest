@@ -11,52 +11,46 @@ table
 
 th
 td
-  padding var(--table-padding-y) var(--table-padding-x)
+  padding-block var(--table-padding-y)
+  padding-inline var(--table-padding-x)
 
-  &:first-child
-    text-align left
-    padding-left var(--first-item-padding-x-start)
+th:first-child
+td:first-child
+  text-align start
+  padding-inline var(--first-item-padding-x-start) var(--table-padding-x)
 
-  &:last-child
-  &.balance
-    padding-right var(--last-item-padding-x-end)
+th:last-child
+td:last-child
+.balance
+  padding-inline var(--table-padding-x) var(--last-item-padding-x-end)
 
 thead > tr
   border-bottom var(--thead-border-bottom)
 
 tbody > tr:nth-child(odd)
-  background var(--table-row-background, table-row-background)
+  background var(--table-row-background, TABLE_ROW_BACKGROUND)
 
 // Table classnames.
-.year
-  padding-right 0
-
-.growth
-.interest
-  display none
-
-  @media breakpoint.small
-    display table-cell
-
 td.growth::after
 td.deposits::before
 td.interest::before
 td.balance::before
-  color var(--text-2-color)
+  color var(--secondary-text-color)
 
 td.growth::after
   content '%'
-  margin-left em(4)
+  margin-inline-start em(4)
 
 // Footnotes after the table.
-.rotate-screen
-  color var(--text-2-color)
-  display none
-  font-size var(--fineprint-font-size)
-  margin rem(12) gap 0
+.growth
+.interest
+  display var(--optional-items-display)
 
-  @media screen and (max-width breakpoint-small-units) and (orientation portrait)
-    display block
+.rotate-screen
+  color var(--secondary-text-color)
+  display var(--footnote-display)
+  font-size var(--fineprint-font-size)
+  margin rem(12) GAP 0
 
 .rotate-screen > span
-  color var(--text-1-color)
+  color var(--primary-text-color)

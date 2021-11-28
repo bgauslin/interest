@@ -4,16 +4,16 @@ user-settings
 
 user-settings > button
   background var(--button-background)
-  border-radius 50%
-  color var(--text-1-color)
+  border-radius (BUTTON_HEIGHT / 2)
+  color var(--primary-text-color)
   cursor pointer
   display flex
-  height button-height
+  height BUTTON_HEIGHT
   opacity 1
-  transition background transition, transform transition
-  width button-height
+  transition background TRANSITION, transform TRANSITION
+  width BUTTON_HEIGHT
 
-  @supports (backdrop-filter backdrop-effect)
+  @supports (backdrop-filter BACKDROP_EFFECT)
     backdrop-filter var(--button-backdrop-filter)
     background var(--button-backdrop-background)
 
@@ -26,8 +26,8 @@ user-settings > button
   &:active
     transform scale(.9)
 
-  svg
-    fill currentColor
-    flex 0 0 rem(20)
-    margin auto
-    pointer-events none
+user-settings > button svg
+  fill currentColor
+  flex 0 0 rem(20)
+  margin auto
+  pointer-events none

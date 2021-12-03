@@ -1,96 +1,95 @@
-[id=menu]
+[id='menu']
   border-radius rem(4)
   display flex
-  margin-top 1rem
-  max-width 'calc(100vw - %s)' % grid-gap
+  margin-block 1rem 0
+  max-width 'calc(100vw - %s)' % GAP
   opacity 0
   position absolute
   right 0
-  transition opacity transition ease-out, transform transition ease-out, visibility transition ease-out
+  transition opacity TRANSITION ease-out, transform TRANSITION ease-out, visibility TRANSITION ease-out
   transform 'translateY(-%s)' % rem(12)
   visibility hidden
 
-  &[aria-hidden=false]
-    opacity 1
-    transform translateY(0)
-    visibility visible
+[id='menu'][aria-hidden='false']
+  opacity 1
+  transform translateY(0)
+  visibility visible
 
-  &
-  &::before
-    background var(--background-1)
-    box-shadow var(--menu-box-shadow, elevation(2))
+[id='menu']
+[id='menu']::before
+  background var(--background-1)
+  box-shadow var(--menu-box-shadow, elevation(2))
 
-  // Menu arrow via rotated square with a drop shadow.
-  &::before
-    elevation(2)
-    clip-path polygon(rem(-8) rem(-8), rem(-8) rem(24), rem(24) rem(-8))
-    content ''
-    display block
-    height menu-arrow
-    position absolute
-    right rem(12)
-    top (- menu-arrow / 2)
-    transform rotate(45deg)
-    width menu-arrow
+// Menu arrow via rotated square with a drop shadow.
+[id='menu']::before
+  clip-path polygon(rem(-8) rem(-8), rem(-8) rem(24), rem(24) rem(-8))
+  content ''
+  display block
+  height MENU_ARROW
+  position absolute
+  right rem(12)
+  top (- MENU_ARROW / 2)
+  transform rotate(45deg)
+  width MENU_ARROW
 
-  // Menu container with overflow scrolling.
-  & > div
-    display flex
-    -webkit-overflow-scrolling touch
-    overflow-x auto
+// Menu container with overflow scrolling.
+[id='menu'] > div
+  display flex
+  overflow auto
+  -webkit-overflow-scrolling touch
 
-  & > div::-webkit-scrollbar
-    display none
+[id='menu'] > div::-webkit-scrollbar
+  display none
 
-  // Settings lists.
-  ul
-    display flex
-    list-style none
-    margin 0
-    max-width 100%
-    padding rem(16)
-    width 100%
+// Settings lists.
+[id='menu'] ul
+  display flex
+  list-style none
+  margin 0
+  max-width 100%
+  padding rem(16)
+  width 100%
 
-  li
-    margin 0
+[id='menu'] li
+  margin 0
 
-    &:not(:last-child)
-      margin-right rem(12)
+[id='menu'] li:not(:last-child)
+  margin-inline-end rem(12)
 
-  // Settings options via radio buttons inside clickable <label> elements.
-  label
-    cursor pointer
-    display block
-    height menu-item-size
-    outline 0
-    overflow hidden
-    position relative
-    width menu-item-size
+// Settings options via radio buttons inside clickable <label> elements.
+[id='menu'] label
+  cursor pointer
+  display block
+  height MENU_ITEM_SIZE
+  outline 0
+  overflow hidden
+  position relative
+  width MENU_ITEM_SIZE
 
-  [type=radio]
-    position absolute
+[id='menu'] [type='radio']
+  position absolute
 
-  label > span
-    align-items center
-    border 3px solid var(--text-2-color)
-    border-radius 50%
-    color var(--text-2-color)
-    display inline-flex
-    font-size em(22)
-    height menu-item-size
-    justify-content center
-    position relative
-    width menu-item-size
-    z-index -1
+[id='menu'] label > span
+  align-items center
+  border 3px solid var(--secondary-text-color)
+  border-radius 50%
+  color var(--secondary-text-color)
+  display inline-flex
+  font-size em(22)
+  height MENU_ITEM_SIZE
+  justify-content center
+  position relative
+  width MENU_ITEM_SIZE
+  z-index -1
 
-    [no-touch] &
-      transition border transition, color transition
+[no-touch] [id='menu'] label > span
+  transition border TRANSITION, color TRANSITION
 
-  input:checked + span
-    border-color var(--theme-color)
-    color var(--theme-color)
+[id='menu'] input:checked + span
+  border-color var(--theme-color)
+  color var(--theme-color)
 
-  label:focus > input:not(:checked) + span
-  [no-touch] & label:hover > input:not(:checked) + span
-    border-color var(--text-1-color)
-    color var(--text-1-color)
+[id='menu'] label:focus > input:not(:checked) + span
+[no-touch] [id='menu'] label:hover > input:not(:checked) + span
+  border-color var(--primary-text-color)
+  color var(--primary-text-color)

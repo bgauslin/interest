@@ -8,10 +8,9 @@ Currencies = {
 
 for name, value in Currencies
   [currency={name}]
-    user-values .total:not(:empty)
-    td.deposits
-    td.interest
-    td.balance
-      &::before
-        content value
-        margin-right em(4)
+    td.balance::before
+    td.deposits::before
+    td.interest::before
+    .total:not(:empty)::before
+      content value
+      margin-inline-end em(4)

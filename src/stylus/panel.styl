@@ -8,12 +8,16 @@
   opacity 1
   overflow-x auto
   overflow-y hidden
-  transition height transition-slow ease-out, opacity transition-slow ease-out
+  transition height TRANSITION_SLOW ease-out, opacity TRANSITION_SLOW ease-out
 
-  // Always display the panel on large screens and up.
-  @media breakpoint.large
-    height auto !important 
-  
-  &[hidden]
-  [no-js] &
-    display none
+.panel[hidden]
+[no-js] .panel
+  display none
+
+// Always show the panel on large screens and up since the table has enough
+// room, but may be collapsed via the show/hide widget. This cannot use a 
+// custom property since the '!important' needs to override an inline style
+// set via JS.
+@media Breakpoint.LARGE
+  .panel
+    height auto !important

@@ -1,7 +1,9 @@
 user-settings
+  margin-right rem(-12)
   position relative
-  right rem(-12)
-  z-index 1
+  
+  @media breakpoint.small
+    margin-right 0
 
 user-settings > button
   border-radius 50%
@@ -13,9 +15,16 @@ user-settings > button
   transition background transition, transform transition
   width button-height
 
-  &[aria-expanded='true']
+  @media breakpoint.large
+    background var(--header-background)
+
+    @supports (backdrop-filter backdrop-effect)
+      backdrop-filter backdrop-effect
+      background var(--header-backdrop-background)
+
   &:active
   &:focus
+  &[aria-expanded='true']
   [no-touch] &:hover
     background var(--background-2)
 

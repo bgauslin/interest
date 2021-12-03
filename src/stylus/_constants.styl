@@ -1,81 +1,80 @@
-// Theme colors.
-theme-color = #00ad45
-theme-color-dark = #4dc67d
-
-// Links and states.
-link-color = #0079fd
-link-color-dark = #0a84fe
-warning-color = #c00
-warning-color-dark = #db4d4d
+// Colors for links, theme, warnings.
+LINK_COLOR = #0079fd
+LINK_COLOR_DARK = #0a84fe
+THEME_COLOR = #00ad45
+THEME_COLOR_DARK = #4dc67d
+WARNING_COLOR = #c00
+WARNING_COLOR_DARK = #db4d4d
 
 // Grays palette.
 // https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color
-gray-1 = rgb(142, 142, 147)
-gray-2 = rgb(174, 174, 178)
-gray-3 = rgb(199, 199, 204)
-gray-4 = rgb(209, 209, 214)
-gray-5 = rgb(229, 229, 234)
-gray-6 = rgb(242, 242, 247)
+GRAY_1 = rgb(142, 142, 147)
+GRAY_2 = rgb(174, 174, 178)
+GRAY_3 = rgb(199, 199, 204)
+GRAY_4 = rgb(209, 209, 214)
+GRAY_5 = rgb(229, 229, 234)
+GRAY_6 = rgb(242, 242, 247)
 
-gray-1-dark = rgb(142, 142, 147)
-gray-2-dark = rgb(99, 99, 102)
-gray-3-dark = rgb(72, 72, 74)
-gray-4-dark = rgb(58, 58, 60)
-gray-5-dark = rgb(44, 44, 46)
-gray-6-dark = rgb(28, 28, 30)
+GRAY_1_DARK = rgb(142, 142, 147)
+GRAY_2_DARK = rgb(99, 99, 102)
+GRAY_3_DARK = rgb(72, 72, 74)
+GRAY_4_DARK = rgb(58, 58, 60)
+GRAY_5_DARK = rgb(44, 44, 46)
+GRAY_6_DARK = rgb(28, 28, 30)
 
 // Default light mode colors.
-background-0 = gray-6
-background-1 = white
-background-2 = gray-4
-border-color = gray-4
-table-row-background = mix(black, white, 3%) // TODO: Update value.
-text-1-color = black
-text-2-color = gray-1
+BACKGROUND_0 = GRAY_6
+BACKGROUND_1 = white
+BACKGROUND_2 = GRAY_4
+BORDER_COLOR = GRAY_4
+TABLE_ROW_BACKGROUND = mix(black, white, 3%) // TODO: update value.
+TEXT_PRIMARY_COLOR = black
+TEXT_SECONDARY_COLOR = GRAY_1
 
 // Dark mode colors.
-background-0-dark = black
-background-1-dark = gray-6-dark
-background-2-dark = gray-4-dark
-border-color-dark = gray-4-dark
-table-row-background-dark = mix(white, black, 8%) // TODO: Update value.
-text-1-color-dark = gray-5
-text-2-color-dark = gray-1
+BACKGROUND_0_DARK = black
+BACKGROUND_1_DARK = GRAY_6_DARK
+BACKGROUND_2_DARK = GRAY_4_DARK
+BORDER_COLOR_DARK = GRAY_4_DARK
+TABLE_ROW_BACKGROUND_DARK = mix(white, black, 8%) // TODO: update value.
+TEXT_PRIMARY_COLOR_DARK = GRAY_5
+TEXT_SECONDARY_COLOR_DARK = GRAY_1
 
 // Blurry backgrounds.
-backdrop-effect = blur(10px)
+BACKDROP_EFFECT = blur(10px)
 
-// Header background with no backdrop-filter support.
-header-background = rgba(white, .95)
-header-background-dark = rgba(black, .95)
+// Header background with no backdrop_filter support.
+HEADER_BACKGROUND = rgba(white, .95)
+HEADER_BACKGROUND_DARK = rgba(black, .95)
 
 // Header background with blur effect.
-header-backdrop-background = rgba(white, .65)
-header-backdrop-background-dark = rgba(gray-6-dark, .65)
+HEADER_BACKDROP_BACKGROUND = rgba(white, .65)
+HEADER_BACKDROP_BACKGROUND_DARK = rgba(GRAY_6_DARK, .65)
 
 // Dimensions.
-breakpoint-small-units = rem(420)
-button-height = rem(40)
-card-corner-radius = rem(8)
-card-padding = rem(24)
-grid-gap = rem(16)
-grid-gap-medium = rem(24)
-menu-arrow = rem(16)
-menu-item-size = rem(40)
-table-max-width = rem(640)
-values-max-width = rem(240)
-values-total-size = rem(32)
-
-// Calculated constants and breakpoints.
-values-grid-width = values-max-width + (2 * card-padding)
-content-width-large = (values-max-width + (2 * card-padding)) + table-max-width + grid-gap-medium
-
-breakpoint = {
-  small:  'screen and (min-width: %s)' % breakpoint-small-units
-  medium: 'screen and (min-width: %s)' % (table-max-width + (grid-gap-medium * 2))
-  large:  'screen and (min-width: %s)' % (content-width-large + (grid-gap-medium * 2))
-}
+BREAKPOINT_SMALL_UNITS = rem(420)
+BUTTON_HEIGHT = rem(40)
+CARD_CORNER_RADIUS = rem(8)
+CARD_PADDING = rem(24)
+GAP = rem(16)
+GAP_MEDIUM = rem(24)
+MENU_ARROW = rem(16)
+MENU_ITEM_SIZE = rem(40)
+TABLE_MAX_WIDTH = rem(640)
+VALUES_MAX_WIDTH = rem(240)
+VALUES_TOTAL_SIZE = rem(32)
 
 // Transitions.
-transition = .3s
-transition-slow = .5s
+TRANSITION = .3s
+TRANSITION_SLOW = .5s
+
+// Calculated constants and breakpoints.
+VALUES_GRID_WIDTH = VALUES_MAX_WIDTH + (2 * CARD_PADDING)
+CONTENT_WIDTH_LARGE = (VALUES_MAX_WIDTH + (2 * CARD_PADDING)) + TABLE_MAX_WIDTH + GAP_MEDIUM
+
+Breakpoint = {
+  SMALL:  'screen and (min-width: %s)' % BREAKPOINT_SMALL_UNITS
+  MEDIUM: 'screen and (min-width: %s)' % (TABLE_MAX_WIDTH + (GAP_MEDIUM * 2))
+  LARGE:  'screen and (min-width: %s)' % (CONTENT_WIDTH_LARGE + (GAP_MEDIUM * 2))
+  SMALL_PORTRAIT: 'screen and (max-width: %s) and (orientation: portrait)' % BREAKPOINT_SMALL_UNITS
+}

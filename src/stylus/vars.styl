@@ -1,47 +1,166 @@
-:root
+// -----------------------------------------------------------------------------
+// Base typography, layouts, colors.
+
+body
   // Typography.
   --fineprint-font-size rem(12)
   --header-font-size rem(16)
   --table-font-size rem(13)
 
   // Layout.
-  --grid-gap grid-gap
+  --header-content-padding 0 var(--gap, GAP)
   --header-height rem(48)
   --table-padding-x em(12)
   --table-padding-y em(8)
 
-  @media breakpoint.medium
-    --fineprint-font-size rem(14)
-    --header-font-size rem(20)
-    --table-font-size rem(15)
-    --grid-gap grid-gap-medium
-    --header-height rem(60)
+  // Default/light mode.
+  --background-0 BACKGROUND_0
+  --background-1 BACKGROUND_1
+  --background-2 BACKGROUND_2
+  --card-border-color BORDER_COLOR
+  --header-backdrop-background HEADER_BACKDROP_BACKGROUND
+  --header-backdrop-filter BACKDROP_EFFECT
+  --header-background HEADER_BACKGROUND
+  --secondary-text-color TEXT_SECONDARY_COLOR
+  --theme-color THEME_COLOR
+  --warning-color WARNING_COLOR
 
-  @media breakpoint.large
+// -----------------------------------------------------------------------------
+// Dark mode.
+
+@media (prefers-color-scheme dark)
+  body
+    --background-0 BACKGROUND_0_DARK
+    --background-1 BACKGROUND_1_DARK
+    --background-2 BACKGROUND_2_DARK
+    --card-border-color transparent
+    --header-backdrop-background HEADER_BACKDROP_BACKGROUND_DARK
+    --header-background HEADER_BACKGROUND_DARK
+    --input-border-color TEXT_SECONDARY_COLOR
+    --menu-box-shadow 0 0 0 1px BORDER_COLOR_DARK
+    --table-row-background TABLE_ROW_BACKGROUND_DARK
+    --primary-text-color TEXT_PRIMARY_COLOR_DARK
+    --secondary-text-color TEXT_SECONDARY_COLOR_DARK
+    --theme-color THEME_COLOR_DARK
+    --warning-color WARNING_COLOR_DARK
+
+// -----------------------------------------------------------------------------
+// Base layouts.
+
+body
+  --grid:
+    'header' var(--header-height) \
+    'main' 1fr / 1fr
+
+main
+  --expandable-visibility visible
+  --first-item-padding-x-start GAP
+  --footnote-display none
+  --last-item-padding-x-end GAP
+  --optional-items-display none
+  --grid:
+    'values' minmax(auto, 1fr) \
+    'table' \
+    'expandable' (BUTTON_HEIGHT * 3)
+
+[no-js] main
+  --grid unset
+
+user-settings
+  --button-background 0
+  --button-backdrop-filter none
+  --button-backdrop-background 0
+  --margin-inline-end rem(-12)
+
+user-values
+  --list-margin 0 auto
+  --total-margin 1rem auto 0
+  --total-text-align center
+
+// -----------------------------------------------------------------------------
+// Small breakpoint layouts.
+
+@media Breakpoint.SMALL
+  body
+    --gap GAP
+    --grid:
+      'header header header' var(--header-height) \
+      '. main .' 1fr / 0 1fr 0
+
+  main
+    --first-item-padding-x-start var(--table-padding-x)
+    --frame-border 1px solid var(--card-border-color)
+    --frame-border-radius CARD_CORNER_RADIUS
+    --grid:
+      'values' minmax(auto, 1fr) \
+      'table' \
+      'expandable' (BUTTON_HEIGHT * 2) \
+      '.' 0
+    --last-item-padding-x-end var(--table-padding-x)
+    --optional-items-display table-cell
+    --table-background var(--background-1)
+    --thead-border-bottom 1px solid var(--card-border-color)
+
+  user-settings
+    --margin-inline-end 0
+
+  // Place fields in side-by-side layout to reduce vertical real estate
+  user-values
+    --item-flex 50%
+    --list-display flex
+
+// -----------------------------------------------------------------------------
+// Small breakpoint + orientation layouts.
+
+@media Breakpoint.SMALL_PORTRAIT
+  main
+    --footnote-display block
+
+// -----------------------------------------------------------------------------
+// Medium breakpoint layouts and typography.
+
+@media Breakpoint.MEDIUM
+  body
+    --fineprint-font-size rem(14)
+    --gap GAP_MEDIUM
+    --header-font-size rem(20)
+    --header-height rem(60)
+    --table-font-size rem(15)
+
+// -----------------------------------------------------------------------------
+// Large breakpoint layouts and colors.
+
+@media Breakpoint.LARGE
+  body
+    --gap 0
+    --header-backdrop-filter none
+    --header-backdrop-background 0
+    --header-background 0
+    --header-content-padding 0
     --table-padding-x em(16)
 
-  // Default/light mode.
-  --background-0 background-0
-  --background-1 background-1
-  --background-2 background-2
-  --header-backdrop-background header-backdrop-background
-  --header-background header-background
-  --text-2-color text-2-color
-  --theme-color theme-color
-  --warning-color warning-color
+  // [1] Widget isn't necessary (or useful) on large screens, so don't show it.
+  main
+    --expandable-visibility hidden // [1]
+    --gap 0 GAP_MEDIUM
+    --grid:
+      'values table' 1fr \
+      'expandable expandable' 0 / VALUES_GRID_WIDTH 1fr
 
-  // Dark mode.
+  user-settings
+    --button-backdrop-background HEADER_BACKDROP_BACKGROUND
+    --button-backdrop-filter BACKDROP_EFFECT
+    --button-background HEADER_BACKGROUND
+
   @media (prefers-color-scheme dark)
-    --background-0 background-0-dark
-    --background-1 background-1-dark
-    --background-2 background-2-dark
-    --card-border-color transparent
-    --header-backdrop-background header-backdrop-background-dark
-    --header-background header-background-dark
-    --input-border-color text-2-color
-    --menu-box-shadow 0 0 0 1px border-color-dark
-    --table-row-background table-row-background-dark
-    --text-1-color text-1-color-dark
-    --text-2-color text-2-color-dark
-    --theme-color theme-color-dark
-    --warning-color warning-color-dark
+    user-settings
+      --button-background HEADER_BACKGROUND_DARK
+      --button-backdrop-background HEADER_BACKDROP_BACKGROUND_DARK
+
+  user-values
+    --list-display block
+    --list-margin 0
+    --position sticky
+    --top var(--header-height)
+    --total-margin .5rem 0 0
+    --total-text-align start

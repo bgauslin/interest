@@ -7,9 +7,9 @@ interface InputAttributes {
   pattern: string,
 }
 
-const EMPTY_ATTR: string = 'empty';
-const FOR_ATTR: string = 'for';
-const STORAGE_ITEM: string = 'values';
+const EMPTY_ATTR = 'empty';
+const FOR_ATTR = 'for';
+const STORAGE_ITEM = 'values';
 
 const UserInputs: InputAttributes[] = [
   {

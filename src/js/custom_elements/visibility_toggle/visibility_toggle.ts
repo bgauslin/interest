@@ -1,7 +1,7 @@
-const EMPTY_ATTR: string = 'empty';
-const HIDDEN_ATTR: string = 'hidden';
-const SOURCE_ATTR: string = 'source';
-const TARGETS_ATTR: string = 'targets';
+const EMPTY_ATTR = 'empty';
+const HIDDEN_ATTR = 'hidden';
+const SOURCE_ATTR = 'source';
+const TARGETS_ATTR = 'targets';
 
 /**
  * Observes a source element for toggling the visibility of target elements.

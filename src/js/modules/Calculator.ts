@@ -13,10 +13,10 @@ interface Sums {
   year: string,
 }
 
-const CURRENCY_ATTR: string = 'currency';
+const CURRENCY_ATTR = 'currency';
 const EURO_FORMAT_THRESHOLD: number = 50000;
-const EUROS: string = 'eur';
-const RUPEES: string = 'inr';
+const EUROS = 'eur';
+const RUPEES = 'inr';
 
 /**
  * Formulas for calculating compound interest and formatting currency.

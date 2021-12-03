@@ -1,8 +1,8 @@
-const ARIA_EXPANDED_ATTR: string = 'aria-expanded';
-const ARIA_HIDDEN_ATTR: string = 'aria-hidden';
-const FOR_ATTR: string = 'for';
-const LABEL_ATTR: string = 'label';
-const STORAGE_ITEM: string = 'expanded';
+const ARIA_EXPANDED_ATTR = 'aria-expanded';
+const ARIA_HIDDEN_ATTR = 'aria-hidden';
+const FOR_ATTR = 'for';
+const LABEL_ATTR = 'label';
+const STORAGE_ITEM = 'expanded';
 
 /**
  * Custom element that expands/collapses a target element when its source

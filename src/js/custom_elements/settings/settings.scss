@@ -1,0 +1,42 @@
+@use 'sass:math';
+@use '../../../styles/const';
+
+:host {
+  margin-inline-end: var(--margin-inline-end);
+  position: relative;
+}
+
+button {
+  backdrop-filter: var(--button-backdrop-filter);
+  background: var(--button-backdrop-background);
+  block-size: const.$button-height;
+  border-radius: math.div(const.$button-height, 2);
+  color: var(--primary-text-color);
+  cursor: pointer;
+  display: flex;
+  inline-size: const.$button-height;
+  opacity: 1;
+  transition: background .3s, transform .3s;
+
+  &:active,
+  &:focus,
+  &[aria-expanded='true'] {
+    background: var(--background-2);
+  }
+
+  &:active {
+    transform: scale(.9);
+  }
+}
+
+button svg {
+  fill: currentColor;
+  flex: 0 0 1.25rem;
+  pointer-events: none;
+}
+
+@media (any-hover: hover) {
+  button:hover {
+    background: var(--background-2);
+  }
+}

@@ -42,15 +42,18 @@ const UserInputs: InputAttributes[] = [
  * Custom element that renders input fields and calculates compound interest
  * based on user-provided values.
  */
-export class UserValues extends HTMLElement {
-  private calculator: Calculator;
-  private currency: HTMLElement;
-  private observer: MutationObserver;
-  private periods: HTMLInputElement;
-  private sums: Sums[];
+@customElement('user-values')
+class UserValues extends HTMLElement {
+
+  @query('.total') total: HTMLElement;
+  @query('[name=periods]') periods: HTMLInputElement;
+  @query('[currency]') currency: HTMLElement;
+
   private table: HTMLElement;
-  private tableTemplate: any;
-  private total: HTMLElement;
+
+  private calculator: Calculator;
+  private observer: MutationObserver;
+  private sums: Sums[];
   private userValues: string;
 
   constructor() {
@@ -61,38 +64,22 @@ export class UserValues extends HTMLElement {
   }
 
   connectedCallback() {
-    this.currency = document.querySelector('[currency]');
+    this.observer.observe(this.currency, {attributes: true});
+
     this.table = document.getElementById(this.getAttribute(FOR_ATTR));
     this.removeAttribute(FOR_ATTR);
 
     this.userValues = localStorage.getItem(STORAGE_ITEM);
-    this.observer.observe(this.currency, {attributes: true});
-
-    this.tableTemplate = require('./table.pug');
-
-    this.setup();
+    if (this.userValues) {
+      this.populateInputs();
+      this.updateTotal();
+    }
     this.setVisibility();
   }
 
   disconnectedCallback() {
     this.observer.disconnect();
     this.removeEventListener('keyup', this.updateTotal);
-  }
-
-  /**
-   * Creates DOM elements and populates them if there are stored user values.
-   */
-  private setup() {
-    const valuesTemplate = require('./user_values.pug');
-    this.innerHTML = valuesTemplate({list: UserInputs});
-
-    this.total = this.querySelector('.total');
-    this.periods = this.querySelector('[name=periods]');
-
-    if (this.userValues) {
-      this.populateInputs();
-      this.updateTotal();
-    }
   }
 
   /**
@@ -134,7 +121,7 @@ export class UserValues extends HTMLElement {
     if (this.querySelectorAll(':invalid').length === 0) {
       // Calculate all sums from user data and render it all in the table.
       this.sums = this.calculator.compound(<CompoundingValues>values);
-      this.table.innerHTML = this.tableTemplate({table: this.sums});
+      // TODO: render({table: this.sums});
 
       // Get last item in sums array to display final balance.
       const lastSum = this.sums[this.sums.length - 1];
@@ -146,6 +133,32 @@ export class UserValues extends HTMLElement {
 
     this.setVisibility();
   }
-}
 
-customElements.define('user-values', UserValues);
+  private renderTable() {
+    return html`
+      <thead>
+        <tr>
+          <th class="year">Year</th>
+          <th class="deposits">Deposits</th>
+          <th class="interest">Interest</th>
+          <th class="balance">Balance</th>
+          <th class="growth">Growth</th>
+        </tr>
+      </thead>
+      <tbody>
+      ${this.table.map((row) => {
+        const {balance, deposits, growth, interest, year} = row;
+        return html`
+          <tr>
+            <td class="year">${year}</td>
+            <td class="deposits">${deposits}</td>
+            <td class="interest">${interest}</td>
+            <td class="balance">${balance}</td>
+            <td class="growth">${growth}</td>
+          </tr>
+        `
+      })}
+      </tbody>
+    `;
+  }
+}

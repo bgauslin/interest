@@ -1,0 +1,37 @@
+/// Grays palette.
+/// @see https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color
+$gray1-light: rgb(142, 142, 147);
+$gray2-light: rgb(174, 174, 178);
+$gray3-light: rgb(199, 199, 204);
+$gray4-light: rgb(209, 209, 214);
+$gray5-light: rgb(229, 229, 234);
+$gray6-light: rgb(242, 242, 247);
+
+$gray1-dark: rgb(142, 142, 147);
+$gray2-dark: rgb(99, 99, 102);
+$gray3-dark: rgb(72, 72, 74);
+$gray4-dark: rgb(58, 58, 60);
+$gray5-dark: rgb(44, 44, 46);
+$gray6-dark: rgb(28, 28, 30);
+
+// Dimensions.
+$button-height: 2.75rem;
+$card-border-radius: .5rem;
+$card-padding: 1.5rem;
+$gap: 1rem;
+$gap-medium: 1.5rem;
+$table-max-width: 40rem;
+$values-max-width: 15rem;
+
+// Calculated constants for breakpoints.
+$values-grid-width: $values-max-width + (2 * $card-padding);
+$content-width-large: $values-grid-width + $table-max-width + $gap-medium;
+$small-breakpoint: 26rem;
+
+// Responsive breakpoints.
+$breakpoint: (
+  'small':  (min-width: #{$small-breakpoint}),
+  'small-portrait': (max-width: #{$small-breakpoint}) and (orientation: portrait),
+  'medium': (min-width: #{$table-max-width + ($gap-medium * 2)},
+  'large':  (min-width: #{$content-width-large + ($gap-medium * 2)},
+);

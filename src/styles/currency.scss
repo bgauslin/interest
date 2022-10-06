@@ -1,0 +1,14 @@
+$currencies: (
+  eur: '€',
+  gbp: '£',
+  inr: '₹',
+  usd: '$',
+  yen: '¥',
+);
+
+@each $name, $value in $currencies {
+  [currency='#{name}'] :is(td.balance, td.deposits, td.interest, .total:not(:empty))::before {
+    content: $value;
+    margin-inline-end: .25em;
+  }
+}

@@ -1,0 +1,121 @@
+@use 'sass:math';
+@use '../../../styles/const';
+
+$arrow-size: 1rem;
+$menu-item-size: 2.5rem;
+
+[id='menu'] {
+  border-radius: .25rem;
+  display: flex;
+  inset-inline: auto 0;
+  margin-block: 1rem 0;
+  max-inline-size: calc(100vw - #{const.$gap});
+  opacity: 0;
+  position: absolute;
+  transition: opacity .3s ease-out, transform .3s ease-out, visibility .3s ease-out;
+  transform: translateY(-.75rem);
+  visibility: hidden;
+}
+
+[id='menu'][aria-hidden='false'] {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+[id='menu'],
+[id='menu']::before {
+  background: var(--background-1);
+  box-shadow: var(--menu-box-shadow);
+}
+
+// Menu arrow via rotated square with a drop shadow.
+[id='menu']::before {
+  block-size: $arrow-size;
+  clip-path: polygon(-.5rem -.5rem, -.5rem 1.5rem, 1.5rem -.5rem);
+  content: '';
+  display: block;
+  inline-size: $arrow-size;
+  inset-block: math.div($arrow-size, -2) auto;
+  inset-inline: auto .75rem;
+  position: absolute;
+  transform: rotate(45deg);
+}
+
+// Menu container with overflow scrolling.
+[id='menu'] > div {
+  display: flex;
+  overflow: auto;
+}
+
+[id='menu'] > div::-webkit-scrollbar {
+  display: none;
+}
+
+// Settings lists.
+[id='menu'] ul {
+  display: flex;
+  inline-size: 100%;
+  list-style: none;
+  margin: 0;
+  max-inline-size: 100%;
+  padding: 1rem;
+}
+
+[id='menu'] li {
+  margin: 0;
+}
+
+[id='menu'] li:not(:last-child) {
+  margin-inline-end: .75rem;
+}
+
+// Settings options via radio buttons inside clickable <label> elements.
+[id='menu'] label {
+  block-size: $menu-item-size;
+  cursor: pointer;
+  display: block;
+  inline-size: $menu-item-size;
+  outline: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+[id='menu'] [type='radio'] {
+  position: absolute;
+}
+
+[id='menu'] label > span {
+  align-items: center;
+  block-size: $menu-item-size;
+  border: 3px solid var(--secondary-text-color);
+  border-radius: math.div($menu-item-size, 2);
+  color: var(--secondary-text-color);
+  display: inline-flex;
+  font-size: 1.375em;
+  inline-size: $menu-item-size;
+  justify-content: center;
+  position: relative;
+  z-index: -1;
+}
+
+[id='menu'] input:checked + span {
+  border-color: var(--theme-color);
+  color: var(--theme-color);
+}
+
+[id='menu'] label:focus > input:not(:checked) + span {
+  border-color: var(--primary-text-color);
+  color: var(--primary-text-color);
+}
+
+@media (any-hover: hover) {
+  [id='menu'] label > span {
+    transition: border .3s, color .3s;
+  }
+  
+  [id='menu'] label:hover > input:not(:checked) + span {
+    border-color: var(--primary-text-color);
+    color: var(--primary-text-color);
+  }
+}

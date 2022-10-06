@@ -19,7 +19,7 @@ html(lang="en")
       type="font/woff2"
       crossorigin="crossorigin"
     )
-  body(no-js no-touch)
+  body
     header
       div
         h1= title
@@ -33,4 +33,3 @@ html(lang="en")
           table(id="data")
         p.rotate-screen Rotate screen to view <span>Interest</span> and <span>Growth</span> columns.
     visibility-toggle(source=".total" targets="#expandable, #panel")
-    x-tools

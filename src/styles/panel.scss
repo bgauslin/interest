@@ -1,23 +1,24 @@
+@use 'sass:map';
+@use '../path/to/const';
+
 // Collapsible outer wrapper whose box model ensures all of its children are
 // hidden when collapsed.
-.panel
-  box-sizing border-box
-  grid-area table
-  height auto
-  justify-self stretch
-  opacity 1
-  overflow-x auto
-  overflow-y hidden
-  transition height TRANSITION_SLOW ease-out, opacity TRANSITION_SLOW ease-out
-
-.panel[hidden]
-[no-js] .panel
-  display none
+.panel {
+  block-size: auto;
+  box-sizing: border-box;
+  grid-area: table;
+  justify-self: stretch;
+  opacity: 1;
+  overflow: auto hidden;
+  transition: block-size .5s ease-out, opacity .5s ease-out;
+}
 
 // Always show the panel on large screens and up since the table has enough
 // room, but may be collapsed via the show/hide widget. This cannot use a 
 // custom property since the '!important' needs to override an inline style
 // set via JS.
-@media Breakpoint.LARGE
-  .panel
-    height auto !important
+@media #{map.get(const.$breakpoint, large)} {
+  .panel {
+    block-size: auto !important;
+  }
+}

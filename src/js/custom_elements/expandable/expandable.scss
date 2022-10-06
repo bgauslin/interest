@@ -1,0 +1,69 @@
+@use 'sass:math';
+@use '../../../styles/const';
+
+:host {
+  align-items: center;
+  background: var(--theme-color);
+  block-size: const.$button-height;
+  border: 2px solid var(--theme-color);
+  border-radius: math.div(const.$button-height, 2);
+  color: var(--background-0);
+  cursor: pointer;
+  display: flex;
+  font-family: 'Avenir Variable', sans-serif;
+  font-variation-settings: 'wght' 600;
+  font-size: .875em;
+  grid-area: expandable;
+  inline-size: max(8.75rem, 33vw);
+  justify-content: center;
+  line-height: 1;
+  margin: auto; // TODO
+  opacity: 1;
+  padding: 0 1.5rem 0 .875rem;
+  transition: opacity .3s ease-out;
+  visibility: var(--expandable-visibility);
+  white-space: nowrap;
+
+  &:focus,
+  &:active {
+    background: transparent;
+    color: var(--theme-color);
+  }
+}
+
+:host[hidden] {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+:host::before {
+  // css-triangle(var(--background-0), 5px, 'down');
+  content: '';
+  display: inline-block;
+  margin-inline-end: .5rem;
+  transition: border-block-start-color .5s ease, transform .5s ease;
+}
+
+:host:is(:focus, :active)::before {
+  border-block-start-color: var(--theme-color);
+}
+
+:host[aria-expanded='true']::before {
+  transform: rotate(-180deg);
+}
+
+@media (any-hover: hover){
+  :host {
+    transition: background .3s ease, border .3s ease, color .3s ease;
+  }
+
+  :host:hover {
+    background: transparent;
+    color: var(--theme-color);
+  }
+
+  :host:hover::before {
+    border-block-start-color: var(--theme-color);
+  }
+}

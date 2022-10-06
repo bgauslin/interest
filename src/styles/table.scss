@@ -1,0 +1,75 @@
+@use 'const';
+
+// Outer wrapper for a table that makes its overflowing content scrollable.
+.table-frame {
+  border: var(--frame-border);
+  border-radius: var(--frame-border-radius);
+  overflow-x: auto;
+}
+
+// Table styles for first/last cells and alternating rows.
+// [1] Align commas and decimal points across cells.
+table {
+  background: var(--table-background);
+  border-collapse: collapse;
+  font-size: var(--table-font-size);
+  font-variant-numeric: tabular-nums; // [1]
+  inline-size: 100%;
+}
+
+:is(th, td) {
+  padding-block: var(--table-padding-y);
+  padding-inline: var(--table-padding-x);
+  text-align: end;
+  white-space: nowrap;
+}
+
+:is(th, td):first-child {
+  text-align: start;
+  padding-inline: var(--first-item-padding-x-start) var(--table-padding-x);
+}
+
+.balance,
+:is(th, td):last-child {
+  padding-inline: var(--table-padding-x) var(--last-item-padding-x-end);
+}
+
+th {
+  font-variation-settings: 'wght' 600;
+}
+
+thead > tr {
+  border-bottom: var(--thead-border-bottom);
+}
+
+tbody > tr:nth-child(odd) {
+  background: var(--table-row-background);
+}
+
+// Table classnames.
+td.growth::after,
+:is(td.balance, td.deposits, td.interest)::before {
+  color: var(--secondary-text-color);
+}
+
+td.growth::after {
+  content: '%';
+  margin-inline-start: .25em;
+}
+
+// Footnotes after the table.
+:is(.growth, .interest) {
+  display: var(--optional-items-display);
+}
+
+.rotate-screen {
+  color: var(--secondary-text-color);
+  display: var(--footnote-display);
+  font-size: var(--fineprint-font-size);
+  margin-block: .75rem 0;
+  margin-inline: const.$gap;
+}
+
+.rotate-screen > span {
+  color: var(--primary-text-color);
+}

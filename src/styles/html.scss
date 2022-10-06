@@ -1,0 +1,45 @@
+@font-face {
+  font-display: swap;
+  font-family: 'Avenir Variable';
+  font-weight: 1 999;
+  src: url('https://assets.gauslin.com/fonts/AvenirNext-Variable.woff2') format('woff2');
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  block-size: -webkit-fill-available;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  text-size-adjust: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:focus {
+  outline: 0;
+}
+
+input,
+button {
+  appearance: none;
+  background: 0;
+  border: 0;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+}
+
+input[type='radio'] {
+  block-size: 0;
+  inline-size: 0;
+}
+
+svg path {
+  fill: currentColor;
+}

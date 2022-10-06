@@ -1,0 +1,14 @@
+@use 'const';
+
+main {
+  display: grid;
+  gap: var(--gap);
+  grid: var(--grid);
+  grid-area: main;
+  inline-size: 100%;
+  margin-block: 0;
+  margin-inline: auto;
+  max-inline-size: const.$content-width-large;
+  padding-block: 0 env(safe-area-inset-bottom);
+  padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
+}

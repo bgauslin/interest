@@ -6,7 +6,7 @@ import shadowStyles from './table.scss';
 /**
  * Custom element that renders a table based on user-provided values.
  */
-@customElement('table-widget')
+@customElement('i-table')
 class TableWidget extends LitElement {
   @state() calculator: Calculator;
   @state() currency: String = '';

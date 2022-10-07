@@ -8,8 +8,9 @@ import './components/table/table';
 import './components/user-values/user-values';
 
 // Simple event hub for sending/receiving custom event data.
-const tableWidget = document.querySelector('table-widget');
-const userValuesWidget = document.querySelector('user-values');
+const drawerWidget = document.querySelector('i-drawer');
+const tableWidget = document.querySelector('i-table');
+const userValuesWidget = document.querySelector('i-values');
 let currency = '';
 let userValues = {};
 
@@ -42,6 +43,8 @@ function updateValues(e: CustomEvent) {
   });
   tableWidget.dispatchEvent(updateValues);
   saveToStorage();
+
+  drawerWidget.removeAttribute('aria-hidden');
 }
 
 document.addEventListener('updateCurrency', updateCurrency);

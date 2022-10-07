@@ -5,7 +5,7 @@ import shadowStyles from './settings.scss';
 /**
  * Web component that renders theme swatches for a user to choose from.
  */
-@customElement('settings-widget')
+@customElement('i-settings')
 class Settings extends LitElement {
   @property({type: String}) currencies = [
     {id: 'usd', symbol: '$', label: 'Dollars'},

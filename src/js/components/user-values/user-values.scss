@@ -7,7 +7,6 @@ $total-size: 2rem;
 
 :host {
   display: block;
-  grid-area: values;
   overflow: hidden;
 
   @media #{map.get(const.$breakpoint, small)} {
@@ -30,27 +29,31 @@ form {
 }
 
 ul {
-  display: flex; //
-  flex-wrap: wrap; //
+  display: grid;
+  grid: auto-flow / 1fr;
   gap: 1rem;
   list-style: none;
   margin: 0;
   padding: 0;
+
+  @media #{map.get(const.$breakpoint, small)} {
+    grid: auto-flow / repeat(2, 1fr);
+  }
+
+  @media #{map.get(const.$breakpoint, large)} {
+    grid: auto-flow / 1fr;
+  }
 }
 
 li {
-  align-items: center; //
-  display: flex; //
-
-  // @media #{map.get(const.$breakpoint, small)} {
-  //   flex: 50%;
-  // }
+  align-items: center;
+  display: flex;
+  gap: .5rem;
 }
 
 label {
   flex: 1;
   line-height: 1;
-  margin-inline: .5rem 0;
   opacity: .8;
   order: 2;
   white-space: nowrap;
@@ -91,14 +94,6 @@ input {
     color: var(--color-on-surface);
   }
 }
-
-// Reorder fields for side-by-side layout at small breakpoint.
-// @media #{map.get(const.$breakpoint, small)} {
-//   .principal { order: 1; }
-//   .rate { order: 2; }
-//   .contribution { order: 3; }
-//   .periods { order: 4; }
-// }
 
 .total {
   block-size: $total-size;

@@ -1,2 +1,8 @@
 @use 'vars';
 @use 'html';
+
+// Hide the drawer until it has content.
+app-drawer[aria-hidden='true'] {
+  opacity: 0;
+  pointer-events: none;
+}

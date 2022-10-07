@@ -13,12 +13,15 @@
   --color-theme: #00ad45;
   --comp-backdrop-filter: blur(10px);
   --comp-header-background: rgba(white, .65);
-  --layout-header-padding: 0 #{const.$gap};
   --layout-body-grid: 'header' var(--layout-header-height) 'main' 1fr / 1fr;
-  --layout-main-grid: 'values' minmax(auto, 1fr) 'table' 'expandable' (const.$button-height * 3); // TODO
   --layout-header-height: 3rem;
+  --layout-header-padding: 0 #{const.$gap};
   --type-fineprint: .75rem;
   --type-header: 1rem;
+
+  // TODO: Revsit/refactor <main> layouts.
+  --layout-main-gap: #{const.$gap};
+  --layout-main-grid: 'values' 'drawer' minmax(auto, 1fr) / 1fr; 
 
   @media (prefers-color-scheme: dark) {
     --color-error: #db4d4d;
@@ -36,7 +39,6 @@
   @media #{map.get(const.$breakpoint, small)} {
     --layout-body-gap: #{const.$gap};
     --layout-body-grid: 'header header header' var(--layout-header-height) '. main .' 1fr / 0 1fr 0;
-    --layout-main-grid: 'values' minmax(auto, 1fr) 'table' 'expandable' #{const.$button-height * 2} '.' 0; // TODO
   }
 
   @media #{map.get(const.$breakpoint, medium)} {
@@ -45,6 +47,9 @@
     --layout-header-padding: 0 #{const.$gap-medium};
     --type-fineprint: .875rem;
     --type-header: 1.25rem;
+
+    // TODO: Revsit/refactor <main> layouts.
+    --layout-main-gap: #{const.$gap-medium};
   }
 
   @media #{map.get(const.$breakpoint, large)} {
@@ -52,13 +57,14 @@
     --comp-header-background: 0;
     --layout-body-gap: 0;
     --layout-header-padding: 0;
-    --layout-main-gap: 0 #{const.$gap-medium};
-    --layout-main-grid: 'values table' 1fr 'expandable expandable' 0 / #{const.$values-grid-width} 1fr;
+
+    // TODO: Revsit/refactor <main> layouts.
+    --layout-main-grid: 'values drawer' 1fr '. .' 3rem / #{const.$values-grid-width} 1fr;
   }
 }
 
 // TODO: Figure out why these don't work in shadow DOM Sass file.
-i-table {
+app-table {
   --color-odd-row-background: #{mix(black, white, 1%)};
   --type-cell: .8125rem;
 
@@ -70,4 +76,3 @@ i-table {
     --type-cell: .9375rem;
   }
 }
-

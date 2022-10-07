@@ -1,0 +1,71 @@
+@use 'sass:map';
+@use 'sass:math';
+@use '../../../styles/const';
+
+// Button that expands/collapses the drawer.
+button {
+  align-items: center;
+  background: var(--color-theme);
+  block-size: const.$button-height;
+  border: 2px solid var(--color-theme);
+  border-radius: math.div(const.$button-height, 2);
+  color: var(--color-surface);
+  cursor: pointer;
+  display: flex;
+  font-family: 'Avenir Variable', sans-serif;
+  font-variation-settings: 'wght' 600;
+  font-size: .875em;
+  inline-size: max(8.75rem, 33vw);
+  justify-content: center;
+  line-height: 1;
+  opacity: 1;
+  padding: 0 1.5rem 0 .875rem;
+  transition: opacity .3s ease-out;
+  white-space: nowrap;
+
+  &:focus,
+  &:active {
+    background: transparent;
+    color: var(--color-theme);
+  }
+}
+
+button[aria-hidden='true'] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (any-hover: hover){
+  button {
+    transition: background .3s ease, border .3s ease, color .3s ease;
+  }
+
+  button:hover {
+    background: transparent;
+    color: var(--color-theme);
+  }
+}
+
+// Drawer that expands/collapses into view.
+.drawer {
+  block-size: auto;
+  box-sizing: border-box;
+  // grid-area: table;
+  // justify-self: stretch;
+  opacity: 1;
+  overflow: auto hidden;
+  transition: block-size .5s ease-out, opacity .5s ease-out;
+}
+
+.drawer[aria-hidden='true'] {
+  opacity: 0;
+}
+
+// Always show the panel on large screens since the table has enough room,
+// but may be collapsed via the web component. The '!important' is required
+// to override inline styles set via JS.
+@media #{map.get(const.$breakpoint, large)} {
+  .drawer {
+    block-size: auto !important;
+  }
+}

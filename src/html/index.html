@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Compound Interest Calculator</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Web app for calculating compound interest">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preload"as="font" type="font/woff2" crossorigin="crossorigin"
+          href="https://assets.gauslin.com/fonts/AvenirNext-Variable.woff2">
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>Compound Interest Calculator</h1>
+        <settings-widget></settings-widget>
+      </div>
+    </header>
+    <main>
+      <user-values></user-values>
+      <expandable-drawer>
+        <span slot="label">Table</span>
+        <table-widget slot="drawer"></table-widget>
+      </expandable-drawer>
+      <noscript>
+        Please <a href="https://www.enable-javascript.com/" title="How to enable JavaScript in your browser">enable JavaScript</a> to view this app.
+      </noscript>
+    </main>
+  </body>
+</html>

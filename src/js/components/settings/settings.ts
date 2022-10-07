@@ -25,18 +25,23 @@ class Settings extends LitElement {
   constructor() {
     super();
     this.clickListener = this.handleClick.bind(this);
-    this.addEventListener('keyup', this.handleKey);
+    this.addEventListener('keyup', this.handleKey); 
   }
   
   connectedCallback() {
     super.connectedCallback();
-    this.currency = localStorage.getItem('currency') || this.currencies[0].id;
+    this.getSavedCurrency();
   }
 
   disconnectedCallback() { 
     super.disconnectedCallback();
-    document.removeEventListener('click', this.clickListener);
     this.removeEventListener('keyup', this.handleKey);
+    document.removeEventListener('click', this.clickListener);
+  }
+
+  private getSavedCurrency() {
+    const storage = JSON.parse(localStorage.getItem('settings'));
+    this.currency = storage.currency || this.currencies[0].id;
   }
 
   private toggleOpen() {
@@ -74,7 +79,6 @@ class Settings extends LitElement {
   private updateCurrency() {
     const formData = new FormData(this.form);
     this.currency = formData.get('currency').toString();
-
     this.dispatchEvent(new CustomEvent('updateCurrency', {
       bubbles: true,
       detail: {

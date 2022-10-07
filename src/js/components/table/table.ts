@@ -1,6 +1,6 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
-import {Calculator, Sums} from '../../modules/Calculator';
+import {Calculator, CompoundingValues, Sums} from '../../modules/Calculator';
 import shadowStyles from './table.scss';
 
 /**
@@ -12,6 +12,7 @@ class TableWidget extends LitElement {
   @state() currency: String = '';
   @state() currencyListener: EventListenerObject;
   @state() tableData: Sums[] = [];
+  @state() userValues: CompoundingValues;
   @state() valuesListener: EventListenerObject;
 
   static styles = css`${shadowStyles}`;
@@ -20,28 +21,40 @@ class TableWidget extends LitElement {
     super();
     this.calculator = new Calculator();
     this.currencyListener = this.updateCurrency.bind(this);
-    this.valuesListener = this.updateTableData.bind(this);
+    this.valuesListener = this.updateValues.bind(this);
   }
 
   connectedCallback() {
     super.connectedCallback();
-    document.addEventListener('updateCurrency', this.currencyListener);
-    document.addEventListener('updateValues', this.valuesListener);
+    this.addEventListener('updateCurrency', this.currencyListener);
+    this.addEventListener('updateValues', this.valuesListener);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    document.removeEventListener('updateCurrency', this.currencyListener);
-    document.removeEventListener('updateValues', this.valuesListener);
+    this.removeEventListener('updateCurrency', this.currencyListener);
+    this.removeEventListener('updateValues', this.valuesListener);
   }
 
   private updateCurrency(e: CustomEvent) {
     this.currency = e.detail.currency;
+    if (this.userValues) {
+      this.updateTable();
+    }
+    console.log('table.updateCurrency', this.currency);
   }
 
-  private updateTableData(e: CustomEvent) {
+  private updateValues(e: CustomEvent) {
+    this.userValues = e.detail.values;
+    this.updateTable();
+    
+    console.log('table.updateValues', this.userValues);
+  }
+
+  private updateTable() {
+    console.log('table.updateTable')
     this.tableData =
-        this.calculator.compound(e.detail.values, `${this.currency}`);
+        this.calculator.compound(this.userValues, `${this.currency}`);
   }
 
   render() {

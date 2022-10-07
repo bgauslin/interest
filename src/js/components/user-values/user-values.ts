@@ -18,7 +18,7 @@ interface InputAttributes {
 class UserValues extends LitElement {
   @property({type: String}) currency = 'usd';
   @property({type: String}) total = '';
-  @property({type: String}) userInputs: InputAttributes[] = [
+  @property() userInputs: InputAttributes[] = [
     {
       inputmode: 'numeric',
       label: 'Principal',
@@ -44,7 +44,7 @@ class UserValues extends LitElement {
       pattern: '[0-9]+',
     }
   ];
-  @property({type: String}) userValues: CompoundingValues;
+  @property() userValues: CompoundingValues;
   @query('form') form: HTMLFormElement;
   @state() calculator: Calculator;
   @state() currencyListener: EventListenerObject;
@@ -60,59 +60,62 @@ class UserValues extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.populateInputs();
-    document.addEventListener('updateCurrency', this.currencyListener);
+    this.addEventListener('updateCurrency', this.currencyListener);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    document.removeEventListener('updateCurrency', this.currencyListener);
+    this.removeEventListener('updateCurrency', this.currencyListener);
   }
 
-  private updateCurrency(e: CustomEvent) {
-    this.currency = e.detail.currency;
-    console.log('userValues.updateCurrency()', this.currency);
+  private async populateInputs() {
+    const storage = JSON.parse(localStorage.getItem('settings'));
+    this.userValues = storage.values;
+    
+    if (this.userValues) {
+      await this.updateComplete;
+      for (const [name, value] of Object.entries(this.userValues)) {
+        const input =
+            this.form.querySelector<HTMLInputElement>(`[name="${name}"]`);
+        input.value = value;
+      }
+
+      this.updateValues();
+      this.updateTotal();
+    }
   }
 
-  private populateInputs() {
-    const storage = localStorage.getItem('values');
-    this.userValues = JSON.parse(storage);
-
-    // TODO: this.form isn't ready yet.
-    // if (this.userValues) {
-    //   for (const [name, value] of Object.entries(this.userValues)) {
-    //     console.log(`${name}: ${value}`);
-    //     const input = this.form.querySelector<HTMLInputElement>(`[name="${name}"]`);
-    //     input.value = value;
-    //   }
-    // }
-  }
-
-  /** Gets all user-provided values, then dispatches and saves them. */
   private getFormValues() {
     if (this.form.querySelectorAll(':invalid').length) {
       return;
     }
-    
-    // Get the form values.
+
     const formData = new FormData(this.form);
-    const values: CompoundingValues = {
+    this.userValues = {
       contribution: Number(formData.get('contribution')),
       periods: Number(formData.get('periods')),
       principal: Number(formData.get('principal')),
       rate: Number(formData.get('rate')),
     };
 
-    // Update the total.
-    this.total = this.calculator.total(values, this.currency);
+    this.updateValues();
+    this.updateTotal();
+  }
 
-    // Dispatch values for rendering elsewhere.
+  private updateCurrency(e: CustomEvent) {
+    this.currency = e.detail.currency;
+    this.updateTotal();
+  }
+
+  private updateValues() {
     this.dispatchEvent(new CustomEvent('updateValues', {
       bubbles: true,
-      detail: {values},
+      detail: {values: this.userValues},
     }));
+  }
 
-    // Save values for populating form on later visits.
-    localStorage.setItem('values', JSON.stringify(values));
+  private updateTotal() {
+    this.total = this.calculator.total(this.userValues, this.currency);
   }
 
   render() {

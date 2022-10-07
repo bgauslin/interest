@@ -15,6 +15,8 @@ class Expandable extends LitElement {
 
   private toggleOpen() {
     this.open = !this.open;
+    console.log(this.open);
+
     if (this.open) {
       this.collapse();
     } else {
@@ -23,9 +25,8 @@ class Expandable extends LitElement {
   }
 
   private collapse() {
-    const drawerHeight = `${this.drawer.scrollHeight / 16}rem`;
     window.requestAnimationFrame(() => {
-      this.drawer.style.blockSize = drawerHeight;
+      this.drawer.style.blockSize = `${this.drawer.scrollHeight / 16}rem`;
       window.requestAnimationFrame(() => {
         this.drawer.style.blockSize = '0';
       });
@@ -33,8 +34,7 @@ class Expandable extends LitElement {
   }
 
   private expand() {
-    const drawerHeight = `${this.drawer.scrollHeight / 16}rem`;
-    this.drawer.style.blockSize = drawerHeight;
+    this.drawer.style.blockSize = `${this.drawer.scrollHeight / 16}rem`;
     this.drawer.addEventListener('transitionend', () => {
       this.drawer.style.blockSize = null;
     }, {once: true});
@@ -43,20 +43,14 @@ class Expandable extends LitElement {
   render() {
     const labelPrefix = this.open ? 'Hide' : 'Show';
     return html`
-      <button
-        aria-controls="drawer"
-        aria-expanded="${this.open}"
-        @click="${this.toggleOpen}">
-        ${labelPrefix} <slot name="label"></slot>
+      <button aria-controls="drawer" aria-expanded="${this.open}"
+          @click="${this.toggleOpen}">
+        <span class="label">${labelPrefix}</span>
+        <slot name="label"></slot>
       </button>
-      <div
-        aria-hidden="${!this.open}"
-        class="drawer"
-        id="drawer">
+      <div class="drawer" id="drawer">
         <slot name="drawer"></slot>
       </div>
     `;
   }
 }
-
-

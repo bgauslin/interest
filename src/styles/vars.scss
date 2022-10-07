@@ -3,9 +3,10 @@
 
 :root {
   --color-error: #c00;
-  --color-input-border: #{const.$gray4-dark}; //
   --color-on-surface: black;
   --color-on-surface-variant: #{const.$gray1-light};
+  --color-on-theme: white;
+  --color-outline: #{const.$gray4-dark};
   --color-surface: #{const.$gray6-light};
   --color-surface1: #{const.$gray5-light};
   --color-surface2: #{const.$gray4-light};
@@ -21,9 +22,10 @@
 
   @media (prefers-color-scheme: dark) {
     --color-error: #db4d4d;
-    --color-input-border: #{const.$gray4-light}; //
     --color-on-surface: #{const.$gray5-light};
     --color-on-surface-variant: #{const.$gray1-light};
+    --color-on-theme: black; //
+    --color-outline: #{const.$gray4-light};
     --color-surface: #{const.$gray6-dark};
     --color-surface1: #{const.$gray5-dark};
     --color-surface2: #{const.$gray4-dark};
@@ -48,8 +50,8 @@
   @media #{map.get(const.$breakpoint, large)} {
     --comp-backdrop-filter: none;
     --comp-header-background: 0;
-    --layout-header-padding: 0;
     --layout-body-gap: 0;
+    --layout-header-padding: 0;
     --layout-main-gap: 0 #{const.$gap-medium};
     --layout-main-grid: 'values table' 1fr 'expandable expandable' 0 / #{const.$values-grid-width} 1fr;
   }

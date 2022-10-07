@@ -23,19 +23,23 @@ input {
 }
 
 button {
-  background-color: var(--color-surface1); // TODO
+  background-color: var(--color-surface);
   block-size: $button-size;
   border-radius: math.div($button-size, 2);
-  color: var(--color-on-surface); // TODO
+  color: var(--color-on-surface);
   cursor: pointer;
   display: grid;
   inline-size: $button-size;
   opacity: 1;
   place-content: center;
 
-  &:focus,
+  &:focus {
+    background-color: var(--color-surface2);
+  }
+
   &[aria-expanded='true'] {
-    background-color: var(--color-surface2); // TODO
+    background-color: var(--color-theme);
+    color: var(--color-on-theme);
   }
 }
 
@@ -44,14 +48,20 @@ button {
     transition: background-color .3s;
 
     &:hover {
-      background-color: var(--color-surface2); // TODO
+      background-color: var(--color-surface2);
+    }
+
+    &[aria-expanded='true'] {
+      background-color: var(--color-theme);
+      color: var(--color-on-theme);
     }
   }
 }
 
-svg {
-  fill: currentColor;
-  inline-size: 1.25rem;
+// Currency symbol for button and options.
+button > span,
+li > span {
+  font-size: 1.5rem;
   pointer-events: none;
 }
 
@@ -82,6 +92,7 @@ ul {
   padding: .375rem;
 }
 
+// Stack each list item's children on top of each other.
 li {
   display: inline-grid;
   grid: 1fr / 1fr;
@@ -92,7 +103,7 @@ li > * {
   grid-area: 1 / 1 / -1 / -1;
 }
 
-// Radio buttons styles as discs.
+// Radio buttons styled as discs.
 input {
   background-color: var(--color-surface1);
   block-size: $swatch-size;  
@@ -112,7 +123,3 @@ input:checked {
   border-color: var(--color-theme);
 }
 
-li > span {
-  font-size: 1.5em;
-  pointer-events: none;
-}

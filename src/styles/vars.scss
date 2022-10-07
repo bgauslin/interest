@@ -1,163 +1,56 @@
 @use 'sass:map';
 @use 'const';
 
-// -----------------------------------------------------------------------------
-// Base typography, layout, colors.
-
-body {
-  // Typography.
-  --fineprint-font-size: .75rem;
-  --header-font-size: 1rem;
-  --table-font-size: .8125rem;
-
-  // Layout.
-  --header-content-padding: 0 var(--gap);
-  --header-height: 3rem;
-  --table-padding-x: .75em;
-  --table-padding-y: .5em;
-
-  // Light mode colors.
-  --background-0: #{const.$gray6-light};
-  --background-1: white;
-  --background-2: #{const.$gray4-light};
-  --card-border-color: #{const.$gray4-light};
-  --header-backdrop-background: rgba(white, .65);
-  --header-backdrop-filter: blur(10px);
-  --input-border-color: #{const.$gray4-light};
-  --menu-box-shadow: 0 0 6px rgba(black, .2), 0 0 6px rgba(black, .3);
-  --primary-text-color: black;
-  --secondary-text-color: #{const.$gray1-light};
-  --table-row-background: #{mix(black, white, 3%)}; // TODO: Update value.
-  --theme-color: #00ad45;
-  --warning-color: #c00;
-}
-
-// Dark mode colors.
-@media (prefers-color-scheme: dark) {
-  body {
-    --background-0: black;
-    --background-1: #{const.$gray6-dark};
-    --background-2: #{const.$gray4-dark};
-    --card-border-color: transparent;
-    --header-backdrop-background: #{rgba(const.$gray6-dark, .65)};
-    --input-border-color: #{const.$gray1-light};
-    --menu-box-shadow: 0 0 0 1px #{const.$gray4-dark};
-    --primary-text-color: #{const.$gray5-light};
-    --secondary-text-color: #{const.$gray1-light};
-    --table-row-background: #{mix(white, black, 8%)}; // TODO: Update value.
-    --theme-color: #4dc67d;
-    --warning-color: #db4d4d;
-  }
-}
-
-// -----------------------------------------------------------------------------
-// Layout.
-
-body {
-  --grid: 'header' var(--header-height) 'main' 1fr / 1fr;
-}
-
-main {
-  --expandable-visibility: visible;
-  --first-item-padding-x-start: #{const.$gap};
-  --footnote-display: none;
-  --last-item-padding-x-end: #{const.$gap};
-  --optional-items-display: none;
-  --grid: 'values' minmax(auto, 1fr) 'table' 'expandable' (const.$button-height * 3);
-}
-
-user-settings {
-  --button-background: 0;
-  --button-backdrop-filter: none;
-  --button-backdrop-background: 0;
-  --margin-inline-end: -.75rem;
-}
-
-user-values {
-  --list-margin: 0 auto;
-  --total-margin: 1rem auto 0;
-  --total-text-align: center;
-}
-
-@media #{map.get(const.$breakpoint, small)} {
-  body {
-    --gap: const.$gap;
-    --grid: 'header header header' var(--header-height) '. main .' 1fr / 0 1fr 0;
-  }
-
-  main {
-    --first-item-padding-x-start: var(--table-padding-x);
-    --frame-border: 1px solid var(--card-border-color);
-    --frame-border-radius: const.$card-border-radius;
-    --grid: 'values' minmax(auto, 1fr) 'table' 'expandable' #{const.$button-height * 2} '.' 0;
-    --last-item-padding-x-end: var(--table-padding-x);
-    --optional-items-display: table-cell;
-    --table-background: var(--background-1);
-    --thead-border-bottom: 1px solid var(--card-border-color);
-  }
-
-  user-settings {
-    --margin-inline-end: 0;
-  }
-
-  // Place fields in side-by-side layout to reduce vertical real estate
-  user-values {
-    --item-flex: 50%;
-    --list-display: flex;
-  }
-}
-
-@media #{map.get(const.$breakpoint, small-portrait)} {
-  main {
-    --footnote-display: block;
-  }
-}
-
-@media #{map.get(const.$breakpoint, medium)} {
-  body {
-    --fineprint-font-size: .875rem;
-    --gap: #{const.$gap-medium};
-    --header-font-size: 1.25rem;
-    --header-height: 4rem;
-    --table-font-size: .9375rem;
-  }
-}
-
-@media #{map.get(const.$breakpoint, large)} {
-  body {
-    --gap: 0;
-    --header-backdrop-filter: none;
-    --header-backdrop-background: 0;
-    --header-content-padding: 0;
-    --table-padding-x: 1em;
-  }
-
-  // [1] Widget isn't necessary (or useful) on large screens, so don't show it.
-  main {
-    --expandable-visibility: hidden; // [1]
-    --gap: 0 #{const.$gap-medium};
-    --grid: 'values table' 1fr 'expandable expandable' 0 / #{const.$values-grid-width} 1fr;
-  }
-
-  user-settings {
-    --button-backdrop-background: rgba(white, .65);
-    --button-backdrop-filter: blur(10px);
-    --button-background: rgba(white, .95);
-  }
+:root {
+  --color-error: #c00;
+  --color-input-border: #{const.$gray4-dark}; //
+  --color-on-surface: black;
+  --color-on-surface-variant: #{const.$gray1-light};
+  --color-surface: #{const.$gray6-light};
+  --color-surface1: #{const.$gray5-light};
+  --color-surface2: #{const.$gray4-light};
+  --color-theme: #00ad45;
+  --comp-backdrop-filter: blur(10px);
+  --comp-header-background: rgba(white, .65);
+  --layout-header-padding: 0 #{const.$gap};
+  --layout-body-grid: 'header' var(--layout-header-height) 'main' 1fr / 1fr;
+  --layout-main-grid: 'values' minmax(auto, 1fr) 'table' 'expandable' (const.$button-height * 3);
+  --layout-header-height: 3rem;
+  --type-fineprint: .75rem;
+  --type-header: 1rem;
 
   @media (prefers-color-scheme: dark) {
-    user-settings {
-      --button-background: rgba(black, .95);
-      --button-backdrop-background: #{rgba(const.$gray6-dark, .65)};
-    }
+    --color-error: #db4d4d;
+    --color-input-border: #{const.$gray4-light}; //
+    --color-on-surface: #{const.$gray5-light};
+    --color-on-surface-variant: #{const.$gray1-light};
+    --color-surface: #{const.$gray6-dark};
+    --color-surface1: #{const.$gray5-dark};
+    --color-surface2: #{const.$gray4-dark};
+    --color-theme: #4dc67d;
+    --comp-header-background: #{rgba(const.$gray6-dark, .65)};
   }
 
-  user-values {
-    --list-display: block;
-    --list-margin: 0;
-    --position: sticky;
-    --top: var(--header-height);
-    --total-margin: .5rem 0 0;
-    --total-text-align: start;
+  @media #{map.get(const.$breakpoint, small)} {
+    --layout-body-gap: #{const.$gap};
+    --layout-body-grid: 'header header header' var(--layout-header-height) '. main .' 1fr / 0 1fr 0;
+    --layout-main-grid: 'values' minmax(auto, 1fr) 'table' 'expandable' #{const.$button-height * 2} '.' 0;
+  }
+
+  @media #{map.get(const.$breakpoint, medium)} {
+    --layout-body-gap: #{const.$gap-medium};
+    --layout-header-height: 4rem;
+    --layout-header-padding: 0 #{const.$gap-medium};
+    --type-fineprint: .875rem;
+    --type-header: 1.25rem;
+  }
+
+  @media #{map.get(const.$breakpoint, large)} {
+    --comp-backdrop-filter: none;
+    --comp-header-background: 0;
+    --layout-header-padding: 0;
+    --layout-body-gap: 0;
+    --layout-main-gap: 0 #{const.$gap-medium};
+    --layout-main-grid: 'values table' 1fr 'expandable expandable' 0 / #{const.$values-grid-width} 1fr;
   }
 }

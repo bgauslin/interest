@@ -1,0 +1,110 @@
+@use 'sass:map';
+@use '../../../styles/const';
+
+:host {
+  --cell-padding-block: .5em;
+  --cell-padding-inline: .75em;
+  --footnote-display: none;
+  --optional-columns-display: none;
+  --table-font-size: .8125rem;
+  --table-row-background: #{mix(black, white, 3%)}; // TODO}
+
+  @media (prefers-color-scheme: dark) {
+    --table-row-background: #{mix(white, black, 8%)}; // TODO
+  }
+
+  @media #{map.get(const.$breakpoint, small)} {
+    --optional-columns-display: table-cell;
+    --table-background: var(--color-surface1);
+  }
+
+  @media #{map.get(const.$breakpoint, small-portrait)} {
+    --footnote-display: block;
+  }
+
+  @media #{map.get(const.$breakpoint, medium)} {
+    --table-font-size: .9375rem;
+  }
+
+  @media #{map.get(const.$breakpoint, large)} {
+    --cell-padding-inline: 1em;
+  }
+}
+
+// Make <table> overflow content scrollable.
+:host {
+  border-radius: const.$card-border-radius;
+  overflow-x: auto;
+}
+
+table {
+  background: var(--table-background, 0);
+  border-collapse: collapse;
+  font-size: var(--table-font-size);
+  font-variant-numeric: tabular-nums;
+  inline-size: 100%;
+  opacity: 1;
+  transition: opacity .3s;
+}
+
+table[aria-hidden='true'] {
+  opacity: 0;
+}
+
+// All cells are end-aligned by default.
+:is(th, td) {
+  padding-block: var(--cell-padding-block);
+  padding-inline: var(--cell-padding-inline);
+  text-align: end;
+  white-space: nowrap;
+}
+
+// Make first column start-aligned.
+:is(th, td):first-child {
+  text-align: start;
+}
+
+// Table headers are bold.
+th {
+  font-variation-settings: 'wght' 600;
+}
+
+// The 'growth' and 'interest' columns only display when the viewport is wide
+// enought.
+:is(.growth, .interest) {
+  display: var(--optional-columns-display);
+}
+
+// Pseudo-elements for numeric values.
+:is(td.balance, td.deposits, td.interest)::before,
+td.growth::after {
+  color: var(--color-on-surface-variant);
+}
+
+:is(td.balance, td.deposits, td.interest)::before {
+  content: var(--currency);
+  margin-inline-end: .25em;
+}
+
+td.growth::after {
+  content: '%';
+  margin-inline-start: .25em;
+}
+
+// Alternating row backgrounds.
+tbody > tr:nth-child(odd) {
+  background: var(--table-row-background);
+}
+
+// Footnotes after the table.
+.rotate-screen {
+  color: var(--color-on-surface-variant);
+  display: var(--footnote-display);
+  font-size: var(--type-fineprint);
+  margin-block: .75rem 0;
+  margin-inline: const.$gap;
+}
+
+.rotate-screen > span {
+  color: var(--color-on-surface);
+}

@@ -8,42 +8,42 @@ import shadowStyles from './table.scss';
  */
 @customElement('table-widget')
 class TableWidget extends LitElement {
-  private calculator: Calculator;
-  private valuesListener: EventListenerObject;
-  private currencyListener: EventListenerObject;
-
+  @state() calculator: Calculator;
   @state() currency: String = '';
+  @state() currencyListener: EventListenerObject;
   @state() tableData: Sums[] = [];
+  @state() valuesListener: EventListenerObject;
 
   static styles = css`${shadowStyles}`;
 
   constructor() {
     super();
     this.calculator = new Calculator();
-    this.valuesListener = this.updateTableData.bind(this);
     this.currencyListener = this.updateCurrency.bind(this);
+    this.valuesListener = this.updateTableData.bind(this);
   }
 
   connectedCallback() {
     super.connectedCallback();
-    document.addEventListener('updateValues', this.valuesListener);
     document.addEventListener('updateCurrency', this.currencyListener);
+    document.addEventListener('updateValues', this.valuesListener);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
+    document.removeEventListener('updateCurrency', this.currencyListener);
     document.removeEventListener('updateValues', this.valuesListener);
   }
 
-  updateTableData(e: CustomEvent) {
+  private updateTableData(e: CustomEvent) {
     this.tableData =
         this.calculator.compound(e.detail.values, `${this.currency}`);
-    console.log('updateTableData called', this.tableData);
+    console.log('table.updateTableData()', this.tableData);
   }
 
-  updateCurrency(e: CustomEvent) {
+  private updateCurrency(e: CustomEvent) {
     this.currency = e.detail.currency;
-    console.log('updateCurrency called', this.currency);
+    console.log('table.updateCurrency()', this.currency);
   }
 
   render() {

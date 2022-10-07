@@ -14,27 +14,30 @@ class Expandable extends LitElement {
   static styles = css`${shadowStyles}`;
 
   private toggleOpen() {
-    this.open = this.open;
-    const direction = this.open ? 'expand' : 'collapse';
-    this.expandCollapse(direction);
+    this.open = !this.open;
+    if (this.open) {
+      this.collapse();
+    } else {
+      this.expand();
+    }
   }
 
-  private expandCollapse(action: string) {
+  private collapse() {
     const drawerHeight = `${this.drawer.scrollHeight / 16}rem`;
-
-    if (action === 'expand') {
+    window.requestAnimationFrame(() => {
       this.drawer.style.blockSize = drawerHeight;
-      this.drawer.addEventListener('transitionend', () => {
-        this.drawer.style.blockSize = null;
-      }, {once: true});
-    } else {
       window.requestAnimationFrame(() => {
-        this.drawer.style.blockSize = drawerHeight;
-        window.requestAnimationFrame(() => {
-          this.drawer.style.blockSize = '0';
-        });
+        this.drawer.style.blockSize = '0';
       });
-    }
+    });
+  }
+
+  private expand() {
+    const drawerHeight = `${this.drawer.scrollHeight / 16}rem`;
+    this.drawer.style.blockSize = drawerHeight;
+    this.drawer.addEventListener('transitionend', () => {
+      this.drawer.style.blockSize = null;
+    }, {once: true});
   }
 
   render() {

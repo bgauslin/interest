@@ -16,10 +16,9 @@ class Settings extends LitElement {
   ];
   @query('button') button: HTMLButtonElement;
   @query('form') form: HTMLFormElement;
+  @state() clickListener: EventListenerObject;
   @state() currency: String = '';
   @state() open: Boolean = false;
-
-  private clickListener: EventListenerObject;
 
   static styles = css`${shadowStyles}`;
 
@@ -38,23 +37,6 @@ class Settings extends LitElement {
     super.disconnectedCallback();
     document.removeEventListener('click', this.clickListener);
     this.removeEventListener('keyup', this.handleKey);
-  }
-
-  private updateCurrency() {
-    const formData = new FormData(this.form);
-    this.currency = formData.get('currency').toString();
-
-    // Set a custom property for use elsewhere.
-    document.documentElement.style.setProperty(
-        '--currency', `${this.currency}`);
-
-    // Dispatch currency for rendering elsewhere.
-    this.dispatchEvent(new CustomEvent('updateCurrency', {
-      bubbles: true,
-      detail: {
-        currency: this.currency,
-      }
-    }));
   }
 
   private toggleOpen() {
@@ -89,6 +71,18 @@ class Settings extends LitElement {
     }
   }
 
+  private updateCurrency() {
+    const formData = new FormData(this.form);
+    this.currency = formData.get('currency').toString();
+
+    this.dispatchEvent(new CustomEvent('updateCurrency', {
+      bubbles: true,
+      detail: {
+        currency: this.currency,
+      }
+    }));
+  }
+
   render() {
     return html`
       ${this.renderButton()}
@@ -98,6 +92,8 @@ class Settings extends LitElement {
 
   private renderButton() {
     const buttonLabel = 'Update theme';
+    const currentCurrency =
+        this.currencies.find(currency => currency.id == this.currency);
     return html`
       <button
         aria-controls="menu"
@@ -107,18 +103,8 @@ class Settings extends LitElement {
         id="button"
         title="${buttonLabel}"
         @click="${this.toggleOpen}">
-        ${this.renderDefaultIcon()}
+        <span aria-hidden="true">${currentCurrency.symbol}</span>
       </button>
-    `;
-  }
-
-  private renderDefaultIcon() {
-    return html`
-      <svg aria-hidden="true" viewbox="0 0 24 24">
-        <circle cx="4" cy="12" r="2.5"/>
-        <circle cx="12" cy="12" r="2.5"/>
-        <circle cx="20" cy="12" r="2.5"/>
-      </svg>
     `;
   }
 

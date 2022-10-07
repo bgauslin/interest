@@ -15,7 +15,7 @@
   --comp-header-background: rgba(white, .65);
   --layout-header-padding: 0 #{const.$gap};
   --layout-body-grid: 'header' var(--layout-header-height) 'main' 1fr / 1fr;
-  --layout-main-grid: 'values' minmax(auto, 1fr) 'table' 'expandable' (const.$button-height * 3);
+  --layout-main-grid: 'values' minmax(auto, 1fr) 'table' 'expandable' (const.$button-height * 3); // TODO
   --layout-header-height: 3rem;
   --type-fineprint: .75rem;
   --type-header: 1rem;
@@ -36,7 +36,7 @@
   @media #{map.get(const.$breakpoint, small)} {
     --layout-body-gap: #{const.$gap};
     --layout-body-grid: 'header header header' var(--layout-header-height) '. main .' 1fr / 0 1fr 0;
-    --layout-main-grid: 'values' minmax(auto, 1fr) 'table' 'expandable' #{const.$button-height * 2} '.' 0;
+    --layout-main-grid: 'values' minmax(auto, 1fr) 'table' 'expandable' #{const.$button-height * 2} '.' 0; // TODO
   }
 
   @media #{map.get(const.$breakpoint, medium)} {

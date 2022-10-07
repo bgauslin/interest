@@ -111,21 +111,16 @@ input {
   overflow: hidden;
   text-align: center;
   text-overflow: ellipsis;
-  transition: opacity .2s ease-out, visibility .2s ease-out; // TODO
-  visibility: visible; // TODO
+  transition: opacity .2s ease-out;
 
   @media #{map.get(const.$breakpoint, large)} {
     text-align: start;
   }
 }
 
-.total:empty {
+.total[aria-hidden='true'] {
   opacity: 0;
-  visibility: hidden; // TODO
 }
 
-@include utils.currency-symbols();
-
-.total[currency]:not(:empty)::before {
-  margin-inline-end: .25em;
-}
+// Currency symbols.
+@include utils.currency-symbols('data-currency');

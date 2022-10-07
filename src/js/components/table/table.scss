@@ -1,10 +1,10 @@
 @use 'sass:map';
 @use '../../../styles/const';
+@use '../../../styles/utils';
+
 
 :host {
   --color-row-background: #{mix(black, white, 1%)};
-  --layout-cell-padding-block: .5em;
-  --layout-cell-padding-inline: .75em;
   --layout-footnote-display: none;
   --layout-optional-columns-display: none;
   --type-cell: .8125rem;
@@ -25,10 +25,6 @@
   @media #{map.get(const.$breakpoint, medium)} {
     --type-cell: .9375rem;
   }
-
-  @media #{map.get(const.$breakpoint, large)} {
-    --layout-cell-padding-inline: 1em;
-  }
 }
 
 table {
@@ -48,8 +44,8 @@ table[aria-hidden='true'] {
 
 // All cells are end-aligned by default.
 :is(th, td) {
-  padding-block: var(--layout-cell-padding-block);
-  padding-inline: var(--layout-cell-padding-inline);
+  padding-block: .5rem;
+  padding-inline: 1rem;
   text-align: end;
   white-space: nowrap;
 }
@@ -85,6 +81,9 @@ td.growth::after {
   content: '%';
   margin-inline-start: .25em;
 }
+
+// Pseudo-element for currency symbols.
+@include utils.currency-symbols('currency');
 
 // Alternating row backgrounds.
 tbody > tr:nth-child(odd) {

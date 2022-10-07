@@ -9,7 +9,7 @@ import shadowStyles from './table.scss';
 @customElement('i-table')
 class TableWidget extends LitElement {
   @state() calculator: Calculator;
-  @state() currency: String = '';
+  @state() currency = '';
   @state() currencyListener: EventListenerObject;
   @state() tableData: Sums[] = [];
   @state() userValues: CompoundingValues;
@@ -41,20 +41,16 @@ class TableWidget extends LitElement {
     if (this.userValues) {
       this.updateTable();
     }
-    console.log('table.updateCurrency', this.currency);
   }
 
   private updateValues(e: CustomEvent) {
     this.userValues = e.detail.values;
     this.updateTable();
-    
-    console.log('table.updateValues', this.userValues);
   }
 
   private updateTable() {
-    console.log('table.updateTable')
     this.tableData =
-        this.calculator.compound(this.userValues, `${this.currency}`);
+        this.calculator.compound(this.userValues, this.currency);
   }
 
   render() {

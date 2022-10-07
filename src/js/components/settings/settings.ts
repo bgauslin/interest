@@ -7,7 +7,7 @@ import shadowStyles from './settings.scss';
  */
 @customElement('i-settings')
 class Settings extends LitElement {
-  @property({type: String}) currencies = [
+  @property() currencies = [
     {id: 'usd', symbol: '$', label: 'Dollars'},
     {id: 'eur', symbol: '€', label: 'Euros'},
     {id: 'gbp', symbol: '£', label: 'Pounds'},
@@ -17,7 +17,7 @@ class Settings extends LitElement {
   @query('button') button: HTMLButtonElement;
   @query('form') form: HTMLFormElement;
   @state() clickListener: EventListenerObject;
-  @state() currency: String = '';
+  @state() currency = '';
   @state() open: Boolean = false;
 
   static styles = css`${shadowStyles}`;
@@ -41,7 +41,7 @@ class Settings extends LitElement {
 
   private getSavedCurrency() {
     const storage = JSON.parse(localStorage.getItem('settings'));
-    this.currency = storage.currency || this.currencies[0].id;
+    this.currency = storage ? storage.currency : this.currencies[0].id;
   }
 
   private toggleOpen() {
@@ -96,8 +96,7 @@ class Settings extends LitElement {
 
   private renderButton() {
     const buttonLabel = 'Update theme';
-    const currentCurrency =
-        this.currencies.find(currency => currency.id == this.currency);
+    const currentCurrency = this.currencies.find(currency => currency.id === this.currency);
     return html`
       <button
         aria-controls="menu"

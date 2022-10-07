@@ -10,16 +10,18 @@ import './components/user-values/user-values';
 // Simple event hub for sending/receiving custom event data.
 const drawerWidget = document.querySelector('i-drawer');
 const tableWidget = document.querySelector('i-table');
-const userValuesWidget = document.querySelector('i-values');
-let currency = '';
-let userValues = {};
+const valuesWidget = document.querySelector('i-values');
+let currency = 'usd';
+let values = {};
 
 function saveToStorage() {
-  const settings = {
-    values: userValues,
-    currency: currency, 
-  };
-  localStorage.setItem('settings', JSON.stringify(settings));
+  if (currency && values) {
+    const settings = {
+      currency,
+      values,
+    };
+    localStorage.setItem('settings', JSON.stringify(settings));
+  }
 }
 
 function updateCurrency(e: CustomEvent) {
@@ -30,15 +32,15 @@ function updateCurrency(e: CustomEvent) {
     }
   });
   tableWidget.dispatchEvent(updateCurrency);
-  userValuesWidget.dispatchEvent(updateCurrency);
+  valuesWidget.dispatchEvent(updateCurrency);
   saveToStorage();
 }
 
 function updateValues(e: CustomEvent) {
-  userValues = e.detail.values;
+  values = e.detail.values;
   const updateValues = new CustomEvent('updateValues', {
     detail: {
-      values: userValues,
+      values: values,
     }
   });
   tableWidget.dispatchEvent(updateValues);

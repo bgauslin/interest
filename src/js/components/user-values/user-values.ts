@@ -16,8 +16,6 @@ interface InputAttributes {
  */
 @customElement('i-values')
 class UserValues extends LitElement {
-  @property({type: String}) currency = 'usd';
-  @property({type: String}) total = '';
   @property() userInputs: InputAttributes[] = [
     {
       inputmode: 'numeric',
@@ -44,10 +42,12 @@ class UserValues extends LitElement {
       pattern: '[0-9]+',
     }
   ];
-  @property() userValues: CompoundingValues;
   @query('form') form: HTMLFormElement;
+  @state() currency = 'usd';
+  @state() total = '';
   @state() calculator: Calculator;
   @state() currencyListener: EventListenerObject;
+  @state() userValues: CompoundingValues;
 
   static styles = css`${shadowStyles}`;
 
@@ -59,7 +59,7 @@ class UserValues extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.populateInputs();
+    this.updateFromStorage();
     this.addEventListener('updateCurrency', this.currencyListener);
   }
 
@@ -68,21 +68,25 @@ class UserValues extends LitElement {
     this.removeEventListener('updateCurrency', this.currencyListener);
   }
 
-  private async populateInputs() {
+  private async updateFromStorage() {
     const storage = JSON.parse(localStorage.getItem('settings'));
+    if (!storage) {
+      return;
+    }
+
+    this.currency = storage.currency;
     this.userValues = storage.values;
     
-    if (this.userValues) {
-      await this.updateComplete;
-      for (const [name, value] of Object.entries(this.userValues)) {
-        const input =
-            this.form.querySelector<HTMLInputElement>(`[name="${name}"]`);
-        input.value = value;
-      }
+    await this.updateComplete;
 
-      this.updateValues();
-      this.updateTotal();
+    for (const [name, value] of Object.entries(this.userValues)) {
+      const input =
+          this.form.querySelector<HTMLInputElement>(`[name="${name}"]`);
+      input.value = value;
     }
+
+    this.updateValues();
+    this.updateTotal();
   }
 
   private getFormValues() {
@@ -108,14 +112,18 @@ class UserValues extends LitElement {
   }
 
   private updateValues() {
-    this.dispatchEvent(new CustomEvent('updateValues', {
-      bubbles: true,
-      detail: {values: this.userValues},
-    }));
+    if (this.userValues) {
+      this.dispatchEvent(new CustomEvent('updateValues', {
+        bubbles: true,
+        detail: {values: this.userValues},
+      }));
+    }
   }
 
   private updateTotal() {
-    this.total = this.calculator.total(this.userValues, this.currency);
+    if (this.userValues) {
+      this.total = this.calculator.total(this.userValues, this.currency);
+    }
   }
 
   render() {
@@ -139,7 +147,10 @@ class UserValues extends LitElement {
             `
           })}
         </ul>
-        <div class="total" currency="${this.currency}">
+        <div
+          aria-hidden="${this.total === ''}"
+          class="total"
+          data-currency="${this.currency}">
           ${this.total}
         </div>
       </form>

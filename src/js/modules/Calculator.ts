@@ -13,11 +13,6 @@ interface Sums {
   year: string,
 }
 
-const CURRENCY_ATTR = 'currency';
-const EURO_FORMAT_THRESHOLD: number = 50000;
-const EUROS = 'eur';
-const RUPEES = 'inr';
-
 /**
  * Formulas for calculating compound interest and formatting currency.
  */
@@ -25,7 +20,7 @@ class Calculator {
   /**
    * Calculates compound interest and returns an array of all calculated values.
    */
-  public compound(values: CompoundingValues): Sums[] {
+  public compound(values: CompoundingValues, currency: string = 'usd'): Sums[] {
     const {contribution, principal, periods, rate} = values;
     const sums = [];
 
@@ -51,15 +46,24 @@ class Calculator {
       };
 
       sums.push({
-        balance: this.formatCurrency(balance),
-        deposits: this.formatCurrency(deposits),
+        balance: this.formatCurrency(balance, currency),
+        deposits: this.formatCurrency(deposits, currency),
         growth,
-        interest: this.formatCurrency(interest),
+        interest: this.formatCurrency(interest, currency),
         year: String(i),
       });
     }
 
     return sums;
+  }
+
+  /**
+   * Returns the total amount based on provided compounding values. 
+   */
+  public total(values: CompoundingValues, currency: string = 'usd'): string {
+    const sums = this.compound(values, currency);
+    const lastSum = sums[sums.length - 1];
+    return lastSum.balance;
   }
 
   /**
@@ -72,18 +76,18 @@ class Calculator {
   /**
    * Formats an amount based on currency type: 12345.67123 => 12,345.67.
    */
-  private formatCurrency(amount: number): string {
-    const currency = document.body.getAttribute(CURRENCY_ATTR);
+  private formatCurrency(amount: number, currency: string): string {
     let thousands = ',';
     let decimals = '.';
 
-    if (currency === RUPEES) {
+    if (currency === 'inr') {
       return this.formatRupees(amount);
     }
 
-    if (currency === EUROS) {
-      thousands = (amount > EURO_FORMAT_THRESHOLD) ? ',' : '.';
-      decimals = (amount > EURO_FORMAT_THRESHOLD) ? '.' : ',';
+    if (currency === 'eur') {
+      const threshold = 50000;
+      thousands = (amount > threshold) ? ',' : '.';
+      decimals = (amount > threshold) ? '.' : ',';
     }
 
     return amount.toFixed(2).replace('.', decimals).replace(

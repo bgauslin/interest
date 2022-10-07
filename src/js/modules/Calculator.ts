@@ -13,6 +13,16 @@ interface Sums {
   year: string,
 }
 
+const Currencies = [
+  {id: 'usd', symbol: '$', label: 'Dollars'},
+  {id: 'eur', symbol: '€', label: 'Euros'},
+  {id: 'gbp', symbol: '£', label: 'Pounds'},
+  {id: 'yen', symbol: '¥', label: 'Yen'},
+  {id: 'inr', symbol: '₹', label: 'Rupees'},
+];
+
+const DEFAULT_CURRENCY = Currencies[0].id;
+
 /**
  * Formulas for calculating compound interest and formatting currency.
  */
@@ -20,7 +30,8 @@ class Calculator {
   /**
    * Calculates compound interest and returns an array of all calculated values.
    */
-  public compound(values: CompoundingValues, currency: string = 'usd'): Sums[] {
+  public compound(values: CompoundingValues,
+                  currency: string = DEFAULT_CURRENCY): Sums[] {
     const {contribution, principal, periods, rate} = values;
     const sums = [];
 
@@ -114,4 +125,4 @@ class Calculator {
   }
 }
 
-export {Calculator, CompoundingValues, Sums};
+export {Calculator, CompoundingValues, Currencies, DEFAULT_CURRENCY, Sums};

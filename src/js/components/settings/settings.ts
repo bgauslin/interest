@@ -1,5 +1,6 @@
 import {LitElement, css, html} from 'lit';
-import {customElement, property, query, state} from 'lit/decorators.js';
+import {customElement, query, state} from 'lit/decorators.js';
+import {Currencies} from '../../modules/Calculator';
 import shadowStyles from './settings.scss';
 
 /**
@@ -7,17 +8,10 @@ import shadowStyles from './settings.scss';
  */
 @customElement('i-settings')
 class Settings extends LitElement {
-  @property() currencies = [
-    {id: 'usd', symbol: '$', label: 'Dollars'},
-    {id: 'eur', symbol: '€', label: 'Euros'},
-    {id: 'gbp', symbol: '£', label: 'Pounds'},
-    {id: 'yen', symbol: '¥', label: 'Yen'},
-    {id: 'inr', symbol: '₹', label: 'Rupees'},
-  ];
   @query('button') button: HTMLButtonElement;
   @query('form') form: HTMLFormElement;
   @state() clickListener: EventListenerObject;
-  @state() currency = '';
+  @state() currency = Currencies[0].id;
   @state() open: Boolean = false;
 
   static styles = css`${shadowStyles}`;
@@ -41,10 +35,12 @@ class Settings extends LitElement {
 
   private getSavedCurrency() {
     const storage = JSON.parse(localStorage.getItem('settings'));
-    this.currency = storage ? storage.currency : this.currencies[0].id;
+    if (storage && storage.currency) {
+      this.currency = storage.currency;
+    }
   }
 
-  private toggleOpen() {
+  private toggleMenu() {
     if (!this.open) {
       this.openMenu();
     } else {
@@ -96,7 +92,7 @@ class Settings extends LitElement {
 
   private renderButton() {
     const buttonLabel = 'Update theme';
-    const currentCurrency = this.currencies.find(currency => currency.id === this.currency);
+    const currentCurrency = Currencies.find(currency => currency.id === this.currency);
     return html`
       <button
         aria-controls="menu"
@@ -105,7 +101,7 @@ class Settings extends LitElement {
         aria-label="${buttonLabel}"
         id="button"
         title="${buttonLabel}"
-        @click="${this.toggleOpen}">
+        @click="${this.toggleMenu}">
         <span aria-hidden="true">${currentCurrency.symbol}</span>
       </button>
     `;
@@ -116,7 +112,7 @@ class Settings extends LitElement {
       <form id="menu" aria-hidden="${!this.open}"
         @change="${this.updateCurrency}">
         <ul role="menu" aria-labelledby="button">
-        ${this.currencies.map((currency) => {
+        ${Currencies.map((currency) => {
           const {id, label, symbol} = currency;
           return html`
             <li role="menuitem">

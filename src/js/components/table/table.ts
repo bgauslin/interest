@@ -1,6 +1,6 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
-import {Calculator, CompoundingValues, Sums} from '../../modules/Calculator';
+import {Calculator, CompoundingValues, DEFAULT_CURRENCY, Sums} from '../../modules/Calculator';
 import shadowStyles from './table.scss';
 
 /**
@@ -9,7 +9,7 @@ import shadowStyles from './table.scss';
 @customElement('i-table')
 class TableWidget extends LitElement {
   @state() calculator: Calculator;
-  @state() currency = '';
+  @state() currency = DEFAULT_CURRENCY;
   @state() currencyListener: EventListenerObject;
   @state() tableData: Sums[] = [];
   @state() userValues: CompoundingValues;

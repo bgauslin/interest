@@ -1,6 +1,6 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
-import {Calculator, CompoundingValues} from '../../modules/Calculator';
+import {Calculator, CompoundingValues, DEFAULT_CURRENCY} from '../../modules/Calculator';
 import shadowStyles from './user-values.scss';
 
 interface InputAttributes {
@@ -43,7 +43,7 @@ class UserValues extends LitElement {
     }
   ];
   @query('form') form: HTMLFormElement;
-  @state() currency = 'usd';
+  @state() currency = DEFAULT_CURRENCY;
   @state() total = '';
   @state() calculator: Calculator;
   @state() currencyListener: EventListenerObject;

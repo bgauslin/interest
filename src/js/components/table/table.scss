@@ -75,7 +75,7 @@ td.growth::after {
   margin-inline-start: .25em;
 }
 
-// Pseudo-element for currency symbols.
+// TODO: Pseudo-elements for currency symbols.
 @include utils.currency-symbols('currency');
 
 // Alternating row backgrounds.

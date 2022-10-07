@@ -111,8 +111,8 @@ input {
   overflow: hidden;
   text-align: center;
   text-overflow: ellipsis;
-  transition: opacity .3s ease-out, visibility .3s ease-out;
-  visibility: visible;
+  transition: opacity .2s ease-out, visibility .2s ease-out; // TODO
+  visibility: visible; // TODO
 
   @media #{map.get(const.$breakpoint, large)} {
     text-align: start;
@@ -121,7 +121,7 @@ input {
 
 .total:empty {
   opacity: 0;
-  visibility: hidden;
+  visibility: hidden; // TODO
 }
 
 @include utils.currency-symbols();

@@ -45,7 +45,7 @@ button {
 
 @media (any-hover: hover) {
   button {
-    transition: background-color .3s;
+    transition: background-color .2s;
 
     &:hover {
       background-color: var(--color-surface2);
@@ -75,7 +75,7 @@ form {
   opacity: 1;
   position: absolute;
   transform: translate3d(0, 0, 0);
-  transition: opacity .3s ease-out, transform .3s ease-out;
+  transition: opacity .2s ease-out, transform .2s ease-out;
 }
 
 form[aria-hidden='true'] {

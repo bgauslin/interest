@@ -5,7 +5,6 @@
 :host {
   display: grid;
   grid: 'drawer' 'button' 1fr;
-  place-items: center; //
 }
 
 button {
@@ -28,6 +27,7 @@ button {
   outline: 0;
   padding-block: 0;
   padding-inline: 1.5rem;
+  place-self: center;
   transition: opacity .2s ease-out;
   white-space: nowrap;
 

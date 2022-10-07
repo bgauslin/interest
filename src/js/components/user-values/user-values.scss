@@ -1,0 +1,131 @@
+@use 'sass:map';
+@use 'sass:math';
+@use '../../../styles/const';
+@use '../../../styles/utils';
+
+$total-size: 2rem;
+
+:host {
+  display: block;
+  grid-area: values;
+  overflow: hidden;
+
+  @media #{map.get(const.$breakpoint, small)} {
+    align-self: start;
+    background: var(--color-surface);
+    border-radius: const.$card-border-radius;
+  }
+
+  @media #{map.get(const.$breakpoint, large)} {
+    position: sticky;
+    inset-block: var(--layout-header-height) auto;
+  }
+}
+
+form {
+  display: grid;
+  gap: 2rem;
+  grid: auto-flow / 1fr;
+  padding: const.$card-padding;
+}
+
+ul {
+  display: flex; //
+  flex-wrap: wrap; //
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  align-items: center; //
+  display: flex; //
+
+  // @media #{map.get(const.$breakpoint, small)} {
+  //   flex: 50%;
+  // }
+}
+
+label {
+  flex: 1;
+  line-height: 1;
+  margin-inline: .5rem 0;
+  opacity: .8;
+  order: 2;
+  white-space: nowrap;
+}
+
+label[for='rate']::before {
+  content: '% ';
+}
+
+input {
+  background: 0;
+  block-size: 2rem;
+  border-block: 2px solid transparent;
+  border-block-end: 2px solid var(--color-input-border);
+  border-inline: 0;
+  border-radius: 0;
+  font-family: 'Avenir Variable', sans-serif;
+  font-size: inherit;
+  inline-size: 5.5rem;
+  line-height: 1;
+  margin: 0;
+  order: 1;
+  outline: 0;
+  padding: 0;
+  text-align: end;
+
+  &:focus {
+    border-block-end-color: var(--color-theme);
+    color: var(--color-theme);
+  }
+
+  &:focus:invalid {
+    border-block-end-color: var(--color-error);
+    color: var(--color-error);
+  }
+
+  &:not(:focus) {
+    color: var(--color-on-surface);
+  }
+}
+
+// Reorder fields for side-by-side layout at small breakpoint.
+// @media #{map.get(const.$breakpoint, small)} {
+//   .principal { order: 1; }
+//   .rate { order: 2; }
+//   .contribution { order: 3; }
+//   .periods { order: 4; }
+// }
+
+.total {
+  block-size: $total-size;
+  color: var(--color-theme);
+  font-size: $total-size;
+  line-height: $total-size;
+  margin: 0;
+  max-inline-size: calc(100vw - #{2 * (const.$gap + const.$card-padding)});
+  opacity: 1;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  transition: opacity .3s, visibility .3s;
+  visibility: visible;
+
+  @media #{map.get(const.$breakpoint, large)} {
+    text-align: start;
+  }
+}
+
+.total:empty {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@include utils.currency-symbols();
+
+.total[currency]:not(:empty)::before {
+  margin-inline-end: .25em;
+}

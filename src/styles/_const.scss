@@ -16,7 +16,7 @@ $gray6-dark: rgb(28, 28, 30);
 
 // Dimensions.
 $button-height: 2.75rem;
-$card-border-radius: .5rem;
+$card-border-radius: 1rem;
 $card-padding: 1.5rem;
 $gap: 1rem;
 $gap-medium: 1.5rem;
@@ -30,8 +30,8 @@ $small-breakpoint: 26rem;
 
 // Responsive breakpoints.
 $breakpoint: (
-  'small':  (min-width: #{$small-breakpoint}),
-  'small-portrait': (max-width: #{$small-breakpoint}) and (orientation: portrait),
-  'medium': (min-width: #{$table-max-width + ($gap-medium * 2)},
-  'large':  (min-width: #{$content-width-large + ($gap-medium * 2)},
+  'small':  '(min-width: #{$small-breakpoint})',
+  'small-portrait': '(max-width: #{$small-breakpoint}) and (orientation: portrait)',
+  'medium': '(min-width: #{$table-max-width + ($gap-medium * 2)})',
+  'large':  '(min-width: #{$content-width-large + ($gap-medium * 2)})',
 );

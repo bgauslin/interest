@@ -1,25 +1,25 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, query, state} from 'lit/decorators.js';
-import {Currencies} from '../../modules/Calculator';
+import {Currencies, DEFAULT_CURRENCY} from '../../modules/Calculator';
 import shadowStyles from './settings.scss';
 
 /**
- * Web component that renders theme swatches for a user to choose from.
+ * Web component that renders currencies for a user to choose from.
  */
 @customElement('i-settings')
 class Settings extends LitElement {
   @query('button') button: HTMLButtonElement;
   @query('form') form: HTMLFormElement;
   @state() clickListener: EventListenerObject;
-  @state() currency = Currencies[0].id;
+  @state() currency = DEFAULT_CURRENCY;
   @state() open: Boolean = false;
+  @state() closeMenuKeys: String[] = ['Escape', 'Space'];
 
   static styles = css`${shadowStyles}`;
 
   constructor() {
     super();
     this.clickListener = this.handleClick.bind(this);
-    this.addEventListener('keyup', this.handleKey); 
   }
   
   connectedCallback() {
@@ -51,6 +51,10 @@ class Settings extends LitElement {
   private openMenu() {
     this.open = true;
     window.requestAnimationFrame(() => {
+      const checked = this.form.querySelector<HTMLInputElement>(':checked');
+      checked?.focus();
+
+      this.addEventListener('keyup', this.handleKey);
       document.addEventListener('click', this.clickListener);
     });
   }
@@ -58,6 +62,7 @@ class Settings extends LitElement {
   private closeMenu() {
     this.open = false;
     document.removeEventListener('click', this.clickListener);
+    this.removeEventListener('keyup', this.handleKey);
   }
 
   private handleClick(event: Event) {
@@ -67,7 +72,7 @@ class Settings extends LitElement {
   }
 
   private handleKey(event: KeyboardEvent) {
-    if (this.open && event.code === 'Escape') {
+    if (this.open && this.closeMenuKeys.includes(event.code)) {
       this.closeMenu();
     }
   }
@@ -92,7 +97,8 @@ class Settings extends LitElement {
 
   private renderButton() {
     const buttonLabel = 'Update theme';
-    const currentCurrency = Currencies.find(currency => currency.id === this.currency);
+    const currentCurrency =
+        Currencies.find(currency => currency.id === this.currency);
     return html`
       <button
         aria-controls="menu"

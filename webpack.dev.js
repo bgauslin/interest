@@ -7,9 +7,6 @@ module.exports = merge(common, {
   output: {
     filename: '[name].js',
   },
-  // devServer: {
-  //   contentBase: './dist'
-  // },
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].css',

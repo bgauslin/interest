@@ -2,16 +2,9 @@
 @use '../../../styles/const';
 @use '../../../styles/utils';
 
-
 :host {
-  --color-row-background: #{mix(black, white, 1%)};
   --layout-footnote-display: none;
   --layout-optional-columns-display: none;
-  --type-cell: .8125rem;
-
-  @media (prefers-color-scheme: dark) {
-    --color-row-background: #{mix(white, black, 1%)};
-  }
 
   @media #{map.get(const.$breakpoint, small)} {
     --color-table-background: var(--color-surface);
@@ -23,7 +16,7 @@
   }
 
   @media #{map.get(const.$breakpoint, medium)} {
-    --type-cell: .9375rem;
+    --layout-footnote-display: none;
   }
 }
 
@@ -87,7 +80,7 @@ td.growth::after {
 
 // Alternating row backgrounds.
 tbody > tr:nth-child(odd) {
-  background-color: var(--color-row-background);
+  background-color: var(--color-odd-row-background);
 }
 
 // Footnotes after the table.

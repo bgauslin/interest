@@ -56,3 +56,18 @@
     --layout-main-grid: 'values table' 1fr 'expandable expandable' 0 / #{const.$values-grid-width} 1fr;
   }
 }
+
+// TODO: Figure out why these don't work in shadow DOM Sass file.
+i-table {
+  --color-odd-row-background: #{mix(black, white, 1%)};
+  --type-cell: .8125rem;
+
+  @media (prefers-color-scheme: dark) {
+    --color-odd-row-background: #{mix(white, black, 1%)};
+  }
+
+  @media #{map.get(const.$breakpoint, medium)} {
+    --type-cell: .9375rem;
+  }
+}
+

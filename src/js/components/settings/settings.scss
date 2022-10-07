@@ -1,0 +1,118 @@
+@use 'sass:math';
+
+// Component constants.
+$button-size: 2.75rem;
+$swatch-size: 2.75rem;
+
+:host {
+  place-self: center;
+  position: relative;
+  z-index: 1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+input {
+  -webkit-appearance: none;
+  appearance: none;
+  border: 0;
+  outline: 0;
+}
+
+button {
+  background-color: var(--color-surface1); // TODO
+  block-size: $button-size;
+  border-radius: math.div($button-size, 2);
+  color: var(--color-on-surface); // TODO
+  cursor: pointer;
+  display: grid;
+  inline-size: $button-size;
+  opacity: 1;
+  place-content: center;
+
+  &:focus,
+  &[aria-expanded='true'] {
+    background-color: var(--color-surface2); // TODO
+  }
+}
+
+@media (any-hover: hover) {
+  button {
+    transition: background-color .3s;
+
+    &:hover {
+      background-color: var(--color-surface2); // TODO
+    }
+  }
+}
+
+svg {
+  fill: currentColor;
+  inline-size: 1.25rem;
+  pointer-events: none;
+}
+
+// Menu.
+form {
+  backdrop-filter: blur(5px);
+  background: var(--color-surface2);
+  border-radius: 2rem;
+  inset-block: $button-size auto;
+  inset-inline: auto $button-size;
+  opacity: 1;
+  position: absolute;
+  transform: translate3d(0, 0, 0);
+  transition: opacity .3s ease, transform .3s ease;
+}
+
+form[aria-hidden='true'] {
+  opacity: 0;
+  transform: translate3d(0, -.5rem, 0);
+}
+
+// Options via list of radio buttons.
+ul {
+  display: flex;
+  gap: .375rem;
+  list-style: none;
+  margin: 0;
+  padding: .375rem;
+}
+
+li {
+  display: inline-grid;
+  grid: 1fr / 1fr;
+  place-items: center;
+}
+
+li > * {
+  grid-area: 1 / 1 / -1 / -1;
+}
+
+// Radio buttons styles as discs.
+input {
+  background-color: var(--color-surface1);
+  block-size: $swatch-size;  
+  border-radius: math.div($swatch-size, 2);
+  border: 3px solid var(--color-surface2);
+  cursor: pointer;
+  display: block;
+  inline-size: $swatch-size;
+  margin: 0;
+}
+
+input:focus {
+  border-color: var(--color-on-surface-variant);
+}
+
+input:checked {
+  border-color: var(--color-theme);
+}
+
+li > span {
+  font-size: 1.5em;
+  pointer-events: none;
+}

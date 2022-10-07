@@ -1,55 +1,67 @@
 import {LitElement, css, html} from 'lit';
-import {customElement, query, state} from 'lit/decorators.js';
+import {customElement, property, query, state} from 'lit/decorators.js';
 import shadowStyles from './expandable.scss';
 
 /**
- * Custom element that expands/collapses a target element when its source
- * element is clicked.
+ * Custom element that expands/collapses a drawer when a button is clicked.
  */
-@customElement('expandable-drawer')
+@customElement('i-drawer')
 class Expandable extends LitElement {
+  @property({attribute: 'label'}) label = '';
   @query('.drawer') drawer: HTMLElement;
   @state() open: Boolean = false;
 
   static styles = css`${shadowStyles}`;
 
-  private toggleOpen() {
-    this.open = !this.open;
-    console.log(this.open);
+  connectedCallback() {
+    super.connectedCallback();
+    this.setupDrawer();
+  }
 
-    if (this.open) {
-      this.collapse();
-    } else {
-      this.expand();
+  private async setupDrawer() {
+    await this.updateComplete;
+    if (!this.open) {
+      this.drawer.style.blockSize = '0';
     }
   }
 
-  private collapse() {
+  private toggleDrawer() {
+    if (this.open) {
+      this.closeDrawer();
+    } else {
+      this.openDrawer();
+    }
+    this.open = !this.open;
+  }
+
+  private closeDrawer() {
     window.requestAnimationFrame(() => {
-      this.drawer.style.blockSize = `${this.drawer.scrollHeight / 16}rem`;
+      const drawerHeight = this.drawer.scrollHeight;
+      this.drawer.style.blockSize = `${drawerHeight / 16}rem`;
       window.requestAnimationFrame(() => {
         this.drawer.style.blockSize = '0';
       });
     });
   }
 
-  private expand() {
-    this.drawer.style.blockSize = `${this.drawer.scrollHeight / 16}rem`;
+  private openDrawer() {
+    const drawerHeight = this.drawer.scrollHeight;
+    this.drawer.style.blockSize = `${drawerHeight / 16}rem`;
     this.drawer.addEventListener('transitionend', () => {
       this.drawer.style.blockSize = null;
     }, {once: true});
   }
 
   render() {
-    const labelPrefix = this.open ? 'Hide' : 'Show';
+    const action = this.open ? 'Hide' : 'Show';
+    const buttonLabel = `${action} ${this.label}`;
     return html`
-      <button aria-controls="drawer" aria-expanded="${this.open}"
-          @click="${this.toggleOpen}">
-        <span class="label">${labelPrefix}</span>
-        <slot name="label"></slot>
-      </button>
+      <button
+        aria-controls="drawer"
+        aria-expanded="${this.open}"
+        @click="${this.toggleDrawer}">${buttonLabel}</button>
       <div class="drawer" id="drawer">
-        <slot name="drawer"></slot>
+        <slot></slot>
       </div>
     `;
   }

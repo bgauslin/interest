@@ -2,18 +2,18 @@
 import '../styles/index';
 
 // Web components.
-import './components/expandable/expandable';
+import './components/drawer/drawer';
 import './components/settings/settings';
 import './components/table/table';
 import './components/user-values/user-values';
 
-// TODO: Move the following to a class or web component...
+// TODO: Move the following to a class or web component.
 // Simple event hub for sending/receiving custom event data.
 import {DEFAULT_CURRENCY} from './modules/Calculator';
 
-const drawerWidget = document.querySelector('i-drawer');
-const tableWidget = document.querySelector('i-table');
-const valuesWidget = document.querySelector('i-values');
+const drawerWidget = document.querySelector('app-drawer');
+const tableWidget = document.querySelector('app-table');
+const valuesWidget = document.querySelector('app-values');
 let currency = DEFAULT_CURRENCY;
 let values = {};
 

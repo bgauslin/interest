@@ -13,7 +13,7 @@
   ],
   "files": [
     "src/js/app.ts",
-    "src/js/components/expandable/expandable.ts",
+    "src/js/components/drawer/drawer.ts",
     "src/js/components/settings/settings.ts",
     "src/js/components/table/table.ts",
     "src/js/components/user-values/user-values.ts",

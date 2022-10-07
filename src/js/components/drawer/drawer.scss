@@ -2,6 +2,12 @@
 @use 'sass:math';
 @use '../../../styles/const';
 
+:host {
+  display: grid;
+  grid: 'drawer' 'button' 1fr;
+  place-items: center; //
+}
+
 button {
   align-items: center;
   background-color: transparent;
@@ -14,8 +20,11 @@ button {
   font-family: 'Avenir Variable', sans-serif;
   font-variation-settings: 'wght' 600;
   font-size: .875em;
+  grid-area: button;
   justify-content: center;
   line-height: 1;
+  margin-block: 2rem;
+  margin-inline: 2rem;
   outline: 0;
   padding-block: 0;
   padding-inline: 1.5rem;
@@ -42,6 +51,7 @@ button {
 
 .drawer {
   box-sizing: border-box;
+  grid-area: drawer;
   overflow: hidden;
   transition: block-size .2s ease-out;
 }

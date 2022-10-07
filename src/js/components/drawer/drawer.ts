@@ -1,12 +1,12 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
-import shadowStyles from './expandable.scss';
+import shadowStyles from './drawer.scss';
 
 /**
  * Custom element that expands/collapses a drawer when a button is clicked.
  */
-@customElement('i-drawer')
-class Expandable extends LitElement {
+@customElement('app-drawer')
+class Drawer extends LitElement {
   @property({attribute: 'label'}) label = '';
   @query('.drawer') drawer: HTMLElement;
   @state() open: Boolean = false;

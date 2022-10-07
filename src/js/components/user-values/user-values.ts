@@ -14,7 +14,7 @@ interface InputAttributes {
  * Custom element that renders input fields and calculates compound interest
  * based on user-provided values.
  */
-@customElement('i-values')
+@customElement('app-values')
 class UserValues extends LitElement {
   @property() userInputs: InputAttributes[] = [
     {

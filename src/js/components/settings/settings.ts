@@ -6,7 +6,7 @@ import shadowStyles from './settings.scss';
 /**
  * Web component that renders currencies for a user to choose from.
  */
-@customElement('i-settings')
+@customElement('app-settings')
 class Settings extends LitElement {
   @query('button') button: HTMLButtonElement;
   @query('form') form: HTMLFormElement;

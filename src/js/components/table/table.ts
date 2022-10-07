@@ -35,15 +35,13 @@ class TableWidget extends LitElement {
     document.removeEventListener('updateValues', this.valuesListener);
   }
 
+  private updateCurrency(e: CustomEvent) {
+    this.currency = e.detail.currency;
+  }
+
   private updateTableData(e: CustomEvent) {
     this.tableData =
         this.calculator.compound(e.detail.values, `${this.currency}`);
-    console.log('table.updateTableData()', this.tableData);
-  }
-
-  private updateCurrency(e: CustomEvent) {
-    this.currency = e.detail.currency;
-    console.log('table.updateCurrency()', this.currency);
   }
 
   render() {

@@ -23,7 +23,7 @@ html {
 }
 
 body {
-  background: var(--color-surface1);
+  background-color: var(--color-surface1);
   color: var(--color-on-surface);
   display: grid;
   font-family: 'Avenir Variable', sans-serif;
@@ -37,7 +37,7 @@ body {
 
 header {
   backdrop-filter: var(--comp-backdrop-filter);
-  background: var(--comp-header-background);
+  background-color: var(--comp-header-background);
   block-size: var(--layout-header-height);
   grid-area: header;
   inset-block: 0 auto;

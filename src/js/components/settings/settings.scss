@@ -68,14 +68,14 @@ li > span {
 // Menu.
 form {
   backdrop-filter: blur(5px);
-  background: var(--color-surface2);
+  background-color: var(--color-surface2);
   border-radius: 2rem;
   inset-block: $button-size auto;
   inset-inline: auto $button-size;
   opacity: 1;
   position: absolute;
   transform: translate3d(0, 0, 0);
-  transition: opacity .3s ease, transform .3s ease;
+  transition: opacity .3s ease-out, transform .3s ease-out;
 }
 
 form[aria-hidden='true'] {

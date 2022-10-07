@@ -2,49 +2,44 @@
 @use '../../../styles/const';
 
 :host {
-  --cell-padding-block: .5em;
-  --cell-padding-inline: .75em;
-  --footnote-display: none;
-  --optional-columns-display: none;
-  --table-font-size: .8125rem;
-  --table-row-background: #{mix(black, white, 3%)}; // TODO}
+  --color-row-background: #{mix(black, white, 1%)};
+  --layout-cell-padding-block: .5em;
+  --layout-cell-padding-inline: .75em;
+  --layout-footnote-display: none;
+  --layout-optional-columns-display: none;
+  --type-cell: .8125rem;
 
   @media (prefers-color-scheme: dark) {
-    --table-row-background: #{mix(white, black, 8%)}; // TODO
+    --color-row-background: #{mix(white, black, 1%)};
   }
 
   @media #{map.get(const.$breakpoint, small)} {
-    --optional-columns-display: table-cell;
-    --table-background: var(--color-surface1);
+    --color-table-background: var(--color-surface);
+    --layout-optional-columns-display: table-cell;
   }
 
   @media #{map.get(const.$breakpoint, small-portrait)} {
-    --footnote-display: block;
+    --layout-footnote-display: block;
   }
 
   @media #{map.get(const.$breakpoint, medium)} {
-    --table-font-size: .9375rem;
+    --type-cell: .9375rem;
   }
 
   @media #{map.get(const.$breakpoint, large)} {
-    --cell-padding-inline: 1em;
+    --layout-cell-padding-inline: 1em;
   }
 }
 
-// Make <table> overflow content scrollable.
-:host {
-  border-radius: const.$card-border-radius;
-  overflow-x: auto;
-}
-
 table {
-  background: var(--table-background, 0);
+  background-color: var(--color-table-background, 0);
   border-collapse: collapse;
-  font-size: var(--table-font-size);
+  border-radius: const.$card-border-radius;
+  font-size: var(--type-cell);
   font-variant-numeric: tabular-nums;
   inline-size: 100%;
   opacity: 1;
-  transition: opacity .3s;
+  transition: opacity .3s ease-out;
 }
 
 table[aria-hidden='true'] {
@@ -53,8 +48,8 @@ table[aria-hidden='true'] {
 
 // All cells are end-aligned by default.
 :is(th, td) {
-  padding-block: var(--cell-padding-block);
-  padding-inline: var(--cell-padding-inline);
+  padding-block: var(--layout-cell-padding-block);
+  padding-inline: var(--layout-cell-padding-inline);
   text-align: end;
   white-space: nowrap;
 }
@@ -72,7 +67,7 @@ th {
 // The 'growth' and 'interest' columns only display when the viewport is wide
 // enought.
 :is(.growth, .interest) {
-  display: var(--optional-columns-display);
+  display: var(--layout-optional-columns-display);
 }
 
 // Pseudo-elements for numeric values.
@@ -93,13 +88,13 @@ td.growth::after {
 
 // Alternating row backgrounds.
 tbody > tr:nth-child(odd) {
-  background: var(--table-row-background);
+  background-color: var(--color-row-background);
 }
 
 // Footnotes after the table.
 .rotate-screen {
   color: var(--color-on-surface-variant);
-  display: var(--footnote-display);
+  display: var(--layout-footnote-display);
   font-size: var(--type-fineprint);
   margin-block: .75rem 0;
   margin-inline: const.$gap;

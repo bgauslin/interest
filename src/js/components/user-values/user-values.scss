@@ -12,7 +12,7 @@ $total-size: 2rem;
 
   @media #{map.get(const.$breakpoint, small)} {
     align-self: start;
-    background: var(--color-surface);
+    background-color: var(--color-surface);
     border-radius: const.$card-border-radius;
   }
 
@@ -61,7 +61,7 @@ label[for='rate']::before {
 }
 
 input {
-  background: 0;
+  background-color: transparent;
   block-size: 2rem;
   border-block: 2px solid transparent;
   border-block-end: 2px solid var(--color-outline);
@@ -111,7 +111,7 @@ input {
   overflow: hidden;
   text-align: center;
   text-overflow: ellipsis;
-  transition: opacity .3s, visibility .3s;
+  transition: opacity .3s ease-out, visibility .3s ease-out;
   visibility: visible;
 
   @media #{map.get(const.$breakpoint, large)} {

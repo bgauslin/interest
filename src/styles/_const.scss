@@ -16,22 +16,24 @@ $gray6-dark: rgb(28, 28, 30);
 
 // Dimensions.
 $button-height: 2.75rem;
-$card-border-radius: 1rem;
 $card-padding: 1.5rem;
-$gap: 1rem;
-$gap-medium: 1.5rem;
+$card-radius: 1rem;
+$gap-max: 2rem;
+$gap-min: 1rem;
 $table-max-size: 40rem;
 $values-max-size: 18rem;
 
+// TODO: Rename/refactor breakpoints...
+
 // Calculated constants for breakpoints.
 $values-grid-width: $values-max-size + (2 * $card-padding);
-$content-width-large: $values-grid-width + $table-max-size + $gap-medium;
+$content-width-large: $values-grid-width + $table-max-size + $gap-max;
 $small-breakpoint: 26rem;
 
 // Responsive breakpoints.
 $breakpoint: (
   'small':  '(min-width: #{$small-breakpoint})',
   'small-portrait': '(max-width: #{$small-breakpoint}) and (orientation: portrait)',
-  'medium': '(min-width: #{$table-max-size + ($gap-medium * 2)})',
-  'large':  '(min-width: #{$content-width-large + ($gap-medium * 2)})',
+  'medium': '(min-width: #{$table-max-size + ($gap-max * 2)})',
+  'large':  '(min-width: #{$content-width-large + ($gap-max * 2)})',
 );

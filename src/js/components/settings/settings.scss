@@ -1,4 +1,5 @@
 @use 'sass:math';
+@use '../../../styles/const';
 
 // Component constants.
 $button-size: 2.75rem;
@@ -13,16 +14,17 @@ $swatch-size: 2.75rem;
   box-sizing: border-box;
 }
 
+// Reset default element styles.
 button,
 input {
   -webkit-appearance: none;
   appearance: none;
+  background: 0;
   border: 0;
   outline: 0;
 }
 
 button {
-  background-color: var(--color-surface);
   block-size: $button-size;
   border-radius: math.div($button-size, 2);
   color: var(--color-theme);
@@ -48,7 +50,7 @@ button {
   pointer-events: none;
 }
 
-// Menu.
+// Currency menu.
 form {
   backdrop-filter: blur(5px);
   background-color: var(--color-surface2);
@@ -57,17 +59,17 @@ form {
   inset-inline: 0 auto;
   opacity: 1;
   position: absolute;
-  transform: translate3d(0, 0, 0);
+  transform: translate3d(-.375rem, -.375rem, 0);
   transition: opacity .2s ease-out, transform .2s ease-out;
 }
 
 form[aria-hidden='true'] {
   opacity: 0;
   pointer-events: none;
-  transform: translate3d(0, .5rem, 0);
+  transform: translate3d(-.375rem, .5rem, 0);
 }
 
-// Options via list of radio buttons.
+// Currency options via list of radio buttons.
 ul {
   display: flex;
   gap: .375rem;

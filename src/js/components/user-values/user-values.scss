@@ -9,7 +9,7 @@
   @media #{map.get(const.$breakpoint, small)} {
     align-self: start;
     background-color: var(--color-surface);
-    border-radius: const.$card-border-radius;
+    border-radius: const.$card-radius;
   }
 
   @media #{map.get(const.$breakpoint, large)} {
@@ -108,12 +108,13 @@ input {
 }
 
 .total {
-  align-items: center;
   display: grid;
   grid: 1fr / auto-flow;
   opacity: 1;
   padding-block: const.$card-padding;
   padding-inline: const.$card-padding;
+  place-content: center;
+  place-items: center;
   transition: opacity .2s ease-out;
 }
 
@@ -128,6 +129,7 @@ $amount-size: 2rem;
   color: var(--color-theme);
   font-size: $amount-size;
   line-height: $amount-size;
+  max-inline-size: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

@@ -5,15 +5,12 @@
   --color-error: #c00;
   --color-on-surface: black;
   --color-on-surface-variant: #{const.$gray1-light};
-  --color-on-theme: white;
+  --color-on-theme: white; //
   --color-outline: #{const.$gray4-dark};
   --color-surface: #{const.$gray6-light};
   --color-surface1: #{const.$gray5-light};
   --color-surface2: #{const.$gray4-light};
   --color-theme: #00ad45;
-  --layout-body-grid: 'main' 1fr / 1fr; //
-  --layout-main-gap: #{const.$gap};
-  --layout-main-grid: 'values' 'drawer' minmax(auto, 1fr) / 1fr; 
 
   @media (prefers-color-scheme: dark) {
     --color-error: #db4d4d;
@@ -25,22 +22,6 @@
     --color-surface1: #{const.$gray5-dark};
     --color-surface2: #{const.$gray4-dark};
     --color-theme: #4dc67d;
-  }
-
-  @media #{map.get(const.$breakpoint, small)} {
-    --layout-body-gap: #{const.$gap};
-    --layout-body-grid: '. main .' 1fr / 0 1fr 0; //
-  }
-
-  @media #{map.get(const.$breakpoint, medium)} {
-    --layout-body-gap: #{const.$gap-medium};
-    --layout-main-gap: #{const.$gap-medium};
-  }
-
-  @media #{map.get(const.$breakpoint, large)} {
-    --layout-body-gap: 0;
-    --layout-body-grid: '. main .' 1fr '. . .' 3rem / 0 1fr 0;
-    --layout-main-grid: 'values drawer' 1fr / #{const.$values-grid-width} 1fr;
   }
 }
 

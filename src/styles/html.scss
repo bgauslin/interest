@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use 'const';
 
 @font-face {
@@ -19,11 +20,8 @@ html {
 body {
   background-color: var(--color-surface1);
   color: var(--color-on-surface);
-  display: grid;
   font-family: 'Avenir Variable', sans-serif;
   font-variation-settings: 'wght' 500;
-  gap: var(--layout-body-gap);
-  grid: var(--layout-body-grid);
   margin: 0;
   min-block-size: 100vh;
   touch-action: manipulation;
@@ -37,8 +35,8 @@ body {
 
 main {
   display: grid;
-  gap: var(--layout-main-gap);
-  grid: var(--layout-main-grid);
+  gap: clamp(#{const.$gap-min}, #{const.$gap-min} + 1vw, #{const.$gap-max});
+  grid: 'values' 'drawer' minmax(auto, 1fr) / 1fr;
   grid-area: main;
   inline-size: 100%;
   margin-block: 0;
@@ -46,6 +44,10 @@ main {
   max-inline-size: const.$content-width-large;
   padding-block: 0 env(safe-area-inset-bottom);
   padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
+
+  @media #{map.get(const.$breakpoint, large)} {
+    grid: 'values drawer' 1fr / #{const.$values-grid-width} 1fr;
+  }
 }
 
 app-values {

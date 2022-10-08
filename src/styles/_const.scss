@@ -15,11 +15,12 @@ $gray5-dark: rgb(44, 44, 46);
 $gray6-dark: rgb(28, 28, 30);
 
 $error-light: #db4d4d;
-$error-dark:  #db4d4d;
+// $error-dark:  #db4d4d; // TODO
 $theme-light: #00ad45;
 $theme-dark: #4dc67d;
 
 // Dimensions.
+$amount-size: 2rem;
 $button-height: 2.75rem;
 $card-padding: 1.5rem;
 $card-radius: 1rem;
@@ -27,28 +28,21 @@ $gap-max: 3rem;
 $gap-min: 1rem;
 $field-gap: 1rem;
 $field-input-size: 5.5rem;
-$field-label-size: 8.25rem;
 
 // Compound dimensions.
 $fluid-gap: clamp(#{$gap-min}, #{$gap-min} + 1vw, #{$gap-max});
 
-$field-min-size: $field-input-size + $field-gap + $field-label-size;
-
-// Arbitrary amount added to prevent 3-column layout.
-$field-max-size: $field-min-size + 5rem;
-
 // Breakpoints via content-based min/max values.
-$values-max-size: ($field-min-size * 2) + $gap-max + ($card-padding * 2);
-$values-median-size: ($field-label-size * 2) + $field-gap +  + ($card-padding * 2);
-
+$field-min-size: 20rem;
 $table-max-size: 48rem;
 $table-min-size: 36rem;
 
-$app-max-size: $values-median-size + $gap-max + $table-max-size;
+$values-min-size: $field-min-size + ($card-padding * 2);
+$app-max-size: $values-min-size + $gap-max + $table-max-size;
 
 // Note: 'small-portrait' has 'max-width' media query (default is 'min-width').
 $breakpoint: (
-  'small':  '(min-width: #{$values-max-size + ($gap-min * 2)})',
-  'small-portrait': '(max-width: #{$values-max-size + ($gap-min * 2)}) and (orientation: portrait)',
-  'medium': '(min-width: #{$values-median-size + $table-min-size + ($gap-max * 3)})',
+  'small':  '(min-width: #{$values-min-size + ($gap-min * 2)})',
+  'small-portrait': '(max-width: #{$values-min-size + ($gap-min * 2)}) and (orientation: portrait)',
+  'medium': '(min-width: #{$values-min-size + $table-min-size + ($gap-max * 3)})',
 );

@@ -24,7 +24,7 @@
 
   @media #{map.get(const.$breakpoint, 'medium')} {
     gap: 0 const.$fluid-gap;
-    grid: 'values drawer' 1fr / #{const.$values-median-size} 1fr;
+    grid: 'values drawer' 1fr / #{const.$values-min-size} 1fr;
   }
 }
 

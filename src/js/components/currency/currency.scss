@@ -32,17 +32,14 @@ button {
   color: var(--color-theme);
   cursor: pointer;
   display: grid;
-  font-size: 2rem;
+  font-size: const.$amount-size;
   inline-size: $button-size;
   opacity: 1;
   place-content: center;
 
-  &:focus {
-    background-color: var(--color-surface1);
-  }
-
+  &:focus,
   &[aria-expanded='true'] {
-    background-color: transparent;
+    background-color: var(--color-surface1);
   }
 }
 

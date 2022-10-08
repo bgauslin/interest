@@ -35,26 +35,24 @@ form {
 
 ul {
   display: grid;
-  grid: auto-flow / repeat(auto-fill, minmax(#{const.$field-max-size}, 1fr));
+  grid: auto-flow / repeat(auto-fill, minmax(#{const.$field-min-size}, 1fr));
   gap: const.$field-gap;
   list-style: none;
   margin: 0;
   padding: 0;
-  place-items: center;
 }
 
 li {
   align-items: center;
-  display: flex;
+  display: grid;
   gap: const.$field-gap;
+  grid: 'input label' / 1fr 1fr;
 }
 
 label {
-  flex: 1;
-  inline-size: const.$field-label-size;
   line-height: 1;
   opacity: .8;
-  order: 2;
+  grid-area: label;
   white-space: nowrap;
 }
 
@@ -71,10 +69,11 @@ input {
   border-radius: 0;
   font-family: 'Avenir Variable', sans-serif;
   font-size: inherit;
+  grid-area: input;
   inline-size: const.$field-input-size;
+  justify-self: end;
   line-height: 1;
   margin: 0;
-  order: 1;
   outline: 0;
   padding: 0;
   text-align: end;
@@ -94,11 +93,6 @@ input {
   }
 }
 
-// Pull the amount closer to the widget via negative margins.
-interest-currency {
-  margin-inline: -.5rem;
-}
-
 .total {
   display: grid;
   grid: 1fr / auto-flow;
@@ -114,13 +108,11 @@ interest-currency {
   visibility: hidden;
 }
 
-$amount-size: 2rem;
-
 .amount {
-  block-size: $amount-size;
+  block-size: const.$amount-size;
   color: var(--color-theme);
-  font-size: $amount-size;
-  line-height: $amount-size;
+  font-size: const.$amount-size;
+  line-height: const.$amount-size;
   max-inline-size: 100%;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -1,19 +1,14 @@
 @use 'sass:map';
 @use 'const';
 
-@font-face {
-  font-display: swap;
-  font-family: 'Avenir Variable';
-  font-weight: 1 999;
-  src: url('https://assets.gauslin.com/fonts/AvenirNext-Variable.woff2') format('woff2');
-}
-
 html {
   -webkit-tap-highlight-color: transparent;
   text-size-adjust: none;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -37,9 +32,6 @@ main {
   display: grid;
   gap: clamp(#{const.$gap-min}, #{const.$gap-min} + 1vw, #{const.$gap-max});
   grid: 'values' 'drawer' minmax(auto, 1fr) / 1fr;
-  grid-area: main;
-  inline-size: 100%;
-  margin-block: 0;
   margin-inline: auto;
   max-inline-size: const.$content-width-large;
   padding-block: 0 env(safe-area-inset-bottom);
@@ -55,6 +47,12 @@ app-values {
   grid-area: values;
 }
 
+// Drawer should be hidden until it has content.
 app-drawer {
   grid-area: drawer;
+
+  &[aria-hidden='true'] {
+    opacity: 0;
+    visibility: hidden;
+  }
 }

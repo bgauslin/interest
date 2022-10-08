@@ -1,3 +1,5 @@
+@use 'sass:string';
+
 /// Appends default duration and timing function to properties which should
 /// transition.
 /// @param {!List} $properties - List of properties.
@@ -19,22 +21,4 @@
   }
   
   @return string.unquote($value);
-}
-
-/// Adds currency symbols via pseudo-elements.
-/// @param {!String} $attribute
-@mixin currency-symbols($attribute) {
-  $currencies: (
-    'eur': '€',
-    'gbp': '£',
-    'inr': '₹',
-    'usd': '$',
-    'yen': '¥',
-  );
-
-  @each $name, $value in $currencies {
-    [#{$attribute}='#{$name}']::before {
-      content: '#{$value}';
-    }
-  }
 }

@@ -55,7 +55,8 @@ class TableWidget extends LitElement {
 
   render() {
     return html`
-      <div class="table" aria-hidden="${this.tableData.length === 0}">
+      <div class="table" aria-hidden="${this.tableData.length === 0}"
+        data-currency="${this.currency}">
         <table>
           <thead>
             <tr>

@@ -115,7 +115,7 @@ input {
   padding-inline: const.$card-padding;
   place-content: center;
   place-items: center;
-  transition: opacity .2s ease-out;
+  transition: utils.transition(opacity);
 }
 
 .total[aria-hidden='true'] {

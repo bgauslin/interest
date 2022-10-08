@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use 'sass:math';
 @use '../../../styles/const';
+@use '../../../styles/utils';
 
 :host {
   display: grid;
@@ -28,7 +29,7 @@ button {
   padding-block: 0;
   padding-inline: 1.5rem;
   place-self: start center;
-  transition: opacity .2s ease-out;
+  transition: utils.transition(opacity);
   white-space: nowrap;
 
   &:focus,
@@ -40,7 +41,7 @@ button {
 
 @media (any-hover: hover){
   button {
-    transition: background-color .2s ease-out, color .2s ease-out;
+    transition: utils.transition(background-color, color);
   }
 
   button:hover {
@@ -53,7 +54,7 @@ button {
   box-sizing: border-box;
   grid-area: drawer;
   overflow: hidden;
-  transition: block-size .2s ease-out;
+  transition: utils.transition(block-size);
 }
 
 // Always hide the button and show the drawer on large screens.

@@ -1,5 +1,6 @@
 @use 'sass:math';
 @use '../../../styles/const';
+@use '../../../styles/utils';
 
 // Component constants.
 $button-size: 2.75rem;
@@ -60,7 +61,7 @@ form {
   opacity: 1;
   position: absolute;
   transform: translate3d(-.375rem, -.375rem, 0);
-  transition: opacity .2s ease-out, transform .2s ease-out;
+  transition: utils.transition(opacity, transform);
 }
 
 form[aria-hidden='true'] {
@@ -116,7 +117,7 @@ input:checked + span {
 
 @media (any-hover: hover) {
   button {
-    transition: background-color .2s;
+    transition: utils.transition(background-color);
 
     &:hover {
       background-color: var(--color-surface2);
@@ -129,7 +130,7 @@ input:checked + span {
   }
 
   input {
-    transition: border-color .2s;
+    transition: utils.transition(border-color);
 
     &:hover {
       border-color: var(--color-on-surface-variant);
@@ -137,6 +138,6 @@ input:checked + span {
   }
 
   input + span {
-    transition: color .2s;
+    transition: utils.transition(color);
   }
 }

@@ -59,17 +59,13 @@ body {
     --color-theme: #4dc67d;
   }
 
-  @media #{map.get(const.$breakpoint, small)} {
+  @media #{map.get(const.$breakpoint, 'small')} {
     --color-body-background: var(--color-surface1);
     --color-table-background: var(--color-surface);
     --layout-optional-columns-display: table-cell;
   }
 
-  @media #{map.get(const.$breakpoint, small-portrait)} {
+  @media #{map.get(const.$breakpoint, 'small-portrait')} {
     --layout-footnote-display: block;
-  }
-
-  @media #{map.get(const.$breakpoint, medium)} {
-    --layout-footnote-display: none;
   }
 }

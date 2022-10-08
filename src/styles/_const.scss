@@ -20,23 +20,27 @@ $card-padding: 1.5rem;
 $card-radius: 1rem;
 $gap-max: 3rem;
 $gap-min: 1rem;
-$input-gap: 1rem;
-$input-size: 5.5rem;
-$label-size: 8.25rem;
+$field-gap: 1rem;
+$field-input-size: 5.5rem;
+$field-label-size: 8.25rem;
 
-// References.
+// Compound dimensions.
 $fluid-gap: clamp(#{$gap-min}, #{$gap-min} + 1vw, #{$gap-max});
 
+$field-min-size: $field-input-size + $field-gap + $field-label-size;
+
+// Arbitrary amount added to prevent 3-column layout.
+$field-max-size: $field-min-size + 5rem;
+
 // Breakpoints via content-based min/max values.
-$values-max-size: ($input-size * 2) + ($label-size * 2) + ($input-gap * 3) + ($card-padding * 2);
-$values-median-size: ($label-size * 2) + $input-gap +  + ($card-padding * 2);
+$values-max-size: ($field-min-size * 2) + $gap-max + ($card-padding * 2);
+$values-median-size: ($field-label-size * 2) + $field-gap +  + ($card-padding * 2);
 
 $table-max-size: 48rem;
 $table-min-size: 36rem;
 
 $app-max-size: $values-median-size + $gap-max + $table-max-size;
 
-// Responsive breakpoints.
 $breakpoint: (
   'small':  '(min-width: #{$values-max-size + ($gap-min * 2)})',
   'small-portrait': '(max-width: #{$values-max-size + ($gap-min * 2)}) and (orientation: portrait)',

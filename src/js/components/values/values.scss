@@ -4,22 +4,22 @@
 @use '../../../styles/utils';
 
 :host {
+  align-self: start;
   display: block;
+  position: sticky;
 
-  @media #{map.get(const.$breakpoint, small)} {
+  @media #{map.get(const.$breakpoint, 'small')} {
     background-color: var(--color-surface);
     border-radius: const.$card-radius;
   }
 
-  @media #{map.get(const.$breakpoint, medium)} {
-    align-self: start;
-    position: sticky;
+  @media #{map.get(const.$breakpoint, 'medium')} {
     inset-block: const.$gap-max 0;
   }
 }
 
 ::slotted(h1) {
-  font-size: clamp(.75rem, .75rem + 1vw, 1.25rem);
+  font-size: clamp(1rem, 1rem + .5vw, 1.25rem);
   margin: 0;
   overflow: hidden;
   padding-block: 1rem;
@@ -38,31 +38,23 @@ form {
 
 ul {
   display: grid;
-  grid: auto-flow / 1fr;
-  gap: const.$input-gap;
+  grid: auto-flow / repeat(auto-fill, minmax(#{const.$field-max-size}, 1fr));
+  gap: const.$field-gap;
   list-style: none;
   margin: 0;
   padding: 0;
   place-items: center;
-
-  @media #{map.get(const.$breakpoint, small)} {
-    grid: auto-flow / repeat(2, 1fr);
-  }
-
-  @media #{map.get(const.$breakpoint, medium)} {
-    grid: auto-flow / 1fr;
-  }
 }
 
 li {
   align-items: center;
   display: flex;
-  gap: const.$input-gap;
+  gap: const.$field-gap;
 }
 
 label {
   flex: 1;
-  inline-size: const.$label-size;
+  inline-size: const.$field-label-size;
   line-height: 1;
   opacity: .8;
   order: 2;
@@ -82,7 +74,7 @@ input {
   border-radius: 0;
   font-family: 'Avenir Variable', sans-serif;
   font-size: inherit;
-  inline-size: const.$input-size;
+  inline-size: const.$field-input-size;
   line-height: 1;
   margin: 0;
   order: 1;

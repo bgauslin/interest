@@ -94,10 +94,10 @@ tbody > tr:nth-child(odd) {
 // Footnotes after the table.
 .rotate-screen {
   color: var(--color-on-surface-variant);
-  display: var(--layout-footnote-display, block);
+  display: var(--layout-footnote-display);
   font-size: .75rem;
-  padding-block: 1rem;
-  padding-inline: 1rem;
+  margin-block: 1rem;
+  margin-inline: 1rem;
 }
 
 .rotate-screen > span {

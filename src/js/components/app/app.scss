@@ -3,8 +3,9 @@
 
 :host {
   display: grid;
-  gap: const.$fluid-gap;
-  grid: 'values' 'drawer' minmax(auto, 1fr) / 1fr;
+  grid:
+    'values'
+    'drawer' minmax(auto, 1fr) / 1fr;
   margin-inline: auto;
   max-inline-size: const.$app-max-size;
   min-block-size: 100vh;
@@ -13,13 +14,14 @@
     min-block-size: 100dvh;
   }
 
-  @media #{map.get(const.$breakpoint, small)} {
+  @media #{map.get(const.$breakpoint, 'small')} {
+    gap: const.$fluid-gap;
     padding-block: const.$fluid-gap;
     padding-inline: const.$fluid-gap;
   }
 
-  @media #{map.get(const.$breakpoint, medium)} {
-    gap: 0 const.$gap-max;
+  @media #{map.get(const.$breakpoint, 'medium')} {
+    gap: 0 const.$fluid-gap;
     grid:
       '. .' const.$gap-max
       'values drawer' 1fr

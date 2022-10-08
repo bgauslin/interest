@@ -5,7 +5,6 @@ $button-size: 2.75rem;
 $swatch-size: 2.75rem;
 
 :host {
-  place-self: center;
   position: relative;
   z-index: 1;
 }
@@ -26,9 +25,10 @@ button {
   background-color: var(--color-surface);
   block-size: $button-size;
   border-radius: math.div($button-size, 2);
-  color: var(--color-on-surface);
+  color: var(--color-theme);
   cursor: pointer;
   display: grid;
+  font-size: 2rem;
   inline-size: $button-size;
   opacity: 1;
   place-content: center;
@@ -43,25 +43,8 @@ button {
   }
 }
 
-@media (any-hover: hover) {
-  button {
-    transition: background-color .2s;
-
-    &:hover {
-      background-color: var(--color-surface2);
-    }
-
-    &[aria-expanded='true'] {
-      background-color: var(--color-theme);
-      color: var(--color-on-theme);
-    }
-  }
-}
-
 // Currency symbol for button and options.
-button > span,
-li > span {
-  font-size: 1.5rem;
+:is(button, li) > span {
   pointer-events: none;
 }
 
@@ -70,8 +53,8 @@ form {
   backdrop-filter: blur(5px);
   background-color: var(--color-surface2);
   border-radius: 2rem;
-  inset-block: $button-size auto;
-  inset-inline: auto $button-size;
+  inset-block: auto $button-size;
+  inset-inline: 0 auto;
   opacity: 1;
   position: absolute;
   transform: translate3d(0, 0, 0);
@@ -81,7 +64,7 @@ form {
 form[aria-hidden='true'] {
   opacity: 0;
   pointer-events: none;
-  transform: translate3d(0, -.5rem, 0);
+  transform: translate3d(0, .5rem, 0);
 }
 
 // Options via list of radio buttons.
@@ -96,6 +79,7 @@ ul {
 // Stack each list item's children on top of each other.
 li {
   display: inline-grid;
+  font-size: 1.5rem;
   grid: 1fr / 1fr;
   place-items: center;
 }
@@ -124,3 +108,33 @@ input:checked {
   border-color: var(--color-theme);
 }
 
+input:checked + span {
+  color: var(--color-theme);
+}
+
+@media (any-hover: hover) {
+  button {
+    transition: background-color .2s;
+
+    &:hover {
+      background-color: var(--color-surface2);
+    }
+
+    &[aria-expanded='true'] {
+      background-color: var(--color-theme);
+      color: var(--color-on-theme);
+    }
+  }
+
+  input {
+    transition: border-color .2s;
+
+    &:hover {
+      border-color: var(--color-on-surface-variant);
+    }
+  }
+
+  input + span {
+    transition: color .2s;
+  }
+}

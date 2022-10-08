@@ -114,8 +114,11 @@ class UserValues extends LitElement {
   private updateValues() {
     if (this.userValues) {
       this.dispatchEvent(new CustomEvent('updateValues', {
+        detail: {
+          values: this.userValues,
+        },
         bubbles: true,
-        detail: {values: this.userValues},
+        composed: true,
       }));
     }
   }
@@ -128,6 +131,7 @@ class UserValues extends LitElement {
 
   render() {
     return html`
+      <slot></slot>
       <form @change="${this.getFormValues}">
         <ul>
           ${this.userInputs.map((item, index) => {
@@ -147,13 +151,11 @@ class UserValues extends LitElement {
             `
           })}
         </ul>
-        <div
-          aria-hidden="${this.total === ''}"
-          class="total"
-          data-currency="${this.currency}">
-          ${this.total}
-        </div>
       </form>
+      <div aria-hidden="${this.total === ''}" class="total">
+        <app-settings></app-settings>
+        <span class="amount">${this.total}</span>
+      </div>
     `;
   }
 }

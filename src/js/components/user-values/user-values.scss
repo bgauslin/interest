@@ -3,11 +3,8 @@
 @use '../../../styles/const';
 @use '../../../styles/utils';
 
-$total-size: 2rem;
-
 :host {
   display: block;
-  overflow: hidden;
 
   @media #{map.get(const.$breakpoint, small)} {
     align-self: start;
@@ -17,15 +14,25 @@ $total-size: 2rem;
 
   @media #{map.get(const.$breakpoint, large)} {
     position: sticky;
-    inset-block: var(--layout-header-height) auto;
+    inset-block: 3rem 0;
   }
+}
+
+::slotted(h1) {
+  font-size: clamp(.75rem, .75rem + 1vw, 1.25rem);
+  margin: 0;
+  overflow: hidden;
+  padding-block: 1rem;
+  padding-inline: const.$card-padding;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 form {
   display: grid;
   gap: 2rem;
   grid: auto-flow / 1fr;
-  padding: const.$card-padding;
+  padding-inline: const.$card-padding;
 }
 
 ul {
@@ -101,27 +108,27 @@ input {
 }
 
 .total {
-  block-size: $total-size;
-  color: var(--color-theme);
-  font-size: $total-size;
-  line-height: $total-size;
-  margin: 0;
-  max-inline-size: calc(100vw - #{2 * (const.$gap + const.$card-padding)});
+  align-items: center;
+  display: grid;
+  grid: 1fr / auto-flow;
   opacity: 1;
-  overflow: hidden;
-  text-align: center;
-  text-overflow: ellipsis;
+  padding-block: const.$card-padding;
+  padding-inline: const.$card-padding;
   transition: opacity .2s ease-out;
-  white-space: nowrap;
-
-  @media #{map.get(const.$breakpoint, large)} {
-    text-align: start;
-  }
 }
 
 .total[aria-hidden='true'] {
   opacity: 0;
 }
 
-// Currency symbols.
-@include utils.currency-symbols('data-currency');
+$amount-size: 2rem;
+
+.amount {
+  block-size: $amount-size;
+  color: var(--color-theme);
+  font-size: $amount-size;
+  line-height: $amount-size;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

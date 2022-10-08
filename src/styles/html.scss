@@ -35,36 +35,6 @@ body {
   }
 }
 
-header {
-  backdrop-filter: var(--comp-backdrop-filter);
-  background-color: var(--comp-header-background);
-  // block-size: var(--layout-header-height);
-  grid-area: header;
-  inset-block: 0 auto;
-  inset-inline: 0;
-  padding-block: 0;
-  padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
-  position: fixed;
-  z-index: 2;
-}
-
-header > div {
-  align-items: center;
-  block-size: var(--layout-header-height);
-  display: flex;
-  justify-content: space-between;
-  margin: 0 auto;
-  max-width: const.$content-width-large;
-  padding: var(--layout-header-padding);
-}
-
-h1 {
-  font-size: clamp(1rem, 1rem + 1vw, 1.5rem);
-  line-height: 1;
-  margin: 0;
-  white-space: nowrap;
-}
-
 main {
   display: grid;
   gap: var(--layout-main-gap);

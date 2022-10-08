@@ -11,11 +11,7 @@
   --color-surface1: #{const.$gray5-light};
   --color-surface2: #{const.$gray4-light};
   --color-theme: #00ad45;
-  --comp-backdrop-filter: blur(10px);
-  --comp-header-background: rgba(white, .65);
-  --layout-body-grid: 'header' var(--layout-header-height) 'main' 1fr / 1fr;
-  --layout-header-height: clamp(2.75rem, 2.75rem + 2vw, 5rem);
-  --layout-header-padding: 0 #{const.$gap};
+  --layout-body-grid: 'main' 1fr / 1fr; //
   --layout-main-gap: #{const.$gap};
   --layout-main-grid: 'values' 'drawer' minmax(auto, 1fr) / 1fr; 
 
@@ -29,30 +25,21 @@
     --color-surface1: #{const.$gray5-dark};
     --color-surface2: #{const.$gray4-dark};
     --color-theme: #4dc67d;
-    --comp-header-background: #{rgba(const.$gray6-dark, .65)};
   }
 
   @media #{map.get(const.$breakpoint, small)} {
     --layout-body-gap: #{const.$gap};
-    --layout-body-grid:
-      'header header header' var(--layout-header-height)
-      '. main .' 1fr / 0 1fr 0;
+    --layout-body-grid: '. main .' 1fr / 0 1fr 0; //
   }
 
   @media #{map.get(const.$breakpoint, medium)} {
     --layout-body-gap: #{const.$gap-medium};
-    --layout-header-padding: 0 #{const.$gap-medium};
     --layout-main-gap: #{const.$gap-medium};
   }
 
   @media #{map.get(const.$breakpoint, large)} {
-    --comp-backdrop-filter: none;
-    --comp-header-background: 0;
     --layout-body-gap: 0;
-    --layout-body-grid:
-      'header header header' var(--layout-header-height)
-      '. main .' 1fr '. . .' 3rem / 0 1fr 0;
-    --layout-header-padding: 0;
+    --layout-body-grid: '. main .' 1fr '. . .' 3rem / 0 1fr 0;
     --layout-main-grid: 'values drawer' 1fr / #{const.$values-grid-width} 1fr;
   }
 }

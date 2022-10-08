@@ -38,8 +38,7 @@
     --layout-body-gap: 0 #{const.$gap};
     --layout-body-grid:
       'header header header' var(--layout-header-height)
-      '. main .' 1fr
-      '. . .' 3rem / 0 1fr 0;
+      '. main .' 1fr / 0 1fr 0;
   }
 
   @media #{map.get(const.$breakpoint, medium)} {
@@ -55,6 +54,9 @@
     --comp-backdrop-filter: none;
     --comp-header-background: 0;
     --layout-body-gap: 0;
+    --layout-body-grid:
+      'header header header' var(--layout-header-height)
+      '. main .' 1fr '. . .' 3rem / 0 1fr 0;
     --layout-header-padding: 0;
     --layout-main-grid: 'values drawer' 1fr / #{const.$values-grid-width} 1fr;
   }

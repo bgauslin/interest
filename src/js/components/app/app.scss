@@ -16,7 +16,7 @@
 
   @media #{map.get(const.$breakpoint, 'small')} {
     gap: const.$fluid-gap;
-    padding-block: const.$fluid-gap;
+    padding-block: const.$fluid-gap 0;
     padding-inline: const.$fluid-gap;
   }
 

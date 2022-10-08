@@ -34,10 +34,9 @@ body {
 :root {
   --color-body-background: var(--color-surface);
   --color-error: #c00;
-  --color-odd-row-background: #{mix(black, white, 1%)}; //
+  --color-odd-row-background: #{mix(black, white, 1%)};
   --color-on-surface: black;
   --color-on-surface-variant: #{const.$gray1-light};
-  --color-on-theme: white; //
   --color-outline: #{const.$gray4-dark};
   --color-surface: #{const.$gray6-light};
   --color-surface1: #{const.$gray5-light};
@@ -48,10 +47,9 @@ body {
 
   @media (prefers-color-scheme: dark) {
     --color-error: #db4d4d;
-    --color-odd-row-background: #{mix(white, black, 1%)}; // 
+    --color-odd-row-background: #{mix(white, const.$gray6-dark, 4%)};
     --color-on-surface: #{const.$gray5-light};
     --color-on-surface-variant: #{const.$gray1-light};
-    --color-on-theme: black; //
     --color-outline: #{const.$gray4-light};
     --color-surface: #{const.$gray6-dark};
     --color-surface1: #{const.$gray5-dark};

@@ -72,8 +72,8 @@ form {
 
 form[aria-hidden='true'] {
   opacity: 0;
-  transform: translate3d(-#{$menu-spacing}, 1rem, 0);
   pointer-events: none;
+  transform: translate3d(-#{$menu-spacing}, 1rem, 0);
 }
 
 // Currency options via list of radio buttons.
@@ -101,8 +101,8 @@ li > * {
 input {
   background-color: var(--color-surface1);
   block-size: $swatch-size;  
-  border-radius: math.div($swatch-size, 2);
   border: 3px solid var(--color-surface2);
+  border-radius: math.div($swatch-size, 2);
   cursor: pointer;
   display: block;
   inline-size: $swatch-size;

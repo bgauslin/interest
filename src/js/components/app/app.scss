@@ -6,9 +6,7 @@
   display: grid;
   font-family: 'Avenir Variable', sans-serif;
   font-variation-settings: 'wght' 500;
-  grid:
-    'values'
-    'drawer' minmax(auto, 1fr) / 1fr;
+  grid: 'values' 'drawer' minmax(auto, 1fr) / 1fr;
   margin-inline: auto;
   max-inline-size: const.$app-max-size;
   min-block-size: 100vh;

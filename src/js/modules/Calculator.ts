@@ -30,8 +30,7 @@ class Calculator {
   /**
    * Calculates compound interest and returns an array of all calculated values.
    */
-  public compound(values: CompoundingValues,
-                  currency: string = DEFAULT_CURRENCY): Sums[] {
+  public compound(values: CompoundingValues, currency: string): Sums[] {
     const {contribution, principal, periods, rate} = values;
     const sums = [];
 
@@ -71,7 +70,7 @@ class Calculator {
   /**
    * Returns the total amount based on provided compounding values. 
    */
-  public total(values: CompoundingValues, currency: string = 'usd'): string {
+  public total(values: CompoundingValues, currency: string): string {
     const sums = this.compound(values, currency);
     const lastSum = sums[sums.length - 1];
     return lastSum.balance;

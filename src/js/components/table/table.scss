@@ -37,18 +37,13 @@
 table {
   background-color: var(--color-table-background, 0);
   border-collapse: collapse;
-  font-size: clamp(.8125rem, .8125rem + 1vw, .9375rem);
+  font-size: clamp(.8125rem, .8125rem + 1vw, 1rem);
   font-variant-numeric: tabular-nums;
   inline-size: 100%;
-  // opacity: 1;
   transition: opacity .2s ease-out;
 }
 
-// table[aria-hidden='true'] {
-//   opacity: 0;
-// }
-
-// All cells are end-aligned by default.
+// All cells are end-aligned by default since they contain numeric content.
 :is(th, td) {
   padding-block: .5rem;
   padding-inline: 1rem;
@@ -61,35 +56,33 @@ table {
   text-align: start;
 }
 
-// Table headers are bold.
+// Make table headers bolder.
 th {
   font-variation-settings: 'wght' 600;
 }
 
-// The 'growth' and 'interest' columns only display when the viewport is wide
-// enought.
+// Only show 'growth' and 'interest' columns when the viewport is wide enough.
 :is(.growth, .interest) {
   display: var(--layout-optional-columns-display);
 }
 
-// Pseudo-elements for numeric values.
+// Pseudo-elements for currency and percent symbols with numeric values.
 :is(td.balance, td.deposits, td.interest)::before,
 td.growth::after {
   color: var(--color-on-surface-variant);
 }
 
+// TODO: Pseudo-elements for currency symbols.
+@include utils.currency-symbols('currency');
+
 :is(td.balance, td.deposits, td.interest)::before {
-  content: var(--currency);
-  margin-inline-end: .25em;
+  margin-inline: 0 .25em;
 }
 
 td.growth::after {
   content: '%';
-  margin-inline-start: .25em;
+  margin-inline: .25em 0;
 }
-
-// TODO: Pseudo-elements for currency symbols.
-@include utils.currency-symbols('currency');
 
 // Alternating row backgrounds.
 tbody > tr:nth-child(odd) {
@@ -101,8 +94,8 @@ tbody > tr:nth-child(odd) {
   color: var(--color-on-surface-variant);
   display: var(--layout-footnote-display, block);
   font-size: .75rem;
-  margin-block: 1rem;
-  margin-inline: const.$gap;
+  padding-block: 1rem;
+  padding-inline: 1rem;
 }
 
 .rotate-screen > span {

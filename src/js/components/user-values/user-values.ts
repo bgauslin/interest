@@ -153,7 +153,7 @@ class UserValues extends LitElement {
         </ul>
       </form>
       <div aria-hidden="${this.total === ''}" class="total">
-        <app-settings></app-settings>
+        <app-currency></app-currency>
         <span class="amount">${this.total}</span>
       </div>
     `;

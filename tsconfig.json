@@ -13,9 +13,9 @@
   ],
   "files": [
     "src/js/app.ts",
+    "src/js/components/currency/currency.ts",
     "src/js/components/drawer/drawer.ts",
     "src/js/components/hub/hub.ts",
-    "src/js/components/settings/settings.ts",
     "src/js/components/table/table.ts",
     "src/js/components/user-values/user-values.ts",
   ]

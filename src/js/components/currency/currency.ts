@@ -1,13 +1,13 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, query, state} from 'lit/decorators.js';
 import {Currencies, DEFAULT_CURRENCY} from '../../modules/Calculator';
-import shadowStyles from './settings.scss';
+import shadowStyles from './currency.scss';
 
 /**
  * Web component that renders currencies for a user to choose from.
  */
-@customElement('app-settings')
-class Settings extends LitElement {
+@customElement('app-currency')
+class Currency extends LitElement {
   @query('button') button: HTMLButtonElement;
   @query('form') form: HTMLFormElement;
   // @state() clickListener: EventListenerObject;

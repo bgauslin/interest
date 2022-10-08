@@ -11,9 +11,9 @@ class App extends LitElement {
   @query('interest-drawer') drawer: HTMLElement;
   @query('interest-table') table: HTMLElement;
   @query('interest-values') values: HTMLElement;
+  @state() appTitle = 'Compound Interest Calculator';
   @state() currency = DEFAULT_CURRENCY;
   @state() currencyListener: EventListenerObject;
-  @state() appTitle = 'Compound Interest Calculator';
   @state() userValues: CompoundingValues;
   @state() valuesListener: EventListenerObject;
 

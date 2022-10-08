@@ -11,9 +11,9 @@ class Currency extends LitElement {
   @query('button') button: HTMLButtonElement;
   @query('form') form: HTMLFormElement;
   @state() clickListener: EventListenerObject;
+  @state() closeMenuKeys: String[] = ['Escape', 'Space'];
   @state() currency = DEFAULT_CURRENCY;
   @state() open: Boolean = false;
-  @state() closeMenuKeys: String[] = ['Escape', 'Space'];
 
   static styles = css`${shadowStyles}`;
 
@@ -33,6 +33,8 @@ class Currency extends LitElement {
     document.removeEventListener('click', this.clickListener);
   }
 
+  // TODO: Move localStorage handling to <app>. Add 'updateCurrency' listener
+  // which receives localStorage data from <app>.
   private getSavedCurrency() {
     const storage = JSON.parse(localStorage.getItem('settings'));
     if (storage && storage.currency) {

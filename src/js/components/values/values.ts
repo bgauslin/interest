@@ -43,10 +43,10 @@ class Values extends LitElement {
     }
   ];
   @query('form') form: HTMLFormElement;
-  @state() currency = DEFAULT_CURRENCY;
-  @state() total = '';
   @state() calculator: Calculator;
+  @state() currency = DEFAULT_CURRENCY;
   @state() currencyListener: EventListenerObject;
+  @state() total = '';
   @state() userValues: CompoundingValues;
 
   static styles = css`${shadowStyles}`;
@@ -68,6 +68,8 @@ class Values extends LitElement {
     this.removeEventListener('updateCurrency', this.currencyListener);
   }
 
+  // TODO: Move localStorage handling to <app>. Add 'updateValues' listener
+  // which receives localStorage data from <app>.
   private async updateFromStorage() {
     const storage = JSON.parse(localStorage.getItem('settings'));
     if (!storage) {
@@ -79,14 +81,17 @@ class Values extends LitElement {
     
     await this.updateComplete;
 
+    this.populateInputs();
+    this.updateValues();
+    this.updateTotal();
+  }
+
+  private populateInputs() {
     for (const [name, value] of Object.entries(this.userValues)) {
       const input =
           this.form.querySelector<HTMLInputElement>(`[name="${name}"]`);
       input.value = value;
-    }
-
-    this.updateValues();
-    this.updateTotal();
+    } 
   }
 
   private getFormValues() {

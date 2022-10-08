@@ -27,8 +27,23 @@
 
 app-table {
   --color-odd-row-background: #{mix(black, white, 1%)};
+  --layout-footnote-display: none;
+  --layout-optional-columns-display: none;
 
   @media (prefers-color-scheme: dark) {
     --color-odd-row-background: #{mix(white, black, 1%)};
+  }
+
+  @media #{map.get(const.$breakpoint, small)} {
+    --color-table-background: var(--color-surface);
+    --layout-optional-columns-display: table-cell;
+  }
+
+  @media #{map.get(const.$breakpoint, small-portrait)} {
+    --layout-footnote-display: block;
+  }
+
+  @media #{map.get(const.$breakpoint, medium)} {
+    --layout-footnote-display: none;
   }
 }

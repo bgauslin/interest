@@ -35,11 +35,19 @@ form {
 
 ul {
   display: grid;
-  grid: auto-flow / repeat(auto-fill, minmax(#{const.$field-min-size}, 1fr));
+  grid: auto-flow / 1fr;
   gap: const.$field-gap;
   list-style: none;
   margin: 0;
   padding: 0;
+
+  @media #{map.get(const.$breakpoint, 'small')} {
+    grid: auto-flow / 1fr 1fr;
+  }
+
+  @media #{map.get(const.$breakpoint, 'medium')} {
+    grid: auto-flow / 1fr;
+  }
 }
 
 li {
@@ -47,12 +55,29 @@ li {
   display: grid;
   gap: const.$field-gap;
   grid: 'input label' / 1fr 1fr;
+
+  @media #{map.get(const.$breakpoint, 'small')} {
+    &:nth-child(odd) {
+      place-self: end;
+    }
+
+    &:nth-child(even) {
+      place-self: start;
+    }
+  }
+
+  @media #{map.get(const.$breakpoint, 'medium')} {
+    &:nth-child(n) {
+      place-self: center;
+    }
+  }
 }
 
 label {
   line-height: 1;
   opacity: .8;
   grid-area: label;
+  min-inline-size: 8rem;
   white-space: nowrap;
 }
 
@@ -61,35 +86,32 @@ label[for='rate']::before {
 }
 
 input {
-  background-color: transparent;
+  appearance: none;
+  background-color: var(--color-surface1); //
   block-size: 2rem;
-  border-block: 2px solid transparent;
-  border-block-end: 2px solid var(--color-outline);
-  border-inline: 0;
-  border-radius: 0;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: var(--color-on-surface);
   font-family: 'Avenir Variable', sans-serif;
   font-size: inherit;
+  font-variation-settings: 'wght' 500;
   grid-area: input;
   inline-size: const.$field-input-size;
   justify-self: end;
   line-height: 1;
   margin: 0;
   outline: 0;
-  padding: 0;
+  padding-inline: .5rem;
   text-align: end;
 
   &:focus {
-    border-block-end-color: var(--color-theme);
-    color: var(--color-theme);
+    background-color: var(--color-surface2);
+    border-color: var(--color-theme);
   }
 
   &:focus:invalid {
-    border-block-end-color: var(--color-error);
-    color: var(--color-error);
-  }
-
-  &:not(:focus) {
-    color: var(--color-on-surface);
+    border-color: var(--color-error);
   }
 }
 

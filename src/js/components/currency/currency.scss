@@ -38,6 +38,7 @@ button {
   place-content: center;
 
   &:focus,
+  &:active,
   &[aria-expanded='true'] {
     background-color: var(--color-surface1);
   }
@@ -107,7 +108,8 @@ input {
   inline-size: $swatch-size;
   margin: 0;
 
-  &:focus {
+  &:focus,
+  &:active {
     border-color: var(--color-on-surface-variant);
   }
 

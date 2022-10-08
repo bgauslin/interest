@@ -47,7 +47,7 @@ th {
 
 // Only show 'growth' and 'interest' columns when the viewport is wide enough.
 :is(.growth, .interest) {
-  display: var(--layout-optional-columns-display);
+  display: var(--layout-optional-columns-display, none);
 }
 
 // Pseudo-elements for currency and percent symbols with numeric values.
@@ -94,9 +94,9 @@ tbody > tr:nth-child(odd) {
 // Footnotes after the table.
 .rotate-screen {
   color: var(--color-on-surface-variant);
-  display: var(--layout-footnote-display);
+  display: var(--layout-footnote-display, none);
   font-size: .75rem;
-  margin-block: 1rem;
+  margin-block: 1rem 0;
   margin-inline: 1rem;
 }
 

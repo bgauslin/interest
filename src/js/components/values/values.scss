@@ -14,19 +14,16 @@
   }
 
   @media #{map.get(const.$breakpoint, 'medium')} {
-    inset-block: const.$gap-max 0;
+    inset-block: const.$fluid-gap 0;
   }
 }
 
 ::slotted(h1) {
   font-size: clamp(1rem, 1rem + .5vw, 1.25rem);
   margin: 0;
-  overflow: hidden;
   padding-block: 1.5rem;
   padding-inline: const.$card-padding;
   text-align: center;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 form {
@@ -105,7 +102,7 @@ interest-currency {
 .total {
   display: grid;
   grid: 1fr / auto-flow;
-  padding-block: const.$card-padding;
+  padding-block: 2.5rem;
   padding-inline: const.$card-padding;
   place-content: center;
   place-items: center;

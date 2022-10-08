@@ -2,7 +2,10 @@
 @use '../../../styles/const';
 
 :host {
+  color: var(--color-on-surface);
   display: grid;
+  font-family: 'Avenir Variable', sans-serif;
+  font-variation-settings: 'wght' 500;
   grid:
     'values'
     'drawer' minmax(auto, 1fr) / 1fr;
@@ -16,17 +19,12 @@
 
   @media #{map.get(const.$breakpoint, 'small')} {
     gap: const.$fluid-gap;
-    padding-block: const.$fluid-gap 0;
-    padding-inline: const.$fluid-gap;
+    padding: const.$fluid-gap;
   }
 
   @media #{map.get(const.$breakpoint, 'medium')} {
     gap: 0 const.$fluid-gap;
-    grid:
-      '. .' const.$gap-max
-      'values drawer' 1fr
-      '. .' const.$gap-max / #{const.$values-median-size} 1fr;
-    padding-block: 0;
+    grid: 'values drawer' 1fr / #{const.$values-median-size} 1fr;
   }
 }
 

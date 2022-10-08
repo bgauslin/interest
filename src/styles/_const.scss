@@ -14,6 +14,11 @@ $gray4-dark: rgb(58, 58, 60);
 $gray5-dark: rgb(44, 44, 46);
 $gray6-dark: rgb(28, 28, 30);
 
+$error-light: #db4d4d;
+$error-dark:  #db4d4d;
+$theme-light: #00ad45;
+$theme-dark: #4dc67d;
+
 // Dimensions.
 $button-height: 2.75rem;
 $card-padding: 1.5rem;
@@ -41,6 +46,7 @@ $table-min-size: 36rem;
 
 $app-max-size: $values-median-size + $gap-max + $table-max-size;
 
+// Note: 'small-portrait' has 'max-width' media query (default is 'min-width').
 $breakpoint: (
   'small':  '(min-width: #{$values-max-size + ($gap-min * 2)})',
   'small-portrait': '(max-width: #{$values-max-size + ($gap-min * 2)}) and (orientation: portrait)',

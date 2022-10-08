@@ -14,11 +14,11 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    // new CopyPlugin({
-    //   patterns: [
-    //     { from: 'src/root' },
-    //   ],
-    // }),
+    new CopyPlugin({
+      patterns: [
+        { from: 'src/root' },
+      ],
+    }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'src/html/index.html',

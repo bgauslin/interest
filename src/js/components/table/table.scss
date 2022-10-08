@@ -37,7 +37,7 @@
 table {
   background-color: var(--color-table-background, 0);
   border-collapse: collapse;
-  font-size: var(--type-cell);
+  font-size: clamp(.8125rem, .8125rem + 1vw, .9375rem);
   font-variant-numeric: tabular-nums;
   inline-size: 100%;
   // opacity: 1;
@@ -100,8 +100,8 @@ tbody > tr:nth-child(odd) {
 .rotate-screen {
   color: var(--color-on-surface-variant);
   display: var(--layout-footnote-display, block);
-  font-size: var(--type-fineprint);
-  margin-block: .75rem 0;
+  font-size: .75rem;
+  margin-block: 1rem;
   margin-inline: const.$gap;
 }
 

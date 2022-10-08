@@ -14,12 +14,10 @@
   --comp-backdrop-filter: blur(10px);
   --comp-header-background: rgba(white, .65);
   --layout-body-grid: 'header' var(--layout-header-height) 'main' 1fr / 1fr;
-  --layout-header-height: 3rem;
+  --layout-header-height: clamp(2.75rem, 2.75rem + 2vw, 5rem);
   --layout-header-padding: 0 #{const.$gap};
   --layout-main-gap: #{const.$gap};
   --layout-main-grid: 'values' 'drawer' minmax(auto, 1fr) / 1fr; 
-  --type-fineprint: .75rem;
-  --type-header: 1rem;
 
   @media (prefers-color-scheme: dark) {
     --color-error: #db4d4d;
@@ -35,19 +33,16 @@
   }
 
   @media #{map.get(const.$breakpoint, small)} {
-    --layout-body-gap: 0 #{const.$gap};
+    --layout-body-gap: #{const.$gap};
     --layout-body-grid:
       'header header header' var(--layout-header-height)
       '. main .' 1fr / 0 1fr 0;
   }
 
   @media #{map.get(const.$breakpoint, medium)} {
-    --layout-body-gap: 0 #{const.$gap-medium};
-    --layout-header-height: 4rem;
+    --layout-body-gap: #{const.$gap-medium};
     --layout-header-padding: 0 #{const.$gap-medium};
     --layout-main-gap: #{const.$gap-medium};
-    --type-fineprint: .875rem;
-    --type-header: 1.25rem;
   }
 
   @media #{map.get(const.$breakpoint, large)} {
@@ -62,16 +57,10 @@
   }
 }
 
-// TODO: Figure out why these don't work in shadow DOM Sass file.
 app-table {
   --color-odd-row-background: #{mix(black, white, 1%)};
-  --type-cell: .8125rem;
 
   @media (prefers-color-scheme: dark) {
     --color-odd-row-background: #{mix(white, black, 1%)};
-  }
-
-  @media #{map.get(const.$breakpoint, medium)} {
-    --type-cell: .9375rem;
   }
 }

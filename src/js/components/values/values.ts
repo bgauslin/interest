@@ -1,7 +1,7 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
 import {Calculator, CompoundingValues, DEFAULT_CURRENCY} from '../../modules/Calculator';
-import shadowStyles from './user-values.scss';
+import shadowStyles from './values.scss';
 
 interface InputAttributes {
   inputmode: string,
@@ -14,8 +14,8 @@ interface InputAttributes {
  * Custom element that renders input fields and calculates compound interest
  * based on user-provided values.
  */
-@customElement('app-values')
-class UserValues extends LitElement {
+@customElement('interest-values')
+class Values extends LitElement {
   @property() userInputs: InputAttributes[] = [
     {
       inputmode: 'numeric',
@@ -153,7 +153,7 @@ class UserValues extends LitElement {
         </ul>
       </form>
       <div aria-hidden="${this.total === ''}" class="total">
-        <app-currency></app-currency>
+        <interest-currency></interest-currency>
         <span class="amount">${this.total}</span>
       </div>
     `;

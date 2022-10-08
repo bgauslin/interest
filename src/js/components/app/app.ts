@@ -1,16 +1,16 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, state, query} from 'lit/decorators.js';
 import {CompoundingValues, DEFAULT_CURRENCY} from '../../modules/Calculator';
-import shadowStyles from './hub.scss';
+import shadowStyles from './app.scss';
 
 /**
  * Web component that sends/receives custom event data to/from custom elements.
  */
-@customElement('app-hub')
-class Hub extends LitElement {
-  @query('app-drawer') drawer: HTMLElement;
-  @query('app-table') table: HTMLElement;
-  @query('app-values') values: HTMLElement;
+@customElement('interest-app')
+class App extends LitElement {
+  @query('interest-drawer') drawer: HTMLElement;
+  @query('interest-table') table: HTMLElement;
+  @query('interest-values') values: HTMLElement;
   @state() currency = DEFAULT_CURRENCY;
   @state() currencyListener: EventListenerObject;
   @state() userValues: CompoundingValues;
@@ -74,12 +74,12 @@ class Hub extends LitElement {
 
   render() {
     return html`
-      <app-values>
+      <interest-values>
         <h1>Compound Interest Calculator</h1>
-      </app-values>
-      <app-drawer label="table" aria-hidden="true">
-        <app-table></app-table>
-      </app-drawer>
+      </interest-values>
+      <interest-drawer aria-hidden="true">
+        <interest-table></interest-table>
+      </interest-drawer>
     `;
   }
 }

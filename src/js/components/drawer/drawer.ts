@@ -1,13 +1,12 @@
 import {LitElement, css, html} from 'lit';
-import {customElement, property, query, state} from 'lit/decorators.js';
+import {customElement, query, state} from 'lit/decorators.js';
 import shadowStyles from './drawer.scss';
 
 /**
  * Custom element that expands/collapses a drawer when a button is clicked.
  */
-@customElement('app-drawer')
+@customElement('interest-drawer')
 class Drawer extends LitElement {
-  @property({attribute: 'label'}) label = '';
   @query('.drawer') drawer: HTMLElement;
   @state() open: Boolean = false;
 
@@ -53,8 +52,7 @@ class Drawer extends LitElement {
   }
 
   render() {
-    const action = this.open ? 'Hide' : 'Show';
-    const buttonLabel = `${action} ${this.label}`;
+    const buttonLabel = this.open ? 'Hide table' : 'Show table';
     return html`
       <button
         aria-controls="drawer"

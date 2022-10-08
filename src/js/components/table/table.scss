@@ -6,6 +6,7 @@
   display: block;
 }
 
+// Scrollable wrapper for <table> element.
 .table {
   border-radius: const.$card-radius;
   overflow: auto hidden;
@@ -16,6 +17,7 @@
   display: none;
 }
 
+// Standard <table> element.
 table {
   background-color: var(--color-table-background, 0);
   border-collapse: collapse;

@@ -6,7 +6,7 @@ import shadowStyles from './currency.scss';
 /**
  * Web component that renders currencies for a user to choose from.
  */
-@customElement('app-currency')
+@customElement('interest-currency')
 class Currency extends LitElement {
   @query('button') button: HTMLButtonElement;
   @query('form') form: HTMLFormElement;

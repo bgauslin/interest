@@ -12,11 +12,11 @@
     "global.d.ts"
   ],
   "files": [
-    "src/js/app.ts",
+    "src/js/index.ts",
+    "src/js/components/app/app.ts",
     "src/js/components/currency/currency.ts",
     "src/js/components/drawer/drawer.ts",
-    "src/js/components/hub/hub.ts",
     "src/js/components/table/table.ts",
-    "src/js/components/user-values/user-values.ts",
+    "src/js/components/values/values.ts",
   ]
 }

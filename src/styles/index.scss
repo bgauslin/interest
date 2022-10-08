@@ -12,22 +12,13 @@
 // Bare bones app-wide styles.
 html {
   -webkit-tap-highlight-color: transparent;
-  text-size-adjust: none;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-// TODO: Update <body> background at breakpoints.
-// TODO: Relocate 'font-' styles to components(?)
 body {
   background-color: var(--color-surface1);
   color: var(--color-on-surface);
-  font-family: 'Avenir Variable', sans-serif; //
-  font-variation-settings: 'wght' 500; //
+  font-family: 'Avenir Variable', sans-serif;
+  font-variation-settings: 'wght' 500;
   margin: 0;
   min-block-size: 100vh;
   touch-action: manipulation;
@@ -80,5 +71,3 @@ body {
     --layout-footnote-display: none;
   }
 }
-
-

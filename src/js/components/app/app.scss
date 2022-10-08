@@ -7,6 +7,7 @@
   grid: 'values' 'drawer' minmax(auto, 1fr) / 1fr;
   margin-inline: auto;
   max-inline-size: const.$content-width-large;
+  min-block-size: 100vh;
   padding-block: 0 env(safe-area-inset-bottom);
   padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
 
@@ -16,20 +17,22 @@
   }
 }
 
-app-values {
-  grid-area: values;
-}
-
-app-drawer {
-  grid-area: drawer;
-
-  // Drawer should be hidden until it has content.
-  &[aria-hidden='true'] {
-    opacity: 0;
-    visibility: hidden;
+@supports (min-block-size: 100dvh) {
+  :host {
+    min-block-size: 100dvh;
   }
 }
 
-app-hub {
-  display: contents;
+interest-values {
+  grid-area: values;
+}
+
+interest-drawer {
+  grid-area: drawer;
+}
+
+// Drawer should be hidden until it has content.
+interest-drawer[aria-hidden='true'] {
+  opacity: 0;
+  visibility: hidden;
 }

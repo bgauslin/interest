@@ -3,23 +3,28 @@
 
 :host {
   display: grid;
-  gap: clamp(#{const.$gap-min}, #{const.$gap-min} + 1vw, #{const.$gap-max});
+  gap: const.$fluid-gap;
   grid: 'values' 'drawer' minmax(auto, 1fr) / 1fr;
   margin-inline: auto;
-  max-inline-size: const.$content-width-large;
+  max-inline-size: const.$app-max-size;
   min-block-size: 100vh;
-  padding-block: 0 env(safe-area-inset-bottom);
-  padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
 
-  @media #{map.get(const.$breakpoint, large)} {
-    gap: 0 const.$gap-max;
-    grid: '. .' 3rem 'values drawer' 1fr '. .' 3rem / #{const.$values-grid-width} 1fr;
-  }
-}
-
-@supports (min-block-size: 100dvh) {
-  :host {
+  @supports (min-block-size: 100dvh) {
     min-block-size: 100dvh;
+  }
+
+  @media #{map.get(const.$breakpoint, small)} {
+    padding-block: const.$fluid-gap;
+    padding-inline: const.$fluid-gap;
+  }
+
+  @media #{map.get(const.$breakpoint, medium)} {
+    gap: 0 const.$gap-max;
+    grid:
+      '. .' const.$gap-max
+      'values drawer' 1fr
+      '. .' const.$gap-max / #{const.$values-median-size} 1fr;
+    padding-block: 0;
   }
 }
 

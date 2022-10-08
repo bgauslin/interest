@@ -4,6 +4,7 @@
 
 // Component constants.
 $button-size: 2.75rem;
+$menu-spacing: .375rem;
 $swatch-size: 2.75rem;
 
 :host {
@@ -65,27 +66,26 @@ form {
   backdrop-filter: blur(5px);
   background-color: var(--color-surface2);
   border-radius: 2rem;
-  inset-block: auto $button-size;
+  inset-block: $button-size auto;
   inset-inline: 0 auto;
-  opacity: 1;
   position: absolute;
-  transform: translate3d(-.375rem, -.375rem, 0);
+  transform: translate3d(-#{$menu-spacing}, .5rem, 0);
   transition: utils.transition(opacity, transform);
 }
 
 form[aria-hidden='true'] {
   opacity: 0;
+  transform: translate3d(-#{$menu-spacing}, 1rem, 0);
   pointer-events: none;
-  transform: translate3d(-.375rem, .5rem, 0);
 }
 
 // Currency options via list of radio buttons.
 ul {
   display: flex;
-  gap: .375rem;
+  gap: $menu-spacing;
   list-style: none;
   margin: 0;
-  padding: .375rem;
+  padding: $menu-spacing;
 }
 
 // Stack each list item's children on top of each other.

@@ -7,14 +7,14 @@
   display: block;
 
   @media #{map.get(const.$breakpoint, small)} {
-    align-self: start;
     background-color: var(--color-surface);
     border-radius: const.$card-radius;
   }
 
-  @media #{map.get(const.$breakpoint, large)} {
+  @media #{map.get(const.$breakpoint, medium)} {
+    align-self: start;
     position: sticky;
-    inset-block: 3rem 0;
+    inset-block: const.$gap-max 0;
   }
 }
 
@@ -39,7 +39,7 @@ form {
 ul {
   display: grid;
   grid: auto-flow / 1fr;
-  gap: 1rem;
+  gap: const.$input-gap;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -49,7 +49,7 @@ ul {
     grid: auto-flow / repeat(2, 1fr);
   }
 
-  @media #{map.get(const.$breakpoint, large)} {
+  @media #{map.get(const.$breakpoint, medium)} {
     grid: auto-flow / 1fr;
   }
 }
@@ -57,16 +57,12 @@ ul {
 li {
   align-items: center;
   display: flex;
-  gap: .5rem;
-}
-
-label,
-input {
-  inline-size: 5.5rem;
+  gap: const.$input-gap;
 }
 
 label {
   flex: 1;
+  inline-size: const.$label-size;
   line-height: 1;
   opacity: .8;
   order: 2;
@@ -86,6 +82,7 @@ input {
   border-radius: 0;
   font-family: 'Avenir Variable', sans-serif;
   font-size: inherit;
+  inline-size: const.$input-size;
   line-height: 1;
   margin: 0;
   order: 1;
@@ -108,6 +105,7 @@ input {
   }
 }
 
+// Pull the amount closer to the widget via negative margins.
 interest-currency {
   margin-inline: -.5rem;
 }
@@ -115,7 +113,6 @@ interest-currency {
 .total {
   display: grid;
   grid: 1fr / auto-flow;
-  opacity: 1;
   padding-block: const.$card-padding;
   padding-inline: const.$card-padding;
   place-content: center;
@@ -125,6 +122,7 @@ interest-currency {
 
 .total[aria-hidden='true'] {
   opacity: 0;
+  visibility: hidden;
 }
 
 $amount-size: 2rem;

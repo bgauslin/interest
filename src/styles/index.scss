@@ -15,23 +15,24 @@ html {
 }
 
 body {
-  background-color: var(--color-surface1);
+  background-color: var(--color-body-background);
   color: var(--color-on-surface);
   font-family: 'Avenir Variable', sans-serif;
   font-variation-settings: 'wght' 500;
   margin: 0;
   min-block-size: 100vh;
+  padding-block: env(safe-area-inset-top) env(safe-area-inset-bottom);
+  padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
   touch-action: manipulation;
-}
 
-@supports (min-block-size: 100dvh) {
-  body {
+  @supports (min-block-size: 100dvh) {
     min-block-size: 100dvh;
   }
 }
 
 // Define all custom properties.
 :root {
+  --color-body-background: var(--color-surface);
   --color-error: #c00;
   --color-odd-row-background: #{mix(black, white, 1%)}; //
   --color-on-surface: black;
@@ -59,6 +60,7 @@ body {
   }
 
   @media #{map.get(const.$breakpoint, small)} {
+    --color-body-background: var(--color-surface1);
     --color-table-background: var(--color-surface);
     --layout-optional-columns-display: table-cell;
   }

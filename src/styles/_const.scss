@@ -18,22 +18,27 @@ $gray6-dark: rgb(28, 28, 30);
 $button-height: 2.75rem;
 $card-padding: 1.5rem;
 $card-radius: 1rem;
-$gap-max: 2rem;
+$gap-max: 3rem;
 $gap-min: 1rem;
-$table-max-size: 40rem;
-$values-max-size: 18rem;
+$input-gap: 1rem;
+$input-size: 5.5rem;
+$label-size: 8.25rem;
 
-// TODO: Rename/refactor breakpoints...
+// References.
+$fluid-gap: clamp(#{$gap-min}, #{$gap-min} + 1vw, #{$gap-max});
 
-// Calculated constants for breakpoints.
-$values-grid-width: $values-max-size + (2 * $card-padding);
-$content-width-large: $values-grid-width + $table-max-size + $gap-max;
-$small-breakpoint: 26rem;
+// Breakpoints via content-based min/max values.
+$values-max-size: ($input-size * 2) + ($label-size * 2) + ($input-gap * 3) + ($card-padding * 2);
+$values-median-size: ($label-size * 2) + $input-gap +  + ($card-padding * 2);
+
+$table-max-size: 48rem;
+$table-min-size: 36rem;
+
+$app-max-size: $values-median-size + $gap-max + $table-max-size;
 
 // Responsive breakpoints.
 $breakpoint: (
-  'small':  '(min-width: #{$small-breakpoint})',
-  'small-portrait': '(max-width: #{$small-breakpoint}) and (orientation: portrait)',
-  'medium': '(min-width: #{$table-max-size + ($gap-max * 2)})',
-  'large':  '(min-width: #{$content-width-large + ($gap-max * 2)})',
+  'small':  '(min-width: #{$values-max-size + ($gap-min * 2)})',
+  'small-portrait': '(max-width: #{$values-max-size + ($gap-min * 2)}) and (orientation: portrait)',
+  'medium': '(min-width: #{$values-median-size + $table-min-size + ($gap-max * 3)})',
 );

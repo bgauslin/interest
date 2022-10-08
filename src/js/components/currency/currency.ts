@@ -10,7 +10,7 @@ import shadowStyles from './currency.scss';
 class Currency extends LitElement {
   @query('button') button: HTMLButtonElement;
   @query('form') form: HTMLFormElement;
-  // @state() clickListener: EventListenerObject;
+  @state() clickListener: EventListenerObject;
   @state() currency = DEFAULT_CURRENCY;
   @state() open: Boolean = false;
   @state() closeMenuKeys: String[] = ['Escape', 'Space'];
@@ -19,7 +19,7 @@ class Currency extends LitElement {
 
   constructor() {
     super();
-    // this.clickListener = this.handleClick.bind(this);
+    this.clickListener = this.handleClick.bind(this);
   }
   
   connectedCallback() {
@@ -30,7 +30,7 @@ class Currency extends LitElement {
   disconnectedCallback() { 
     super.disconnectedCallback();
     this.removeEventListener('keyup', this.handleKey);
-    // document.removeEventListener('click', this.clickListener);
+    document.removeEventListener('click', this.clickListener);
   }
 
   private getSavedCurrency() {
@@ -41,10 +41,10 @@ class Currency extends LitElement {
   }
 
   private toggleMenu() {
-    if (!this.open) {
-      this.openMenu();
-    } else {
+    if (this.open) {
       this.closeMenu();
+    } else {
+      this.openMenu();
     }
   }
 
@@ -54,21 +54,22 @@ class Currency extends LitElement {
       const checked = this.form.querySelector<HTMLInputElement>(':checked');
       checked?.focus();
       this.addEventListener('keyup', this.handleKey);
-      // document.addEventListener('click', this.clickListener);
+      document.addEventListener('click', this.clickListener);
     });
   }
 
   private closeMenu() {
     this.open = false;
-    // document.removeEventListener('click', this.clickListener);
+    document.removeEventListener('click', this.clickListener);
     this.removeEventListener('keyup', this.handleKey);
   }
 
-  // private handleClick(event: Event) {
-  //   if (this.open && event.target !== this) {
-  //     this.closeMenu();
-  //   }
-  // }
+  private handleClick(event: Event) {
+    const path = event.composedPath();
+    if (this.open && !path.includes(this)) {
+      this.closeMenu();
+    }
+  }
 
   private handleKey(event: KeyboardEvent) {
     if (this.open && this.closeMenuKeys.includes(event.code)) {

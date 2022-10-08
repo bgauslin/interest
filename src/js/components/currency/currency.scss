@@ -37,12 +37,21 @@ button {
   place-content: center;
 
   &:focus {
-    background-color: var(--color-surface2);
+    background-color: var(--color-surface1);
   }
 
   &[aria-expanded='true'] {
-    background-color: var(--color-theme);
-    color: var(--color-on-theme);
+    background-color: transparent;
+  }
+}
+
+@media (any-hover: hover) {
+  button {
+    transition: utils.transition(background-color);
+
+    &:hover {
+      background-color: var(--color-surface1);
+    }
   }
 }
 
@@ -101,43 +110,31 @@ input {
   display: block;
   inline-size: $swatch-size;
   margin: 0;
-}
 
-input:focus {
-  border-color: var(--color-on-surface-variant);
-}
+  &:focus {
+    border-color: var(--color-on-surface-variant);
+  }
 
-input:checked {
-  border-color: var(--color-theme);
-}
+  &:checked {
+    border-color: var(--color-theme);
+  }
 
-input:checked + span {
-  color: var(--color-theme);
+  // Currency symbol.
+  &:checked + span {
+    color: var(--color-theme);
+  }
 }
 
 @media (any-hover: hover) {
-  button {
-    transition: utils.transition(background-color);
-
-    &:hover {
-      background-color: var(--color-surface2);
-    }
-
-    &[aria-expanded='true'] {
-      background-color: var(--color-theme);
-      color: var(--color-on-theme);
-    }
-  }
-
   input {
     transition: utils.transition(border-color);
 
     &:hover {
       border-color: var(--color-on-surface-variant);
     }
-  }
 
-  input + span {
-    transition: utils.transition(color);
+    &:hover:checked {
+      border-color: var(--color-theme);
+    }
   }
 }

@@ -1,3 +1,84 @@
-@use 'webfonts';
-@use 'vars';
-@use 'html';
+@use 'sass:map';
+@use 'const';
+
+// Webfonts.
+@font-face {
+  font-display: swap;
+  font-family: 'Avenir Variable';
+  font-weight: 1 999;
+  src: url('https://assets.gauslin.com/fonts/AvenirNext-Variable.woff2') format('woff2');
+}
+
+// Bare bones app-wide styles.
+html {
+  -webkit-tap-highlight-color: transparent;
+  text-size-adjust: none;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// TODO: Update <body> background at breakpoints.
+// TODO: Relocate 'font-' styles to components(?)
+body {
+  background-color: var(--color-surface1);
+  color: var(--color-on-surface);
+  font-family: 'Avenir Variable', sans-serif; //
+  font-variation-settings: 'wght' 500; //
+  margin: 0;
+  min-block-size: 100vh;
+  touch-action: manipulation;
+}
+
+@supports (min-block-size: 100dvh) {
+  body {
+    min-block-size: 100dvh;
+  }
+}
+
+// Define all custom properties.
+:root {
+  --color-error: #c00;
+  --color-odd-row-background: #{mix(black, white, 1%)}; //
+  --color-on-surface: black;
+  --color-on-surface-variant: #{const.$gray1-light};
+  --color-on-theme: white; //
+  --color-outline: #{const.$gray4-dark};
+  --color-surface: #{const.$gray6-light};
+  --color-surface1: #{const.$gray5-light};
+  --color-surface2: #{const.$gray4-light};
+  --color-theme: #00ad45;
+  --layout-footnote-display: none;
+  --layout-optional-columns-display: none;
+
+  @media (prefers-color-scheme: dark) {
+    --color-error: #db4d4d;
+    --color-odd-row-background: #{mix(white, black, 1%)}; // 
+    --color-on-surface: #{const.$gray5-light};
+    --color-on-surface-variant: #{const.$gray1-light};
+    --color-on-theme: black; //
+    --color-outline: #{const.$gray4-light};
+    --color-surface: #{const.$gray6-dark};
+    --color-surface1: #{const.$gray5-dark};
+    --color-surface2: #{const.$gray4-dark};
+    --color-theme: #4dc67d;
+  }
+
+  @media #{map.get(const.$breakpoint, small)} {
+    --color-table-background: var(--color-surface);
+    --layout-optional-columns-display: table-cell;
+  }
+
+  @media #{map.get(const.$breakpoint, small-portrait)} {
+    --layout-footnote-display: block;
+  }
+
+  @media #{map.get(const.$breakpoint, medium)} {
+    --layout-footnote-display: none;
+  }
+}
+
+

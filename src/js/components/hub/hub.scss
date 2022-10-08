@@ -1,34 +1,7 @@
 @use 'sass:map';
-@use 'const';
+@use '../../../styles/const';
 
-html {
-  -webkit-tap-highlight-color: transparent;
-  text-size-adjust: none;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-body {
-  background-color: var(--color-surface1);
-  color: var(--color-on-surface);
-  font-family: 'Avenir Variable', sans-serif;
-  font-variation-settings: 'wght' 500;
-  margin: 0;
-  min-block-size: 100vh;
-  touch-action: manipulation;
-}
-
-@supports (min-block-size: 100dvh) {
-  body {
-    min-block-size: 100dvh;
-  }
-}
-
-main {
+:host {
   display: grid;
   gap: clamp(#{const.$gap-min}, #{const.$gap-min} + 1vw, #{const.$gap-max});
   grid: 'values' 'drawer' minmax(auto, 1fr) / 1fr;
@@ -47,10 +20,10 @@ app-values {
   grid-area: values;
 }
 
-// Drawer should be hidden until it has content.
 app-drawer {
   grid-area: drawer;
 
+  // Drawer should be hidden until it has content.
   &[aria-hidden='true'] {
     opacity: 0;
     visibility: hidden;
@@ -58,5 +31,5 @@ app-drawer {
 }
 
 app-hub {
-  display: none;
+  display: contents;
 }

@@ -1,19 +1,22 @@
-import {LitElement} from 'lit';
-import {customElement, state} from 'lit/decorators.js';
+import {LitElement, css, html} from 'lit';
+import {customElement, state, query} from 'lit/decorators.js';
 import {CompoundingValues, DEFAULT_CURRENCY} from '../../modules/Calculator';
+import shadowStyles from './hub.scss';
 
 /**
  * Web component that sends/receives custom event data to/from custom elements.
  */
 @customElement('app-hub')
 class Hub extends LitElement {
+  @query('app-drawer') drawer: HTMLElement;
+  @query('app-table') table: HTMLElement;
+  @query('app-values') values: HTMLElement;
   @state() currency = DEFAULT_CURRENCY;
   @state() currencyListener: EventListenerObject;
-  @state() drawer: HTMLElement;
-  @state() table: HTMLElement;
   @state() userValues: CompoundingValues;
-  @state() values: HTMLElement;
   @state() valuesListener: EventListenerObject;
+
+  static styles = css`${shadowStyles}`;
 
   constructor() {
     super();
@@ -23,21 +26,14 @@ class Hub extends LitElement {
   
   connectedCallback() {
     super.connectedCallback();
-    this.getElements();
-    document.addEventListener('updateCurrency', this.currencyListener);
-    document.addEventListener('updateValues', this.valuesListener);
+    this.addEventListener('updateCurrency', this.currencyListener);
+    this.addEventListener('updateValues', this.valuesListener);
   }
 
   disconnectedCallback() { 
     super.disconnectedCallback();
-    document.removeEventListener('updateCurrency', this.currencyListener);
-    document.removeEventListener('updateValues', this.valuesListener);
-  }
-
-  private getElements() {
-    this.drawer = document.querySelector('app-drawer');
-    this.table = document.querySelector('app-table');
-    this.values = document.querySelector('app-values');
+    this.removeEventListener('updateCurrency', this.currencyListener);
+    this.removeEventListener('updateValues', this.valuesListener);
   }
 
   private updateCurrency(e: CustomEvent) {
@@ -63,7 +59,7 @@ class Hub extends LitElement {
     this.saveToStorage();
 
     // Reveal the drawer when there are valid values.
-    this.drawer?.removeAttribute('aria-hidden');
+    this.drawer.removeAttribute('aria-hidden');
   }
 
   private saveToStorage() {
@@ -74,5 +70,16 @@ class Hub extends LitElement {
       };
       localStorage.setItem('settings', JSON.stringify(settings));
     }
+  }
+
+  render() {
+    return html`
+      <app-values>
+        <h1>Compound Interest Calculator</h1>
+      </app-values>
+      <app-drawer label="table" aria-hidden="true">
+        <app-table></app-table>
+      </app-drawer>
+    `;
   }
 }

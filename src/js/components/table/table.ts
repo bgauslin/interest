@@ -55,31 +55,33 @@ class TableWidget extends LitElement {
 
   render() {
     return html`
-      <table aria-hidden="${this.tableData.length === 0}">
-        <thead>
-          <tr>
-            <th class="year">Year</th>
-            <th class="deposits">Deposits</th>
-            <th class="interest">Interest</th>
-            <th class="balance">Balance</th>
-            <th class="growth">Growth</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${this.tableData.map((row) => {
-            const {balance, deposits, growth, interest, year} = row;
-            return html`
-              <tr>
-                <td class="year">${year}</td>
-                <td class="deposits">${deposits}</td>
-                <td class="interest">${interest}</td>
-                <td class="balance">${balance}</td>
-                <td class="growth">${growth}</td>
-              </tr>
-            `
-          })}
-        </tbody>
-      </table>
+      <div class="table" aria-hidden="${this.tableData.length === 0}">
+        <table>
+          <thead>
+            <tr>
+              <th class="year">Year</th>
+              <th class="deposits">Deposits</th>
+              <th class="interest">Interest</th>
+              <th class="balance">Balance</th>
+              <th class="growth">Growth</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${this.tableData.map((row) => {
+              const {balance, deposits, growth, interest, year} = row;
+              return html`
+                <tr>
+                  <td class="year">${year}</td>
+                  <td class="deposits">${deposits}</td>
+                  <td class="interest">${interest}</td>
+                  <td class="balance">${balance}</td>
+                  <td class="growth">${growth}</td>
+                </tr>
+              `
+            })}
+          </tbody>
+        </table>
+      </div>
       <p class="rotate-screen">
         Rotate screen to view <span>Interest</span> and <span>Growth</span> columns.
       </p>

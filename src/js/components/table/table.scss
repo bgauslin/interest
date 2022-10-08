@@ -20,20 +20,33 @@
   }
 }
 
+:host {
+  display: block;
+}
+
+.table {
+  border-radius: const.$card-border-radius; //
+  overflow: auto hidden;
+  scrollbar-width: none;
+}
+
+.table::-webkit-scrollbar {
+  display: none;
+}
+
 table {
   background-color: var(--color-table-background, 0);
   border-collapse: collapse;
-  border-radius: const.$card-border-radius;
   font-size: var(--type-cell);
   font-variant-numeric: tabular-nums;
   inline-size: 100%;
-  opacity: 1;
+  // opacity: 1;
   transition: opacity .2s ease-out;
 }
 
-table[aria-hidden='true'] {
-  opacity: 0;
-}
+// table[aria-hidden='true'] {
+//   opacity: 0;
+// }
 
 // All cells are end-aligned by default.
 :is(th, td) {
@@ -86,7 +99,7 @@ tbody > tr:nth-child(odd) {
 // Footnotes after the table.
 .rotate-screen {
   color: var(--color-on-surface-variant);
-  display: var(--layout-footnote-display);
+  display: var(--layout-footnote-display, block);
   font-size: var(--type-fineprint);
   margin-block: .75rem 0;
   margin-inline: const.$gap;

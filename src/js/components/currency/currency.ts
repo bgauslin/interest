@@ -60,8 +60,8 @@ class Currency extends LitElement {
 
   private closeMenu() {
     this.open = false;
-    document.removeEventListener('click', this.clickListener);
     this.removeEventListener('keyup', this.handleKey);
+    document.removeEventListener('click', this.clickListener);
   }
 
   private handleClick(event: Event) {

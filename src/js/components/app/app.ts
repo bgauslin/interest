@@ -13,6 +13,7 @@ class App extends LitElement {
   @query('interest-values') values: HTMLElement;
   @state() currency = DEFAULT_CURRENCY;
   @state() currencyListener: EventListenerObject;
+  @state() appTitle = 'Compound Interest Calculator';
   @state() userValues: CompoundingValues;
   @state() valuesListener: EventListenerObject;
 
@@ -43,8 +44,8 @@ class App extends LitElement {
         currency: this.currency,
       }
     });
-    this.table?.dispatchEvent(updateCurrency);
-    this.values?.dispatchEvent(updateCurrency);
+    this.table.dispatchEvent(updateCurrency);
+    this.values.dispatchEvent(updateCurrency);
     this.saveToStorage();
   }
 
@@ -55,11 +56,8 @@ class App extends LitElement {
         values: this.userValues,
       }
     });
-    this.table?.dispatchEvent(updateValues);
+    this.table.dispatchEvent(updateValues);
     this.saveToStorage();
-
-    // Reveal the drawer when there are valid values.
-    this.drawer.removeAttribute('aria-hidden');
   }
 
   private saveToStorage() {
@@ -75,9 +73,9 @@ class App extends LitElement {
   render() {
     return html`
       <interest-values>
-        <h1>Compound Interest Calculator</h1>
+        <h1>${this.appTitle}</h1>
       </interest-values>
-      <interest-drawer aria-hidden="true">
+      <interest-drawer aria-hidden="${!this.userValues}">
         <interest-table></interest-table>
       </interest-drawer>
     `;

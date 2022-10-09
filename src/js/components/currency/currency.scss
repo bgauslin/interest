@@ -19,7 +19,6 @@ $swatch-size: 2.75rem;
 // Reset default element styles.
 button,
 input {
-  -webkit-appearance: none;
   appearance: none;
   background: 0;
   border: 0;
@@ -35,12 +34,18 @@ button {
   font-size: const.$amount-size;
   inline-size: $button-size;
   opacity: 1;
+  outline: 0;
+  padding: 0;
   place-content: center;
+  white-space: nowrap;
 
-  &:focus,
+  &:focus {
+    background-color: var(--color-surface1);
+  }
+
   &:active,
   &[aria-expanded='true'] {
-    background-color: var(--color-surface1);
+    background-color: var(--color-surface2);
   }
 }
 
@@ -50,6 +55,10 @@ button {
 
     &:hover {
       background-color: var(--color-surface1);
+    }
+
+    &[aria-expanded='true']:hover {
+      background-color: var(--color-surface2);
     }
   }
 }
@@ -61,19 +70,19 @@ button {
 
 // Currency menu.
 form {
-  background-color: var(--color-surface2);
+  background-color: var(--color-surface2); // TODO: backdrop-filter
   border-radius: 2rem;
-  inset-block: $button-size auto;
-  inset-inline: 0 auto;
+  inset-block: ($button-size + $menu-spacing) auto;
+  inset-inline: (- $menu-spacing) auto;
   position: absolute;
-  transform: translate3d(-#{$menu-spacing}, .5rem, 0);
+  transform: translateY(.25rem);
   transition: utils.transition(opacity, transform);
 }
 
 form[aria-hidden='true'] {
   opacity: 0;
   pointer-events: none;
-  transform: translate3d(-#{$menu-spacing}, 1rem, 0);
+  transform: translateY(-.25rem);
 }
 
 // Currency options via list of radio buttons.

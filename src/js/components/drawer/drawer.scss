@@ -49,7 +49,7 @@ button {
   }
 }
 
-.drawer {
+[id='drawer'] {
   box-sizing: border-box;
   grid-area: drawer;
   overflow: hidden;
@@ -63,7 +63,7 @@ button {
     display: none;
   }
 
-  .drawer {
+  [id='drawer'] {
     block-size: auto !important;
   }
 }

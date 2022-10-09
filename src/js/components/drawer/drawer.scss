@@ -24,12 +24,11 @@ button {
   grid-area: button;
   justify-content: center;
   line-height: 1;
-  margin-block: 2rem;
-  margin-inline: 2rem;
+  margin: clamp(2rem, 2rem + 1vw, 3rem);
   outline: 0;
   padding-block: 0;
   padding-inline: 1.5rem;
-  place-self: start center;
+  place-self: end center;
   white-space: nowrap;
 
   &:focus,

@@ -121,11 +121,11 @@ input {
   place-content: center;
   place-items: center;
   transition: utils.transition(opacity);
-}
 
-.total[aria-hidden='true'] {
-  opacity: 0;
-  visibility: hidden;
+  &[aria-hidden='true'] {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 .amount {

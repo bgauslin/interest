@@ -44,10 +44,10 @@ interest-values {
 
 interest-drawer {
   grid-area: drawer;
-}
 
-// Drawer should be hidden until it has content.
-interest-drawer[aria-hidden='true'] {
-  opacity: 0;
-  visibility: hidden;
+  // Drawer should be hidden until it has content.
+  &[aria-hidden='true'] {
+    opacity: 0;
+    visibility: hidden;
+  }
 }

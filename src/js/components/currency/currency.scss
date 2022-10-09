@@ -71,12 +71,12 @@ form {
   position: absolute;
   transform: translateY(.25rem);
   transition: utils.transition(opacity, transform);
-}
 
-form[aria-hidden='true'] {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(-.25rem);
+  &[aria-hidden='true'] {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-.25rem);
+  }
 }
 
 // Currency options via list of radio buttons.

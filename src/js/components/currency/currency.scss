@@ -70,7 +70,7 @@ button {
 
 // Currency menu.
 form {
-  background-color: var(--color-surface2); // TODO: backdrop-filter
+  background-color: var(--color-surface2);
   border-radius: 2rem;
   inset-block: ($button-size + $menu-spacing) auto;
   inset-inline: (- $menu-spacing) auto;
@@ -110,7 +110,7 @@ li > * {
 input {
   background-color: var(--color-surface1);
   block-size: $swatch-size;  
-  border: 3px solid var(--color-surface2);
+  border: 3px solid var(--color-on-surface-variant);
   border-radius: math.div($swatch-size, 2);
   cursor: pointer;
   display: block;
@@ -119,7 +119,7 @@ input {
 
   &:focus,
   &:active {
-    border-color: var(--color-on-surface-variant);
+    border-color: var(--color-on-surface);
   }
 
   &:checked {
@@ -134,10 +134,10 @@ input {
 
 @media (any-hover: hover) {
   input {
-    transition: utils.transition(border-color);
+    transition: utils.transition(border-color, color);
 
     &:hover {
-      border-color: var(--color-on-surface-variant);
+      border-color: var(--color-on-surface);
     }
 
     &:hover:checked {

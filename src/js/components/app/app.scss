@@ -2,6 +2,7 @@
 @use '../../../styles/const';
 
 :host {
+  box-sizing: border-box;
   color: var(--color-on-surface);
   display: grid;
   font-family: 'Avenir Variable', sans-serif;

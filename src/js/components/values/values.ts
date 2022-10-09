@@ -12,7 +12,7 @@ interface InputAttributes {
 
 /**
  * Custom element that renders input fields and calculates compound interest
- * based on user-provided values.
+ * total based on user-provided values.
  */
 @customElement('interest-values')
 class Values extends LitElement {
@@ -48,6 +48,7 @@ class Values extends LitElement {
   @state() currencyListener: EventListenerObject;
   @state() total = '';
   @state() values: CompoundingValues;
+  @state() valuesListener: EventListenerObject;
 
   static styles = css`${shadowStyles}`;
 
@@ -55,46 +56,45 @@ class Values extends LitElement {
     super();
     this.calculator = new Calculator();
     this.currencyListener = this.updateCurrency.bind(this);
+    this.valuesListener = this.updateValues.bind(this);
   }
 
   connectedCallback() {
     super.connectedCallback();
-    this.updateFromStorage();
     this.addEventListener('updateCurrency', this.currencyListener);
+    this.addEventListener('updateValues', this.valuesListener);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.removeEventListener('updateCurrency', this.currencyListener);
+    this.removeEventListener('updateValues', this.valuesListener);
   }
 
-  // TODO: Move localStorage handling to <app>. Add 'updateValues' listener
-  // which receives localStorage data from <app>.
-  private async updateFromStorage() {
-    const storage = JSON.parse(localStorage.getItem('settings'));
-    if (!storage) {
-      return;
-    }
-
-    this.currency = storage.currency;
-    this.values = storage.values;
-    
-    await this.updateComplete;
-
-    this.populateInputs();
-    this.updateValues();
+  private updateCurrency(e: CustomEvent) {
+    this.currency = e.detail.currency;
     this.updateTotal();
   }
 
-  private populateInputs() {
+  private updateValues(e: CustomEvent) {
+    this.values = e.detail.values;
+    this.updateTotal();
+
+    // TODO: Figure out how to do this in the template.
     for (const [name, value] of Object.entries(this.values)) {
       const input =
           this.form.querySelector<HTMLInputElement>(`[name="${name}"]`);
       input.value = value;
-    } 
+    }
   }
 
-  private getFormValues() {
+  private updateTotal() {
+    if (this.values) {
+      this.total = this.calculator.total(this.values, this.currency);
+    }
+  }
+
+  private getValues() {
     if (this.form.querySelectorAll(':invalid').length) {
       return;
     }
@@ -107,37 +107,28 @@ class Values extends LitElement {
       rate: Number(formData.get('rate')),
     };
 
-    this.updateValues();
+    this.dispatchValues();
     this.updateTotal();
   }
 
-  private updateCurrency(e: CustomEvent) {
-    this.currency = e.detail.currency;
-    this.updateTotal();
-  }
-
-  private updateValues() {
-    if (this.values) {
-      this.dispatchEvent(new CustomEvent('updateValues', {
-        detail: {
-          values: this.values,
-        },
-        bubbles: true,
-        composed: true,
-      }));
+  private dispatchValues() {
+    if (!this.values) {
+      return;
     }
-  }
 
-  private updateTotal() {
-    if (this.values) {
-      this.total = this.calculator.total(this.values, this.currency);
-    }
+    this.dispatchEvent(new CustomEvent('updateValues', {
+      detail: {
+        values: this.values,
+      },
+      bubbles: true,
+      composed: true,
+    }));
   }
 
   render() {
     return html`
       <slot></slot>
-      <form @change="${this.getFormValues}">
+      <form @change="${this.getValues}">
         <ul>
           ${this.userInputs.map((item, index) => {
             const {inputmode, label, name, pattern} = item;

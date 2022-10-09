@@ -26,6 +26,7 @@ class App extends LitElement {
   
   connectedCallback() {
     super.connectedCallback();
+    this.getLocalStorage();
     this.addEventListener('updateCurrency', this.currencyListener);
     this.addEventListener('updateValues', this.valuesListener);
   }
@@ -38,6 +39,11 @@ class App extends LitElement {
 
   private updateCurrency(e: CustomEvent) {
     this.currency = e.detail.currency;
+    this.dispatchCurrency();
+    this.setLocalStorage();
+  }
+
+  private dispatchCurrency() {
     const updateCurrency = new CustomEvent('updateCurrency', {
       detail: {
         currency: this.currency,
@@ -45,27 +51,51 @@ class App extends LitElement {
     });
     this.table.dispatchEvent(updateCurrency);
     this.userValues.dispatchEvent(updateCurrency);
-    this.saveToStorage();
   }
 
   private updateValues(e: CustomEvent) {
     this.values = e.detail.values;
+    this.dispatchValues();
+    this.setLocalStorage();
+  }
+
+  private dispatchValues() {
     const updateValues = new CustomEvent('updateValues', {
       detail: {
         values: this.values,
       }
     });
     this.table.dispatchEvent(updateValues);
-    this.saveToStorage();
+    this.userValues.dispatchEvent(updateValues);
   }
 
-  private saveToStorage() {
+  private setLocalStorage() {
     if (this.currency && this.values) {
       const settings = {
         currency: this.currency,
         values: this.values,
       };
       localStorage.setItem('settings', JSON.stringify(settings));
+    }
+  }
+
+  private async getLocalStorage() {
+    const storage = JSON.parse(localStorage.getItem('settings'));
+    if (!storage) {
+      return;
+    }
+
+    this.currency = storage.currency;
+    this.values = storage.values;
+
+    await this.updateComplete;
+
+    if (this.currency) {
+      this.dispatchCurrency();
+    }
+    
+    if (this.values) {
+      this.dispatchValues();
     }
   }
 

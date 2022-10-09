@@ -2,14 +2,8 @@
 @use '../../../styles/const';
 @use '../../../styles/utils';
 
-// Component constants.
-$button-size: 2.75rem;
-$menu-spacing: .375rem;
-$swatch-size: 2.75rem;
-
 :host {
   position: relative;
-  z-index: 1;
 }
 
 * {
@@ -26,13 +20,13 @@ input {
 }
 
 button {
-  block-size: $button-size;
-  border-radius: math.div($button-size, 2);
+  block-size: const.$button-size;
+  border-radius: math.div(const.$button-size, 2);
   color: var(--color-theme);
   cursor: pointer;
   display: grid;
   font-size: const.$amount-size;
-  inline-size: $button-size;
+  inline-size: const.$button-size;
   opacity: 1;
   outline: 0;
   padding: 0;
@@ -72,8 +66,8 @@ button {
 form {
   background-color: var(--color-surface2);
   border-radius: 2rem;
-  inset-block: ($button-size + $menu-spacing) auto;
-  inset-inline: (- $menu-spacing) auto;
+  inset-block: (const.$button-size + const.$menu-spacing) auto;
+  inset-inline: (- const.$menu-spacing) auto;
   position: absolute;
   transform: translateY(.25rem);
   transition: utils.transition(opacity, transform);
@@ -88,10 +82,10 @@ form[aria-hidden='true'] {
 // Currency options via list of radio buttons.
 ul {
   display: flex;
-  gap: $menu-spacing;
+  gap: const.$menu-spacing;
   list-style: none;
   margin: 0;
-  padding: $menu-spacing;
+  padding: const.$menu-spacing;
 }
 
 // Stack each list item's children on top of each other.
@@ -109,12 +103,12 @@ li > * {
 // Radio buttons styled as discs.
 input {
   background-color: var(--color-surface1);
-  block-size: $swatch-size;  
+  block-size: const.$button-size;  
   border: 3px solid var(--color-on-surface-variant);
-  border-radius: math.div($swatch-size, 2);
+  border-radius: math.div(const.$button-size, 2);
   cursor: pointer;
   display: block;
-  inline-size: $swatch-size;
+  inline-size: const.$button-size;
   margin: 0;
 
   &:focus,
@@ -134,7 +128,7 @@ input {
 
 @media (any-hover: hover) {
   input {
-    transition: utils.transition(border-color, color);
+    transition: utils.transition(border-color);
 
     &:hover {
       border-color: var(--color-on-surface);
@@ -143,5 +137,9 @@ input {
     &:hover:checked {
       border-color: var(--color-theme);
     }
+  }
+
+  input + span {
+    transition: utils.transition(color);
   }
 }

@@ -21,23 +21,24 @@ $theme-light: #00ad45;
 $theme-dark: #4dc67d;
 
 // Dimensions.
-$amount-size: 2rem;
-$button-height: 2.75rem;
+$amount-size: 2.25rem;
+$button-size: 2.75rem;
 $card-padding: 1.5rem;
 $card-radius: 1rem;
 $gap-max: 3rem;
 $gap-min: 1rem;
 $field-gap: .75rem;
 $field-input-size: 6rem;
+$menu-spacing: .375rem;
 
 // Compound dimensions.
 $fluid-gap: clamp(#{$gap-min}, #{$gap-min} + 1vw, #{$gap-max});
 
 // Breakpoints via content-based min/max values.
-$table-max-size: 48rem;
+$table-max-size: 50rem;
 $table-min-size: 36rem;
 $values-max-size: 34rem;
-$values-min-size: 21rem;
+$values-min-size: 24rem; //
 
 $app-max-size: $values-min-size + $gap-max + $table-max-size;
 

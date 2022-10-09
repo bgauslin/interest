@@ -9,12 +9,12 @@
 }
 
 button {
-  appearance: none;
   align-items: center;
+  appearance: none;
   background-color: var(--color-theme);
-  block-size: const.$button-height;
+  block-size: const.$button-size;
   border: 0;
-  border-radius: math.div(const.$button-height, 2);
+  border-radius: math.div(const.$button-size, 2);
   color: var(--color-on-theme);
   cursor: pointer;
   display: flex;
@@ -33,19 +33,19 @@ button {
 
   &:focus,
   &:active {
-    background-color: var(--color-surface);
-    color: var(--color-theme);
+    background-color: var(--color-surface2);
+    color: var(--color-on-surface);
   }
 }
 
-@media (any-hover: hover){
+@media (any-hover: hover) {
   button {
     transition: utils.transition(background-color, color);
-  }
 
-  button:hover {
-    background-color: var(--color-surface);
-    color: var(--color-theme);
+    &:hover {
+      background-color: var(--color-surface2);
+      color: var(--color-on-surface);
+    }
   }
 }
 
@@ -53,7 +53,7 @@ button {
   box-sizing: border-box;
   grid-area: drawer;
   overflow: hidden;
-  transition: utils.transition(block-size);
+  transition: block-size .4s ease-out;
 }
 
 // Always hide the button and show the drawer on large screens.

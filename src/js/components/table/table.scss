@@ -11,10 +11,10 @@
   border-radius: const.$card-radius;
   overflow: auto hidden;
   scrollbar-width: none;
-}
 
-.table::-webkit-scrollbar {
-  display: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 // Standard <table> element.

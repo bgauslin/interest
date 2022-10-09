@@ -8,6 +8,7 @@ interface InputAttributes {
   label: string,
   name: string,
   pattern: string,
+  value: string,
 }
 
 /**
@@ -16,30 +17,34 @@ interface InputAttributes {
  */
 @customElement('interest-values')
 class Values extends LitElement {
-  @property() userInputs: InputAttributes[] = [
+  @property() fields: InputAttributes[] = [
     {
       inputmode: 'numeric',
       label: 'Principal',
       name: 'principal',
       pattern: '[0-9]+',
+      value: '',
     },
     {
       inputmode: 'numeric',
       label: 'Yearly addition',
       name: 'contribution',
       pattern: '[0-9]+',
+      value: '',
     },
     {
       inputmode: 'decimal',
       label: 'Interest rate',
       name: 'rate',
       pattern: '[0-9]{0,2}[\\.]?[0-9]{1,2}',
+      value: '',
     },
     {
       inputmode: 'numeric',
       label: 'Years to grow',
       name: 'periods',
       pattern: '[0-9]+',
+      value: '',
     }
   ];
   @query('form') form: HTMLFormElement;
@@ -75,20 +80,16 @@ class Values extends LitElement {
   private updateCurrency(e: CustomEvent) {
     this.currency = e.detail.currency;
     this.updateTotal();
-
     this.dispatchCurrency();
   }
 
   private updateValues(e: CustomEvent) {
     this.values = e.detail.values;
-    this.updateTotal();
-
-    // TODO: Figure out how to do this in the template.
     for (const [name, value] of Object.entries(this.values)) {
-      const input =
-          this.form.querySelector<HTMLInputElement>(`[name="${name}"]`);
-      input.value = value;
+      const field = this.fields.find(input => input.name === name);
+      field.value = value;
     }
+    this.updateTotal();
   }
 
   private updateTotal() {
@@ -145,8 +146,8 @@ class Values extends LitElement {
       <slot></slot>
       <form @change="${this.getValues}">
         <ul>
-          ${this.userInputs.map((item, index) => {
-            const {inputmode, label, name, pattern} = item;
+          ${this.fields.map((field, index) => {
+            const {inputmode, label, name, pattern, value} = field;
             return html`
               <li class="${name}">
                 <label for="${name}">${label}</label>
@@ -154,6 +155,7 @@ class Values extends LitElement {
                   type="text"
                   id="${name}"
                   name="${name}"
+                  value="${value}"
                   inputmode="${inputmode}"
                   pattern="${pattern}"
                   autofocus="${index === 0}"

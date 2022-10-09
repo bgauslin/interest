@@ -43,6 +43,7 @@ class Values extends LitElement {
     }
   ];
   @query('form') form: HTMLFormElement;
+  @query('interest-currency') currencyWidget: HTMLElement;
   @state() calculator: Calculator;
   @state() currency = DEFAULT_CURRENCY;
   @state() currencyListener: EventListenerObject;
@@ -74,6 +75,8 @@ class Values extends LitElement {
   private updateCurrency(e: CustomEvent) {
     this.currency = e.detail.currency;
     this.updateTotal();
+
+    this.dispatchCurrency();
   }
 
   private updateValues(e: CustomEvent) {
@@ -109,6 +112,18 @@ class Values extends LitElement {
 
     this.dispatchValues();
     this.updateTotal();
+  }
+
+  private dispatchCurrency() {
+    if (!this.currency) {
+      return;
+    }
+
+    this.currencyWidget.dispatchEvent(new CustomEvent('updateCurrency', {
+      detail: {
+        currency: this.currency,
+      },
+    }));
   }
 
   private dispatchValues() {

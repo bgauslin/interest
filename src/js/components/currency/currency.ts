@@ -13,6 +13,7 @@ class Currency extends LitElement {
   @state() clickListener: EventListenerObject;
   @state() closeMenuKeys: String[] = ['Escape', 'Space'];
   @state() currency = DEFAULT_CURRENCY;
+  @state() currencyListener: EventListenerObject;
   @state() open: Boolean = false;
 
   static styles = css`${shadowStyles}`;
@@ -20,26 +21,19 @@ class Currency extends LitElement {
   constructor() {
     super();
     this.clickListener = this.handleClick.bind(this);
+    this.currencyListener = this.updateCurrency.bind(this);
   }
   
   connectedCallback() {
     super.connectedCallback();
-    this.getSavedCurrency();
+    this.addEventListener('updateCurrency', this.currencyListener);
   }
 
   disconnectedCallback() { 
     super.disconnectedCallback();
     this.removeEventListener('keyup', this.handleKey);
+    this.removeEventListener('updateCurrency', this.currencyListener);
     document.removeEventListener('click', this.clickListener);
-  }
-
-  // TODO: Move localStorage handling to <app>. Add 'updateCurrency' listener
-  // which receives localStorage data from <app>.
-  private getSavedCurrency() {
-    const storage = JSON.parse(localStorage.getItem('settings'));
-    if (storage && storage.currency) {
-      this.currency = storage.currency;
-    }
   }
 
   private toggleMenu() {
@@ -79,7 +73,11 @@ class Currency extends LitElement {
     }
   }
 
-  private updateCurrency() {
+  private updateCurrency(e: CustomEvent) {
+    this.currency = e.detail.currency;
+  }
+
+  private getCurrency() {
     const formData = new FormData(this.form);
     this.currency = formData.get('currency').toString();
     this.dispatchEvent(new CustomEvent('updateCurrency', {
@@ -120,7 +118,7 @@ class Currency extends LitElement {
   private renderMenu() {
     return html`
       <form id="menu" aria-hidden="${!this.open}"
-        @change="${this.updateCurrency}">
+        @change="${this.getCurrency}">
         <ul role="menu" aria-labelledby="button">
         ${Currencies.map((currency) => {
           const {id, label, symbol} = currency;

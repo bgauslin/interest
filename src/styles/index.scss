@@ -1,7 +1,6 @@
 @use 'sass:map';
 @use 'const';
 
-// Webfonts.
 @font-face {
   font-display: swap;
   font-family: 'Avenir Variable';
@@ -9,27 +8,9 @@
   src: url('https://assets.gauslin.com/fonts/AvenirNext-Variable.woff2') format('woff2');
 }
 
-// Bare bones app-wide styles.
-html {
-  -webkit-tap-highlight-color: transparent;
-}
-
-body {
-  background-color: var(--color-body-background);
-  margin: 0;
-  min-block-size: 100vh;
-  touch-action: manipulation;
-
-  @supports (min-block-size: 100dvh) {
-    min-block-size: 100dvh;
-  }
-}
-
-// Define all custom properties.
 :root {
   --color-body-background: var(--color-surface);
   --color-error: #{const.$error-light};
-  --color-odd-row-background: #{mix(black, const.$gray6-light, 3%)};
   --color-on-surface: #{const.$gray6-dark};
   --color-on-surface-variant: #{const.$gray1-light};
   --color-outline: #{const.$gray4-dark};
@@ -41,7 +22,6 @@ body {
 
   @media (prefers-color-scheme: dark) {
     --color-error: #{const.$error-dark};
-    --color-odd-row-background: #{mix(white, const.$gray6-dark, 3%)};
     --color-on-surface: #{const.$gray5-light};
     --color-on-surface-variant: #{const.$gray1-light};
     --color-outline: #{const.$gray4-light};
@@ -54,11 +34,20 @@ body {
 
   @media #{map.get(const.$breakpoint, 'small')} {
     --color-body-background: var(--color-surface1);
-    --color-table-background: var(--color-surface);
-    --layout-optional-columns-display: table-cell;
   }
+}
 
-  @media #{map.get(const.$breakpoint, 'small-portrait')} {
-    --layout-footnote-display: block;
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--color-body-background);
+  margin: 0;
+  min-block-size: 100vh;
+  touch-action: manipulation;
+
+  @supports (min-block-size: 100dvh) {
+    min-block-size: 100dvh;
   }
 }

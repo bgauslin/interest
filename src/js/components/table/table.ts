@@ -55,8 +55,8 @@ class TableWidget extends LitElement {
 
   render() {
     return html`
-      <div class="table" aria-hidden="${this.tableData.length === 0}"
-        data-currency="${this.currency}">
+      <div aria-hidden="${this.tableData.length === 0}"
+           data-currency="${this.currency}">
         <table>
           <thead>
             <tr>
@@ -83,7 +83,7 @@ class TableWidget extends LitElement {
           </tbody>
         </table>
       </div>
-      <p class="rotate-screen">
+      <p>
         Rotate screen to view <span>Interest</span> and <span>Growth</span> columns.
       </p>
     `;

@@ -47,7 +47,7 @@ class Values extends LitElement {
   @state() currency = DEFAULT_CURRENCY;
   @state() currencyListener: EventListenerObject;
   @state() total = '';
-  @state() userValues: CompoundingValues;
+  @state() values: CompoundingValues;
 
   static styles = css`${shadowStyles}`;
 
@@ -77,7 +77,7 @@ class Values extends LitElement {
     }
 
     this.currency = storage.currency;
-    this.userValues = storage.values;
+    this.values = storage.values;
     
     await this.updateComplete;
 
@@ -87,7 +87,7 @@ class Values extends LitElement {
   }
 
   private populateInputs() {
-    for (const [name, value] of Object.entries(this.userValues)) {
+    for (const [name, value] of Object.entries(this.values)) {
       const input =
           this.form.querySelector<HTMLInputElement>(`[name="${name}"]`);
       input.value = value;
@@ -100,7 +100,7 @@ class Values extends LitElement {
     }
 
     const formData = new FormData(this.form);
-    this.userValues = {
+    this.values = {
       contribution: Number(formData.get('contribution')),
       periods: Number(formData.get('periods')),
       principal: Number(formData.get('principal')),
@@ -117,10 +117,10 @@ class Values extends LitElement {
   }
 
   private updateValues() {
-    if (this.userValues) {
+    if (this.values) {
       this.dispatchEvent(new CustomEvent('updateValues', {
         detail: {
-          values: this.userValues,
+          values: this.values,
         },
         bubbles: true,
         composed: true,
@@ -129,8 +129,8 @@ class Values extends LitElement {
   }
 
   private updateTotal() {
-    if (this.userValues) {
-      this.total = this.calculator.total(this.userValues, this.currency);
+    if (this.values) {
+      this.total = this.calculator.total(this.values, this.currency);
     }
   }
 

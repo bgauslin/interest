@@ -8,13 +8,12 @@ import shadowStyles from './app.scss';
  */
 @customElement('interest-app')
 class App extends LitElement {
-  @query('interest-drawer') drawer: HTMLElement;
   @query('interest-table') table: HTMLElement;
-  @query('interest-values') values: HTMLElement;
+  @query('interest-values') userValues: HTMLElement;
   @state() appTitle = 'Compound Interest Calculator';
   @state() currency = DEFAULT_CURRENCY;
   @state() currencyListener: EventListenerObject;
-  @state() userValues: CompoundingValues;
+  @state() values: CompoundingValues;
   @state() valuesListener: EventListenerObject;
 
   static styles = css`${shadowStyles}`;
@@ -45,15 +44,15 @@ class App extends LitElement {
       }
     });
     this.table.dispatchEvent(updateCurrency);
-    this.values.dispatchEvent(updateCurrency);
+    this.userValues.dispatchEvent(updateCurrency);
     this.saveToStorage();
   }
 
   private updateValues(e: CustomEvent) {
-    this.userValues = e.detail.values;
+    this.values = e.detail.values;
     const updateValues = new CustomEvent('updateValues', {
       detail: {
-        values: this.userValues,
+        values: this.values,
       }
     });
     this.table.dispatchEvent(updateValues);
@@ -61,10 +60,10 @@ class App extends LitElement {
   }
 
   private saveToStorage() {
-    if (this.currency && this.userValues) {
+    if (this.currency && this.values) {
       const settings = {
         currency: this.currency,
-        values: this.userValues,
+        values: this.values,
       };
       localStorage.setItem('settings', JSON.stringify(settings));
     }
@@ -75,7 +74,7 @@ class App extends LitElement {
       <interest-values>
         <h1>${this.appTitle}</h1>
       </interest-values>
-      <interest-drawer aria-hidden="${!this.userValues}">
+      <interest-drawer aria-hidden="${!this.values}">
         <interest-table></interest-table>
       </interest-drawer>
     `;

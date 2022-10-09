@@ -12,7 +12,7 @@ class TableWidget extends LitElement {
   @state() currency = DEFAULT_CURRENCY;
   @state() currencyListener: EventListenerObject;
   @state() tableData: Sums[] = [];
-  @state() userValues: CompoundingValues;
+  @state() values: CompoundingValues;
   @state() valuesListener: EventListenerObject;
 
   static styles = css`${shadowStyles}`;
@@ -38,19 +38,19 @@ class TableWidget extends LitElement {
 
   private updateCurrency(e: CustomEvent) {
     this.currency = e.detail.currency;
-    if (this.userValues) {
+    if (this.values) {
       this.updateTable();
     }
   }
 
   private updateValues(e: CustomEvent) {
-    this.userValues = e.detail.values;
+    this.values = e.detail.values;
     this.updateTable();
   }
 
   private updateTable() {
     this.tableData =
-        this.calculator.compound(this.userValues, this.currency);
+        this.calculator.compound(this.values, this.currency);
   }
 
   render() {

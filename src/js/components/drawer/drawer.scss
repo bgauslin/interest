@@ -9,12 +9,13 @@
 }
 
 button {
+  appearance: none;
   align-items: center;
-  background-color: transparent;
+  background-color: var(--color-theme);
   block-size: const.$button-height;
-  border: 3px solid var(--color-theme);
+  border: 0;
   border-radius: math.div(const.$button-height, 2);
-  color: var(--color-theme);
+  color: var(--color-on-theme);
   cursor: pointer;
   display: flex;
   font-family: 'Avenir Variable', sans-serif;
@@ -29,13 +30,12 @@ button {
   padding-block: 0;
   padding-inline: 1.5rem;
   place-self: start center;
-  transition: utils.transition(opacity);
   white-space: nowrap;
 
   &:focus,
   &:active {
-    background-color: var(--color-theme);
-    color: var(--color-surface);
+    background-color: var(--color-surface);
+    color: var(--color-theme);
   }
 }
 
@@ -45,8 +45,8 @@ button {
   }
 
   button:hover {
-    background-color: var(--color-theme);
-    color: var(--color-surface);
+    background-color: var(--color-surface);
+    color: var(--color-theme);
   }
 }
 

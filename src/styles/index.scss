@@ -37,6 +37,7 @@ body {
   --color-surface1: #{const.$gray5-light};
   --color-surface2: #{const.$gray4-light};
   --color-theme: #{const.$theme-light};
+  --color-on-theme: #{const.$gray6-light};
 
   @media (prefers-color-scheme: dark) {
     --color-error: #{const.$error-dark};
@@ -48,6 +49,7 @@ body {
     --color-surface1: #{const.$gray5-dark};
     --color-surface2: #{const.$gray4-dark};
     --color-theme: #{const.$theme-dark};
+    --color-on-theme: #{const.$gray6-dark};
   }
 
   @media #{map.get(const.$breakpoint, 'small')} {

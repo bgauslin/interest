@@ -38,9 +38,8 @@ module.exports = {
           path.resolve(__dirname, 'src/js/components')
         ],
         use: [
-          {
-            loader: 'lit-css-loader',
-          },
+          'lit-css-loader',
+          'postcss-loader',
           {
             loader: 'sass-loader',
             options: {
@@ -48,7 +47,7 @@ module.exports = {
                 outputStyle: 'compressed',
               },
             },
-          }
+          },
         ],
       },
       {
@@ -60,6 +59,7 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
+          'postcss-loader',
           'sass-loader',
         ],
       },

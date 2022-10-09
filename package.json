@@ -9,7 +9,16 @@
     "start": "http-server dist",
     "build": "webpack --config webpack.prod.js"
   },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "last 2 version"
+  ],
   "devDependencies": {
+    "autoprefixer": "^10.4.12",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
@@ -17,6 +26,8 @@
     "http-server": "^14.1.1",
     "lit-css-loader": "^2.0.0",
     "mini-css-extract-plugin": "^2.6.1",
+    "postcss": "^8.4.17",
+    "postcss-loader": "^7.0.1",
     "sass": "^1.55.0",
     "sass-loader": "^13.0.2",
     "ts-loader": "^9.4.1",

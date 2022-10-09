@@ -9,6 +9,7 @@ import shadowStyles from './currency.scss';
 @customElement('interest-currency')
 class Currency extends LitElement {
   @query('button') button: HTMLButtonElement;
+  @query('form :checked') checked: HTMLInputElement;
   @query('form') form: HTMLFormElement;
   @state() clickListener: EventListenerObject;
   @state() closeMenuKeys: String[] = ['Escape', 'Space'];
@@ -46,10 +47,9 @@ class Currency extends LitElement {
 
   private openMenu() {
     this.open = true;
+    this.checked?.focus();
+    this.addEventListener('keyup', this.handleKey);
     window.requestAnimationFrame(() => {
-      const checked = this.form.querySelector<HTMLInputElement>(':checked');
-      checked?.focus();
-      this.addEventListener('keyup', this.handleKey);
       document.addEventListener('click', this.clickListener);
     });
   }

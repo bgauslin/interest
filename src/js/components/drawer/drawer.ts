@@ -35,8 +35,7 @@ class Drawer extends LitElement {
 
   private closeDrawer() {
     window.requestAnimationFrame(() => {
-      const drawerHeight = this.drawer.scrollHeight;
-      this.drawer.style.blockSize = `${drawerHeight / 16}rem`;
+      this.drawer.style.blockSize = `${this.drawer.scrollHeight / 16}rem`;
       window.requestAnimationFrame(() => {
         this.drawer.style.blockSize = '0';
       });
@@ -44,8 +43,7 @@ class Drawer extends LitElement {
   }
 
   private openDrawer() {
-    const drawerHeight = this.drawer.scrollHeight;
-    this.drawer.style.blockSize = `${drawerHeight / 16}rem`;
+    this.drawer.style.blockSize = `${this.drawer.scrollHeight / 16}rem`;
     this.drawer.addEventListener('transitionend', () => {
       this.drawer.style.blockSize = null;
     }, {once: true});

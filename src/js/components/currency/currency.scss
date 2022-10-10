@@ -41,10 +41,8 @@ button {
   &[aria-expanded='true'] {
     background-color: var(--color-surface2);
   }
-}
 
-@media (any-hover: hover) {
-  button {
+  @media (any-hover: hover) {
     transition: utils.transition(background-color);
 
     &:hover {
@@ -124,10 +122,8 @@ input {
   &:checked + span {
     color: var(--color-theme);
   }
-}
 
-@media (any-hover: hover) {
-  input {
+  @media (any-hover: hover) {
     transition: utils.transition(border-color);
 
     &:hover {
@@ -139,7 +135,7 @@ input {
     }
   }
 
-  input + span {
+  & + span {
     transition: utils.transition(color);
   }
 }

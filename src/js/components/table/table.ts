@@ -40,9 +40,7 @@ class TableWidget extends LitElement {
 
   private updateCurrency(e: CustomEvent) {
     this.currency = e.detail.currency;
-    if (this.values) {
-      this.updateTable();
-    }
+    this.updateTable();
   }
 
   private updateValues(e: CustomEvent) {
@@ -51,8 +49,9 @@ class TableWidget extends LitElement {
   }
 
   private updateTable() {
-    this.tableData =
-        this.calculator.compound(this.values, this.currency);
+    if (this.currency && this.values) {
+      this.tableData = this.calculator.compound(this.values, this.currency);
+    }
   }
 
   render() {

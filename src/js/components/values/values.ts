@@ -17,6 +17,8 @@ interface InputAttributes {
  */
 @customElement('interest-values')
 class Values extends LitElement {
+  @property() currencyEvent = 'updateCurrency';
+  @property() valuesEvent = 'updateValues';
   @property() fields: InputAttributes[] = [
     {
       inputmode: 'numeric',
@@ -47,8 +49,6 @@ class Values extends LitElement {
       value: '',
     }
   ];
-  @property() currencyEvent = 'updateCurrency';
-  @property() valuesEvent = 'updateValues';
   @query('form') form: HTMLFormElement;
   @query('interest-currency') currencyWidget: HTMLElement;
   @state() calculator: Calculator;

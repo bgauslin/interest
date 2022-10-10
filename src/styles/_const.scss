@@ -32,19 +32,19 @@ $field-input-size: 6rem;
 $menu-spacing: .375rem;
 
 // Compound dimensions.
-$fluid-gap: clamp(#{$gap-min}, #{$gap-min} + 1vw, #{$gap-max});
+$fluid-gap: clamp(#{$gap-min}, #{$gap-min} + 2vw, #{$gap-max});
 
 // Breakpoints via content-based min/max values.
-$table-max-size: 50rem;
-$table-min-size: 36rem;
+$table-max-size: 51rem;
+$table-min-size: 37rem;
 $values-max-size: 34rem;
-$values-min-size: 24rem; //
+$values-min-size: 24rem;
 
 $app-max-size: $values-min-size + $gap-max + $table-max-size;
 
 // Note: 'small-portrait' has 'max-width' media query (default is 'min-width').
-$small: $gap-min + $values-max-size + $gap-min;
-$medium: $gap-min + $values-min-size + $gap-min + $table-min-size + $gap-min;
+$small: $values-max-size + ($gap-min * 2);
+$medium: $values-min-size + $table-min-size + ($gap-max * 3);
 $breakpoint: (
   'small':  '(min-width: #{$small})',
   'small-portrait': '(max-width: #{$small}) and (orientation: portrait)',

@@ -7,9 +7,9 @@ import shadowStyles from './drawer.scss';
  */
 @customElement('interest-drawer')
 class Drawer extends LitElement {
-  @query('button') button: HTMLButtonElement;
-  @query('#drawer') drawer: HTMLDivElement;
-  @state() drawerHeight = '0';
+  @query('[aria-controls="drawer"]') button: HTMLButtonElement;
+  @query('[id="drawer"]') drawer: HTMLDivElement;
+  @state() drawerSize = '0';
   @state() open: Boolean = false;
 
   static styles = css`${shadowStyles}`;
@@ -25,32 +25,32 @@ class Drawer extends LitElement {
 
   private closeDrawer() {
     window.requestAnimationFrame(() => {
-      this.drawerHeight = this.getDrawerHeight();
-      window.requestAnimationFrame(() => this.drawerHeight = '0');
+      this.drawerSize = this.getDrawerSize();
+      window.requestAnimationFrame(() => this.drawerSize = '0');
     });
   }
 
   private openDrawer() {
-    this.drawerHeight = this.getDrawerHeight();
+    this.drawerSize = this.getDrawerSize();
     this.drawer.addEventListener('transitionend', () => {
-      this.drawerHeight = null;
+      this.drawerSize = null;
     }, {once: true});
     this.button.blur();
   }
 
-  private getDrawerHeight(): string {
+  private getDrawerSize(): string {
     return `${this.drawer.scrollHeight / 16}rem`;
   }
 
   render() {
-    const buttonLabel = this.open ? 'Hide table' : 'Show table';
-    const style = this.drawerHeight ? `block-size: ${this.drawerHeight}` : '';
+    const label = this.open ? 'Hide table' : 'Show table';
+    const style = this.drawerSize ? `block-size: ${this.drawerSize}` : '';
     return html`
       <button
         aria-controls="drawer"
         aria-expanded="${this.open}"
         type="button"
-        @click="${this.toggleDrawer}">${buttonLabel}</button>
+        @click="${this.toggleDrawer}">${label}</button>
       <div id="drawer" style="${style}">
         <slot></slot>
       </div>

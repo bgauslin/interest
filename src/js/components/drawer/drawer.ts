@@ -7,7 +7,8 @@ import shadowStyles from './drawer.scss';
  */
 @customElement('interest-drawer')
 class Drawer extends LitElement {
-  @query('#drawer') drawer: HTMLElement;
+  @query('button') button: HTMLButtonElement;
+  @query('#drawer') drawer: HTMLDivElement;
   @state() drawerHeight = '0';
   @state() open: Boolean = false;
 
@@ -34,6 +35,7 @@ class Drawer extends LitElement {
     this.drawer.addEventListener('transitionend', () => {
       this.drawerHeight = null;
     }, {once: true});
+    this.button.blur();
   }
 
   private getDrawerHeight(): string {
@@ -47,6 +49,7 @@ class Drawer extends LitElement {
       <button
         aria-controls="drawer"
         aria-expanded="${this.open}"
+        type="button"
         @click="${this.toggleDrawer}">${buttonLabel}</button>
       <div id="drawer" style="${style}">
         <slot></slot>

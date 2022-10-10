@@ -12,7 +12,7 @@
   box-sizing: border-box;
 }
 
-button {
+:host > button {
   align-items: center;
   appearance: none;
   background-color: var(--color-surface1);
@@ -41,10 +41,6 @@ button {
     color: var(--color-on-theme);
   }
 
-  @media #{map.get(const.$breakpoint, 'small')} {
-    background-color: var(--color-surface);
-  }
-
   @media (any-hover: hover) {
     transition: utils.transition(background-color, color);
 
@@ -53,22 +49,25 @@ button {
       color: var(--color-on-theme);
     }
   }
+
+  @media #{map.get(const.$breakpoint, 'small')} {
+    background-color: var(--color-surface);
+  }
+
+  // Always hide the button on large screens.
+  @media #{map.get(const.$breakpoint, 'medium')} {
+    display: none;
+  }
 }
 
-[id='drawer'] {
+:host > div {
   grid-area: drawer;
   overflow: hidden;
   transition: block-size .4s ease-out;
-}
 
-// Always hide the button and show the drawer on large screens.
-// '!important' required to override inline styles set via JS.
-@media #{map.get(const.$breakpoint, 'medium')} {
-  button {
-    display: none;
-  }
-
-  [id='drawer'] {
+  // Always show the drawer on large screens. '!important' required to override
+  // inline styles set via JS.
+  @media #{map.get(const.$breakpoint, 'medium')} {
     block-size: auto !important;
   }
 }

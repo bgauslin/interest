@@ -9,7 +9,7 @@ import shadowStyles from './app.scss';
 @customElement('interest-app')
 class App extends LitElement {
   @property() currencyEvent = 'updateCurrency';
-  @property() storageItem = 'settings';
+  @property() storageItem = 'interest';
   @property() valuesEvent = 'updateValues';
   @query('interest-table') table: HTMLElement;
   @query('interest-values') userValues: HTMLElement;
@@ -92,9 +92,7 @@ class App extends LitElement {
     this.values = storage.values;
 
     await this.updateComplete;
-
     this.dispatchCurrency();
-    
     if (this.values) {
       this.dispatchValues();
     }

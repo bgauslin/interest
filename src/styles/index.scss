@@ -37,12 +37,16 @@
   }
 }
 
+* {
+  box-sizing: border-box;
+}
+
 html {
   -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  background-color: var(--color-body-background);
+  background-color: var(--color-body-background); // TODO: Move to app.
   margin: 0;
   min-block-size: 100vh;
   touch-action: manipulation;

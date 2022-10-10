@@ -8,14 +8,18 @@
   grid: 'drawer' 'button' 1fr;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 button {
   align-items: center;
   appearance: none;
-  background-color: var(--color-theme);
+  background-color: var(--color-surface1);
   block-size: const.$button-size;
   border: 0;
   border-radius: math.div(const.$button-size, 2);
-  color: var(--color-on-theme);
+  color: var(--color-on-surface);
   cursor: pointer;
   display: flex;
   font-family: 'Avenir Variable', sans-serif;
@@ -33,24 +37,25 @@ button {
 
   &:focus,
   &:active {
-    background-color: var(--color-surface2);
-    color: var(--color-on-surface);
+    background-color: var(--color-theme);
+    color: var(--color-on-theme);
   }
-}
 
-@media (any-hover: hover) {
-  button {
+  @media #{map.get(const.$breakpoint, 'small')} {
+    background-color: var(--color-surface);
+  }
+
+  @media (any-hover: hover) {
     transition: utils.transition(background-color, color);
 
     &:hover {
-      background-color: var(--color-surface2);
-      color: var(--color-on-surface);
+      background-color: var(--color-theme);
+      color: var(--color-on-theme);
     }
   }
 }
 
 [id='drawer'] {
-  box-sizing: border-box;
   grid-area: drawer;
   overflow: hidden;
   transition: block-size .4s ease-out;

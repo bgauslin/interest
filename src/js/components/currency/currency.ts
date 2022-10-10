@@ -81,11 +81,11 @@ class Currency extends LitElement {
     const formData = new FormData(this.form);
     this.currency = formData.get('currency').toString();
     this.dispatchEvent(new CustomEvent('updateCurrency', {
+      bubbles: true,
+      composed: true,
       detail: {
         currency: this.currency,
       },
-      bubbles: true,
-      composed: true,
     }));
   }
 
@@ -117,16 +117,25 @@ class Currency extends LitElement {
 
   private renderMenu() {
     return html`
-      <form id="menu" aria-hidden="${!this.open}"
+      <form
+        aria-hidden="${!this.open}"
+        id="menu" 
         @change="${this.getCurrency}">
-        <ul role="menu" aria-labelledby="button">
+        <ul
+          aria-labelledby="button"
+          role="menu">
         ${Currencies.map((currency) => {
           const {id, label, symbol} = currency;
           return html`
             <li role="menuitem">
-              <input type="radio" name="currency" value="${id}"
-                  aria-label="${label}" ?checked="${id === this.currency}">
-              <span>${symbol}</span>
+              <input
+                aria-label="${label}"
+                ?checked="${id === this.currency}"
+                name="currency"
+                role="menuitem"
+                type="radio"
+                value="${id}">
+              <span aria-hidden="true">${symbol}</span>
             </li>`
         })}
         </ul>

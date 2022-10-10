@@ -133,11 +133,11 @@ class Values extends LitElement {
     }
 
     this.dispatchEvent(new CustomEvent('updateValues', {
+      bubbles: true,
+      composed: true,
       detail: {
         values: this.values,
       },
-      bubbles: true,
-      composed: true,
     }));
   }
 
@@ -146,20 +146,19 @@ class Values extends LitElement {
       <slot></slot>
       <form @change="${this.getValues}">
         <ul>
-          ${this.fields.map((field, index) => {
+          ${this.fields.map((field) => {
             const {inputmode, label, name, pattern, value} = field;
             return html`
               <li class="${name}">
                 <label for="${name}">${label}</label>
                 <input
-                  type="text"
                   id="${name}"
-                  name="${name}"
-                  value="${value}"
                   inputmode="${inputmode}"
+                  name="${name}"
                   pattern="${pattern}"
-                  autofocus="${index === 0}"
-                  required>
+                  required
+                  type="text"
+                  value="${value}">
               </li>
             `
           })}

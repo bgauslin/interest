@@ -1,5 +1,5 @@
 import {LitElement, css, html} from 'lit';
-import {customElement, query, state} from 'lit/decorators.js';
+import {customElement, property, query, state} from 'lit/decorators.js';
 import {Currencies, DEFAULT_CURRENCY} from '../../modules/Calculator';
 import shadowStyles from './currency.scss';
 
@@ -8,6 +8,7 @@ import shadowStyles from './currency.scss';
  */
 @customElement('interest-currency')
 class Currency extends LitElement {
+  @property() currencyEvent = 'updateCurrency';
   @query('button') button: HTMLButtonElement;
   @query('form :checked') checked: HTMLInputElement;
   @query('form') form: HTMLFormElement;
@@ -27,13 +28,13 @@ class Currency extends LitElement {
   
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener('updateCurrency', this.currencyListener);
+    this.addEventListener(this.currencyEvent, this.currencyListener);
   }
 
   disconnectedCallback() { 
     super.disconnectedCallback();
     this.removeEventListener('keyup', this.handleKey);
-    this.removeEventListener('updateCurrency', this.currencyListener);
+    this.removeEventListener(this.currencyEvent, this.currencyListener);
     document.removeEventListener('click', this.clickListener);
   }
 
@@ -80,7 +81,7 @@ class Currency extends LitElement {
   private getCurrency() {
     const formData = new FormData(this.form);
     this.currency = formData.get('currency').toString();
-    this.dispatchEvent(new CustomEvent('updateCurrency', {
+    this.dispatchEvent(new CustomEvent(this.currencyEvent, {
       bubbles: true,
       composed: true,
       detail: {
@@ -97,20 +98,19 @@ class Currency extends LitElement {
   }
 
   private renderButton() {
-    const buttonLabel = 'Change currency';
-    const currentCurrency =
-        Currencies.find(currency => currency.id === this.currency);
+    const current = Currencies.find(currency => currency.id === this.currency);
+    const label = 'Change currency';
     return html`
       <button
         aria-controls="menu"
         aria-expanded="${this.open}"
         aria-haspopup="true"
-        aria-label="${buttonLabel}"
+        aria-label="${label}"
         id="button"
-        title="${buttonLabel}"
+        title="${label}"
         type="button"
         @click="${this.toggleMenu}">
-        <span aria-hidden="true">${currentCurrency.symbol}</span>
+        <span aria-hidden="true">${current.symbol}</span>
       </button>
     `;
   }

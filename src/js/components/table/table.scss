@@ -11,6 +11,10 @@
   }
 }
 
+* {
+  box-sizing: border-box;
+}
+
 // Scrollable wrapper for <table> element.
 div {
   overflow: auto hidden;

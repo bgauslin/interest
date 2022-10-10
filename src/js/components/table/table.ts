@@ -1,5 +1,5 @@
 import {LitElement, css, html} from 'lit';
-import {customElement, state} from 'lit/decorators.js';
+import {customElement, property, state} from 'lit/decorators.js';
 import {Calculator, CompoundingValues, DEFAULT_CURRENCY, Sums} from '../../modules/Calculator';
 import shadowStyles from './table.scss';
 
@@ -8,6 +8,8 @@ import shadowStyles from './table.scss';
  */
 @customElement('interest-table')
 class TableWidget extends LitElement {
+  @property() currencyEvent = 'updateCurrency';
+  @property() valuesEvent = 'updateValues';
   @state() calculator: Calculator;
   @state() currency = DEFAULT_CURRENCY;
   @state() currencyListener: EventListenerObject;
@@ -26,14 +28,14 @@ class TableWidget extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener('updateCurrency', this.currencyListener);
-    this.addEventListener('updateValues', this.valuesListener);
+    this.addEventListener(this.currencyEvent, this.currencyListener);
+    this.addEventListener(this.valuesEvent, this.valuesListener);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.removeEventListener('updateCurrency', this.currencyListener);
-    this.removeEventListener('updateValues', this.valuesListener);
+    this.removeEventListener(this.currencyEvent, this.currencyListener);
+    this.removeEventListener(this.valuesEvent, this.valuesListener);
   }
 
   private updateCurrency(e: CustomEvent) {

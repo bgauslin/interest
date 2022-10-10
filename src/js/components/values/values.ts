@@ -47,6 +47,8 @@ class Values extends LitElement {
       value: '',
     }
   ];
+  @property() currencyEvent = 'updateCurrency';
+  @property() valuesEvent = 'updateValues';
   @query('form') form: HTMLFormElement;
   @query('interest-currency') currencyWidget: HTMLElement;
   @state() calculator: Calculator;
@@ -67,14 +69,14 @@ class Values extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener('updateCurrency', this.currencyListener);
-    this.addEventListener('updateValues', this.valuesListener);
+    this.addEventListener(this.currencyEvent, this.currencyListener);
+    this.addEventListener(this.valuesEvent, this.valuesListener);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.removeEventListener('updateCurrency', this.currencyListener);
-    this.removeEventListener('updateValues', this.valuesListener);
+    this.removeEventListener(this.currencyEvent, this.currencyListener);
+    this.removeEventListener(this.valuesEvent, this.valuesListener);
   }
 
   private updateCurrency(e: CustomEvent) {
@@ -120,7 +122,7 @@ class Values extends LitElement {
       return;
     }
 
-    this.currencyWidget.dispatchEvent(new CustomEvent('updateCurrency', {
+    this.currencyWidget.dispatchEvent(new CustomEvent(this.currencyEvent, {
       detail: {
         currency: this.currency,
       },
@@ -132,7 +134,7 @@ class Values extends LitElement {
       return;
     }
 
-    this.dispatchEvent(new CustomEvent('updateValues', {
+    this.dispatchEvent(new CustomEvent(this.valuesEvent, {
       bubbles: true,
       composed: true,
       detail: {

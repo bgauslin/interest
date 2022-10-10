@@ -1,5 +1,5 @@
 import {LitElement, css, html} from 'lit';
-import {customElement, state, query} from 'lit/decorators.js';
+import {customElement, state,property, query} from 'lit/decorators.js';
 import {CompoundingValues, DEFAULT_CURRENCY} from '../../modules/Calculator';
 import shadowStyles from './app.scss';
 
@@ -8,6 +8,9 @@ import shadowStyles from './app.scss';
  */
 @customElement('interest-app')
 class App extends LitElement {
+  @property() currencyEvent = 'updateCurrency';
+  @property() storageItem = 'settings';
+  @property() valuesEvent = 'updateValues';
   @query('interest-table') table: HTMLElement;
   @query('interest-values') userValues: HTMLElement;
   @state() appTitle = 'Compound Interest Calculator';
@@ -27,14 +30,14 @@ class App extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.getLocalStorage();
-    this.addEventListener('updateCurrency', this.currencyListener);
-    this.addEventListener('updateValues', this.valuesListener);
+    this.addEventListener(this.currencyEvent, this.currencyListener);
+    this.addEventListener(this.valuesEvent, this.valuesListener);
   }
 
   disconnectedCallback() { 
     super.disconnectedCallback();
-    this.removeEventListener('updateCurrency', this.currencyListener);
-    this.removeEventListener('updateValues', this.valuesListener);
+    this.removeEventListener(this.currencyEvent, this.currencyListener);
+    this.removeEventListener(this.valuesEvent, this.valuesListener);
   }
 
   private updateCurrency(e: CustomEvent) {
@@ -44,7 +47,7 @@ class App extends LitElement {
   }
 
   private dispatchCurrency() {
-    const updateCurrency = new CustomEvent('updateCurrency', {
+    const updateCurrency = new CustomEvent(this.currencyEvent, {
       detail: {
         currency: this.currency,
       }
@@ -60,7 +63,7 @@ class App extends LitElement {
   }
 
   private dispatchValues() {
-    const updateValues = new CustomEvent('updateValues', {
+    const updateValues = new CustomEvent(this.valuesEvent, {
       detail: {
         values: this.values,
       }
@@ -70,17 +73,17 @@ class App extends LitElement {
   }
 
   private setLocalStorage() {
-    if (this.currency && this.values) {
+    if (this.values) {
       const settings = {
         currency: this.currency,
         values: this.values,
       };
-      localStorage.setItem('settings', JSON.stringify(settings));
+      localStorage.setItem(this.storageItem, JSON.stringify(settings));
     }
   }
 
   private async getLocalStorage() {
-    const storage = JSON.parse(localStorage.getItem('settings'));
+    const storage = JSON.parse(localStorage.getItem(this.storageItem));
     if (!storage) {
       return;
     }
@@ -90,9 +93,7 @@ class App extends LitElement {
 
     await this.updateComplete;
 
-    if (this.currency) {
-      this.dispatchCurrency();
-    }
+    this.dispatchCurrency();
     
     if (this.values) {
       this.dispatchValues();

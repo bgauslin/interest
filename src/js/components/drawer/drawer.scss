@@ -15,11 +15,11 @@
 :host > button {
   align-items: center;
   appearance: none;
-  background-color: var(--color-surface1);
+  background-color: var(--surface1);
   block-size: const.$button-size;
   border: 0;
   border-radius: math.div(const.$button-size, 2);
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   cursor: pointer;
   display: flex;
   font-family: 'Avenir Variable', sans-serif;
@@ -37,21 +37,21 @@
 
   &:focus,
   &:active {
-    background-color: var(--color-theme);
-    color: var(--color-on-theme);
+    background-color: var(--theme);
+    color: var(--on-theme);
   }
 
   @media (any-hover: hover) {
     transition: utils.transition(background-color, color);
 
     &:hover {
-      background-color: var(--color-theme);
-      color: var(--color-on-theme);
+      background-color: var(--theme);
+      color: var(--on-theme);
     }
   }
 
   @media #{map.get(const.$breakpoint, 'small')} {
-    background-color: var(--color-surface);
+    background-color: var(--surface);
   }
 
   // Always hide the button on large screens.

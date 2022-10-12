@@ -1,25 +1,3 @@
-/// Grays palette.
-/// @see https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color
-$gray1-light: rgb(142, 142, 147);
-$gray2-light: rgb(174, 174, 178);
-$gray3-light: rgb(199, 199, 204);
-$gray4-light: rgb(209, 209, 214);
-$gray5-light: rgb(229, 229, 234);
-$gray6-light: rgb(242, 242, 247);
-
-$gray1-dark: rgb(142, 142, 147);
-$gray2-dark: rgb(99, 99, 102);
-$gray3-dark: rgb(72, 72, 74);
-$gray4-dark: rgb(58, 58, 60);
-$gray5-dark: rgb(44, 44, 46);
-$gray6-dark: rgb(28, 28, 30);
-
-$error-light: #db4d4d;
-$error-dark:  #e68282;
-
-$theme-light: #00ad45;
-$theme-dark: #4dc67d;
-
 // Dimensions.
 $amount-size: 2.25rem;
 $button-size: 2.75rem;
@@ -50,3 +28,20 @@ $breakpoint: (
   'small-portrait': '(max-width: #{$small}) and (orientation: portrait)',
   'medium': '(min-width: #{$medium})',
 );
+
+/// Color palettes.
+/// @see https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color
+$grays: (
+  1: (light: rgb(142, 142, 147), dark: rgb(142, 142, 147)),
+  2: (light: rgb(174, 174, 178), dark: rgb(99, 99, 102)),
+  3: (light: rgb(199, 199, 204), dark: rgb(72, 72, 74)),
+  4: (light: rgb(209, 209, 214), dark: rgb(58, 58, 60)),
+  5: (light: rgb(229, 229, 234), dark: rgb(44, 44, 46)),
+  6: (light: rgb(242, 242, 247), dark: rgb(28, 28, 30)),
+);
+
+$error-light: #db4d4d;
+$error-dark:  #e68282;
+
+$theme-light: #00ad45;
+$theme-dark: #4dc67d;

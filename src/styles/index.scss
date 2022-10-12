@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use 'const';
+@use 'utils';
 
 @font-face {
   font-display: swap;
@@ -9,31 +10,26 @@
 }
 
 :root {
-  --color-body-background: var(--color-surface);
-  --color-error: #{const.$error-light};
-  --color-on-surface: #{const.$gray6-dark};
-  --color-on-surface-variant: #{const.$gray1-light};
-  --color-outline: #{const.$gray4-dark};
-  --color-surface: #{const.$gray6-light};
-  --color-surface1: #{const.$gray5-light};
-  --color-surface2: #{const.$gray4-light};
-  --color-theme: #{const.$theme-light};
-  --color-on-theme: #{const.$gray6-light};
+  --error: #{const.$error-light};
+  --on-surface: #{utils.map-deep-get(const.$grays, 6, dark)};
+  --on-surface-variant: #{utils.map-deep-get(const.$grays, 1, light)};
+  --outline: #{utils.map-deep-get(const.$grays, 4, dark)};
+  --surface: #{utils.map-deep-get(const.$grays, 6, light)};
+  --surface1: #{utils.map-deep-get(const.$grays, 5, light)};
+  --surface2: #{utils.map-deep-get(const.$grays, 4, light)};
+  --theme: #{const.$theme-light};
+  --on-theme: #{utils.map-deep-get(const.$grays, 6, light)};
 
   @media (prefers-color-scheme: dark) {
-    --color-error: #{const.$error-dark};
-    --color-on-surface: #{const.$gray5-light};
-    --color-on-surface-variant: #{const.$gray1-light};
-    --color-outline: #{const.$gray4-light};
-    --color-surface: #{const.$gray6-dark};
-    --color-surface1: #{const.$gray5-dark};
-    --color-surface2: #{const.$gray4-dark};
-    --color-theme: #{const.$theme-dark};
-    --color-on-theme: #{const.$gray6-dark};
-  }
-
-  @media #{map.get(const.$breakpoint, 'small')} {
-    --color-body-background: var(--color-surface1);
+    --error: #{const.$error-dark};
+    --on-surface: #{utils.map-deep-get(const.$grays, 5, light)};
+    --on-surface-variant: #{utils.map-deep-get(const.$grays, 1, light)};
+    --outline: #{utils.map-deep-get(const.$grays, 4, light)};
+    --surface: #{utils.map-deep-get(const.$grays, 6, dark)};
+    --surface1: #{utils.map-deep-get(const.$grays, 5, dark)};
+    --surface2: #{utils.map-deep-get(const.$grays, 4, dark)};
+    --theme: #{const.$theme-dark};
+    --on-theme: #{utils.map-deep-get(const.$grays, 6, dark)};
   }
 }
 
@@ -46,12 +42,16 @@ html {
 }
 
 body {
-  background-color: var(--color-body-background); // TODO: Move to app.
+  background-color: var(--body-background, var(--surface));
   margin: 0;
   min-block-size: 100vh;
   touch-action: manipulation;
 
   @supports (min-block-size: 100dvh) {
     min-block-size: 100dvh;
+  }
+
+  @media #{map.get(const.$breakpoint, 'small')} {
+    --body-background: var(--surface1);
   }
 }

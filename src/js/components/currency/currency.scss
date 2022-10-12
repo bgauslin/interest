@@ -22,7 +22,7 @@ input {
 button {
   block-size: const.$button-size;
   border-radius: math.div(const.$button-size, 2);
-  color: var(--color-theme);
+  color: var(--theme);
   cursor: pointer;
   display: grid;
   font-size: const.$amount-size;
@@ -34,23 +34,23 @@ button {
   white-space: nowrap;
 
   &:focus {
-    background-color: var(--color-surface1);
+    background-color: var(--surface1);
   }
 
   &:active,
   &[aria-expanded='true'] {
-    background-color: var(--color-surface2);
+    background-color: var(--surface2);
   }
 
   @media (any-hover: hover) {
     transition: utils.transition(background-color);
 
     &:hover {
-      background-color: var(--color-surface1);
+      background-color: var(--surface1);
     }
 
     &[aria-expanded='true']:hover {
-      background-color: var(--color-surface2);
+      background-color: var(--surface2);
     }
   }
 }
@@ -62,7 +62,7 @@ button {
 
 // Currency menu.
 form {
-  background-color: var(--color-surface2);
+  background-color: var(--surface2);
   border-radius: 2rem;
   inset-block: (const.$button-size + const.$menu-spacing) auto;
   inset-inline: (- const.$menu-spacing) auto;
@@ -100,9 +100,9 @@ li > * {
 
 // Radio buttons styled as discs.
 input {
-  background-color: var(--color-surface1);
+  background-color: var(--surface1);
   block-size: const.$button-size;  
-  border: 3px solid var(--color-on-surface-variant);
+  border: 3px solid var(--on-surface-variant);
   border-radius: math.div(const.$button-size, 2);
   cursor: pointer;
   display: block;
@@ -111,27 +111,27 @@ input {
 
   &:focus,
   &:active {
-    border-color: var(--color-on-surface);
+    border-color: var(--on-surface);
   }
 
   &:checked {
-    border-color: var(--color-theme);
+    border-color: var(--theme);
   }
 
   // Currency symbol.
   &:checked + span {
-    color: var(--color-theme);
+    color: var(--theme);
   }
 
   @media (any-hover: hover) {
     transition: utils.transition(border-color);
 
     &:hover {
-      border-color: var(--color-on-surface);
+      border-color: var(--on-surface);
     }
 
     &:hover:checked {
-      border-color: var(--color-theme);
+      border-color: var(--theme);
     }
   }
 

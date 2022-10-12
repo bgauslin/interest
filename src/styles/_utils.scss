@@ -1,4 +1,16 @@
+@use 'sass:map';
 @use 'sass:string';
+
+/// Accesses deeply nested values from a map since Sass can't do this natively.
+/// @param {!Map} $map - Sass map.
+/// @param {!Arglist} $keys - Sequence of nested keys.
+/// @return {*} - Value of the last nested key.
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map.get($map, $key);
+  }
+  @return $map;
+}
 
 /// Appends default duration and timing function to properties which should
 /// transition.

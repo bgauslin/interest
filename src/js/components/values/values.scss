@@ -7,7 +7,7 @@
   display: block;
 
   @media #{map.get(const.$breakpoint, 'small')} {
-    background-color: var(--color-surface);
+    background-color: var(--surface);
     border-radius: const.$card-radius;
   }
 }
@@ -91,11 +91,11 @@ label[for='rate']::before {
 
 input {
   appearance: none;
-  background-color: var(--color-surface1);
+  background-color: var(--surface1);
   block-size: 2rem;
   border: 2px solid transparent;
   border-radius: 4px;
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   font-family: 'Avenir Variable', sans-serif;
   font-size: inherit;
   font-variation-settings: 'wght' 500;
@@ -109,12 +109,12 @@ input {
   text-align: end;
 
   &:focus {
-    background-color: var(--color-surface2);
-    border-color: var(--color-theme);
+    background-color: var(--surface2);
+    border-color: var(--theme);
   }
 
   &:focus:invalid {
-    border-color: var(--color-error);
+    border-color: var(--error);
   }
 }
 
@@ -134,7 +134,7 @@ input {
 
 .amount {
   block-size: const.$amount-size;
-  color: var(--color-theme);
+  color: var(--theme);
   font-size: const.$amount-size;
   line-height: const.$amount-size;
   max-inline-size: 100%;

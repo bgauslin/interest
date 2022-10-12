@@ -4,10 +4,10 @@
 
 :host {
   display: block;
-  --zebra-stripe: #{mix(black, const.$gray6-light, 3%)};
+  --zebra-stripe: #{mix(black, utils.map-deep-get(const.$grays, 6, light), 3%)};
 
   @media (prefers-color-scheme: dark) {
-    --zebra-stripe: #{mix(white, const.$gray6-dark, 3%)};
+    --zebra-stripe: #{mix(white, utils.map-deep-get(const.$grays, 6, dark), 3%)};
   }
 }
 
@@ -37,7 +37,7 @@ table {
   inline-size: 100%;
 
   @media #{map.get(const.$breakpoint, 'small')} {
-    background-color: var(--color-surface);
+    background-color: var(--surface);
   }
 }
 
@@ -75,7 +75,7 @@ tbody > tr:nth-child(odd) {
 
 // Currency and percent symbols via pseudo-elements.
 :is(td.balance, td.deposits, td.interest)::before {
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   margin-inline: 0 .25em;
 
   [data-currency='eur'] & { content: '€' }
@@ -86,14 +86,14 @@ tbody > tr:nth-child(odd) {
 }
 
 td.growth::after {
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   content: '%';
   margin-inline: .25em 0;
 }
 
 // Footnote after the table.
 p {
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   display: none;
   font-size: .75rem;
   margin-block: 1rem 0;
@@ -105,5 +105,5 @@ p {
 }
 
 p > span {
-  color: var(--color-on-surface);
+  color: var(--on-surface);
 }

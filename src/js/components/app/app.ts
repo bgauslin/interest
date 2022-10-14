@@ -1,6 +1,7 @@
 import {LitElement, css, html} from 'lit';
-import {customElement, state,property, query} from 'lit/decorators.js';
+import {customElement, state, query} from 'lit/decorators.js';
 import {CompoundingValues, DEFAULT_CURRENCY} from '../../modules/Calculator';
+
 import shadowStyles from './app.scss';
 
 /**
@@ -8,15 +9,16 @@ import shadowStyles from './app.scss';
  */
 @customElement('interest-app')
 class App extends LitElement {
-  @property() currencyEvent = 'updateCurrency';
-  @property() storageItem = 'interest';
-  @property() valuesEvent = 'updateValues';
   @query('interest-table') table: HTMLElement;
   @query('interest-values') userValues: HTMLElement;
+
   @state() appTitle = 'Compound Interest Calculator';
   @state() currency = DEFAULT_CURRENCY;
+  @state() currencyEvent = 'updateCurrency';
   @state() currencyListener: EventListenerObject;
+  @state() storageItem = 'interest';
   @state() values: CompoundingValues;
+  @state() valuesEvent = 'updateValues';
   @state() valuesListener: EventListenerObject;
 
   static styles = css`${shadowStyles}`;

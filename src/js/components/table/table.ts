@@ -1,5 +1,5 @@
 import {LitElement, css, html} from 'lit';
-import {customElement, property, state} from 'lit/decorators.js';
+import {customElement, state} from 'lit/decorators.js';
 import {Calculator, CompoundingValues, DEFAULT_CURRENCY, Sums} from '../../modules/Calculator';
 import shadowStyles from './table.scss';
 
@@ -8,13 +8,13 @@ import shadowStyles from './table.scss';
  */
 @customElement('interest-table')
 class TableWidget extends LitElement {
-  @property() currencyEvent = 'updateCurrency';
-  @property() valuesEvent = 'updateValues';
   @state() calculator: Calculator;
   @state() currency = DEFAULT_CURRENCY;
+  @state() currencyEvent = 'updateCurrency';
   @state() currencyListener: EventListenerObject;
   @state() tableData: Sums[] = [];
   @state() values: CompoundingValues;
+  @state() valuesEvent = 'updateValues';
   @state() valuesListener: EventListenerObject;
 
   static styles = css`${shadowStyles}`;

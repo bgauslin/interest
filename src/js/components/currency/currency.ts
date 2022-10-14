@@ -1,6 +1,7 @@
 import {LitElement, css, html} from 'lit';
-import {customElement, property, query, state} from 'lit/decorators.js';
+import {customElement, query, state} from 'lit/decorators.js';
 import {Currencies, DEFAULT_CURRENCY} from '../../modules/Calculator';
+
 import shadowStyles from './currency.scss';
 
 /**
@@ -8,13 +9,14 @@ import shadowStyles from './currency.scss';
  */
 @customElement('interest-currency')
 class Currency extends LitElement {
-  @property() currencyEvent = 'updateCurrency';
   @query('button') button: HTMLButtonElement;
   @query('form :checked') checked: HTMLInputElement;
   @query('form') form: HTMLFormElement;
+
   @state() clickListener: EventListenerObject;
   @state() closeMenuKeys: String[] = ['Escape', 'Space'];
   @state() currency = DEFAULT_CURRENCY;
+  @state() currencyEvent = 'updateCurrency';
   @state() currencyListener: EventListenerObject;
   @state() open: Boolean = false;
 

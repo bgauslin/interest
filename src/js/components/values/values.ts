@@ -1,5 +1,5 @@
 import {LitElement, css, html} from 'lit';
-import {customElement, property, query, state} from 'lit/decorators.js';
+import {customElement, query, state} from 'lit/decorators.js';
 import {Calculator, CompoundingValues, DEFAULT_CURRENCY} from '../../modules/Calculator';
 import shadowStyles from './values.scss';
 
@@ -17,45 +17,22 @@ interface InputAttributes {
  */
 @customElement('interest-values')
 class Values extends LitElement {
-  @property() currencyEvent = 'updateCurrency';
-  @property() valuesEvent = 'updateValues';
-  @property() fields: InputAttributes[] = [
-    {
-      inputmode: 'numeric',
-      label: 'Principal',
-      name: 'principal',
-      pattern: '[0-9]+',
-      value: '',
-    },
-    {
-      inputmode: 'numeric',
-      label: 'Yearly addition',
-      name: 'contribution',
-      pattern: '[0-9]+',
-      value: '',
-    },
-    {
-      inputmode: 'decimal',
-      label: 'Interest rate',
-      name: 'rate',
-      pattern: '[0-9]{0,2}[\\.]?[0-9]{1,2}',
-      value: '',
-    },
-    {
-      inputmode: 'numeric',
-      label: 'Years to grow',
-      name: 'periods',
-      pattern: '[0-9]+',
-      value: '',
-    }
-  ];
   @query('form') form: HTMLFormElement;
   @query('interest-currency') currencyWidget: HTMLElement;
+
   @state() calculator: Calculator;
   @state() currency = DEFAULT_CURRENCY;
+  @state() currencyEvent = 'updateCurrency';
   @state() currencyListener: EventListenerObject;
+  @state() fields: InputAttributes[] = [
+    {inputmode: 'numeric', label: 'Principal', name: 'principal', pattern: '[0-9]+', value: ''},
+    {inputmode: 'numeric', label: 'Yearly addition', name: 'contribution', pattern: '[0-9]+', value: ''},
+    {inputmode: 'decimal', label: 'Interest rate', name: 'rate', pattern: '[0-9]{0,2}[\\.]?[0-9]{1,2}', value: ''},
+    {inputmode: 'numeric', label: 'Years to grow', name: 'periods', pattern: '[0-9]+', value: ''},
+  ];
   @state() total = '';
   @state() values: CompoundingValues;
+  @state() valuesEvent = 'updateValues';
   @state() valuesListener: EventListenerObject;
 
   static styles = css`${shadowStyles}`;

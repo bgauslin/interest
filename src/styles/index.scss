@@ -20,7 +20,7 @@
   --theme: #{const.$theme-light};
   --on-theme: #{utils.map-deep-get(const.$grays, 6, light)};
 
-  --header-size: clamp(3rem, 3rem + 2vw, 4rem);
+  --header-size: clamp(2.75rem, 2.75rem + 2vw, 4rem);
   --header-surface: #{rgba(white, .5)};
   
   @media (prefers-color-scheme: dark) {

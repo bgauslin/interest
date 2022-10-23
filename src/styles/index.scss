@@ -21,7 +21,7 @@
   --on-theme: #{utils.map-deep-get(const.$grays, 6, light)};
 
   --header-size: clamp(2.75rem, 2.75rem + 2vw, 4rem);
-  --header-surface: #{rgba(white, .5)};
+  --header-surface: #{rgba(utils.map-deep-get(const.$grays, 5, light), .5)};
   
   @media (prefers-color-scheme: dark) {
     --error: #{const.$error-dark};
@@ -34,7 +34,7 @@
     --theme: #{const.$theme-dark};
     --on-theme: #{utils.map-deep-get(const.$grays, 6, dark)};
 
-    --header-surface: #{rgba(utils.map-deep-get(const.$grays, 6, dark), .67)};
+    --header-surface: #{rgba(utils.map-deep-get(const.$grays, 5, dark), .5)};
   }
 }
 

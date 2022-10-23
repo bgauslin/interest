@@ -20,7 +20,7 @@ input {
 }
 
 button {
-  background-color: var(--surface1);
+  background-color: var(--surface);
   block-size: const.$button-size;
   border-radius: math.div(const.$button-size, 2);
   color: var(--on-surface);

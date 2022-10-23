@@ -17,6 +17,7 @@
   --surface: #{utils.map-deep-get(const.$grays, 6, light)};
   --surface1: #{utils.map-deep-get(const.$grays, 5, light)};
   --surface2: #{utils.map-deep-get(const.$grays, 4, light)};
+  --surface3: #{utils.map-deep-get(const.$grays, 3, light)};
   --theme: #{const.$theme-light};
   --on-theme: #{utils.map-deep-get(const.$grays, 6, light)};
 
@@ -31,6 +32,7 @@
     --surface: #{utils.map-deep-get(const.$grays, 6, dark)};
     --surface1: #{utils.map-deep-get(const.$grays, 5, dark)};
     --surface2: #{utils.map-deep-get(const.$grays, 4, dark)};
+    --surface3: #{utils.map-deep-get(const.$grays, 3, dark)};
     --theme: #{const.$theme-dark};
     --on-theme: #{utils.map-deep-get(const.$grays, 6, dark)};
 

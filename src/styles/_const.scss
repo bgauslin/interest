@@ -6,12 +6,13 @@ $card-radius: 1rem;
 $field-gap: .75rem;
 $field-input-size: 6rem;
 $menu-spacing: .375rem;
+$outline-size: .1875rem;
 
 $-gap-max: 3rem;
-$-gap-min: 1rem;
+$-gap-min: .75rem;
 
-// Compound dimensions.
-$fluid-gap: clamp(#{$-gap-min}, #{$-gap-min} + 2vw, #{$-gap-max});
+// Computed dimensions.
+$fluid-gap: clamp(#{$-gap-min}, #{$-gap-min} + 1vw, #{$-gap-max});
 
 // Breakpoints via content-based min/max values.
 $-table-max-size: 51rem;

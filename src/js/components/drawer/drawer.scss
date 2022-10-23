@@ -22,7 +22,7 @@
   appearance: none;
   background-color: var(--surface2);
   block-size: const.$button-size;
-  border: 0;
+  border: const.$outline-size solid var(--surface);
   border-radius: math.div(const.$button-size, 2);
   color: var(--on-surface);
   cursor: pointer;
@@ -42,16 +42,15 @@
 
   &:focus,
   &:active {
-    background-color: var(--theme);
-    color: var(--on-theme);
+    background-color: var(--surface3);
+    border-color: var(--outline);
   }
 
   @media (any-hover: hover) {
-    transition: utils.transition(background-color, color);
+    transition: utils.transition(background-color);
 
     &:hover {
-      background-color: var(--theme);
-      color: var(--on-theme);
+      background-color: var(--surface3);
     }
   }
 

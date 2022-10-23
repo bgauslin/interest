@@ -22,7 +22,7 @@ input {
 button {
   background-color: var(--surface2);
   block-size: const.$button-size;
-  border: const.$outline-size solid var(--surface);
+  border: const.$outline-size solid var(--surface2);
   border-radius: math.div(const.$button-size, 2);
   color: var(--on-surface);
   cursor: pointer;

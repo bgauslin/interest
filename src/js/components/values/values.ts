@@ -109,7 +109,7 @@ class Values extends LitElement {
   render() {
     return html`
       <form @change="${this.getValues}">
-        <ul>
+        <ul role="list">
           ${this.fields.map((field) => {
             const {inputmode, label, name, pattern, value} = field;
             return html`
@@ -129,8 +129,12 @@ class Values extends LitElement {
         </ul>
       </form>
 
-      <div aria-hidden="${this.total === ''}" class="total">
-        <span class="amount">${this.total}</span>
+      <div
+        aria-hidden="${this.total === ''}"
+        class="total">
+        <span
+          class="amount"
+          data-currency="${this.currency}">${this.total}</span>
       </div>
     `;
   }

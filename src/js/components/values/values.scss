@@ -5,6 +5,7 @@
 
 :host {
   display: grid;
+  gap: const.$card-padding 0;
   grid: 'form' 'total' / 1fr;
   padding-block: const.$card-padding;
   padding-inline: const.$card-padding;
@@ -36,7 +37,7 @@ form {
   grid-area: form;
 }
 
-ul {
+ul[role='list'] {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -116,7 +117,7 @@ input {
 .total {
   grid: 1fr / auto-flow;
   grid-area: total;
-  padding-block: 2rem;
+  padding-block: const.$card-padding;
   padding-inline: const.$card-padding;
   place-content: center;
   place-items: center;
@@ -138,3 +139,13 @@ input {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.amount::before {
+  margin-inline: 0 .125em;
+}
+
+[data-currency='eur']::before { content: '€' }
+[data-currency='gbp']::before { content: '£' }
+[data-currency='inr']::before { content: '₹' }
+[data-currency='usd']::before { content: '$' }
+[data-currency='yen']::before { content: '¥' }

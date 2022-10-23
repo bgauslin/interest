@@ -4,7 +4,10 @@
 @use '../../../styles/utils';
 
 :host {
-  display: block;
+  display: grid;
+  grid: 'form' 'total' / 1fr;
+  padding-block: const.$card-padding;
+  padding-inline: const.$card-padding;
 
   @media #{map.get(const.$breakpoint, 'small')} {
     background-color: var(--surface);
@@ -30,8 +33,7 @@
 
 form {
   gap: 2rem 0;
-  padding-block: const.$card-padding;
-  padding-inline: const.$card-padding;
+  grid-area: form;
 }
 
 ul {
@@ -113,6 +115,7 @@ input {
 
 .total {
   grid: 1fr / auto-flow;
+  grid-area: total;
   padding-block: 2rem;
   padding-inline: const.$card-padding;
   place-content: center;

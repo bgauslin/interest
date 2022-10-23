@@ -20,9 +20,10 @@ input {
 }
 
 button {
+  background-color: var(--surface1);
   block-size: const.$button-size;
   border-radius: math.div(const.$button-size, 2);
-  color: var(--theme);
+  color: var(--on-surface);
   cursor: pointer;
   display: grid;
   font-size: 1.5rem;
@@ -33,10 +34,7 @@ button {
   place-content: center;
   white-space: nowrap;
 
-  &:focus {
-    background-color: var(--surface1);
-  }
-
+  &:focus,
   &:active,
   &[aria-expanded='true'] {
     background-color: var(--surface2);
@@ -45,10 +43,7 @@ button {
   @media (any-hover: hover) {
     transition: utils.transition(background-color);
 
-    &:hover {
-      background-color: var(--surface1);
-    }
-
+    &:hover,
     &[aria-expanded='true']:hover {
       background-color: var(--surface2);
     }
@@ -65,7 +60,7 @@ form {
   background-color: var(--surface2);
   border-radius: 2rem;
   inset-block: (const.$button-size + const.$menu-spacing) auto;
-  inset-inline: (- const.$menu-spacing) auto;
+  inset-inline: auto (- const.$menu-spacing);
   position: absolute;
   transform: translateY(.25rem);
   transition: utils.transition(opacity, transform);

@@ -17,12 +17,12 @@
 
   @media #{map.get(const.$breakpoint, 'small')} {
     gap: const.$fluid-gap;
-    // grid: 'header' var(--header-size) 'values' 'drawer' 1fr / 1fr;
-    padding: const.$fluid-gap;
+    padding-block: 0;
+    padding-inline: const.$fluid-gap;
   }
 
   @media #{map.get(const.$breakpoint, 'medium')} {
-    gap: 0 const.$fluid-gap;
+    gap: const.$fluid-gap;
     grid: 'header header' var(--header-size) 'values drawer' 1fr / #{const.$values-min-size} 1fr;
   }
 }
@@ -32,7 +32,7 @@
 }
 
 app-header {
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
   background-color: var(--header-surface);
   block-size: var(--header-size);
   grid-area: header;
@@ -47,19 +47,20 @@ header {
   align-items: center;
   block-size: 100%;
   display: flex;
+  gap: 0 1rem;
   justify-content: space-between;
   margin-inline: auto;
-  // max-inline-size: const.$widget-max-size;
-  // padding-inline: const.$app-padding;
-
-  // @media #{map.get(const.$breakpoint, 'medium')} {
-    // max-inline-size: const.$app-max-size;
-  // }
+  max-inline-size: const.$app-max-size;
+  padding-inline: const.$fluid-gap;
 }
 
 h1 {
   font-size: clamp(1rem, 1rem + 1vw, 2rem);
   margin: 0;
+  min-inline-size: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 app-values {
@@ -71,7 +72,7 @@ app-values {
   }
 
   @media #{map.get(const.$breakpoint, 'medium')} {
-    inset-block: const.$fluid-gap 0;
+    inset-block: calc(#{const.$fluid-gap} + var(--offset)) 0;
     position: sticky;
   }
 }

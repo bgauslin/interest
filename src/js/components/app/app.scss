@@ -64,7 +64,6 @@ h1 {
 }
 
 app-values {
-  align-self: center;
   grid-area: values;
 
   @media #{map.get(const.$breakpoint, 'small')} {

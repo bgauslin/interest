@@ -31,14 +31,11 @@ div {
 
 // Standard <table> element.
 table {
+  background-color: var(--surface);
   border-collapse: collapse;
   font-size: clamp(.8125rem, .8125rem + 1vw, 1rem);
   font-variant-numeric: tabular-nums;
   inline-size: 100%;
-
-  @media #{map.get(const.$breakpoint, 'small')} {
-    background-color: var(--surface);
-  }
 }
 
 // All cells are end-aligned by default since they contain numeric content.

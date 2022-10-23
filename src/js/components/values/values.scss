@@ -4,14 +4,14 @@
 @use '../../../styles/utils';
 
 :host {
+  background-color: var(--surface); //
   display: grid;
   gap: const.$card-padding 0;
-  grid: 'form' 'total' / 1fr;
+  grid: 'form' 1fr 'total' / 1fr;
   padding-block: const.$card-padding;
   padding-inline: const.$card-padding;
 
   @media #{map.get(const.$breakpoint, 'small')} {
-    background-color: var(--surface);
     border-radius: const.$card-radius;
   }
 }
@@ -33,6 +33,7 @@
 }
 
 form {
+  align-self: center;
   gap: 2rem 0;
   grid-area: form;
 }

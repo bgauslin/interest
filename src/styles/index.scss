@@ -44,10 +44,11 @@
 
 html {
   -webkit-tap-highlight-color: transparent;
+  text-size-adjust: none;
 }
 
 body {
-  background-color: var(--body-background, var(--surface));
+  background-color: var(--surface1);
   margin: 0;
   min-block-size: 100vh;
   touch-action: manipulation;
@@ -55,17 +56,4 @@ body {
   @supports (min-block-size: 100dvh) {
     min-block-size: 100dvh;
   }
-
-  @media #{map.get(const.$breakpoint, 'small')} {
-    --body-background: var(--surface1);
-  }
 }
-
-
-
-
-
-
-
-
-

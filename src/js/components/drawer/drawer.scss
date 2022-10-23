@@ -4,8 +4,13 @@
 @use '../../../styles/utils';
 
 :host {
+  background-color: var(--surface); //
   display: grid;
   grid: 'drawer' 'button' 1fr;
+
+  @media #{map.get(const.$breakpoint, 'small')} {
+    background: 0;
+  }
 }
 
 * {
@@ -48,10 +53,6 @@
       background-color: var(--theme);
       color: var(--on-theme);
     }
-  }
-
-  @media #{map.get(const.$breakpoint, 'small')} {
-    background-color: var(--surface);
   }
 
   // Always hide the button on large screens.

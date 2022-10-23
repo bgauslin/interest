@@ -20,6 +20,9 @@
   --theme: #{const.$theme-light};
   --on-theme: #{utils.map-deep-get(const.$grays, 6, light)};
 
+  --header-size: clamp(3rem, 3rem + 2vw, 4rem);
+  --header-surface: #{rgba(utils.map-deep-get(const.$grays, 6, light), .65)}; //
+  
   @media (prefers-color-scheme: dark) {
     --error: #{const.$error-dark};
     --on-surface: #{utils.map-deep-get(const.$grays, 5, light)};
@@ -30,6 +33,8 @@
     --surface2: #{utils.map-deep-get(const.$grays, 4, dark)};
     --theme: #{const.$theme-dark};
     --on-theme: #{utils.map-deep-get(const.$grays, 6, dark)};
+
+    --header-surface: #{rgba(utils.map-deep-get(const.$grays, 6, dark), .65)};
   }
 }
 
@@ -55,3 +60,12 @@ body {
     --body-background: var(--surface1);
   }
 }
+
+
+
+
+
+
+
+
+

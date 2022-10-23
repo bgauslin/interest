@@ -6,7 +6,7 @@
   display: grid;
   font-family: 'Avenir Variable', sans-serif;
   font-variation-settings: 'wght' 500;
-  grid: 'values' 1fr 'drawer' / 1fr;
+  grid: 'header' var(--header-size) 'values' 1fr 'drawer' / 1fr;
   margin-inline: auto;
   max-inline-size: const.$app-max-size;
   min-block-size: 100vh;
@@ -17,13 +17,13 @@
 
   @media #{map.get(const.$breakpoint, 'small')} {
     gap: const.$fluid-gap;
-    grid: 'values' 'drawer' 1fr / 1fr;
+    // grid: 'header' var(--header-size) 'values' 'drawer' 1fr / 1fr;
     padding: const.$fluid-gap;
   }
 
   @media #{map.get(const.$breakpoint, 'medium')} {
     gap: 0 const.$fluid-gap;
-    grid: 'values drawer' 1fr / #{const.$values-min-size} 1fr;
+    grid: 'header header' var(--header-size) 'values drawer' 1fr / #{const.$values-min-size} 1fr;
   }
 }
 
@@ -31,7 +31,38 @@
   box-sizing: border-box;
 }
 
-interest-values {
+app-header {
+  backdrop-filter: blur(8px);
+  background-color: var(--header-surface);
+  block-size: var(--header-size);
+  grid-area: header;
+  inset-block: 0 auto;
+  inset-inline: 0;
+  position: fixed;
+  transform: translateY(var(--shift));
+  z-index: 3;
+}
+
+header {
+  align-items: center;
+  block-size: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-inline: auto;
+  // max-inline-size: const.$widget-max-size;
+  // padding-inline: const.$app-padding;
+
+  // @media #{map.get(const.$breakpoint, 'medium')} {
+    // max-inline-size: const.$app-max-size;
+  // }
+}
+
+h1 {
+  font-size: clamp(1rem, 1rem + 1vw, 2rem);
+  margin: 0;
+}
+
+app-values {
   align-self: center;
   grid-area: values;
 
@@ -45,7 +76,7 @@ interest-values {
   }
 }
 
-interest-drawer {
+app-drawer {
   grid-area: drawer;
 
   &[aria-hidden='true'] {

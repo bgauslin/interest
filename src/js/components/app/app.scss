@@ -7,6 +7,7 @@
   font-family: 'Avenir Variable', sans-serif;
   font-variation-settings: 'wght' 500;
   grid: 'header' var(--header-size) 'values' 1fr 'drawer' / 1fr;
+  inline-size: 100%;
   margin-inline: auto;
   max-inline-size: const.$app-max-size;
   min-block-size: 100vh;

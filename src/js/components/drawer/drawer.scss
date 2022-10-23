@@ -20,7 +20,7 @@
 :host > button {
   align-items: center;
   appearance: none;
-  background-color: var(--surface1);
+  background-color: var(--surface2);
   block-size: const.$button-size;
   border: 0;
   border-radius: math.div(const.$button-size, 2);

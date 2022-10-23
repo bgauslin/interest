@@ -20,7 +20,7 @@ input {
 }
 
 button {
-  background-color: var(--surface);
+  background-color: var(--surface2);
   block-size: const.$button-size;
   border-radius: math.div(const.$button-size, 2);
   color: var(--on-surface);
@@ -37,15 +37,17 @@ button {
   &:focus,
   &:active,
   &[aria-expanded='true'] {
-    background-color: var(--surface2);
+    background-color: var(--theme);
+    color: var(--on-theme);
   }
 
   @media (any-hover: hover) {
-    transition: utils.transition(background-color);
+    transition: utils.transition(background-color, color);
 
     &:hover,
     &[aria-expanded='true']:hover {
-      background-color: var(--surface2);
+      background-color: var(--theme);
+      color: var(--on-theme);
     }
   }
 }

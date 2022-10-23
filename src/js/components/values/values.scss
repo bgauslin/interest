@@ -4,7 +4,7 @@
 @use '../../../styles/utils';
 
 :host {
-  background-color: var(--surface); //
+  background-color: var(--surface);
   display: grid;
   gap: const.$card-padding 0;
   grid: 'form' 1fr 'total' / 1fr;
@@ -88,7 +88,7 @@ label[for='rate']::before {
 
 input {
   appearance: none;
-  background-color: var(--surface1);
+  background-color: var(--surface2);
   block-size: 2rem;
   border: 2px solid transparent;
   border-radius: 4px;

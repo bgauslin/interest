@@ -43,11 +43,12 @@ button {
   }
 
   @media (any-hover: hover) {
-    transition: utils.transition(background-color);
+    transition: utils.transition(background-color, border-color);
 
     &:hover,
     &[aria-expanded='true']:hover {
       background-color: var(--surface3);
+      border-color: var(--surface3);
     }
   }
 }

@@ -36,6 +36,7 @@ app-header {
   backdrop-filter: blur(10px);
   background-color: var(--header-surface);
   block-size: var(--header-size);
+  border-block-end: .5px solid var(--surface3);
   grid-area: header;
   inset-block: 0 auto;
   inset-inline: 0;

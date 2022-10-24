@@ -4,7 +4,7 @@
 
 :host {
   display: block;
-  --zebra-stripe: #{mix(black, utils.map-deep-get(const.$grays, 6, light), 3%)};
+  --zebra-stripe: #{mix(black, utils.map-deep-get(const.$grays, 6, light), 1%)};
 
   @media (prefers-color-scheme: dark) {
     --zebra-stripe: #{mix(white, utils.map-deep-get(const.$grays, 6, dark), 3%)};

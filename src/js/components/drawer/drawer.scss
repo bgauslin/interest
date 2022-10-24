@@ -4,13 +4,8 @@
 @use '../../../styles/utils';
 
 :host {
-  background-color: var(--surface); //
   display: grid;
   grid: 'drawer' 'button' 1fr;
-
-  @media #{map.get(const.$breakpoint, 'small')} {
-    background: 0;
-  }
 }
 
 * {

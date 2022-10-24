@@ -11,21 +11,22 @@
 
 :root {
   --error: #{const.$error-light};
+  --header-size: clamp(2.75rem, 2.75rem + 2vw, 4rem);
+  --header-surface: #{rgba(white, .67)};
   --on-surface: #{utils.map-deep-get(const.$grays, 6, dark)};
   --on-surface-variant: #{utils.map-deep-get(const.$grays, 1, light)};
   --outline: #{utils.map-deep-get(const.$grays, 4, dark)};
-  --surface: #{utils.map-deep-get(const.$grays, 6, light)};
-  --surface1: #{utils.map-deep-get(const.$grays, 5, light)};
-  --surface2: #{utils.map-deep-get(const.$grays, 4, light)};
-  --surface3: #{utils.map-deep-get(const.$grays, 3, light)};
+  --surface: white;
+  --surface1: #{utils.map-deep-get(const.$grays, 6, light)};
+  --surface2: #{utils.map-deep-get(const.$grays, 5, light)};
+  --surface3: #{utils.map-deep-get(const.$grays, 4, light)};
   --theme: #{const.$theme-light};
   --on-theme: #{utils.map-deep-get(const.$grays, 6, light)};
 
-  --header-size: clamp(2.75rem, 2.75rem + 2vw, 4rem);
-  --header-surface: #{rgba(utils.map-deep-get(const.$grays, 6, light), .67)};
   
   @media (prefers-color-scheme: dark) {
     --error: #{const.$error-dark};
+    --header-surface: #{rgba(utils.map-deep-get(const.$grays, 6, dark), .67)};
     --on-surface: #{utils.map-deep-get(const.$grays, 5, light)};
     --on-surface-variant: #{utils.map-deep-get(const.$grays, 1, light)};
     --outline: #{utils.map-deep-get(const.$grays, 4, light)};
@@ -35,8 +36,6 @@
     --surface3: #{utils.map-deep-get(const.$grays, 3, dark)};
     --theme: #{const.$theme-dark};
     --on-theme: #{utils.map-deep-get(const.$grays, 6, dark)};
-
-    --header-surface: #{rgba(utils.map-deep-get(const.$grays, 6, dark), .67)};
   }
 }
 
@@ -50,7 +49,7 @@ html {
 }
 
 body {
-  background-color: var(--surface1);
+  background-color: var(--surface);
   display: grid;
   margin: 0;
   min-block-size: 100vh;
@@ -58,6 +57,10 @@ body {
 
   @supports (min-block-size: 100dvh) {
     min-block-size: 100dvh;
+  }
+
+  @media #{map.get(const.$breakpoint, 'small')} {
+    background-color: var(--surface1);
   }
 }
 

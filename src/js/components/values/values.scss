@@ -89,12 +89,13 @@ label[for='rate']::before {
 input {
   appearance: none;
   background-color: var(--surface2);
-  block-size: 2rem;
-  border: 2px solid transparent;
-  border-radius: 4px;
+  block-size: const.$input-block-size;
+  border: const.$outline-size solid var(--surface);
+  border-radius: const.$input-radius;
+  box-sizing: content-box;
   color: var(--on-surface);
   font-family: 'Avenir Variable', sans-serif;
-  font-size: inherit;
+  font-size: 1em;
   font-variation-settings: 'wght' 500;
   grid-area: input;
   inline-size: const.$field-input-size;
@@ -102,16 +103,15 @@ input {
   line-height: 1;
   margin: 0;
   outline: 0;
-  padding-inline: .5rem;
+  padding-inline: const.$input-padding;
   text-align: end;
 
   &:focus {
-    background-color: var(--surface2);
-    border-color: var(--theme);
+    border-color: var(--on-surface);
   }
 
-  &:focus:invalid {
-    border-color: var(--error);
+  &:invalid {
+    color: var(--color-error);
   }
 }
 

@@ -10,7 +10,7 @@
 }
 
 :root {
-  --error: #{const.$error-light};
+  --color-error: #{const.$error-light};
   --header-size: clamp(2.75rem, 2.75rem + 2vw, 4rem);
   --header-surface: #{rgba(white, .67)};
   --on-surface: #{utils.map-deep-get(const.$grays, 6, dark)};
@@ -22,10 +22,9 @@
   --surface3: #{utils.map-deep-get(const.$grays, 4, light)};
   --theme: #{const.$theme-light};
   --on-theme: #{utils.map-deep-get(const.$grays, 6, light)};
-
   
   @media (prefers-color-scheme: dark) {
-    --error: #{const.$error-dark};
+    --color-error: #{const.$error-dark};
     --header-surface: #{rgba(utils.map-deep-get(const.$grays, 6, dark), .67)};
     --on-surface: #{utils.map-deep-get(const.$grays, 5, light)};
     --on-surface-variant: #{utils.map-deep-get(const.$grays, 1, light)};

@@ -117,7 +117,7 @@ input {
   margin: 0;
 
   &:focus,
-  &:active {
+  &:checked {
     border-color: var(--on-surface);
   }
 

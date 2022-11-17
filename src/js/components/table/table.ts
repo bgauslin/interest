@@ -6,7 +6,7 @@ import shadowStyles from './table.scss';
 /**
  * Custom element that renders a table based on user-provided values.
  */
-@customElement('interest-table')
+@customElement('app-table')
 class TableWidget extends LitElement {
   @state() calculator: Calculator;
   @state() currency = DEFAULT_CURRENCY;
@@ -56,7 +56,7 @@ class TableWidget extends LitElement {
 
   render() {
     return html`
-      <div data-currency="${this.currency}">
+      <div class="table">
         <table>
           <thead>
             <tr>

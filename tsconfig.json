@@ -16,6 +16,7 @@
     "src/js/components/app/app.ts",
     "src/js/components/currency/currency.ts",
     "src/js/components/drawer/drawer.ts",
+    "src/js/components/header/header.ts",
     "src/js/components/table/table.ts",
     "src/js/components/values/values.ts",
   ]

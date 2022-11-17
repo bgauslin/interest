@@ -15,10 +15,9 @@ interface InputAttributes {
  * Custom element that renders input fields and calculates compound interest
  * total based on user-provided values.
  */
-@customElement('interest-values')
+@customElement('app-values')
 class Values extends LitElement {
   @query('form') form: HTMLFormElement;
-  @query('interest-currency') currencyWidget: HTMLElement;
 
   @state() calculator: Calculator;
   @state() currency = DEFAULT_CURRENCY;
@@ -59,7 +58,6 @@ class Values extends LitElement {
   private updateCurrency(e: CustomEvent) {
     this.currency = e.detail.currency;
     this.updateTotal();
-    this.dispatchCurrency();
   }
 
   private updateValues(e: CustomEvent) {
@@ -94,18 +92,6 @@ class Values extends LitElement {
     this.updateTotal();
   }
 
-  private dispatchCurrency() {
-    if (!this.currency) {
-      return;
-    }
-
-    this.currencyWidget.dispatchEvent(new CustomEvent(this.currencyEvent, {
-      detail: {
-        currency: this.currency,
-      },
-    }));
-  }
-
   private dispatchValues() {
     if (!this.values) {
       return;
@@ -122,9 +108,8 @@ class Values extends LitElement {
 
   render() {
     return html`
-      <slot></slot>
       <form @change="${this.getValues}">
-        <ul>
+        <ul role="list">
           ${this.fields.map((field) => {
             const {inputmode, label, name, pattern, value} = field;
             return html`
@@ -139,13 +124,13 @@ class Values extends LitElement {
                   type="text"
                   value="${value}">
               </li>
-            `
+            `;
           })}
         </ul>
       </form>
+
       <div aria-hidden="${this.total === ''}" class="total">
-        <interest-currency></interest-currency>
-        <span class="amount">${this.total}</span>
+        <span>${this.total}</span>
       </div>
     `;
   }

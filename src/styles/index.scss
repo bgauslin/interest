@@ -10,24 +10,29 @@
 }
 
 :root {
-  --error: #{const.$error-light};
+  --color-error: #{const.$error-light};
+  --header-size: clamp(2.75rem, 2.75rem + 2vw, 4rem);
+  --header-surface: #{rgba(white, .67)};
   --on-surface: #{utils.map-deep-get(const.$grays, 6, dark)};
   --on-surface-variant: #{utils.map-deep-get(const.$grays, 1, light)};
   --outline: #{utils.map-deep-get(const.$grays, 4, dark)};
-  --surface: #{utils.map-deep-get(const.$grays, 6, light)};
-  --surface1: #{utils.map-deep-get(const.$grays, 5, light)};
-  --surface2: #{utils.map-deep-get(const.$grays, 4, light)};
+  --surface: white;
+  --surface1: #{utils.map-deep-get(const.$grays, 6, light)};
+  --surface2: #{utils.map-deep-get(const.$grays, 5, light)};
+  --surface3: #{utils.map-deep-get(const.$grays, 4, light)};
   --theme: #{const.$theme-light};
   --on-theme: #{utils.map-deep-get(const.$grays, 6, light)};
-
+  
   @media (prefers-color-scheme: dark) {
-    --error: #{const.$error-dark};
+    --color-error: #{const.$error-dark};
+    --header-surface: #{rgba(utils.map-deep-get(const.$grays, 6, dark), .67)};
     --on-surface: #{utils.map-deep-get(const.$grays, 5, light)};
     --on-surface-variant: #{utils.map-deep-get(const.$grays, 1, light)};
     --outline: #{utils.map-deep-get(const.$grays, 4, light)};
     --surface: #{utils.map-deep-get(const.$grays, 6, dark)};
     --surface1: #{utils.map-deep-get(const.$grays, 5, dark)};
     --surface2: #{utils.map-deep-get(const.$grays, 4, dark)};
+    --surface3: #{utils.map-deep-get(const.$grays, 3, dark)};
     --theme: #{const.$theme-dark};
     --on-theme: #{utils.map-deep-get(const.$grays, 6, dark)};
   }
@@ -39,10 +44,12 @@
 
 html {
   -webkit-tap-highlight-color: transparent;
+  text-size-adjust: none;
 }
 
 body {
-  background-color: var(--body-background, var(--surface));
+  background-color: var(--surface);
+  display: grid;
   margin: 0;
   min-block-size: 100vh;
   touch-action: manipulation;
@@ -52,6 +59,10 @@ body {
   }
 
   @media #{map.get(const.$breakpoint, 'small')} {
-    --body-background: var(--surface1);
+    background-color: var(--surface1);
   }
+}
+
+noscript {
+  place-self: center;
 }

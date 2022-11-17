@@ -4,14 +4,18 @@ $button-size: 2.75rem;
 $card-padding: 1.5rem;
 $card-radius: 1rem;
 $field-gap: .75rem;
-$field-input-size: 6rem;
+$field-input-size: 5rem;
+$input-block-size: 2rem;
+$input-padding: .5rem;
+$input-radius: .5rem;
 $menu-spacing: .375rem;
+$outline-size: .1875rem;
 
 $-gap-max: 3rem;
-$-gap-min: 1rem;
+$-gap-min: .75rem;
 
-// Compound dimensions.
-$fluid-gap: clamp(#{$-gap-min}, #{$-gap-min} + 2vw, #{$-gap-max});
+// Computed dimensions.
+$fluid-gap: clamp(#{$-gap-min}, #{$-gap-min} + 1vw, #{$-gap-max});
 
 // Breakpoints via content-based min/max values.
 $-table-max-size: 51rem;

@@ -15,8 +15,8 @@
   box-sizing: border-box;
 }
 
-// Scrollable wrapper for <table> element.
-div {
+// Scrollable <div> wrapper for <table> element.
+.table {
   overflow: auto hidden;
   scrollbar-width: none;
 
@@ -31,14 +31,11 @@ div {
 
 // Standard <table> element.
 table {
+  background-color: var(--surface);
   border-collapse: collapse;
   font-size: clamp(.8125rem, .8125rem + 1vw, 1rem);
   font-variant-numeric: tabular-nums;
   inline-size: 100%;
-
-  @media #{map.get(const.$breakpoint, 'small')} {
-    background-color: var(--surface);
-  }
 }
 
 // All cells are end-aligned by default since they contain numeric content.
@@ -71,24 +68,6 @@ tbody > tr:nth-child(odd) {
   @media #{map.get(const.$breakpoint, 'small')} {
     display: table-cell;
   }
-}
-
-// Currency and percent symbols via pseudo-elements.
-:is(td.balance, td.deposits, td.interest)::before {
-  color: var(--on-surface-variant);
-  margin-inline: 0 .25em;
-
-  [data-currency='eur'] & { content: '€' }
-  [data-currency='gbp'] & { content: '£' }
-  [data-currency='inr'] & { content: '₹' }
-  [data-currency='usd'] & { content: '$' }
-  [data-currency='yen'] & { content: '¥' }
-}
-
-td.growth::after {
-  color: var(--on-surface-variant);
-  content: '%';
-  margin-inline: .25em 0;
 }
 
 // Footnote after the table.

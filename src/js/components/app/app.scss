@@ -24,7 +24,7 @@
 
   @media #{map.get(const.$breakpoint, 'medium')} {
     gap: const.$fluid-gap;
-    grid: 'header header' var(--header-size) 'values drawer' 1fr / #{const.$values-min-size} 1fr;
+    grid: 'header header' var(--header-size) 'values drawer' 1fr '. .' var(--header-size) / #{const.$values-min-size} 1fr;
   }
 }
 

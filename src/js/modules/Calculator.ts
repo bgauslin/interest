@@ -1,11 +1,11 @@
-interface CompoundingValues {
+export interface CompoundingValues {
   contribution: number,
   periods: number,
   principal: number,
   rate: number,
 }
 
-interface Sums {
+export interface Sums {
   balance: string,
   deposits: string,
   growth: string,
@@ -13,26 +13,30 @@ interface Sums {
   year: string,
 }
 
-const Currencies = [
-  {id: 'usd', symbol: '$', label: 'Dollars'},
-  {id: 'eur', symbol: '€', label: 'Euros'},
-  {id: 'gbp', symbol: '£', label: 'Pounds'},
-  {id: 'yen', symbol: '¥', label: 'Yen'},
-  {id: 'inr', symbol: '₹', label: 'Rupees'},
+export const Currencies = [
+  {id: 'usd', locale: 'en-US', symbol: '$', label: 'Dollars'},
+  {id: 'eur', locale: 'de-DE', symbol: '€', label: 'Euros'},
+  {id: 'gbp', locale: 'en-GB', symbol: '£', label: 'Pounds'},
+  {id: 'jpy', locale: 'ja-JP', symbol: '¥', label: 'Yen'},
+  {id: 'inr', locale: 'en-IN', symbol: '₹', label: 'Rupees'},
 ];
 
-const DEFAULT_CURRENCY = Currencies[0].id;
+export const DEFAULT_CURRENCY = Currencies[0].id;
 
 /**
  * Formulas for calculating compound interest and formatting currency.
  */
-class Calculator {
+export class Calculator {
   /**
    * Calculates compound interest and returns an array of all calculated values.
    */
   public compound(values: CompoundingValues, currency: string): Sums[] {
     const {contribution, principal, periods, rate} = values;
-    const sums = [];
+    const {locale} = Currencies.find(selected => selected.id === currency);
+    const format = {
+      currency: currency.toUpperCase(),
+      style: 'currency',
+    };
 
     const pmt = contribution;
     let p: number = principal;
@@ -40,6 +44,7 @@ class Calculator {
     let principalCompounded: number;
     let contributionCompounded: number;
 
+    const sums = [];
     for (let i = 1; i <= periods; i++) {
       principalCompounded = this.amountWithInterest(p, rate);
       contributionCompounded = this.amountWithInterest(c, rate);
@@ -50,16 +55,21 @@ class Calculator {
       const balance = principalCompounded + contributionCompounded;
       const interest = balance - deposits;
 
-      let growth: string = ((balance / deposits - 1) * 100).toFixed(1);
-      if (growth === 'NaN') {
-        growth = 'N/A'
-      };
+      let growth: number|string = (balance / deposits - 1) * 100;
+      if (growth === 0) {
+        growth = 'N/A';
+      } else { 
+        growth = `${new Intl.NumberFormat('en-US', {
+          maximumFractionDigits: 1,
+          minimumFractionDigits: 1,
+        }).format(growth)}%`;
+      }
 
       sums.push({
-        balance: this.formatCurrency(balance, currency),
-        deposits: this.formatCurrency(deposits, currency),
+        balance: new Intl.NumberFormat(locale, format).format(balance),
+        deposits: new Intl.NumberFormat(locale, format).format(deposits),
         growth,
-        interest: this.formatCurrency(interest, currency),
+        interest: new Intl.NumberFormat(locale, format).format(interest),
         year: String(i),
       });
     }
@@ -82,46 +92,4 @@ class Calculator {
   private amountWithInterest(amount: number, rate: number): number {
     return amount * (rate / 100 + 1);
   }
-
-  /**
-   * Formats an amount based on currency type: 12345.67123 => 12,345.67.
-   */
-  private formatCurrency(amount: number, currency: string): string {
-    let thousands = ',';
-    let decimals = '.';
-
-    if (currency === 'inr') {
-      return this.formatRupees(amount);
-    }
-
-    if (currency === 'eur') {
-      const threshold = 50000;
-      thousands = (amount > threshold) ? ',' : '.';
-      decimals = (amount > threshold) ? '.' : ',';
-    }
-
-    return amount.toFixed(2).replace('.', decimals).replace(
-      new RegExp('\\d(?=(\\d{3})+\\D)', 'g'), '$&' + thousands);
-  };
-
-  /**
-   * Formats currency for rupees (which has its own formatting, so it get its
-   * own method), and returns amount in '##,##,###.##' format.
-   */
-  private formatRupees(rupees: number): string {
-    const string = rupees.toFixed(2).toString().split('.');
-    const amount = string[0];
-    const decimal = string[1];
-    const lastThree = amount.length - 3;
-    const thousands = amount.substring(0, lastThree);
-    const thousandsFormatted = thousands.replace(/\B(?=(\d{2})+(?!\d))/g, ',');
-    let hundreds = amount.substring(lastThree);
-    if (thousands) {
-      hundreds = `,${hundreds}`;
-    }
-
-    return `${thousandsFormatted}${hundreds}.${decimal}`;
-  }
 }
-
-export {Calculator, CompoundingValues, Currencies, DEFAULT_CURRENCY, Sums};

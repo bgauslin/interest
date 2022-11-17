@@ -80,10 +80,10 @@ label {
   opacity: .8;
   pointer-events: none;
   white-space: nowrap;
-}
 
-label[for='rate']::before {
-  content: '% ';
+  &[for='rate']::before {
+    content: '% ';
+  }
 }
 
 input {
@@ -130,7 +130,7 @@ input {
   }
 }
 
-.amount {
+.total > span {
   block-size: const.$amount-size;
   color: var(--theme);
   font-size: const.$amount-size;
@@ -140,13 +140,3 @@ input {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
-.amount::before {
-  margin-inline: 0 .125em;
-}
-
-[data-currency='eur']::before { content: '€' }
-[data-currency='gbp']::before { content: '£' }
-[data-currency='inr']::before { content: '₹' }
-[data-currency='usd']::before { content: '$' }
-[data-currency='yen']::before { content: '¥' }

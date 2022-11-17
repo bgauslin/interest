@@ -56,7 +56,7 @@ class TableWidget extends LitElement {
 
   render() {
     return html`
-      <div data-currency="${this.currency}">
+      <div class="table">
         <table>
           <thead>
             <tr>

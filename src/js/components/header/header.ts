@@ -1,12 +1,13 @@
 import {LitElement} from 'lit';
-import {customElement, state} from 'lit/decorators.js';
+import {customElement, property, state} from 'lit/decorators.js';
 
 /**
  * Shifts a fixed header in and out of the viewport depending on scroll
- * direction, and sets its transparency based on the state of its target.
+ * direction.
  */
 @customElement('app-header')
 class AppHeader extends LitElement {
+  @property({attribute: 'shifty', type: Boolean}) isShifty: boolean;
   @state() size: number;
   @state() resizeListener: EventListenerObject;
   @state() scrollChange: number;
@@ -21,15 +22,19 @@ class AppHeader extends LitElement {
   }
 
   connectedCallback() {
-    this.getSize();
-    this.setShift();
-    document.addEventListener('scroll', this.scrollListener);
-    window.addEventListener('resize', this.resizeListener);
+    if (this.isShifty) {
+      this.getSize();
+      this.setShift();
+      document.addEventListener('scroll', this.scrollListener);
+      window.addEventListener('resize', this.resizeListener);
+    }
   }
 
   disconnectedCallback() {
-    document.removeEventListener('scroll', this.scrollListener);
-    window.removeEventListener('resize', this.resizeListener);
+    if (this.isShifty) {
+      document.removeEventListener('scroll', this.scrollListener);
+      window.removeEventListener('resize', this.resizeListener);
+    }
   }
 
   private getSize() {

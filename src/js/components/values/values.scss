@@ -107,7 +107,7 @@ input {
   text-align: end;
 
   &:focus {
-    border-color: var(--on-surface);
+    border-color: var(--outline);
   }
 
   &:invalid {

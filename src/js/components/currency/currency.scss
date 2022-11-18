@@ -118,7 +118,7 @@ input {
 
   &:focus,
   &:checked {
-    border-color: var(--on-surface);
+    border-color: var(--outline);
   }
 
   @media (any-hover: hover) {
@@ -130,7 +130,7 @@ input {
     }
 
     &:hover:checked {
-      border-color: var(--on-surface);
+      border-color: var(--outline);
     }
   }
 }

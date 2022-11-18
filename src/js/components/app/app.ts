@@ -12,7 +12,6 @@ class App extends LitElement {
   @query('app-currency') currencyWidget: HTMLElement;
   @query('app-table') table: HTMLElement;
   @query('app-values') userValues: HTMLElement;
-
   @state() appTitle = 'Compound Interest Calculator';
   @state() currency = DEFAULT_CURRENCY;
   @state() currencyEvent = 'updateCurrency';

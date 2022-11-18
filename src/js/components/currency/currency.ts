@@ -12,7 +12,6 @@ class Currency extends LitElement {
   @query('button') button: HTMLButtonElement;
   @query('form :checked') checked: HTMLInputElement;
   @query('form') form: HTMLFormElement;
-
   @state() clickListener: EventListenerObject;
   @state() closeMenuKeys: String[] = ['Escape', 'Space'];
   @state() currency = DEFAULT_CURRENCY;

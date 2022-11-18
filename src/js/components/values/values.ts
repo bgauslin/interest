@@ -18,7 +18,6 @@ interface InputAttributes {
 @customElement('app-values')
 class Values extends LitElement {
   @query('form') form: HTMLFormElement;
-
   @state() calculator: Calculator;
   @state() currency = DEFAULT_CURRENCY;
   @state() currencyEvent = 'updateCurrency';

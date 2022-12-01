@@ -39,25 +39,18 @@ button {
     border-color: var(--outline);
   }
 
-  &:focus,
   &[aria-expanded='true'] {
-    background-color: var(--surface3);
-  }
-
-  &[aria-expanded='true'] {
-    border-color: var(--surface3);
+    background-color: var(--on-surface);
+    color: var(--surface2);
   }
 
   @media (any-hover: hover) {
-    transition: utils.transition(background-color, border-color);
-
-    &:hover {
-      border-color: var(--surface3);
-    }
+    transition: utils.transition(background-color, color);
 
     &:hover,
     &[aria-expanded='true']:hover {
-      background-color: var(--surface3);
+      background-color: var(--on-surface);
+      color: var(--surface2);
     }
   }
 }

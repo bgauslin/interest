@@ -11,6 +11,7 @@
   margin-inline: auto;
   max-inline-size: const.$app-max-size;
   min-block-size: 100vh;
+  padding-block: 0 env(safe-area-inset-bottom);
 
   @supports (min-block-size: 100dvh) {
     min-block-size: 100dvh;
@@ -18,7 +19,6 @@
 
   @media #{map.get(const.$breakpoint, 'small')} {
     gap: const.$fluid-gap;
-    padding-block: 0;
     padding-inline: const.$fluid-gap;
   }
 
@@ -40,6 +40,7 @@ app-header {
   grid-area: header;
   inset-block: 0 auto;
   inset-inline: 0;
+  padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
   position: fixed;
   transform: translateY(var(--shift));
   z-index: 3;

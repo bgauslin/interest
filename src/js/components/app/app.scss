@@ -10,12 +10,8 @@
   inline-size: 100%;
   margin-inline: auto;
   max-inline-size: const.$app-max-size;
-  min-block-size: 100vh;
+  min-block-size: 100dvh;
   padding-block: 0 env(safe-area-inset-bottom);
-
-  @supports (min-block-size: 100dvh) {
-    min-block-size: 100dvh;
-  }
 
   @media #{map.get(const.$breakpoint, 'small')} {
     gap: const.$fluid-gap;

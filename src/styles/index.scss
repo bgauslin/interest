@@ -11,8 +11,6 @@
 
 :root {
   --color-error: #{const.$error-light};
-  --header-size: clamp(2.75rem, 2.75rem + 2vw, 4rem);
-  --header-surface: #{rgba(white, .67)};
   --on-surface: #{utils.map-deep-get(const.$grays, 6, dark)};
   --on-surface-variant: #{utils.map-deep-get(const.$grays, 1, light)};
   --outline: #{utils.map-deep-get(const.$colors, 'blue', light)};
@@ -25,7 +23,6 @@
   
   @media (prefers-color-scheme: dark) {
     --color-error: #{const.$error-dark};
-    --header-surface: #{rgba(utils.map-deep-get(const.$grays, 6, dark), .67)};
     --on-surface: #{utils.map-deep-get(const.$grays, 5, light)};
     --on-surface-variant: #{utils.map-deep-get(const.$grays, 1, light)};
     --outline: #{utils.map-deep-get(const.$colors, 'blue', dark)};

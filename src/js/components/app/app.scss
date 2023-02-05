@@ -6,7 +6,7 @@
   display: grid;
   font-family: 'Avenir Variable', sans-serif;
   font-variation-settings: 'wght' 500;
-  grid: 'header' var(--header-size) 'values' 1fr 'drawer' / 1fr;
+  grid: 'values' 1fr 'drawer' / 1fr;
   inline-size: 100%;
   margin-inline: auto;
   max-inline-size: const.$app-max-size;
@@ -20,7 +20,7 @@
 
   @media #{map.get(const.$breakpoint, 'medium')} {
     gap: const.$fluid-gap;
-    grid: 'header header' var(--header-size) 'values drawer' 1fr '. .' var(--header-size) / #{const.$values-min-size} 1fr;
+    grid: 'values drawer' 1fr / #{const.$values-min-size} 1fr;
   }
 }
 
@@ -28,38 +28,9 @@
   box-sizing: border-box;
 }
 
-app-header {
-  backdrop-filter: blur(10px);
-  background-color: var(--header-surface);
-  block-size: var(--header-size);
-  border-block-end: .5px solid var(--surface3);
-  grid-area: header;
-  inset-block: 0 auto;
-  inset-inline: 0;
-  padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
-  position: fixed;
-  transform: translateY(var(--shift));
-  z-index: 3;
-}
-
-header {
-  align-items: center;
-  block-size: 100%;
-  display: flex;
-  gap: 0 1rem;
-  justify-content: space-between;
-  margin-inline: auto;
-  max-inline-size: const.$app-max-size;
-  padding-inline: const.$fluid-gap;
-}
-
+// TODO: Screen reader a11y.
 h1 {
-  font-size: clamp(.875rem, .875rem + 1vw, 2rem);
-  margin: 0;
-  min-inline-size: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  display: none;
 }
 
 app-values {
@@ -71,7 +42,7 @@ app-values {
   }
 
   @media #{map.get(const.$breakpoint, 'medium')} {
-    inset-block: calc(#{const.$fluid-gap} + var(--offset, var(--header-size))) auto;
+    inset-block: #{const.$fluid-gap} auto;
     position: sticky;
   }
 }

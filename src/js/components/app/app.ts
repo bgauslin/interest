@@ -103,14 +103,11 @@ class App extends LitElement {
 
   render() {
     return html`
-      <app-header>
-        <header>
-          <h1>${this.appTitle}</h1>
-          <app-currency></app-currency>
-        </header>
-      </app-header>
+      <h1>${this.appTitle}</h1>
 
-      <app-values></app-values>
+      <app-values>
+        <app-currency></app-currency>
+      </app-values>
       
       <app-drawer aria-hidden="${!this.values}">
         <app-table></app-table>

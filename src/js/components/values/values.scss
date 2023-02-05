@@ -6,7 +6,7 @@
 :host {
   display: grid;
   gap: const.$card-padding 0;
-  grid: 'currency' 'form' 1fr 'total' / 1fr;
+  grid: 'form' 1fr 'total' / 1fr;
   margin-inline: env(safe-area-inset-left) env(safe-area-inset-right);
   padding-block: const.$card-padding;
   padding-inline: const.$card-padding;
@@ -117,10 +117,10 @@ input {
 }
 
 .total {
-  grid: 1fr / auto-flow;
+  gap: 0 .5rem;
+  grid: 'widget result .' 1fr / 3rem 1fr 3rem;
   grid-area: total;
   padding-block: const.$card-padding;
-  padding-inline: const.$card-padding;
   place-content: center;
   place-items: center;
   transition: utils.transition(opacity);
@@ -135,13 +135,10 @@ input {
   block-size: const.$amount-size;
   color: var(--theme);
   font-size: const.$amount-size;
+  grid-area: result;
   line-height: const.$amount-size;
   max-inline-size: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-app-currency {
-  grid-area: currency;
 }

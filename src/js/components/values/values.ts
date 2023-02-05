@@ -129,10 +129,9 @@ class Values extends LitElement {
       </form>
 
       <div aria-hidden="${this.total === ''}" class="total">
+        <app-currency></app-currency>
         <span>${this.total}</span>
       </div>
-
-      <app-currency></app-currency>
     `;
   }
 }

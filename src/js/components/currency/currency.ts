@@ -110,9 +110,7 @@ class Currency extends LitElement {
         id="button"
         title="${label}"
         type="button"
-        @click="${this.toggleMenu}">
-        <span aria-hidden="true">${current.symbol}</span>
-      </button>
+        @click="${this.toggleMenu}">✏️</button>
     `;
   }
 

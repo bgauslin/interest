@@ -6,7 +6,7 @@
 :host {
   display: grid;
   gap: const.$card-padding 0;
-  grid: 'form' 1fr 'total' / 1fr;
+  grid: 'currency' 'form' 1fr 'total' / 1fr;
   margin-inline: env(safe-area-inset-left) env(safe-area-inset-right);
   padding-block: const.$card-padding;
   padding-inline: const.$card-padding;
@@ -140,4 +140,8 @@ input {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+app-currency {
+  grid-area: currency;
 }

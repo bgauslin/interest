@@ -9,7 +9,6 @@ import shadowStyles from './app.scss';
  */
 @customElement('interest-app')
 class App extends LitElement {
-  @query('app-currency') currencyWidget: HTMLElement;
   @query('app-table') table: HTMLElement;
   @query('app-values') userValues: HTMLElement;
   @state() appTitle = 'Compound Interest Calculator';
@@ -54,7 +53,6 @@ class App extends LitElement {
         currency: this.currency,
       }
     });
-    this.currencyWidget.dispatchEvent(updateCurrency);
     this.table.dispatchEvent(updateCurrency);
     this.userValues.dispatchEvent(updateCurrency);
   }
@@ -105,9 +103,7 @@ class App extends LitElement {
     return html`
       <h1>${this.appTitle}</h1>
 
-      <app-values>
-        <app-currency></app-currency>
-      </app-values>
+      <app-values></app-values>
       
       <app-drawer aria-hidden="${!this.values}">
         <app-table></app-table>

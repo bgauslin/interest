@@ -64,8 +64,6 @@ button {
 form {
   background-color: var(--surface3);
   border-radius: 2rem;
-  inset-block: (const.$button-size + const.$menu-spacing) auto;
-  inset-inline: auto (- const.$menu-spacing);
   position: absolute;
   transform: translateY(.25rem);
   transition: utils.transition(opacity, transform);

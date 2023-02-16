@@ -50,21 +50,23 @@
       border-color: var(--surface3);
     }
   }
-
-  // Always hide the button on large screens.
-  @media #{map.get(const.$breakpoint, 'medium')} {
-    display: none;
-  }
 }
 
 :host > div {
   grid-area: drawer;
   overflow: hidden;
   transition: block-size .4s ease-out;
+}
 
-  // Always show the drawer on large screens. '!important' required to override
-  // inline styles set via JS.
-  @media #{map.get(const.$breakpoint, 'medium')} {
-    block-size: auto !important;
+// [1] Always hide the button on large screens.
+// [2] Always show the drawer on large screens. '!important' is required to
+// override inline styles set via JS.
+@media #{map.get(const.$breakpoint, 'medium')} {
+  :host > button {
+    display: none; // [1] 
+  }
+
+  :host > div {
+    block-size: auto !important; // [2]
   }
 }

@@ -19,14 +19,10 @@
 .table {
   overflow: auto hidden;
   scrollbar-width: none;
+}
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  @media #{map.get(const.$breakpoint, 'small')} {
-    border-radius: const.$card-radius;
-  }
+.table::-webkit-scrollbar {
+  display: none;
 }
 
 // Standard <table> element.
@@ -61,28 +57,37 @@ tbody > tr:nth-child(odd) {
   background-color: var(--zebra-stripe);
 }
 
-// Only show 'growth' and 'interest' columns when the viewport is wide enough.
+// The 'growth' and 'interest' columns require at least landscape orientation
+// on small screens, so they're hidden by default.
 :is(.growth, .interest) {
   display: none;
-
-  @media #{map.get(const.$breakpoint, 'small')} {
-    display: table-cell;
-  }
 }
 
 // Footnote after the table.
 p {
   color: var(--on-surface-variant);
-  display: none;
   font-size: .75rem;
   margin-block: 1rem 0;
   margin-inline: 1rem;
-
-  @media #{map.get(const.$breakpoint, 'small-portrait')} {
-    display: block;
-  }
+  text-align: center;  
 }
 
 p > span {
   color: var(--on-surface);
+}
+
+@media #{map.get(const.$breakpoint, 'small')} {
+  .table {
+    border-radius: const.$card-radius;
+  }
+
+  // Only show 'growth' and 'interest' columns when viewport is wide enough.
+  :is(.growth, .interest) {
+    display: table-cell;
+  }
+
+  // Hide the footnote since it isn't needed.
+  p {
+    display: none;
+  }
 }

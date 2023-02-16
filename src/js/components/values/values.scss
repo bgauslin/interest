@@ -15,11 +15,6 @@
   box-sizing: border-box;
 }
 
-// TODO: Refactor grid to accommodate widget (and unhide it).
-app-currency {
-  display: none;
-}
-
 :is(form, ul, li, .total) {
   display: grid;
 }
@@ -96,6 +91,7 @@ input {
   color: var(--theme);
   font-size: const.$amount-size;
   grid-area: total;
+  line-height: 1;
   overflow: scroll hidden;
   padding-block: const.$card-padding;
   padding-inline: const.$card-padding;

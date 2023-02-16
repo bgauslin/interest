@@ -108,6 +108,8 @@ class App extends LitElement {
       <app-drawer aria-hidden="${!this.values}">
         <app-table></app-table>
       </app-drawer>
+
+      <app-currency></app-currency>
     `;
   }
 }

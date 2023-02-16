@@ -133,8 +133,6 @@ class Values extends LitElement {
         class="total">
         ${this.total}
       </div>
-
-      <app-currency></app-currency>
     `;
   }
 }

@@ -37,6 +37,12 @@ app-drawer {
   }
 }
 
+app-currency {
+  inset-block: auto const.$button-gap;
+  inset-inline: const.$fluid-gap auto;
+  position: fixed;
+}
+
 @media #{map.get(const.$breakpoint, 'small')} {
   :host {
     gap: const.$fluid-gap;
@@ -51,7 +57,7 @@ app-drawer {
 
 @media #{map.get(const.$breakpoint, 'medium')} {
   :host {
-    grid: 'values drawer' 1fr / #{const.$values-min-size} 1fr;
+    grid: 'values drawer' 1fr 'currency drawer' / #{const.$values-min-size} 1fr;
     padding-block: const.$fluid-gap;
   }
 
@@ -62,5 +68,10 @@ app-drawer {
 
   app-drawer {
     inset-block: #{const.$fluid-gap} auto;
+  }
+
+  app-currency {
+    grid-area: currency;
+    position: sticky;
   }
 }

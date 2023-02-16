@@ -36,6 +36,7 @@ table {
 
 // All cells are end-aligned by default since they contain numeric content.
 :is(th, td) {
+  line-height: 1;
   padding-block: .5rem;
   padding-inline: 1rem;
   text-align: end;

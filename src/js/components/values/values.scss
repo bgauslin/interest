@@ -9,16 +9,15 @@
   grid: 'form' 1fr 'total' / 1fr;
   margin-inline: env(safe-area-inset-left) env(safe-area-inset-right);
   padding-block: const.$card-padding;
-  padding-inline: const.$card-padding;
-
-  @media #{map.get(const.$breakpoint, 'small')} {
-    background-color: var(--surface);
-    border-radius: const.$card-radius;
-  }
 }
 
 * {
   box-sizing: border-box;
+}
+
+// TODO: Refactor grid to accommodate widget (and unhide it).
+app-currency {
+  display: none;
 }
 
 :is(form, ul, li, .total) {
@@ -37,41 +36,18 @@ form {
   align-self: center;
   gap: 2rem 0;
   grid-area: form;
+  padding-inline: const.$card-padding;
 }
 
-ul[role='list'] {
+[role='list'] {
   list-style: none;
   margin: 0;
   padding: 0;
-
-  @media #{map.get(const.$breakpoint, 'small')} {
-    grid: auto-flow / 1fr 1fr;
-  }
-
-  @media #{map.get(const.$breakpoint, 'medium')} {
-    grid: auto-flow / 1fr;
-  }
 }
 
 li {
   align-items: center;
   grid: 'input label' / 1fr 1fr;
-
-  @media #{map.get(const.$breakpoint, 'small')} {
-    &:nth-child(odd) {
-      place-self: end;
-    }
-
-    &:nth-child(even) {
-      place-self: start;
-    }
-  }
-
-  @media #{map.get(const.$breakpoint, 'medium')} {
-    &:nth-child(n) {
-      place-self: center;
-    }
-  }
 }
 
 label {
@@ -81,10 +57,10 @@ label {
   opacity: .8;
   pointer-events: none;
   white-space: nowrap;
+}
 
-  &[for='rate']::before {
-    content: '% ';
-  }
+label[for='rate']::before {
+  content: '% ';
 }
 
 input {
@@ -117,28 +93,51 @@ input {
 }
 
 .total {
-  gap: 0 .5rem;
-  grid: 'widget result .' 1fr / 3rem 1fr 3rem;
+  color: var(--theme);
+  font-size: const.$amount-size;
   grid-area: total;
+  overflow: scroll hidden;
   padding-block: const.$card-padding;
-  place-content: center;
-  place-items: center;
+  padding-inline: const.$card-padding;
+  scrollbar-width: none;
+  text-align: center;
   transition: utils.transition(opacity);
+}
 
-  &[aria-hidden='true'] {
-    opacity: 0;
-    visibility: hidden;
+.total::-webkit-scrollbar {
+  display: none;
+}
+
+.total[aria-hidden='true'] {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media #{map.get(const.$breakpoint, 'small')} {
+  :host {
+    background-color: var(--surface);
+    border-radius: const.$card-radius;
+  }
+
+  [role='list'] {
+    grid: auto-flow / 1fr 1fr;
+  }
+
+  li:nth-child(odd) {
+    place-self: end;
+  }
+
+  li:nth-child(even) {
+    place-self: start;
   }
 }
 
-.total > span {
-  block-size: const.$amount-size;
-  color: var(--theme);
-  font-size: const.$amount-size;
-  grid-area: result;
-  line-height: const.$amount-size;
-  max-inline-size: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+@media #{map.get(const.$breakpoint, 'medium')} {
+  [role='list'] {
+    grid: auto-flow / 1fr;
+  }
+
+  li:nth-child(n) {
+    place-self: center;
+  }
 }

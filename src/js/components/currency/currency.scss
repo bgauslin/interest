@@ -39,11 +39,6 @@ button {
     border-color: var(--outline);
   }
 
-  &[aria-expanded='true'] {
-    background-color: var(--on-surface);
-    color: var(--surface2);
-  }
-
   @media (any-hover: hover) {
     transition: utils.transition(background-color, color);
 
@@ -53,6 +48,12 @@ button {
       color: var(--surface2);
     }
   }
+}
+
+button[aria-expanded='true'] {
+  background-color: var(--on-surface);
+  border-color: var(--on-surface);
+  color: var(--surface2);
 }
 
 svg {
@@ -73,12 +74,12 @@ form {
   position: absolute;
   transform: translateY(-.25rem);
   transition: utils.transition(opacity, transform);
+}
 
-  &[aria-hidden='true'] {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(.25rem);
-  }
+form[aria-hidden='true'] {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(.25rem);
 }
 
 // Currency options via list of radio buttons.

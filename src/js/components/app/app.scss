@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use '../../../styles/const';
+@use '../../../styles/utils';
 
 :host {
   color: var(--on-surface);
@@ -30,17 +31,18 @@ app-values {
 
 app-drawer {
   grid-area: drawer;
-
-  &[aria-hidden='true'] {
-    opacity: 0;
-    visibility: hidden;
-  }
 }
 
 app-currency {
   inset-block: auto const.$button-gap;
   inset-inline: const.$fluid-gap auto;
   position: fixed;
+  transition: utils.transition(opacity);
+}
+
+:is(app-drawer, app-currency)[aria-hidden='true'] {
+  opacity: 0;
+  visibility: hidden;
 }
 
 @media #{map.get(const.$breakpoint, 'small')} {

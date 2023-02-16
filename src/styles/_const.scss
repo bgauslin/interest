@@ -26,13 +26,11 @@ $values-min-size: 24rem;
 
 $app-max-size: $values-min-size + $-gap-max + $-table-max-size;
 
-// Note: 'small-portrait' has 'max-width' media query (default is 'min-width').
 $-small: $-values-max-size + ($-gap-min * 2);
 $-medium: $values-min-size + $-table-min-size + ($-gap-max * 3);
 
 $breakpoint: (
   'small':  '(min-width: #{$-small})',
-  'small-portrait': '(max-width: #{$-small}) and (orientation: portrait)',
   'medium': '(min-width: #{$-medium})',
 );
 

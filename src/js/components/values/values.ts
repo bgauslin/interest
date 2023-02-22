@@ -130,7 +130,8 @@ class Values extends LitElement {
 
       <div
         aria-hidden="${this.total === ''}"
-        class="total">
+        class="total"
+        tabindex="-1">
         ${this.total}
       </div>
 

@@ -5,7 +5,7 @@
 
 :host {
   display: grid;
-  grid: 'values' 'total' 'widget' / 1fr;
+  grid: 'values' 'total' 6rem 'widget' / 1fr;
   inline-size: 100%;
   margin-inline: env(safe-area-inset-left) env(safe-area-inset-right);
   max-inline-size: const.$values-max-size;
@@ -32,6 +32,7 @@ form {
   align-self: center;
   gap: 2rem 0;
   grid-area: values;
+  padding-block: 0 const.$card-padding;
   padding-inline: const.$card-padding;
 }
 
@@ -90,12 +91,13 @@ input {
 
 .total {
   color: var(--theme);
-  font-size: const.$amount-size;
+  font-size: 2.75rem;
   grid-area: total;
   line-height: 1;
+  max-inline-size: 100%;
   overflow: scroll hidden;
-  padding-block: const.$card-padding;
   padding-inline: const.$card-padding;
+  place-self: center;
   scrollbar-width: none;
   text-align: center;
   transition: utils.transition(opacity);
@@ -105,7 +107,7 @@ input {
   display: none;
 }
 
-.total[aria-hidden='true'] {
+[aria-hidden='true'] {
   opacity: 0;
   visibility: hidden;
 }

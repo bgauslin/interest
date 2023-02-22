@@ -16,16 +16,16 @@ input {
   appearance: none;
   background: 0;
   border: 0;
+  margin: 0;
   outline: 0;
 }
 
 button {
   align-items: center;
-  appearance: none;
   block-size: const.$button-size;
   border: const.$outline-size solid transparent;
   border-radius: math.div(const.$button-size, 2);
-  color: var(--on-surface);
+  color: var(--on-surface-variant);
   cursor: pointer;
   display: flex;
   font-family: 'Avenir Variable', sans-serif;
@@ -38,25 +38,31 @@ button {
   padding-inline: 1.5rem;
   white-space: nowrap;
 
+
+  &:focus,
+  &[aria-expanded='true'] {
+    color: var(--on-surface);
+  }
+
   &:focus {
     background-color: var(--surface2);
     border-color: var(--outline);
   }
 
+  &[aria-expanded='true'] {
+    background-color: var(--surface3);
+  }
+
   @media (any-hover: hover) {
-    transition: utils.transition(background-color);
+    transition: utils.transition(background-color, color);
 
     &:hover,
     &[aria-expanded='true']:hover {
       background-color: var(--surface2);
+      border-color: transparent;
+      color: var(--on-surface);
     }
   }
-}
-
-button[aria-expanded='true'] {
-  background-color: var(--surface3);
-  // border-color: var(--on-surface);
-  // color: var(--surface2);
 }
 
 svg {
@@ -72,8 +78,8 @@ svg {
 // Currency menu.
 form {
   background-color: var(--surface3);
-  border-radius: 1rem; //
-  inset-block: 3.5rem auto; //
+  border-radius: .5rem;
+  inset-block: 3rem auto;
   position: absolute;
   transform: translateY(.25rem);
   transition: utils.transition(opacity, transform);
@@ -88,20 +94,22 @@ form[aria-hidden='true'] {
 // Currency options via list of radio buttons.
 ul {
   list-style: none;
-  margin-block: 1rem;
+  margin-block: .5rem;
   padding: 0;
 }
 
 label {
   align-items: center;
+  block-size: 2.75rem;
   cursor: pointer;
   display: flex;
-  gap: 0 .5em;
-  padding-block: .5rem; //
-  padding-inline: 0 2rem; //
+  padding-inline: 0 1rem;
 
-  &:focus,
-  &:checked {
+  &:focus {
+    background-color: var(--surface2);
+  }
+
+  &[data-checked] {
     background-color: var(--surface2);
   }
 
@@ -110,25 +118,26 @@ label {
 
     &:hover {
       background-color: var(--surface1);
-      // border-color: var(--surface1);
     }
-
-    // &:hover:checked {
-    //   border-color: var(--outline);
-    // }
   }
 }
 
-label:has(> span) {
-  background-color: red;
+span {
+  white-space: nowrap;
 }
 
-input {
-  margin: 0;
-}
-
-input + span {
+.symbol {
   display: inline-grid;
-  inline-size: 1.5rem;
+  font-size: 1.5rem;
+  inline-size: 3rem;
   place-content: center;
+}
+
+.example {
+  color: var(--on-surface-variant);
+  font-size: .9em;
+}
+
+[data-checked] .example {
+  color: var(--on-surface);
 }

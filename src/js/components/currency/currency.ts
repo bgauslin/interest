@@ -106,36 +106,35 @@ class Currency extends LitElement {
         aria-controls="menu"
         aria-expanded="${this.open}"
         aria-haspopup="true"
-        aria-label="${label}"
         id="button"
-        title="${label}"
         type="button"
-        @click="${this.toggleMenu}">Currency</button>
+        @click="${this.toggleMenu}">${label}</button>
     `;
   }
 
   private renderMenu() {
     return html`
       <form
-        aria-hidden="${!this.open}"v
+        aria-hidden="${!this.open}"
         id="menu" 
         @change="${this.getCurrency}">
         <ul
           aria-labelledby="button"
           role="menu">
         ${Currencies.map((currency) => {
-          const {id, label, symbol} = currency;
+          const {example, id, label, symbol} = currency;
           return html`
             <li>
-              <label>
+              <label ?data-checked="${id === this.currency}">
                 <input
+                  aria-label="${label}"
                   ?checked="${id === this.currency}"
                   name="currency"
                   tabindex="${this.open ? '0' : '-1'}"
                   type="radio"
                   value="${id}">
-                <span>${symbol}</span>
-                <span>${label}</span>
+                <span class="symbol">${symbol}</span>
+                <span class="example">${example}</span>
               </label>
             </li>`
         })}

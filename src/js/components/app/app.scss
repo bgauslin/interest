@@ -7,7 +7,7 @@
   display: grid;
   font-family: 'Avenir Variable', sans-serif;
   font-variation-settings: 'wght' 500;
-  grid: 'values' 1fr 'drawer' / 1fr;
+  grid: 1fr auto / 1fr;
   inline-size: 100%;
   margin-inline: auto;
   max-inline-size: const.$app-max-size;
@@ -25,22 +25,10 @@ h1 {
 }
 
 app-values {
-  align-self: center;
-  grid-area: values;
+  place-self: center;
 }
 
-app-drawer {
-  grid-area: drawer;
-}
-
-app-currency {
-  inset-block: auto const.$button-gap;
-  inset-inline: const.$fluid-gap auto;
-  position: fixed;
-  transition: utils.transition(opacity);
-}
-
-:is(app-drawer, app-currency)[aria-hidden='true'] {
+app-drawer[aria-hidden='true'] {
   opacity: 0;
   visibility: hidden;
 }
@@ -70,10 +58,5 @@ app-currency {
 
   app-drawer {
     inset-block: #{const.$fluid-gap} auto;
-  }
-
-  app-currency {
-    grid-area: currency;
-    position: sticky;
   }
 }

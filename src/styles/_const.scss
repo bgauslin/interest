@@ -22,12 +22,12 @@ $fluid-gap: clamp(#{$-gap-min}, #{$-gap-min} + 1vw, #{$-gap-max});
 $-table-max-size: 51rem;
 $-table-min-size: 37rem;
 
-$-values-max-size: 34rem;
+$values-max-size: 34rem;
 $values-min-size: 24rem;
 
 $app-max-size: $values-min-size + $-gap-max + $-table-max-size;
 
-$-small: $-values-max-size + ($-gap-min * 2);
+$-small: $values-max-size + ($-gap-min * 2);
 $-medium: $values-min-size + $-table-min-size + ($-gap-max * 3);
 
 $breakpoint: (

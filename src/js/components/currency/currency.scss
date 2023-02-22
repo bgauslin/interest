@@ -20,40 +20,43 @@ input {
 }
 
 button {
-  background-color: var(--surface2);
+  align-items: center;
+  appearance: none;
   block-size: const.$button-size;
-  border: const.$outline-size solid var(--surface2);
+  border: const.$outline-size solid transparent;
   border-radius: math.div(const.$button-size, 2);
   color: var(--on-surface);
   cursor: pointer;
-  display: grid;
-  font-size: 1.5rem;
-  inline-size: const.$button-size;
-  opacity: 1;
+  display: flex;
+  font-family: 'Avenir Variable', sans-serif;
+  font-size: .875em;
+  font-variation-settings: 'wght' 600;
+  justify-content: center;
+  line-height: 1;
   outline: 0;
-  padding: 0;
-  place-content: center;
+  padding-block: 0;
+  padding-inline: 1.5rem;
   white-space: nowrap;
 
   &:focus {
+    background-color: var(--surface2);
     border-color: var(--outline);
   }
 
   @media (any-hover: hover) {
-    transition: utils.transition(background-color, color);
+    transition: utils.transition(background-color);
 
     &:hover,
     &[aria-expanded='true']:hover {
-      background-color: var(--on-surface);
-      color: var(--surface2);
+      background-color: var(--surface2);
     }
   }
 }
 
 button[aria-expanded='true'] {
-  background-color: var(--on-surface);
-  border-color: var(--on-surface);
-  color: var(--surface2);
+  background-color: var(--surface3);
+  // border-color: var(--on-surface);
+  // color: var(--surface2);
 }
 
 svg {
@@ -69,54 +72,37 @@ svg {
 // Currency menu.
 form {
   background-color: var(--surface3);
-  border-radius: 2rem;
-  inset-block: -3.5rem auto;
+  border-radius: 1rem; //
+  inset-block: 3.5rem auto; //
   position: absolute;
-  transform: translateY(-.25rem);
+  transform: translateY(.25rem);
   transition: utils.transition(opacity, transform);
 }
 
 form[aria-hidden='true'] {
   opacity: 0;
   pointer-events: none;
-  transform: translateY(.25rem);
+  transform: translateY(-.25rem);
 }
 
 // Currency options via list of radio buttons.
 ul {
-  display: flex;
-  gap: const.$menu-spacing;
   list-style: none;
-  margin: 0;
-  padding: const.$menu-spacing;
+  margin-block: 1rem;
+  padding: 0;
 }
 
-// Stack each list item's children on top of each other.
-li {
-  display: inline-grid;
-  font-size: 1.5rem;
-  grid: 1fr / 1fr;
-  place-items: center;
-}
-
-li > * {
-  grid-area: 1 / 1 / -1 / -1;
-}
-
-// Radio buttons styled as discs.
-input {
-  background-color: var(--surface2);
-  block-size: const.$button-size;  
-  border: 3px solid var(--surface2);
-  border-radius: math.div(const.$button-size, 2);
+label {
+  align-items: center;
   cursor: pointer;
-  display: block;
-  inline-size: const.$button-size;
-  margin: 0;
+  display: flex;
+  gap: 0 .5em;
+  padding-block: .5rem; //
+  padding-inline: 0 2rem; //
 
   &:focus,
   &:checked {
-    border-color: var(--outline);
+    background-color: var(--surface2);
   }
 
   @media (any-hover: hover) {
@@ -124,11 +110,25 @@ input {
 
     &:hover {
       background-color: var(--surface1);
-      border-color: var(--surface1);
+      // border-color: var(--surface1);
     }
 
-    &:hover:checked {
-      border-color: var(--outline);
-    }
+    // &:hover:checked {
+    //   border-color: var(--outline);
+    // }
   }
+}
+
+label:has(> span) {
+  background-color: red;
+}
+
+input {
+  margin: 0;
+}
+
+input + span {
+  display: inline-grid;
+  inline-size: 1.5rem;
+  place-content: center;
 }

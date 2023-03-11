@@ -5,11 +5,10 @@
 
 :host {
   display: grid;
-  grid: 'values' 'total' 6rem 'widget' / 1fr;
+  grid: 'widget' 4rem 'values' 'total' 6rem / 1fr;
   inline-size: 100%;
   margin-inline: env(safe-area-inset-left) env(safe-area-inset-right);
   max-inline-size: const.$values-max-size;
-  padding-block: const.$card-padding;
 }
 
 * {
@@ -32,7 +31,6 @@ form {
   align-self: center;
   gap: 2rem 0;
   grid-area: values;
-  padding-block: 0 const.$card-padding;
   padding-inline: const.$card-padding;
 }
 
@@ -114,7 +112,8 @@ input {
 
 app-currency {
   grid-area: widget;
-  justify-self: center;
+  margin-inline: auto .75rem;
+  place-self: center end;
   transition: utils.transition(opacity);
 }
 

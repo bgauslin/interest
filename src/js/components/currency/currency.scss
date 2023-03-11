@@ -21,28 +21,14 @@ input {
 }
 
 button {
-  align-items: center;
   block-size: const.$button-size;
   border: const.$outline-size solid transparent;
   border-radius: math.div(const.$button-size, 2);
-  color: var(--on-surface-variant);
   cursor: pointer;
-  display: flex;
-  font-family: 'Avenir Variable', sans-serif;
-  font-size: .875em;
-  font-variation-settings: 'wght' 600;
-  justify-content: center;
-  line-height: 1;
+  display: grid;
+  inline-size: const.$button-size;
   outline: 0;
-  padding-block: 0;
-  padding-inline: 1.5rem;
-  white-space: nowrap;
-
-
-  &:focus,
-  &[aria-expanded='true'] {
-    color: var(--on-surface);
-  }
+  place-items: center;
 
   &:focus {
     background-color: var(--surface2);
@@ -60,7 +46,6 @@ button {
     &[aria-expanded='true']:hover {
       background-color: var(--surface2);
       border-color: transparent;
-      color: var(--on-surface);
     }
   }
 }
@@ -70,37 +55,29 @@ svg {
   inline-size: 1.5rem;
 }
 
-// Currency symbol for button and options.
-:is(button, li) > span {
-  pointer-events: none;
-}
-
 // Currency menu.
 dialog {
-  background-color: var(--surface3);
+  background-color: var(--surface2);
   block-size: 0;
   border: 0;
   border-radius: .5rem;
   display: block;
   inline-size: 12rem;
+  margin-block: .5rem 0;
   overflow: hidden;
   padding: 0;
+  transform: translateX(calc(-100% + const.$button-size));
   transition: utils.transition(opacity);
 }
 
 dialog[open] {
   block-size: auto;
   opacity: 1;
-  transform: translateY(const.$menu-spacing);
 }
 
 dialog,
 dialog[data-closing] {
   opacity: 0;
-}
-
-dialog[data-flip] {
-  transform: translateY(calc(-100% - #{const.$button-size + const.$menu-spacing}));
 }
 
 // Currency options via list of radio buttons.
@@ -118,19 +95,20 @@ label {
   display: flex;
   padding-inline: 0 1rem;
 
-  &:focus {
-    background-color: var(--surface2);
-  }
-
+  &:focus,
   &[data-checked] {
-    background-color: var(--surface2);
+    background-color: var(--surface3);
   }
 
   @media (any-hover: hover) {
-    transition: utils.transition(background-color, border-color);
+    transition: utils.transition(background-color);
 
     &:hover {
       background-color: var(--surface1);
+    }
+
+    &:hover[data-checked] {
+      background-color: var(--surface3);
     }
   }
 }
@@ -147,10 +125,5 @@ span {
 }
 
 .example {
-  color: var(--on-surface-variant);
   font-size: .9em;
-}
-
-[data-checked] .example {
-  color: var(--on-surface);
 }

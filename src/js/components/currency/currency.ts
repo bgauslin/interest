@@ -11,72 +11,77 @@ import shadowStyles from './currency.scss';
 class Currency extends LitElement {
   @query('button') button: HTMLButtonElement;
   @query('form :checked') checked: HTMLInputElement;
+  @query('dialog') dialog: HTMLDialogElement;
   @query('form') form: HTMLFormElement;
+
   @state() clickListener: EventListenerObject;
   @state() closeMenuKeys: String[] = ['Escape', 'Space'];
+  @state() closing: Boolean = false;
   @state() currency = DEFAULT_CURRENCY;
   @state() currencyEvent = 'updateCurrency';
   @state() currencyListener: EventListenerObject;
+  @state() flip: Boolean = false;
+  @state() keyListener: EventListenerObject;
   @state() open: Boolean = false;
 
   static styles = css`${shadowStyles}`;
 
   constructor() {
     super();
-    this.clickListener = this.handleClick.bind(this);
     this.currencyListener = this.updateCurrency.bind(this);
+    this.clickListener = this.handleClick.bind(this);
+    this.keyListener = this.handleKey.bind(this);
   }
   
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener(this.currencyEvent, this.currencyListener);
+    document.addEventListener('click', this.clickListener);
+    document.addEventListener('keydown', this.keyListener);
   }
 
   disconnectedCallback() { 
     super.disconnectedCallback();
-    this.removeEventListener('keyup', this.handleKey);
-    this.removeEventListener(this.currencyEvent, this.currencyListener);
     document.removeEventListener('click', this.clickListener);
+    document.removeEventListener('keydown', this.keyListener);
+  }
+
+  private handleClick(e: Event) {
+    if (this.open && !e.composedPath().includes(this)) {
+      this.toggleMenu();
+    }
+  }
+
+  private handleKey(e: KeyboardEvent) {
+    if (e.code === 'Escape') {
+      e.preventDefault();
+      this.toggleMenu();
+    }
   }
 
   private toggleMenu() {
+    this.open = !this.open;
     if (this.open) {
-      this.closeMenu();
-    } else {
       this.openMenu();
+    } else {
+      this.closeMenu();
     }
   }
 
   private openMenu() {
-    this.open = true;
-    this.checked?.focus();
-    this.addEventListener('keyup', this.handleKey);
-    window.requestAnimationFrame(() => {
-      document.addEventListener('click', this.clickListener);
-    });
+    const viewportHeight = window.innerHeight;
+    const {height, y} = this.form.getBoundingClientRect();
+    this.flip = (y + height > viewportHeight);
+    this.dialog.show();
+    this.checked.focus();
   }
 
   private closeMenu() {
-    this.open = false;
-    this.removeEventListener('keyup', this.handleKey);
-    document.removeEventListener('click', this.clickListener);
-  }
-
-  private handleClick(event: Event) {
-    const path = event.composedPath();
-    if (this.open && !path.includes(this.form)) {
-      this.closeMenu();
-    }
-  }
-
-  private handleKey(event: KeyboardEvent) {
-    if (this.open && this.closeMenuKeys.includes(event.code)) {
-      this.closeMenu();
-    }
-  }
-
-  private updateCurrency(e: CustomEvent) {
-    this.currency = e.detail.currency;
+    this.closing = true;
+    this.dialog.addEventListener('transitionend', () => {
+      this.dialog.close();
+      this.closing = false;
+      this.flip = false;
+    }, {once: true});
   }
 
   private getCurrency() {
@@ -91,6 +96,10 @@ class Currency extends LitElement {
     }));
   }
 
+  private updateCurrency(e: CustomEvent) {
+    this.currency = e.detail.currency;
+  }
+
   render() {
     return html`
       ${this.renderButton()}
@@ -99,14 +108,12 @@ class Currency extends LitElement {
   }
 
   private renderButton() {
-    const current = Currencies.find(currency => currency.id === this.currency);
     const label = 'Change currency';
     return html`
       <button
         aria-controls="menu"
         aria-expanded="${this.open}"
         aria-haspopup="true"
-        id="button"
         type="button"
         @click="${this.toggleMenu}">${label}</button>
     `;
@@ -114,32 +121,32 @@ class Currency extends LitElement {
 
   private renderMenu() {
     return html`
-      <form
-        aria-hidden="${!this.open}"
-        id="menu" 
-        @change="${this.getCurrency}">
-        <ul
-          aria-labelledby="button"
-          role="menu">
-        ${Currencies.map((currency) => {
-          const {example, id, label, symbol} = currency;
-          return html`
-            <li>
-              <label ?data-checked="${id === this.currency}">
-                <input
-                  aria-label="${label}"
-                  ?checked="${id === this.currency}"
-                  name="currency"
-                  tabindex="${this.open ? '0' : '-1'}"
-                  type="radio"
-                  value="${id}">
-                <span class="symbol">${symbol}</span>
-                <span class="example">${example}</span>
-              </label>
-            </li>`
-        })}
-        </ul>
-      </form>
+      <dialog
+        ?data-closing="${this.closing}"
+        ?data-flip="${this.flip}"
+        id="menu">
+        <form @change="${this.getCurrency}">
+          <ul>
+          ${Currencies.map((currency) => {
+            const {example, id, label, symbol} = currency;
+            return html`
+              <li>
+                <label ?data-checked="${id === this.currency}">
+                  <input
+                    aria-label="${label}"
+                    ?checked="${id === this.currency}"
+                    name="currency"
+                    tabindex="${this.open ? '0' : '-1'}"
+                    type="radio"
+                    value="${id}">
+                  <span class="symbol">${symbol}</span>
+                  <span class="example">${example}</span>
+                </label>
+              </li>`
+          })}
+          </ul>
+        </form>
+      </dialog>
     `;
   }
 }

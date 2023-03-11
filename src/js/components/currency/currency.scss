@@ -76,20 +76,31 @@ svg {
 }
 
 // Currency menu.
-form {
+dialog {
   background-color: var(--surface3);
+  block-size: 0;
+  border: 0;
   border-radius: .5rem;
+  display: block;
   inline-size: 12rem;
-  inset-block: 3rem auto;
-  position: absolute;
-  transform: translateY(.25rem);
-  transition: utils.transition(opacity, transform);
+  overflow: hidden;
+  padding: 0;
+  transition: utils.transition(opacity);
 }
 
-form[aria-hidden='true'] {
+dialog[open] {
+  block-size: auto;
+  opacity: 1;
+  transform: translateY(const.$menu-spacing);
+}
+
+dialog,
+dialog[data-closing] {
   opacity: 0;
-  pointer-events: none;
-  transform: translateY(-.25rem);
+}
+
+dialog[data-flip] {
+  transform: translateY(calc(-100% - #{const.$button-size + const.$menu-spacing}));
 }
 
 // Currency options via list of radio buttons.
@@ -102,6 +113,7 @@ ul {
 label {
   align-items: center;
   block-size: 2.75rem;
+  color: var(--on-surface);
   cursor: pointer;
   display: flex;
   padding-inline: 0 1rem;

@@ -16,8 +16,10 @@ input {
   appearance: none;
   background: 0;
   border: 0;
+  color: inherit;
   margin: 0;
   outline: 0;
+  padding: 0;
 }
 
 button {
@@ -62,7 +64,6 @@ dialog {
   border: 0;
   border-radius: .5rem;
   display: block;
-  inline-size: 12rem;
   margin-block: .5rem 0;
   overflow: hidden;
   padding: 0;
@@ -80,7 +81,6 @@ dialog[data-closing] {
   opacity: 0;
 }
 
-// Currency options via list of radio buttons.
 ul {
   list-style: none;
   margin-block: .5rem;
@@ -93,7 +93,7 @@ label {
   color: var(--on-surface);
   cursor: pointer;
   display: flex;
-  padding-inline: 0 1rem;
+  padding-inline: 0 1.5rem;
 
   &:focus,
   &[data-checked] {
@@ -113,6 +113,10 @@ label {
   }
 }
 
+input {
+  inline-size: 0;
+}
+
 span {
   white-space: nowrap;
 }
@@ -126,4 +130,9 @@ span {
 
 .example {
   font-size: .9em;
+  opacity: .7;
+
+  [data-checked] & {
+    opacity: unset;
+  }
 }

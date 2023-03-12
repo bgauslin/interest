@@ -137,7 +137,12 @@ class Currency extends LitElement {
         <form @change="${this.getCurrency}">
           <ul>
           ${Currencies.map((currency) => {
-            const {example, id, label, symbol} = currency;
+            const {id, label, locale, symbol} = currency;
+            const example = new Intl.NumberFormat(locale, {
+              currency: id.toUpperCase(),
+              style: 'currency',
+            }).format(1234567.89);
+
             return html`
               <li>
                 <label ?data-checked="${id === this.currency}">

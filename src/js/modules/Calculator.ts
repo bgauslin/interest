@@ -14,11 +14,11 @@ export interface Sums {
 }
 
 export const Currencies = [
-  {id: 'usd', locale: 'en-US', symbol: '$', label: 'Dollars', example: '123,456.78'},
-  {id: 'eur', locale: 'de-DE', symbol: '€', label: 'Euros', example: '123.456,78'},
-  {id: 'gbp', locale: 'en-GB', symbol: '£', label: 'Pounds', example: '123,456.78'},
-  {id: 'jpy', locale: 'ja-JP', symbol: '¥', label: 'Yen', example: '123,456'},
-  {id: 'inr', locale: 'en-IN', symbol: '₹', label: 'Rupees', example: '1,23,456,78'},
+  {id: 'usd', locale: 'en-US', symbol: '$', label: 'Dollars'},
+  {id: 'eur', locale: 'de-DE', symbol: '€', label: 'Euros'},
+  {id: 'gbp', locale: 'en-GB', symbol: '£', label: 'Pounds'},
+  {id: 'jpy', locale: 'ja-JP', symbol: '¥', label: 'Yen'},
+  {id: 'inr', locale: 'en-IN', symbol: '₹', label: 'Rupees'},
 ];
 
 export const DEFAULT_CURRENCY = Currencies[0].id;

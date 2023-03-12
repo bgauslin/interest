@@ -18,6 +18,7 @@ interface InputAttributes {
 @customElement('app-values')
 class Values extends LitElement {
   @query('form') form: HTMLFormElement;
+
   @state() calculator: Calculator;
   @state() currency = DEFAULT_CURRENCY;
   @state() currencyEvent = 'updateCurrency';
@@ -135,7 +136,9 @@ class Values extends LitElement {
         ${this.total}
       </div>
 
-      <app-currency aria-hidden="${this.total === ''}"></app-currency>
+      <app-currency
+        aria-hidden="${this.total === ''}"
+        currency="${this.currency}"></app-currency>
     `;
   }
 }

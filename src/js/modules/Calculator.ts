@@ -15,9 +15,9 @@ export interface Sums {
 
 export const Currencies = [
   {id: 'usd', locale: 'en-US', symbol: '$', label: 'Dollars'},
-  {id: 'eur', locale: 'de-DE', symbol: '€', label: 'Euros'},
+  {id: 'eur', locale: 'en-GB', symbol: '€', label: 'Euros'},
   {id: 'gbp', locale: 'en-GB', symbol: '£', label: 'Pounds'},
-  {id: 'jpy', locale: 'ja-JP', symbol: '¥', label: 'Yen'},
+  {id: 'cny', locale: 'zh-CN', symbol: '¥', label: 'Yen'},
   {id: 'inr', locale: 'en-IN', symbol: '₹', label: 'Rupees'},
 ];
 

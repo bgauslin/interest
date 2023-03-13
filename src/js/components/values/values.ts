@@ -1,6 +1,8 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, query, state} from 'lit/decorators.js';
 import {Calculator, CompoundingValues, DEFAULT_CURRENCY} from '../../modules/Calculator';
+import {AppEvents} from '../../modules/CustomEvents';
+
 import shadowStyles from './values.scss';
 
 interface InputAttributes {
@@ -21,18 +23,18 @@ class Values extends LitElement {
 
   @state() calculator: Calculator;
   @state() currency = DEFAULT_CURRENCY;
-  @state() currencyEvent = 'updateCurrency';
   @state() currencyListener: EventListenerObject;
+  @state() total = '';
+  @state() values: CompoundingValues;
+  @state() valuesListener: EventListenerObject;
+
+  // TODO: Refactor (?)
   @state() fields: InputAttributes[] = [
     {inputmode: 'numeric', label: 'Principal', name: 'principal', pattern: '[0-9]+', value: ''},
     {inputmode: 'numeric', label: 'Yearly addition', name: 'contribution', pattern: '[0-9]+', value: ''},
     {inputmode: 'decimal', label: 'Interest rate', name: 'rate', pattern: '[0-9]{0,2}[\\.]?[0-9]{1,2}', value: ''},
     {inputmode: 'numeric', label: 'Years to grow', name: 'periods', pattern: '[0-9]+', value: ''},
   ];
-  @state() total = '';
-  @state() values: CompoundingValues;
-  @state() valuesEvent = 'updateValues';
-  @state() valuesListener: EventListenerObject;
 
   static styles = css`${shadowStyles}`;
 
@@ -45,14 +47,14 @@ class Values extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener(this.currencyEvent, this.currencyListener);
-    this.addEventListener(this.valuesEvent, this.valuesListener);
+    this.addEventListener(AppEvents.CURRENCY, this.currencyListener);
+    this.addEventListener(AppEvents.VALUES, this.valuesListener);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.removeEventListener(this.currencyEvent, this.currencyListener);
-    this.removeEventListener(this.valuesEvent, this.valuesListener);
+    this.removeEventListener(AppEvents.CURRENCY, this.currencyListener);
+    this.removeEventListener(AppEvents.VALUES, this.valuesListener);
   }
 
   private updateCurrency(e: CustomEvent) {
@@ -97,7 +99,7 @@ class Values extends LitElement {
       return;
     }
 
-    this.dispatchEvent(new CustomEvent(this.valuesEvent, {
+    this.dispatchEvent(new CustomEvent(AppEvents.VALUES, {
       bubbles: true,
       composed: true,
       detail: {

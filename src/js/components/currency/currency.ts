@@ -1,6 +1,7 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
 import {Currencies, DEFAULT_CURRENCY} from '../../modules/Calculator';
+import {AppEvents} from '../../modules/CustomEvents';
 
 import shadowStyles from './currency.scss';
 
@@ -19,7 +20,6 @@ class Currency extends LitElement {
   @state() clickListener: EventListenerObject;
   @state() closeMenuKeys: String[] = ['Escape', 'Space'];
   @state() closing: Boolean = false;
-  @state() currencyEvent = 'updateCurrency';
   @state() currencyListener: EventListenerObject;
   @state() keyListener: EventListenerObject;
   @state() open: Boolean = false;
@@ -88,7 +88,7 @@ class Currency extends LitElement {
   private getCurrency() {
     const formData = new FormData(this.form);
     this.currency = formData.get('currency').toString();
-    this.dispatchEvent(new CustomEvent(this.currencyEvent, {
+    this.dispatchEvent(new CustomEvent(AppEvents.CURRENCY, {
       bubbles: true,
       composed: true,
       detail: {

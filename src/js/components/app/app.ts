@@ -1,8 +1,12 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, state, query} from 'lit/decorators.js';
 import {CompoundingValues, DEFAULT_CURRENCY} from '../../modules/Calculator';
+import {AppEvents} from '../../modules/CustomEvents';
 
 import shadowStyles from './app.scss';
+
+const APP_TITLE = 'Compound Interest Calculator';
+const STORAGE_ITEM = 'interest';
 
 /**
  * Web component that sends/receives custom event data to/from custom elements.
@@ -11,13 +15,10 @@ import shadowStyles from './app.scss';
 class App extends LitElement {
   @query('app-table') table: HTMLElement;
   @query('app-values') userValues: HTMLElement;
-  @state() appTitle = 'Compound Interest Calculator';
+  
   @state() currency = DEFAULT_CURRENCY;
-  @state() currencyEvent = 'updateCurrency';
   @state() currencyListener: EventListenerObject;
-  @state() storageItem = 'interest';
   @state() values: CompoundingValues;
-  @state() valuesEvent = 'updateValues';
   @state() valuesListener: EventListenerObject;
 
   static styles = css`${shadowStyles}`;
@@ -31,14 +32,14 @@ class App extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.getLocalStorage();
-    this.addEventListener(this.currencyEvent, this.currencyListener);
-    this.addEventListener(this.valuesEvent, this.valuesListener);
+    this.addEventListener(AppEvents.CURRENCY, this.currencyListener);
+    this.addEventListener(AppEvents.VALUES, this.valuesListener);
   }
 
   disconnectedCallback() { 
     super.disconnectedCallback();
-    this.removeEventListener(this.currencyEvent, this.currencyListener);
-    this.removeEventListener(this.valuesEvent, this.valuesListener);
+    this.removeEventListener(AppEvents.CURRENCY, this.currencyListener);
+    this.removeEventListener(AppEvents.VALUES, this.valuesListener);
   }
 
   private updateCurrency(e: CustomEvent) {
@@ -48,7 +49,7 @@ class App extends LitElement {
   }
 
   private dispatchCurrency() {
-    const updateCurrency = new CustomEvent(this.currencyEvent, {
+    const updateCurrency = new CustomEvent(AppEvents.CURRENCY, {
       detail: {
         currency: this.currency,
       }
@@ -64,7 +65,7 @@ class App extends LitElement {
   }
 
   private dispatchValues() {
-    const updateValues = new CustomEvent(this.valuesEvent, {
+    const updateValues = new CustomEvent(AppEvents.VALUES, {
       detail: {
         values: this.values,
       }
@@ -79,12 +80,12 @@ class App extends LitElement {
         currency: this.currency,
         values: this.values,
       };
-      localStorage.setItem(this.storageItem, JSON.stringify(settings));
+      localStorage.setItem(STORAGE_ITEM, JSON.stringify(settings));
     }
   }
 
   private async getLocalStorage() {
-    const storage = JSON.parse(localStorage.getItem(this.storageItem));
+    const storage = JSON.parse(localStorage.getItem(STORAGE_ITEM));
     if (!storage) {
       return;
     }
@@ -101,10 +102,8 @@ class App extends LitElement {
 
   render() {
     return html`
-      <h1>${this.appTitle}</h1>
-
+      <h1>${APP_TITLE}</h1>
       <app-values></app-values>
-      
       <app-drawer aria-hidden="${!this.values}">
         <app-table></app-table>
       </app-drawer>

@@ -1,6 +1,8 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
 import {Calculator, CompoundingValues, DEFAULT_CURRENCY, Sums} from '../../modules/Calculator';
+import {AppEvents} from '../../modules/CustomEvents';
+
 import shadowStyles from './table.scss';
 
 /**
@@ -10,11 +12,9 @@ import shadowStyles from './table.scss';
 class TableWidget extends LitElement {
   @state() calculator: Calculator;
   @state() currency = DEFAULT_CURRENCY;
-  @state() currencyEvent = 'updateCurrency';
   @state() currencyListener: EventListenerObject;
   @state() tableData: Sums[] = [];
   @state() values: CompoundingValues;
-  @state() valuesEvent = 'updateValues';
   @state() valuesListener: EventListenerObject;
 
   static styles = css`${shadowStyles}`;
@@ -28,14 +28,14 @@ class TableWidget extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener(this.currencyEvent, this.currencyListener);
-    this.addEventListener(this.valuesEvent, this.valuesListener);
+    this.addEventListener(AppEvents.CURRENCY, this.currencyListener);
+    this.addEventListener(AppEvents.VALUES, this.valuesListener);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.removeEventListener(this.currencyEvent, this.currencyListener);
-    this.removeEventListener(this.valuesEvent, this.valuesListener);
+    this.removeEventListener(AppEvents.CURRENCY, this.currencyListener);
+    this.removeEventListener(AppEvents.VALUES, this.valuesListener);
   }
 
   private updateCurrency(e: CustomEvent) {

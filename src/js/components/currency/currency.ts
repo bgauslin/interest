@@ -1,7 +1,7 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
 import {Currencies, DEFAULT_CURRENCY} from '../../modules/Calculator';
-import {AppEvents} from '../../modules/CustomEvents';
+import {AppEvents} from '../../modules/shared';
 
 import shadowStyles from './currency.scss';
 
@@ -10,18 +10,16 @@ import shadowStyles from './currency.scss';
  */
 @customElement('app-currency')
 class Currency extends LitElement {
+  private clickListener: EventListenerObject;
+  private keyListener: EventListenerObject;
+
   @property({reflect: true}) currency = DEFAULT_CURRENCY;
 
-  @query('button') button: HTMLButtonElement;
   @query('form :checked') checked: HTMLInputElement;
   @query('dialog') dialog: HTMLDialogElement;
   @query('form') form: HTMLFormElement;
 
-  @state() clickListener: EventListenerObject;
-  @state() closeMenuKeys: String[] = ['Escape', 'Space'];
   @state() closing: Boolean = false;
-  @state() currencyListener: EventListenerObject;
-  @state() keyListener: EventListenerObject;
   @state() open: Boolean = false;
   @state() symbol = '';
 
@@ -29,7 +27,6 @@ class Currency extends LitElement {
 
   constructor() {
     super();
-    this.currencyListener = this.updateCurrency.bind(this);
     this.clickListener = this.handleClick.bind(this);
     this.keyListener = this.handleKey.bind(this);
   }
@@ -95,10 +92,6 @@ class Currency extends LitElement {
         currency: this.currency,
       },
     }));
-  }
-
-  private updateCurrency(e: CustomEvent) {
-    this.currency = e.detail.currency;
   }
 
   private updateSymbol() {

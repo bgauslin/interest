@@ -1,7 +1,7 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, query, state} from 'lit/decorators.js';
 import {Calculator, CompoundingValues, DEFAULT_CURRENCY} from '../../modules/Calculator';
-import {AppEvents} from '../../modules/CustomEvents';
+import {AppEvents} from '../../modules/shared';
 
 import shadowStyles from './values.scss';
 
@@ -19,28 +19,26 @@ interface InputAttributes {
  */
 @customElement('app-values')
 class Values extends LitElement {
+  private calculator = new Calculator();
+  private currencyListener: EventListenerObject;
+  private valuesListener: EventListenerObject;
+
   @query('form') form: HTMLFormElement;
 
-  @state() calculator: Calculator;
   @state() currency = DEFAULT_CURRENCY;
-  @state() currencyListener: EventListenerObject;
-  @state() total = '';
-  @state() values: CompoundingValues;
-  @state() valuesListener: EventListenerObject;
-
-  // TODO: Refactor (?)
   @state() fields: InputAttributes[] = [
     {inputmode: 'numeric', label: 'Principal', name: 'principal', pattern: '[0-9]+', value: ''},
     {inputmode: 'numeric', label: 'Yearly addition', name: 'contribution', pattern: '[0-9]+', value: ''},
     {inputmode: 'decimal', label: 'Interest rate', name: 'rate', pattern: '[0-9]{0,2}[\\.]?[0-9]{1,2}', value: ''},
     {inputmode: 'numeric', label: 'Years to grow', name: 'periods', pattern: '[0-9]+', value: ''},
   ];
+  @state() total = '';
+  @state() values: CompoundingValues;
 
   static styles = css`${shadowStyles}`;
 
   constructor() {
     super();
-    this.calculator = new Calculator();
     this.currencyListener = this.updateCurrency.bind(this);
     this.valuesListener = this.updateValues.bind(this);
   }

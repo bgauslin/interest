@@ -99,10 +99,10 @@ input {
   scrollbar-width: none;
   text-align: center;
   transition: utils.transition(opacity);
-}
 
-.total::-webkit-scrollbar {
-  display: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 [aria-hidden='true'] {

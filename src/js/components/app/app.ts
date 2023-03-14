@@ -1,11 +1,10 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, query, state} from 'lit/decorators.js';
-import {CompoundingValues, DEFAULT_CURRENCY} from '../../modules/Calculator';
+import {Calculator, CompoundingValues, DEFAULT_CURRENCY, Sums} from '../../modules/Calculator';
 import {AppEvents} from '../../modules/shared';
 
 import shadowStyles from './app.scss';
 
-const APP_TITLE = 'Compound Interest Calculator';
 const STORAGE_ITEM = 'interest';
 
 /**
@@ -13,10 +12,10 @@ const STORAGE_ITEM = 'interest';
  */
 @customElement('interest-app')
 class App extends LitElement {
+  private calculator= new Calculator();
   private currencyListener: EventListenerObject;
   private valuesListener: EventListenerObject;
 
-  @query('app-table') table: HTMLElement;
   @query('app-values') userValues: HTMLElement;
   
   @state() currency = DEFAULT_CURRENCY;
@@ -55,7 +54,6 @@ class App extends LitElement {
         currency: this.currency,
       }
     });
-    this.table.dispatchEvent(updateCurrency);
     this.userValues.dispatchEvent(updateCurrency);
   }
 
@@ -71,7 +69,6 @@ class App extends LitElement {
         values: this.values,
       }
     });
-    this.table.dispatchEvent(updateValues);
     this.userValues.dispatchEvent(updateValues);
   }
 
@@ -103,11 +100,48 @@ class App extends LitElement {
 
   render() {
     return html`
-      <h1>${APP_TITLE}</h1>
       <app-values></app-values>
       <app-drawer aria-hidden="${!this.values}">
-        <app-table></app-table>
+        ${this.renderTable()}
       </app-drawer>
+    `;
+  }
+
+  renderTable() {
+    const tableData: Sums[] =
+        this.calculator.compound(this.values, this.currency);
+
+    return html`
+      <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <th class="year">Year</th>
+              <th class="deposits">Deposits</th>
+              <th class="interest" data-optional>Interest</th>
+              <th class="balance">Balance</th>
+              <th class="growth" data-optional>Growth</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${tableData.map((row) => {
+              const {balance, deposits, growth, interest, year} = row;
+              return html`
+                <tr>
+                  <td class="year">${year}</td>
+                  <td class="deposits">${deposits}</td>
+                  <td class="interest" data-optional>${interest}</td>
+                  <td class="balance">${balance}</td>
+                  <td class="growth" data-optional>${growth}</td>
+                </tr>
+              `
+            })}
+          </tbody>
+        </table>
+      </div>
+      <p class="footnote">
+        Rotate screen to view <span>Interest</span> and <span>Growth</span> columns.
+      </p>
     `;
   }
 }

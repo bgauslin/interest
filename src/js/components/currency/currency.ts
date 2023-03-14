@@ -21,7 +21,6 @@ class Currency extends LitElement {
 
   @state() closing: Boolean = false;
   @state() open: Boolean = false;
-  @state() symbol = '';
 
   static styles = css`${shadowStyles}`;
 
@@ -41,10 +40,6 @@ class Currency extends LitElement {
     super.disconnectedCallback();
     document.removeEventListener('click', this.clickListener);
     document.removeEventListener('keydown', this.keyListener);
-  }
-
-  updated() {
-    this.updateSymbol();
   }
 
   private handleClick(e: Event) {
@@ -82,9 +77,10 @@ class Currency extends LitElement {
     }, {once: true});
   }
 
-  private getCurrency() {
+  private updateCurrency() {
     const formData = new FormData(this.form);
     this.currency = formData.get('currency').toString();
+
     this.dispatchEvent(new CustomEvent(AppEvents.CURRENCY, {
       bubbles: true,
       composed: true,
@@ -92,11 +88,6 @@ class Currency extends LitElement {
         currency: this.currency,
       },
     }));
-  }
-
-  private updateSymbol() {
-    const currency = Currencies.find(c => c.id === this.currency);
-    this.symbol = currency.symbol;
   }
 
   render() {
@@ -108,6 +99,8 @@ class Currency extends LitElement {
 
   private renderButton() {
     const label = 'Change currency';
+    const currency = Currencies.find(c => c.id === this.currency);
+    const symbol = currency.symbol;
     return html`
       <button
         aria-controls="menu"
@@ -117,7 +110,7 @@ class Currency extends LitElement {
         title="${label}"
         type="button"
         @click="${this.toggleMenu}">
-          ${this.symbol}
+          ${symbol}
         </button>
     `;
   }
@@ -127,7 +120,7 @@ class Currency extends LitElement {
       <dialog
         ?data-closing="${this.closing}"
         id="menu">
-        <form @change="${this.getCurrency}">
+        <form @change="${this.updateCurrency}">
           <ul>
           ${Currencies.map((currency) => {
             const {id, label, locale, symbol} = currency;

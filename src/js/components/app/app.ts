@@ -1,7 +1,7 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
 import {when} from 'lit/directives/when.js';
-import {Calculator, CompoundingValues, DEFAULT_CURRENCY, Sums} from '../../modules/Calculator';
+import {Calculator, CompoundingValues, Sums} from '../../modules/Calculator';
 import {AppEvents} from '../../modules/shared';
 
 import shadowStyles from './app.scss';
@@ -11,11 +11,11 @@ import shadowStyles from './app.scss';
  */
 @customElement('interest-app')
 class App extends LitElement {
-  private calculator= new Calculator();
+  private calculator = new Calculator();
   private currencyListener: EventListenerObject;
   private valuesListener: EventListenerObject;
   
-  @state() currency = DEFAULT_CURRENCY;
+  @state() currency: string;
   @state() values: CompoundingValues;
 
   static styles = css`${shadowStyles}`;

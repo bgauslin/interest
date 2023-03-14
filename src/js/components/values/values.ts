@@ -13,6 +13,8 @@ interface InputAttributes {
   value: string,
 }
 
+const STORAGE_ITEM = 'interest';
+
 /**
  * Custom element that renders input fields and calculates compound interest
  * total based on user-provided values.
@@ -21,7 +23,6 @@ interface InputAttributes {
 class Values extends LitElement {
   private calculator = new Calculator();
   private currencyListener: EventListenerObject;
-  private valuesListener: EventListenerObject;
 
   @query('form') form: HTMLFormElement;
 
@@ -40,42 +41,70 @@ class Values extends LitElement {
   constructor() {
     super();
     this.currencyListener = this.updateCurrency.bind(this);
-    this.valuesListener = this.updateValues.bind(this);
   }
 
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener(AppEvents.CURRENCY, this.currencyListener);
-    this.addEventListener(AppEvents.VALUES, this.valuesListener);
+    this.getLocalStorage();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.removeEventListener(AppEvents.CURRENCY, this.currencyListener);
-    this.removeEventListener(AppEvents.VALUES, this.valuesListener);
+  }
+
+  private async getLocalStorage() {
+    const storage = JSON.parse(localStorage.getItem(STORAGE_ITEM));
+    
+    console.log('values.storage', storage);
+
+    if (!storage) {
+      return;
+    }
+
+    const {currency, values} = storage;
+    this.currency = currency;
+    this.values = values;
+
+    this.requestUpdate();
+    await this.updateComplete;
+
+    if (this.values) {
+      this.dispatchValues();
+    }    
+  }
+
+  private setLocalStorage() {
+    console.log('values.setLocalStorage()');
+
+    if (this.values) {
+      const settings = {
+        currency: this.currency,
+        values: this.values,
+      };
+      localStorage.setItem(STORAGE_ITEM, JSON.stringify(settings));
+    }
   }
 
   private updateCurrency(e: CustomEvent) {
+    console.log('values.updateCurrency()');
+
     this.currency = e.detail.currency;
     this.updateTotal();
   }
 
-  private updateValues(e: CustomEvent) {
-    this.values = e.detail.values;
-    for (const [name, value] of Object.entries(this.values)) {
-      const field = this.fields.find(input => input.name === name);
-      field.value = value;
-    }
-    this.updateTotal();
-  }
-
   private updateTotal() {
+    console.log('values.updateTotal()');
+
     if (this.values) {
       this.total = this.calculator.total(this.values, this.currency);
     }
   }
 
   private getValues() {
+    console.log('values.getValues()');
+
     if (this.form.querySelectorAll(':invalid').length) {
       return;
     }
@@ -88,11 +117,14 @@ class Values extends LitElement {
       rate: Number(formData.get('rate')),
     };
 
-    this.dispatchValues();
     this.updateTotal();
+    this.dispatchValues();
+    this.setLocalStorage();
   }
 
   private dispatchValues() {
+    console.log('values.dispatchValues()');
+    
     if (!this.values) {
       return;
     }

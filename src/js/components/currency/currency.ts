@@ -1,4 +1,4 @@
-import {LitElement, css, html} from 'lit';
+import {LitElement, PropertyValues, css, html} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
 import {Currencies, DEFAULT_CURRENCY} from '../../modules/Calculator';
 import {AppEvents} from '../../modules/shared';
@@ -14,11 +14,8 @@ class Currency extends LitElement {
   private keyListener: EventListenerObject;
 
   @property({reflect: true}) currency = DEFAULT_CURRENCY;
-
-  @query('form :checked') checked: HTMLInputElement;
+  @query(':checked') checked: HTMLInputElement;
   @query('dialog') dialog: HTMLDialogElement;
-  @query('form') form: HTMLFormElement;
-
   @state() closing: Boolean = false;
   @state() open: Boolean = false;
 
@@ -77,20 +74,25 @@ class Currency extends LitElement {
     }, {once: true});
   }
 
-  private updateCurrency() {
-    const formData = new FormData(this.form);
-    this.currency = formData.get('currency').toString();
+  protected updated(changed: PropertyValues<this>) {
+    for (const [key, value] of changed.entries()) {
+      if (key !== 'currency') {
+        return;
+      }
 
-    this.dispatchEvent(new CustomEvent(AppEvents.CURRENCY, {
-      bubbles: true,
-      composed: true,
-      detail: {
-        currency: this.currency,
-      },
-    }));
+      if (value) {
+        this.dispatchEvent(new CustomEvent(AppEvents.CURRENCY, {
+          bubbles: true,
+          composed: true,
+          detail: {
+            currency: this.currency,
+          },
+        }));
+      }
+    }
   }
 
-  render() {
+  protected render() {
     return html`
       ${this.renderButton()}
       ${this.renderMenu()}
@@ -119,33 +121,32 @@ class Currency extends LitElement {
     return html`
       <dialog
         ?data-closing="${this.closing}"
-        id="menu">
-        <form @change="${this.updateCurrency}">
-          <ul>
-          ${Currencies.map((currency) => {
-            const {id, label, locale, symbol} = currency;
-            const example = new Intl.NumberFormat(locale, {
-              currency: id.toUpperCase(),
-              style: 'currency',
-            }).format(1234567.89);
+        id="menu">        
+        <ul>
+        ${Currencies.map((currency) => {
+          const {id, label, locale, symbol} = currency;
+          const example = new Intl.NumberFormat(locale, {
+            currency: id.toUpperCase(),
+            style: 'currency',
+          }).format(1234567.89);
 
-            return html`
-              <li>
-                <label ?data-checked="${id === this.currency}">
-                  <input
-                    aria-label="${label}"
-                    ?checked="${id === this.currency}"
-                    name="currency"
-                    tabindex="${this.open ? '0' : '-1'}"
-                    type="radio"
-                    value="${id}">
-                  <span class="symbol">${symbol}</span>
-                  <span class="example">${example}</span>
-                </label>
-              </li>`
-          })}
-          </ul>
-        </form>
+          return html`
+            <li>
+              <label ?data-checked="${id === this.currency}">
+                <input
+                  aria-label="${label}"
+                  ?checked="${id === this.currency}"
+                  name="currency"
+                  tabindex="${this.open ? '0' : '-1'}"
+                  type="radio"
+                  value="${id}"
+                  @click="${() => this.currency = id}">
+                <span class="symbol">${symbol}</span>
+                <span class="example">${example}</span>
+              </label>
+            </li>`
+        })}
+        </ul>
       </dialog>
     `;
   }

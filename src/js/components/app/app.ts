@@ -1,6 +1,5 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
-import {when} from 'lit/directives/when.js';
 import {Calculator, CompoundingValues, Sums} from '../../modules/Calculator';
 import {AppEvents} from '../../modules/shared';
 
@@ -50,14 +49,16 @@ class App extends LitElement {
     return html`
       <app-values></app-values>
       <app-drawer aria-hidden="${!this.values}">
-        ${when(this.values && this.currency, () => {
-          return html`${this.renderTable()}`;
-        })}
+        ${this.renderTable()}
       </app-drawer>
     `;
   }
 
   renderTable() {
+    if (!this.values || !this.currency) {
+      return;
+    }
+
     const tableData: Sums[] =
         this.calculator.compound(this.values, this.currency);
 

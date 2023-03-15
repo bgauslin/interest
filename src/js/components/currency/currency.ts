@@ -111,9 +111,7 @@ class Currency extends LitElement {
         aria-label="${label}"
         title="${label}"
         type="button"
-        @click="${this.toggleMenu}">
-          ${symbol}
-        </button>
+        @click="${this.toggleMenu}">${symbol}</button>
     `;
   }
 

@@ -122,12 +122,7 @@ class Currency extends LitElement {
         id="menu">        
         <ul>
         ${Currencies.map((currency) => {
-          const {id, label, locale, symbol} = currency;
-          const example = new Intl.NumberFormat(locale, {
-            currency: id.toUpperCase(),
-            style: 'currency',
-          }).format(1234567.89);
-
+          const {id, label, symbol} = currency;
           return html`
             <li>
               <label ?data-checked="${id === this.currency}">
@@ -140,7 +135,7 @@ class Currency extends LitElement {
                   value="${id}"
                   @click="${() => this.currency = id}">
                 <span class="symbol">${symbol}</span>
-                <span class="example">${example}</span>
+                <span>${label}</span>
               </label>
             </li>`
         })}

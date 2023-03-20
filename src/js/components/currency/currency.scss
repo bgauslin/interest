@@ -29,7 +29,7 @@ button {
   border-radius: math.div(const.$button-size, 2);
   cursor: pointer;
   display: grid;
-  font-size: 1.25em;
+  font-size: 1.5rem;
   inline-size: const.$button-size;
   outline: 0;
   place-items: center;
@@ -122,13 +122,4 @@ span {
   font-size: 1.5rem;
   inline-size: 2.5rem;
   place-content: center;
-}
-
-.example {
-  font-size: .9em;
-  opacity: .7;
-
-  [data-checked] & {
-    opacity: unset;
-  }
 }

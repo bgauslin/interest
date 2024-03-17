@@ -1,15 +1,3 @@
-// =============================================================================
-// Breakpoints via content-based min/max values.
-$gap-max: 3rem;
-$gap-min: .75rem;
-$table-min: 37rem;
-$values-max: 34rem;
-$values-min: 24rem;
-
-$breakpoint-small: '(min-width: #{$values-max + ($gap-min * 2)})';
-$breakpoint-medium: '(min-width: #{$values-min + $table-min + ($gap-max * 3)})';
-// =============================================================================
-  
 :root {
   // Grays via Apple HIG.
   // https://developer.apple.com/design/human-interface-guidelines/foundations/color#specifications
@@ -64,8 +52,9 @@ $breakpoint-medium: '(min-width: #{$values-min + $table-min + ($gap-max * 3)})';
   --outline-size: .1875rem;
   --table-optional-display: none;
 
-  @media #{$breakpoint-small} {
-    --app-gap: clamp(.75rem, .75rem + 1vw, 3rem);
+  // Small breakpoint.
+  @media (min-width: 40rem) {
+    --app-gap: clamp(1rem, 1rem + 1vw, 2rem);
     --app-padding-block: var(--app-gap) 0;
     --app-padding-inline: var(--app-gap);
     --body-fill: var(--fill-0);
@@ -76,14 +65,14 @@ $breakpoint-medium: '(min-width: #{$values-min + $table-min + ($gap-max * 3)})';
     --values-list-grid: auto-flow / 1fr 1fr;
   }
 
+  // Medium breakpoint.
   // [1] Always show the drawer on large screens.
   // [2] Always hide the button on large screens.
-  @media #{$breakpoint-medium} {
-    --app-grid: 'values drawer' 1fr 'currency drawer' / #{$values-min} 1fr;
+  @media (min-width: 50rem) {
+    --app-grid: 'values drawer' 1fr 'currency drawer' / auto 1fr;
     --app-padding-block: var(--app-gap);
     --drawer-block-size: auto; // [1]
     --drawer-button-display: none; // [2]
-
     --values-inset-block: var(--app-gap) auto;
     --values-list-grid: auto-flow / 1fr;
     --values-position: sticky;

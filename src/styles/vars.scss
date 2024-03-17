@@ -83,15 +83,14 @@ $breakpoint-medium: '(min-width: #{$values-min + $table-min + ($gap-max * 3)})';
     --values-place-self: start center;
   }
 
-  // [1] Always show the drawer on large screens. '!important' is required to
-  // override inline styles set via JS.
+  // [1] Always show the drawer on large screens.
   // [2] Always hide the button on large screens.
   @media #{$breakpoint-medium} {
     --app-grid: 'values drawer' 1fr 'currency drawer' / #{$values-min} 1fr;
     --app-padding-block: var(--app-gap);
-    --drawer-block-size: auto !important; // [1]
+    --drawer-block-size: auto; // [1]
     --drawer-button-display: none; // [2]
-    --drawer-margin-block: var(--app-gap) auto;
+    --drawer-margin-block: 0;
     --values-inset-block: var(--app-gap) auto;
     --values-item-even-place-self: center;
     --values-item-odd-place-self: center;

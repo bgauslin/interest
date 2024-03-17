@@ -45,7 +45,7 @@ class Drawer extends LitElement {
 
   render() {
     const label = this.open ? 'Hide table' : 'Show table';
-    const style = this.drawerSize ? `block-size: ${this.drawerSize}` : '';
+    const style = this.drawerSize ? `--block-size: ${this.drawerSize}` : '';
     return html`
       <button
         aria-controls="drawer"

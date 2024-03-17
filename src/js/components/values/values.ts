@@ -1,11 +1,9 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, query, state} from 'lit/decorators.js';
 import {Calculator, CompoundingValues, DEFAULT_CURRENCY} from '../../modules/Calculator';
-import {AppEvents} from '../../modules/shared';
+import {AppEvents, STORAGE_ITEM} from '../../modules/shared';
 
 import shadowStyles from './values.scss';
-
-const STORAGE_ITEM = 'interest';
 
 /**
  * Custom element that renders input fields and calculates compound interest
@@ -49,7 +47,6 @@ class Values extends LitElement {
   private updateCurrency(e: CustomEvent) {
     this.currency = e.detail.currency;
     this.updateTotal();
-    this.setLocalStorage();
   }
 
   private updateTotal() {
@@ -72,7 +69,6 @@ class Values extends LitElement {
     this.updateTotal();
     this.dispatchCurrency();
     this.dispatchValues();
-    this.setLocalStorage();
   }
 
   private getLocalStorage() {
@@ -97,20 +93,12 @@ class Values extends LitElement {
     }
   }
 
-  private setLocalStorage() {
-    localStorage.setItem(STORAGE_ITEM, JSON.stringify({
-      currency: this.currency,
-      values: this.values,
-    }));
-  }
-
   private dispatchCurrency() {
     this.dispatchEvent(new CustomEvent(AppEvents.CURRENCY, {
       bubbles: true,
       composed: true,
       detail: {
         currency: this.currency,
-        notes: 'from values widget',
       },
     }));
   }

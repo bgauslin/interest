@@ -1,7 +1,7 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
 import {Calculator, CompoundingValues, Sums} from '../../modules/Calculator';
-import {AppEvents} from '../../modules/shared';
+import {AppEvents, STORAGE_ITEM} from '../../modules/shared';
 
 import shadowStyles from './app.scss';
 
@@ -39,10 +39,23 @@ class App extends LitElement {
 
   private updateCurrency(e: CustomEvent) {
     this.currency = e.detail.currency;
+    this.setLocalStorage();
   }
 
   private updateValues(e: CustomEvent) {
     this.values = e.detail.values;
+    this.setLocalStorage();
+  }
+
+  private setLocalStorage() {
+    if (!this.currency || !this.values) {
+      return;
+    }
+
+    localStorage.setItem(STORAGE_ITEM, JSON.stringify({
+      currency: this.currency,
+      values: this.values,
+    }));
   }
 
   render() {

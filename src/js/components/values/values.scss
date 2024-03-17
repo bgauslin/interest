@@ -31,7 +31,7 @@ form {
   align-self: center;
   gap: 2rem 0;
   grid-area: values;
-  padding-inline: const.$card-padding;
+  padding-inline: var(--card-padding);
 }
 
 [role='list'] {
@@ -94,7 +94,7 @@ input {
   line-height: 1;
   max-inline-size: 100%;
   overflow: scroll hidden;
-  padding-inline: const.$card-padding;
+  padding-inline: var(--card-padding);
   place-self: center;
   scrollbar-width: none;
   text-align: center;
@@ -120,7 +120,7 @@ app-currency {
 @media #{map.get(const.$breakpoint, 'small')} {
   :host {
     background-color: var(--fill-0);
-    border-radius: const.$card-radius;
+    border-radius: var(--card-radius);
   }
 
   [role='list'] {

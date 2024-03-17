@@ -12,11 +12,11 @@
 
   @media #{map.get(const.$breakpoint, 'small')} {
     --app-grid: 1fr auto / 1fr;
-    --app-gap: clamp(.75rem + 1vw, 3rem);
+    --app-gap: clamp(.75rem, .75rem + 1vw, 3rem);
     --app-padding-block: var(--app-gap) 0;
     --app-padding-inline: var(--app-gap);
     --footnote-display: none;
-    --table-border-radius: #{const.$card-radius};
+    --table-border-radius: var(--card-radius);
     --table-optional-display: table-cell;
     --values-place-self: start center;
   }

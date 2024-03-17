@@ -24,13 +24,13 @@ input {
 
 button {
   background-color: var(--fill-2);
-  block-size: const.$button-size;
+  block-size: var(--button-size);
   border: const.$outline-size solid transparent;
-  border-radius: math.div(const.$button-size, 2);
+  border-radius: var(--button-size);
   cursor: pointer;
   display: grid;
   font-size: 1.5rem;
-  inline-size: const.$button-size;
+  inline-size: var(--button-size);
   outline: 0;
   place-items: center;
 
@@ -63,7 +63,7 @@ dialog {
   margin-block: .5rem 0;
   overflow: hidden;
   padding: 0;
-  transform: translateX(calc(-100% + const.$button-size));
+  transform: translateX(calc(-100% + var(--button-size)));
   transition: utils.transition(opacity);
 }
 

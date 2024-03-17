@@ -1,6 +1,5 @@
 @use 'sass:map';
 @use '../../../styles/const';
-@use '../../../styles/utils';
 
 :host {
   display: grid;
@@ -97,7 +96,7 @@ input {
   place-self: center;
   scrollbar-width: none;
   text-align: center;
-  transition: utils.transition(opacity);
+  transition: opacity var(--transition);
 
   &::-webkit-scrollbar {
     display: none;
@@ -113,7 +112,7 @@ app-currency {
   grid-area: widget;
   margin-inline: auto .75rem;
   place-self: center end;
-  transition: utils.transition(opacity);
+  transition: opacity var(--transition);
 }
 
 @media #{const.$breakpoint-small} {

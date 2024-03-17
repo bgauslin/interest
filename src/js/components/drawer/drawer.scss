@@ -1,6 +1,5 @@
 @use 'sass:map';
 @use '../../../styles/const';
-@use '../../../styles/utils';
 
 :host {
   display: grid;
@@ -43,7 +42,7 @@
   }
 
   @media (any-hover: hover) {
-    transition: utils.transition(background-color, border-color);
+    transition: background-color var(--transition), border-color var(--transition);
 
     &:hover {
       background-color: var(--fill-3);

@@ -1,5 +1,3 @@
-@use '../../../styles/utils';
-
 :host {
   position: relative;
 }
@@ -41,7 +39,7 @@ button {
   }
 
   @media (any-hover: hover) {
-    transition: utils.transition(background-color, color);
+    transition: background-color var(--transition), color var(--transition);
 
     &:hover,
     &[aria-expanded='true']:hover {
@@ -62,7 +60,7 @@ dialog {
   overflow: hidden;
   padding: 0;
   transform: translateX(calc(-100% + var(--button-size)));
-  transition: utils.transition(opacity);
+  transition: opacity var(--transition);
 }
 
 dialog[open] {
@@ -95,7 +93,7 @@ label {
   }
 
   @media (any-hover: hover) {
-    transition: utils.transition(background-color);
+    transition: background-color var(--transition);
 
     &:hover {
       background-color: var(--fill-1);

@@ -1,0 +1,33 @@
+@use 'const';
+
+@font-face {
+  font-display: swap;
+  font-family: 'Avenir Variable';
+  font-weight: 1 999;
+  src: url('https://assets.gauslin.com/fonts/AvenirNext-Variable.woff2') format('woff2');
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+  text-size-adjust: none;
+}
+
+body {
+  background-color: var(--fill-0);
+  display: grid;
+  margin: 0;
+  min-block-size: 100dvh;
+  touch-action: manipulation;
+
+  @media #{const.$breakpoint-small} {
+    background-color: var(--fill-1);
+  }
+}
+
+noscript {
+  place-self: center;
+}

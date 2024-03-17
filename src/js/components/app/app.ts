@@ -12,9 +12,11 @@ import shadowStyles from './app.scss';
 class App extends LitElement {
   private calculator = new Calculator();
   private currencyListener: EventListenerObject;
+  private drawerListener: EventListenerObject;
   private valuesListener: EventListenerObject;
   
   @state() currency: string;
+  @state() drawer: Boolean = false;
   @state() values: CompoundingValues;
 
   static styles = css`${shadowStyles}`;
@@ -22,27 +24,38 @@ class App extends LitElement {
   constructor() {
     super();
     this.currencyListener = this.updateCurrency.bind(this);
+    this.drawerListener = this.updateDrawer.bind(this);
     this.valuesListener = this.updateValues.bind(this);
   }
   
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener(AppEvents.CURRENCY, this.currencyListener);
+    this.addEventListener(AppEvents.DRAWER, this.drawerListener);
     this.addEventListener(AppEvents.VALUES, this.valuesListener);
   }
 
   disconnectedCallback() { 
     super.disconnectedCallback();
     this.removeEventListener(AppEvents.CURRENCY, this.currencyListener);
+    this.removeEventListener(AppEvents.DRAWER, this.drawerListener);
     this.removeEventListener(AppEvents.VALUES, this.valuesListener);
   }
 
-  private updateCurrency(e: CustomEvent) {
+  private async updateCurrency(e: CustomEvent) {
+    await this.updateComplete;
     this.currency = e.detail.currency;
     this.setLocalStorage();
   }
 
-  private updateValues(e: CustomEvent) {
+  private async updateDrawer(e: CustomEvent) {
+    await this.updateComplete;
+    this.drawer = e.detail.drawer;
+    this.setLocalStorage();
+  }
+
+  private async updateValues(e: CustomEvent) {
+    await this.updateComplete;
     this.values = e.detail.values;
     this.setLocalStorage();
   }
@@ -54,6 +67,7 @@ class App extends LitElement {
 
     localStorage.setItem(STORAGE_ITEM, JSON.stringify({
       currency: this.currency,
+      drawer: this.drawer,
       values: this.values,
     }));
   }

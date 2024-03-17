@@ -1,5 +1,6 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, query, state} from 'lit/decorators.js';
+import {AppEvents, STORAGE_ITEM} from '../../modules/shared';
 import shadowStyles from './drawer.scss';
 
 /**
@@ -15,6 +16,26 @@ class Drawer extends LitElement {
 
   static styles = css`${shadowStyles}`;
 
+  connectedCallback() {
+    super.connectedCallback();
+    this.getLocalStorage();
+    this.dispatchDrawerState();
+  }
+
+  private getLocalStorage() {
+    const storage = JSON.parse(localStorage.getItem(STORAGE_ITEM));
+    if (!storage) {
+      return;
+    }
+
+    if (storage.drawer) {
+      this.open = storage.drawer;
+      if (this.open) {
+        this.drawerSize = null;
+      }
+    }
+  }
+
   private toggleDrawer() {
     if (this.open) {
       this.closeDrawer();
@@ -22,6 +43,7 @@ class Drawer extends LitElement {
       this.openDrawer();
     }
     this.open = !this.open;
+    this.dispatchDrawerState();
   }
 
   private closeDrawer() {
@@ -41,6 +63,16 @@ class Drawer extends LitElement {
 
   private getDrawerSize(): string {
     return `${this.drawer.scrollHeight / 16}rem`;
+  }
+
+  private dispatchDrawerState() {
+    this.dispatchEvent(new CustomEvent(AppEvents.DRAWER, {
+      bubbles: true,
+      composed: true,
+      detail: {
+        drawer: this.open,
+      }
+    }));
   }
 
   render() {

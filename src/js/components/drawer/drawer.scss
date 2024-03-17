@@ -32,7 +32,7 @@
   place-self: start center;
   white-space: nowrap;
 
-  &:focus,
+  &:focus-visible,
   &:active {
     background-color: var(--fill-3);
     border-color: var(--outline);

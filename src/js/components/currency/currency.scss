@@ -30,7 +30,7 @@ button {
   outline: 0;
   place-items: center;
 
-  &:focus {
+  &:focus-visible {
     border-color: var(--outline);
   }
 
@@ -87,7 +87,7 @@ label {
   display: flex;
   padding-inline: .25rem 1.5rem;
 
-  &:focus,
+  &:focus-visible,
   &[data-checked] {
     background-color: var(--fill-3);
   }

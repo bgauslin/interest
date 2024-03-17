@@ -84,7 +84,7 @@ input {
   padding-inline: .5rem;
   text-align: end;
 
-  &:focus {
+  &:focus-visible {
     border-color: var(--outline);
   }
 

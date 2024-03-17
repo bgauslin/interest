@@ -30,7 +30,7 @@
   grid-area: button;
   justify-content: center;
   line-height: 1;
-  margin: const.$button-gap;
+  margin: clamp(2rem, 2rem + 1vw, 3rem);
   outline: 0;
   padding-block: 0;
   padding-inline: 1.5rem;

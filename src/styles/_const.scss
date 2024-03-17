@@ -13,10 +13,6 @@ $outline-size: .1875rem;
 $-gap-max: 3rem;
 $-gap-min: .75rem;
 
-// Computed dimensions.
-$button-gap: clamp(2rem, 2rem + 1vw, 3rem);
-$fluid-gap: clamp(#{$-gap-min}, #{$-gap-min} + 1vw, #{$-gap-max});
-
 // Breakpoints via content-based min/max values.
 $-table-max-size: 51rem;
 $-table-min-size: 37rem;

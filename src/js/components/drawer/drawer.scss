@@ -1,6 +1,3 @@
-@use 'sass:map';
-@use '../../../styles/const';
-
 :host {
   display: grid;
   grid: 'drawer' 'button' 1fr;

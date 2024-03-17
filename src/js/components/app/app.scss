@@ -1,4 +1,10 @@
-@use '../../../styles/const';
+// [1] How the app's initial maximum width is calculated:
+//
+//   24rem  values min
+// +  3rem  gap max
+// + 51rem  table max
+// -------
+// = 78rem
 
 :host {
   color: var(--text-color);
@@ -9,7 +15,7 @@
   grid: var(--app-grid);
   inline-size: 100%;
   margin-inline: auto;
-  max-inline-size: const.$app-max-size; // TODO: Remove/refactor.
+  max-inline-size: 78rem; // [1]
   min-block-size: 100dvh;
   padding-block: var(--app-padding-block);
   padding-inline: var(--app-padding-inline);

@@ -2,7 +2,7 @@
   background-color: var(--fill-1);
   border-radius: var(--values-border-radius);
   display: grid;
-  grid: 'widget' 4rem 'values' 'total' 6rem / 1fr;
+  grid: 'title widget' 4rem 'values values' 'total total' 6rem / 1fr auto;
   inline-size: 100%;
   margin-inline: env(safe-area-inset-left) env(safe-area-inset-right);
   max-inline-size: var(--values-max-inline-size);
@@ -22,6 +22,19 @@
 
 :is(form, ul) {
   grid: auto-flow / 1fr;
+}
+
+h1 {
+  color: var(--theme);
+  font-size: 1.1em;
+  grid-area: title;
+  margin-block: 0;
+  margin-inline: var(--card-padding);
+  min-inline-size: 0;
+  overflow: hidden;
+  place-self: center stretch;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 form {

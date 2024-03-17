@@ -115,6 +115,8 @@ class Values extends LitElement {
 
   render() {
     return html`
+      <h1>${document.title}</h1>
+
       <form @change="${this.updateValues}">
         <ul role="list">
           ${this.fields.map((field) => {

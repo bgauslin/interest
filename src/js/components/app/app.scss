@@ -31,7 +31,7 @@
 }
 
 :host {
-  color: var(--on-surface);
+  color: var(--text-color);
   display: grid;
   font-family: 'Avenir Variable', sans-serif;
   font-variation-settings: 'wght' 500;
@@ -72,7 +72,7 @@ app-drawer {
 }
 
 table {
-  background-color: var(--surface);
+  background-color: var(--fill-0);
   border-collapse: collapse;
   font-size: clamp(.8125rem, .8125rem + 1vw, 1rem);
   font-variant-numeric: tabular-nums;
@@ -107,7 +107,7 @@ table [data-optional] {
 
 // Footnote after the table.
 .footnote {
-  color: var(--on-surface-variant);
+  color: var(--text-color-variant);
   display: var(--footnote-display);
   font-size: .75rem;
   margin-block: 1rem 0;
@@ -116,5 +116,5 @@ table [data-optional] {
 }
 
 .footnote > span {
-  color: var(--on-surface);
+  color: var(--text-color);
 }

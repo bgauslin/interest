@@ -60,12 +60,12 @@ label[for='rate']::before {
 
 input {
   appearance: none;
-  background-color: var(--surface2);
+  background-color: var(--fill-2);
   block-size: const.$input-block-size;
-  border: const.$outline-size solid var(--surface);
+  border: const.$outline-size solid var(--fill-0);
   border-radius: const.$input-radius;
   box-sizing: content-box;
-  color: var(--on-surface);
+  color: var(--text-color);
   font-family: 'Avenir Variable', sans-serif;
   font-size: 1em;
   font-variation-settings: 'wght' 500;
@@ -83,7 +83,7 @@ input {
   }
 
   &:invalid {
-    color: var(--color-error);
+    color: var(--error);
   }
 }
 
@@ -119,7 +119,7 @@ app-currency {
 
 @media #{map.get(const.$breakpoint, 'small')} {
   :host {
-    background-color: var(--surface);
+    background-color: var(--fill-0);
     border-radius: const.$card-radius;
   }
 

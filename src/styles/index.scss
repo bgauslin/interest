@@ -10,8 +10,6 @@
 }
 
 :root {
-  --theme: rgb(0, 173, 69);
-
   // Grays via Apple HIG.
   // https://developer.apple.com/design/human-interface-guidelines/foundations/color#specifications
   --gray1: rgb(142, 142, 147);
@@ -21,18 +19,17 @@
   --gray5: rgb(229, 229, 234);
   --gray6: rgb(242, 242, 247);
 
-  --color-error: rgb(219, 77, 77);
-  --on-surface: rgb(28, 28, 30); // Gray6 Dark
-  --on-surface-variant: var(--gray1);
+  --error: rgb(219, 77, 77);
+  --fill-0: white;
+  --fill-1: var(--gray6);
+  --fill-2: var(--gray5);
+  --fill-3: var(--gray4);
   --outline: rgb(0, 122, 255);
-  --surface: white;
-  --surface1: var(--gray6);
-  --surface2: var(--gray5);
-  --surface3: var(--gray4);
+  --text-color: rgb(28, 28, 30); // Gray6 Dark
+  --text-color-variant: var(--gray1);
+  --theme: rgb(0, 173, 69);
 
   @media (prefers-color-scheme: dark) {
-    --theme: rgb(77, 198, 125);
-
     --gray1: rgb(142, 142, 147);
     --gray2: rgb(99, 99, 102);
     --gray3: rgb(72, 72, 74);
@@ -40,14 +37,15 @@
     --gray5: rgb(44, 44, 46);
     --gray6: rgb(28, 28, 30);
 
-    --color-error: rgb(230, 130, 130);
-    --on-surface: rgb(229, 229, 234); // Gray5 Light
-    --on-surface-variant: rgb(142, 142, 147); // Gray1 Light
+    --error: rgb(230, 130, 130);
+    --fill-0: var(--gray6);
+    --fill-1: var(--gray5);
+    --fill-2: var(--gray4);
+    --fill-3: var(--gray3);
     --outline: rgb(10, 132, 255);
-    --surface: var(--gray6);
-    --surface1: var(--gray5);
-    --surface2: var(--gray4);
-    --surface3: var(--gray3);
+    --text-color: rgb(229, 229, 234); // Gray5 Light
+    --text-color-variant: rgb(142, 142, 147); // Gray1 Light
+    --theme: rgb(77, 198, 125);
   }
 }
 
@@ -61,14 +59,14 @@ html {
 }
 
 body {
-  background-color: var(--surface);
+  background-color: var(--fill-0);
   display: grid;
   margin: 0;
   min-block-size: 100dvh;
   touch-action: manipulation;
 
   @media #{map.get(const.$breakpoint, 'small')} {
-    background-color: var(--surface1);
+    background-color: var(--fill-1);
   }
 }
 

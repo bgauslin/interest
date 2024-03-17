@@ -17,11 +17,11 @@
 :host > button {
   align-items: center;
   appearance: none;
-  background-color: var(--surface2);
+  background-color: var(--fill-2);
   block-size: const.$button-size;
-  border: const.$outline-size solid var(--surface2);
+  border: const.$outline-size solid var(--fill-2);
   border-radius: math.div(const.$button-size, 2);
-  color: var(--on-surface);
+  color: var(--text-color);
   cursor: pointer;
   display: flex;
   font-family: 'Avenir Variable', sans-serif;
@@ -39,7 +39,7 @@
 
   &:focus,
   &:active {
-    background-color: var(--surface3);
+    background-color: var(--fill-3);
     border-color: var(--outline);
   }
 
@@ -47,8 +47,8 @@
     transition: utils.transition(background-color, border-color);
 
     &:hover {
-      background-color: var(--surface3);
-      border-color: var(--surface3);
+      background-color: var(--fill-3);
+      border-color: var(--fill-3);
     }
   }
 }

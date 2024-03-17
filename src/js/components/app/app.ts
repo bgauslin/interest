@@ -112,7 +112,7 @@ class App extends LitElement {
                   <td class="growth" data-optional>${growth}</td>
                   <td class="balance">${balance}</td>
                 </tr>
-              `
+              `;
             })}
           </tbody>
         </table>

@@ -137,7 +137,8 @@ class Currency extends LitElement {
                 <span class="symbol">${symbol}</span>
                 <span>${label}</span>
               </label>
-            </li>`
+            </li>
+          `;
         })}
         </ul>
       </dialog>

@@ -9,7 +9,7 @@
     --zebra-stripe: #{mix(white, rgb(28, 28, 30), 3%)}; // Gray6 Dark
   }
 
-  @media #{map.get(const.$breakpoint, 'small')} {
+  @media #{const.$breakpoint-small} {
     --app-grid: 1fr auto / 1fr;
     --app-gap: clamp(.75rem, .75rem + 1vw, 3rem);
     --app-padding-block: var(--app-gap) 0;
@@ -20,7 +20,7 @@
     --values-place-self: start center;
   }
 
-  @media #{map.get(const.$breakpoint, 'medium')} {
+  @media #{const.$breakpoint-medium} {
     --app-grid: 'values drawer' 1fr 'currency drawer' / #{const.$values-min-size} 1fr;
     --app-padding-block: var(--app-gap);
     --drawer-margin-block: var(--app-gap) auto;

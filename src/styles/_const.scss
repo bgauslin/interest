@@ -1,4 +1,4 @@
-// Breakpoints via content-based min/max values.
+// Breakpoints and max-sizes via content-based min/max values.
 $-gap-max: 3rem;
 $-gap-min: .75rem;
 $-table-max-size: 51rem;
@@ -9,10 +9,5 @@ $values-min-size: 24rem;
 
 $app-max-size: $values-min-size + $-gap-max + $-table-max-size;
 
-$-small: $values-max-size + ($-gap-min * 2);
-$-medium: $values-min-size + $-table-min-size + ($-gap-max * 3);
-
-$breakpoint: (
-  'small':  '(min-width: #{$-small})',
-  'medium': '(min-width: #{$-medium})',
-);
+$breakpoint-small: '(min-width: #{$values-max-size + ($-gap-min * 2)})';
+$breakpoint-medium: '(min-width: #{$values-min-size + $-table-min-size + ($-gap-max * 3)})';

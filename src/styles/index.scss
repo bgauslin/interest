@@ -70,7 +70,7 @@ body {
   min-block-size: 100dvh;
   touch-action: manipulation;
 
-  @media #{map.get(const.$breakpoint, 'small')} {
+  @media #{const.$breakpoint-small} {
     background-color: var(--fill-1);
   }
 }

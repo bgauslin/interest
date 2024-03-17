@@ -116,7 +116,7 @@ app-currency {
   transition: utils.transition(opacity);
 }
 
-@media #{map.get(const.$breakpoint, 'small')} {
+@media #{const.$breakpoint-small} {
   :host {
     background-color: var(--fill-0);
     border-radius: var(--card-radius);
@@ -135,7 +135,7 @@ app-currency {
   }
 }
 
-@media #{map.get(const.$breakpoint, 'medium')} {
+@media #{const.$breakpoint-medium} {
   :host {
     max-inline-size: none;
   }

@@ -61,7 +61,7 @@
 // [1] Always hide the button on large screens.
 // [2] Always show the drawer on large screens. '!important' is required to
 // override inline styles set via JS.
-@media #{map.get(const.$breakpoint, 'medium')} {
+@media #{const.$breakpoint-medium} {
   :host > button {
     display: none; // [1] 
   }

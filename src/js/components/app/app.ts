@@ -97,8 +97,8 @@ class App extends LitElement {
               <th class="year">Year</th>
               <th class="deposits">Deposits</th>
               <th class="interest" data-optional>Interest</th>
-              <th class="balance">Balance</th>
               <th class="growth" data-optional>Growth</th>
+              <th class="balance">Balance</th>
             </tr>
           </thead>
           <tbody>
@@ -109,8 +109,8 @@ class App extends LitElement {
                   <td class="year">${year}</td>
                   <td class="deposits">${deposits}</td>
                   <td class="interest" data-optional>${interest}</td>
-                  <td class="balance">${balance}</td>
                   <td class="growth" data-optional>${growth}</td>
+                  <td class="balance">${balance}</td>
                 </tr>
               `
             })}

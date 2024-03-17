@@ -70,16 +70,26 @@ table {
   }
 }
 
+:is(th, td)[data-optional] {
+  display: var(--table-optional-display);
+}
+
 th {
   font-variation-settings: 'wght' 600;
+  padding-block: 1em;
+}
+
+thead {
+  border-block-end: 1px solid var(--body-fill);
 }
 
 tbody > tr:nth-child(odd) {
   background-color: var(--zebra-stripe);
 }
 
-table [data-optional] {
-  display: var(--table-optional-display);
+td.balance {
+  color: var(--theme);
+  font-variation-settings: 'wght' 600;
 }
 
 // Footnote after the table.

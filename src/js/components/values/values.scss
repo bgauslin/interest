@@ -1,5 +1,5 @@
 :host {
-  background-color: var(--values-fill);
+  background-color: var(--fill-1);
   border-radius: var(--values-border-radius);
   display: grid;
   grid: 'widget' 4rem 'values' 'total' 6rem / 1fr;
@@ -68,7 +68,7 @@ input {
   appearance: none;
   background-color: var(--fill-2);
   block-size: 2rem;
-  border: var(--outline-size) solid var(--fill-0);
+  border: var(--outline-size) solid var(--fill-1);
   border-radius: .5rem;
   box-sizing: content-box;
   color: var(--text-color);

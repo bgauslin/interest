@@ -12,6 +12,7 @@ $breakpoint-medium: '(min-width: #{$values-min + $table-min + ($gap-max * 3)})';
   
 :root {
   // Layout.
+  --app-grid: auto auto / 1fr;
   --button-size: 2.75rem;
   --card-padding: 1.5rem;
   --card-radius: 1rem;
@@ -29,7 +30,7 @@ $breakpoint-medium: '(min-width: #{$values-min + $table-min + ($gap-max * 3)})';
   --gray6: rgb(242, 242, 247);
 
   // Theming.
-  --body-fill: var(--fill-0);
+  --body-fill: var(--fill-1);
   --error: rgb(219, 77, 77);
   --fill-0: white;
   --fill-1: var(--gray6);
@@ -71,12 +72,11 @@ $breakpoint-medium: '(min-width: #{$values-min + $table-min + ($gap-max * 3)})';
     --app-gap: clamp(.75rem, .75rem + 1vw, 3rem);
     --app-padding-block: var(--app-gap) 0;
     --app-padding-inline: var(--app-gap);
-    --body-fill: var(--fill-1);
+    --body-fill: var(--fill-0);
     --footnote-display: none;
     --table-border-radius: var(--card-radius);
     --table-optional-display: table-cell;
     --values-border-radius: var(--card-radius);
-    --values-fill: var(--fill-0);
     --values-item-even-place-self: start;
     --values-item-odd-place-self: end;
     --values-list-grid: auto-flow / 1fr 1fr;

@@ -2,13 +2,16 @@
   background-color: var(--fill-1);
   border-radius: var(--values-border-radius);
   display: grid;
-  grid: 'title widget' 4rem 'values values' 'total total' 6rem / 1fr auto;
+  gap: 1rem;
+  grid: '. . . . .' '. . title widget .' var(--button-size) '. . values . .' 'total total total total total' 6rem / 0 var(--button-size) 1fr var(--button-size) 0;
   inline-size: 100%;
+  inset-block: var(--values-inset-block, 0);
   margin-inline: env(safe-area-inset-left) env(safe-area-inset-right);
-  max-inline-size: var(--values-max-inline-size);
+  place-self: start center;
+  position: var(--values-position, static);
 }
 
-* {
+:where(*) {
   box-sizing: border-box;
 }
 
@@ -25,13 +28,11 @@
 }
 
 h1 {
+  align-self: center;
   font-size: 1.1em;
   grid-area: title;
-  margin-block: 0;
-  margin-inline: var(--card-padding);
-  min-inline-size: 0;
+  margin: 0;
   overflow: hidden;
-  place-self: center stretch;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -40,7 +41,6 @@ form {
   align-self: center;
   gap: 2rem 0;
   grid-area: values;
-  padding-inline: var(--card-padding);
 }
 
 [role='list'] {
@@ -51,23 +51,13 @@ form {
 }
 
 li {
-  align-items: center;
-  grid: 'input label' / 1fr 1fr;
-
-  &:nth-child(odd) {
-    place-self: var(--values-item-odd-place-self);
-  }
-
-  &:nth-child(even) {
-    place-self: var(--values-item-even-place-self);
-  }
+  place-items: center start;
+  grid: 'input label' / auto 1fr;
 }
 
 label {
   grid-area: label;
-  line-height: 1;
-  min-inline-size: 8rem;
-  opacity: .8;
+  opacity: .7;
   pointer-events: none;
   white-space: nowrap;
 }
@@ -109,10 +99,10 @@ input {
   color: var(--theme);
   font-size: 2.75rem;
   grid-area: total;
+  // inline-size: 100%; // ???
   line-height: 1;
-  max-inline-size: 100%;
   overflow: scroll hidden;
-  padding-inline: var(--card-padding);
+  padding-inline: .5em;
   place-self: center;
   scrollbar-width: none;
   text-align: center;
@@ -130,7 +120,5 @@ input {
 
 app-currency {
   grid-area: widget;
-  margin-inline: auto .75rem;
-  place-self: center end;
   transition: opacity var(--transition);
 }

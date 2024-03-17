@@ -1,11 +1,3 @@
-// [1] How the app's initial maximum width is calculated:
-//
-//   24rem  values min
-// +  3rem  gap max
-// + 51rem  table max
-// -------
-// = 78rem
-
 :host {
   color: var(--text-color);
   display: grid;
@@ -15,25 +7,10 @@
   grid: var(--app-grid);
   inline-size: 100%;
   margin-inline: auto;
-  max-inline-size: 78rem; // [1]
+  max-inline-size: 80rem;
   min-block-size: 100dvh;
   padding-block: var(--app-padding-block);
   padding-inline: var(--app-padding-inline);
-}
-
-app-values {
-  inset-block: var(--values-inset-block, 0);
-  place-self: var(--values-place-self, center);
-  position: var(--values-position, static);
-}
-
-app-drawer {
-  margin-block: var(--drawer-margin-block, 0);
-
-  &[aria-hidden='true'] {
-    opacity: 0;
-    visibility: hidden;
-  }
 }
 
 // Scrollable wrapper for <table> element.

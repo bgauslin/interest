@@ -21,7 +21,7 @@
   border-radius: var(--button-size);
   color: var(--text-color);
   cursor: pointer;
-  display: flex;
+  display: var(--drawer-button-display, flex);
   font-family: 'Avenir Variable', sans-serif;
   font-size: .875em;
   font-variation-settings: 'wght' 600;
@@ -52,20 +52,8 @@
 }
 
 :host > div {
+  block-size: var(--drawer-block-size);
   grid-area: drawer;
   overflow: hidden;
   transition: block-size .4s ease-out;
-}
-
-// [1] Always hide the button on large screens.
-// [2] Always show the drawer on large screens. '!important' is required to
-// override inline styles set via JS.
-@media #{const.$breakpoint-medium} {
-  :host > button {
-    display: none; // [1] 
-  }
-
-  :host > div {
-    block-size: auto !important; // [2]
-  }
 }

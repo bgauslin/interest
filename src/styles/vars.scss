@@ -55,14 +55,6 @@
     --zebra-stripe: #{mix(white, rgb(28, 28, 30), 3%)}; // Gray6 Dark
   }
 
-  @media #{const.$breakpoint-medium} {
-    --app-grid: 'values drawer' 1fr 'currency drawer' / #{const.$values-min-size} 1fr;
-    --app-padding-block: var(--app-gap);
-    --drawer-margin-block: var(--app-gap) auto;
-    --values-inset-block: var(--app-gap) auto;
-    --values-position: sticky;
-  }
-
   @media #{const.$breakpoint-small} {
     --body-fill: var(--fill-1);
 
@@ -74,5 +66,18 @@
     --table-border-radius: var(--card-radius);
     --table-optional-display: table-cell;
     --values-place-self: start center;
+  }
+
+  // [1] Always show the drawer on large screens. '!important' is required to
+  // override inline styles set via JS.
+  // [2] Always hide the button on large screens.
+  @media #{const.$breakpoint-medium} {
+    --app-grid: 'values drawer' 1fr 'currency drawer' / #{const.$values-min-size} 1fr;
+    --app-padding-block: var(--app-gap);
+    --drawer-block-size: auto !important; // [1]
+    --drawer-button-display: none; // [2]
+    --drawer-margin-block: var(--app-gap) auto;
+    --values-inset-block: var(--app-gap) auto;
+    --values-position: sticky;
   }
 }

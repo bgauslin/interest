@@ -20,7 +20,7 @@
 }
 
 :is(ul, li) {
-  gap: const.$field-gap;
+  gap: .75rem;
 }
 
 :is(form, ul) {
@@ -61,21 +61,21 @@ label[for='rate']::before {
 input {
   appearance: none;
   background-color: var(--fill-2);
-  block-size: const.$input-block-size;
-  border: const.$outline-size solid var(--fill-0);
-  border-radius: const.$input-radius;
+  block-size: 2rem;
+  border: var(--outline-size) solid var(--fill-0);
+  border-radius: .5rem;
   box-sizing: content-box;
   color: var(--text-color);
   font-family: 'Avenir Variable', sans-serif;
   font-size: 1em;
   font-variation-settings: 'wght' 500;
   grid-area: input;
-  inline-size: const.$field-input-size;
+  inline-size: 5rem;
   justify-self: end;
   line-height: 1;
   margin: 0;
   outline: 0;
-  padding-inline: const.$input-padding;
+  padding-inline: .5rem;
   text-align: end;
 
   &:focus {

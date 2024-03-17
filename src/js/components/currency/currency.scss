@@ -25,7 +25,7 @@ input {
 button {
   background-color: var(--fill-2);
   block-size: var(--button-size);
-  border: const.$outline-size solid transparent;
+  border: var(--outline-size) solid transparent;
   border-radius: var(--button-size);
   cursor: pointer;
   display: grid;

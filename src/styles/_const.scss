@@ -1,16 +1,6 @@
-// Dimensions.
-$field-gap: .75rem;
-$field-input-size: 5rem;
-$input-block-size: 2rem;
-$input-padding: .5rem;
-$input-radius: .5rem;
-$menu-spacing: .375rem;
-$outline-size: .1875rem;
-
+// Breakpoints via content-based min/max values.
 $-gap-max: 3rem;
 $-gap-min: .75rem;
-
-// Breakpoints via content-based min/max values.
 $-table-max-size: 51rem;
 $-table-min-size: 37rem;
 

@@ -19,7 +19,7 @@
   appearance: none;
   background-color: var(--fill-2);
   block-size: var(--button-size);
-  border: const.$outline-size solid var(--fill-2);
+  border: var(--outline-size) solid var(--fill-2);
   border-radius: var(--button-size);
   color: var(--text-color);
   cursor: pointer;

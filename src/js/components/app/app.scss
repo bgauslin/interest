@@ -4,10 +4,10 @@
 
 :host {
   --table-optional-display: none;
-  --zebra-stripe: #{mix(black, utils.map-deep-get(const.$grays, 6, light), 3%)};
+  --zebra-stripe: #{mix(black, rgb(242, 242, 247), 3%)}; // Gray6 Light
 
   @media (prefers-color-scheme: dark) {
-    --zebra-stripe: #{mix(white, utils.map-deep-get(const.$grays, 6, dark), 3%)};
+    --zebra-stripe: #{mix(white, rgb(28, 28, 30), 3%)}; // Gray6 Dark
   }
 
   @media #{map.get(const.$breakpoint, 'small')} {

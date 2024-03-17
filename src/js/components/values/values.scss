@@ -1,12 +1,11 @@
-@use 'sass:map';
-@use '../../../styles/const';
-
 :host {
+  background-color: var(--values-fill);
+  border-radius: var(--values-border-radius);
   display: grid;
   grid: 'widget' 4rem 'values' 'total' 6rem / 1fr;
   inline-size: 100%;
   margin-inline: env(safe-area-inset-left) env(safe-area-inset-right);
-  max-inline-size: const.$values-max-size;
+  max-inline-size: var(--values-max-inline-size);
 }
 
 * {
@@ -33,6 +32,7 @@ form {
 }
 
 [role='list'] {
+  grid: var(--values-list-grid);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -41,6 +41,14 @@ form {
 li {
   align-items: center;
   grid: 'input label' / 1fr 1fr;
+
+  &:nth-child(odd) {
+    place-self: var(--values-item-odd-place-self);
+  }
+
+  &:nth-child(even) {
+    place-self: var(--values-item-even-place-self);
+  }
 }
 
 label {
@@ -113,37 +121,4 @@ app-currency {
   margin-inline: auto .75rem;
   place-self: center end;
   transition: opacity var(--transition);
-}
-
-@media #{const.$breakpoint-small} {
-  :host {
-    background-color: var(--fill-0);
-    border-radius: var(--card-radius);
-  }
-
-  [role='list'] {
-    grid: auto-flow / 1fr 1fr;
-  }
-
-  li:nth-child(odd) {
-    place-self: end;
-  }
-
-  li:nth-child(even) {
-    place-self: start;
-  }
-}
-
-@media #{const.$breakpoint-medium} {
-  :host {
-    max-inline-size: none;
-  }
-
-  [role='list'] {
-    grid: auto-flow / 1fr;
-  }
-
-  li:nth-child(n) {
-    place-self: center;
-  }
 }

@@ -7,6 +7,7 @@
   --card-radius: 1rem;
   --outline-size: .1875rem;
   --table-optional-display: none;
+  --values-max-inline-size: #{const.$values-max-size};
 
   // Grays via Apple HIG.
   // https://developer.apple.com/design/human-interface-guidelines/foundations/color#specifications
@@ -56,15 +57,19 @@
   }
 
   @media #{const.$breakpoint-small} {
-    --body-fill: var(--fill-1);
-
     --app-grid: 1fr auto / 1fr;
     --app-gap: clamp(.75rem, .75rem + 1vw, 3rem);
     --app-padding-block: var(--app-gap) 0;
     --app-padding-inline: var(--app-gap);
+    --body-fill: var(--fill-1);
     --footnote-display: none;
     --table-border-radius: var(--card-radius);
     --table-optional-display: table-cell;
+    --values-border-radius: var(--card-radius);
+    --values-fill: var(--fill-0);
+    --values-item-even-place-self: start;
+    --values-item-odd-place-self: end;
+    --values-list-grid: auto-flow / 1fr 1fr;
     --values-place-self: start center;
   }
 
@@ -78,6 +83,10 @@
     --drawer-button-display: none; // [2]
     --drawer-margin-block: var(--app-gap) auto;
     --values-inset-block: var(--app-gap) auto;
+    --values-item-even-place-self: center;
+    --values-item-odd-place-self: center;
+    --values-list-grid: auto-flow / 1fr;
+    --values-max-inline-size: none;
     --values-position: sticky;
   }
 }

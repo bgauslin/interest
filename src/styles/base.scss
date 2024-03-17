@@ -1,5 +1,3 @@
-@use 'const';
-
 @font-face {
   font-display: swap;
   font-family: 'Avenir Variable';
@@ -17,15 +15,11 @@ html {
 }
 
 body {
-  background-color: var(--fill-0);
+  background-color: var(--body-fill);
   display: grid;
   margin: 0;
   min-block-size: 100dvh;
   touch-action: manipulation;
-
-  @media #{const.$breakpoint-small} {
-    background-color: var(--fill-1);
-  }
 }
 
 noscript {

@@ -5,19 +5,16 @@
   src: url('https://assets.gauslin.com/fonts/AvenirNext-Variable.woff2') format('woff2');
 }
 
-:where(*) {
-  box-sizing: border-box;
-}
-
 html {
   -webkit-tap-highlight-color: transparent;
-  text-size-adjust: none;
   touch-action: manipulation;
 }
 
 body {
   background-color: var(--body-fill);
   display: grid;
+  font: var(--font);
+  font-variation-settings: 'wght' 500;
   margin: 0;
   min-block-size: 100dvh;
 }

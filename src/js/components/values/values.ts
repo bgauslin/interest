@@ -115,7 +115,7 @@ class Values extends LitElement {
 
   render() {
     return html`
-      <h1>${document.title}</h1>
+      <h1>Compound Interest</h1>
 
       <form @change="${this.updateValues}">
         <ul role="list">

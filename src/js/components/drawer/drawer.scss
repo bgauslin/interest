@@ -24,16 +24,16 @@
   color: var(--text-color);
   cursor: pointer;
   display: var(--drawer-button-display, flex);
-  font-family: 'Avenir Variable', sans-serif;
+  font-family: var(--font-family);
   font-size: .875em;
   font-variation-settings: 'wght' 600;
   grid-area: button;
   justify-content: center;
   line-height: 1;
-  margin: clamp(2rem, 2rem + 1vw, 3rem);
+  margin: clamp(2em, 2em + 1vw, 3em);
   outline: 0;
   padding-block: 0;
-  padding-inline: 1.5rem;
+  padding-inline: 1.5em;
   place-self: start center;
   white-space: nowrap;
 

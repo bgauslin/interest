@@ -1,4 +1,49 @@
 :root {
+  // Layout.
+  --app-grid: auto 1fr / 1fr;
+  --app-max-inline-size: 80em;
+  --button-size: 2.75rem;
+  --card-radius: 1em;
+  --font: clamp(.875em, .75em + 1vw, 1.125em) / 1.4 var(--font-family); 
+  --font-family: 'Avenir Variable';
+  --gap: clamp(1em, 1em + 1vw, 2em);
+  --outline-size: .1875em;
+  --table-optional-display: none;
+  --values-padding-block: .75em var(--gap);
+  --values-padding-inline: var(--gap) .75em;
+
+  // Layout - small breakpoint.
+  @media (min-width: 40em) {
+    --app-gap: var(--gap);
+    --app-padding-block: var(--gap) 0;
+    --app-padding-inline: var(--gap);
+    --body-fill: var(--fill-0);
+    --footnote-display: none;
+    --table-border-radius: var(--card-radius);
+    --table-optional-display: table-cell;
+    --values-border-radius: var(--card-radius);
+    --values-list-grid: auto-flow / 1fr 1fr;
+  }
+
+  // Layout - medium breakpoint.
+  // [1] Always show the drawer on large screens.
+  // [2] Always hide the button on large screens.
+  @media (min-width: 50em) {
+    --app-gap: 0 var(--gap);
+    --app-grid: 'values drawer' 1fr 'currency drawer' / auto 1fr;
+    --app-padding-block: var(--gap);
+    --drawer-block-size: auto; // [1]
+    --drawer-button-display: none; // [2]
+    --values-inset-block: var(--gap) auto;
+    --values-list-grid: auto-flow / 1fr;
+    --values-max-inline-size: 16em;
+    --values-place-self: start;
+    --values-position: sticky;
+  }
+
+  // Transitions.
+  --transition: .3s ease-out;
+
   // Grays via Apple HIG.
   // https://developer.apple.com/design/human-interface-guidelines/foundations/color#specifications
   --gray1: rgb(142, 142, 147);
@@ -21,9 +66,6 @@
   --theme: rgb(0, 173, 69);
   --zebra-stripe: #{mix(black, rgb(242, 242, 247), 3%)}; // Gray6 Light
 
-  // Transitions.
-  --transition: .3s ease-out;
-
   @media (prefers-color-scheme: dark) {
     // Dark mode grays.
     --gray1: rgb(142, 142, 147);
@@ -43,38 +85,5 @@
     --text-color-variant: rgb(142, 142, 147); // Gray1 Light
     --theme: rgb(77, 198, 125);
     --zebra-stripe: #{mix(white, rgb(28, 28, 30), 3%)}; // Gray6 Dark
-  }
-
-  // Layout.
-  --app-grid: auto 1fr / 1fr;
-  --button-size: 2.75rem;
-  --card-radius: 1rem;
-  --outline-size: .1875rem;
-  --table-optional-display: none;
-
-  // Small breakpoint.
-  @media (min-width: 40rem) {
-    --app-gap: clamp(1rem, 1rem + 1vw, 2rem);
-    --app-padding-block: var(--app-gap) 0;
-    --app-padding-inline: var(--app-gap);
-    --body-fill: var(--fill-0);
-    --footnote-display: none;
-    --table-border-radius: var(--card-radius);
-    --table-optional-display: table-cell;
-    --values-border-radius: var(--card-radius);
-    --values-list-grid: auto-flow / 1fr 1fr;
-  }
-
-  // Medium breakpoint.
-  // [1] Always show the drawer on large screens.
-  // [2] Always hide the button on large screens.
-  @media (min-width: 50rem) {
-    --app-grid: 'values drawer' 1fr 'currency drawer' / auto 1fr;
-    --app-padding-block: var(--app-gap);
-    --drawer-block-size: auto; // [1]
-    --drawer-button-display: none; // [2]
-    --values-inset-block: var(--app-gap) auto;
-    --values-list-grid: auto-flow / 1fr;
-    --values-position: sticky;
   }
 }

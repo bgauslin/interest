@@ -1,16 +1,12 @@
 :host {
   color: var(--text-color);
   display: grid;
-  font-family: 'Avenir Variable', sans-serif;
-  font-variation-settings: 'wght' 500;
-  gap: var(--app-gap, 0);
+  gap: var(--app-gap);
   grid: var(--app-grid);
-  inline-size: 100%;
-  margin-inline: auto;
-  max-inline-size: 80rem;
-  min-block-size: 100dvh;
+  max-inline-size: var(--app-max-inline-size); 
   padding-block: var(--app-padding-block);
   padding-inline: var(--app-padding-inline);
+  place-self: start center;
 }
 
 // Scrollable wrapper for <table> element.

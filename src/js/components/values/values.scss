@@ -91,7 +91,7 @@ input {
   }
 
   &:invalid {
-    color: var(--error);
+    color: var(--warning-color);
   }
 }
 

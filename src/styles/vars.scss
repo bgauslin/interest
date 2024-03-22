@@ -1,24 +1,20 @@
 :root {
   // Layout.
   --app-grid: auto 1fr / 1fr;
-  --app-max-inline-size: 100em;
-  --app-place-self: start;
   --button-size: 2.75rem;
   --card-radius: 1em;
   --font: clamp(1em, .75em + 1vw, 1.25em) / 1.4 var(--font-family);
   --font-family: 'Avenir Variable';
   --gap: clamp(1em, 1em + 1vw, 2em);
+  --header-size: clamp(4em, 3em + 1vw, 6em);
   --outline-size: .1875em;
   --table-optional-display: none;
-  --values-padding-block: .75em var(--gap);
-  --values-padding-inline: var(--gap) .75em;
 
   // Layout - small breakpoint.
   @media (min-width: 44em) {
     --app-gap: var(--gap);
     --app-padding-block: var(--gap) 0;
     --app-padding-inline: var(--gap);
-    --app-place-self: start center;
     --body-fill: var(--fill-0);
     --footnote-display: none;
     --table-border-radius: var(--card-radius);
@@ -38,7 +34,6 @@
     --drawer-button-display: none; // [2]
     --values-inset-block: var(--gap) auto;
     --values-list-grid: auto-flow / 1fr;
-    --values-max-inline-size: 18em;
     --values-place-self: start;
     --values-position: sticky;
   }

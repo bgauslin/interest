@@ -3,14 +3,12 @@
   border-radius: var(--values-border-radius);
   display: grid;
   gap: 1em;
-  grid: 'title widget' var(--button-size) 'values values' 'total total' 6em / 1fr var(--button-size);
-  inline-size: 100%;
+  grid: 'title widget' var(--header-size) 'values values' 'total total' 6em / 1fr var(--button-size);
   inset-block: var(--values-inset-block, 0);
   margin-inline: env(safe-area-inset-left) env(safe-area-inset-right);
-  max-inline-size: var(--values-max-inline-size, none);
   overflow: hidden;
-  padding-block: var(--values-padding-block, var(--gap));
-  padding-inline: var(--values-padding-inline, var(--gap));
+  padding-block: 0 var(--gap);
+  padding-inline: var(--gap);
   place-self: var(--values-place-self);
   position: var(--values-position, static);
 }

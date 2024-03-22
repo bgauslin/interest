@@ -13,6 +13,7 @@ class Drawer extends LitElement {
   
   @state() drawerSize = '0';
   @state() open: Boolean = false;
+  @state() target: HTMLElement;
 
   static styles = css`${shadowStyles}`;
 
@@ -20,6 +21,14 @@ class Drawer extends LitElement {
     super.connectedCallback();
     this.getLocalStorage();
     this.dispatchDrawerState();
+    this.addEventListener('touchstart', this.handleTouchstart);
+    this.addEventListener('touchend', this.handleTouchend);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('touchstart', this.handleTouchstart);
+    this.removeEventListener('touchend', this.handleTouchend);
   }
 
   private getLocalStorage() {
@@ -75,7 +84,20 @@ class Drawer extends LitElement {
     }));
   }
 
-  render() {
+  private handleTouchstart(event: TouchEvent) {
+    const composed = event.composedPath();
+    this.target = <HTMLElement>composed[0];
+
+    if (this.target.tagName === 'BUTTON') {
+      this.target.classList.add('touch');
+    }
+  }
+
+  private handleTouchend() {
+    this.target.classList.remove('touch');
+  }
+
+  protected render() {
     const label = this.open ? 'Hide table' : 'Show table';
     const style = this.drawerSize ? `--block-size: ${this.drawerSize}` : '';
     return html`

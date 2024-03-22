@@ -14,7 +14,7 @@
   visibility: hidden;
 }
 
-:host > button {
+button {
   align-items: center;
   appearance: none;
   background-color: var(--fill-2);
@@ -36,23 +36,32 @@
   padding-inline: 1.5em;
   place-self: start center;
   white-space: nowrap;
+  transition: transform var(--transition);
 
   &:focus-visible {
     background-color: var(--fill-3);
     border-color: var(--outline);
   }
 
+  &.touch {
+    transform: scale(.8);
+  }
+
   @media (any-hover: hover) {
-    transition: background-color var(--transition), border-color var(--transition);
+    transition: background-color var(--transition), border-color var(--transition), transform var(--transition);
 
     &:hover {
       background-color: var(--fill-3);
-      border-color: var(--fill-3);
+      border-color: transparent;
+    }
+
+    &:active {
+      transform: scale(.8);
     }
   }
 }
 
-:host > div {
+div {
   block-size: var(--drawer-block-size, var(--block-size));
   grid-area: drawer;
   overflow: hidden;

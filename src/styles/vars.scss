@@ -10,8 +10,8 @@
   --outline-size: .1875em;
   --table-optional-display: none;
 
-  // Layout - small breakpoint.
-  @media (min-width: 44em) {
+  // Responsive breakpoints.
+  @media (min-width: 40em) {
     --app-gap: var(--gap);
     --app-padding-block: var(--gap) 0;
     --app-padding-inline: var(--gap);
@@ -23,12 +23,11 @@
     --values-list-grid: auto-flow / 1fr 1fr;
   }
 
-  // Layout - medium breakpoint.
   // [1] Always show the drawer on large screens.
   // [2] Always hide the button on large screens.
   @media (min-width: 60em) {
     --app-gap: 0 var(--gap);
-    --app-grid: 'values drawer' 1fr 'currency drawer' / auto 1fr;
+    --app-grid: 'values drawer' 1fr 'currency drawer' / 18em 1fr;
     --app-padding-block: var(--gap);
     --drawer-block-size: auto; // [1]
     --drawer-button-display: none; // [2]

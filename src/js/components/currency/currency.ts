@@ -18,6 +18,7 @@ class Currency extends LitElement {
   @query('dialog') dialog: HTMLDialogElement;
   @state() closing: Boolean = false;
   @state() open: Boolean = false;
+  @state() target: HTMLElement;
 
   static styles = css`${shadowStyles}`;
 
@@ -31,25 +32,46 @@ class Currency extends LitElement {
     super.connectedCallback();
     document.addEventListener('click', this.clickListener);
     document.addEventListener('keydown', this.keyListener);
+    this.addEventListener('touchstart', this.handleTouchstart);
+    this.addEventListener('touchend', this.handleTouchend);
   }
 
   disconnectedCallback() { 
     super.disconnectedCallback();
     document.removeEventListener('click', this.clickListener);
     document.removeEventListener('keydown', this.keyListener);
+    this.removeEventListener('touchstart', this.handleTouchstart);
+    this.removeEventListener('touchend', this.handleTouchend);
   }
 
-  private handleClick(e: Event) {
-    if (this.open && !e.composedPath().includes(this)) {
+  private handleClick(event: Event) {
+    if (this.open && !event.composedPath().includes(this)) {
       this.toggleMenu();
     }
   }
 
-  private handleKey(e: KeyboardEvent) {
-    if (e.code === 'Escape') {
-      e.preventDefault();
+  private handleKey(event: KeyboardEvent) {
+    if (event.code === 'Escape') {
+      event.preventDefault();
       this.toggleMenu();
     }
+  }
+
+  private handleTouchstart(event: TouchEvent) {
+    const composed = event.composedPath();
+    this.target = <HTMLElement>composed[0];
+
+    console.log('handleTouchstart()', this.target);
+    console.log('composed', composed);
+
+    if (this.target.tagName === 'BUTTON') {
+      this.target.classList.add('touch');
+    }
+  }
+
+  private handleTouchend() {
+    console.log('handleTouchend()');
+    this.target.classList.remove('touch');
   }
 
   private toggleMenu() {

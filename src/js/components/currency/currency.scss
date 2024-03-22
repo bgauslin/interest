@@ -30,6 +30,7 @@ button {
   inline-size: var(--button-size);
   outline: 0;
   place-items: center;
+  transition: transform var(--transition);
 
   &:focus-visible {
     border-color: var(--outline);
@@ -39,13 +40,21 @@ button {
     background-color: var(--fill-3);
   }
 
+  &.touch {
+    transform: scale(.8);
+  }
+
   @media (any-hover: hover) {
-    transition: background-color var(--transition), color var(--transition);
+    transition: background-color var(--transition), color var(--transition), transform var(--transition);
 
     &:hover,
     &[aria-expanded='true']:hover {
       background-color: var(--fill-3);
       border-color: transparent;
+    }
+
+    &:active {
+      transform: scale(.8);
     }
   }
 }
@@ -88,8 +97,12 @@ label {
   display: flex;
   padding-inline: .25rem 1.5rem;
 
-  &:focus-visible,
+  &:focus-visible {
+    background-color: var(--fill-3);
+  }
+
   &[data-checked] {
+    color: var(--theme);
     background-color: var(--fill-3);
   }
 
@@ -97,10 +110,6 @@ label {
     transition: background-color var(--transition);
 
     &:hover {
-      background-color: var(--fill-1);
-    }
-
-    &:hover[data-checked] {
       background-color: var(--fill-3);
     }
   }

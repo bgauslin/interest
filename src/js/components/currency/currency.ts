@@ -61,16 +61,12 @@ class Currency extends LitElement {
     const composed = event.composedPath();
     this.target = <HTMLElement>composed[0];
 
-    console.log('handleTouchstart()', this.target);
-    console.log('composed', composed);
-
     if (this.target.tagName === 'BUTTON') {
       this.target.classList.add('touch');
     }
   }
 
   private handleTouchend() {
-    console.log('handleTouchend()');
     this.target.classList.remove('touch');
   }
 

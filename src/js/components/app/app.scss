@@ -6,7 +6,7 @@
   max-inline-size: var(--app-max-inline-size); 
   padding-block: var(--app-padding-block);
   padding-inline: var(--app-padding-inline);
-  place-self: start center;
+  place-self: var(--app-place-self);
 }
 
 // Scrollable wrapper for <table> element.

@@ -37,8 +37,7 @@
   place-self: start center;
   white-space: nowrap;
 
-  &:focus-visible,
-  &:active {
+  &:focus-visible {
     background-color: var(--fill-3);
     border-color: var(--outline);
   }

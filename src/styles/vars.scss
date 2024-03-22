@@ -2,9 +2,10 @@
   // Layout.
   --app-grid: auto 1fr / 1fr;
   --app-max-inline-size: 100em;
+  --app-place-self: start;
   --button-size: 2.75rem;
   --card-radius: 1em;
-  --font: clamp(.875em, .75em + 1vw, 1.125em) / 1.4 var(--font-family); 
+  --font: clamp(1em, .75em + 1vw, 1.25em) / 1.4 var(--font-family);
   --font-family: 'Avenir Variable';
   --gap: clamp(1em, 1em + 1vw, 2em);
   --outline-size: .1875em;
@@ -13,10 +14,11 @@
   --values-padding-inline: var(--gap) .75em;
 
   // Layout - small breakpoint.
-  @media (min-width: 40em) {
+  @media (min-width: 44em) {
     --app-gap: var(--gap);
     --app-padding-block: var(--gap) 0;
     --app-padding-inline: var(--gap);
+    --app-place-self: start center;
     --body-fill: var(--fill-0);
     --footnote-display: none;
     --table-border-radius: var(--card-radius);
@@ -28,7 +30,7 @@
   // Layout - medium breakpoint.
   // [1] Always show the drawer on large screens.
   // [2] Always hide the button on large screens.
-  @media (min-width: 50em) {
+  @media (min-width: 60em) {
     --app-gap: 0 var(--gap);
     --app-grid: 'values drawer' 1fr 'currency drawer' / auto 1fr;
     --app-padding-block: var(--gap);

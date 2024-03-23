@@ -62,6 +62,7 @@ button {
 
 // Currency menu.
 dialog {
+  -webkit-backdrop-filter: var(--backdrop-filter);
   backdrop-filter: var(--backdrop-filter);
   background-color: var(--fill-2a);
   block-size: 0;

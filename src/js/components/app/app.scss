@@ -5,12 +5,13 @@
   grid: var(--app-grid);
   padding-block: var(--app-padding-block);
   padding-inline: var(--app-padding-inline);
-  place-self: start center;
+  place-self: start stretch;
 }
 
 // Scrollable wrapper for <table> element.
 .table {
   background-color: var(--fill-1);
+  border: var(--table-border);
   border-radius: var(--table-border-radius, 0);
   overflow: auto hidden;
   scrollbar-width: none;

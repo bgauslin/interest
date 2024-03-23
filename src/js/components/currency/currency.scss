@@ -62,9 +62,10 @@ button {
 
 // Currency menu.
 dialog {
-  background-color: var(--fill-2);
+  backdrop-filter: var(--backdrop-filter);
+  background-color: var(--fill-2a);
   block-size: 0;
-  border: 0;
+  border: var(--border);
   border-radius: .5rem;
   display: block;
   margin-block: .5rem 0;
@@ -99,19 +100,19 @@ label {
   padding-inline: .25rem 1.5rem;
 
   &:focus-visible {
-    background-color: var(--fill-3);
+    background-color: var(--fill-3a);
   }
 
   &[data-checked] {
     color: var(--theme);
-    background-color: var(--fill-3);
+    background-color: var(--fill-3a);
   }
 
   @media (any-hover: hover) {
     transition: background-color var(--transition);
 
     &:hover {
-      background-color: var(--fill-3);
+      background-color: var(--fill-3a);
     }
   }
 }

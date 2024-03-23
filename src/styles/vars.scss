@@ -7,7 +7,7 @@
   --font-family: 'Avenir Variable';
   --gap: clamp(1em, 1em + 1vw, 2em);
   --header-size: clamp(4em, 3em + 1vw, 6em);
-  --outline-size: .1875em;
+  --outline-size: 3px;
   --table-optional-display: none;
 
   // Responsive breakpoints.
@@ -50,11 +50,15 @@
   --gray6: rgb(242, 242, 247);
 
   // Theming.
+  --backdrop-filter: blur(6px);
   --body-fill: var(--fill-1);
+  --border: 1px solid var(--gray5);
   --fill-0: var(--gray6);
   --fill-1: white;
   --fill-2: var(--gray5);
+  --fill-2a: rgba(229, 229, 234, .5); // --fill-2 with alpha
   --fill-3: var(--gray4);
+  --fill-3a: rgba(209, 209, 214, .5); // --fill-3 with alpha
   --outline: var(--theme);
   --text-color: rgb(28, 28, 30); // Gray6 Dark
   --text-color-variant: var(--gray1);
@@ -75,7 +79,9 @@
     --fill-0: black;
     --fill-1: var(--gray6);
     --fill-2: var(--gray5);
+    --fill-2a: rgba(44, 44, 46, .5); // --fill-2 with alpha
     --fill-3: var(--gray4);
+    --fill-3a: rgba(58, 58, 60, .5); // --fill-3 with alpha
     --text-color: rgb(229, 229, 234); // Gray5 Light
     --text-color-variant: rgb(142, 142, 147); // Gray1 Light
     --theme: rgb(77, 198, 125);

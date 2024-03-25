@@ -42,21 +42,21 @@ class App extends LitElement {
     this.removeEventListener(AppEvents.VALUES, this.valuesListener);
   }
 
-  private async updateCurrency(e: CustomEvent) {
+  private async updateCurrency(event: CustomEvent) {
     await this.updateComplete;
-    this.currency = e.detail.currency;
+    this.currency = event.detail.currency;
     this.setLocalStorage();
   }
 
-  private async updateDrawer(e: CustomEvent) {
+  private async updateDrawer(event: CustomEvent) {
     await this.updateComplete;
-    this.drawer = e.detail.drawer;
+    this.drawer = event.detail.drawer;
     this.setLocalStorage();
   }
 
-  private async updateValues(e: CustomEvent) {
+  private async updateValues(event: CustomEvent) {
     await this.updateComplete;
-    this.values = e.detail.values;
+    this.values = event.detail.values;
     this.setLocalStorage();
   }
 

@@ -17,12 +17,13 @@ class Drawer extends LitElement {
 
   static styles = css`${shadowStyles}`;
 
+  // TODO: Refactor/relocate touch listeners to app element.
   connectedCallback() {
     super.connectedCallback();
     this.getLocalStorage();
     this.dispatchDrawerState();
-    this.addEventListener('touchstart', this.handleTouchstart);
-    this.addEventListener('touchend', this.handleTouchend);
+    this.addEventListener('touchstart', this.handleTouchstart, {passive: true});
+    this.addEventListener('touchend', this.handleTouchend, {passive: true});
   }
 
   disconnectedCallback() {

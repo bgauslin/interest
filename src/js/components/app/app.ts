@@ -22,7 +22,6 @@ class App extends LitElement {
 
   static styles = css`${shadowStyles}`;
 
-  // TODO: Relocate touch listeners to single listener here.
   constructor() {
     super();
     this.currencyListener = this.updateCurrency.bind(this);

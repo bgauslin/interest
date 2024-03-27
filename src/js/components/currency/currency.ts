@@ -27,7 +27,6 @@ class Currency extends LitElement {
     this.keyListener = this.handleKey.bind(this);
   }
   
-  // TODO: Refactor/relocate touch listeners to app element.
   connectedCallback() {
     super.connectedCallback();
     document.addEventListener('click', this.clickListener);

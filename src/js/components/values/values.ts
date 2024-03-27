@@ -44,8 +44,8 @@ class Values extends LitElement {
     this.removeEventListener(AppEvents.CURRENCY, this.currencyListener);
   }
 
-  private updateCurrency(e: CustomEvent) {
-    this.currency = e.detail.currency;
+  private updateCurrency(event: CustomEvent) {
+    this.currency = event.detail.currency;
     this.updateTotal();
   }
 

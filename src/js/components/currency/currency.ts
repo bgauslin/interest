@@ -18,7 +18,6 @@ class Currency extends LitElement {
   @query('dialog') dialog: HTMLDialogElement;
   @state() closing: Boolean = false;
   @state() open: Boolean = false;
-  @state() target: HTMLElement;
 
   static styles = css`${shadowStyles}`;
 
@@ -33,16 +32,12 @@ class Currency extends LitElement {
     super.connectedCallback();
     document.addEventListener('click', this.clickListener);
     document.addEventListener('keydown', this.keyListener);
-    this.addEventListener('touchstart', this.handleTouchstart, {passive: true});
-    this.addEventListener('touchend', this.handleTouchend, {passive: true});
   }
 
   disconnectedCallback() { 
     super.disconnectedCallback();
     document.removeEventListener('click', this.clickListener);
     document.removeEventListener('keydown', this.keyListener);
-    this.removeEventListener('touchstart', this.handleTouchstart);
-    this.removeEventListener('touchend', this.handleTouchend);
   }
 
   private handleClick(event: Event) {
@@ -56,19 +51,6 @@ class Currency extends LitElement {
       event.preventDefault();
       this.toggleMenu();
     }
-  }
-
-  private handleTouchstart(event: TouchEvent) {
-    const composed = event.composedPath();
-    this.target = <HTMLElement>composed[0];
-
-    if (this.target.tagName === 'BUTTON') {
-      this.target.classList.add('touch');
-    }
-  }
-
-  private handleTouchend() {
-    this.target.classList.remove('touch');
   }
 
   private toggleMenu() {

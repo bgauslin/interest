@@ -17,6 +17,7 @@ class App extends LitElement {
   
   @state() currency: string;
   @state() drawer: Boolean = false;
+  @state() target: HTMLElement;
   @state() values: CompoundingValues;
 
   static styles = css`${shadowStyles}`;
@@ -34,6 +35,8 @@ class App extends LitElement {
     this.addEventListener(AppEvents.CURRENCY, this.currencyListener);
     this.addEventListener(AppEvents.DRAWER, this.drawerListener);
     this.addEventListener(AppEvents.VALUES, this.valuesListener);
+    this.addEventListener('touchstart', this.handleTouchstart, {passive: true});
+    this.addEventListener('touchend', this.handleTouchend, {passive: true});
   }
 
   disconnectedCallback() { 
@@ -41,6 +44,8 @@ class App extends LitElement {
     this.removeEventListener(AppEvents.CURRENCY, this.currencyListener);
     this.removeEventListener(AppEvents.DRAWER, this.drawerListener);
     this.removeEventListener(AppEvents.VALUES, this.valuesListener);
+    this.removeEventListener('touchstart', this.handleTouchstart);
+    this.removeEventListener('touchend', this.handleTouchend);
   }
 
   private async updateCurrency(event: CustomEvent) {
@@ -71,6 +76,19 @@ class App extends LitElement {
       drawer: this.drawer,
       values: this.values,
     }));
+  }
+
+  private handleTouchstart(event: TouchEvent) {
+    const composed = event.composedPath();
+    this.target = <HTMLElement>composed[0];
+
+    if (this.target.tagName === 'BUTTON') {
+      this.target.classList.add('touch');
+    }
+  }
+
+  private handleTouchend() {
+    this.target.classList.remove('touch');
   }
 
   render() {

@@ -90,7 +90,7 @@ class App extends LitElement {
     this.target.classList.remove('touch');
   }
 
-  render() {
+  protected render() {
     return html`
       <app-values></app-values>
       <app-drawer aria-hidden="${!this.values}">
@@ -99,7 +99,7 @@ class App extends LitElement {
     `;
   }
 
-  renderTable() {
+  private renderTable() {
     if (!this.values || !this.currency) {
       return;
     }

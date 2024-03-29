@@ -113,7 +113,7 @@ class Values extends LitElement {
     }));
   }
 
-  render() {
+  protected render() {
     return html`
       <h1>Compound Interest</h1>
 

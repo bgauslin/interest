@@ -12,14 +12,49 @@ html {
 
 body {
   background-color: var(--body-fill);
+  color: var(--text-color);
   display: grid;
   font: var(--font);
   font-variation-settings: 'wght' 500;
   margin: 0;
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   min-block-size: 100dvh;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+:not(:defined) {
+  display: none;
 }
 
 noscript {
+  padding: 1.5em;
   place-self: center;
+  text-align: center;
+}
+
+a {
+  color: var(--link-color);
+  outline: none;
+  text-decoration: none;
+
+  &:visited {
+    color: var(--link-visited-color);
+  }
+  
+  &:focus-visible {
+    color: var(--link-focus-color);
+  }
+  
+  &:active {
+    color: var(--link-active-color, var(--link-focus-color));
+  }
+  
+  @media (any-hover: hover) {
+    & {
+      transition: color var(--transition);
+    }
+  
+    &:hover {
+      color: var(--link-focus-color);
+    }
+  }
 }

@@ -64,6 +64,9 @@
   --fill-3: var(--gray4);
   --fill-3a: rgba(209, 209, 214, var(--fill-alpha)); // --fill-3 with alpha
   --outline: var(--theme);
+  --link-color: DodgerBlue;
+  --link-focus-color: OrangeRed;
+  --link-visited-color: RebeccaPurple;
   --text-color: rgb(28, 28, 30); // Gray6 Dark
   --text-color-variant: var(--gray1);
   --theme: rgb(0, 173, 69);
@@ -86,6 +89,9 @@
     --fill-2a: rgba(44, 44, 46, var(--fill-alpha)); // --fill-2 with alpha
     --fill-3: var(--gray4);
     --fill-3a: rgba(58, 58, 60, var(--fill-alpha)); // --fill-3 with alpha
+    --link-color: CornflowerBlue;
+    --link-focus-color: DarkOrange;
+    --link-visited-color: MediumPurple;
     --text-color: rgb(229, 229, 234); // Gray5 Light
     --text-color-variant: rgb(142, 142, 147); // Gray1 Light
     --theme: rgb(77, 198, 125);

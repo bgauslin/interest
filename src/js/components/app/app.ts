@@ -78,9 +78,7 @@ class App extends LitElement {
   }
 
   private handleTouchstart(event: TouchEvent) {
-    const composed = event.composedPath();
-    this.target = <HTMLElement>composed[0];
-
+    this.target = <HTMLElement>event.composedPath()[0];
     if (this.target.tagName === 'BUTTON') {
       this.target.classList.add('touch');
     }

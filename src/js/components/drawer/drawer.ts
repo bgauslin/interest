@@ -19,7 +19,7 @@ class Drawer extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.getLocalStorage();
-    this.dispatchDrawerState();
+    this.sendDrawerState();
   }
 
   private getLocalStorage() {
@@ -43,7 +43,7 @@ class Drawer extends LitElement {
       this.openDrawer();
     }
     this.open = !this.open;
-    this.dispatchDrawerState();
+    this.sendDrawerState();
   }
 
   private closeDrawer() {
@@ -65,7 +65,7 @@ class Drawer extends LitElement {
     return `${this.drawer.scrollHeight / 16}rem`;
   }
 
-  private dispatchDrawerState() {
+  private sendDrawerState() {
     this.dispatchEvent(new CustomEvent(AppEvents.DRAWER, {
       bubbles: true,
       composed: true,

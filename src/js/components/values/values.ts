@@ -67,8 +67,8 @@ class Values extends LitElement {
     };
 
     this.updateTotal();
-    this.dispatchCurrency();
-    this.dispatchValues();
+    this.sendCurrency();
+    this.sendValues();
   }
 
   private getLocalStorage() {
@@ -83,17 +83,17 @@ class Values extends LitElement {
         const field = this.fields.find(field => field.name == key);
         field.value = `${value}`;
       }
-      this.dispatchValues();
+      this.sendValues();
     }
 
     if (storage.currency) {
       this.currency = storage.currency;
-      this.dispatchCurrency();
+      this.sendCurrency();
       this.updateTotal();
     }
   }
 
-  private dispatchCurrency() {
+  private sendCurrency() {
     this.dispatchEvent(new CustomEvent(AppEvents.CURRENCY, {
       bubbles: true,
       composed: true,
@@ -103,7 +103,7 @@ class Values extends LitElement {
     }));
   }
 
-  private dispatchValues() {
+  private sendValues() {
     this.dispatchEvent(new CustomEvent(AppEvents.VALUES, {
       bubbles: true,
       composed: true,

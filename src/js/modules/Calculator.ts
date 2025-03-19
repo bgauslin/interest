@@ -35,6 +35,7 @@ export class Calculator {
     const {locale} = Currencies.find(selected => selected.id === currency);
     const format = {
       currency: currency.toUpperCase(),
+      maximumFractionDigits: 0,
       style: 'currency',
     };
 

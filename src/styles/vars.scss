@@ -17,12 +17,12 @@
     --app-padding-inline: var(--gap);
     --body-fill: var(--fill-0);
     --footnote-display: none;
+    --table-border: var(--border);
     --table-border-radius: var(--card-radius);
     --table-optional-display: table-cell;
+    --values-border: var(--border);
     --values-border-radius: var(--card-radius);
     --values-list-grid: auto-flow / 1fr 1fr;
-    --table-border: var(--border);
-    --values-border: var(--border);
   }
 
   // [1] Always show the drawer on large screens.

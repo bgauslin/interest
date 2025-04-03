@@ -31,7 +31,6 @@ h1 {
   grid-area: title;
   margin: 0;
   overflow: hidden;
-  // text-align: var(--title-text-align, center);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -50,8 +49,8 @@ form {
 }
 
 li {
-  place-items: center start;
   grid: 'input label' / auto 1fr;
+  place-items: center start;
 }
 
 label {

@@ -12,7 +12,7 @@
 button,
 input {
   appearance: none;
-  background: 0;
+  background: none;
   border: 0;
   color: inherit;
   margin: 0;
@@ -105,8 +105,8 @@ label {
   }
 
   &[data-checked] {
-    color: var(--theme);
     background-color: var(--fill-3a);
+    color: var(--theme);
   }
 
   @media (any-hover: hover) {

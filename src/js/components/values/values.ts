@@ -6,7 +6,7 @@ import {AppEvents, STORAGE_ITEM} from '../../modules/shared';
 import shadowStyles from './values.scss';
 
 /**
- * Custom element that renders input fields and calculates compound interest
+ * Web component that renders input fields and calculates the compound interest
  * total based on user-provided values.
  */
 @customElement('app-values')

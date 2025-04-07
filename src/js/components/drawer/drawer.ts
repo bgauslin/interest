@@ -4,7 +4,7 @@ import {AppEvents, STORAGE_ITEM} from '../../modules/shared';
 import shadowStyles from './drawer.scss';
 
 /**
- * Custom element that expands/collapses a drawer when a button is clicked.
+ * Web component that expands/collapses a drawer when a button is clicked.
  */
 @customElement('app-drawer')
 class Drawer extends LitElement {

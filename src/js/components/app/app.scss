@@ -2,10 +2,11 @@
   display: grid;
   gap: var(--app-gap);
   grid: var(--app-grid);
-  max-inline-size: 90em;
-  padding-block: var(--app-padding-block);
-  padding-inline: var(--app-padding-inline);
-  place-self: var(--app-place-self, start stretch);
+  inline-size: var(--app-inline-size, auto);
+  margin-block: var(--app-margin-block);
+  margin-inline: var(--app-margin-inline);
+  max-inline-size: 84rem;
+  place-self: var(--app-place-self);
 }
 
 // Scrollable wrapper for <table> element.

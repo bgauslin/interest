@@ -1,6 +1,7 @@
 :root {
   // Layout.
   --app-grid: auto 1fr / 1fr;
+  --app-place-self: start stretch;
   --button-size: 2.75rem;
   --card-radius: 1em;
   --font: clamp(1em, .75em + 1vw, 1.25em) / 1.4 var(--font-family);
@@ -11,10 +12,10 @@
   --table-optional-display: none;
 
   // Responsive breakpoints.
-  @media (min-width: 40em) {
+  @media (min-width: 40rem) {
     --app-gap: var(--gap);
-    --app-padding-block: var(--gap) 0;
-    --app-padding-inline: var(--gap);
+    --app-margin-block: var(--gap) 0;
+    --app-margin-inline: var(--gap);
     --body-fill: var(--fill-0);
     --footnote-display: none;
     --table-border: var(--border);
@@ -27,16 +28,17 @@
 
   // [1] Always show the drawer on large screens.
   // [2] Always hide the button on large screens.
-  @media (min-width: 60em) {
+  @media (min-width: 60rem) {
     --app-gap: 0 var(--gap);
     --app-grid: 'values drawer' 1fr 'currency drawer' / 18em 1fr;
-    --app-padding-block: var(--gap);
+    --app-inline-size: calc(100% - (var(--gap) * 2));
+    --app-margin-block: var(--gap);
     --app-place-self: start center;
     --drawer-block-size: auto; // [1]
     --drawer-button-display: none; // [2]
     --values-inset-block: var(--gap) auto;
     --values-list-grid: auto-flow / 1fr;
-    --values-place-self: start;
+    --values-place-self: start stretch;
     --values-position: sticky;
   }
 

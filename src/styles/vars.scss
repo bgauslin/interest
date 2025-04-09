@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 :root {
   // Layout.
   --app-grid: auto 1fr / 1fr;
@@ -11,40 +13,46 @@
   --outline-size: 2px;
   --table-optional-display: none;
 
+  // Transitions.
+  --transition: .3s ease-out;
+
   // Responsive breakpoints.
   @media (min-width: 40rem) {
-    --app-gap: var(--gap);
-    --app-margin-block: var(--gap) 0;
-    --app-margin-inline: var(--gap);
-    --body-fill: var(--fill-0);
-    --footnote-display: none;
-    --table-border: var(--border);
-    --table-border-radius: var(--card-radius);
-    --table-optional-display: table-cell;
-    --values-border: var(--border);
-    --values-border-radius: var(--card-radius);
-    --values-list-grid: auto-flow / 1fr 1fr;
+    & {
+      --app-gap: var(--gap);
+      --app-margin-block: var(--gap) 0;
+      --app-margin-inline: var(--gap);
+      --body-fill: var(--fill-0);
+      --footnote-display: none;
+      --table-border: var(--border);
+      --table-border-radius: var(--card-radius);
+      --table-optional-display: table-cell;
+      --values-border: var(--border);
+      --values-border-radius: var(--card-radius);
+      --values-list-grid: auto-flow / 1fr 1fr;
+    }
   }
 
   // [1] Always show the drawer on large screens.
   // [2] Always hide the button on large screens.
   @media (min-width: 60rem) {
-    --app-gap: 0 var(--gap);
-    --app-grid: 'values drawer' 1fr 'currency drawer' / 18em 1fr;
-    --app-inline-size: calc(100% - (var(--gap) * 2));
-    --app-margin-block: var(--gap);
-    --app-place-self: start center;
-    --drawer-block-size: auto; // [1]
-    --drawer-button-display: none; // [2]
-    --values-inset-block: var(--gap) auto;
-    --values-list-grid: auto-flow / 1fr;
-    --values-place-self: start stretch;
-    --values-position: sticky;
+    & {
+      --app-gap: 0 var(--gap);
+      --app-grid: 'values drawer' 1fr 'currency drawer' / 18em 1fr;
+      --app-inline-size: calc(100% - (var(--gap) * 2));
+      --app-margin-block: var(--gap);
+      --app-place-self: start center;
+      --drawer-block-size: auto; // [1]
+      --drawer-button-display: none; // [2]
+      --values-inset-block: var(--gap) auto;
+      --values-list-grid: auto-flow / 1fr;
+      --values-place-self: start stretch;
+      --values-position: sticky;
+    }
   }
+}
 
-  // Transitions.
-  --transition: .3s ease-out;
-
+:root {
   // Grays via Apple HIG.
   // https://developer.apple.com/design/human-interface-guidelines/foundations/color#specifications
   --gray1: rgb(142, 142, 147);
@@ -73,31 +81,33 @@
   --text-color-variant: var(--gray1);
   --theme: rgb(0, 173, 69);
   --warning-color: rgb(219, 77, 77);
-  --zebra-stripe: #{mix(black, rgb(242, 242, 247), 3%)}; // Gray6 Light
+  --zebra-stripe: #{color.mix(black, rgb(242, 242, 247), 3%)}; // Gray6 Light
 
   @media (prefers-color-scheme: dark) {
-    // Dark mode grays.
-    --gray1: rgb(142, 142, 147);
-    --gray2: rgb(99, 99, 102);
-    --gray3: rgb(72, 72, 74);
-    --gray4: rgb(58, 58, 60);
-    --gray5: rgb(44, 44, 46);
-    --gray6: rgb(28, 28, 30);
+    & {
+      // Dark mode grays.
+      --gray1: rgb(142, 142, 147);
+      --gray2: rgb(99, 99, 102);
+      --gray3: rgb(72, 72, 74);
+      --gray4: rgb(58, 58, 60);
+      --gray5: rgb(44, 44, 46);
+      --gray6: rgb(28, 28, 30);
 
-    // Dark mode theming.
-    --fill-0: black;
-    --fill-1: var(--gray6);
-    --fill-2: var(--gray5);
-    --fill-2a: rgba(44, 44, 46, var(--fill-alpha)); // --fill-2 with alpha
-    --fill-3: var(--gray4);
-    --fill-3a: rgba(58, 58, 60, var(--fill-alpha)); // --fill-3 with alpha
-    --link-color: CornflowerBlue;
-    --link-focus-color: DarkOrange;
-    --link-visited-color: MediumPurple;
-    --text-color: rgb(229, 229, 234); // Gray5 Light
-    --text-color-variant: rgb(142, 142, 147); // Gray1 Light
-    --theme: rgb(77, 198, 125);
-    --warning-color: rgb(230, 130, 130);
-    --zebra-stripe: #{mix(white, rgb(28, 28, 30), 3%)}; // Gray6 Dark
+      // Dark mode theming.
+      --fill-0: black;
+      --fill-1: var(--gray6);
+      --fill-2: var(--gray5);
+      --fill-2a: rgba(44, 44, 46, var(--fill-alpha)); // --fill-2 with alpha
+      --fill-3: var(--gray4);
+      --fill-3a: rgba(58, 58, 60, var(--fill-alpha)); // --fill-3 with alpha
+      --link-color: CornflowerBlue;
+      --link-focus-color: DarkOrange;
+      --link-visited-color: MediumPurple;
+      --text-color: rgb(229, 229, 234); // Gray5 Light
+      --text-color-variant: rgb(142, 142, 147); // Gray1 Light
+      --theme: rgb(77, 198, 125);
+      --warning-color: rgb(230, 130, 130);
+      --zebra-stripe: #{color.mix(white, rgb(28, 28, 30), 3%)}; // Gray6 Dark
+    }
   }
 }

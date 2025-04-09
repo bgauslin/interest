@@ -22,7 +22,6 @@
       --app-gap: var(--gap);
       --app-margin-block: var(--gap) 0;
       --app-margin-inline: var(--gap);
-      --body-fill: var(--fill-0);
       --footnote-display: none;
       --table-border: var(--border);
       --table-border-radius: var(--card-radius);
@@ -64,7 +63,6 @@
 
   // Theming.
   --backdrop-filter: blur(6px);
-  --body-fill: var(--fill-1);
   --border: 1px solid var(--gray5);
   --fill-alpha: .7;
   --fill-0: var(--gray6);

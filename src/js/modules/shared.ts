@@ -5,3 +5,11 @@ export enum AppEvents {
   DRAWER = 'drawerUpdated',
   VALUES = 'valuesUpdated',
 }
+
+export interface TextInput {
+  inputmode: string,
+  label: string,
+  name: string,
+  pattern: string,
+  value: string,
+}

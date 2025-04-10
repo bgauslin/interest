@@ -10,8 +10,7 @@ import shadowStyles from './drawer.scss';
 class Drawer extends LitElement {
   @query('[aria-controls="drawer"]') button: HTMLButtonElement;
   @query('[id="drawer"]') drawer: HTMLDivElement;
-  
-  @state() drawerSize = '0';
+  @state() drawerSize: string = '0';
   @state() open: Boolean = false;
 
   static styles = css`${shadowStyles}`;
@@ -62,7 +61,7 @@ class Drawer extends LitElement {
   }
 
   private getDrawerSize(): string {
-    return `${this.drawer.scrollHeight / 16}rem`;
+    return `${this.drawer.scrollHeight}px`;
   }
 
   private sendDrawerState() {

@@ -1,7 +1,7 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, query, state} from 'lit/decorators.js';
 import {Calculator, CompoundingValues, DEFAULT_CURRENCY} from '../../modules/Calculator';
-import {AppEvents, STORAGE_ITEM} from '../../modules/shared';
+import {AppEvents, STORAGE_ITEM, TextInput} from '../../modules/shared';
 
 import shadowStyles from './values.scss';
 
@@ -11,25 +11,25 @@ import shadowStyles from './values.scss';
  */
 @customElement('app-values')
 class Values extends LitElement {
-  private calculator = new Calculator();
+  private calculator: Calculator;
   private currencyListener: EventListenerObject;
 
   @query('form') form: HTMLFormElement;
-
-  @state() currency = DEFAULT_CURRENCY;
-  @state() fields = [
+  @state() currency: string = DEFAULT_CURRENCY;
+  @state() fields: TextInput[] = [
     {inputmode: 'numeric', label: 'Principal', name: 'principal', pattern: '[0-9]+', value: ''},
     {inputmode: 'numeric', label: 'Yearly addition', name: 'contribution', pattern: '[0-9]+', value: ''},
     {inputmode: 'decimal', label: 'Interest rate', name: 'rate', pattern: '[0-9]{0,2}[\\.]?[0-9]{1,2}', value: ''},
     {inputmode: 'numeric', label: 'Years to grow', name: 'periods', pattern: '[0-9]+', value: ''},
   ];
-  @state() total = '';
+  @state() total: string = '';
   @state() values: CompoundingValues;
 
   static styles = css`${shadowStyles}`;
 
   constructor() {
     super();
+    this.calculator = new Calculator();
     this.currencyListener = this.updateCurrency.bind(this);
   }
 
@@ -54,9 +54,7 @@ class Values extends LitElement {
   }
 
   private updateValues() {
-    if (this.form.querySelectorAll(':invalid').length) {
-      return;
-    }
+    if (this.form.querySelectorAll(':invalid').length) return;
 
     const formData = new FormData(this.form);
     this.values = {
@@ -73,9 +71,7 @@ class Values extends LitElement {
 
   private getLocalStorage() {
     const storage = JSON.parse(localStorage.getItem(STORAGE_ITEM));
-    if (!storage) {
-      return;
-    }
+    if (!storage) return;
 
     if (storage.values) {
       this.values = storage.values;

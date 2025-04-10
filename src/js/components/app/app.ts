@@ -10,7 +10,7 @@ import shadowStyles from './app.scss';
  */
 @customElement('interest-app')
 class App extends LitElement {
-  private calculator = new Calculator();
+  private calculator: Calculator;
   private currencyListener: EventListenerObject;
   private drawerListener: EventListenerObject;
   private valuesListener: EventListenerObject;
@@ -24,6 +24,7 @@ class App extends LitElement {
 
   constructor() {
     super();
+    this.calculator = new Calculator();
     this.currencyListener = this.updateCurrency.bind(this);
     this.drawerListener = this.updateDrawer.bind(this);
     this.valuesListener = this.updateValues.bind(this);
@@ -98,12 +99,9 @@ class App extends LitElement {
   }
 
   private renderTable() {
-    if (!this.values || !this.currency) {
-      return;
-    }
+    if (!this.values || !this.currency) return;
 
-    const tableData: Sums[] =
-        this.calculator.compound(this.values, this.currency);
+    const tableData: Sums[] =  this.calculator.compound(this.values, this.currency);
 
     return html`
       <div class="table">

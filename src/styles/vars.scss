@@ -4,6 +4,7 @@
   // Layout.
   --app-grid: auto 1fr / 1fr;
   --app-place-self: start stretch;
+  --body-fill: var(--fill-1);
   --button-size: 2.75rem;
   --card-radius: 1em;
   --font: clamp(1em, .75em + 1vw, 1.25em) / 1.4 var(--font-family);
@@ -22,6 +23,7 @@
       --app-gap: var(--gap);
       --app-margin-block: var(--gap) 0;
       --app-margin-inline: var(--gap);
+      --body-fill: revert;
       --footnote-display: none;
       --table-border: var(--border);
       --table-border-radius: var(--card-radius);

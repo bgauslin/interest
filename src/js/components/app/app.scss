@@ -53,10 +53,6 @@ th {
   padding-block: 1em;
 }
 
-thead {
-  border-block-end: 1px solid var(--fill-0);
-}
-
 tbody > tr:nth-child(odd) {
   background-color: var(--zebra-stripe);
 }

@@ -15,11 +15,12 @@ class Values extends LitElement {
   private currencyListener: EventListenerObject;
 
   @query('form') form: HTMLFormElement;
+  @state() commas: boolean = false;
   @state() currency: string = DEFAULT_CURRENCY;
   @state() fields: TextInput[] = [
     {inputmode: 'numeric', label: 'Principal', name: 'principal', pattern: '[0-9]+', value: ''},
     {inputmode: 'numeric', label: 'Yearly addition', name: 'contribution', pattern: '[0-9]+', value: ''},
-    {inputmode: 'decimal', label: 'Interest rate', name: 'rate', pattern: '[0-9]{0,2}[\\.]?[0-9]{1,2}', value: ''},
+    {inputmode: 'decimal', label: 'Interest rate', name: 'rate', pattern: '[0-9]{0,2}[,\.]?[0-9]{1,2}', value: ''},
     {inputmode: 'numeric', label: 'Years to grow', name: 'periods', pattern: '[0-9]+', value: ''},
   ];
   @state() total: string = '';
@@ -57,11 +58,17 @@ class Values extends LitElement {
     if (this.form.querySelectorAll(':invalid').length) return;
 
     const formData = new FormData(this.form);
+
+    const rate_ = `${formData.get('rate')}`;
+    const found = rate_.match(/[,]/g);
+    this.commas = found && found.length !== 0;
+    const rate = Number(rate_.replace(',', '.'));
+
     this.values = {
       contribution: Number(formData.get('contribution')),
       periods: Number(formData.get('periods')),
       principal: Number(formData.get('principal')),
-      rate: Number(formData.get('rate')),
+      rate,
     };
 
     this.updateTotal();

@@ -15,8 +15,9 @@ class App extends LitElement {
   private drawerListener: EventListenerObject;
   private valuesListener: EventListenerObject;
   
+  @state() commas: boolean = false;
   @state() currency: string;
-  @state() drawer: Boolean = false;
+  @state() drawer: boolean = false;
   @state() target: HTMLElement;
   @state() values: CompoundingValues;
 
@@ -62,6 +63,7 @@ class App extends LitElement {
 
   private async updateValues(event: CustomEvent) {
     await this.updateComplete;
+    this.commas = event.detail.commas;
     this.values = event.detail.values;
     this.setLocalStorage();
   }
@@ -72,6 +74,7 @@ class App extends LitElement {
     }
 
     localStorage.setItem(STORAGE_ITEM, JSON.stringify({
+      commas: this.commas,
       currency: this.currency,
       drawer: this.drawer,
       values: this.values,

@@ -80,11 +80,16 @@ class Values extends LitElement {
     const storage = JSON.parse(localStorage.getItem(STORAGE_ITEM));
     if (!storage) return;
 
+    if (storage.commas) {
+      this.commas = storage.commas;
+    }
+
     if (storage.values) {
       this.values = storage.values;
       for (const [key, value] of Object.entries(this.values)) {
         const field = this.fields.find(field => field.name == key);
-        field.value = `${value}`;
+        const value_ = `${value}`;
+        field.value = this.commas ? value_.replace('.', ',') : value_;
       }
       this.sendValues();
     }
@@ -111,6 +116,7 @@ class Values extends LitElement {
       bubbles: true,
       composed: true,
       detail: {
+        commas: this.commas,
         values: this.values,
       },
     }));

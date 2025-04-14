@@ -9,7 +9,7 @@ import shadowStyles from './values.scss';
  * Web component that renders input fields and calculates the compound interest
  * total based on user-provided values.
  */
-@customElement('app-values')
+@customElement('interest-values')
 class Values extends LitElement {
   private calculator: Calculator;
   private currencyListener: EventListenerObject;
@@ -154,9 +154,9 @@ class Values extends LitElement {
         ${this.total}
       </div>
 
-      <app-currency
+      <interest-currency
         aria-hidden="${this.total === ''}"
-        currency="${this.currency}"></app-currency>
+        currency="${this.currency}"></interest-currency>
     `;
   }
 }

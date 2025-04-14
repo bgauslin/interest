@@ -94,10 +94,10 @@ class App extends LitElement {
 
   protected render() {
     return html`
-      <app-values></app-values>
-      <app-drawer aria-hidden="${!this.values}">
+      <interest-values></interest-values>
+      <interest-drawer aria-hidden="${!this.values}">
         ${this.renderTable()}
-      </app-drawer>
+      </interest-drawer>
     `;
   }
 

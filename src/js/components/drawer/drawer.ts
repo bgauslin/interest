@@ -11,7 +11,7 @@ class Drawer extends LitElement {
   @query('[aria-controls="drawer"]') button: HTMLButtonElement;
   @query('[id="drawer"]') drawer: HTMLDivElement;
   @state() drawerSize: string = '0';
-  @state() open: Boolean = false;
+  @state() open: boolean = false;
 
   static styles = css`${shadowStyles}`;
 

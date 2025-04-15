@@ -63,8 +63,9 @@ class App extends LitElement {
 
   private async updateValues(event: CustomEvent) {
     await this.updateComplete;
-    this.commas = event.detail.commas;
-    this.values = event.detail.values;
+    const {commas, values} = event.detail;
+    this.commas = commas;
+    this.values = values;
     this.setLocalStorage();
   }
 

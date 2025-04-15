@@ -87,7 +87,7 @@ class Values extends LitElement {
     if (storage.values) {
       this.values = storage.values;
       for (const [key, value] of Object.entries(this.values)) {
-        const field = this.fields.find(field => field.name == key);
+        const field = this.fields.find(field => field.name === key);
         const value_ = `${value}`;
         field.value = this.commas ? value_.replace('.', ',') : value_;
       }
@@ -123,37 +123,33 @@ class Values extends LitElement {
   }
 
   protected render() {
+    const items = this.fields.map((field) => {
+      const {inputmode, label, name, pattern, value} = field;
+      return html`
+        <li class="${name}">
+          <label for="${name}">${label}</label>
+          <input
+            id="${name}"
+            inputmode="${inputmode}"
+            name="${name}"
+            pattern="${pattern}"
+            required
+            type="text"
+            .value="${value}">
+        </li>
+      `;
+    });
+
     return html`
       <h1>Compound Interest</h1>
-
       <form @change="${this.updateValues}">
         <ul role="list">
-          ${this.fields.map((field) => {
-            const {inputmode, label, name, pattern, value} = field;
-            return html`
-              <li class="${name}">
-                <label for="${name}">${label}</label>
-                <input
-                  id="${name}"
-                  inputmode="${inputmode}"
-                  name="${name}"
-                  pattern="${pattern}"
-                  required
-                  type="text"
-                  .value="${value}">
-              </li>
-            `;
-          })}
+          ${items}
         </ul>
       </form>
-
       <div
         aria-hidden="${this.total === ''}"
-        class="total"
-        tabindex="-1">
-        ${this.total}
-      </div>
-
+        class="total">${this.total}</div>
       <interest-currency
         aria-hidden="${this.total === ''}"
         currency="${this.currency}"></interest-currency>

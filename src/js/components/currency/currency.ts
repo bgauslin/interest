@@ -16,8 +16,8 @@ class Currency extends LitElement {
   @property({reflect: true}) currency = DEFAULT_CURRENCY;
   @query(':checked') checked: HTMLInputElement;
   @query('dialog') dialog: HTMLDialogElement;
-  @state() closing: Boolean = false;
-  @state() open: Boolean = false;
+  @state() closing: boolean = false;
+  @state() open: boolean = false;
 
   static styles = css`${shadowStyles}`;
 

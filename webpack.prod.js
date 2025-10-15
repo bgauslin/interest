@@ -13,18 +13,4 @@ module.exports = merge(common, {
       filename: '[contenthash].css',
     }),
   ],
-  // optimization: {
-  //   minimize: true,
-  //   minimizer: [
-  //     new TerserPlugin({
-  //       extractComments: false,
-  //       terserOptions: {
-  //         mangle: true,
-  //         output: {
-  //           comments: false,
-  //         },
-  //       }
-  //     })
-  //   ],
-  // },
 });

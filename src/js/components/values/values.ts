@@ -55,6 +55,12 @@ class Values extends LitElement {
   }
 
   private updateValues() {
+    let timer;
+    clearTimeout(timer);
+    timer = setTimeout(() => this.formValues(), 300);
+  }
+
+  private formValues() {
     if (this.form.querySelectorAll(':invalid').length) return;
 
     const formData = new FormData(this.form);

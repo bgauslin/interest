@@ -2,8 +2,8 @@ import {LitElement, css, html} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
 import {Calculator, CompoundingValues, Sums} from '../../modules/Calculator';
 import {AppEvents, STORAGE_ITEM} from '../../modules/shared';
-
 import shadowStyles from './app.scss';
+
 
 /**
  * Web component that sends/receives custom event data to/from custom elements.

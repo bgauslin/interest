@@ -2,8 +2,8 @@ import {LitElement, css, html} from 'lit';
 import {customElement, query, state} from 'lit/decorators.js';
 import {Calculator, CompoundingValues, DEFAULT_CURRENCY} from '../../modules/Calculator';
 import {AppEvents, STORAGE_ITEM, TextInput} from '../../modules/shared';
-
 import shadowStyles from './values.scss';
+
 
 /**
  * Web component that renders input fields and calculates the compound interest

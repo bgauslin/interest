@@ -3,6 +3,7 @@ import {customElement, query, state} from 'lit/decorators.js';
 import {AppEvents, STORAGE_ITEM} from '../../modules/shared';
 import shadowStyles from './drawer.scss';
 
+
 /**
  * Web component that expands/collapses a drawer when a button is clicked.
  */

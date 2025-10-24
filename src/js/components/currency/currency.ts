@@ -2,8 +2,8 @@ import {LitElement, PropertyValues, css, html} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
 import {Currencies, DEFAULT_CURRENCY} from '../../modules/Calculator';
 import {AppEvents} from '../../modules/shared';
-
 import shadowStyles from './currency.scss';
+
 
 /**
  * Web component that renders currencies for a user to choose from.

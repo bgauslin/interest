@@ -79,9 +79,9 @@
   --link-visited-color: RebeccaPurple;
   --text-color: rgb(28, 28, 30); // Gray6 Dark
   --text-color-variant: var(--gray1);
-  --theme: rgb(0, 173, 69);
+  --theme: rgb(0, 125, 50);
   --warning-color: rgb(219, 77, 77);
-  --zebra-stripe: #{color.mix(black, rgb(242, 242, 247), 3%)}; // Gray6 Light
+  --zebra-stripe: #{color.mix(white, rgb(242, 242, 247), 40%)}; // Gray6 Light
 
   @media (prefers-color-scheme: dark) {
     & {
@@ -105,9 +105,9 @@
       --link-visited-color: MediumPurple;
       --text-color: rgb(229, 229, 234); // Gray5 Light
       --text-color-variant: rgb(142, 142, 147); // Gray1 Light
-      --theme: rgb(77, 198, 125);
+      --theme: rgb(40, 175, 82);
       --warning-color: rgb(230, 130, 130);
-      --zebra-stripe: #{color.mix(white, rgb(28, 28, 30), 3%)}; // Gray6 Dark
+      --zebra-stripe: #{color.mix(white, rgb(28, 28, 30), 5%)}; // Gray6 Dark
     }
   }
 }

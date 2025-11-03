@@ -12,7 +12,7 @@ import shadowStyles from './values.scss';
 @customElement('interest-values')
 class Values extends LitElement {
   private calculator: Calculator;
-  private currencyListener: EventListenerObject;
+  private currencyHandler: EventListenerObject;
 
   @query('form') form: HTMLFormElement;
   @state() commas: boolean = false;
@@ -31,18 +31,18 @@ class Values extends LitElement {
   constructor() {
     super();
     this.calculator = new Calculator();
-    this.currencyListener = this.updateCurrency.bind(this);
+    this.currencyHandler = this.updateCurrency.bind(this);
   }
 
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener(AppEvents.CURRENCY, this.currencyListener);
+    this.addEventListener(AppEvents.CURRENCY, this.currencyHandler);
     this.getLocalStorage();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.removeEventListener(AppEvents.CURRENCY, this.currencyListener);
+    this.removeEventListener(AppEvents.CURRENCY, this.currencyHandler);
   }
 
   private updateCurrency(event: CustomEvent) {

@@ -10,8 +10,8 @@ import shadowStyles from './currency.scss';
  */
 @customElement('interest-currency')
 class Currency extends LitElement {
-  private clickListener: EventListenerObject;
-  private keyListener: EventListenerObject;
+  private clickHandler: EventListenerObject;
+  private keyHandler: EventListenerObject;
 
   @property({reflect: true}) currency = DEFAULT_CURRENCY;
   @query(':checked') checked: HTMLInputElement;
@@ -23,20 +23,20 @@ class Currency extends LitElement {
 
   constructor() {
     super();
-    this.clickListener = this.handleClick.bind(this);
-    this.keyListener = this.handleKey.bind(this);
+    this.clickHandler = this.handleClick.bind(this);
+    this.keyHandler = this.handleKey.bind(this);
   }
   
   connectedCallback() {
     super.connectedCallback();
-    document.addEventListener('click', this.clickListener);
-    document.addEventListener('keydown', this.keyListener);
+    document.addEventListener('click', this.clickHandler);
+    document.addEventListener('keydown', this.keyHandler);
   }
 
   disconnectedCallback() { 
     super.disconnectedCallback();
-    document.removeEventListener('click', this.clickListener);
-    document.removeEventListener('keydown', this.keyListener);
+    document.removeEventListener('click', this.clickHandler);
+    document.removeEventListener('keydown', this.keyHandler);
   }
 
   private handleClick(event: Event) {

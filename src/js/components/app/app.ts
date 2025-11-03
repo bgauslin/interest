@@ -11,9 +11,9 @@ import shadowStyles from './app.scss';
 @customElement('interest-app')
 class App extends LitElement {
   private calculator: Calculator;
-  private currencyListener: EventListenerObject;
-  private drawerListener: EventListenerObject;
-  private valuesListener: EventListenerObject;
+  private currencyHandler: EventListenerObject;
+  private drawerHandler: EventListenerObject;
+  private valuesHandler: EventListenerObject;
   
   @state() commas: boolean = false;
   @state() currency: string;
@@ -26,25 +26,25 @@ class App extends LitElement {
   constructor() {
     super();
     this.calculator = new Calculator();
-    this.currencyListener = this.updateCurrency.bind(this);
-    this.drawerListener = this.updateDrawer.bind(this);
-    this.valuesListener = this.updateValues.bind(this);
+    this.currencyHandler = this.updateCurrency.bind(this);
+    this.drawerHandler = this.updateDrawer.bind(this);
+    this.valuesHandler = this.updateValues.bind(this);
   }
   
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener(AppEvents.CURRENCY, this.currencyListener);
-    this.addEventListener(AppEvents.DRAWER, this.drawerListener);
-    this.addEventListener(AppEvents.VALUES, this.valuesListener);
+    this.addEventListener(AppEvents.CURRENCY, this.currencyHandler);
+    this.addEventListener(AppEvents.DRAWER, this.drawerHandler);
+    this.addEventListener(AppEvents.VALUES, this.valuesHandler);
     this.addEventListener('touchstart', this.handleTouchstart, {passive: true});
     this.addEventListener('touchend', this.handleTouchend, {passive: true});
   }
 
   disconnectedCallback() { 
     super.disconnectedCallback();
-    this.removeEventListener(AppEvents.CURRENCY, this.currencyListener);
-    this.removeEventListener(AppEvents.DRAWER, this.drawerListener);
-    this.removeEventListener(AppEvents.VALUES, this.valuesListener);
+    this.removeEventListener(AppEvents.CURRENCY, this.currencyHandler);
+    this.removeEventListener(AppEvents.DRAWER, this.drawerHandler);
+    this.removeEventListener(AppEvents.VALUES, this.valuesHandler);
     this.removeEventListener('touchstart', this.handleTouchstart);
     this.removeEventListener('touchend', this.handleTouchend);
   }

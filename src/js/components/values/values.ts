@@ -1,7 +1,7 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, query, state} from 'lit/decorators.js';
 import {Calculator, CompoundingValues, DEFAULT_CURRENCY} from '../../modules/Calculator';
-import {AppEvents, STORAGE_ITEM, TextInput} from '../../modules/shared';
+import {Events, STORAGE_ITEM, TextInput} from '../../modules/shared';
 import shadowStyles from './values.scss';
 
 
@@ -36,13 +36,13 @@ class Values extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener(AppEvents.CURRENCY, this.currencyHandler);
+    this.addEventListener(Events.Currency, this.currencyHandler);
     this.getLocalStorage();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.removeEventListener(AppEvents.CURRENCY, this.currencyHandler);
+    this.removeEventListener(Events.Currency, this.currencyHandler);
   }
 
   private updateCurrency(event: CustomEvent) {
@@ -108,7 +108,7 @@ class Values extends LitElement {
   }
 
   private sendCurrency() {
-    this.dispatchEvent(new CustomEvent(AppEvents.CURRENCY, {
+    this.dispatchEvent(new CustomEvent(Events.Currency, {
       bubbles: true,
       composed: true,
       detail: {
@@ -118,7 +118,7 @@ class Values extends LitElement {
   }
 
   private sendValues() {
-    this.dispatchEvent(new CustomEvent(AppEvents.VALUES, {
+    this.dispatchEvent(new CustomEvent(Events.Values, {
       bubbles: true,
       composed: true,
       detail: {

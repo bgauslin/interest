@@ -1,9 +1,13 @@
 export const STORAGE_ITEM = 'interest';
 
-export enum AppEvents {
-  CURRENCY = 'currencyUpdated',
-  DRAWER = 'drawerUpdated',
-  VALUES = 'valuesUpdated',
+export enum Events {
+  Click = 'click',
+  Currency = 'currencyUpdated',
+  Drawer = 'drawerUpdated',
+  Keydown = 'keydown',
+  Touchend = 'touchend',
+  Touchstart = 'touchstart',
+  Values = 'valuesUpdated',
 }
 
 export interface TextInput {

@@ -1,6 +1,6 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, query, state} from 'lit/decorators.js';
-import {AppEvents, STORAGE_ITEM} from '../../modules/shared';
+import {Events, STORAGE_ITEM} from '../../modules/shared';
 import shadowStyles from './drawer.scss';
 
 
@@ -66,7 +66,7 @@ class Drawer extends LitElement {
   }
 
   private sendDrawerState() {
-    this.dispatchEvent(new CustomEvent(AppEvents.DRAWER, {
+    this.dispatchEvent(new CustomEvent(Events.Drawer, {
       bubbles: true,
       composed: true,
       detail: {

@@ -1,7 +1,7 @@
 import {LitElement, PropertyValues, css, html} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
 import {Currencies, DEFAULT_CURRENCY} from '../../modules/Calculator';
-import {AppEvents} from '../../modules/shared';
+import {Events} from '../../modules/shared';
 import shadowStyles from './currency.scss';
 
 
@@ -29,14 +29,14 @@ class Currency extends LitElement {
   
   connectedCallback() {
     super.connectedCallback();
-    document.addEventListener('click', this.clickHandler);
-    document.addEventListener('keydown', this.keyHandler);
+    document.addEventListener(Events.Click, this.clickHandler);
+    document.addEventListener(Events.Keydown, this.keyHandler);
   }
 
   disconnectedCallback() { 
     super.disconnectedCallback();
-    document.removeEventListener('click', this.clickHandler);
-    document.removeEventListener('keydown', this.keyHandler);
+    document.removeEventListener(Events.Click, this.clickHandler);
+    document.removeEventListener(Events.Keydown, this.keyHandler);
   }
 
   private handleClick(event: Event) {
@@ -81,7 +81,7 @@ class Currency extends LitElement {
       }
 
       if (value) {
-        this.dispatchEvent(new CustomEvent(AppEvents.CURRENCY, {
+        this.dispatchEvent(new CustomEvent(Events.Currency, {
           bubbles: true,
           composed: true,
           detail: {

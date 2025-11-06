@@ -1,7 +1,7 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
 import {Calculator, CompoundingValues, Sums} from '../../modules/Calculator';
-import {AppEvents, STORAGE_ITEM} from '../../modules/shared';
+import {Events, STORAGE_ITEM} from '../../modules/shared';
 import shadowStyles from './app.scss';
 
 
@@ -33,20 +33,20 @@ class App extends LitElement {
   
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener(AppEvents.CURRENCY, this.currencyHandler);
-    this.addEventListener(AppEvents.DRAWER, this.drawerHandler);
-    this.addEventListener(AppEvents.VALUES, this.valuesHandler);
-    this.addEventListener('touchstart', this.handleTouchstart, {passive: true});
-    this.addEventListener('touchend', this.handleTouchend, {passive: true});
+    this.addEventListener(Events.Currency, this.currencyHandler);
+    this.addEventListener(Events.Drawer, this.drawerHandler);
+    this.addEventListener(Events.Touchend, this.handleTouchend, {passive: true});
+    this.addEventListener(Events.Touchstart, this.handleTouchstart, {passive: true});
+    this.addEventListener(Events.Values, this.valuesHandler);
   }
 
   disconnectedCallback() { 
     super.disconnectedCallback();
-    this.removeEventListener(AppEvents.CURRENCY, this.currencyHandler);
-    this.removeEventListener(AppEvents.DRAWER, this.drawerHandler);
-    this.removeEventListener(AppEvents.VALUES, this.valuesHandler);
-    this.removeEventListener('touchstart', this.handleTouchstart);
-    this.removeEventListener('touchend', this.handleTouchend);
+    this.removeEventListener(Events.Currency, this.currencyHandler);
+    this.removeEventListener(Events.Drawer, this.drawerHandler);
+    this.removeEventListener(Events.Touchend, this.handleTouchend);
+    this.removeEventListener(Events.Touchstart, this.handleTouchstart);
+    this.removeEventListener(Events.Values, this.valuesHandler);
   }
 
   private async updateCurrency(event: CustomEvent) {

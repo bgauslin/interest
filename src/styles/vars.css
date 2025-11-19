@@ -1,5 +1,7 @@
 :root {
-  /* Layout. */
+  /**
+   * Layout.
+   */
   --app-grid: auto 1fr / 1fr;
   --app-place-self: start stretch;
   --body-fill: var(--fill-1);
@@ -12,10 +14,14 @@
   --outline-size: 2px;
   --table-optional-display: none;
 
-  /* Transitions. */
+  /**
+   * Transitions.
+   */
   --transition: .3s ease-out;
 
-  /* Responsive breakpoints. */
+  /**
+   * Responsive breakpoints.
+   */
   @media (min-width: 40rem) {
     & {
       --app-gap: var(--gap);
@@ -54,8 +60,10 @@
 }
 
 :root {
-  /* Grays via Apple HIG. */
-  /* https://developer.apple.com/design/human-interface-guidelines/foundations/color#specifications */
+  /**
+   * Grays via Apple HIG.
+   * https://developer.apple.com/design/human-interface-guidelines/foundations/color#specifications
+   */
   --gray1: rgb(142, 142, 147);
   --gray2: rgb(174, 174, 178);
   --gray3: rgb(199, 199, 204);
@@ -63,7 +71,9 @@
   --gray5: rgb(229, 229, 234);
   --gray6: rgb(242, 242, 247);
 
-  /* Theming. */
+  /**
+   * Theming.
+   */
   --backdrop-filter: blur(6px);
   --border: 1px solid var(--gray5);
   --fill-alpha: .7;
@@ -81,11 +91,15 @@
   --text-color-variant: var(--gray1);
   --theme: rgb(0, 125, 50);
   --warning-color: rgb(219, 77, 77);
+
+  /* TODO: Use native color-mix(). */
   --zebra-stripe: rgb(247.2, 247.2, 250.2);  /* White, Gray6 Light, 40% */
 
   @media (prefers-color-scheme: dark) {
     & {
-      /* Dark mode grays. */
+      /**
+       * Dark mode grays.
+       */
       --gray1: rgb(142, 142, 147);
       --gray2: rgb(99, 99, 102);
       --gray3: rgb(72, 72, 74);
@@ -93,7 +107,9 @@
       --gray5: rgb(44, 44, 46);
       --gray6: rgb(28, 28, 30);
 
-      /* Dark mode theming. */
+      /**
+       * Dark mode theming.
+       */
       --fill-0: black;
       --fill-1: var(--gray6);
       --fill-2: var(--gray5);
@@ -107,6 +123,8 @@
       --text-color-variant: rgb(142, 142, 147);  /* Gray1 Light */
       --theme: rgb(40, 175, 82);
       --warning-color: rgb(230, 130, 130);
+
+      /* TODO: Use native color-mix(). */
       --zebra-stripe: rgb(39.35, 39.35, 41.25);  /* White, Gray6 Dark, 5% */
     }
   }

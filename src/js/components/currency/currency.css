@@ -8,7 +8,9 @@
   box-sizing: border-box;
 }
 
-/* Reset default element styles. */
+/**
+ * Reset default element styles.
+ */
 button,
 input {
   appearance: none;
@@ -60,7 +62,9 @@ button {
   }
 }
 
-/* Currency menu. */
+/**
+ * Currency menu.
+ */
 dialog {
   -webkit-backdrop-filter: var(--backdrop-filter);
   backdrop-filter: var(--backdrop-filter);

@@ -2,7 +2,7 @@ import {LitElement, css, html} from 'lit';
 import {customElement, query, state} from 'lit/decorators.js';
 import {Calculator, CompoundingValues, DEFAULT_CURRENCY} from '../../modules/calculator';
 import {Events, STORAGE_ITEM, TextInput} from '../../modules/shared';
-import shadowStyles from './values.scss';
+import shadowStyles from './values.css';
 
 
 /**

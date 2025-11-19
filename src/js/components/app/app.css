@@ -9,7 +9,7 @@
   place-self: var(--app-place-self);
 }
 
-// Scrollable wrapper for <table> element.
+/* Scrollable wrapper for <table> element. */
 .table {
   background-color: var(--fill-1);
   border: var(--table-border);
@@ -30,17 +30,19 @@ table {
   inline-size: 100%;
 }
 
-// [1] All cells are end-aligned by default since they contain numeric content.
-// [2] First column, however, is start-aligned for readability.
+/**
+ * [1] All cells are end-aligned by default since they contain numeric content.
+ * [2] First column, however, is start-aligned for readability.
+ */
 :is(th, td) {
   line-height: 1;
   padding-block: .5em;
   padding-inline: 1em;
-  text-align: end; // [1]
+  text-align: end;  /* [1] */
   white-space: nowrap;
 
   &:first-child {
-    text-align: start; // [2]
+    text-align: start;  /* [2] */
   }
 }
 
@@ -62,7 +64,7 @@ td.balance {
   font-variation-settings: 'wght' 600;
 }
 
-// Footnote after the table.
+/* Footnote after the table. */
 .footnote {
   color: var(--text-color-variant);
   display: var(--footnote-display, block);

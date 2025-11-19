@@ -2,7 +2,7 @@ import {LitElement, css, html} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
 import {Calculator, CompoundingValues, Sums} from '../../modules/calculator';
 import {Events, STORAGE_ITEM} from '../../modules/shared';
-import shadowStyles from './app.scss';
+import shadowStyles from './app.css';
 
 
 /**

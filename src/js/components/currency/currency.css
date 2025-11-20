@@ -22,6 +22,9 @@ input {
   padding: 0;
 }
 
+/**
+ * Button that opens/closes the <dialog> element.
+ */
 button {
   background-color: var(--fill-2);
   block-size: var(--button-size);
@@ -78,24 +81,31 @@ dialog {
   padding: 0;
   transform: translateX(calc(-100% + var(--button-size)));
   transition: opacity var(--transition);
+
+  &[open] {
+    block-size: auto;
+    opacity: 1;
+  }
+
+  &,
+  &[data-closing] {
+    opacity: 0;
+  }
 }
 
-dialog[open] {
-  block-size: auto;
-  opacity: 1;
-}
-
-dialog,
-dialog[data-closing] {
-  opacity: 0;
-}
-
+/**
+ * List of currency options.
+ */
 ul {
   list-style: none;
   margin-block: .5rem;
   padding: 0;
 }
 
+/**
+ * Each currency option is within a <label> wrapped around a radio button with
+ * <span> elements for a currency symbol and its text label.
+ */
 label {
   align-items: center;
   block-size: 2.75rem;
@@ -120,19 +130,24 @@ label {
       background-color: var(--fill-3a);
     }
   }
-}
 
-input {
-  inline-size: 0;
-}
+  /* Hide the checkbox and let the outer <label> act as the click target. */
+  input {
+    inline-size: 0;
+  }
 
-span {
-  white-space: nowrap;
-}
+  /**
+   * <span> elements for text content.
+   */
+  .symbol {
+    display: inline-grid;
+    font-size: 1.5rem;
+    inline-size: 2.5rem;
+    place-content: center;
+  }
 
-.symbol {
-  display: inline-grid;
-  font-size: 1.5rem;
-  inline-size: 2.5rem;
-  place-content: center;
+  .label {
+    flex: 1;
+    white-space: nowrap;
+  }
 }

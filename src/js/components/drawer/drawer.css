@@ -1,17 +1,21 @@
-:where(*) {
-  box-sizing: border-box;
-}
-
 :host {
   display: grid;
   grid: 'drawer' 'button' 1fr;
   padding-block: o  env(safe-area-inset-bottom);
   padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
+
+  /**
+   * The drawer is initially invisible until there's content to display
+   * in the table.
+   */
+  &[aria-hidden='true'] {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
-:host([aria-hidden='true']) {
-  opacity: 0;
-  visibility: hidden;
+:where(*) {
+  box-sizing: border-box;
 }
 
 button {
@@ -61,6 +65,10 @@ button {
   }
 }
 
+/**
+ * Drawer element that wraps a table and opens/closes on small screens when
+ * the button is clicked.
+ */
 div {
   block-size: var(--drawer-block-size, var(--block-size));
   grid-area: drawer;

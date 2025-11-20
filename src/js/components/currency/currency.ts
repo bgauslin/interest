@@ -135,7 +135,7 @@ class Currency extends LitElement {
                   value="${id}"
                   @click="${() => this.currency = id}">
                 <span class="symbol">${symbol}</span>
-                <span>${label}</span>
+                <span class="label">${label}</span>
               </label>
             </li>
           `;

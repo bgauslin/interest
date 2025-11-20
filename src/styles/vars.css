@@ -1,22 +1,24 @@
 :root {
-  /**
-   * Layout.
-   */
+  /* App layout. */
   --app-grid: auto 1fr / 1fr;
   --app-place-self: start stretch;
-  --body-fill: var(--fill-1);
+
+  /* General layout. */
   --button-size: 2.75rem;
   --card-radius: 1em;
-  --font: clamp(1em, .75em + 1vw, 1.25em) / 1.4 var(--font-family);
-  --font-family: 'Avenir Variable', sans-serif;
   --gap: clamp(1em, 1em + 1vw, 2em);
   --header-size: clamp(4em, 3em + 1vw, 6em);
   --outline-size: 2px;
   --table-optional-display: none;
 
-  /**
-   * Transitions.
-   */
+  /* Typography. */
+  --font: clamp(1em, .75em + 1vw, 1.25em) / 1.4 var(--font-family);
+  --font-family: 'Avenir Variable', sans-serif;
+
+  /* App background. */
+  --body-fill: var(--fill-1);
+
+  /* Transitions. */
   --transition: .3s ease-out;
 
   /**
@@ -27,14 +29,18 @@
       --app-gap: var(--gap);
       --app-margin-block: var(--gap) 0;
       --app-margin-inline: var(--gap);
-      --body-fill: revert;
+
       --footnote-display: none;
+
       --table-border: var(--border);
       --table-border-radius: var(--card-radius);
       --table-optional-display: table-cell;
+      
       --values-border: var(--border);
       --values-border-radius: var(--card-radius);
       --values-list-grid: auto-flow / 1fr 1fr;
+
+      --body-fill: revert;
     }
   }
 
@@ -49,8 +55,10 @@
       --app-inline-size: calc(100% - (var(--gap) * 2));
       --app-margin-block: var(--gap);
       --app-place-self: start center;
+
       --drawer-block-size: auto;  /* [1] */
       --drawer-button-display: none;  /* [2] */
+      
       --values-inset-block: var(--gap) auto;
       --values-list-grid: auto-flow / 1fr;
       --values-place-self: start stretch;
@@ -62,70 +70,82 @@
 :root {
   /**
    * Grays via Apple HIG.
-   * https://developer.apple.com/design/human-interface-guidelines/foundations/color#specifications
+   * @see https://developer.apple.com/design/human-interface-guidelines/color
    */
   --gray1: rgb(142, 142, 147);
+  --gray1-dark: rgb(142, 142, 147);
+
   --gray2: rgb(174, 174, 178);
+  --gray2-dark: rgb(99, 99, 102);
+  
   --gray3: rgb(199, 199, 204);
+  --gray3-dark: rgb(72, 72, 74);
+  
   --gray4: rgb(209, 209, 214);
+  --gray4-dark: rgb(58, 58, 60);
+  
   --gray5: rgb(229, 229, 234);
+  --gray5-dark: rgb(44, 44, 46);
+  
   --gray6: rgb(242, 242, 247);
+  --gray6-dark: rgb(28, 28, 30);
 
   /**
-   * Theming.
+   * Light mode/default theming.
    */
   --backdrop-filter: blur(6px);
   --border: 1px solid var(--gray5);
+
   --fill-alpha: .7;
+
   --fill-0: var(--gray6);
   --fill-1: white;
   --fill-2: var(--gray5);
-  --fill-2a: rgba(229, 229, 234, var(--fill-alpha));  /* --fill-2 with alpha */
+  --fill-2a: rgba(229, 229, 234, var(--fill-alpha));  /* --gray5, alpha */
   --fill-3: var(--gray4);
-  --fill-3a: rgba(209, 209, 214, var(--fill-alpha));  /* --fill-3 with alpha */
+  --fill-3a: rgba(209, 209, 214, var(--fill-alpha));  /* --gray4, alpha */
+  
   --outline: var(--theme);
+  
   --link-color: DodgerBlue;
   --link-focus-color: OrangeRed;
   --link-visited-color: RebeccaPurple;
-  --text-color: rgb(28, 28, 30);  /* Gray6 Dark */
+  
+  --text-color: var(--gray6-dark);
   --text-color-variant: var(--gray1);
+  
   --theme: rgb(0, 125, 50);
   --warning-color: rgb(219, 77, 77);
 
-  /* TODO: Use native color-mix(). */
-  --zebra-stripe: rgb(247.2, 247.2, 250.2);  /* White, Gray6 Light, 40% */
+  /* TODO(zebra-stripe): Use native color-mix() or similar. */
+  --zebra-stripe: rgb(247.2, 247.2, 250.2);  /* White, Gray6, 40% */
 
+  /**
+   * Dark mode theming.
+   */
   @media (prefers-color-scheme: dark) {
     & {
-      /**
-       * Dark mode grays.
-       */
-      --gray1: rgb(142, 142, 147);
-      --gray2: rgb(99, 99, 102);
-      --gray3: rgb(72, 72, 74);
-      --gray4: rgb(58, 58, 60);
-      --gray5: rgb(44, 44, 46);
-      --gray6: rgb(28, 28, 30);
+      --border: 1px solid var(--gray5-dark);
 
-      /**
-       * Dark mode theming.
-       */
       --fill-0: black;
-      --fill-1: var(--gray6);
-      --fill-2: var(--gray5);
-      --fill-2a: rgba(44, 44, 46, var(--fill-alpha));  /* --fill-2 with alpha */
-      --fill-3: var(--gray4);
-      --fill-3a: rgba(58, 58, 60, var(--fill-alpha));  /* --fill-3 with alpha */
+      --fill-1: var(--gray6-dark);
+      --fill-2: var(--gray5-dark);
+      --fill-2a: rgba(44, 44, 46, var(--fill-alpha));  /* --gray5-dark, alpha */
+      --fill-3: var(--gray4-dark);
+      --fill-3a: rgba(58, 58, 60, var(--fill-alpha));  /* --gray4-dark, alpha */
+
       --link-color: CornflowerBlue;
       --link-focus-color: DarkOrange;
       --link-visited-color: MediumPurple;
-      --text-color: rgb(229, 229, 234);  /* Gray5 Light */
-      --text-color-variant: rgb(142, 142, 147);  /* Gray1 Light */
+      
+      --text-color: var(--gray5);
+      --text-color-variant: var(--gray1);
+
       --theme: rgb(40, 175, 82);
       --warning-color: rgb(230, 130, 130);
 
-      /* TODO: Use native color-mix(). */
-      --zebra-stripe: rgb(39.35, 39.35, 41.25);  /* White, Gray6 Dark, 5% */
+      /* TODO(zebra-stripe): Use native color-mix() or similar. */
+      --zebra-stripe: rgb(39.35, 39.35, 41.25);  /* White, Gray6-Dark, 5% */
     }
   }
 }

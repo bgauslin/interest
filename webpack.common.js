@@ -1,6 +1,7 @@
 const path = require('path');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const FontPreloadPlugin = require('webpack-font-preload-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -39,7 +40,6 @@ module.exports = {
         ],
         use: [
           'lit-css-loader',
-          'postcss-loader',
         ],
       },
       {
@@ -51,9 +51,14 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
-          'postcss-loader',
         ],
       },
+    ],
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin(),
     ],
   },
   resolve: {

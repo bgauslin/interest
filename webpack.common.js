@@ -40,10 +40,22 @@ module.exports = {
         ],
         use: [
           'lit-css-loader',
+          {
+            // Files are plain CSS but we're using Sass simply to minify the
+            // shadow DOM stylesheet in each web component.
+            // TODO(build): Replace sass and sass-loader.
+            loader: 'sass-loader',
+            options: {
+              api: 'modern',
+              sassOptions: {
+                outputStyle: 'compressed',
+              },
+            },
+          },
         ],
       },
       {
-        // App shell styles and custom properties.
+        // App light DOM styles.
         test: /\.css$/,
         include: [
           path.resolve(__dirname, 'src/styles')

@@ -1,10 +1,10 @@
 <svg width="128px" height="128px" xmlns="http://www.w3.org/2000/svg">
   <style>
-    .graphic { fill: #00ad45; }
+    .graphic { fill: #007d32; }
     .canvas { fill: none; }
     @media (prefers-color-scheme: dark) {
       .graphic { fill: #ffffff; }
-      .canvas { fill: #00ad45; }
+      .canvas { fill: #007d32; }
     }
   </style>
   <path class="canvas" d="M16 0 C7.164 0 0 7.164 0 16 L0 112 C0 120.836 7.164 128 16 128 L112 128 C120.836 128 128 120.836 128 112 L128 16 C128 7.164 120.836 0 112 0 Z"/>

@@ -112,7 +112,7 @@ input {
  * The grand total based on user-provided values.
  */
 .total {
-  color: var(--theme);
+  color: var(--theme-color);
   font-size: 2.75em;
   grid-area: total;
   inline-size: 100%;

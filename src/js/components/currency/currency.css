@@ -120,7 +120,7 @@ label {
 
   &[data-checked] {
     background-color: var(--fill-3a);
-    color: var(--theme);
+    color: var(--theme-color);
   }
 
   @media (any-hover: hover) {

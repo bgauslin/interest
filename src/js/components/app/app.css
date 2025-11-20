@@ -62,7 +62,7 @@ tbody > tr:nth-child(odd) {
 }
 
 td.balance {
-  color: var(--theme);
+  color: var(--theme-color);
   font-variation-settings: 'wght' 600;
 }
 

@@ -10,6 +10,15 @@
 }
 
 /**
+ * The drawer is initially invisible until there's content to display
+ * in the table.
+ */
+interest-drawer[aria-hidden='true'] {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/**
  * Scrollable wrapper for <table> element.
  */
 .table {

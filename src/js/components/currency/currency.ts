@@ -8,8 +8,7 @@ import shadowStyles from './currency.css';
 /**
  * Web component that renders currencies for a user to choose from.
  */
-@customElement('interest-currency')
-class Currency extends LitElement {
+@customElement('interest-currency') class Currency extends LitElement {
   private clickHandler: EventListenerObject;
   private keyHandler: EventListenerObject;
 

@@ -7,8 +7,7 @@ import shadowStyles from './drawer.css';
 /**
  * Web component that expands/collapses a drawer when a button is clicked.
  */
-@customElement('interest-drawer')
-class Drawer extends LitElement {
+@customElement('interest-drawer') class Drawer extends LitElement {
   @query('[aria-controls="drawer"]') button: HTMLButtonElement;
   @query('[id="drawer"]') drawer: HTMLDivElement;
   @state() drawerSize: string = '0';

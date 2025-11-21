@@ -8,8 +8,7 @@ import shadowStyles from './app.css';
 /**
  * Web component that sends/receives custom event data to/from custom elements.
  */
-@customElement('interest-app')
-class App extends LitElement {
+@customElement('interest-app') class App extends LitElement {
   private calculator: Calculator;
   private currencyHandler: EventListenerObject;
   private drawerHandler: EventListenerObject;

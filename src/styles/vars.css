@@ -109,8 +109,8 @@
   
   /* Link styles for <noscript> blurb. */
   --link-color: DodgerBlue;
-  --link-focus-color: OrangeRed;
-  --link-visited-color: RebeccaPurple;
+  --link-color-focus: OrangeRed;
+  --link-color-visited: RebeccaPurple;
   
   --text-color: var(--gray6-dark);
   --text-color-variant: var(--gray1);
@@ -137,8 +137,8 @@
 
       /* Link styles for <noscript> blurb. */
       --link-color: CornflowerBlue;
-      --link-focus-color: DarkOrange;
-      --link-visited-color: MediumPurple;
+      --link-color-focus: DarkOrange;
+      --link-color-visited: MediumPurple;
       
       --text-color: var(--gray5);
       --text-color-variant: var(--gray1);

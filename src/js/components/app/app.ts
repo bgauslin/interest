@@ -12,7 +12,6 @@ import shadowStyles from './app.css';
   private calculator: Calculator;
 
   private drawerHandler: EventListenerObject;
-  private valuesHandler: EventListenerObject;
   
   @state() commas: boolean = false;
   @state() currency: string;
@@ -27,7 +26,6 @@ import shadowStyles from './app.css';
     this.calculator = new Calculator();
 
     this.drawerHandler = this.updateDrawer.bind(this);
-    this.valuesHandler = this.updateValues.bind(this);
   }
   
   connectedCallback() {
@@ -36,7 +34,6 @@ import shadowStyles from './app.css';
     this.addEventListener(Events.Drawer, this.drawerHandler);
     this.addEventListener(Events.Touchend, this.handleTouchend, {passive: true});
     this.addEventListener(Events.Touchstart, this.handleTouchstart, {passive: true});
-    this.addEventListener(Events.Values, this.valuesHandler);
   }
 
   disconnectedCallback() { 
@@ -45,7 +42,6 @@ import shadowStyles from './app.css';
     this.removeEventListener(Events.Drawer, this.drawerHandler);
     this.removeEventListener(Events.Touchend, this.handleTouchend);
     this.removeEventListener(Events.Touchstart, this.handleTouchstart);
-    this.removeEventListener(Events.Values, this.valuesHandler);
   }
 
   private updateCurrency(event: CustomEvent) {
@@ -59,8 +55,7 @@ import shadowStyles from './app.css';
     this.setLocalStorage();
   }
 
-  private async updateValues(event: CustomEvent) {
-    await this.updateComplete;
+  private updateValues(event: CustomEvent) {
     const {commas, values} = event.detail;
     this.commas = commas;
     this.values = values;
@@ -94,7 +89,8 @@ import shadowStyles from './app.css';
   protected render() {
     return html`
       <interest-values
-        @currencyUpdated=${this.updateCurrency}></interest-values>
+        @currencyUpdated=${this.updateCurrency}
+        @valuesUpdated=${this.updateValues}></interest-values>
       <interest-drawer aria-hidden="${!this.values}">
         ${this.renderTable()}
       </interest-drawer>

@@ -29,17 +29,26 @@ import shadowStyles from './drawer.css';
     super.disconnectedCallback();
   }
 
-  firstUpdated() {
+  protected firstUpdated() {
     if (this.open) {
       this.drawerSize = null;
     }
   }
 
   private toggleDrawer() {
+    const drawerSize = () => `${this.drawer.scrollHeight}px`;
+
     if (this.open) {
-      this.closeDrawer();
+      window.requestAnimationFrame(() => {
+        this.drawerSize = drawerSize();
+        window.requestAnimationFrame(() => this.drawerSize = '0');
+      });
     } else {
-      this.openDrawer();
+      this.drawerSize = drawerSize();
+      this.drawer.addEventListener('transitionend', () => {
+        this.drawerSize = null;
+      }, {once: true});
+      this.button.blur();
     }
 
     this.open = !this.open;
@@ -51,28 +60,10 @@ import shadowStyles from './drawer.css';
     }));
   }
 
-  private closeDrawer() {
-    window.requestAnimationFrame(() => {
-      this.drawerSize = this.getDrawerSize();
-      window.requestAnimationFrame(() => this.drawerSize = '0');
-    });
-  }
-
-  private openDrawer() {
-    this.drawerSize = this.getDrawerSize();
-    this.drawer.addEventListener('transitionend', () => {
-      this.drawerSize = null;
-    }, {once: true});
-    this.button.blur();
-  }
-
-  private getDrawerSize(): string {
-    return `${this.drawer.scrollHeight}px`;
-  }
-
   protected render() {
     const label = this.open ? 'Hide table' : 'Show table';
     const style = this.drawerSize ? `--block-size: ${this.drawerSize}` : '';
+
     return html`
       <button
         aria-controls="drawer"

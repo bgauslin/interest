@@ -1,6 +1,6 @@
 import {LitElement, PropertyValues, css, html} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
-import {Currencies, DEFAULT_CURRENCY} from '../../modules/calculator';
+import {Currencies} from '../../modules/calculator';
 import {Events} from '../../modules/shared';
 import shadowStyles from './currency.css';
 
@@ -69,9 +69,7 @@ import shadowStyles from './currency.css';
 
   protected updated(changed: PropertyValues<this>) {
     for (const [key, value] of changed.entries()) {
-      if (key !== 'currency') {
-        return;
-      }
+      if (key !== 'currency') return;
 
       if (value) {
         this.dispatchEvent(new CustomEvent(Events.Currency, {
@@ -84,16 +82,10 @@ import shadowStyles from './currency.css';
   }
 
   protected render() {
-    return html`
-      ${this.renderButton()}
-      ${this.renderMenu()}
-    `;
-  }
-
-  private renderButton() {
     const label = 'Change currency';
     const currency = Currencies.find(c => c.id === this.currency);
     const symbol = currency.symbol;
+
     return html`
       <button
         aria-controls="menu"
@@ -102,12 +94,10 @@ import shadowStyles from './currency.css';
         aria-label="${label}"
         title="${label}"
         type="button"
-        @click="${this.toggleMenu}">${symbol}</button>
-    `;
-  }
+        @click=${this.toggleMenu}>
+        ${symbol}
+      </button>
 
-  private renderMenu() {
-    return html`
       <dialog
         ?data-closing="${this.closing}"
         id="menu">        
@@ -116,15 +106,16 @@ import shadowStyles from './currency.css';
           const {id, label, symbol} = currency;
           return html`
             <li>
-              <label ?data-checked="${id === this.currency}">
+              <label
+                ?data-checked=${id === this.currency}>
                 <input
                   aria-label="${label}"
-                  ?checked="${id === this.currency}"
+                  ?checked=${id === this.currency}
                   name="currency"
                   tabindex="${this.open ? '0' : '-1'}"
                   type="radio"
                   value="${id}"
-                  @click="${() => this.currency = id}">
+                  @click=${() => this.currency = id}>
                 <span class="symbol">${symbol}</span>
                 <span class="label">${label}</span>
               </label>

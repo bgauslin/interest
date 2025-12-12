@@ -1,6 +1,6 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
-import {Calculator, CompoundingValues, Sums} from '../../modules/calculator';
+import {Calculator, CompoundingValues, DEFAULT_CURRENCY, Sums} from '../../modules/calculator';
 import {Events, STORAGE_ITEM} from '../../modules/shared';
 import shadowStyles from './app.css';
 
@@ -12,7 +12,7 @@ import shadowStyles from './app.css';
   private calculator: Calculator;
   
   @state() commas: boolean = false;
-  @state() currency: string;
+  @state() currency: string = DEFAULT_CURRENCY;
   @state() drawer: boolean = false;
   @state() target: HTMLElement;
   @state() values: CompoundingValues;
@@ -26,9 +26,9 @@ import shadowStyles from './app.css';
   
   connectedCallback() {
     super.connectedCallback();
+    this.getLocalStorage();
     this.addEventListener(Events.Touchend, this.handleTouchend, {passive: true});
     this.addEventListener(Events.Touchstart, this.handleTouchstart, {passive: true});
-    this.getLocalStorage();
   }
 
   disconnectedCallback() { 
@@ -58,16 +58,16 @@ import shadowStyles from './app.css';
     const storage = JSON.parse(localStorage.getItem(STORAGE_ITEM));
     if (!storage) return;
 
-    const {drawer} = storage;
-    if (drawer) {
-      this.drawer = drawer;
-    }
+    const {commas, currency, drawer, values} = storage;
+
+    this.commas = commas;
+    this.currency = currency;  
+    this.drawer = drawer;
+    this.values = values;
   }
 
   private setLocalStorage() {
-    if (!this.currency || !this.values) {
-      return;
-    }
+    if (!this.values) return;
 
     localStorage.setItem(STORAGE_ITEM, JSON.stringify({
       commas: this.commas,
@@ -91,8 +91,12 @@ import shadowStyles from './app.css';
   protected render() {
     return html`
       <interest-values
+        .commas=${this.commas}
+        .currency=${this.currency} 
+        .values=${this.values}
         @currencyUpdated=${this.updateCurrency}
         @valuesUpdated=${this.updateValues}></interest-values>
+
       <interest-drawer
         aria-hidden="${!this.values}"
         .open=${this.drawer}

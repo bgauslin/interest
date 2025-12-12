@@ -12,9 +12,11 @@ import shadowStyles from './currency.css';
   private clickHandler: EventListenerObject;
   private keyHandler: EventListenerObject;
 
-  @property({reflect: true}) currency = DEFAULT_CURRENCY;
+  @property({reflect: true}) currency: string;
+
   @query(':checked') checked: HTMLInputElement;
   @query('dialog') dialog: HTMLDialogElement;
+
   @state() closing: boolean = false;
   @state() open: boolean = false;
 
@@ -54,23 +56,15 @@ import shadowStyles from './currency.css';
   private toggleMenu() {
     this.open = !this.open;
     if (this.open) {
-      this.openMenu();
+      this.dialog.show();
+      this.checked.focus();
     } else {
-      this.closeMenu();
+      this.closing = true;
+      this.dialog.addEventListener('transitionend', () => {
+        this.dialog.close();
+        this.closing = false;
+      }, {once: true});
     }
-  }
-
-  private openMenu() {
-    this.dialog.show();
-    this.checked.focus();
-  }
-
-  private closeMenu() {
-    this.closing = true;
-    this.dialog.addEventListener('transitionend', () => {
-      this.dialog.close();
-      this.closing = false;
-    }, {once: true});
   }
 
   protected updated(changed: PropertyValues<this>) {
@@ -81,8 +75,6 @@ import shadowStyles from './currency.css';
 
       if (value) {
         this.dispatchEvent(new CustomEvent(Events.Currency, {
-          bubbles: true,
-          composed: true,
           detail: {
             currency: this.currency,
           },

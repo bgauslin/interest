@@ -1,7 +1,7 @@
 import {LitElement, css, html} from 'lit';
-import {customElement, query, state} from 'lit/decorators.js';
-import {Calculator, CompoundingValues, DEFAULT_CURRENCY} from '../../modules/calculator';
-import {Events, STORAGE_ITEM, TextInput} from '../../modules/shared';
+import {customElement, property, query, state} from 'lit/decorators.js';
+import {Calculator, CompoundingValues} from '../../modules/calculator';
+import {Events, TextInput} from '../../modules/shared';
 import shadowStyles from './values.css';
 
 
@@ -11,11 +11,13 @@ import shadowStyles from './values.css';
  */
 @customElement('interest-values') class Values extends LitElement {
   private calculator: Calculator;
-  private currencyHandler: EventListenerObject;
+
+  @property() commas: boolean;
+  @property() currency: string;
+  @property() values: CompoundingValues;
 
   @query('form') form: HTMLFormElement;
-  @state() commas: boolean = false;
-  @state() currency: string = DEFAULT_CURRENCY;
+
   @state() fields: TextInput[] = [
     {inputmode: 'numeric', label: 'Principal', name: 'principal', pattern: '[0-9]+', value: ''},
     {inputmode: 'numeric', label: 'Yearly addition', name: 'contribution', pattern: '[0-9]+', value: ''},
@@ -23,29 +25,31 @@ import shadowStyles from './values.css';
     {inputmode: 'numeric', label: 'Years to grow', name: 'periods', pattern: '[0-9]+', value: ''},
   ];
   @state() total: string = '';
-  @state() values: CompoundingValues;
+  
 
   static styles = css`${shadowStyles}`;
 
   constructor() {
     super();
     this.calculator = new Calculator();
-    this.currencyHandler = this.updateCurrency.bind(this);
   }
 
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener(Events.Currency, this.currencyHandler);
-    this.getLocalStorage();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.removeEventListener(Events.Currency, this.currencyHandler);
   }
 
-  private updateCurrency(event: CustomEvent) {
-    this.currency = event.detail.currency;
+  protected firstUpdated() {
+    if (!this.values) return;
+
+    for (const [key, value] of Object.entries(this.values)) {
+      const field = this.fields.find(field => field.name === key);
+      const value_ = `${value}`;
+      field.value = this.commas ? value_.replace('.', ',') : value_;
+    }
     this.updateTotal();
   }
 
@@ -77,39 +81,14 @@ import shadowStyles from './values.css';
     };
 
     this.updateTotal();
-    this.sendCurrency();
     this.sendValues();
   }
 
-  private getLocalStorage() {
-    const storage = JSON.parse(localStorage.getItem(STORAGE_ITEM));
-    if (!storage) return;
+  private updateCurrency(event: CustomEvent) {
+    this.currency = event.detail.currency;
+    this.updateTotal();
 
-    if (storage.commas) {
-      this.commas = storage.commas;
-    }
-
-    if (storage.values) {
-      this.values = storage.values;
-      for (const [key, value] of Object.entries(this.values)) {
-        const field = this.fields.find(field => field.name === key);
-        const value_ = `${value}`;
-        field.value = this.commas ? value_.replace('.', ',') : value_;
-      }
-      this.sendValues();
-    }
-
-    if (storage.currency) {
-      this.currency = storage.currency;
-      this.sendCurrency();
-      this.updateTotal();
-    }
-  }
-
-  private sendCurrency() {
     this.dispatchEvent(new CustomEvent(Events.Currency, {
-      bubbles: true,
-      composed: true,
       detail: {
         currency: this.currency,
       },
@@ -118,8 +97,6 @@ import shadowStyles from './values.css';
 
   private sendValues() {
     this.dispatchEvent(new CustomEvent(Events.Values, {
-      bubbles: true,
-      composed: true,
       detail: {
         commas: this.commas,
         values: this.values,
@@ -157,7 +134,8 @@ import shadowStyles from './values.css';
         class="total">${this.total}</div>
       <interest-currency
         aria-hidden="${this.total === ''}"
-        currency="${this.currency}"></interest-currency>
+        .currency=${this.currency}
+        @currencyUpdated=${this.updateCurrency}></interest-currency>
     `;
   }
 }

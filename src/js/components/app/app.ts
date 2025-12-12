@@ -10,7 +10,7 @@ import shadowStyles from './app.css';
  */
 @customElement('interest-app') class App extends LitElement {
   private calculator: Calculator;
-  private currencyHandler: EventListenerObject;
+
   private drawerHandler: EventListenerObject;
   private valuesHandler: EventListenerObject;
   
@@ -25,14 +25,14 @@ import shadowStyles from './app.css';
   constructor() {
     super();
     this.calculator = new Calculator();
-    this.currencyHandler = this.updateCurrency.bind(this);
+
     this.drawerHandler = this.updateDrawer.bind(this);
     this.valuesHandler = this.updateValues.bind(this);
   }
   
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener(Events.Currency, this.currencyHandler);
+
     this.addEventListener(Events.Drawer, this.drawerHandler);
     this.addEventListener(Events.Touchend, this.handleTouchend, {passive: true});
     this.addEventListener(Events.Touchstart, this.handleTouchstart, {passive: true});
@@ -41,15 +41,14 @@ import shadowStyles from './app.css';
 
   disconnectedCallback() { 
     super.disconnectedCallback();
-    this.removeEventListener(Events.Currency, this.currencyHandler);
+
     this.removeEventListener(Events.Drawer, this.drawerHandler);
     this.removeEventListener(Events.Touchend, this.handleTouchend);
     this.removeEventListener(Events.Touchstart, this.handleTouchstart);
     this.removeEventListener(Events.Values, this.valuesHandler);
   }
 
-  private async updateCurrency(event: CustomEvent) {
-    await this.updateComplete;
+  private updateCurrency(event: CustomEvent) {
     this.currency = event.detail.currency;
     this.setLocalStorage();
   }
@@ -94,7 +93,8 @@ import shadowStyles from './app.css';
 
   protected render() {
     return html`
-      <interest-values></interest-values>
+      <interest-values
+        @currencyUpdated=${this.updateCurrency}></interest-values>
       <interest-drawer aria-hidden="${!this.values}">
         ${this.renderTable()}
       </interest-drawer>

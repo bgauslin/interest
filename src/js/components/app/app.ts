@@ -1,4 +1,4 @@
-import {LitElement, css, html} from 'lit';
+import {LitElement, css, html, nothing} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
 import {Calculator, CompoundingValues, DEFAULT_CURRENCY, Sums} from '../../modules/calculator';
 import {Events, STORAGE_ITEM} from '../../modules/shared';
@@ -89,6 +89,9 @@ import shadowStyles from './app.css';
   }
 
   protected render() {
+    const tableData: Sums[] = this.values ?
+        this.calculator.compound(this.values, this.currency) : [];
+
     return html`
       <interest-values
         .commas=${this.commas}
@@ -101,47 +104,39 @@ import shadowStyles from './app.css';
         aria-hidden="${!this.values}"
         .open=${this.drawer}
         @drawerUpdated=${this.updateDrawer}>
-        ${this.renderTable()}
+
+        ${tableData.length > 0 ? html`
+        <div class="table">
+          <table>
+            <thead>
+              <tr>
+                <th class="year">Year</th>
+                <th class="deposits">Deposits</th>
+                <th class="interest" data-optional>Interest</th>
+                <th class="growth" data-optional>Growth</th>
+                <th class="balance">Balance</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${tableData.map((row) => {
+                const {balance, deposits, growth, interest, year} = row;
+                return html`
+                  <tr>
+                    <td class="year">${year}</td>
+                    <td class="deposits">${deposits}</td>
+                    <td class="interest" data-optional>${interest}</td>
+                    <td class="growth" data-optional>${growth}</td>
+                    <td class="balance">${balance}</td>
+                  </tr>
+                `;
+              })}
+            </tbody>
+          </table>
+        </div>
+        <p class="footnote">
+          Rotate screen to view <span>Interest</span> and <span>Growth</span> columns.
+        </p>` : nothing}
       </interest-drawer>
-    `;
-  }
-
-  private renderTable() {
-    if (!this.values || !this.currency) return;
-
-    const tableData: Sums[] =  this.calculator.compound(this.values, this.currency);
-
-    return html`
-      <div class="table">
-        <table>
-          <thead>
-            <tr>
-              <th class="year">Year</th>
-              <th class="deposits">Deposits</th>
-              <th class="interest" data-optional>Interest</th>
-              <th class="growth" data-optional>Growth</th>
-              <th class="balance">Balance</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${tableData.map((row) => {
-              const {balance, deposits, growth, interest, year} = row;
-              return html`
-                <tr>
-                  <td class="year">${year}</td>
-                  <td class="deposits">${deposits}</td>
-                  <td class="interest" data-optional>${interest}</td>
-                  <td class="growth" data-optional>${growth}</td>
-                  <td class="balance">${balance}</td>
-                </tr>
-              `;
-            })}
-          </tbody>
-        </table>
-      </div>
-      <p class="footnote">
-        Rotate screen to view <span>Interest</span> and <span>Growth</span> columns.
-      </p>
     `;
   }
 }

@@ -45,7 +45,7 @@ import shadowStyles from './drawer.css';
       });
     } else {
       this.drawerSize = drawerSize();
-      this.drawer.addEventListener('transitionend', () => {
+      this.drawer.addEventListener(Events.TransitionEnd, () => {
         this.drawerSize = null;
       }, {once: true});
       this.button.blur();

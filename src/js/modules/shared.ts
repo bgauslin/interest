@@ -4,9 +4,10 @@ export enum Events {
   Click = 'click',
   Currency = 'currencyUpdated',
   Drawer = 'drawerUpdated',
-  Keydown = 'keydown',
-  Touchend = 'touchend',
-  Touchstart = 'touchstart',
+  KeyUp = 'keyup',
+  TouchEnd = 'touchend',
+  TouchStart = 'touchstart',
+  TransitionEnd = 'transitionend',
   Values = 'valuesUpdated',
 }
 

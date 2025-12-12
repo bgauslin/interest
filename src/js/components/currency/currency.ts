@@ -31,13 +31,13 @@ import shadowStyles from './currency.css';
   connectedCallback() {
     super.connectedCallback();
     document.addEventListener(Events.Click, this.clickHandler);
-    document.addEventListener(Events.Keydown, this.keyHandler);
+    document.addEventListener(Events.KeyUp, this.keyHandler);
   }
 
   disconnectedCallback() { 
     super.disconnectedCallback();
     document.removeEventListener(Events.Click, this.clickHandler);
-    document.removeEventListener(Events.Keydown, this.keyHandler);
+    document.removeEventListener(Events.KeyUp, this.keyHandler);
   }
 
   private handleClick(event: Event) {
@@ -60,7 +60,7 @@ import shadowStyles from './currency.css';
       this.checked.focus();
     } else {
       this.closing = true;
-      this.dialog.addEventListener('transitionend', () => {
+      this.dialog.addEventListener(Events.TransitionEnd, () => {
         this.dialog.close();
         this.closing = false;
       }, {once: true});

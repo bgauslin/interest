@@ -27,14 +27,14 @@ import shadowStyles from './app.css';
   connectedCallback() {
     super.connectedCallback();
     this.getLocalStorage();
-    this.addEventListener(Events.Touchend, this.handleTouchend, {passive: true});
-    this.addEventListener(Events.Touchstart, this.handleTouchstart, {passive: true});
+    this.addEventListener(Events.TouchEnd, this.handleTouchEnd, {passive: true});
+    this.addEventListener(Events.TouchStart, this.handleTouchStart, {passive: true});
   }
 
   disconnectedCallback() { 
     super.disconnectedCallback();
-    this.removeEventListener(Events.Touchend, this.handleTouchend);
-    this.removeEventListener(Events.Touchstart, this.handleTouchstart);
+    this.removeEventListener(Events.TouchEnd, this.handleTouchEnd);
+    this.removeEventListener(Events.TouchStart, this.handleTouchStart);
   }
 
   private updateCurrency(event: CustomEvent) {
@@ -77,14 +77,14 @@ import shadowStyles from './app.css';
     }));
   }
 
-  private handleTouchstart(event: TouchEvent) {
+  private handleTouchStart(event: TouchEvent) {
     this.target = <HTMLElement>event.composedPath()[0];
     if (this.target.tagName === 'BUTTON') {
       this.target.classList.add('touch');
     }
   }
 
-  private handleTouchend() {
+  private handleTouchEnd() {
     this.target.classList.remove('touch');
   }
 

@@ -25,7 +25,6 @@ import shadowStyles from './values.css';
     {inputmode: 'numeric', label: 'Years to grow', name: 'periods', pattern: '[0-9]+', value: ''},
   ];
   @state() total: string = '';
-  
 
   static styles = css`${shadowStyles}`;
 
@@ -84,7 +83,7 @@ import shadowStyles from './values.css';
     this.sendValues();
   }
 
-  private updateCurrency(event: CustomEvent) {
+  private sendCurrency(event: CustomEvent) {
     this.currency = event.detail.currency;
     this.updateTotal();
 
@@ -135,7 +134,7 @@ import shadowStyles from './values.css';
       <interest-currency
         aria-hidden="${this.total === ''}"
         .currency=${this.currency}
-        @currencyUpdated=${this.updateCurrency}></interest-currency>
+        @currencyUpdated=${this.sendCurrency}></interest-currency>
     `;
   }
 }

@@ -10,8 +10,6 @@ import shadowStyles from './app.css';
  */
 @customElement('interest-app') class App extends LitElement {
   private calculator: Calculator;
-
-  private drawerHandler: EventListenerObject;
   
   @state() commas: boolean = false;
   @state() currency: string;
@@ -24,22 +22,17 @@ import shadowStyles from './app.css';
   constructor() {
     super();
     this.calculator = new Calculator();
-
-    this.drawerHandler = this.updateDrawer.bind(this);
   }
   
   connectedCallback() {
     super.connectedCallback();
-
-    this.addEventListener(Events.Drawer, this.drawerHandler);
     this.addEventListener(Events.Touchend, this.handleTouchend, {passive: true});
     this.addEventListener(Events.Touchstart, this.handleTouchstart, {passive: true});
+    this.getLocalStorage();
   }
 
   disconnectedCallback() { 
     super.disconnectedCallback();
-
-    this.removeEventListener(Events.Drawer, this.drawerHandler);
     this.removeEventListener(Events.Touchend, this.handleTouchend);
     this.removeEventListener(Events.Touchstart, this.handleTouchstart);
   }
@@ -49,8 +42,7 @@ import shadowStyles from './app.css';
     this.setLocalStorage();
   }
 
-  private async updateDrawer(event: CustomEvent) {
-    await this.updateComplete;
+  private updateDrawer(event: CustomEvent) {
     this.drawer = event.detail.drawer;
     this.setLocalStorage();
   }
@@ -60,6 +52,16 @@ import shadowStyles from './app.css';
     this.commas = commas;
     this.values = values;
     this.setLocalStorage();
+  }
+
+  private getLocalStorage() {
+    const storage = JSON.parse(localStorage.getItem(STORAGE_ITEM));
+    if (!storage) return;
+
+    const {drawer} = storage;
+    if (drawer) {
+      this.drawer = drawer;
+    }
   }
 
   private setLocalStorage() {
@@ -91,7 +93,10 @@ import shadowStyles from './app.css';
       <interest-values
         @currencyUpdated=${this.updateCurrency}
         @valuesUpdated=${this.updateValues}></interest-values>
-      <interest-drawer aria-hidden="${!this.values}">
+      <interest-drawer
+        aria-hidden="${!this.values}"
+        .open=${this.drawer}
+        @drawerUpdated=${this.updateDrawer}>
         ${this.renderTable()}
       </interest-drawer>
     `;

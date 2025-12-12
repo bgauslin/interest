@@ -1,6 +1,6 @@
 import {LitElement, css, html} from 'lit';
-import {customElement, query, state} from 'lit/decorators.js';
-import {Events, STORAGE_ITEM} from '../../modules/shared';
+import {customElement, property, query, state} from 'lit/decorators.js';
+import {Events} from '../../modules/shared';
 import shadowStyles from './drawer.css';
 
 
@@ -8,30 +8,30 @@ import shadowStyles from './drawer.css';
  * Web component that expands/collapses a drawer when a button is clicked.
  */
 @customElement('interest-drawer') class Drawer extends LitElement {
+  @property({reflect: true, type: Boolean}) open: boolean = false;
+  
   @query('[aria-controls="drawer"]') button: HTMLButtonElement;
   @query('[id="drawer"]') drawer: HTMLDivElement;
+
   @state() drawerSize: string = '0';
-  @state() open: boolean = false;
 
   static styles = css`${shadowStyles}`;
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.getLocalStorage();
-    this.sendDrawerState();
+  constructor() {
+    super();
   }
 
-  private getLocalStorage() {
-    const storage = JSON.parse(localStorage.getItem(STORAGE_ITEM));
-    if (!storage) {
-      return;
-    }
+  connectedCallback() {
+    super.connectedCallback();
+  }
 
-    if (storage.drawer) {
-      this.open = storage.drawer;
-      if (this.open) {
-        this.drawerSize = null;
-      }
+  disconnectedCallback() {
+    super.disconnectedCallback();
+  }
+
+  firstUpdated() {
+    if (this.open) {
+      this.drawerSize = null;
     }
   }
 
@@ -41,8 +41,14 @@ import shadowStyles from './drawer.css';
     } else {
       this.openDrawer();
     }
+
     this.open = !this.open;
-    this.sendDrawerState();
+    
+    this.dispatchEvent(new CustomEvent(Events.Drawer, {
+      detail: {
+        drawer: this.open,
+      }
+    }));
   }
 
   private closeDrawer() {
@@ -64,16 +70,6 @@ import shadowStyles from './drawer.css';
     return `${this.drawer.scrollHeight}px`;
   }
 
-  private sendDrawerState() {
-    this.dispatchEvent(new CustomEvent(Events.Drawer, {
-      bubbles: true,
-      composed: true,
-      detail: {
-        drawer: this.open,
-      }
-    }));
-  }
-
   protected render() {
     const label = this.open ? 'Hide table' : 'Show table';
     const style = this.drawerSize ? `--block-size: ${this.drawerSize}` : '';
@@ -82,8 +78,10 @@ import shadowStyles from './drawer.css';
         aria-controls="drawer"
         aria-expanded="${this.open}"
         type="button"
-        @click="${this.toggleDrawer}">${label}</button>
-      <div id="drawer" style="${style}">
+        @click=${this.toggleDrawer}>${label}</button>
+      <div
+        id="drawer"
+        style="${style}">
         <slot></slot>
       </div>
     `;

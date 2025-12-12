@@ -1,7 +1,7 @@
 {
   "name": "interest",
   "description": "Web app that calculates compound interest",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "license": "UNLICENSED",
   "repository": "https://github.com/bgauslin/interest",
   "scripts": {

@@ -20,7 +20,6 @@ import shadowStyles from './currency.css';
   @state() closing: boolean = false;
   @state() open: boolean = false;
 
-  static styles = css`${shadowStyles}`;
 
   constructor() {
     super();
@@ -127,4 +126,7 @@ import shadowStyles from './currency.css';
       </dialog>
     `;
   }
+
+  // Shadow DOM stylesheet.
+  static styles = css`${shadowStyles}`;
 }

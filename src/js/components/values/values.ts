@@ -11,6 +11,12 @@ import shadowStyles from './values.css';
  */
 @customElement('interest-values') class Values extends LitElement {
   private calculator: Calculator;
+  private fields: TextInput[] = [
+    {inputmode: 'numeric', label: 'Principal', name: 'principal', pattern: '[0-9]+', value: ''},
+    {inputmode: 'numeric', label: 'Yearly addition', name: 'contribution', pattern: '[0-9]+', value: ''},
+    {inputmode: 'decimal', label: 'Interest rate', name: 'rate', pattern: '[0-9]{0,2}[,\.]?[0-9]{1,2}', value: ''},
+    {inputmode: 'numeric', label: 'Years to grow', name: 'periods', pattern: '[0-9]+', value: ''},
+  ];
 
   @property() commas: boolean;
   @property() currency: string;
@@ -18,15 +24,7 @@ import shadowStyles from './values.css';
 
   @query('form') form: HTMLFormElement;
 
-  @state() fields: TextInput[] = [
-    {inputmode: 'numeric', label: 'Principal', name: 'principal', pattern: '[0-9]+', value: ''},
-    {inputmode: 'numeric', label: 'Yearly addition', name: 'contribution', pattern: '[0-9]+', value: ''},
-    {inputmode: 'decimal', label: 'Interest rate', name: 'rate', pattern: '[0-9]{0,2}[,\.]?[0-9]{1,2}', value: ''},
-    {inputmode: 'numeric', label: 'Years to grow', name: 'periods', pattern: '[0-9]+', value: ''},
-  ];
   @state() total: string = '';
-
-  static styles = css`${shadowStyles}`;
 
   constructor() {
     super();
@@ -49,6 +47,7 @@ import shadowStyles from './values.css';
       const value_ = `${value}`;
       field.value = this.commas ? value_.replace('.', ',') : value_;
     }
+
     this.updateTotal();
   }
 
@@ -59,18 +58,19 @@ import shadowStyles from './values.css';
   private updateValues() {
     let timer;
     clearTimeout(timer);
-    timer = setTimeout(() => this.formValues(), 300);
+    timer = setTimeout(() => this.getValues(), 300);
   }
 
-  private formValues() {
+  private getValues() {
     if (this.form.querySelectorAll(':invalid').length) return;
 
     const formData = new FormData(this.form);
 
     const rate_ = `${formData.get('rate')}`;
-    const found = rate_.match(/[,]/g);
-    this.commas = found && found.length !== 0;
     const rate = Number(rate_.replace(',', '.'));
+    const found = rate_.match(/[,]/g);
+
+    this.commas = found && found.length !== 0;
 
     this.values = {
       contribution: Number(formData.get('contribution')),
@@ -80,10 +80,10 @@ import shadowStyles from './values.css';
     };
 
     this.updateTotal();
-    this.sendValues();
+    this.dispatchValues();
   }
 
-  private sendCurrency(event: CustomEvent) {
+  private dispatchCurrency(event: CustomEvent) {
     this.currency = event.detail.currency;
     this.updateTotal();
 
@@ -94,7 +94,7 @@ import shadowStyles from './values.css';
     }));
   }
 
-  private sendValues() {
+  private dispatchValues() {
     this.dispatchEvent(new CustomEvent(Events.Values, {
       detail: {
         commas: this.commas,
@@ -136,7 +136,10 @@ import shadowStyles from './values.css';
       <interest-currency
         aria-hidden="${this.total === ''}"
         .currency=${this.currency}
-        @currencyUpdated=${this.sendCurrency}></interest-currency>
+        @currencyUpdated=${this.dispatchCurrency}></interest-currency>
     `;
   }
+
+  // Shadow DOM stylesheet.
+  static styles = css`${shadowStyles}`;
 }

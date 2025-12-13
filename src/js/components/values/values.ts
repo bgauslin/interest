@@ -130,7 +130,9 @@ import shadowStyles from './values.css';
       </form>
       <div
         aria-hidden="${this.total === ''}"
-        class="total">${this.total}</div>
+        class="total">
+        ${this.total}
+      </div>
       <interest-currency
         aria-hidden="${this.total === ''}"
         .currency=${this.currency}

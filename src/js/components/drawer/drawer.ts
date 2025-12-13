@@ -10,8 +10,8 @@ import shadowStyles from './drawer.css';
 @customElement('interest-drawer') class Drawer extends LitElement {
   @property({reflect: true, type: Boolean}) open: boolean = false;
   
-  @query('[aria-controls="drawer"]') button: HTMLButtonElement;
-  @query('[id="drawer"]') drawer: HTMLDivElement;
+  @query('button') button: HTMLButtonElement;
+  @query('div') drawer: HTMLDivElement;
 
   @state() drawerSize: string = '0';
 
@@ -69,7 +69,9 @@ import shadowStyles from './drawer.css';
         aria-controls="drawer"
         aria-expanded="${this.open}"
         type="button"
-        @click=${this.toggleDrawer}>${label}</button>
+        @click=${this.toggleDrawer}>
+        ${label}
+      </button>
       <div
         id="drawer"
         style="${style}">

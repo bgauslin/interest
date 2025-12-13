@@ -14,7 +14,6 @@ import shadowStyles from './app.css';
   @state() commas: boolean = false;
   @state() currency: string = DEFAULT_CURRENCY;
   @state() drawer: boolean = false;
-  @state() touchTarget: HTMLElement;
   @state() values: CompoundingValues;
 
   constructor() {
@@ -25,14 +24,10 @@ import shadowStyles from './app.css';
   connectedCallback() {
     super.connectedCallback();
     this.getLocalStorage();
-    this.addEventListener(Events.TouchEnd, this.handleTouchEnd, {passive: true});
-    this.addEventListener(Events.TouchStart, this.handleTouchStart, {passive: true});
   }
 
   disconnectedCallback() { 
     super.disconnectedCallback();
-    this.removeEventListener(Events.TouchEnd, this.handleTouchEnd);
-    this.removeEventListener(Events.TouchStart, this.handleTouchStart);
   }
 
   private updateCurrency(event: CustomEvent) {
@@ -73,17 +68,6 @@ import shadowStyles from './app.css';
       drawer: this.drawer,
       values: this.values,
     }));
-  }
-
-  private handleTouchStart(event: TouchEvent) {
-    this.touchTarget = <HTMLElement>event.composedPath()[0];
-    if (this.touchTarget.tagName === 'BUTTON') {
-      this.touchTarget.classList.add('touch');
-    }
-  }
-
-  private handleTouchEnd() {
-    this.touchTarget.classList.remove('touch');
   }
 
   protected render() {
@@ -140,6 +124,7 @@ import shadowStyles from './app.css';
           Rotate screen to view <span>Interest</span> and <span>Growth</span> columns.
         </p>` : nothing}
       </interest-drawer>
+      <interest-touch></interest-touch>
     `;
   }
 

@@ -17,5 +17,6 @@
     "src/js/components/currency/currency.ts",
     "src/js/components/drawer/drawer.ts",
     "src/js/components/values/values.ts",
+    "src/js/components/touch.ts",
   ]
 }

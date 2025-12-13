@@ -55,6 +55,7 @@ import shadowStyles from './currency.css';
 
   private toggleMenu() {
     this.open = !this.open;
+
     if (this.open) {
       this.dialog.show();
       this.checked.focus();
@@ -99,8 +100,8 @@ import shadowStyles from './currency.css';
       </button>
 
       <dialog
-        ?data-closing="${this.closing}"
-        id="menu">        
+        id="menu"
+        ?data-closing=${this.closing}>        
         <ul>
         ${Currencies.map((currency) => {
           const {id, label, symbol} = currency;
@@ -110,11 +111,11 @@ import shadowStyles from './currency.css';
                 ?data-checked=${id === this.currency}>
                 <input
                   aria-label="${label}"
-                  ?checked=${id === this.currency}
                   name="currency"
                   tabindex="${this.open ? '0' : '-1'}"
                   type="radio"
                   value="${id}"
+                  ?checked=${id === this.currency}
                   @click=${() => this.currency = id}>
                 <span class="symbol">${symbol}</span>
                 <span class="label">${label}</span>

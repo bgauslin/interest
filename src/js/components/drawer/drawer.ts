@@ -15,8 +15,6 @@ import shadowStyles from './drawer.css';
 
   @state() drawerSize: string = '0';
 
-  static styles = css`${shadowStyles}`;
-
   constructor() {
     super();
   }
@@ -61,22 +59,28 @@ import shadowStyles from './drawer.css';
   }
 
   protected render() {
-    const label = this.open ? 'Hide table' : 'Show table';
     const style = this.drawerSize ? `--block-size: ${this.drawerSize}` : '';
-
     return html`
       <button
         aria-controls="drawer"
         aria-expanded="${this.open}"
         type="button"
         @click=${this.toggleDrawer}>
-        ${label}
+        <slot
+          name="open"
+          ?hidden=${!this.open}></slot>
+        <slot
+          name="closed"
+          ?hidden=${this.open}></slot>
       </button>
       <div
         id="drawer"
         style="${style}">
-        <slot></slot>
+        <slot name="content"></slot>
       </div>
     `;
   }
+
+  // Shadow DOM stylesheet.
+  static styles = css`${shadowStyles}`;
 }

@@ -10,7 +10,6 @@
 }
 
 button {
-  align-items: center;
   appearance: none;
   background-color: var(--fill-2);
   block-size: var(--button-size);
@@ -18,17 +17,18 @@ button {
   border-radius: var(--button-size);
   color: var(--text-color);
   cursor: pointer;
-  display: var(--drawer-button-display, flex);
+  display: var(--drawer-button-display, grid);
   font-family: var(--font-family);
   font-size: .875em;
   font-variation-settings: 'wght' 600;
+  grid: 1fr / 1fr;
   grid-area: button;
-  justify-content: center;
   line-height: 1;
   margin: clamp(2em, 2em + 1vw, 3em);
   outline: 0;
   padding-block: 0;
   padding-inline: 1.5em;
+  place-items: center;
   place-self: start center;
   white-space: nowrap;
   transition: transform var(--transition);
@@ -53,6 +53,10 @@ button {
     &:active {
       transform: scale(.8);
     }
+  }
+
+  slot {
+    grid-area: 1 / 1;
   }
 }
 

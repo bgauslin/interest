@@ -17,7 +17,7 @@ import shadowStyles from './app.css';
   @state() target: HTMLElement;
   @state() values: CompoundingValues;
 
-  static styles = css`${shadowStyles}`;
+  
 
   constructor() {
     super();
@@ -104,9 +104,12 @@ import shadowStyles from './app.css';
         aria-hidden="${!this.values}"
         .open=${this.drawer}
         @drawerUpdated=${this.updateDrawer}>
-
+        <span slot="open">Hide table</span>
+        <span slot="closed">Show table</span>
         ${tableData.length > 0 ? html`
-        <div class="table">
+        <div
+          class="table"
+          slot="content">
           <table>
             <thead>
               <tr>
@@ -139,4 +142,7 @@ import shadowStyles from './app.css';
       </interest-drawer>
     `;
   }
+
+  // Shadow DOM stylesheet.
+  static styles = css`${shadowStyles}`;
 }

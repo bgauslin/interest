@@ -77,6 +77,7 @@ import shadowStyles from './drawer.css';
         id="drawer"
         style="${style}">
         <slot name="content"></slot>
+        <slot name="footnote"></slot>
       </div>
     `;
   }

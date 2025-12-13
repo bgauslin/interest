@@ -14,10 +14,8 @@ import shadowStyles from './app.css';
   @state() commas: boolean = false;
   @state() currency: string = DEFAULT_CURRENCY;
   @state() drawer: boolean = false;
-  @state() target: HTMLElement;
+  @state() touchTarget: HTMLElement;
   @state() values: CompoundingValues;
-
-  
 
   constructor() {
     super();
@@ -78,14 +76,14 @@ import shadowStyles from './app.css';
   }
 
   private handleTouchStart(event: TouchEvent) {
-    this.target = <HTMLElement>event.composedPath()[0];
-    if (this.target.tagName === 'BUTTON') {
-      this.target.classList.add('touch');
+    this.touchTarget = <HTMLElement>event.composedPath()[0];
+    if (this.touchTarget.tagName === 'BUTTON') {
+      this.touchTarget.classList.add('touch');
     }
   }
 
   private handleTouchEnd() {
-    this.target.classList.remove('touch');
+    this.touchTarget.classList.remove('touch');
   }
 
   protected render() {
@@ -136,7 +134,9 @@ import shadowStyles from './app.css';
             </tbody>
           </table>
         </div>
-        <p class="footnote">
+        <p
+          class="footnote"
+          slot="footnote">
           Rotate screen to view <span>Interest</span> and <span>Growth</span> columns.
         </p>` : nothing}
       </interest-drawer>

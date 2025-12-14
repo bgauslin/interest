@@ -1,9 +1,9 @@
 // Web components.
-import './components/app/app';
-import './components/currency/currency';
-import './components/drawer/drawer';
-import './components/values/values';
-import './components/touch';
+import './app';
+import './currency';
+import './drawer';
+import './touch';
+import './values';
 
 // App stylesheet (required in JS entry file for Webpack).
 import '../styles/index';

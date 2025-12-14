@@ -33,12 +33,6 @@ export class Calculator {
   public compound(values: CompoundingValues, currency: string): Sums[] {
     const {contribution, principal, periods, rate} = values;
     const {locale} = Currencies.find(selected => selected.id === currency);
-    const format = {
-      currency: currency.toUpperCase(),
-      maximumFractionDigits: 0,
-      style: 'currency',
-    };
-
     const pmt = contribution;
     let p: number = principal;
     let c: number = pmt;
@@ -65,6 +59,12 @@ export class Calculator {
           minimumFractionDigits: 1,
         }).format(growth)}%`;
       }
+
+      const format = {
+        currency: currency.toUpperCase(),
+        maximumFractionDigits: 0,
+        style: 'currency',
+      };
 
       sums.push({
         balance: new Intl.NumberFormat(locale, format).format(balance),

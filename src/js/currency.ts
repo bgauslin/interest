@@ -1,12 +1,12 @@
 import {LitElement, PropertyValues, css, html} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
-import {Currencies} from '../../modules/calculator';
-import {Events} from '../../modules/shared';
-import shadowStyles from './currency.css';
+import {Currencies} from './calculator';
+import {Events} from './shared';
+import shadowStyles from './shadow-styles/currency.css';
 
 
 /**
- * Web component that renders currencies for a user to choose from.
+ * Lit web component that displays currencies for a user to choose from.
  */
 @customElement('interest-currency') class Currency extends LitElement {
   private clickHandler: EventListenerObject;

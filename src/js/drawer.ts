@@ -1,11 +1,12 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
-import {Events} from '../../modules/shared';
-import shadowStyles from './drawer.css';
+import {Events} from './shared';
+import shadowStyles from './shadow-styles/drawer.css';
 
 
 /**
- * Web component that expands/collapses a drawer when a button is clicked.
+ * Lit web component that expands/collapses a drawer containing slotted content
+ * when a show/hide button is clicked.
  */
 @customElement('interest-drawer') class Drawer extends LitElement {
   @property({reflect: true, type: Boolean}) open: boolean = false;

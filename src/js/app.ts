@@ -1,12 +1,13 @@
 import {LitElement, css, html, nothing} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
-import {Calculator, CompoundingValues, DEFAULT_CURRENCY, Sums} from '../../modules/calculator';
-import {Events, STORAGE_ITEM} from '../../modules/shared';
-import shadowStyles from './app.css';
+import {Calculator, CompoundingValues, DEFAULT_CURRENCY, Sums} from './calculator';
+import {STORAGE_ITEM} from './shared';
+import shadowStyles from './shadow-styles/app.css';
 
 
 /**
- * Web component that sends/receives custom event data to/from custom elements.
+ * Lit web component that calculates compound interest based on user-provided
+ * values.
  */
 @customElement('interest-app') class App extends LitElement {
   private calculator: Calculator;

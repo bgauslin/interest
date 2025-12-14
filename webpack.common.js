@@ -36,7 +36,7 @@ module.exports = {
         // Encapsulated shadow DOM styles in web components.
         test: /\.css$/,
         include: [
-          path.resolve(__dirname, 'src/js/components')
+          path.resolve(__dirname, 'src/js/shadow-styles')
         ],
         use: [
           'lit-css-loader',

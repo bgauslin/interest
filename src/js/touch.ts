@@ -1,9 +1,9 @@
-import {Events} from '../modules/shared';
+import {Events} from './shared';
 
 
 /**
- * Custom element that adds/removes a 'touch' class on touch targets in the DOM
- * for applying CSS styles.
+ * Vanilla custom element that adds/removes a 'touch' class on touch targets
+ * in the DOM for applying CSS.
  */	
 customElements.define('interest-touch', class extends HTMLElement {
   private touchEndHandler: EventListenerObject;

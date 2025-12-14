@@ -1,13 +1,13 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
-import {Calculator, CompoundingValues} from '../../modules/calculator';
-import {Events, TextInput} from '../../modules/shared';
-import shadowStyles from './values.css';
+import {Calculator, CompoundingValues} from './calculator';
+import {Events, TextInput} from './shared';
+import shadowStyles from './shadow-styles/values.css';
 
 
 /**
- * Web component that renders input fields and calculates the compound interest
- * total based on user-provided values.
+ * Lit web component that displays input fields for a user to fill out in
+ * order to calculate compound interest.
  */
 @customElement('interest-values') class Values extends LitElement {
   private calculator: Calculator;

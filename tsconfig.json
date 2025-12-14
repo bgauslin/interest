@@ -13,10 +13,10 @@
   ],
   "files": [
     "src/js/index.ts",
-    "src/js/components/app/app.ts",
-    "src/js/components/currency/currency.ts",
-    "src/js/components/drawer/drawer.ts",
-    "src/js/components/values/values.ts",
-    "src/js/components/touch.ts",
+    "src/js/app.ts",
+    "src/js/currency.ts",
+    "src/js/drawer.ts",
+    "src/js/touch.ts",
+    "src/js/values.ts"
   ]
 }

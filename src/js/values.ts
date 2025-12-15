@@ -14,6 +14,7 @@ import {CompoundingValues, Events} from './shared';
   @property() values: CompoundingValues;
 
   @query('form') form: HTMLFormElement;
+  @query('input[type="text"]:first-of-type') firstField: HTMLFormElement;
 
   @state() contribution: number;
   @state() periods: number;
@@ -53,6 +54,7 @@ import {CompoundingValues, Events} from './shared';
 
   private clearValues() {
     this.dispatchEvent(new CustomEvent(Events.ValuesCleared));
+    window.requestAnimationFrame(() => this.firstField.focus());
   }
 
   private getValues() {
@@ -138,6 +140,8 @@ import {CompoundingValues, Events} from './shared';
         </ul>
         <button
           aria-hidden="${!this.values}"
+          aria-label="Clear all fields"
+          title="Clear all fields"
           type="reset"
           @click=${this.clearValues}>Clear</button>
       </form>

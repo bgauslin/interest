@@ -60,9 +60,9 @@ button {
   appearance: none;
   background-color: var(--button-background);
   block-size: var(--button-size);
-  border: var(--outline-size) solid var(--button-background);
+  border: var(--button-border);
   border-radius: var(--button-size);
-  color: inherit;
+  color: var(--button-color, inherit);
   cursor: pointer;
   display: grid;
   font-family: inherit;
@@ -78,6 +78,7 @@ button {
   &:focus-visible {
     background-color: var(--button-background-focus);
     border-color: var(--outline);
+    color: var(--button-color-focus, var(--button-color, inherit));
   }
 
   &.touch {
@@ -85,11 +86,12 @@ button {
   }
 
   @media (any-hover: hover) {
-    transition: background-color var(--transition), border-color var(--transition), transform var(--transition);
+    transition: background-color var(--transition), border-color var(--transition), color var(--transition), transform var(--transition);
 
     &:hover {
       background-color: var(--button-background-focus);
       border-color: var(--button-background-focus);
+      color: var(--button-color-focus, var(--button-color, inherit));
     }
 
     &:active {

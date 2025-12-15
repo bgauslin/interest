@@ -68,6 +68,12 @@ interest-values {
   }
 
   button[type='reset'] {
+    --button-background: transparent;
+    --button-background-focus: var(--fill-2);
+    --button-border: var(--outline-size) solid var(--fill-3);
+    --button-color: var(--text-color-variant);
+    --button-color-focus: var(--text-color);
+    --button-font-weight: 500;
     --button-padding: 1em;
     --button-size: 2rem;
     place-self: center;

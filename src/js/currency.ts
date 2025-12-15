@@ -19,7 +19,6 @@ import shadowStyles from './shadow-styles/currency.css';
   @state() closing: boolean = false;
   @state() open: boolean = false;
 
-
   constructor() {
     super();
     this.clickHandler = this.handleClick.bind(this);

@@ -1,5 +1,6 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
+import {live} from 'lit/directives/live.js';
 import {CompoundingValues, Events} from './shared';
 import shadowStyles from './shadow-styles/values.css';
 
@@ -33,15 +34,18 @@ import shadowStyles from './shadow-styles/values.css';
   }
 
   protected willUpdate() {
-    if (!this.values) return;
-
-    const {contribution, principal, periods, rate} = this.values;
-
-    this.contribution = contribution;
-    this.principal = principal;
-    this.periods = periods;
-    this.rate = rate;
-
+    if (this.values) {
+      const {contribution, principal, periods, rate} = this.values;
+      this.contribution = contribution;
+      this.principal = principal;
+      this.periods = periods;
+      this.rate = rate;
+    } else {
+      this.contribution = null;
+      this.principal = null;
+      this.periods = null;
+      this.rate = null;
+    }
   }
 
   private getValues() {
@@ -88,7 +92,7 @@ import shadowStyles from './shadow-styles/values.css';
               name="principal"
               pattern="[0-9]+"
               type="text"
-              value="${this.principal}"
+              .value="${live(this.principal)}"
               required>
           </li>
           <li>
@@ -99,7 +103,7 @@ import shadowStyles from './shadow-styles/values.css';
               name="contribution"
               pattern="[0-9]+"
               type="text"
-              value="${this.contribution}"
+              .value="${live(this.contribution)}"
               required>
           </li>
           <li>
@@ -110,7 +114,7 @@ import shadowStyles from './shadow-styles/values.css';
               name="rate"
               pattern="[0-9]{0,2}[,.]?[0-9]{1,2}"
               type="text"
-              value="${this.rate}"
+              .value="${live(this.rate)}"
               required>
           </li>
           <li>
@@ -121,7 +125,7 @@ import shadowStyles from './shadow-styles/values.css';
               name="periods"
               pattern="[0-9]+"
               type="text"
-              value="${this.periods}"
+              .value="${live(this.periods)}"
               required>
           </li>
         </ul>

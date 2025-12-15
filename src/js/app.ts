@@ -55,6 +55,12 @@ import shadowStyles from './shadow-styles/app.css';
     this.total = this.calculator.total(this.values, this.currency);
   }
 
+  private clearValues() {
+    this.values = null;
+    this.total = '';
+    localStorage.removeItem(STORAGE_ITEM);
+  }
+
   private getLocalStorage() {
     const storage = JSON.parse(localStorage.getItem(STORAGE_ITEM));
     if (!storage) return;
@@ -101,6 +107,11 @@ import shadowStyles from './shadow-styles/app.css';
         <div
           aria-hidden="${this.total === ''}"
           class="total">${this.total}</div>
+
+        <button
+          aria-hidden="${this.total === ''}"
+          type="reset"
+          @click=${this.clearValues}>Clear</button>
       </div>
 
       <interest-drawer

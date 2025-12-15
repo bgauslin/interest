@@ -18,7 +18,7 @@
   border-radius: var(--container-border-radius);
   display: grid;
   gap: 1em;
-  grid: 'title widget' var(--header-size) 'values values' 'total total' 6em / 1fr var(--button-size);
+  grid: 'title widget' var(--header-size) 'values values' 'total total' 6em 'clear clear' / 1fr var(--button-size);
   inset-block: var(--container-inset-block, 0);
   overflow: hidden;
   padding-block: 0 var(--gap);
@@ -42,10 +42,9 @@ interest-values {
 }
 
 /**
- * The total and the currency widget are invisible until there is content
- * displayed in the table based on user-provided values.
+ * Make elements invisible until there are user-provided values.
  */
-:is(interest-currency, .total)[aria-hidden='true'] {
+[aria-hidden='true'] {
   opacity: 0;
   visibility: hidden;
 }
@@ -80,6 +79,53 @@ interest-currency {
 
   &::-webkit-scrollbar {
     display: none;
+  }
+}
+
+/* TODO: @use button styles. */
+button[type='reset'] {
+  grid-area: clear;
+
+  appearance: none;
+  background-color: var(--fill-2);
+  block-size: var(--button-size);
+  border: var(--outline-size) solid var(--fill-2);
+  border-radius: var(--button-size);
+  color: var(--text-color);
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: .875em;
+  font-variation-settings: 'wght' 600;
+  grid: 1fr / 1fr;
+  line-height: 1;
+  outline: 0;
+  padding-block: 0;
+  padding-inline: 1.5em;
+  place-items: center;
+  place-self: start center;
+  white-space: nowrap;
+  transition: transform var(--transition);
+
+&:focus-visible {
+    background-color: var(--fill-3);
+    border-color: var(--outline);
+  }
+
+  &.touch {
+    transform: scale(.8);
+  }
+
+  @media (any-hover: hover) {
+    transition: background-color var(--transition), border-color var(--transition), transform var(--transition);
+
+    &:hover {
+      background-color: var(--fill-3);
+      border-color: transparent;
+    }
+
+    &:active {
+      transform: scale(.8);
+    }
   }
 }
 

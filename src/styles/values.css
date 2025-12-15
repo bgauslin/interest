@@ -1,28 +1,16 @@
 interest-values {
-  :is(form, ul) {
+  --gap: .75em;
+
+  form {
+    align-self: center;
+    display: grid;
+    gap: 1.5rem 0;
     grid: auto-flow / 1fr;
   }
 
-  :is(form, ul, li) {
-    display: grid;
-  }
-
-  :is(ul, li) {
-    gap: .75em;
-  }
-
-  /**
-   * Everything within a <form> for accessing native form APIs.
-   */
-  form {
-    align-self: center;
-    gap: 2em 0;
-  }
-
-  /**
-   * List containing items with input fields.
-   */
   [role='list'] {
+    display: grid;
+    gap: var(--gap);
     grid: var(--values-list-grid);
     list-style: none;
     margin: 0;
@@ -30,6 +18,8 @@ interest-values {
   }
 
   li {
+    display: grid;
+    gap: var(--gap);
     grid: 'input label' / auto 1fr;
     place-items: center start;
   }
@@ -75,5 +65,11 @@ interest-values {
     &:invalid {
       color: var(--warning-color);
     }
+  }
+
+  button[type='reset'] {
+    --button-padding: 1em;
+    --button-size: 2rem;
+    place-self: center;
   }
 }

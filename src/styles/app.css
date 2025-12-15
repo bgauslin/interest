@@ -82,14 +82,6 @@ interest-currency {
   }
 }
 
-/* TODO: Define button defaults with var() refs in base.css. */
-button[type='reset'] {
-  --button-padding: 1em;
-  --button-size: 2rem;
-  grid-area: 2 / 2;
-  place-self: end;
-}
-
 /**
  * The drawer is initially invisible until there's content to display
  * in the table.

@@ -51,6 +51,10 @@ import {CompoundingValues, Events} from './shared';
     }
   }
 
+  private clearValues() {
+    this.dispatchEvent(new CustomEvent(Events.ValuesCleared));
+  }
+
   private getValues() {
     let timer;
     clearTimeout(timer);
@@ -132,6 +136,10 @@ import {CompoundingValues, Events} from './shared';
               required>
           </li>
         </ul>
+        <button
+          aria-hidden="${!this.values}"
+          type="reset"
+          @click=${this.clearValues}>Clear</button>
       </form>
     `;
   }

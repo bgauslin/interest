@@ -100,7 +100,8 @@ import {DEFAULT_CURRENCY, STORAGE_ITEM, CompoundingValues, Sums} from './shared'
         <interest-values
           .commas=${this.commas}
           .values=${this.values}
-          @valuesUpdated=${this.updateValues}></interest-values>
+          @valuesUpdated=${this.updateValues}
+          @valuesCleared=${this.clearValues}></interest-values>
 
         <interest-currency
           aria-hidden="${this.total === ''}"
@@ -111,11 +112,6 @@ import {DEFAULT_CURRENCY, STORAGE_ITEM, CompoundingValues, Sums} from './shared'
           aria-hidden="${this.total === ''}"
           class="total"
           tabindex="-1">${this.total}</div>
-
-        <button
-          aria-hidden="${this.total === ''}"
-          type="reset"
-          @click=${this.clearValues}>Clear</button>
       </div>
 
       <interest-drawer

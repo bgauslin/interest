@@ -19,6 +19,7 @@ export enum Events {
   TouchStart = 'touchstart',
   TransitionEnd = 'transitionend',
   Values = 'valuesUpdated',
+  ValuesCleared = 'valuesCleared',
 }
 
 export interface CompoundingValues {

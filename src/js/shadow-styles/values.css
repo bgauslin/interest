@@ -1,5 +1,5 @@
 :host {
-  display: contents;
+  grid-area: values;
 }
 
 /**
@@ -23,7 +23,6 @@
 form {
   align-self: center;
   gap: 2em 0;
-  grid-area: values;
 }
 
 /**

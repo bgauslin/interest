@@ -34,13 +34,14 @@
 
       --container-border: var(--border);
       --container-border-radius: var(--card-radius);
-      --container-list-grid: auto-flow / 1fr 1fr;
 
       --footnote-display: none;
 
       --table-border: var(--border);
       --table-border-radius: var(--card-radius);
       --table-optional-display: table-cell;
+
+      --values-list-grid: auto-flow / 1fr 1fr;
     }
   }
 
@@ -57,12 +58,13 @@
       --app-place-self: start center;
 
       --container-inset-block: var(--gap) auto;
-      --container-list-grid: auto-flow / 1fr;
       --container-place-self: start stretch;
       --container-position: sticky;
 
       --drawer-block-size: auto;  /* [1] */
       --drawer-button-display: none;  /* [2] */
+
+      --values-list-grid: auto-flow / 1fr;
     }
   }
 }

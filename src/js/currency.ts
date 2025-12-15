@@ -1,7 +1,6 @@
 import {LitElement, PropertyValues, css, html} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
-import {Currencies} from './calculator';
-import {Events} from './shared';
+import {Currencies, Events} from './shared';
 import shadowStyles from './shadow-styles/currency.css';
 
 

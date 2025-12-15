@@ -1,27 +1,5 @@
-export interface CompoundingValues {
-  contribution: number,
-  periods: number,
-  principal: number,
-  rate: number,
-}
+import {CompoundingValues, Currencies, Sums} from'./shared';
 
-export interface Sums {
-  balance: string,
-  deposits: string,
-  growth: string,
-  interest: string,
-  year: string,
-}
-
-export const Currencies = [
-  {id: 'usd', locale: 'en-US', symbol: '$', label: 'Dollars'},
-  {id: 'eur', locale: 'en-GB', symbol: '€', label: 'Euros'},
-  {id: 'gbp', locale: 'en-GB', symbol: '£', label: 'Pounds'},
-  {id: 'cny', locale: 'zh-CN', symbol: '¥', label: 'Yen'},
-  {id: 'inr', locale: 'en-IN', symbol: '₹', label: 'Rupees'},
-];
-
-export const DEFAULT_CURRENCY = Currencies[0].id;
 
 /**
  * Formulas for calculating compound interest and formatting currency.

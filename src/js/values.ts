@@ -1,7 +1,7 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
-import {Calculator, CompoundingValues} from './calculator';
-import {Events, TextInput} from './shared';
+import {Calculator} from './calculator';
+import {CompoundingValues, Events, TextInput} from './shared';
 import shadowStyles from './shadow-styles/values.css';
 
 

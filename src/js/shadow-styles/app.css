@@ -27,9 +27,6 @@
   position: var(--container-position, static);
 }
 
-/**
- * The name of the app.
- */
 h1 {
   align-self: center;
   font-size: 1.125em;
@@ -38,6 +35,30 @@ h1 {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+interest-values {
+  grid-area: values;
+}
+
+/**
+ * The total and the currency widget are invisible until there is content
+ * displayed in the table based on user-provided values.
+ */
+:is(interest-currency, .total)[aria-hidden='true'] {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/**
+ * The widget containing currency options to choose from.
+ */
+interest-currency {
+  grid-area: widget;  
+  inset-inline: auto -.625em;
+  position: relative;
+  place-self: center end;
+  transition: opacity var(--transition);
 }
 
 /**
@@ -63,29 +84,17 @@ h1 {
 }
 
 /**
- * The total and the currency widget are invisible until there is content
- * displayed in the table based on user-provided values.
- */
-[aria-hidden='true'] {
-  opacity: 0;
-  visibility: hidden;
-}
-
-/**
- * The widget containing currency options to choose from.
- */
-interest-currency {
-  grid-area: widget;
-  transition: opacity var(--transition);
-}
-
-/**
  * The drawer is initially invisible until there's content to display
  * in the table.
  */
-interest-drawer[aria-hidden='true'] {
-  opacity: 0;
-  visibility: hidden;
+interest-drawer {
+  padding-block: env(safe-area-inset-top) env(safe-area-inset-bottom);
+  padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
+
+  &[aria-hidden='true'] {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 /**

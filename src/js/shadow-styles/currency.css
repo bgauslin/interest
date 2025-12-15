@@ -1,10 +1,4 @@
-:host {
-  inset-inline: auto -.625em;
-  position: relative;
-  place-self: center end;
-}
-
-* {
+:where(*) {
   box-sizing: border-box;
 }
 

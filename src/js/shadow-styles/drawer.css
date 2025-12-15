@@ -7,30 +7,28 @@
   box-sizing: border-box;
 }
 
-/* TODO: @use button styles. */
+/* TODO: @use button module -OR- remove shadow DOM. */
 button {
   appearance: none;
   background-color: var(--fill-2);
   block-size: var(--button-size);
   border: var(--outline-size) solid var(--fill-2);
   border-radius: var(--button-size);
-  color: var(--text-color);
+  color: inherit;
   cursor: pointer;
   display: var(--drawer-button-display, grid);
   font-family: var(--font-family);
   font-size: .875em;
   font-variation-settings: 'wght' 600;
-  grid: 1fr / 1fr;
   grid-area: button;
-  line-height: 1;
   margin: clamp(2em, 2em + 1vw, 3em);
   outline: 0;
   padding-block: 0;
   padding-inline: 1.5em;
-  place-items: center;
+  place-content: center;
   place-self: start center;
-  white-space: nowrap;
   transition: transform var(--transition);
+  white-space: nowrap;
 
   &:focus-visible {
     background-color: var(--fill-3);

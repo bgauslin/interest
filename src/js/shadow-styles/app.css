@@ -18,7 +18,7 @@
   border-radius: var(--container-border-radius);
   display: grid;
   gap: 1em;
-  grid: 'title widget' var(--header-size) 'values values' 'total total' 6em 'clear clear' / 1fr var(--button-size);
+  grid: var(--header-size) auto 6em / 1fr var(--button-size);
   inset-block: var(--container-inset-block, 0);
   overflow: hidden;
   padding-block: 0 var(--gap);
@@ -30,7 +30,7 @@
 h1 {
   align-self: center;
   font-size: 1.125em;
-  grid-area: title;
+  grid-area: 1 / 1;
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -38,7 +38,7 @@ h1 {
 }
 
 interest-values {
-  grid-area: values;
+  grid-area: 2 / 1 / 2 / -1;
 }
 
 /**
@@ -53,7 +53,7 @@ interest-values {
  * The widget containing currency options to choose from.
  */
 interest-currency {
-  grid-area: widget;  
+  grid-area: 1 / 2;  
   inset-inline: auto -.625em;
   position: relative;
   place-self: center end;
@@ -67,7 +67,7 @@ interest-currency {
   color: var(--theme-color);
   display: grid;
   font-size: 2.75em;
-  grid-area: total;
+  grid-area: 3 / 1 / 3 / -1;
   inline-size: 100%;
   line-height: 1;
   overflow: scroll hidden;
@@ -82,31 +82,29 @@ interest-currency {
   }
 }
 
-/* TODO: @use button styles. */
+/* TODO: @use button module -OR- remove shadow DOM. */
 button[type='reset'] {
-  grid-area: clear;
-
   appearance: none;
   background-color: var(--fill-2);
-  block-size: var(--button-size);
+  block-size: 2rem;
   border: var(--outline-size) solid var(--fill-2);
-  border-radius: var(--button-size);
-  color: var(--text-color);
+  border-radius: 2rem;
+  color: inherit;
   cursor: pointer;
+  display: grid;
   font-family: var(--font-family);
   font-size: .875em;
   font-variation-settings: 'wght' 600;
-  grid: 1fr / 1fr;
-  line-height: 1;
+  grid-area: 2 / 2;
   outline: 0;
   padding-block: 0;
-  padding-inline: 1.5em;
-  place-items: center;
-  place-self: start center;
-  white-space: nowrap;
+  padding-inline: 1em;
+  place-content: center;
+  place-self: end;
   transition: transform var(--transition);
+  white-space: nowrap;
 
-&:focus-visible {
+  &:focus-visible {
     background-color: var(--fill-3);
     border-color: var(--outline);
   }

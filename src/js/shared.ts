@@ -35,11 +35,3 @@ export interface Sums {
   interest: string,
   year: string,
 }
-
-export interface TextInput {
-  inputmode: string,
-  label: string,
-  name: string,
-  pattern: string,
-  value: string,
-}

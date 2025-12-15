@@ -1,7 +1,7 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
 import {Calculator} from './calculator';
-import {CompoundingValues, Events, TextInput} from './shared';
+import {CompoundingValues, Events} from './shared';
 import shadowStyles from './shadow-styles/values.css';
 
 
@@ -11,19 +11,17 @@ import shadowStyles from './shadow-styles/values.css';
  */
 @customElement('interest-values') class Values extends LitElement {
   private calculator: Calculator;
-  private fields: TextInput[] = [
-    {inputmode: 'numeric', label: 'Principal', name: 'principal', pattern: '[0-9]+', value: ''},
-    {inputmode: 'numeric', label: 'Yearly addition', name: 'contribution', pattern: '[0-9]+', value: ''},
-    {inputmode: 'decimal', label: 'Interest rate', name: 'rate', pattern: '[0-9]{0,2}[,\.]?[0-9]{1,2}', value: ''},
-    {inputmode: 'numeric', label: 'Years to grow', name: 'periods', pattern: '[0-9]+', value: ''},
-  ];
-
+    
   @property() commas: boolean;
   @property() currency: string;
   @property() values: CompoundingValues;
 
   @query('form') form: HTMLFormElement;
 
+  @state() contribution: number;
+  @state() periods: number;
+  @state() principal: number;
+  @state() rate: number;
   @state() total: string = '';
 
   constructor() {
@@ -42,11 +40,12 @@ import shadowStyles from './shadow-styles/values.css';
   protected firstUpdated() {
     if (!this.values) return;
 
-    for (const [key, value] of Object.entries(this.values)) {
-      const field = this.fields.find(field => field.name === key);
-      const value_ = `${value}`;
-      field.value = this.commas ? value_.replace('.', ',') : value_;
-    }
+    const {contribution, principal, periods, rate} = this.values;
+
+    this.contribution = contribution;
+    this.principal = principal;
+    this.periods = periods;
+    this.rate = rate;
 
     this.updateTotal();
   }
@@ -104,28 +103,54 @@ import shadowStyles from './shadow-styles/values.css';
   }
 
   protected render() {
-    const items = this.fields.map((field) => {
-      const {inputmode, label, name, pattern, value} = field;
-      return html`
-        <li class="${name}">
-          <label for="${name}">${label}</label>
-          <input
-            id="${name}"
-            inputmode="${inputmode}"
-            name="${name}"
-            pattern="${pattern}"
-            required
-            type="text"
-            .value="${value}">
-        </li>
-      `;
-    });
-
     return html`
       <h1>Compound Interest</h1>
       <form @input="${this.updateValues}">
         <ul role="list">
-          ${items}
+          <li>
+            <label for="principal">Principal</label>
+            <input
+              id="principal"
+              inputmode="numeric"
+              name="principal"
+              pattern="[0-9]+"
+              type="text"
+              value="${this.principal}"
+              required>
+          </li>
+          <li>
+            <label for="contribution">Yearly addition</label>
+            <input
+              id="contribution"
+              inputmode="numeric"
+              name="contribution"
+              pattern="[0-9]+"
+              type="text"
+              value="${this.contribution}"
+              required>
+          </li>
+          <li>
+            <label for="rate">Interest rate</label>
+            <input 
+              id="rate"
+              inputmode="decimal"
+              name="rate"
+              pattern="[0-9]{0,2}[,.]?[0-9]{1,2}"
+              type="text"
+              value="${this.rate}"
+              required>
+          </li>
+          <li>
+            <label for="periods">Years to grow</label>
+            <input 
+              id="periods"
+              inputmode="numeric"
+              name="periods"
+              pattern="[0-9]+"
+              type="text"
+              value="${this.periods}"
+              required>
+          </li>
         </ul>
       </form>
       <div

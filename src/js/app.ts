@@ -2,11 +2,10 @@ import {LitElement, css, html, nothing} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
 import {Calculator} from './calculator';
 import {DEFAULT_CURRENCY, STORAGE_ITEM, CompoundingValues, Sums} from './shared';
-import shadowStyles from './shadow-styles/app.css';
 
 
 /**
- * Lit web component that calculates compound interest based on user-provided
+ * Lit custom element that calculates compound interest based on user-provided
  * values.
  */
 @customElement('interest-app') class App extends LitElement {
@@ -30,6 +29,10 @@ import shadowStyles from './shadow-styles/app.css';
 
   disconnectedCallback() { 
     super.disconnectedCallback();
+  }
+
+  protected createRenderRoot() {
+    return this;
   }
 
   private updateCurrency(event: CustomEvent) {
@@ -159,7 +162,4 @@ import shadowStyles from './shadow-styles/app.css';
       <interest-touch></interest-touch>
     `;
   }
-
-  // Shadow DOM stylesheet.
-  static styles = css`${shadowStyles}`;
 }

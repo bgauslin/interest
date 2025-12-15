@@ -2,11 +2,10 @@ import {LitElement, css, html} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
 import {live} from 'lit/directives/live.js';
 import {CompoundingValues, Events} from './shared';
-import shadowStyles from './shadow-styles/values.css';
 
 
 /**
- * Lit web component that displays input fields for a user to fill out in
+ * Lit custom element that displays input fields for a user to fill out in
  * order to calculate compound interest.
  */
 @customElement('interest-values') class Values extends LitElement {
@@ -31,6 +30,10 @@ import shadowStyles from './shadow-styles/values.css';
 
   disconnectedCallback() {
     super.disconnectedCallback();
+  }
+
+  protected createRenderRoot() {
+    return this;
   }
 
   protected willUpdate() {
@@ -132,7 +135,4 @@ import shadowStyles from './shadow-styles/values.css';
       </form>
     `;
   }
-
-  // Shadow DOM stylesheet.
-  static styles = css`${shadowStyles}`;
 }

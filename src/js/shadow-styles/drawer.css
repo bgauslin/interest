@@ -7,7 +7,6 @@
   box-sizing: border-box;
 }
 
-/* TODO: @use button module -OR- remove shadow DOM. */
 button {
   appearance: none;
   background-color: var(--fill-2);

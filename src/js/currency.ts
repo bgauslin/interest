@@ -1,11 +1,10 @@
 import {LitElement, PropertyValues, css, html} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
 import {Currencies, Events} from './shared';
-import shadowStyles from './shadow-styles/currency.css';
 
 
 /**
- * Lit web component that displays currencies for a user to choose from.
+ * Lit custom element that displays currencies for a user to choose from.
  */
 @customElement('interest-currency') class Currency extends LitElement {
   private clickHandler: EventListenerObject;
@@ -35,6 +34,10 @@ import shadowStyles from './shadow-styles/currency.css';
     super.disconnectedCallback();
     document.removeEventListener(Events.Click, this.clickHandler);
     document.removeEventListener(Events.KeyUp, this.keyHandler);
+  }
+
+  protected createRenderRoot() {
+    return this;
   }
 
   private handleClick(event: Event) {
@@ -124,7 +127,4 @@ import shadowStyles from './shadow-styles/currency.css';
       </dialog>
     `;
   }
-
-  // Shadow DOM stylesheet.
-  static styles = css`${shadowStyles}`;
 }

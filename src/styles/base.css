@@ -5,6 +5,10 @@
   src: url('../fonts/AvenirNext-Variable.woff2') format('woff2');
 }
 
+:where(*) {
+  box-sizing: border-box;
+}
+
 html {
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;

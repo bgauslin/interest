@@ -1,4 +1,4 @@
-:host {
+interest-app {
   display: grid;
   gap: var(--app-gap);
   grid: var(--app-grid);
@@ -82,7 +82,7 @@ interest-currency {
   }
 }
 
-/* TODO: @use button module -OR- remove shadow DOM. */
+/* TODO: Define button defaults with var() refs in base.css. */
 button[type='reset'] {
   appearance: none;
   background-color: var(--fill-2);

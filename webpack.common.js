@@ -41,7 +41,6 @@ module.exports = {
         use: [
           'lit-css-loader',
           {
-            // TODO: Go back to scss and remove this comment.
             // Files are plain CSS but we're using Sass simply to minify the
             // shadow DOM stylesheet in each web component.
             loader: 'sass-loader',

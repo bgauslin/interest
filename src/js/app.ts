@@ -15,6 +15,7 @@ import shadowStyles from './shadow-styles/app.css';
   @state() commas: boolean = false;
   @state() currency: string = DEFAULT_CURRENCY;
   @state() drawer: boolean = false;
+  @state() total: string = '';
   @state() values: CompoundingValues;
 
   constructor() {
@@ -33,6 +34,7 @@ import shadowStyles from './shadow-styles/app.css';
 
   private updateCurrency(event: CustomEvent) {
     this.currency = event.detail.currency;
+    this.updateTotal();
     this.setLocalStorage();
   }
 
@@ -45,7 +47,12 @@ import shadowStyles from './shadow-styles/app.css';
     const {commas, values} = event.detail;
     this.commas = commas;
     this.values = values;
+    this.updateTotal();
     this.setLocalStorage();
+  }
+
+  private updateTotal() {
+    this.total = this.calculator.total(this.values, this.currency);
   }
 
   private getLocalStorage() {
@@ -58,6 +65,8 @@ import shadowStyles from './shadow-styles/app.css';
     this.currency = currency;  
     this.drawer = drawer;
     this.values = values;
+
+    this.updateTotal();
   }
 
   private setLocalStorage() {
@@ -76,12 +85,23 @@ import shadowStyles from './shadow-styles/app.css';
         this.calculator.compound(this.values, this.currency) : [];
 
     return html`
-      <interest-values
-        .commas=${this.commas}
-        .currency=${this.currency} 
-        .values=${this.values}
-        @currencyUpdated=${this.updateCurrency}
-        @valuesUpdated=${this.updateValues}></interest-values>
+      <div class="container">
+        <h1>Compound Interest</h1>
+
+        <interest-values
+          .commas=${this.commas}
+          .values=${this.values}
+          @valuesUpdated=${this.updateValues}></interest-values>
+
+        <interest-currency
+          aria-hidden="${this.total === ''}"
+          .currency=${this.currency}
+          @currencyUpdated=${this.updateCurrency}></interest-currency>
+
+        <div
+          aria-hidden="${this.total === ''}"
+          class="total">${this.total}</div>
+      </div>
 
       <interest-drawer
         aria-hidden="${!this.values}"

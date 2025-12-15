@@ -1,6 +1,5 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
-import {Calculator} from './calculator';
 import {CompoundingValues, Events} from './shared';
 import shadowStyles from './shadow-styles/values.css';
 
@@ -10,8 +9,6 @@ import shadowStyles from './shadow-styles/values.css';
  * order to calculate compound interest.
  */
 @customElement('interest-values') class Values extends LitElement {
-  private calculator: Calculator;
-    
   @property() commas: boolean;
   @property() currency: string;
   @property() values: CompoundingValues;
@@ -22,11 +19,9 @@ import shadowStyles from './shadow-styles/values.css';
   @state() periods: number;
   @state() principal: number;
   @state() rate: number;
-  @state() total: string = '';
 
   constructor() {
     super();
-    this.calculator = new Calculator();
   }
 
   connectedCallback() {
@@ -37,7 +32,7 @@ import shadowStyles from './shadow-styles/values.css';
     super.disconnectedCallback();
   }
 
-  protected firstUpdated() {
+  protected willUpdate() {
     if (!this.values) return;
 
     const {contribution, principal, periods, rate} = this.values;
@@ -47,11 +42,6 @@ import shadowStyles from './shadow-styles/values.css';
     this.periods = periods;
     this.rate = rate;
 
-    this.updateTotal();
-  }
-
-  private updateTotal() {
-    this.total = this.calculator.total(this.values, this.currency);
   }
 
   private updateValues() {
@@ -78,19 +68,7 @@ import shadowStyles from './shadow-styles/values.css';
       rate,
     };
 
-    this.updateTotal();
     this.dispatchValues();
-  }
-
-  private dispatchCurrency(event: CustomEvent) {
-    this.currency = event.detail.currency;
-    this.updateTotal();
-
-    this.dispatchEvent(new CustomEvent(Events.Currency, {
-      detail: {
-        currency: this.currency,
-      },
-    }));
   }
 
   private dispatchValues() {
@@ -104,7 +82,6 @@ import shadowStyles from './shadow-styles/values.css';
 
   protected render() {
     return html`
-      <h1>Compound Interest</h1>
       <form @input="${this.updateValues}">
         <ul role="list">
           <li>
@@ -153,15 +130,6 @@ import shadowStyles from './shadow-styles/values.css';
           </li>
         </ul>
       </form>
-      <div
-        aria-hidden="${this.total === ''}"
-        class="total">
-        ${this.total}
-      </div>
-      <interest-currency
-        aria-hidden="${this.total === ''}"
-        .currency=${this.currency}
-        @currencyUpdated=${this.dispatchCurrency}></interest-currency>
     `;
   }
 

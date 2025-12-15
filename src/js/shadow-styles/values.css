@@ -1,39 +1,15 @@
 :host {
-  background-color: var(--fill-1);
-  border: var(--values-border);
-  border-radius: var(--values-border-radius);
-  display: grid;
-  gap: 1em;
-  grid: 'title widget' var(--header-size) 'values values' 'total total' 6em / 1fr var(--button-size);
-  inset-block: var(--values-inset-block, 0);
-  overflow: hidden;
-  padding-block: 0 var(--gap);
-  padding-inline: var(--gap);
-  place-self: var(--values-place-self);
-  position: var(--values-position, static);
+  display: contents;
 }
 
 /**
- * The name of the app.
- */
-h1 {
-  align-self: center;
-  font-size: 1.125em;
-  grid-area: title;
-  margin: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/**
- * General layout rules for the form and its list containing input fields.
+ * General layout for the form and its list containing input fields.
  */
 :is(form, ul) {
   grid: auto-flow / 1fr;
 }
 
-:is(form, ul, li, .total) {
+:is(form, ul, li) {
   display: grid;
 }
 
@@ -106,42 +82,4 @@ input {
   &:invalid {
     color: var(--warning-color);
   }
-}
-
-/**
- * The grand total based on user-provided values.
- */
-.total {
-  color: var(--theme-color);
-  font-size: 2.75em;
-  grid-area: total;
-  inline-size: 100%;
-  line-height: 1;
-  overflow: scroll hidden;
-  padding-inline: var(--gap);
-  place-self: center;
-  scrollbar-width: none;
-  text-align: center;
-  transition: opacity var(--transition);
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-/**
- * The total and the currency widget are invisible until there is content
- * displayed in the table based on user-provided values.
- */
-[aria-hidden='true'] {
-  opacity: 0;
-  visibility: hidden;
-}
-
-/**
- * The widget containing currency options to choose from.
- */
-interest-currency {
-  grid-area: widget;
-  transition: opacity var(--transition);
 }

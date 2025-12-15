@@ -84,47 +84,10 @@ interest-currency {
 
 /* TODO: Define button defaults with var() refs in base.css. */
 button[type='reset'] {
-  appearance: none;
-  background-color: var(--fill-2);
-  block-size: 2rem;
-  border: var(--outline-size) solid var(--fill-2);
-  border-radius: 2rem;
-  color: inherit;
-  cursor: pointer;
-  display: grid;
-  font-family: var(--font-family);
-  font-size: .875em;
-  font-variation-settings: 'wght' 600;
+  --button-padding: 1em;
+  --button-size: 2rem;
   grid-area: 2 / 2;
-  outline: 0;
-  padding-block: 0;
-  padding-inline: 1em;
-  place-content: center;
   place-self: end;
-  transition: transform var(--transition);
-  white-space: nowrap;
-
-  &:focus-visible {
-    background-color: var(--fill-3);
-    border-color: var(--outline);
-  }
-
-  &.touch {
-    transform: scale(.8);
-  }
-
-  @media (any-hover: hover) {
-    transition: background-color var(--transition), border-color var(--transition), transform var(--transition);
-
-    &:hover {
-      background-color: var(--fill-3);
-      border-color: transparent;
-    }
-
-    &:active {
-      transform: scale(.8);
-    }
-  }
 }
 
 /**

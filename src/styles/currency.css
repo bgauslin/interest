@@ -16,41 +16,21 @@ interest-currency {
    * Button that opens/closes the <dialog> element.
    */
   button {
-    background-color: var(--fill-2);
-    block-size: var(--button-size);
-    border: var(--outline-size) solid transparent;
-    border-radius: var(--button-size);
-    cursor: pointer;
-    display: grid;
-    font-size: 1.5rem;
-    inline-size: var(--button-size);
-    outline: 0;
-    place-items: center;
-    transition: transform var(--transition);
+    --button-font-size: 1.5rem;
+    --button-font-weight: 500;
+    --button-padding: 0;
 
-    &:focus-visible {
-      border-color: var(--outline);
-    }
+    aspect-ratio: 1;
 
     &[aria-expanded='true'] {
-      background-color: var(--fill-3);
-    }
-
-    &.touch {
-      transform: scale(.8);
+      background-color: var(--button-background-focus);
+      border-color: var(--button-background-focus);
     }
 
     @media (any-hover: hover) {
-      transition: background-color var(--transition), color var(--transition), transform var(--transition);
-
-      &:hover,
       &[aria-expanded='true']:hover {
-        background-color: var(--fill-3);
-        border-color: transparent;
-      }
-
-      &:active {
-        transform: scale(.8);
+        background-color: var(--button-background-focus);
+        border-color: var(--button-background-focus);
       }
     }
   }

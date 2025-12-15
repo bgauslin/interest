@@ -3,34 +3,30 @@
   grid: 'drawer' 'button' 1fr;
 }
 
-:where(*) {
-  box-sizing: border-box;
-}
-
 button {
   appearance: none;
-  background-color: var(--fill-2);
+  background-color: var(--button-background);
   block-size: var(--button-size);
-  border: var(--outline-size) solid var(--fill-2);
+  border: var(--outline-size) solid var(--button-background);
   border-radius: var(--button-size);
   color: inherit;
   cursor: pointer;
   display: var(--drawer-button-display, grid);
   font-family: var(--font-family);
-  font-size: .875em;
-  font-variation-settings: 'wght' 600;
+  font-size: var(--button-font-size);
+  font-variation-settings: 'wght' var(--button-font-weight);
   grid-area: button;
   margin: clamp(2em, 2em + 1vw, 3em);
   outline: 0;
   padding-block: 0;
-  padding-inline: 1.5em;
+  padding-inline: var(--button-padding);
   place-content: center;
   place-self: start center;
   transition: transform var(--transition);
   white-space: nowrap;
 
   &:focus-visible {
-    background-color: var(--fill-3);
+    background-color: var(--button-background-focus);
     border-color: var(--outline);
   }
 
@@ -42,8 +38,8 @@ button {
     transition: background-color var(--transition), border-color var(--transition), transform var(--transition);
 
     &:hover {
-      background-color: var(--fill-3);
-      border-color: transparent;
+      background-color: var(--button-background-focus);
+      border-color: var(--button-background-focus);
     }
 
     &:active {

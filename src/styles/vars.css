@@ -1,71 +1,73 @@
 :root {
-  /* App background. */
   --body-fill: var(--fill-1);
 
-  /* App layout. */
   --app-grid: auto 1fr / 1fr;
   --app-place-self: start stretch;
 
-  /* General layout. */
+  --button-background: var(--fill-2);
+  --button-background-focus: var(--fill-3);
+  --button-font-size: .875em;
+  --button-font-weight: 600;
+  --button-padding: 1.5em;
   --button-size: 2.75rem;
+
   --card-radius: 1em;
   --gap: clamp(1em, 1em + 1vw, 2em);
   --header-size: clamp(4em, 3em + 1vw, 6em);
   --outline-size: 2px;
   --table-optional-display: none;
 
-  /* Typography. */
   --font: clamp(1em, .75em + 1vw, 1.25em) / 1.4 var(--font-family);
   --font-family: 'Avenir Variable', sans-serif;
 
-  /* Transitions. */
   --transition: .3s ease-out;
+}
 
-  /**
-   * Responsive breakpoints.
-   */
-  @media (min-width: 40rem) {
-    & {
-      --body-fill: revert;
+/**
+ * Medium breakpoint.
+ */
+@media (min-width: 40rem) {
+  :root {
+    --body-fill: revert;
 
-      --app-gap: var(--gap);
-      --app-margin-block: var(--gap) 0;
-      --app-margin-inline: var(--gap);
+    --app-gap: var(--gap);
+    --app-margin-block: var(--gap) 0;
+    --app-margin-inline: var(--gap);
 
-      --container-border: var(--border);
-      --container-border-radius: var(--card-radius);
+    --container-border: var(--border);
+    --container-border-radius: var(--card-radius);
 
-      --footnote-display: none;
+    --footnote-display: none;
 
-      --table-border: var(--border);
-      --table-border-radius: var(--card-radius);
-      --table-optional-display: table-cell;
+    --table-border: var(--border);
+    --table-border-radius: var(--card-radius);
+    --table-optional-display: table-cell;
 
-      --values-list-grid: auto-flow / 1fr 1fr;
-    }
+    --values-list-grid: auto-flow / 1fr 1fr;
   }
+}
 
-  /**
-   * [1] Always show the drawer on large screens.
-   * [2] Always hide the button on large screens.
-   */
-  @media (min-width: 60rem) {
-    & {
-      --app-gap: 0 var(--gap);
-      --app-grid: 'values drawer' 1fr 'currency drawer' / 18em 1fr;
-      --app-inline-size: calc(100% - (var(--gap) * 2));
-      --app-margin-block: var(--gap);
-      --app-place-self: start center;
+/**
+ * Large breakpoint.
+ * [1] Always show the drawer on large screens.
+ * [2] Always hide the button on large screens.
+ */
+@media (min-width: 60rem) {
+  :root {
+    --app-gap: 0 var(--gap);
+    --app-grid: 'values drawer' 1fr 'currency drawer' / 18em 1fr;
+    --app-inline-size: calc(100% - (var(--gap) * 2));
+    --app-margin-block: var(--gap);
+    --app-place-self: start center;
 
-      --container-inset-block: var(--gap) auto;
-      --container-place-self: start stretch;
-      --container-position: sticky;
+    --container-inset-block: var(--gap) auto;
+    --container-place-self: start stretch;
+    --container-position: sticky;
 
-      --drawer-block-size: auto;  /* [1] */
-      --drawer-button-display: none;  /* [2] */
+    --drawer-block-size: auto;  /* [1] */
+    --drawer-button-display: none;  /* [2] */
 
-      --values-list-grid: auto-flow / 1fr;
-    }
+    --values-list-grid: auto-flow / 1fr;
   }
 }
 
@@ -122,34 +124,34 @@
 
   /* TODO(zebra-stripe): Use native color-mix() or similar. */
   --zebra-stripe: rgb(247.2, 247.2, 250.2);  /* White, Gray6, 40% */
+}
 
-  /**
-   * Dark mode theming.
-   */
-  @media (prefers-color-scheme: dark) {
-    & {
-      --border: 1px solid var(--gray5-dark);
+/**
+ * Dark mode theming.
+ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --border: 1px solid var(--gray5-dark);
 
-      --fill-0: black;
-      --fill-1: var(--gray6-dark);
-      --fill-2: var(--gray5-dark);
-      --fill-2a: rgba(44, 44, 46, var(--fill-alpha));  /* --gray5-dark, alpha */
-      --fill-3: var(--gray4-dark);
-      --fill-3a: rgba(58, 58, 60, var(--fill-alpha));  /* --gray4-dark, alpha */
+    --fill-0: black;
+    --fill-1: var(--gray6-dark);
+    --fill-2: var(--gray5-dark);
+    --fill-2a: rgba(44, 44, 46, var(--fill-alpha));  /* --gray5-dark, alpha */
+    --fill-3: var(--gray4-dark);
+    --fill-3a: rgba(58, 58, 60, var(--fill-alpha));  /* --gray4-dark, alpha */
 
-      /* Link styles for <noscript> blurb. */
-      --link-color: CornflowerBlue;
-      --link-color-focus: DarkOrange;
-      --link-color-visited: MediumPurple;
-      
-      --text-color: var(--gray5);
-      --text-color-variant: var(--gray1);
+    /* Link styles for <noscript> blurb. */
+    --link-color: CornflowerBlue;
+    --link-color-focus: DarkOrange;
+    --link-color-visited: MediumPurple;
+    
+    --text-color: var(--gray5);
+    --text-color-variant: var(--gray1);
 
-      --theme-color: rgb(40, 175, 82);
-      --warning-color: rgb(230, 130, 130);
+    --theme-color: rgb(40, 175, 82);
+    --warning-color: rgb(230, 130, 130);
 
-      /* TODO(zebra-stripe): Use native color-mix() or similar. */
-      --zebra-stripe: rgb(39.35, 39.35, 41.25);  /* White, Gray6-Dark, 5% */
-    }
+    /* TODO(zebra-stripe): Use native color-mix() or similar. */
+    --zebra-stripe: rgb(39.35, 39.35, 41.25);  /* White, Gray6-Dark, 5% */
   }
 }

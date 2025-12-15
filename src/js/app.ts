@@ -109,7 +109,8 @@ import {DEFAULT_CURRENCY, STORAGE_ITEM, CompoundingValues, Sums} from './shared'
 
         <div
           aria-hidden="${this.total === ''}"
-          class="total">${this.total}</div>
+          class="total"
+          tabindex="-1">${this.total}</div>
 
         <button
           aria-hidden="${this.total === ''}"

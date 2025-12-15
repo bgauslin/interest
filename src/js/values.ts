@@ -44,13 +44,13 @@ import shadowStyles from './shadow-styles/values.css';
 
   }
 
-  private updateValues() {
+  private getValues() {
     let timer;
     clearTimeout(timer);
-    timer = setTimeout(() => this.getValues(), 300);
+    timer = setTimeout(() => this.updateValues(), 300);
   }
 
-  private getValues() {
+  private updateValues() {
     if (this.form.querySelectorAll(':invalid').length) return;
 
     const formData = new FormData(this.form);
@@ -68,10 +68,6 @@ import shadowStyles from './shadow-styles/values.css';
       rate,
     };
 
-    this.dispatchValues();
-  }
-
-  private dispatchValues() {
     this.dispatchEvent(new CustomEvent(Events.Values, {
       detail: {
         commas: this.commas,
@@ -82,7 +78,7 @@ import shadowStyles from './shadow-styles/values.css';
 
   protected render() {
     return html`
-      <form @input="${this.updateValues}">
+      <form @input="${this.getValues}">
         <ul role="list">
           <li>
             <label for="principal">Principal</label>

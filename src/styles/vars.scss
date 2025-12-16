@@ -1,6 +1,4 @@
 :root {
-  --body-fill: var(--fill-1);
-
   --app-grid: auto 1fr / 1fr;
   --app-place-self: start stretch;
 
@@ -29,8 +27,6 @@
  */
 @media (min-width: 40rem) {
   :root {
-    --body-fill: revert;
-
     --app-gap: var(--gap);
     --app-margin-block: var(--gap) 0;
     --app-margin-inline: var(--gap);
@@ -98,18 +94,25 @@
   /**
    * Light mode/default theming.
    */
-  --backdrop-filter: blur(6px);
-  --border: 1px solid var(--gray5);
-
   --fill-alpha: .7;
 
-  --fill-0: var(--gray6);
-  --fill-1: white;
+  --fill-0: white;
+  --fill-1: var(--gray6);
   --fill-2: var(--gray5);
   --fill-2a: rgba(229, 229, 234, var(--fill-alpha));  /* --gray5, alpha */
   --fill-3: var(--gray4);
   --fill-3a: rgba(209, 209, 214, var(--fill-alpha));  /* --gray4, alpha */
   
+  --backdrop-filter: blur(6px);
+  --border: 1px solid var(--gray5);
+  --input-border: var(--outline-size) solid var(--fill-0);
+
+  --app-background: var(--fill-0);
+  --body-background: var(--fill-1);
+  --input-background: var(--fill-2);
+  --menu-background: var(--fill-2a); // TODO
+  --menu-background-focus: var(--fill-3a);  // TODO
+  --table-background: var(--fill-1);
   --outline: var(--theme-color);
   
   /* Link styles for <noscript> blurb. */
@@ -132,14 +135,20 @@
  */
 @media (prefers-color-scheme: dark) {
   :root {
-    --border: 1px solid var(--gray5-dark);
-
     --fill-0: black;
     --fill-1: var(--gray6-dark);
     --fill-2: var(--gray5-dark);
     --fill-2a: rgba(44, 44, 46, var(--fill-alpha));  /* --gray5-dark, alpha */
     --fill-3: var(--gray4-dark);
     --fill-3a: rgba(58, 58, 60, var(--fill-alpha));  /* --gray4-dark, alpha */
+
+    --border: 1px solid var(--gray5-dark);
+    --input-border: var(--outline-size) solid var(--fill-1);
+
+    --app-background: var(--fill-1);
+    --body-background: var(--fill-0);
+    --menu-background: var(--fill-2a); // TODO
+    --menu-background-focus: var(--fill-3a);  // TODO
 
     /* Link styles for <noscript> blurb. */
     --link-color: CornflowerBlue;

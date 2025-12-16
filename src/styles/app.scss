@@ -13,7 +13,7 @@ interest-app {
  * Container for title, values, currency, and the total.
  */
 .container {
-  background-color: var(--fill-1);
+  background-color: var(--app-background);
   border: var(--container-border);
   border-radius: var(--container-border-radius);
   display: grid;
@@ -100,7 +100,7 @@ interest-drawer {
  * Scrollable wrapper for <table> element.
  */
 .table {
-  background-color: var(--fill-1);
+  background-color: var(--app-background);
   border: var(--table-border);
   border-radius: var(--table-border-radius, 0);
   overflow: auto hidden;
@@ -112,7 +112,7 @@ interest-drawer {
 }
 
 table {
-  background-color: var(--fill-1);
+  // background-color: var(--table-background);
   border-collapse: collapse;
   font-size: .875em;
   font-variant-numeric: tabular-nums;

@@ -40,9 +40,9 @@ interest-values {
    */
   input {
     appearance: none;
-    background-color: var(--fill-2);
+    background-color: var(--input-background);
     block-size: 2em;
-    border: var(--outline-size) solid var(--fill-1);
+    border: var(--input-border);
     border-radius: .5em;
     box-sizing: content-box;
     color: var(--text-color);

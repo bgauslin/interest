@@ -95,8 +95,6 @@
   /**
    * Light mode/default theming.
    */
-  --fill-alpha: .7;
-
   --fill-0: white;
   --fill-1: var(--gray6);
   --fill-2: var(--gray5);
@@ -122,8 +120,8 @@
   --link-color-focus: OrangeRed;
   --link-color-visited: RebeccaPurple;
   
-  --text-color: var(--gray6-dark);
-  --text-color-variant: var(--gray2-dark);
+  --text-color: var(--gray5-dark);
+  --text-color-secondary: var(--gray2-dark);
   
   --theme-color: rgb(0, 125, 50);
   --warning-color: rgb(219, 77, 77);
@@ -155,8 +153,8 @@ interest-currency {
 interest-values {
   --button-background: transparent;
   --button-background-focus: var(--fill-2);
-  --button-border: var(--outline-size) solid var(--text-color-variant);
-  --button-color: var(--text-color-variant);
+  --button-border: var(--outline-size) solid var(--text-color-secondary);
+  --button-color: var(--text-color-secondary);
   --button-color-focus: var(--text-color);
   --button-font-size: .75em;
   --button-padding: 1em;
@@ -194,7 +192,7 @@ interest-values {
     --link-color-visited: MediumPurple;
     
     --text-color: var(--gray5);
-    --text-color-variant: var(--gray1);
+    --text-color-secondary: var(--gray2);
 
     --theme-color: rgb(40, 175, 82);
     --warning-color: rgb(230, 130, 130);

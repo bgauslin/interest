@@ -5,6 +5,13 @@
   grid: 'drawer' 'button' 1fr;
 }
 
+[id='drawer'] {
+  block-size: var(--drawer-block-size, var(--block-size));
+  grid-area: drawer;
+  overflow: hidden;
+  transition: block-size .4s ease-out;
+}
+
 button {
   @include mixins.button;
 
@@ -16,15 +23,4 @@ button {
   slot {
     grid-area: 1 / 1;
   }
-}
-
-/**
- * Drawer element that wraps contains a <slot> and opens/closes on small screens
- * when the button is clicked.
- */
-[id='drawer'] {
-  block-size: var(--drawer-block-size, var(--block-size));
-  grid-area: drawer;
-  overflow: hidden;
-  transition: block-size .4s ease-out;
 }

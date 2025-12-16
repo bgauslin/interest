@@ -3,6 +3,7 @@ interest-values {
 
   form {
     align-self: center;
+    caret-color: inherit;
     display: grid;
     gap: 1.5rem 0;
     grid: auto-flow / 1fr;
@@ -25,8 +26,8 @@ interest-values {
   }
 
   label {
+    color: var(--text-color-variant);
     grid-area: label;
-    opacity: .7;
     pointer-events: none;
     white-space: nowrap;
 

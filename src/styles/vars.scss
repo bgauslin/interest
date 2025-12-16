@@ -101,10 +101,13 @@
   --fill-1: var(--gray6);
   --fill-2: var(--gray5);
   --fill-3: var(--gray4);
+  --fill-4: var(--gray3);
 
   --app-background: var(--fill-0);
   --border: 1px solid var(--gray5);
   --box-shadow: 0 0 4px rgba(0, 0, 0, .12),0 0 2px rgba(0, 0, 0, .25);
+  --button-background: var(--fill-1);
+  --button-background-focus: var(--fill-2);
   --button-border: var(--outline-size) solid var(--button-background);
   --input-background: var(--fill-1);
   --input-border: var(--outline-size) solid var(--fill-0);
@@ -120,7 +123,7 @@
   --link-color-visited: RebeccaPurple;
   
   --text-color: var(--gray6-dark);
-  --text-color-variant: var(--gray1);
+  --text-color-variant: var(--gray2-dark);
   
   --theme-color: rgb(0, 125, 50);
   --warning-color: rgb(219, 77, 77);
@@ -131,15 +134,18 @@
 
 /* Drawer toggle button in shadow DOM. */
 interest-drawer {
+  --button-background: var(--fill-1);
+  --button-background-focus: var(--fill-2);
+  --button-border: var(--outline-size) solid var(--button-background);
+
+  @media (min-width: 40rem) {
   --button-background: var(--fill-2);
   --button-background-focus: var(--fill-3);
-  --button-border: var(--outline-size) solid var(--button-background);
+  }
 }
 
 /* Currency menu toggle button. */
 interest-currency {
-  --button-background: var(--fill-1);
-  --button-background-focus: var(--fill-2);
   --button-font-size: 1.5rem;
   --button-font-weight: 500;
   --button-padding: 0;
@@ -149,12 +155,13 @@ interest-currency {
 interest-values {
   --button-background: transparent;
   --button-background-focus: var(--fill-2);
-  --button-border: var(--outline-size) solid var(--fill-3);
+  --button-border: var(--outline-size) solid var(--text-color-variant);
   --button-color: var(--text-color-variant);
   --button-color-focus: var(--text-color);
-  --button-font-weight: 500;
+  --button-font-size: .75em;
   --button-padding: 1em;
   --button-size: 2rem;
+  --button-text-transform: uppercase;
 }
 
 /**
@@ -173,7 +180,7 @@ interest-values {
     --input-border: var(--outline-size) solid var(--fill-1);
 
     --app-background: var(--fill-1);
-    --body-background: var(--fill-1);
+    --body-background: var(--fill-1); /**/
     --button-background: var(--fill-4);
     --button-background-focus: var(--fill-5);
     --input-background: var(--fill-4);
@@ -196,6 +203,7 @@ interest-values {
     --zebra-stripe: rgb(39.35, 39.35, 41.25);  /* White, Gray6-Dark, 5% */
   }
 
+  interest-drawer,
   interest-currency {
     --button-background: var(--fill-4);
     --button-background-focus: var(--fill-5);

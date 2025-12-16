@@ -9,9 +9,6 @@ interest-app {
   place-self: var(--app-place-self);
 }
 
-/**
- * Container for title, values, currency, and the total.
- */
 .container {
   background-color: var(--app-background);
   border: var(--container-border);
@@ -41,17 +38,12 @@ interest-values {
   grid-area: 2 / 1 / 2 / -1;
 }
 
-/**
- * Make elements invisible until there are user-provided values.
- */
+/* Make elements invisible until there are user-provided values. */
 [aria-hidden='true'] {
   opacity: 0;
   visibility: hidden;
 }
 
-/**
- * The widget containing currency options to choose from.
- */
 interest-currency {
   grid-area: 1 / 2;  
   inset-inline: auto -.625em;
@@ -60,9 +52,6 @@ interest-currency {
   transition: opacity var(--transition);
 }
 
-/**
- * The grand total based on user-provided values.
- */
 .total {
   color: var(--theme-color);
   display: grid;
@@ -82,10 +71,7 @@ interest-currency {
   }
 }
 
-/**
- * The drawer is initially invisible until there's content to display
- * in the table.
- */
+/* Drawer is invisible until there's content to display in the table. */
 interest-drawer {
   padding-block: env(safe-area-inset-top) env(safe-area-inset-bottom);
   padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
@@ -96,9 +82,7 @@ interest-drawer {
   }
 }
 
-/**
- * Scrollable wrapper for <table> element.
- */
+/* Scrollable wrapper for <table> element. */
 .table {
   background-color: var(--app-background);
   border: var(--table-border);
@@ -112,7 +96,6 @@ interest-drawer {
 }
 
 table {
-  // background-color: var(--table-background);
   border-collapse: collapse;
   font-size: .875em;
   font-variant-numeric: tabular-nums;
@@ -153,9 +136,6 @@ td.balance {
   font-variation-settings: 'wght' 600;
 }
 
-/**
- * Footnote after the table.
- */
 .footnote {
   color: var(--text-color-secondary);
   display: var(--footnote-display, block);
@@ -163,8 +143,8 @@ td.balance {
   margin-block: 2rem 0;
   margin-inline: 1rem;
   text-align: center;  
-}
 
-.footnote > span {
-  color: var(--text-color);
+  span {
+    color: var(--text-color);
+  }
 }

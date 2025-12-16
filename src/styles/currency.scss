@@ -1,7 +1,4 @@
 interest-currency {
-  /**
-   * Reset default element styles.
-   */
   input {
     appearance: none;
     background: none;
@@ -12,9 +9,6 @@ interest-currency {
     padding: 0;
   }
 
-  /**
-   * Button that opens/closes the <dialog> element.
-   */
   button {
     aspect-ratio: 1;
 
@@ -31,9 +25,7 @@ interest-currency {
     }
   }
 
-  /**
-   * Currency menu.
-   */
+  /* Currency menu. */
   dialog {
     background-color: var(--menu-background);
     block-size: 0;
@@ -58,9 +50,7 @@ interest-currency {
     }
   }
 
-  /**
-   * List of currency options.
-   */
+  /* List of currency options. */
   ul {
     list-style: none;
     margin-block: .5rem;
@@ -101,9 +91,6 @@ interest-currency {
       inline-size: 0;
     }
 
-    /**
-     * <span> elements for text content.
-     */
     .symbol {
       display: inline-grid;
       font-size: 1.5rem;

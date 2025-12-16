@@ -1,6 +1,4 @@
 interest-values {
-  --gap: .75em;
-
   form {
     align-self: center;
     caret-color: inherit;
@@ -9,9 +7,9 @@ interest-values {
     grid: auto-flow / 1fr;
   }
 
-  [role='list'] {
+  ul {
     display: grid;
-    gap: var(--gap);
+    gap: var(--values-gap);
     grid: var(--values-list-grid);
     list-style: none;
     margin: 0;
@@ -20,7 +18,7 @@ interest-values {
 
   li {
     display: grid;
-    gap: var(--gap);
+    gap: var(--values-gap);
     grid: 'input label' / auto 1fr;
     place-items: center start;
   }
@@ -36,9 +34,7 @@ interest-values {
     }
   }
 
-  /**
-   * Text input fields for user-provided values.
-   */
+  /* Text inputs. */
   input {
     appearance: none;
     background-color: var(--input-background);
@@ -68,7 +64,8 @@ interest-values {
     }
   }
 
-  button[type='reset'] {
+  /* 'Clear' button. */
+  button {
     place-self: center;
   }
 }

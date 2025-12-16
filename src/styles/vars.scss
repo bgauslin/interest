@@ -1,4 +1,6 @@
 :root {
+  --body-background: var(--fill-0);
+
   --app-grid: auto 1fr / 1fr;
   --app-place-self: start stretch;
 
@@ -27,6 +29,8 @@
  */
 @media (min-width: 40rem) {
   :root {
+    --body-background: var(--fill-1);
+
     --app-gap: var(--gap);
     --app-margin-block: var(--gap) 0;
     --app-margin-inline: var(--gap);
@@ -106,7 +110,6 @@
   --input-border: var(--outline-size) solid var(--fill-0);
 
   --app-background: var(--fill-0);
-  --body-background: var(--fill-1);
   --input-background: var(--fill-2);
   --menu-background: var(--fill-0);
   --menu-background-focus: var(--fill-2);
@@ -144,7 +147,7 @@
     --input-border: var(--outline-size) solid var(--fill-1);
 
     --app-background: var(--fill-1);
-    --body-background: var(--fill-0);
+    --body-background: var(--fill-1);
     --menu-background: var(--fill-2);
     --menu-background-focus: var(--fill-4);
     --menu-background-active: var(--fill-3);
@@ -162,5 +165,11 @@
 
     /* TODO(zebra-stripe): Use native color-mix() or similar. */
     --zebra-stripe: rgb(39.35, 39.35, 41.25);  /* White, Gray6-Dark, 5% */
+  }
+}
+
+@media (prefers-color-scheme: dark) and (min-width: 40rem) {
+  :root {
+    --body-background: var(--fill-0);
   }
 }

@@ -34,15 +34,13 @@ module.exports = {
       },
       {
         // Encapsulated shadow DOM styles in web components.
-        test: /\.css$/,
+        test: /\.(s)css$/,
         include: [
           path.resolve(__dirname, 'src/js/shadow-styles')
         ],
         use: [
           'lit-css-loader',
           {
-            // Files are plain CSS but we're using Sass simply to minify the
-            // shadow DOM stylesheet in each web component.
             loader: 'sass-loader',
             options: {
               api: 'modern',
@@ -55,13 +53,22 @@ module.exports = {
       },
       {
         // App light DOM styles.
-        test: /\.css$/,
+        test: /\.(s)css$/,
         include: [
           path.resolve(__dirname, 'src/styles')
         ],
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              api: 'modern',
+              sassOptions: {
+                outputStyle: 'compressed',
+              },
+            },
+          },
         ],
       },
     ],
@@ -73,6 +80,6 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.ts', '.js', '.css'],
+    extensions: ['.ts', '.js', '.scss'],
   },
 }

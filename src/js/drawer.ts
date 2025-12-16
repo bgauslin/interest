@@ -1,7 +1,7 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
 import {Events} from './shared';
-import shadowStyles from './shadow-styles/drawer.css';
+import shadowStyles from './shadow-styles/drawer.scss';
 
 
 /**

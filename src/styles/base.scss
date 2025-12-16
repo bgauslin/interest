@@ -1,0 +1,63 @@
+@use 'mixins';
+
+@font-face {
+  font-display: swap;
+  font-family: 'Avenir Variable';
+  font-weight: 1 999;
+  src: url('../fonts/AvenirNext-Variable.woff2') format('woff2');
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+body {
+  background-color: var(--body-fill, var(--fill-0));
+  color: var(--text-color);
+  display: grid;
+  font: var(--font);
+  font-variation-settings: 'wght' 500;
+  margin: 0;
+  min-block-size: 100dvh;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+:not(:defined) {
+  display: none;
+}
+
+noscript {
+  padding: 1.5em;
+  place-self: center;
+  text-align: center;
+}
+
+a {
+  color: var(--link-color);
+  outline: none;
+  text-decoration: none;
+
+  &:visited {
+    color: var(--link-color-visited);
+  }
+  
+  &:focus-visible,
+  &:active {
+    color: var(--link-color-focus);
+  }
+  
+  @media (any-hover: hover) {
+    & {
+      transition: color var(--transition);
+    }
+  
+    &:hover {
+      color: var(--link-color-focus);
+    }
+  }
+}
+
+button {
+  @include mixins.button;
+}

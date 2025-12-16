@@ -1,7 +1,7 @@
-/**
- * Reset default element styles.
- */
 interest-currency {
+  /**
+   * Reset default element styles.
+   */
   input {
     appearance: none;
     background: none;
@@ -16,10 +16,6 @@ interest-currency {
    * Button that opens/closes the <dialog> element.
    */
   button {
-    --button-font-size: 1.5rem;
-    --button-font-weight: 500;
-    --button-padding: 0;
-
     aspect-ratio: 1;
 
     &[aria-expanded='true'] {

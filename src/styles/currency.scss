@@ -39,12 +39,11 @@ interest-currency {
    * Currency menu.
    */
   dialog {
-    -webkit-backdrop-filter: var(--backdrop-filter);
-    backdrop-filter: var(--backdrop-filter);
     background-color: var(--menu-background);
     block-size: 0;
-    border: var(--border);
+    border: none;
     border-radius: .5rem;
+    box-shadow: var(--box-shadow);
     display: block;
     margin-block: .5rem 0;
     overflow: hidden;
@@ -89,7 +88,7 @@ interest-currency {
     }
 
     &[data-checked] {
-      background-color: var(--menu-background-focus);
+      background-color: var(--menu-background-active);
       color: var(--theme-color);
     }
 

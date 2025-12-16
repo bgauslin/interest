@@ -99,19 +99,18 @@
   --fill-0: white;
   --fill-1: var(--gray6);
   --fill-2: var(--gray5);
-  --fill-2a: rgba(229, 229, 234, var(--fill-alpha));  /* --gray5, alpha */
   --fill-3: var(--gray4);
-  --fill-3a: rgba(209, 209, 214, var(--fill-alpha));  /* --gray4, alpha */
-  
-  --backdrop-filter: blur(6px);
+
   --border: 1px solid var(--gray5);
+  --box-shadow: 0 0 4px rgba(0, 0, 0, .12),0 0 2px rgba(0, 0, 0, .25);
   --input-border: var(--outline-size) solid var(--fill-0);
 
   --app-background: var(--fill-0);
   --body-background: var(--fill-1);
   --input-background: var(--fill-2);
-  --menu-background: var(--fill-2a); // TODO
-  --menu-background-focus: var(--fill-3a);  // TODO
+  --menu-background: var(--fill-0);
+  --menu-background-focus: var(--fill-2);
+  --menu-background-active: var(--fill-1);
   --table-background: var(--fill-1);
   --outline: var(--theme-color);
   
@@ -138,17 +137,17 @@
     --fill-0: black;
     --fill-1: var(--gray6-dark);
     --fill-2: var(--gray5-dark);
-    --fill-2a: rgba(44, 44, 46, var(--fill-alpha));  /* --gray5-dark, alpha */
     --fill-3: var(--gray4-dark);
-    --fill-3a: rgba(58, 58, 60, var(--fill-alpha));  /* --gray4-dark, alpha */
+    --fill-4: var(--gray3-dark);
 
     --border: 1px solid var(--gray5-dark);
     --input-border: var(--outline-size) solid var(--fill-1);
 
     --app-background: var(--fill-1);
     --body-background: var(--fill-0);
-    --menu-background: var(--fill-2a); // TODO
-    --menu-background-focus: var(--fill-3a);  // TODO
+    --menu-background: var(--fill-2);
+    --menu-background-focus: var(--fill-4);
+    --menu-background-active: var(--fill-3);
 
     /* Link styles for <noscript> blurb. */
     --link-color: CornflowerBlue;

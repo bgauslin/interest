@@ -9,7 +9,7 @@ export class Calculator {
    * Calculates compound interest and returns an array of all calculated values.
    */
   public compound(values: CompoundingValues, currency: string): Sums[] {
-    const {contribution, principal, periods, rate} = values;
+    const {contribution, periods, principal, rate} = values;
     const {locale} = Currencies.find(selected => selected.id === currency);
     const pmt = contribution;
     let p: number = principal;
@@ -17,14 +17,14 @@ export class Calculator {
     let principalCompounded: number;
     let contributionCompounded: number;
 
-    const sums = [];
-    for (let i = 1; i <= periods; i++) {
+    const sums: Sums[] = [];
+    for (let index = 1; index <= periods; index++) {
       principalCompounded = this.amountWithInterest(p, rate);
       contributionCompounded = this.amountWithInterest(c, rate);
       p = principalCompounded;
       c = pmt + contributionCompounded;
 
-      const deposits = principal + (contribution * i);
+      const deposits = principal + (contribution * index);
       const balance = principalCompounded + contributionCompounded;
       const interest = balance - deposits;
 
@@ -32,24 +32,26 @@ export class Calculator {
       if (growth === 0) {
         growth = 'N/A';
       } else { 
-        growth = `${new Intl.NumberFormat('en-US', {
+        growth = `${new Intl.NumberFormat(locale, {
           maximumFractionDigits: 1,
           minimumFractionDigits: 1,
         }).format(growth)}%`;
       }
 
-      const format = {
-        currency: currency.toUpperCase(),
-        maximumFractionDigits: 0,
-        style: 'currency',
-      };
+      const formatted = (amount: number) => {
+        return new Intl.NumberFormat(locale, {
+          currency: currency.toUpperCase(),
+          maximumFractionDigits: 0,
+          style: 'currency',
+        }).format(amount);
+      }
 
       sums.push({
-        balance: new Intl.NumberFormat(locale, format).format(balance),
-        deposits: new Intl.NumberFormat(locale, format).format(deposits),
+        balance: formatted(balance),
+        deposits: formatted(deposits),
         growth,
-        interest: new Intl.NumberFormat(locale, format).format(interest),
-        year: String(i),
+        interest: formatted(interest),
+        year: String(index),
       });
     }
 

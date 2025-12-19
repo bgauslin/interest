@@ -10,8 +10,7 @@ import {DEFAULT_CURRENCY, STORAGE_ITEM, CompoundingValues, Sums} from './shared'
  */
 @customElement('interest-app') class App extends LitElement {
   private calculator: Calculator;
-  
-  @state() commas: boolean = false;
+
   @state() currency: string = DEFAULT_CURRENCY;
   @state() drawer: boolean = false;
   @state() total: string = '';
@@ -47,8 +46,7 @@ import {DEFAULT_CURRENCY, STORAGE_ITEM, CompoundingValues, Sums} from './shared'
   }
 
   private updateValues(event: CustomEvent) {
-    const {commas, values} = event.detail;
-    this.commas = commas;
+    const {values} = event.detail;
     this.values = values;
     this.updateTotal();
     this.setLocalStorage();
@@ -68,9 +66,8 @@ import {DEFAULT_CURRENCY, STORAGE_ITEM, CompoundingValues, Sums} from './shared'
     const storage = JSON.parse(localStorage.getItem(STORAGE_ITEM));
     if (!storage) return;
 
-    const {commas, currency, drawer, values} = storage;
+    const {currency, drawer, values} = storage;
 
-    this.commas = commas;
     this.currency = currency;  
     this.drawer = drawer;
     this.values = values;
@@ -82,7 +79,6 @@ import {DEFAULT_CURRENCY, STORAGE_ITEM, CompoundingValues, Sums} from './shared'
     if (!this.values) return;
 
     localStorage.setItem(STORAGE_ITEM, JSON.stringify({
-      commas: this.commas,
       currency: this.currency,
       drawer: this.drawer,
       values: this.values,
@@ -98,7 +94,6 @@ import {DEFAULT_CURRENCY, STORAGE_ITEM, CompoundingValues, Sums} from './shared'
         <h1>Compound Interest</h1>
 
         <interest-values
-          .commas=${this.commas}
           .values=${this.values}
           @valuesUpdated=${this.updateValues}
           @valuesCleared=${this.clearValues}></interest-values>

@@ -9,7 +9,6 @@ import {CompoundingValues, Events} from './shared';
  * order to calculate compound interest.
  */
 @customElement('interest-values') class Values extends LitElement {
-  @property() commas: boolean;
   @property() currency: string;
   @property() values: CompoundingValues;
 
@@ -68,22 +67,17 @@ import {CompoundingValues, Events} from './shared';
 
     const formData = new FormData(this.form);
 
-    const rate_ = `${formData.get('rate')}`;
-    const rate = Number(rate_.replace(',', '.'));
-    const found = rate_.match(/[,]/g);
-
-    this.commas = found && found.length !== 0;
+    const rate = `${formData.get('rate')}`.replace(',', '.');
 
     this.values = {
       contribution: Number(formData.get('contribution')),
       periods: Number(formData.get('periods')),
       principal: Number(formData.get('principal')),
-      rate,
+      rate: Number(rate),
     };
 
     this.dispatchEvent(new CustomEvent(Events.Values, {
       detail: {
-        commas: this.commas,
         values: this.values,
       },
     }));

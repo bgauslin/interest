@@ -1,9 +1,12 @@
 export const Currencies = new Map([
-  ['USD', ['$', 'Dollars', 'en-US']],
-  ['EUR', ['€', 'Euros', 'es-ES']],
-  ['GBP', ['£', 'Pounds', 'en-GB']],
+  ['USD', ['$', 'Dollar', 'en-US']],
+  ['EUR', ['€', 'Euro', 'es-ES']],
+  ['GBP', ['£', 'Pound', 'en-GB']],
   ['JPY', ['¥', 'Yen', 'ja-JP']],
-  ['INR', ['₹', 'Rupees', 'en-IN']],
+  ['KRW', ['₩', 'Won', 'ko-KR']],
+  ['INR', ['₹', 'Rupee', 'en-IN']],
+  ['TRY', ['₺', 'Lira', 'tr-TR']],
+  ['RUB', ['₽', 'Ruble', 'ru-RU']],
 ]);
 
 export const DEFAULT_CURRENCY = 'USD';

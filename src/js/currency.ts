@@ -1,4 +1,4 @@
-import {LitElement, PropertyValues, css, html} from 'lit';
+import {LitElement, PropertyValues, html} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
 import {Currencies, Events} from './shared';
 
@@ -83,17 +83,40 @@ import {Currencies, Events} from './shared';
   }
 
   protected render() {
-    const label = 'Change currency';
-    const currency = Currencies.find(c => c.id === this.currency);
-    const symbol = currency.symbol;
+    const items: any = [];
+    for (const [key, values] of Currencies.entries()) {
+      const id = key;
+      const [symbol, label] = values;
+      const item = html`
+        <li>
+          <label
+            ?data-checked=${id === this.currency}>
+            <input
+              aria-label="${label}"
+              name="currency"
+              tabindex="${this.open ? '0' : '-1'}"
+              type="radio"
+              value="${id}"
+              ?checked=${id === this.currency}
+              @click=${() => this.currency = id}>
+            <span class="symbol">${symbol}</span>
+            <span class="label">${label}</span>
+          </label>
+        </li>
+      `;
+      items.push(item);
+    }
+
+    const buttonLabel = 'Change currency';
+    const [symbol] = Currencies.get(this.currency);
 
     return html`
       <button
         aria-controls="menu"
         aria-expanded="${this.open}"
         aria-haspopup="true"
-        aria-label="${label}"
-        title="${label}"
+        aria-label="${buttonLabel}"
+        title="${buttonLabel}"
         type="button"
         @click=${this.toggleMenu}>
         ${symbol}
@@ -103,26 +126,7 @@ import {Currencies, Events} from './shared';
         id="menu"
         ?data-closing=${this.closing}>        
         <ul>
-        ${Currencies.map((currency) => {
-          const {id, label, symbol} = currency;
-          return html`
-            <li>
-              <label
-                ?data-checked=${id === this.currency}>
-                <input
-                  aria-label="${label}"
-                  name="currency"
-                  tabindex="${this.open ? '0' : '-1'}"
-                  type="radio"
-                  value="${id}"
-                  ?checked=${id === this.currency}
-                  @click=${() => this.currency = id}>
-                <span class="symbol">${symbol}</span>
-                <span class="label">${label}</span>
-              </label>
-            </li>
-          `;
-        })}
+          ${items}
         </ul>
       </dialog>
     `;

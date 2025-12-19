@@ -1,4 +1,4 @@
-import {CompoundingValues, Currencies, Sums} from'./shared';
+import {Currencies, CompoundingValues, Sums} from'./shared';
 
 
 /**
@@ -10,7 +10,7 @@ export class Calculator {
    */
   public compound(values: CompoundingValues, currency: string): Sums[] {
     const {contribution, periods, principal, rate} = values;
-    const {locale} = Currencies.find(selected => selected.id === currency);
+    const [symbol, label, locale] = Currencies.get(currency);
     const pmt = contribution;
     let p: number = principal;
     let c: number = pmt;

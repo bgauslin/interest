@@ -1,12 +1,12 @@
-export const Currencies = [
-  {id: 'usd', locale: 'en-US', symbol: '$', label: 'Dollars'},
-  {id: 'eur', locale: 'en-GB', symbol: '€', label: 'Euros'},
-  {id: 'gbp', locale: 'en-GB', symbol: '£', label: 'Pounds'},
-  {id: 'cny', locale: 'zh-CN', symbol: '¥', label: 'Yen'},
-  {id: 'inr', locale: 'en-IN', symbol: '₹', label: 'Rupees'},
-];
+export const Currencies = new Map([
+  ['USD', ['$', 'Dollars', 'en-US']],
+  ['EUR', ['€', 'Euros', 'es-ES']],
+  ['GBP', ['£', 'Pounds', 'en-GB']],
+  ['JPY', ['¥', 'Yen', 'ja-JP']],
+  ['INR', ['₹', 'Rupees', 'en-IN']],
+]);
 
-export const DEFAULT_CURRENCY = Currencies[0].id;
+export const DEFAULT_CURRENCY = 'USD';
 
 export const STORAGE_ITEM = 'interest';
 

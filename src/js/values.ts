@@ -1,4 +1,4 @@
-import {LitElement, css, html} from 'lit';
+import {LitElement, html} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
 import {live} from 'lit/directives/live.js';
 import {CompoundingValues, Events} from './shared';

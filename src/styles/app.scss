@@ -26,9 +26,11 @@ interest-app {
 
 h1 {
   align-self: center;
+  animation: slideInleft .6s forwards;
   font-size: 1.125em;
   grid-area: 1 / 1;
   margin: 0;
+  opacity: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

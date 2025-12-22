@@ -1,4 +1,6 @@
 interest-currency {
+  position: relative;
+
   input {
     appearance: none;
     background: none;
@@ -33,20 +35,25 @@ interest-currency {
     border-radius: .5rem;
     box-shadow: var(--box-shadow);
     display: block;
+    inset-block: var(--button-size) auto;
+    inset-inline: auto 0;
     margin-block: .5rem 0;
     overflow: hidden;
     padding: 0;
-    transform: translateX(calc(-100% + var(--button-size)));
-    transition: opacity var(--transition);
+    position: absolute;
+    transform-origin: top center;
+    transition: opacity var(--transition), transform var(--transition);
 
     &[open] {
       block-size: auto;
       opacity: 1;
+      transform: scale(100%);
     }
 
     &,
     &[data-closing] {
       opacity: 0;
+      transform: scale(90%);
     }
   }
 

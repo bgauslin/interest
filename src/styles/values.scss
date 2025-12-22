@@ -17,10 +17,18 @@ interest-values {
   }
 
   li {
+    animation: slideInUp var(--transition) ease-in-out forwards;
     display: grid;
     gap: var(--values-gap);
     grid: 'input label' / auto 1fr;
+    opacity: 0;
     place-items: center start;
+  }
+
+  @for $n from 1 through 3 {
+    li:nth-child(#{$n + 1}) {
+      animation-delay: #{$n * 100}ms;
+    }
   }
 
   label {
